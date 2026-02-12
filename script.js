@@ -1,3 +1,13 @@
+// Редирект мобильных пользователей в магазин приложений
+(function() {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (/android/i.test(ua)) {
+        window.location.href = 'https://play.google.com/store/apps/details?id=com.doublereading';
+    } else if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+        window.location.href = 'https://apps.apple.com/us/app/lingo7/id6471030440';
+    }
+})();
+
 // Список языков с кодами флагов (flag-icons использует ISO 3166-1 alpha-2)
 const languagesWithFlags = {
     // Популярные
