@@ -898,15 +898,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Цели Яндекс.Метрики и Google Analytics для кликов по ссылкам на сторы
     document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function(link) {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var url = this.href;
             if (typeof ym !== 'undefined') ym(106042821, 'reachGoal', 'click_app_store');
-            if (typeof gtag !== 'undefined') gtag('event', 'click_app_store', { event_category: 'download' });
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click_app_store', {
+                    event_category: 'download',
+                    event_callback: function() { window.location.href = url; }
+                });
+                setTimeout(function() { window.location.href = url; }, 500);
+            } else {
+                window.location.href = url;
+            }
         });
     });
     document.querySelectorAll('a[href*="play.google.com"]').forEach(function(link) {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var url = this.href;
             if (typeof ym !== 'undefined') ym(106042821, 'reachGoal', 'click_google_play');
-            if (typeof gtag !== 'undefined') gtag('event', 'click_google_play', { event_category: 'download' });
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click_google_play', {
+                    event_category: 'download',
+                    event_callback: function() { window.location.href = url; }
+                });
+                setTimeout(function() { window.location.href = url; }, 500);
+            } else {
+                window.location.href = url;
+            }
         });
     });
 });
