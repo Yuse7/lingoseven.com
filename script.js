@@ -905,4 +905,16 @@ document.addEventListener('DOMContentLoaded', function() {
             readNumber.classList.add('visible');
         });
     }
+
+    // Цели Яндекс.Метрики для кликов по ссылкам на сторы
+    document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (typeof ym !== 'undefined') ym(106042821, 'reachGoal', 'click_app_store');
+        });
+    });
+    document.querySelectorAll('a[href*="play.google.com"]').forEach(function(link) {
+        link.addEventListener('click', function() {
+            if (typeof ym !== 'undefined') ym(106042821, 'reachGoal', 'click_google_play');
+        });
+    });
 });
