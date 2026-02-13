@@ -896,15 +896,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Цели Яндекс.Метрики для кликов по ссылкам на сторы
+    // Цели Яндекс.Метрики и Google Analytics для кликов по ссылкам на сторы
     document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function(link) {
         link.addEventListener('click', function() {
             if (typeof ym !== 'undefined') ym(106042821, 'reachGoal', 'click_app_store');
+            if (typeof gtag !== 'undefined') gtag('event', 'click_app_store', { event_category: 'download' });
         });
     });
     document.querySelectorAll('a[href*="play.google.com"]').forEach(function(link) {
         link.addEventListener('click', function() {
             if (typeof ym !== 'undefined') ym(106042821, 'reachGoal', 'click_google_play');
+            if (typeof gtag !== 'undefined') gtag('event', 'click_google_play', { event_category: 'download' });
         });
     });
 });
