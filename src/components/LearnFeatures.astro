@@ -1,0 +1,40 @@
+---
+interface Props {
+  targetLangName: string;
+  translations: Record<string, any>;
+}
+const { targetLangName, translations } = Astro.props;
+
+function t(key: string): string {
+  const val = translations[key] || key;
+  return val.replace(/{targetLang}/g, targetLangName);
+}
+
+const features = [
+  { icon: '📖', titleKey: 'feature_parallel_title', descKey: 'feature_parallel_desc' },
+  { icon: '🎧', titleKey: 'feature_audio_title', descKey: 'feature_audio_desc' },
+  { icon: '🧠', titleKey: 'feature_srs_title', descKey: 'feature_srs_desc' },
+  { icon: '🌱', titleKey: 'feature_level_title', descKey: 'feature_level_desc' },
+  { icon: '🌍', titleKey: 'feature_languages_title', descKey: 'feature_languages_desc' },
+  { icon: '🍒', titleKey: 'feature_content_title', descKey: 'feature_content_desc' },
+];
+---
+
+<section class="learn-features">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">{t('features_tag')}</span>
+      <h2>{t('features_title')}</h2>
+      <p>{t('features_subtitle')}</p>
+    </div>
+    <div class="learn-features-grid">
+      {features.map((f) => (
+        <div class="learn-feature-card">
+          <div class="learn-feature-icon">{f.icon}</div>
+          <h3>{t(f.titleKey)}</h3>
+          <p>{t(f.descKey)}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

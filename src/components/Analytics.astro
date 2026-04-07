@@ -1,0 +1,50 @@
+---
+// Analytics: Yandex.Metrika, Google Analytics, Google Ads
+---
+
+<!-- Yandex.Metrika counter -->
+<script is:inline>
+  (function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+  })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106042821', 'ym');
+
+  ym(106042821, 'init', {
+    ssr: true,
+    webvisor: true,
+    clickmap: true,
+    ecommerce: "dataLayer",
+    accurateTrackBounce: true,
+    trackLinks: true
+  });
+</script>
+<noscript>
+  <div>
+    <img src="https://mc.yandex.ru/watch/106042821" style="position:absolute; left:-9999px;" alt="" />
+  </div>
+</noscript>
+
+<!-- Google tag (gtag.js) -->
+<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-17781135403"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  // Google Ads
+  gtag('config', 'AW-17781135403');
+  // Google Analytics
+  gtag('config', 'G-DCNBF6FH70');
+</script>
+
+<!-- Event snippet for Purchase (1) conversion page -->
+<script is:inline>
+  gtag('event', 'conversion', {
+    'send_to': 'AW-17781135403/iWDBCLqphNAbEKuw2p5C',
+    'value': 1.0,
+    'currency': 'USD',
+    'transaction_id': ''
+  });
+</script>

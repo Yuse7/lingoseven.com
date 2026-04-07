@@ -1,0 +1,894 @@
+---
+// AudioDemo — phone widget with real audio playback and word-by-word highlighting
+// Loads book content + audio via backend API, syncs word highlighting to audio transcript timings
+interface Props {
+  targetLang?: string;
+  uiLang?: string;
+}
+const { targetLang = 'de', uiLang = 'en' } = Astro.props;
+---
+
+<div class="audio-demo" data-target-lang={targetLang} data-ui-lang={uiLang}>
+  <div class="audio-demo__phone-wrap">
+    <img src="/images/phone-clean.svg" alt="" class="audio-demo__shell" />
+    <div class="audio-demo__frame">
+      <div class="audio-reader" id="audioReaderRoot">
+        <!-- Header -->
+        <div class="audio-reader__header">
+          <span class="audio-reader__back">&#8249;</span>
+          <span class="audio-reader__title" id="audioReaderTitle">Loading&hellip;</span>
+          <button class="audio-reader__listen is-active" id="audioPlayBtn" style="display:none">
+            <span class="audio-reader__eq">
+              <span class="audio-reader__eq-bar"></span>
+              <span class="audio-reader__eq-bar"></span>
+              <span class="audio-reader__eq-bar"></span>
+              <span class="audio-reader__eq-bar"></span>
+            </span>
+            Listening
+          </button>
+        </div>
+
+        <!-- Audio progress bar -->
+        <div class="audio-reader__progress">
+          <div class="audio-reader__progress-fill" id="audioProgress"></div>
+        </div>
+
+        <!-- Content (filled dynamically) -->
+        <div class="audio-reader__content" id="audioReaderContent">
+          <div class="audio-reader__loading" id="audioLoading">Loading...</div>
+        </div>
+
+        <!-- Page footer -->
+        <div class="audio-reader__footer">
+          <span class="audio-reader__page">&#8249;</span>
+          <span class="audio-reader__page">1 / 30</span>
+          <span class="audio-reader__page">&#8250;</span>
+        </div>
+
+        <!-- Mute/unmute banner -->
+        <button class="audio-reader__mute-banner" id="audioMuteBtn" title="Unmute audio">
+          <svg id="audioMuteIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+          <span id="audioMuteLabel">Try the audio</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Phone wrapper */
+  .audio-demo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .audio-demo__phone-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .audio-demo__shell {
+    position: absolute;
+    width: 332px;
+    height: 645px;
+    top: -2px;
+    left: -6px;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .audio-demo__frame {
+    width: 320px;
+    height: 640px;
+    background: #fff;
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Reader layout */
+  .audio-reader {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+  }
+
+  .audio-reader__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+  }
+
+  .audio-reader__back {
+    font-size: 20px;
+    color: #f97316;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .audio-reader__title {
+    font-size: 11px;
+    color: #333;
+    font-weight: 500;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .audio-reader__listen {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #e5e7eb;
+    color: #666;
+    transition: all 0.3s;
+  }
+  .audio-reader__listen.is-active {
+    background: #f97316;
+    color: #fff;
+  }
+
+  .audio-reader__eq {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5px;
+    height: 12px;
+  }
+  .audio-reader__eq-bar {
+    width: 2px;
+    background: #fff;
+    border-radius: 1px;
+    animation: audio-eq-bounce 1s ease-in-out infinite;
+  }
+  .audio-reader__eq-bar:nth-child(1) { height: 4px; animation-delay: 0s; }
+  .audio-reader__eq-bar:nth-child(2) { height: 8px; animation-delay: 0.15s; }
+  .audio-reader__eq-bar:nth-child(3) { height: 5px; animation-delay: 0.3s; }
+  .audio-reader__eq-bar:nth-child(4) { height: 10px; animation-delay: 0.45s; }
+
+  @keyframes audio-eq-bounce {
+    0%, 100% { transform: scaleY(0.4); }
+    50% { transform: scaleY(1); }
+  }
+
+  /* Progress bar */
+  .audio-reader__progress {
+    height: 3px;
+    background: #f0f0f0;
+    flex-shrink: 0;
+  }
+  .audio-reader__progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #f97316;
+    transition: width 0.2s linear;
+  }
+
+  /* Content area */
+  .audio-reader__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 14px 14px 20px;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    pointer-events: none;
+  }
+  .audio-reader__content::-webkit-scrollbar { display: none; }
+
+  /* Sentence pair styles — use :global() for dynamically injected elements */
+  :global(.audio-reader__chapter) {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: center;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  :global(.audio-reader__chapter-trans) {
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  :global(.audio-reader__subchapter) {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: center;
+    margin-bottom: 2px;
+  }
+  :global(.audio-reader__subchapter-trans) {
+    font-size: 10px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+
+  :global(.audio-reader__pair) { margin-bottom: 10px; }
+
+  :global(.audio-reader__en) {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+    transition: background 0.3s, color 0.3s;
+    padding: 2px 4px;
+    margin: 0 -4px 2px;
+    border-radius: 4px;
+  }
+  :global(.audio-reader__en.is-reading) {
+    background: rgba(249, 115, 22, 0.06);
+    border-radius: 4px;
+  }
+
+  :global(.audio-reader__word.is-spoken) {
+    background: rgba(249, 115, 22, 0.25);
+    color: #c2410c;
+    border-radius: 3px;
+    padding: 1px 2px;
+    margin: -1px -2px;
+  }
+
+  :global(.audio-reader__trans) {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #aaa;
+    padding: 0 4px;
+  }
+
+  /* Footer */
+  .audio-reader__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+    border-top: 1px solid #eee;
+    flex-shrink: 0;
+  }
+  .audio-reader__page { font-size: 11px; color: #999; }
+
+  /* Mute banner */
+  .audio-reader__mute-banner {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 12;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: none;
+    background: #f97316;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .audio-reader__mute-banner:hover {
+    background: #ea580c;
+  }
+  .audio-reader__mute-banner:active {
+    transform: translateX(-50%) scale(0.97);
+  }
+  .audio-reader__mute-banner.is-unmuted {
+    background: #16a34a;
+  }
+  .audio-reader__mute-banner.is-unmuted:hover {
+    background: #15803d;
+  }
+  .audio-reader__mute-banner svg {
+    flex-shrink: 0;
+  }
+
+  /* EQ bars paused state */
+  .audio-reader__eq-bar.is-paused {
+    animation-play-state: paused;
+  }
+
+  @media (max-width: 768px) {
+    .audio-demo__frame {
+      width: 260px;
+      height: 520px;
+      border-radius: 30px;
+    }
+    .audio-demo__shell {
+      width: 272px;
+      height: 530px;
+      left: -5px;
+      top: -2px;
+    }
+    .audio-reader__mute-banner {
+      bottom: 34px;
+      font-size: 10px;
+      padding: 6px 12px;
+    }
+  }
+</style>
+
+<script>
+  const S3 = 'https://lingo7.s3.eu-central-1.amazonaws.com';
+  const BACKEND = 'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api';
+  const BOOK = 'summary_11_A';
+  const audioRoot = document.querySelector<HTMLElement>('.audio-demo');
+  const TGT = audioRoot?.dataset.targetLang || 'de';
+  const TRN = audioRoot?.dataset.uiLang || 'en';
+
+  // Try S3 first, if fails trigger backend generation and poll
+  async function fetchWithGeneration(s3Url, backendUrl, options = {}) {
+    // 1. Try S3
+    try {
+      const res = await fetch(s3Url);
+      if (res.ok) return await res.json();
+    } catch (e) { /* S3 failed, try backend */ }
+
+    // 2. Trigger generation via backend
+    const res = await fetch(backendUrl);
+    if (!res.ok) throw new Error(`Backend ${res.status}`);
+    let data = await res.json();
+
+    // 3. If generating/processing, poll
+    const isReady = options.isReady || (d => d[options.statusField || 'status'] === (options.readyValue || 'ready'));
+    const pollDelay = options.pollDelay || 3000;
+    const maxPolls = options.maxPolls || 10;
+
+    if (!isReady(data)) {
+      for (let i = 0; i < maxPolls; i++) {
+        await new Promise(r => setTimeout(r, pollDelay));
+        const poll = await fetch(backendUrl);
+        if (!poll.ok) continue;
+        data = await poll.json();
+        if (isReady(data)) break;
+      }
+    }
+
+    if (!isReady(data)) throw new Error('Generation timed out');
+
+    // 4. For pages/audio: re-fetch from S3 (backend returns URLs)
+    //    For mappings: data contains elements directly
+    if (options.returnDirect) return data;
+
+    // Re-try S3 after generation
+    const s3Res = await fetch(s3Url);
+    if (s3Res.ok) return await s3Res.json();
+    throw new Error('S3 still unavailable after generation');
+  }
+
+  // ── Helpers ──
+
+  function tokensToText(tokens) {
+    return tokens.map(t => t[1] + t[0] + t[2]).join('');
+  }
+
+  /** Returns array of { text, wordCount } per "sentence" (split on sentence-ending punctuation) */
+  function splitTokensToSentences(tokens) {
+    const sentences = [];
+    let current = [];
+    for (const t of tokens) {
+      current.push(t);
+      if (/[.!?]/.test(t[2])) {
+        sentences.push(current);
+        current = [];
+      }
+    }
+    if (current.length) sentences.push(current);
+    return sentences.map(toks => ({
+      text: tokensToText(toks).trim(),
+      wordCount: toks.filter(t => t[0].trim()).length,
+    }));
+  }
+
+  /** Parse page JSON into title, subtitle, and sentences (with word counts for transcript mapping) */
+  function parsePage(data) {
+    let title = '';
+    let subtitle = '';
+    const sentences = [];       // { text, wordCount }
+    const elementWordCounts = []; // per-element total word count (for transcript alignment)
+
+    for (const el of data.elements) {
+      if (el.type === 'header') {
+        const text = tokensToText(el.data.text.tokens);
+        const wc = el.data.text.tokens.filter(t => t[0].trim()).length;
+        if (el.data.level === 1) { title = text; }
+        else if (!subtitle) { subtitle = text; }
+        elementWordCounts.push(wc);
+      } else if (el.type === 'paragraph') {
+        let elWords = 0;
+        for (const textObj of el.data.texts) {
+          const sents = splitTokensToSentences(textObj.tokens);
+          sentences.push(...sents);
+          for (const s of sents) elWords += s.wordCount;
+        }
+        elementWordCounts.push(elWords);
+      } else if (el.type === 'quote') {
+        // Treat like paragraph
+        const tokens = el.data.text ? el.data.text.tokens : [];
+        if (tokens.length) {
+          const sents = splitTokensToSentences(tokens);
+          sentences.push(...sents);
+          elementWordCounts.push(sents.reduce((a, s) => a + s.wordCount, 0));
+        } else {
+          elementWordCounts.push(0);
+        }
+      } else {
+        elementWordCounts.push(0);
+      }
+    }
+    return { title, subtitle, sentences, elementWordCounts };
+  }
+
+  // ── DOM refs ──
+
+  const container = document.getElementById('audioReaderContent');
+  const titleEl = document.getElementById('audioReaderTitle');
+  const progressEl = document.getElementById('audioProgress');
+  const muteBtn = document.getElementById('audioMuteBtn');
+  const muteIcon = document.getElementById('audioMuteIcon');
+  const muteLabel = document.getElementById('audioMuteLabel');
+  const playBtn = document.getElementById('audioPlayBtn');
+
+  // SVG paths for mute icons
+  const ICON_MUTED = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+  const ICON_UNMUTED = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+
+  // ── State ──
+
+  let audio = null;
+  let playbackRate = 1;
+  let isMuted = true;
+  let wordTimings = [];   // flat array of { time, sentenceIdx, wordIdx }
+  let allWordSpans = [];  // flat array of span elements matching wordTimings
+  let sentenceEls = [];   // .audio-reader__en elements
+  let currentWordIdx = -1;
+  let currentSentenceIdx = -1;
+  let animFrameId = null;
+  let audioFailed = false;
+
+  // ── Main ──
+
+  async function init() {
+    try {
+      // Fetch pages: try S3 first, fall back to backend generation
+      const [tgtJson, trnJson] = await Promise.all([
+        fetchWithGeneration(
+          `${S3}/pages/${BOOK}/${TGT}/page_0.json`,
+          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${TGT}&trans_lang=${TRN}&page_index=0`
+        ),
+        fetchWithGeneration(
+          `${S3}/pages/${BOOK}/${TRN}/page_0.json`,
+          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${TRN}&trans_lang=${TGT}&page_index=0`
+        ),
+      ]);
+      const tgtData = parsePage(tgtJson);
+      const trnData = parsePage(trnJson);
+      const hash = tgtJson.hash;
+
+      // Set title
+      titleEl.textContent = tgtData.title.length > 22
+        ? tgtData.title.slice(0, 20) + '\u2026'
+        : tgtData.title;
+
+      // Render content
+      renderContent(tgtData, trnData);
+
+      // Try to load audio and transcript
+      await loadAudio(hash, tgtData, tgtJson);
+    } catch (e) {
+      console.error('AudioDemo: failed to load data', e);
+      // Fall back to timer-based karaoke
+      audioFailed = true;
+      startFallbackKaraoke();
+    }
+  }
+
+  function renderContent(tgtData, trnData) {
+    let html = '';
+    let lineIdx = 0;
+
+    if (tgtData.title) {
+      html += `<div class="audio-reader__pair">`;
+      html += `<div class="audio-reader__chapter audio-reader__en" data-line="${lineIdx}">${tgtData.title}</div>`;
+      html += `<div class="audio-reader__chapter-trans">${trnData.title}</div>`;
+      html += `</div>`;
+      lineIdx++;
+    }
+    if (tgtData.subtitle) {
+      html += `<div class="audio-reader__pair">`;
+      html += `<div class="audio-reader__subchapter audio-reader__en" data-line="${lineIdx}">${tgtData.subtitle}</div>`;
+      html += `<div class="audio-reader__subchapter-trans">${trnData.subtitle}</div>`;
+      html += `</div>`;
+      lineIdx++;
+    }
+
+    const maxSentences = Math.min(tgtData.sentences.length, trnData.sentences.length, 8);
+    for (let i = 0; i < maxSentences; i++) {
+      html += `<div class="audio-reader__pair">`;
+      html += `<p class="audio-reader__en" data-line="${lineIdx}">${tgtData.sentences[i].text}</p>`;
+      html += `<p class="audio-reader__trans">${trnData.sentences[i].text}</p>`;
+      html += `</div>`;
+      lineIdx++;
+    }
+
+    container.innerHTML = html;
+
+    // Wrap words in spans
+    sentenceEls = Array.from(container.querySelectorAll('.audio-reader__en[data-line]'));
+    sentenceEls.forEach(line => {
+      const words = line.textContent.split(/\s+/).filter(w => w);
+      line.innerHTML = words.map(w => `<span class="audio-reader__word">${w}</span>`).join(' ');
+    });
+  }
+
+  async function loadAudio(hash, tgtData, tgtJson) {
+    const audioUrl = `${S3}/audio/${BOOK}/${TGT}/page_0_${hash}.mp3`;
+    const transcriptUrl = `${S3}/audio/${BOOK}/${TGT}/page_0_${hash}.json`;
+    let transcriptData;
+
+    // Try loading transcript from S3 first, fall back to backend generation
+    try {
+      const res = await fetch(transcriptUrl);
+      if (!res.ok) throw new Error('not on S3');
+      transcriptData = await res.json();
+    } catch (e) {
+      // Trigger generation via backend, poll until ready
+      try {
+        const apiUrl = `${BACKEND}/book/audio?book_code=${BOOK}&orig_lang=${TGT}&page_index=0&content_hash=${hash}`;
+        let apiRes = await fetch(apiUrl);
+        let apiData = await apiRes.json();
+
+        for (let i = 0; i < 10 && apiData.status !== 'ready'; i++) {
+          await new Promise(r => setTimeout(r, 3000));
+          apiRes = await fetch(apiUrl);
+          apiData = await apiRes.json();
+        }
+
+        if (apiData.status !== 'ready') throw new Error('Audio generation timed out');
+
+        // Now fetch transcript from S3
+        const tRes = await fetch(transcriptUrl);
+        transcriptData = await tRes.json();
+      } catch (e2) {
+        console.warn('AudioDemo: audio unavailable, using fallback', e2);
+        audioFailed = true;
+        startFallbackKaraoke();
+        return;
+      }
+    }
+
+    // Build word timings from transcript
+    buildWordTimings(transcriptData, tgtData, tgtJson);
+
+    // Create audio element
+    audio = new Audio();
+    audio.crossOrigin = 'anonymous';
+    audio.muted = true;
+    audio.preload = 'auto';
+    audio.playbackRate = playbackRate;
+
+    audio.addEventListener('error', () => {
+      console.warn('AudioDemo: audio failed to load, using fallback');
+      audioFailed = true;
+      startFallbackKaraoke();
+    });
+
+    audio.addEventListener('canplaythrough', () => {
+      if (!audioFailed) startAudioPlayback();
+    }, { once: true });
+
+    audio.addEventListener('ended', () => {
+      // Loop: reset and replay
+      cancelAnimationFrame(animFrameId);
+      clearHighlights();
+      progressEl.style.width = '0%';
+      currentWordIdx = -1;
+      currentSentenceIdx = -1;
+      container.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+        syncLoop();
+      }, 1500);
+    });
+
+    // Audio URL is always the S3 direct URL
+    audio.src = audioUrl;
+
+    // Timeout: if audio doesn't load in 5s, fall back
+    setTimeout(() => {
+      if (!audioFailed && audio.readyState < 3) {
+        audioFailed = true;
+        startFallbackKaraoke();
+      }
+    }, 5000);
+  }
+
+  /**
+   * Build a flat list of word timings from the transcript.
+   * Transcript has per-element arrays of per-word start times.
+   * We need to map these to our rendered sentences.
+   */
+  function buildWordTimings(transcriptData, tgtData, tgtJson) {
+    const transcript = transcriptData.transcript;
+    const duration = transcriptData.duration;
+    const elements = tgtJson.elements;
+
+    // Flatten transcript timings. Must match the order of rendered sentenceEls:
+    // title (level-1 header) → subtitle (first non-level-1 header) → paragraphs/quotes.
+    let flatTimings = [];
+    let titleIncluded = false;
+    let subtitleIncluded = false;
+
+    for (let i = 0; i < transcript.length && i < elements.length; i++) {
+      const el = elements[i];
+      let include = false;
+      if (el.type === 'header') {
+        if (el.data.level === 1 && !titleIncluded) {
+          include = true;
+          titleIncluded = true;
+        } else if (el.data.level !== 1 && !subtitleIncluded) {
+          include = true;
+          subtitleIncluded = true;
+        }
+      } else if (el.type === 'paragraph' || el.type === 'quote') {
+        include = true;
+      }
+      if (include) {
+        const times = transcript[i];
+        if (times) flatTimings.push(...times);
+      }
+    }
+
+    // Map flat timings to our sentence/word structure
+    wordTimings = [];
+    allWordSpans = [];
+    let timingIdx = 0;
+
+    sentenceEls.forEach((sentEl, sIdx) => {
+      const spans = Array.from(sentEl.querySelectorAll('.audio-reader__word'));
+      spans.forEach((span, wIdx) => {
+        const time = timingIdx < flatTimings.length ? flatTimings[timingIdx] : null;
+        wordTimings.push({ time, sentenceIdx: sIdx, wordIdx: wIdx });
+        allWordSpans.push(span);
+        timingIdx++;
+      });
+    });
+  }
+
+  function startAudioPlayback() {
+    audio.play().catch(() => {});
+    syncLoop();
+  }
+
+  function stopAndReset() {
+    cancelAnimationFrame(animFrameId);
+    clearHighlights();
+    progressEl.style.width = '0%';
+    currentWordIdx = -1;
+    currentSentenceIdx = -1;
+
+    // Reset mute state
+    isMuted = true;
+    if (audio) {
+      audio.muted = true;
+    }
+    muteBtn.classList.remove('is-unmuted');
+    muteIcon.innerHTML = ICON_MUTED;
+    muteLabel.textContent = 'Try the audio';
+    playBtn.style.display = 'none';
+
+    // Scroll to top then restart muted playback with highlighting
+    container.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+        syncLoop();
+      } else {
+        startFallbackKaraoke();
+      }
+    }, 1500);
+  }
+
+  function syncLoop() {
+    if (!audio || audioFailed) return;
+
+    const t = audio.currentTime;
+    const dur = audio.duration || 1;
+
+    // Update progress bar
+    progressEl.style.width = `${(t / dur) * 100}%`;
+
+    // Find current word based on audio time
+    let newWordIdx = -1;
+    for (let i = wordTimings.length - 1; i >= 0; i--) {
+      if (wordTimings[i].time !== null && t >= wordTimings[i].time) {
+        newWordIdx = i;
+        break;
+      }
+    }
+
+    if (newWordIdx !== currentWordIdx && newWordIdx >= 0) {
+      // Clear previous word highlight
+      if (currentWordIdx >= 0 && allWordSpans[currentWordIdx]) {
+        allWordSpans[currentWordIdx].classList.remove('is-spoken');
+      }
+
+      const entry = wordTimings[newWordIdx];
+
+      // Sentence changed
+      if (entry.sentenceIdx !== currentSentenceIdx) {
+        if (currentSentenceIdx >= 0 && sentenceEls[currentSentenceIdx]) {
+          sentenceEls[currentSentenceIdx].classList.remove('is-reading');
+        }
+        sentenceEls[entry.sentenceIdx].classList.add('is-reading');
+        scrollIfNeeded(entry.sentenceIdx);
+        currentSentenceIdx = entry.sentenceIdx;
+      }
+
+      // Highlight current word
+      allWordSpans[newWordIdx].classList.add('is-spoken');
+      currentWordIdx = newWordIdx;
+
+    }
+
+    // Check if we've passed the last rendered word — loop early
+    // (audio covers the full page but we only render ~8 sentences)
+    if (currentWordIdx === wordTimings.length - 1 && wordTimings[currentWordIdx]?.time !== null) {
+      const lastWordTime = wordTimings[currentWordIdx].time;
+      if (t > lastWordTime + 2) {
+        // All rendered text has been read, loop now instead of waiting for full audio
+        cancelAnimationFrame(animFrameId);
+        audio.pause();
+        clearHighlights();
+        progressEl.style.width = '0%';
+        currentWordIdx = -1;
+        currentSentenceIdx = -1;
+        container.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => {
+          audio.currentTime = 0;
+          audio.play().catch(() => {});
+          syncLoop();
+        }, 1500);
+        return;
+      }
+    }
+
+    animFrameId = requestAnimationFrame(syncLoop);
+  }
+
+  function scrollIfNeeded(idx) {
+    const pair = sentenceEls[idx]?.closest('.audio-reader__pair');
+    if (!pair) return;
+    const pairBottom = pair.offsetTop + pair.offsetHeight - container.offsetTop;
+    const visibleBottom = container.scrollTop + container.clientHeight;
+    if (pairBottom > visibleBottom) {
+      const top = pair.offsetTop - container.offsetTop - 20;
+      container.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+  }
+
+  function clearHighlights() {
+    allWordSpans.forEach(s => s.classList.remove('is-spoken'));
+    sentenceEls.forEach(s => s.classList.remove('is-reading'));
+  }
+
+  function pauseEqBars(paused) {
+    const bars = playBtn.querySelectorAll('.audio-reader__eq-bar');
+    bars.forEach(b => b.classList.toggle('is-paused', paused));
+  }
+
+  // ── Mute toggle ──
+
+  muteBtn.addEventListener('click', () => {
+    if (!audio) return;
+    isMuted = !isMuted;
+    audio.muted = isMuted;
+    // Re-trigger play() within user gesture context to satisfy browser autoplay policy
+    if (!isMuted) {
+      audio.play().catch(() => {});
+    }
+    muteBtn.classList.toggle('is-unmuted', !isMuted);
+    muteIcon.innerHTML = isMuted ? ICON_MUTED : ICON_UNMUTED;
+    muteLabel.textContent = isMuted ? 'Try the audio' : 'Sound on';
+    // Show "Listening" button only when unmuted
+    playBtn.style.display = isMuted ? 'none' : '';
+  });
+
+  // ── External speed control ──
+
+  document.addEventListener('audiodemo:setspeed', (e) => {
+    const detail = (e as CustomEvent).detail;
+    const speed = detail && typeof detail.speed === 'number' ? detail.speed : 1;
+    playbackRate = speed;
+    if (audio) audio.playbackRate = speed;
+  });
+
+  // ── Fallback: timer-based karaoke (same as ReaderDemo) ──
+
+  function startFallbackKaraoke() {
+    if (!sentenceEls.length) return;
+
+    // Hide mute button and progress bar since there's no audio
+    muteBtn.style.display = 'none';
+    progressEl.parentElement.style.display = 'none';
+
+    // Change button text
+    playBtn.textContent = '';
+    const eq = document.createElement('span');
+    eq.className = 'audio-reader__eq';
+    eq.innerHTML = '<span class="audio-reader__eq-bar"></span><span class="audio-reader__eq-bar"></span><span class="audio-reader__eq-bar"></span><span class="audio-reader__eq-bar"></span>';
+    playBtn.prepend(eq);
+    playBtn.append(document.createTextNode(' Listening\u2026'));
+
+    const WORD_DELAY = 230;
+    const LINE_PAUSE = 400;
+    let lineIdx = 0;
+
+    function readLine() {
+      const line = sentenceEls[lineIdx];
+      if (!line) return;
+      const words = line.querySelectorAll('.audio-reader__word');
+      line.classList.add('is-reading');
+      scrollIfNeeded(lineIdx);
+
+      let wordIdx = 0;
+      function nextWord() {
+        if (wordIdx > 0) words[wordIdx - 1].classList.remove('is-spoken');
+        if (wordIdx < words.length) {
+          words[wordIdx].classList.add('is-spoken');
+          wordIdx++;
+          setTimeout(nextWord, WORD_DELAY);
+        } else {
+          setTimeout(() => {
+            words.forEach(w => w.classList.remove('is-spoken'));
+            line.classList.remove('is-reading');
+            lineIdx = (lineIdx + 1) % sentenceEls.length;
+            if (lineIdx === 0) {
+              container.scrollTo({ top: 0, behavior: 'smooth' });
+              setTimeout(readLine, 1000);
+            } else {
+              readLine();
+            }
+          }, LINE_PAUSE);
+        }
+      }
+      nextWord();
+    }
+
+    setTimeout(readLine, 1500);
+  }
+
+  // ── Start ──
+
+  init();
+</script>

@@ -1,0 +1,59 @@
+---
+interface Props {
+  targetLangName: string;
+  translations: Record<string, any>;
+}
+const { targetLangName, translations } = Astro.props;
+
+function t(key: string): string {
+  const val = translations[key] || key;
+  return val.replace(/{targetLang}/g, targetLangName);
+}
+
+const faqs = [
+  { qKey: 'faq1_question', aKey: 'faq1_answer' },
+  { qKey: 'faq2_question', aKey: 'faq2_answer' },
+  { qKey: 'faq3_question', aKey: 'faq3_answer' },
+  { qKey: 'faq4_question', aKey: 'faq4_answer' },
+];
+---
+
+<section class="learn-faq">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">{t('faq_tag')}</span>
+      <h2>{t('faq_title')}</h2>
+    </div>
+    <div class="faq-list">
+      {faqs.map((faq, i) => (
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>{String(i + 1).padStart(2, '0')} — {t(faq.qKey)}</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>{t(faq.aKey)}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.learn-faq .faq-question').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      if (!item) return;
+      const isActive = item.classList.contains('active');
+      // Close all items in this section
+      item.closest('.learn-faq')?.querySelectorAll('.faq-item').forEach((el) => {
+        el.classList.remove('active');
+      });
+      // Toggle clicked item
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+</script>

@@ -1,0 +1,211 @@
+---
+interface UiLanguage {
+  code: string;
+  nativeName: string;
+  flag: string;
+  url: string;
+}
+
+interface LearnLanguageLink {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  translations?: Record<string, string>;
+  uiLang?: string;
+  uiLanguages?: UiLanguage[];
+  learnLanguageLinks?: LearnLanguageLink[];
+}
+
+const { translations, uiLang = 'en', uiLanguages, learnLanguageLinks } = Astro.props;
+
+const privacyText = translations?.['footer_privacy'] ?? 'Privacy Policy';
+const termsText = translations?.['footer_terms'] ?? 'Terms of Use';
+const contactText = translations?.['footer_contact'] ?? 'Contact';
+const copyrightText = translations?.['footer_copyright'] ?? '© 2024–2026 Lingo7. All rights reserved.';
+const learnLangTemplate = translations?.['learn_language'] ?? 'Learn {lang}';
+
+const currentLang = uiLanguages?.find((l) => l.code === uiLang);
+---
+
+<footer class="footer">
+  <div class="container">
+    {learnLanguageLinks && learnLanguageLinks.length > 0 && (
+      <div class="footer-learn-languages">
+        {learnLanguageLinks.map((link) => (
+          <a href={link.url} class="footer-learn-link">
+            {learnLangTemplate.replace('{lang}', link.name)}
+          </a>
+        ))}
+      </div>
+    )}
+
+    {uiLanguages && uiLanguages.length > 1 && (
+      <div class="footer-lang-switcher">
+        <button class="footer-lang-switcher-btn" aria-label="Switch language">
+          <span class="footer-lang-flag">{currentLang?.flag ?? '🌐'}</span>
+          <span class="footer-lang-name">{currentLang?.nativeName ?? 'English'}</span>
+          <svg class="footer-lang-arrow" width="12" height="12" viewBox="0 0 12 12">
+            <path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="footer-lang-dropdown">
+          {uiLanguages.map((lang) => (
+            <a
+              href={lang.url}
+              class:list={['footer-lang-option', { active: lang.code === uiLang }]}
+            >
+              <span class="footer-lang-option-flag">{lang.flag}</span>
+              <span>{lang.nativeName}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="footer-simple">
+      <a href="/" class="logo">
+        <img src="/images/logo.svg" alt="Lingo7" class="logo-img" />
+      </a>
+      <div class="footer-links-inline">
+        <a href="/privacypolicy">{privacyText}</a>
+        <a href="/terms">{termsText}</a>
+        <a href="mailto:support@lingoseven.com">support@lingoseven.com</a>
+      </div>
+      <p class="footer-copy">{copyrightText}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-learn-languages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    justify-content: center;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .footer-learn-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .footer-learn-link:hover {
+    color: var(--primary);
+  }
+
+  .footer-lang-switcher {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .footer-lang-switcher-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+
+  .footer-lang-switcher-btn:hover {
+    border-color: var(--primary);
+  }
+
+  .footer-lang-flag {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .footer-lang-arrow {
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  .footer-lang-switcher.open .footer-lang-arrow {
+    transform: rotate(180deg);
+  }
+
+  .footer-lang-dropdown {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 220px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    padding: 4px;
+  }
+
+  .footer-lang-switcher.open .footer-lang-dropdown {
+    display: block;
+  }
+
+  .footer-lang-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-radius: calc(var(--radius) - 2px);
+    transition: background 0.15s;
+  }
+
+  .footer-lang-option:hover {
+    background: rgba(74, 222, 128, 0.05);
+  }
+
+  .footer-lang-option.active {
+    background: rgba(74, 222, 128, 0.1);
+    font-weight: 600;
+  }
+
+  .footer-lang-option-flag {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const switcher = document.querySelector('.footer-lang-switcher');
+    const btn = document.querySelector('.footer-lang-switcher-btn');
+    if (!switcher || !btn) return;
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      switcher.classList.toggle('open');
+    });
+
+    document.addEventListener('click', () => {
+      switcher.classList.remove('open');
+    });
+
+    switcher.querySelector('.footer-lang-dropdown')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  });
+</script>

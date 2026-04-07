@@ -1,0 +1,652 @@
+---
+// Interactive parallel reader demo — loads real book content via backend API
+interface Props {
+  targetLang?: string;
+  uiLang?: string;
+}
+const { targetLang = 'de', uiLang = 'en' } = Astro.props;
+---
+
+<div class="reader-demo" data-target-lang={targetLang} data-ui-lang={uiLang}>
+  <div class="reader-demo__phone-wrap">
+    <img src="/images/phone-clean.svg" alt="" class="reader-demo__shell" />
+    <div class="reader-demo__frame">
+      <div class="reader" id="readerRoot">
+        <!-- Header -->
+        <div class="reader__header">
+          <span class="reader__back">&#8249;</span>
+          <span class="reader__title" id="readerTitle">Loading…</span>
+          <button class="reader__listen is-active" style="display:none">
+            <span class="reader__eq">
+              <span class="reader__eq-bar"></span>
+              <span class="reader__eq-bar"></span>
+              <span class="reader__eq-bar"></span>
+              <span class="reader__eq-bar"></span>
+            </span>
+            Reading…
+          </button>
+        </div>
+
+        <!-- Content (filled dynamically) -->
+        <div class="reader__content" id="readerContent">
+          <div class="reader__loading" id="readerLoading">Loading...</div>
+        </div>
+
+        <!-- Page footer -->
+        <div class="reader__footer">
+          <span class="reader__page">&#8249;</span>
+          <span class="reader__page">1 / 30</span>
+          <span class="reader__page">&#8250;</span>
+        </div>
+
+        <!-- Tap finger -->
+        <div class="reader__finger" id="readerFinger">
+          <img src="/images/finger.svg" alt="" width="36" height="36" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Phone wrapper */
+  .reader-demo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .reader-demo__phone-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reader-demo__shell {
+    position: absolute;
+    width: 332px;
+    height: 645px;
+    top: -2px;
+    left: -6px;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .reader-demo__frame {
+    width: 320px;
+    height: 640px;
+    background: #fff;
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Finger */
+  .reader__finger {
+    position: absolute;
+    z-index: 30;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, top 0.4s ease, left 0.4s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  }
+  .reader__finger.is-visible { opacity: 1; }
+  .reader__finger.is-tapping { animation: finger-tap 0.5s ease; }
+
+  @keyframes finger-tap {
+    0% { transform: scale(1); }
+    30% { transform: scale(0.75); }
+    60% { transform: scale(0.85); }
+    100% { transform: scale(1); }
+  }
+
+  /* Reader */
+  .reader {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+  }
+
+  .reader__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+  }
+
+  .reader__back {
+    font-size: 20px;
+    color: #f97316;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .reader__title {
+    font-size: 11px;
+    color: #333;
+    font-weight: 500;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .reader__page { font-size: 11px; color: #999; }
+
+  .reader__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+    border-top: 1px solid #eee;
+    flex-shrink: 0;
+  }
+
+  .reader__listen {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #e5e7eb;
+    color: #666;
+    transition: all 0.3s;
+  }
+  .reader__listen.is-active {
+    background: #f97316;
+    color: #fff;
+  }
+
+  .reader__eq {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5px;
+    height: 12px;
+  }
+  .reader__eq-bar {
+    width: 2px;
+    background: #fff;
+    border-radius: 1px;
+    animation: eq-bounce 1s ease-in-out infinite;
+  }
+  .reader__eq-bar:nth-child(1) { height: 4px; animation-delay: 0s; }
+  .reader__eq-bar:nth-child(2) { height: 8px; animation-delay: 0.15s; }
+  .reader__eq-bar:nth-child(3) { height: 5px; animation-delay: 0.3s; }
+  .reader__eq-bar:nth-child(4) { height: 10px; animation-delay: 0.45s; }
+
+  @keyframes eq-bounce {
+    0%, 100% { transform: scaleY(0.4); }
+    50% { transform: scaleY(1); }
+  }
+
+  .reader__content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 14px 14px 20px;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    pointer-events: none;
+  }
+  .reader__content::-webkit-scrollbar { display: none; }
+
+  .reader__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #999;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  :global(.reader__chapter) {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: center;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  :global(.reader__chapter-trans) {
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  :global(.reader__subchapter) {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: center;
+    margin-bottom: 2px;
+  }
+  :global(.reader__subchapter-trans) {
+    font-size: 10px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+
+  :global(.reader__pair) { margin-bottom: 10px; }
+
+  :global(.reader__en) {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+    transition: background 0.3s, color 0.3s;
+    padding: 2px 4px;
+    margin: 0 -4px 2px;
+    border-radius: 4px;
+  }
+  :global(.reader__en.is-reading) {
+    background: rgba(249, 115, 22, 0.06);
+    border-radius: 4px;
+  }
+
+  :global(.reader__word.is-spoken) {
+    background: rgba(249, 115, 22, 0.25);
+    color: #c2410c;
+    border-radius: 3px;
+    padding: 1px 2px;
+    margin: -1px -2px;
+  }
+
+  :global(.reader__trans) {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #aaa;
+    padding: 0 4px;
+  }
+
+  :global(.reader__word.is-tapped) {
+    background: #f97316;
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 3px;
+    margin: -1px -3px;
+  }
+
+  @media (max-width: 768px) {
+    .reader-demo__frame {
+      width: 260px;
+      height: 520px;
+      border-radius: 30px;
+    }
+    .reader-demo__shell {
+      width: 272px;
+      height: 530px;
+      left: -5px;
+      top: -2px;
+    }
+  }
+
+  :global(.reader__trans-word) {
+    transition: background 0.3s, color 0.3s;
+    border-radius: 3px;
+    padding: 1px 2px;
+    margin: -1px -2px;
+  }
+  :global(.reader__trans-word.is-trans-highlighted) {
+    background: rgba(249, 115, 22, 0.2);
+    color: #c2410c;
+    border-radius: 3px;
+  }
+</style>
+
+<script>
+  const S3 = 'https://lingo7.s3.eu-central-1.amazonaws.com';
+  const BACKEND = 'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api';
+  const BOOK = 'summary_11_A';
+  const readerRoot = document.querySelector<HTMLElement>('.reader-demo');
+  const TGT = readerRoot?.dataset.targetLang || 'de';
+  const TRN = readerRoot?.dataset.uiLang || 'en';
+
+  // Try S3 first, if fails trigger backend generation and poll
+  async function fetchWithGeneration(s3Url, backendUrl, options = {}) {
+    // 1. Try S3
+    try {
+      const res = await fetch(s3Url);
+      if (res.ok) return await res.json();
+    } catch (e) { /* S3 failed, try backend */ }
+
+    // 2. Trigger generation via backend
+    const res = await fetch(backendUrl);
+    if (!res.ok) throw new Error(`Backend ${res.status}`);
+    let data = await res.json();
+
+    // 3. If generating/processing, poll
+    const isReady = options.isReady || (d => d[options.statusField || 'status'] === (options.readyValue || 'ready'));
+    const pollDelay = options.pollDelay || 3000;
+    const maxPolls = options.maxPolls || 10;
+
+    if (!isReady(data)) {
+      for (let i = 0; i < maxPolls; i++) {
+        await new Promise(r => setTimeout(r, pollDelay));
+        const poll = await fetch(backendUrl);
+        if (!poll.ok) continue;
+        data = await poll.json();
+        if (isReady(data)) break;
+      }
+    }
+
+    if (!isReady(data)) throw new Error('Generation timed out');
+
+    // 4. For pages/audio: re-fetch from S3 (backend returns URLs)
+    //    For mappings: data contains elements directly
+    if (options.returnDirect) return data;
+
+    // Re-try S3 after generation
+    const s3Res = await fetch(s3Url);
+    if (s3Res.ok) return await s3Res.json();
+    throw new Error('S3 still unavailable after generation');
+  }
+
+  // Reconstruct text from token array [[word, prefix, suffix], ...]
+  function tokensToText(tokens) {
+    return tokens.map(t => t[1] + t[0] + t[2]).join('');
+  }
+
+  // Split token array into sentences, returning words + text for each
+  function splitTokensToSentences(tokens) {
+    const sentences = [];
+    let current = [];
+    for (const t of tokens) {
+      current.push(t);
+      if (/[.!?]/.test(t[2])) {
+        sentences.push({ words: current.map(tk => tk[0]), text: tokensToText(current).trim(), tokenCount: current.length });
+        current = [];
+      }
+    }
+    if (current.length > 0) {
+      sentences.push({ words: current.map(tk => tk[0]), text: tokensToText(current).trim(), tokenCount: current.length });
+    }
+    return sentences;
+  }
+
+  // Extract structured data from page JSON, tracking element/token offsets for mappings
+  function parsePage(data) {
+    let title = '';
+    let subtitle = '';
+    const sentences = []; // { words, text, elementIdx, tokenOffset }
+
+    for (let elIdx = 0; elIdx < data.elements.length; elIdx++) {
+      const el = data.elements[elIdx];
+      if (el.type === 'header') {
+        const text = tokensToText(el.data.text.tokens);
+        if (el.data.level === 1) title = text;
+        else if (!subtitle) subtitle = text;
+      } else if (el.type === 'paragraph') {
+        let tokenOffset = 0;
+        for (const textObj of el.data.texts) {
+          const sents = splitTokensToSentences(textObj.tokens);
+          for (const s of sents) {
+            sentences.push({ ...s, elementIdx: elIdx, tokenOffset });
+            tokenOffset += s.tokenCount;
+          }
+        }
+      }
+    }
+    return { title, subtitle, sentences, hash: data.hash };
+  }
+
+  // Build word-wrapped HTML for a sentence
+  function renderWords(words, cssClass) {
+    return words.map((w, i) =>
+      `<span class="${cssClass}" data-word-idx="${i}">${w}</span>`
+    ).join(' ');
+  }
+
+  async function loadAndRender() {
+    const container = document.getElementById('readerContent');
+    const titleEl = document.getElementById('readerTitle');
+    if (!container) return;
+
+    try {
+      // Fetch pages: try S3 first, fall back to backend generation
+      const [targetRaw, transRaw] = await Promise.all([
+        fetchWithGeneration(
+          `${S3}/pages/${BOOK}/${TGT}/page_0.json`,
+          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${TGT}&trans_lang=${TRN}&page_index=0`
+        ),
+        fetchWithGeneration(
+          `${S3}/pages/${BOOK}/${TRN}/page_0.json`,
+          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${TRN}&trans_lang=${TGT}&page_index=0`
+        ),
+      ]);
+
+      const targetData = parsePage(targetRaw);
+      const transData = parsePage(transRaw);
+
+      // Set header title (truncated)
+      titleEl.textContent = targetData.title.length > 22
+        ? targetData.title.slice(0, 20) + '…'
+        : targetData.title;
+
+      // Build content HTML
+      let html = '';
+
+      if (targetData.title) {
+        html += `<div class="reader__chapter">${targetData.title}</div>`;
+        html += `<div class="reader__chapter-trans">${transData.title}</div>`;
+      }
+
+      if (targetData.subtitle) {
+        html += `<div class="reader__subchapter">${targetData.subtitle}</div>`;
+        html += `<div class="reader__subchapter-trans">${transData.subtitle}</div>`;
+      }
+
+      const maxSentences = Math.min(targetData.sentences.length, transData.sentences.length, 8);
+      for (let i = 0; i < maxSentences; i++) {
+        const tgt = targetData.sentences[i];
+        const tr = transData.sentences[i];
+        html += `<div class="reader__pair">`;
+        html += `<p class="reader__en" data-line="${i}">${renderWords(tgt.words, 'reader__word')}</p>`;
+        html += `<p class="reader__trans" data-line="${i}">${renderWords(tr.words, 'reader__trans-word')}</p>`;
+        html += `</div>`;
+      }
+
+      container.innerHTML = html;
+
+      // Load mappings: needs page hashes
+      let mappings = null;
+      try {
+        const origHash = targetRaw.hash;
+        const transHash = transRaw.hash;
+        const contentHash = origHash + transHash; // 8 chars
+
+        mappings = await fetchWithGeneration(
+          `${S3}/mappings/${BOOK}/${TGT}_${TRN}/page_0_${contentHash}.json`,
+          `${BACKEND}/book/mappings?book_code=${BOOK}&orig_lang=${TGT}&trans_lang=${TRN}&page_index=0&content_hash=${contentHash}`,
+          {
+            isReady: d => d.type !== 'processing',
+            returnDirect: true,
+          }
+        );
+      } catch (e) {
+        console.warn('ReaderDemo: mappings unavailable', e);
+      }
+
+      // Show listen button and start animation
+      document.querySelector('.reader__listen').style.display = '';
+      startFingerAnimation(targetData.sentences, transData.sentences, mappings, maxSentences);
+    } catch (e) {
+      console.error('ReaderDemo: failed to load book data', e);
+    }
+  }
+
+  function startFingerAnimation(targetSentences, transSentences, mappings, count) {
+    const lines = document.querySelectorAll('#readerContent .reader__en[data-line]');
+    const transLines = document.querySelectorAll('#readerContent .reader__trans[data-line]');
+    const container = document.getElementById('readerContent');
+    const finger = document.getElementById('readerFinger');
+    const reader = document.getElementById('readerRoot');
+    if (!lines.length || !container) return;
+
+    const WORD_DELAY = 300;
+    const LINE_PAUSE = 500;
+    const TAP_HIGHLIGHT_DURATION = 1800;
+
+    // Pick tap word indices: every 5-6 words, prefer words >= 5 chars
+    function pickTapWordIndices(words) {
+      const indices = [];
+      let nextEligible = 3;
+      for (let i = nextEligible; i < words.length; i++) {
+        if (i < nextEligible) continue;
+        const wordText = words[i].textContent || '';
+        if (wordText.length >= 5) {
+          indices.push(i);
+          nextEligible = i + 5 + Math.floor(Math.random() * 2);
+        }
+      }
+      return indices;
+    }
+
+    function positionFinger(wordEl) {
+      const rect = wordEl.getBoundingClientRect();
+      const readerRect = reader.getBoundingClientRect();
+      const maxTop = readerRect.height * 0.85;
+      const top = Math.min(rect.top - readerRect.top + rect.height * 0.5, maxTop);
+      const left = Math.max(0, Math.min(
+        rect.left - readerRect.left + rect.width / 2 - 6,
+        readerRect.width - 40
+      ));
+      finger.style.top = top + 'px';
+      finger.style.left = left + 'px';
+    }
+
+    function scrollToLine(line) {
+      const pair = line.closest('.reader__pair');
+      if (!pair) return;
+      const pairBottom = pair.offsetTop + pair.offsetHeight - container.offsetTop;
+      const visibleBottom = container.scrollTop + container.clientHeight;
+      if (pairBottom > visibleBottom) {
+        const top = pair.offsetTop - container.offsetTop - 20;
+        container.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }
+    }
+
+    function getTransIndices(sentenceIdx, wordIdx) {
+      if (!mappings) return [];
+      const sent = targetSentences[sentenceIdx];
+      if (!sent) return [];
+      const elMappings = mappings.elements[sent.elementIdx];
+      if (!elMappings || !elMappings[0]) return [];
+      const globalWordIdx = sent.tokenOffset + wordIdx;
+      const mapping = elMappings[0][globalWordIdx];
+      if (!mapping) return [];
+      const transSent = transSentences[sentenceIdx];
+      if (!transSent) return [];
+      const transOffset = transSent.tokenOffset;
+      return mapping[0]
+        .map(idx => idx - transOffset)
+        .filter(idx => idx >= 0 && idx < transSent.words.length);
+    }
+
+    let lineIdx = 0;
+
+    function readLine() {
+      const line = lines[lineIdx];
+      const transLine = transLines[lineIdx];
+      const words = line.querySelectorAll('.reader__word');
+      const transWords = transLine ? transLine.querySelectorAll('.reader__trans-word') : [];
+      const tapWordIndices = pickTapWordIndices(words);
+
+      line.classList.add('is-reading');
+      scrollToLine(line);
+
+      let wordIdx = 0;
+      let tapping = false;
+
+      function moveToWord() {
+        if (wordIdx >= words.length) {
+          finger.classList.remove('is-visible');
+          setTimeout(() => {
+            line.classList.remove('is-reading');
+            lineIdx++;
+            if (lineIdx >= count) {
+              lineIdx = 0;
+              container.scrollTo({ top: 0, behavior: 'smooth' });
+              setTimeout(readLine, 1000);
+            } else {
+              readLine();
+            }
+          }, LINE_PAUSE);
+          return;
+        }
+
+        const wordEl = words[wordIdx];
+        positionFinger(wordEl);
+        finger.classList.add('is-visible');
+
+        if (tapWordIndices.includes(wordIdx) && !tapping) {
+          tapping = true;
+          const transIdxs = getTransIndices(lineIdx, wordIdx);
+          setTimeout(() => {
+            finger.classList.add('is-tapping');
+            setTimeout(() => finger.classList.remove('is-tapping'), 500);
+            // Highlight after finger presses down
+            setTimeout(() => {
+              wordEl.classList.add('is-tapped');
+              for (const ti of transIdxs) {
+                if (transWords[ti]) transWords[ti].classList.add('is-trans-highlighted');
+              }
+            }, 250);
+            // Hold, then clear and continue
+            setTimeout(() => {
+              wordEl.classList.remove('is-tapped');
+              for (const ti of transIdxs) {
+                if (transWords[ti]) transWords[ti].classList.remove('is-trans-highlighted');
+              }
+              tapping = false;
+              wordIdx++;
+              moveToWord();
+            }, 250 + TAP_HIGHLIGHT_DURATION);
+          }, 1100);
+          return;
+        }
+
+        wordIdx++;
+        setTimeout(moveToWord, WORD_DELAY);
+      }
+
+      moveToWord();
+    }
+
+    // Start only when the phone scrolls into view, with no initial delay.
+    const demoEl = document.querySelector('.reader-demo');
+    if (!demoEl || !('IntersectionObserver' in window)) {
+      readLine();
+      return;
+    }
+    const io = new IntersectionObserver((entries, obs) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          readLine();
+          break;
+        }
+      }
+    }, { threshold: 0.35 });
+    io.observe(demoEl);
+  }
+
+  loadAndRender();
+</script>

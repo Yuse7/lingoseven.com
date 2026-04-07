@@ -1,0 +1,54 @@
+---
+interface LanguageItem {
+  code: string;
+  name: string;
+  slug: string;
+}
+
+interface Props {
+  languages: LanguageItem[];
+  currentUiLang: string;
+  currentTargetLang?: string;
+}
+
+const { languages, currentUiLang, currentTargetLang } = Astro.props;
+
+// Map language codes to flag emojis (regional indicator pairs)
+function codeToFlag(code: string): string {
+  const flagMap: Record<string, string> = {
+    en: '\u{1F1EC}\u{1F1E7}', ar: '\u{1F1E6}\u{1F1EA}', zh: '\u{1F1E8}\u{1F1F3}',
+    ja: '\u{1F1EF}\u{1F1F5}', ko: '\u{1F1F0}\u{1F1F7}', hi: '\u{1F1EE}\u{1F1F3}',
+    bn: '\u{1F1E7}\u{1F1E9}', ur: '\u{1F1F5}\u{1F1F0}', fa: '\u{1F1EE}\u{1F1F7}',
+    he: '\u{1F1EE}\u{1F1F1}', ms: '\u{1F1F2}\u{1F1FE}', tl: '\u{1F1F5}\u{1F1ED}',
+    sw: '\u{1F1F0}\u{1F1EA}', bs: '\u{1F1E7}\u{1F1E6}', sr: '\u{1F1F7}\u{1F1F8}',
+    pt: '\u{1F1F5}\u{1F1F9}', es: '\u{1F1EA}\u{1F1F8}',
+  };
+  if (flagMap[code]) return flagMap[code];
+  // Default: convert 2-letter code to regional indicator symbols
+  const upper = code.slice(0, 2).toUpperCase();
+  return String.fromCodePoint(...[...upper].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
+}
+
+function getUrl(slug: string): string {
+  if (currentUiLang === 'en') {
+    return `/learn/${slug}/`;
+  }
+  return `/${currentUiLang}/learn/${slug}/`;
+}
+---
+
+<section class="language-grid-section">
+  <div class="container">
+    <div class="language-grid">
+      {languages.map((lang) => (
+        <a
+          href={getUrl(lang.slug)}
+          class:list={['language-grid-item', { active: lang.code === currentTargetLang }]}
+        >
+          <span class="language-grid-flag">{codeToFlag(lang.code)}</span>
+          <span class="language-grid-name">{lang.name}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

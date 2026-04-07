@@ -1,0 +1,85 @@
+---
+interface Props {
+  targetLangName?: string;
+  translations?: Record<string, any>;
+}
+const { targetLangName = '', translations = {} } = Astro.props;
+
+function t(key: string): string {
+  const val = translations[key] || key;
+  return val.replace(/{targetLang}/g, targetLangName);
+}
+
+type Testimonial = { id: number; flag: string; name: string; level?: 'beginner' | 'intermediate' | 'advanced' };
+
+const testimonials: Testimonial[] = [
+  { id: 1, flag: 'it', name: 'Luca Conti' },
+  { id: 2, flag: 'gb', name: 'Emily Carter' },
+  { id: 3, flag: 'fr', name: 'Hugo Bernard' },
+  { id: 4, flag: 'es', name: 'Carlos Hernández' },
+  { id: 5, flag: 'gb', name: 'Alice Green', level: 'advanced' },
+  { id: 6, flag: 'it', name: 'Giulia Bianchi' },
+  { id: 7, flag: 'gb', name: 'Emma Thompson', level: 'beginner' },
+  { id: 8, flag: 'fr', name: 'Chloé Martin' },
+  { id: 9, flag: 'de', name: 'Jonas Weber' },
+  { id: 10, flag: 'es', name: 'Diego Castillo' },
+  { id: 11, flag: 'gb', name: 'James Miller' },
+  { id: 12, flag: 'de', name: 'Leon Müller', level: 'intermediate' },
+  { id: 13, flag: 'es', name: 'Valeria Navarro' },
+  { id: 14, flag: 'fr', name: 'Thomas Moreau' },
+  { id: 15, flag: 'gb', name: 'Olivia Bennett' },
+  { id: 16, flag: 'fr', name: 'Camille Dubois' },
+  { id: 17, flag: 'es', name: 'Martina Ruiz' },
+  { id: 18, flag: 'gb', name: 'Sarah Johnson' },
+  { id: 19, flag: 'it', name: 'Francesca Romano', level: 'advanced' },
+  { id: 20, flag: 'gb', name: 'Daniel White' },
+  { id: 21, flag: 'es', name: 'Lucía Gómez' },
+  { id: 22, flag: 'fr', name: 'Antoine Lefèvre' },
+  { id: 23, flag: 'de', name: 'Mia Fischer' },
+  { id: 24, flag: 'es', name: 'Javier Morales' },
+  { id: 25, flag: 'fr', name: 'Élodie Laurent' },
+  { id: 26, flag: 'de', name: 'Lena Schneider' },
+  { id: 27, flag: 'es', name: 'Sofía Martínez', level: 'beginner' },
+  { id: 28, flag: 'it', name: 'Marco Rossi' },
+  { id: 29, flag: 'gb', name: 'Matthew Clark' },
+  { id: 30, flag: 'fr', name: 'Nicolas Petit', level: 'intermediate' },
+];
+---
+
+<!-- Reviews -->
+<section id="testimonials" class="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">{t('testimonials_tag')}</span>
+            <h2>{t('testimonials_title')}</h2>
+            <p>{t('testimonials_subtitle')}</p>
+        </div>
+    </div>
+    <div class="testimonials-slider">
+        <div class="testimonials-track">
+            {testimonials.map((tm) => (
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"{t(`testimonial_${tm.id}`)}"</p>
+                    <div class="testimonial-author">
+                        <span class={`fi fi-${tm.flag}`}></span>
+                        <div class="author-info">
+                            <span class="author-name">{tm.name}</span>
+                            {tm.level && <span class="author-level">{t(`level_${tm.level}`)}</span>}
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+        <button class="testimonials-btn testimonials-btn-prev" aria-label="Previous">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+        <button class="testimonials-btn testimonials-btn-next" aria-label="Next">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
+    </div>
+</section>

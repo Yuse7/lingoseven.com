@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import { getEnabledLanguages } from '../data/languages';
+import { codeToSlug } from '../data/languageSlugs';
+
+// Map language code to country code for flagcdn.com
+const langToCountry: Record<string, string> = {
+  en: 'gb', de: 'de', fr: 'fr', es: 'es', it: 'it', pt: 'pt', ru: 'ru', sr: 'rs',
+  nl: 'nl', sv: 'se', no: 'no', da: 'dk', ro: 'ro', uk: 'ua', pl: 'pl', cs: 'cz',
+  sk: 'sk', hr: 'hr', bs: 'ba', bg: 'bg', mk: 'mk', sl: 'si', lv: 'lv', lt: 'lt',
+  fi: 'fi', hu: 'hu', et: 'ee', tr: 'tr', az: 'az', el: 'gr', vi: 'vn', id: 'id',
+  ms: 'my', is: 'is', af: 'za', ca: 'es', gl: 'es', kk: 'kz', uz: 'uz', tl: 'ph',
+  mn: 'mn', ka: 'ge', hy: 'am', sq: 'al', eu: 'es', sw: 'ke', zu: 'za', be: 'by',
+  ky: 'kg',
+};
+
+const languages = getEnabledLanguages();
+---
+
+<BaseLayout
+  title="Lingo7 — Learn a language in 30 minutes a day"
+  description="Master any language through parallel reading, audio, and spaced repetition. 90+ languages supported."
+>
+  <HeroSection />
+
+  <section class="choose-language">
+    <div class="container">
+      <div class="choose-language-grid">
+        {languages.map((lang) => (
+          <a href={`/en/learn/${codeToSlug[lang.code]}`} class="choose-language-pill">
+            <img
+              src={`https://flagcdn.com/24x18/${langToCountry[lang.code] ?? lang.code}.png`}
+              alt=""
+              class="choose-language-flag"
+            />
+            <span>Learn {lang.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .choose-language {
+    padding: 80px 0;
+  }
+
+  .choose-language-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .choose-language-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .choose-language-pill:hover {
+    border-color: var(--primary);
+    background: rgba(74, 222, 128, 0.05);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .choose-language-flag {
+    width: 24px;
+    height: 18px;
+    border-radius: 3px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .choose-language {
+      padding: 60px 0;
+    }
+
+    .choose-language-pill {
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+  }
+</style>

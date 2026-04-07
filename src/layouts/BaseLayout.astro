@@ -1,0 +1,77 @@
+---
+import Head from '../components/Head.astro';
+import Analytics from '../components/Analytics.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface UiLanguage {
+  code: string;
+  nativeName: string;
+  flag: string;
+  url: string;
+}
+
+interface LearnLanguageLink {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  hreflangAlternates?: Array<{ lang: string; url: string }>;
+  translations?: Record<string, string>;
+  uiLang?: string;
+  uiLanguages?: UiLanguage[];
+  learnLanguageLinks?: LearnLanguageLink[];
+  showNav?: boolean;
+}
+
+const {
+  title,
+  description,
+  lang = 'en',
+  canonicalUrl,
+  ogImage,
+  hreflangAlternates,
+  translations,
+  uiLang = 'en',
+  uiLanguages,
+  learnLanguageLinks,
+  showNav = false,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <Head
+    title={title}
+    description={description}
+    lang={lang}
+    canonicalUrl={canonicalUrl}
+    ogImage={ogImage}
+    hreflangAlternates={hreflangAlternates}
+  />
+  <Analytics />
+</head>
+<body>
+  <Header
+    translations={translations}
+    uiLang={uiLang}
+    uiLanguages={uiLanguages}
+    showNav={showNav}
+  />
+  <slot />
+  <Footer
+    translations={translations}
+    uiLang={uiLang}
+    uiLanguages={uiLanguages}
+    learnLanguageLinks={learnLanguageLinks}
+  />
+  <script src="../scripts/main.ts"></script>
+</body>
+</html>

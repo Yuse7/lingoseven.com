@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LearnHero from '../../../components/LearnHero.astro';
+import FeaturesSlider from '../../../components/FeaturesSlider.astro';
+import AudioSection from '../../../components/AudioSection.astro';
+import PracticeSection from '../../../components/PracticeSection.astro';
+import HowItWorks from '../../../components/HowItWorks.astro';
+import TestimonialsSlider from '../../../components/TestimonialsSlider.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import DownloadSection from '../../../components/DownloadSection.astro';
+import { getEnabledLanguages, hasAudio } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { getTranslations } from '../../../utils/i18n';
+import { getTargetLanguageName } from '../../../data/languageNames';
+
+export function getStaticPaths() {
+  const enabled = getEnabledLanguages();
+  const paths: Array<{ params: { uiLang: string; targetLang: string }; props: { targetCode: string; uiCode: string } }> = [];
+
+  for (const target of enabled) {
+    for (const ui of enabled) {
+      const slug = codeToSlug[target.code];
+      if (!slug) continue;
+      paths.push({
+        params: { uiLang: ui.code, targetLang: slug },
+        props: { targetCode: target.code, uiCode: ui.code },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { targetCode, uiCode } = Astro.props;
+const translations = getTranslations(uiCode);
+const targetLangName = getTargetLanguageName(targetCode, uiCode);
+const uiLangName = getTargetLanguageName(uiCode, uiCode);
+const targetSlug = codeToSlug[targetCode];
+
+const title = translations['learn_meta_title']?.replace('{targetLang}', targetLangName) ?? `Learn ${targetLangName}`;
+const description = translations['learn_meta_description']?.replace('{targetLang}', targetLangName) ?? `Learn ${targetLangName} with Lingo7`;
+
+const enabled = getEnabledLanguages();
+
+// Build hreflang alternates
+const hreflangAlternates = enabled.map((ui) => ({
+  lang: ui.code,
+  url: `https://lingoseven.com/${ui.code}/learn/${targetSlug}`,
+}));
+hreflangAlternates.push({
+  lang: 'x-default',
+  url: `https://lingoseven.com/en/learn/${targetSlug}`,
+});
+
+// Language switcher data for header/footer
+const uiLanguages = enabled.map((l) => ({
+  code: l.code,
+  nativeName: l.nativeName,
+  flag: l.flag,
+  url: `/${l.code}/learn/${targetSlug}`,
+}));
+
+// Footer links to all "Learn [Language]" pages
+const learnLanguageLinks = enabled.map((l) => ({
+  name: getTargetLanguageName(l.code, uiCode),
+  url: `/${uiCode}/learn/${codeToSlug[l.code]}`,
+}));
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang={uiCode}
+  canonicalUrl={`https://lingoseven.com/${uiCode}/learn/${targetSlug}`}
+  hreflangAlternates={hreflangAlternates}
+  translations={translations}
+  uiLang={uiCode}
+  uiLanguages={uiLanguages}
+  learnLanguageLinks={learnLanguageLinks}
+  showNav={true}
+>
+  <LearnHero targetLangName={targetLangName} translations={translations} />
+  <FeaturesSlider targetLangName={targetLangName} uiLangName={uiLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
+  {hasAudio(targetCode) && (
+    <AudioSection targetLangName={targetLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
+  )}
+  <PracticeSection targetLangName={targetLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
+  <HowItWorks targetLangName={targetLangName} translations={translations} />
+  <TestimonialsSlider targetLangName={targetLangName} translations={translations} />
+  <FaqAccordion targetLangName={targetLangName} translations={translations} />
+  <DownloadSection targetLangName={targetLangName} translations={translations} />
+</BaseLayout>

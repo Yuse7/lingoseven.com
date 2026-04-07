@@ -1,0 +1,114 @@
+---
+import ReaderDemo from './ReaderDemo.astro';
+
+interface Props {
+  targetLangName?: string;
+  uiLangName?: string;
+  targetLang?: string;
+  uiLang?: string;
+  translations?: Record<string, any>;
+}
+const {
+  targetLangName = '',
+  uiLangName = '',
+  targetLang = 'de',
+  uiLang = 'en',
+  translations = {},
+} = Astro.props;
+
+function t(key: string): string {
+  const val = translations[key] || key;
+  return val.replace(/{targetLang}/g, targetLangName).replace(/{uiLang}/g, uiLangName);
+}
+---
+
+<!-- Parallel Reading -->
+<section id="features" class="parallel-reading">
+    <div class="container">
+        <div class="parallel-reading-content">
+            <div class="parallel-reading-screenshot">
+                <ReaderDemo targetLang={targetLang} uiLang={uiLang} />
+            </div>
+            <div class="parallel-reading-text">
+                <span class="section-tag">{t('features_slider_tag')}</span>
+                <h2>{t('features_slider_title')}</h2>
+                <p>{t('features_slider_description')}</p>
+                <ul class="parallel-reading-benefits">
+                    <li set:html={t('features_slider_benefit1')}></li>
+                    <li set:html={t('features_slider_benefit2')}></li>
+                    <li set:html={t('features_slider_benefit3')}></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .parallel-reading {
+        padding: 80px 0;
+    }
+
+    .parallel-reading-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .parallel-reading-screenshot {
+        display: flex;
+        justify-content: center;
+    }
+
+    .parallel-reading-text h2 {
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .parallel-reading-text > p {
+        color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 24px;
+    }
+
+    .parallel-reading-benefits {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .parallel-reading-benefits li {
+        color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+        font-size: 1rem;
+        line-height: 1.6;
+        padding-left: 28px;
+        position: relative;
+    }
+
+    .parallel-reading-benefits li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--primary, #4ade80);
+        font-weight: 700;
+    }
+
+    .parallel-reading-benefits li strong {
+        color: var(--text-primary, #fff);
+    }
+
+    @media (max-width: 768px) {
+        .parallel-reading {
+            padding: 48px 0;
+        }
+
+        .parallel-reading-content {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+    }
+</style>

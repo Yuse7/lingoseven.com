@@ -1,0 +1,259 @@
+---
+import AudioDemo from './AudioDemo.astro';
+
+interface Props {
+  targetLangName?: string;
+  targetLang?: string;
+  uiLang?: string;
+  translations?: Record<string, any>;
+}
+
+const {
+  targetLangName = '',
+  targetLang = 'de',
+  uiLang = 'en',
+  translations = {},
+} = Astro.props;
+
+function t(key: string): string {
+  const val = translations[key] || key;
+  return val.replace(/{targetLang}/g, targetLangName);
+}
+---
+
+<!-- Audio Books -->
+<section class="audio-section">
+    <div class="container">
+        <div class="audio-content">
+            <div class="audio-text">
+                <span class="section-tag section-tag--amber">{t('audio_tag')}</span>
+                <h2>{t('audio_title')}</h2>
+                <p>{t('audio_subtitle')}</p>
+                <ul class="audio-benefits">
+                    <li set:html={t('audio_benefit_native')}></li>
+                    <li set:html={t('audio_benefit_sync')}></li>
+                    <li set:html={t('audio_benefit_ear')}></li>
+                </ul>
+                <div class="audio-controls">
+                    <button class="audio-listen-btn" id="audioListenBtn" data-label-off={t('audio_listen_btn')} data-label-on={t('audio_listen_btn_on')}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                            <line x1="23" y1="9" x2="17" y2="15"/>
+                            <line x1="17" y1="9" x2="23" y2="15"/>
+                        </svg>
+                        <span class="audio-listen-btn__label">{t('audio_listen_btn')}</span>
+                    </button>
+                </div>
+            </div>
+            <div class="audio-screenshot">
+                <AudioDemo targetLang={targetLang} uiLang={uiLang} />
+                <div class="audio-speed" id="audioSpeedControl" aria-hidden="true">
+                    <span class="audio-speed__label">{t('audio_speed_label')}</span>
+                    <div class="audio-speed__options" role="group" aria-label="Playback speed">
+                        <button type="button" class="audio-speed__btn" data-speed="0.75">0.75&times;</button>
+                        <button type="button" class="audio-speed__btn" data-speed="0.9">0.9&times;</button>
+                        <button type="button" class="audio-speed__btn is-active" data-speed="1">1&times;</button>
+                        <button type="button" class="audio-speed__btn" data-speed="1.1">1.1&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .audio-section {
+        padding: 80px 0;
+    }
+
+    .audio-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .audio-screenshot {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .audio-text h2 {
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .audio-text > p {
+        color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 24px;
+    }
+
+    .audio-benefits {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .audio-benefits li {
+        color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+        font-size: 1rem;
+        line-height: 1.6;
+        padding-left: 28px;
+        position: relative;
+    }
+
+    .audio-benefits li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--primary, #4ade80);
+        font-weight: 700;
+    }
+
+    .audio-benefits li strong {
+        color: var(--text-primary, #fff);
+    }
+
+    .audio-controls {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-top: 28px;
+        flex-wrap: wrap;
+    }
+
+    .audio-listen-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        background: #f97316;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+        font-family: inherit;
+    }
+    .audio-listen-btn:hover {
+        background: #ea580c;
+    }
+    .audio-listen-btn:active {
+        transform: scale(0.97);
+    }
+    .audio-listen-btn svg {
+        flex-shrink: 0;
+    }
+
+    .audio-speed {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4px);
+        transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0.25s;
+    }
+    .audio-speed.is-visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .audio-speed__label {
+        font-size: 0.85rem;
+        color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+        font-weight: 500;
+    }
+    .audio-speed__options {
+        display: inline-flex;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 3px;
+        gap: 2px;
+    }
+    .audio-speed__btn {
+        background: transparent;
+        border: none;
+        color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 6px 10px;
+        border-radius: 7px;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+    }
+    .audio-speed__btn:hover {
+        color: #fff;
+    }
+    .audio-speed__btn.is-active {
+        background: #16a34a;
+        color: #fff;
+    }
+
+    @media (max-width: 768px) {
+        .audio-section {
+            padding: 48px 0;
+        }
+
+        .audio-content {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+    }
+</style>
+
+<script>
+  const listenBtn = document.getElementById('audioListenBtn');
+  const muteBtn = document.getElementById('audioMuteBtn');
+  const speedControl = document.getElementById('audioSpeedControl');
+  const speedBtns = speedControl?.querySelectorAll<HTMLButtonElement>('.audio-speed__btn');
+
+  function syncListenBtn() {
+    if (!listenBtn) return;
+    const isUnmuted = muteBtn?.classList.contains('is-unmuted');
+    const labelOn = (listenBtn as HTMLElement).dataset.labelOn || 'Sound on';
+    const labelOff = (listenBtn as HTMLElement).dataset.labelOff || 'Try the audio';
+    const label = isUnmuted ? labelOn : labelOff;
+    listenBtn.innerHTML = isUnmuted
+      ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> <span class="audio-listen-btn__label">${label}</span>`
+      : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg> <span class="audio-listen-btn__label">${label}</span>`;
+    listenBtn.style.background = isUnmuted ? '#16a34a' : '#f97316';
+    if (speedControl) {
+      speedControl.classList.toggle('is-visible', !!isUnmuted);
+      speedControl.setAttribute('aria-hidden', isUnmuted ? 'false' : 'true');
+    }
+  }
+
+  // Clicking main button toggles AudioDemo mute
+  listenBtn?.addEventListener('click', () => {
+    if (muteBtn) muteBtn.click();
+    const audioDemo = document.querySelector('.audio-demo');
+    if (audioDemo) audioDemo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  // Speed controls — dispatch custom event consumed by AudioDemo
+  speedBtns?.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const speed = parseFloat(btn.dataset.speed || '1');
+      speedBtns.forEach(b => b.classList.toggle('is-active', b === btn));
+      document.dispatchEvent(new CustomEvent('audiodemo:setspeed', { detail: { speed } }));
+    });
+  });
+
+  // Sync main button when AudioDemo mute state changes (e.g. clicked directly or reset)
+  if (muteBtn) {
+    new MutationObserver(syncListenBtn).observe(muteBtn, { attributes: true, attributeFilter: ['class'] });
+  }
+</script>
