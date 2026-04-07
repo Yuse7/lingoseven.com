@@ -10,6 +10,7 @@
   "nav_home": "Home",
   "nav_all_languages": "All languages",
   "hero_title": "Improve your {targetLang} while enjoying your favorite books",
+  "learn_hero_pill": "Evidence-based learning technique",
   "start_learning": "Start learning {targetLang}",
   "download_app": "Download the app",
   "download_on": "Download on",
@@ -58,14 +59,12 @@
   "footer_contact": "Contact",
   "footer_copyright": "© 2024-2026 Lingo7. All rights reserved.",
   "language_switcher": "Language",
-
   "features_slider_tag": "Parallel Reading",
   "features_slider_title": "Read {targetLang} books with {uiLang} translation",
   "features_slider_description": "Every {targetLang} sentence is shown side by side with its {uiLang} translation. You read naturally, absorbing {targetLang} vocabulary and grammar in context — no stopping to look up words.",
   "features_slider_benefit1": "<strong>No dictionary needed</strong> — {uiLang} translation is always right there",
   "features_slider_benefit2": "<strong>Natural absorption</strong> — learn {targetLang} grammar and vocabulary from real texts",
   "features_slider_benefit3": "<strong>Real books</strong> — not textbook exercises, but stories you actually enjoy",
-
   "audio_tag": "Audio Books",
   "audio_title": "Listen and read {targetLang} at the same time",
   "audio_subtitle": "Turn on the audio and follow along with your eyes — one of the fastest ways to level up your {targetLang} listening and pronunciation.",
@@ -75,7 +74,6 @@
   "audio_listen_btn": "Try the audio",
   "audio_listen_btn_on": "Sound on",
   "audio_speed_label": "Speed",
-
   "practice_tag": "Spaced Repetition",
   "practice_title": "The most proven way to remember words",
   "practice_subtitle": "Spaced repetition is one of the most rigorously studied learning techniques of the last century — repeatedly shown to outperform cramming and re-reading by a wide margin. Lingo7 tracks every word you tap while reading and brings it back for review right before you'd forget it. 14 different exercises — from quick recognition to active recall, typing and pronunciation — strengthen memory from every angle.",
@@ -104,7 +102,6 @@
   "practice_desc_is_correct": "See a word and a translation — quickly decide if it's correct",
   "practice_desc_pronounce": "Pronounce the word and get instant accuracy feedback",
   "practice_desc_recall": "Try to recall the translation from memory before revealing it",
-
   "how_tag": "How it works",
   "how_title": "Read. Listen. Repeat.",
   "how_subtitle": "Build an effective routine by developing multiple skills in parallel",
@@ -126,7 +123,6 @@
   "how_bonus2_desc": "Learn a language and <strong>grow as a person at the same time</strong>.",
   "how_summary_label": "Summary",
   "how_summary_text": "Lingo7 combines essential language skills into one process — so your progress is fast and tangible.",
-
   "faq2_tag": "Proven methods",
   "faq2_title": "Polyglot secrets",
   "faq2_subtitle": "The 5 principles every polyglot uses — built into Lingo7.",
@@ -145,7 +141,6 @@
   "faq2_item5_question": "05 — Train all skills together",
   "faq2_item5_principle": "<strong>Principle:</strong> The fastest progress happens when reading, listening, vocabulary, and pronunciation reinforce each other. A word you've read, heard, and pronounced is remembered in a way that isolated drilling can't match — overall results grow faster than the sum of individual exercises.",
   "faq2_item5_how": "<strong>How Lingo7 helps:</strong> One session covers all four: you read a page with parallel translation, listen to the narration with word-by-word highlighting, tap new words to save them, and practice pronunciation on the ones you learn. Four skills trained in parallel, in 7–15 minutes a day.",
-
   "testimonials_tag": "Reviews",
   "testimonials_title": "What users say",
   "testimonials_subtitle": "Real stories from language learners around the world",
@@ -182,7 +177,6 @@
   "testimonial_28": "I read with pleasure — and it suddenly became my 'lesson'.",
   "testimonial_29": "This is the first app where I don't feel stupid. No panic from unfamiliar words — the translation is right there, and you keep going.",
   "testimonial_30": "I already know the basics, but I was missing regular practice. This format fits perfectly into my day: I read and level up my comprehension without extra prep.",
-
   "download_section_title": "Want to learn a language quickly and effectively?",
   "download_section_subtitle": "Download Lingo7 and start learning a language today"
 }
