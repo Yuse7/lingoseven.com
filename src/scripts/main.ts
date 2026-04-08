@@ -479,47 +479,45 @@ if (readVideo && readNumber) {
 }
 
 // ========== Analytics tracking for store links ==========
-declare function ym(id: number, action: string, goal: string): void;
-declare function gtag(command: string, event: string, params: Record<string, unknown>): void;
+// Fires Yandex.Metrika goals (both counters) and gtag events (GA4 + Google Ads)
+// when a user clicks an App Store or Google Play link. We do NOT preventDefault,
+// so cmd/middle-click and new-tab behaviour keep working. Modern gtag and ym
+// use sendBeacon, so events survive navigation.
+declare function ym(id: number, action: string, goal: string, params?: Record<string, unknown>): void;
+declare function gtag(command: string, event: string, params?: Record<string, unknown>): void;
 
-document.querySelectorAll('a[href*="apps.apple.com"]').forEach((link) => {
-  link.addEventListener('click', function (this: HTMLAnchorElement, e: Event) {
-    e.preventDefault();
-    const url = this.href;
-    if (typeof ym !== 'undefined') ym(106042821, 'reachGoal', 'click_app_store');
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'click_app_store', {
-        event_category: 'download',
-        event_callback: () => {
-          window.location.href = url;
-        },
-      });
-      setTimeout(() => {
-        window.location.href = url;
-      }, 500);
-    } else {
-      window.location.href = url;
-    }
-  });
-});
+const YM_COUNTER_IDS = [106042821, 108422157];
+const GOOGLE_ADS_ID = 'AW-17781135403';
+// Conversion label for "Purchase (1)" in Google Ads (same as page-load conversion).
+const GOOGLE_ADS_CONVERSION_LABEL = 'iWDBCLqphNAbEKuw2p5C';
 
-document.querySelectorAll('a[href*="play.google.com"]').forEach((link) => {
-  link.addEventListener('click', function (this: HTMLAnchorElement, e: Event) {
-    e.preventDefault();
-    const url = this.href;
-    if (typeof ym !== 'undefined') ym(106042821, 'reachGoal', 'click_google_play');
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'click_google_play', {
-        event_category: 'download',
-        event_callback: () => {
-          window.location.href = url;
-        },
-      });
-      setTimeout(() => {
-        window.location.href = url;
-      }, 500);
-    } else {
-      window.location.href = url;
-    }
+const trackStoreClick = (goal: 'click_app_store' | 'click_google_play', url: string) => {
+  if (typeof ym !== 'undefined') {
+    YM_COUNTER_IDS.forEach((id) => ym(id, 'reachGoal', goal));
+  }
+  if (typeof gtag !== 'undefined') {
+    gtag('event', goal, {
+      event_category: 'download',
+      event_label: url,
+      transport_type: 'beacon',
+    });
+    gtag('event', 'conversion', {
+      send_to: `${GOOGLE_ADS_ID}/${GOOGLE_ADS_CONVERSION_LABEL}`,
+      transport_type: 'beacon',
+    });
+  }
+};
+
+const bindStoreTracking = (
+  selector: string,
+  goal: 'click_app_store' | 'click_google_play',
+) => {
+  document.querySelectorAll<HTMLAnchorElement>(selector).forEach((link) => {
+    link.addEventListener('click', function (this: HTMLAnchorElement) {
+      trackStoreClick(goal, this.href);
+    });
   });
-});
+};
+
+bindStoreTracking('a[href*="apps.apple.com"]', 'click_app_store');
+bindStoreTracking('a[href*="play.google.com"]', 'click_google_play');
