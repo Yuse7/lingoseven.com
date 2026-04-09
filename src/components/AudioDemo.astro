@@ -286,26 +286,27 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     padding: 8px 16px;
     border-radius: 10px;
     border: none;
-    background: #f97316;
-    color: #fff;
+    background: var(--primary, #4ade80);
+    color: #1a2332;
     font-size: 11px;
     font-weight: 600;
     font-family: inherit;
     cursor: pointer;
     white-space: nowrap;
-    transition: background 0.2s, transform 0.1s;
+    transition: background 0.2s, transform 0.1s, color 0.2s;
   }
   .audio-reader__mute-banner:hover {
-    background: #ea580c;
+    background: #3fc96e;
   }
   .audio-reader__mute-banner:active {
     transform: translateX(-50%) scale(0.97);
   }
   .audio-reader__mute-banner.is-unmuted {
-    background: #16a34a;
+    background: #f97316;
+    color: #fff;
   }
   .audio-reader__mute-banner.is-unmuted:hover {
-    background: #15803d;
+    background: #ea580c;
   }
   .audio-reader__mute-banner svg {
     flex-shrink: 0;
