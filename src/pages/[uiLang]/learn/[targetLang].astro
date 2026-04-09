@@ -7,6 +7,7 @@ import PracticeSection from '../../../components/PracticeSection.astro';
 import HowItWorks from '../../../components/HowItWorks.astro';
 import TestimonialsSlider from '../../../components/TestimonialsSlider.astro';
 import FaqAccordion from '../../../components/FaqAccordion.astro';
+import LibrarySection from '../../../components/LibrarySection.astro';
 import DownloadSection from '../../../components/DownloadSection.astro';
 import { getEnabledLanguages, hasAudio } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
@@ -85,6 +86,7 @@ const learnLanguageLinks = enabled.map((l) => ({
     <AudioSection targetLangName={targetLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
   )}
   <PracticeSection targetLangName={targetLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
+  <LibrarySection targetLangName={targetLangName} translations={translations} />
   <HowItWorks targetLangName={targetLangName} translations={translations} />
   <TestimonialsSlider targetLangName={targetLangName} translations={translations} />
   <FaqAccordion targetLangName={targetLangName} translations={translations} />

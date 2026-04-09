@@ -1,0 +1,647 @@
+---
+interface Props {
+  targetLangName?: string;
+  translations?: Record<string, any>;
+}
+
+const { targetLangName = '', translations = {} } = Astro.props;
+
+function t(key: string): string {
+  const val = translations[key] || key;
+  return val.replace(/{targetLang}/g, targetLangName);
+}
+
+const coverUrl = (id: string) => `https://lingo7.s3.eu-central-1.amazonaws.com/covers/250x250/${id}.webp`;
+
+interface Book {
+  title: string;
+  author: string;
+  cover: string;
+  pages: number;
+}
+
+interface Category {
+  id: string;
+  labelKey: string;
+  icon: string;
+  books: Book[];
+}
+
+const categories: Category[] = [
+  {
+    id: 'summary',
+    labelKey: 'library_cat_bestsellers',
+    icon: '🔥',
+
+    books: [
+      { title: 'Sapiens', author: 'Yuval Noah Harari', cover: coverUrl('summary_5'), pages: 21 },
+      { title: 'A Brief History of Time', author: 'Stephen Hawking', cover: coverUrl('summary_11'), pages: 21 },
+      { title: 'The Art of War', author: 'Sun Tzu', cover: coverUrl('summary_12'), pages: 22 },
+      { title: 'The Power of Now', author: 'Eckhart Tolle', cover: coverUrl('summary_10'), pages: 19 },
+      { title: 'The Subtle Art of Not Giving a F*ck', author: 'Mark Manson', cover: coverUrl('summary_4'), pages: 10 },
+      { title: 'The 5 Love Languages', author: 'Gary Chapman', cover: coverUrl('summary_6'), pages: 11 },
+      { title: 'The Monk Who Sold His Ferrari', author: 'Robin Sharma', cover: coverUrl('summary_3'), pages: 15 },
+      { title: 'Outlive', author: 'Peter Attia', cover: coverUrl('summary_14'), pages: 16 },
+    ],
+  },
+  {
+    id: 'classic',
+    labelKey: 'library_cat_short_stories',
+    icon: '📖',
+
+    books: [
+      { title: 'The Ugly Duckling', author: 'Hans Christian Andersen', cover: coverUrl('classic_27'), pages: 11 },
+      { title: 'The Tell-Tale Heart', author: 'Edgar Allan Poe', cover: coverUrl('classic_18'), pages: 6 },
+      { title: 'The Gift of the Magi', author: 'O. Henry', cover: coverUrl('classic_59'), pages: 6 },
+      { title: 'Snow White', author: 'Brothers Grimm', cover: coverUrl('classic_41'), pages: 8 },
+      { title: 'A Scandal in Bohemia', author: 'Arthur Conan Doyle', cover: coverUrl('classic_2'), pages: 20 },
+      { title: 'The Little Mermaid', author: 'Hans Christian Andersen', cover: coverUrl('classic_26'), pages: 24 },
+      { title: 'The Lady with the Dog', author: 'Anton Chekhov', cover: coverUrl('classic_77'), pages: 16 },
+      { title: 'The Monkey\'s Paw', author: 'W. W. Jacobs', cover: coverUrl('classic_64'), pages: 11 },
+    ],
+  },
+  {
+    id: 'classic2',
+    labelKey: 'library_cat_golden_classics',
+    icon: '✨',
+
+    books: [
+      { title: 'A Daughter of the Snows', author: 'Jack London', cover: coverUrl('classic2_14654'), pages: 423 },
+      { title: 'Albert Savarus', author: 'Honore de Balzac', cover: coverUrl('classic2_1898'), pages: 206 },
+      { title: 'Brother Jacob', author: 'George Eliot', cover: coverUrl('classic2_2171'), pages: 64 },
+      { title: 'Hunted Down', author: 'Charles Dickens', cover: coverUrl('classic2_807'), pages: 42 },
+      { title: 'Jungle Tales of Tarzan', author: 'Edgar Rice Burroughs', cover: coverUrl('classic2_106'), pages: 387 },
+      { title: 'Pandora', author: 'Henry James', cover: coverUrl('classic2_2299'), pages: 64 },
+      { title: 'The Invisible Girl', author: 'Mary Shelley', cover: coverUrl('classic2_56665'), pages: 519 },
+      { title: 'Christmas At Thompson Hall', author: 'Anthony Trollope', cover: coverUrl('classic2_58558'), pages: 65 },
+    ],
+  },
+  {
+    id: 'fivemin',
+    labelKey: 'library_cat_five_min',
+    icon: '⚡',
+
+    books: [
+      { title: 'Can Dolphins Talk?', author: '', cover: coverUrl('nature_14'), pages: 5 },
+      { title: 'Are We in Control of Our Own Lives?', author: '', cover: coverUrl('philosophy_13'), pages: 5 },
+      { title: 'Cancer Vaccine: Future or Present?', author: '', cover: coverUrl('science_36'), pages: 6 },
+      { title: 'Can You Become Smarter by Playing Video Games?', author: '', cover: coverUrl('myself_29'), pages: 3 },
+      { title: 'Can You Send Smell Over Wi-Fi?', author: '', cover: coverUrl('technology_8'), pages: 8 },
+      { title: 'Can You Survive Without Sleep?', author: '', cover: coverUrl('science_63'), pages: 9 },
+      { title: 'Could Stonehenge Be a Portal to the Afterlife?', author: '', cover: coverUrl('history_32'), pages: 5 },
+      { title: 'Can Lying Be Justified?', author: '', cover: coverUrl('philosophy_4'), pages: 4 },
+    ],
+  },
+  {
+    id: 'people',
+    labelKey: 'library_cat_biographies',
+    icon: '👤',
+
+    books: [
+      { title: 'Albert Einstein', author: '', cover: coverUrl('people_7'), pages: 10 },
+      { title: 'Elon Musk', author: '', cover: coverUrl('people_13'), pages: 12 },
+      { title: 'Cleopatra', author: '', cover: coverUrl('people_11'), pages: 7 },
+      { title: 'Freddie Mercury', author: '', cover: coverUrl('people_12'), pages: 11 },
+      { title: 'Coco Chanel', author: '', cover: coverUrl('people_21'), pages: 9 },
+      { title: 'Audrey Hepburn', author: '', cover: coverUrl('people_31'), pages: 4 },
+      { title: 'Frida Kahlo', author: '', cover: coverUrl('people_32'), pages: 6 },
+      { title: 'Charlie Chaplin', author: '', cover: coverUrl('people_30'), pages: 8 },
+    ],
+  },
+  {
+    id: 'dialog',
+    labelKey: 'library_cat_dialogues',
+    icon: '💬',
+
+    books: [
+      { title: 'At the Airport', author: '', cover: coverUrl('dialog_1'), pages: 6 },
+      { title: 'At the Hotel', author: '', cover: coverUrl('dialog_3'), pages: 6 },
+      { title: 'At the Restaurant', author: '', cover: coverUrl('dialog_4'), pages: 4 },
+      { title: 'Lost in the City', author: '', cover: coverUrl('dialog_5'), pages: 2 },
+      { title: 'At the Coffee Shop', author: '', cover: coverUrl('dialog_7'), pages: 3 },
+      { title: 'At the Gym', author: '', cover: coverUrl('dialog_8'), pages: 5 },
+      { title: 'At the Supermarket', author: '', cover: coverUrl('dialog_9'), pages: 4 },
+      { title: 'Renting a Car Abroad', author: '', cover: coverUrl('dialog_2'), pages: 5 },
+    ],
+  },
+];
+---
+
+<section class="library-section">
+  <div class="container">
+    <div class="library-header">
+      <span class="section-tag section-tag--blue">{t('library_tag')}</span>
+      <h2>{t('library_title')}</h2>
+      <p class="library-subtitle">{t('library_subtitle')}</p>
+    </div>
+
+    <!-- Category tabs -->
+    <div class="library-tabs" role="tablist">
+      {categories.map((cat, i) => (
+        <button
+          class={`library-tab ${i === 0 ? 'active' : ''}`}
+          role="tab"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          data-cat={cat.id}
+        >
+          <span class="library-tab-icon">{cat.icon}</span>
+          <span class="library-tab-label">{t(cat.labelKey)}</span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Book carousels -->
+    {categories.map((cat, i) => (
+      <div class={`library-carousel ${i === 0 ? 'active' : ''}`} data-cat={cat.id}>
+        <div class="library-track">
+          {cat.books.map((book) => (
+            <div class="book-card">
+              <div class="book-cover-wrap">
+                <img
+                  src={book.cover}
+                  alt={book.title}
+                  class="book-cover"
+                  loading="lazy"
+                  width="140"
+                  height="210"
+                />
+              </div>
+              <div class="book-info">
+                <span class="book-title">{book.title}</span>
+                {book.author && <span class="book-author">{book.author}</span>}
+                <span class="book-pages">{book.pages} {t('library_pages')}</span>
+              </div>
+            </div>
+          ))}
+
+        </div>
+      </div>
+    ))}
+
+    <!-- Upload your own book — highlight banner -->
+    <div class="upload-banner">
+      <!-- Animated gradient border -->
+      <div class="upload-banner-border"></div>
+      <!-- Ambient glow -->
+      <div class="upload-banner-glow"></div>
+
+      <div class="upload-banner-inner">
+        <!-- Main content -->
+        <div class="upload-body">
+          <h3 class="upload-headline">{t('library_upload_title')}</h3>
+          <p class="upload-desc">{t('library_upload_subtitle')}</p>
+          <div class="upload-formats">
+            <span class="upload-format">EPUB</span>
+            <span class="upload-format-dot"></span>
+            <span class="upload-format">FB2</span>
+            <span class="upload-format-dot"></span>
+            <span class="upload-format">TXT</span>
+          </div>
+        </div>
+
+        <!-- Upload icon -->
+        <div class="upload-visual" aria-hidden="true">
+          <div class="upload-circle">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="library-footer">
+      <p class="library-total">{t('library_total')}</p>
+      <div class="hero-cta">
+        <a href="https://apps.apple.com/app/id6471030440" class="btn btn-primary btn-large">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <div class="btn-text">
+            <span class="btn-small">Download on</span>
+            <span class="btn-big">App Store</span>
+          </div>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.doublereading" class="btn btn-outline btn-large">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.56.69.56 1.19s-.22.92-.56 1.19l-2.11 1.24-2.5-2.5 2.5-2.5 2.11 1.38M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/>
+          </svg>
+          <div class="btn-text">
+            <span class="btn-small">Get it on</span>
+            <span class="btn-big">Google Play</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.library-tab');
+    const carousels = document.querySelectorAll('.library-carousel');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const cat = tab.getAttribute('data-cat');
+
+        tabs.forEach((t) => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        carousels.forEach((c) => {
+          c.classList.toggle('active', c.getAttribute('data-cat') === cat);
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .library-section {
+    padding: 100px 0 80px;
+  }
+
+  .library-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 48px;
+  }
+
+  .library-header h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 16px 0 12px;
+    color: #fff;
+  }
+
+  .library-subtitle {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .section-tag--blue {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: rgba(96, 165, 250, 0.15);
+    color: #60a5fa;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Tabs */
+  .library-tabs {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .library-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .library-tab:hover {
+    border-color: rgba(96, 165, 250, 0.4);
+    color: var(--text);
+  }
+
+  .library-tab.active {
+    background: rgba(96, 165, 250, 0.12);
+    border-color: rgba(96, 165, 250, 0.5);
+    color: #60a5fa;
+  }
+
+  .library-tab-icon {
+    font-size: 16px;
+  }
+
+  /* Carousels */
+  .library-carousel {
+    display: none;
+  }
+
+  .library-carousel.active {
+    display: block;
+  }
+
+  .library-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 0 20px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  }
+
+  .library-track::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .library-track::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .library-track::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+  }
+
+  /* Book cards */
+  .book-card {
+    flex: 0 0 160px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    cursor: default;
+  }
+
+  .book-cover-wrap {
+    width: 160px;
+    height: 230px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .book-card:hover .book-cover-wrap {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 0 2px;
+  }
+
+  .book-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .book-author {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .book-pages {
+    font-size: 11px;
+    color: var(--text-light);
+    opacity: 0.7;
+  }
+
+  /* Upload banner */
+  .upload-banner {
+    position: relative;
+    margin-top: 48px;
+    border-radius: 20px;
+    padding: 2px;
+    overflow: hidden;
+  }
+
+  .upload-banner-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #4ade80 0%, #22c55e 30%, #0ea5e9 60%, #a78bfa 100%);
+    background-size: 200% 200%;
+    animation: borderShift 6s ease-in-out infinite;
+  }
+
+  @keyframes borderShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .upload-banner-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 20px;
+    background: radial-gradient(ellipse at 30% 50%, rgba(74, 222, 128, 0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(96, 165, 250, 0.08) 0%, transparent 60%);
+    filter: blur(24px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .upload-banner-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: stretch;
+    background: linear-gradient(135deg, #1e2b3d 0%, #1a2332 40%, #1d2940 100%);
+    border-radius: 18px;
+    min-height: 140px;
+    overflow: hidden;
+  }
+
+  /* Main content */
+  .upload-body {
+    flex: 1;
+    padding: 32px 20px 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .upload-headline {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .upload-desc {
+    font-size: 15px;
+    color: var(--text-light);
+    margin: 0 0 16px;
+    line-height: 1.5;
+    max-width: 480px;
+  }
+
+  .upload-formats {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .upload-format {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(74, 222, 128, 0.7);
+    text-transform: uppercase;
+  }
+
+  .upload-format-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Upload visual / icon */
+  .upload-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+    flex-shrink: 0;
+  }
+
+  .upload-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(74, 222, 128, 0.08);
+    border: 1.5px solid rgba(74, 222, 128, 0.25);
+    color: #4ade80;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .upload-banner:hover .upload-circle {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(74, 222, 128, 0.15);
+    background: rgba(74, 222, 128, 0.12);
+  }
+
+  /* Footer */
+  .library-footer {
+    text-align: center;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .library-total {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.6;
+    max-width: 500px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .library-section {
+      padding: 60px 0;
+    }
+
+    .library-header h2 {
+      font-size: 28px;
+    }
+
+    .library-tabs {
+      justify-content: flex-start;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+
+    .library-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .library-tab {
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+
+    .library-tab-label {
+      display: none;
+    }
+
+    .library-tab-icon {
+      font-size: 18px;
+    }
+
+    .book-card {
+      flex: 0 0 130px;
+    }
+
+    .book-cover-wrap {
+      width: 130px;
+      height: 190px;
+    }
+
+    .upload-banner-inner {
+      flex-direction: column;
+      min-height: auto;
+    }
+
+    .upload-body {
+      padding: 24px 20px;
+      text-align: center;
+      align-items: center;
+    }
+
+    .upload-headline { font-size: 20px; }
+
+    .upload-visual {
+      display: none;
+    }
+
+    .upload-formats {
+      justify-content: center;
+    }
+
+  }
+</style>

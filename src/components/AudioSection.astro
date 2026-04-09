@@ -47,7 +47,7 @@ function t(key: string): string {
             </div>
             <div class="audio-screenshot">
                 <AudioDemo targetLang={targetLang} uiLang={uiLang} />
-                <div class="audio-speed" id="audioSpeedControl" aria-hidden="true">
+                <div class="audio-speed" id="audioSpeedControl">
                     <span class="audio-speed__label">{t('audio_speed_label')}</span>
                     <div class="audio-speed__options" role="group" aria-label="Playback speed">
                         <button type="button" class="audio-speed__btn" data-speed="0.75">0.75&times;</button>
@@ -135,18 +135,20 @@ function t(key: string): string {
         align-items: center;
         gap: 10px;
         padding: 14px 28px;
-        background: #f97316;
-        color: #fff;
+        background: var(--primary);
+        color: #1a2332;
         border: none;
         border-radius: 12px;
         font-size: 1rem;
         font-weight: 600;
         cursor: pointer;
-        transition: background 0.2s, transform 0.1s;
+        transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
         font-family: inherit;
+        box-shadow: 0 4px 14px rgba(74, 222, 128, 0.3);
     }
     .audio-listen-btn:hover {
-        background: #ea580c;
+        background: #3fc96e;
+        box-shadow: 0 6px 20px rgba(74, 222, 128, 0.4);
     }
     .audio-listen-btn:active {
         transform: scale(0.97);
@@ -159,15 +161,6 @@ function t(key: string): string {
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-4px);
-        transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0.25s;
-    }
-    .audio-speed.is-visible {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
     }
     .audio-speed__label {
         font-size: 0.85rem;
@@ -229,7 +222,15 @@ function t(key: string): string {
     listenBtn.innerHTML = isUnmuted
       ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> <span class="audio-listen-btn__label">${label}</span>`
       : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg> <span class="audio-listen-btn__label">${label}</span>`;
-    listenBtn.style.background = isUnmuted ? '#16a34a' : '#f97316';
+    if (isUnmuted) {
+      listenBtn.style.background = '#f97316';
+      listenBtn.style.color = '#fff';
+      listenBtn.style.boxShadow = '0 4px 14px rgba(249, 115, 22, 0.4)';
+    } else {
+      listenBtn.style.background = '';
+      listenBtn.style.color = '';
+      listenBtn.style.boxShadow = '';
+    }
     if (speedControl) {
       speedControl.classList.toggle('is-visible', !!isUnmuted);
       speedControl.setAttribute('aria-hidden', isUnmuted ? 'false' : 'true');
