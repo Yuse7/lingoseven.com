@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Learn a language in 30 minutes a day",
-  "learn_meta_title": "Learn {targetLang} with Lingo7",
-  "learn_meta_description": "Master {targetLang} through parallel reading, audio, and spaced repetition — in just 30 minutes a day",
+  "learn_meta_title": "Learn {targetLang}: Parallel Books, Audio & Vocabulary",
+  "learn_meta_description": "Read {targetLang} books with parallel translation in your language. Listen to native audio while reading. Build {targetLang} vocabulary with spaced repetition. Free app for iOS & Android.",
   "nav_features": "Features",
   "nav_how_it_works": "How it works",
   "nav_reviews": "Reviews",

@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Günde 30 dakikada bir dil öğrenin",
-  "learn_meta_title": "Lingo7 ile {targetLang} öğrenin",
-  "learn_meta_description": "Paralel okuma, ses ve aralıklı tekrar ile {targetLang} dilinde ustalaşın — günde sadece 30 dakikada",
+  "learn_meta_title": "{targetLang} öğrenin: Paralel Kitaplar, Ses & Kelime Hazinesi",
+  "learn_meta_description": "Kendi dilinizde paralel çeviriyle {targetLang} kitapları okuyun. Okurken anadil sesi dinleyin. Aralıklı tekrarla {targetLang} kelime haznenizi geliştirin. iOS & Android için ücretsiz uygulama.",
   "nav_features": "Özellikler",
   "nav_how_it_works": "Nasıl çalışır",
   "nav_reviews": "Yorumlar",

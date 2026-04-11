@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Lär dig ett språk på 30 minuter om dagen",
-  "learn_meta_title": "Lär dig {targetLang} med Lingo7",
-  "learn_meta_description": "Bemästra {targetLang} genom parallellläsning, ljud och utspridd repetition — på bara 30 minuter om dagen",
+  "learn_meta_title": "Lär dig {targetLang}: Parallella böcker, Ljud & Ordförråd",
+  "learn_meta_description": "Läs {targetLang}-böcker med parallell översättning på ditt språk. Lyssna på native-ljud medan du läser. Bygg upp ditt {targetLang}-ordförråd med utspridd repetition. Gratis app för iOS & Android.",
   "nav_features": "Funktioner",
   "nav_how_it_works": "Hur det fungerar",
   "nav_reviews": "Omdömen",

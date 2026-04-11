@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Научи језик за 30 минута дневно",
-  "learn_meta_title": "Учите {targetLang} уз Lingo7",
-  "learn_meta_description": "Савладајте {targetLang} кроз паралелно читање, аудио и размакнуто понављање — за само 30 минута дневно",
+  "learn_meta_title": "Учите {targetLang}: Паралелне књиге, Аудио & Речник",
+  "learn_meta_description": "Читајте књиге на {targetLang} с паралелним преводом на ваш језик. Слушајте аудио изворних говорника током читања. Градите речник {targetLang} уз размакнуто понављање. Бесплатна апликација за iOS & Android.",
   "nav_features": "Функције",
   "nav_how_it_works": "Како функционише",
   "nav_reviews": "Рецензије",

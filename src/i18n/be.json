@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Вывучайце мову за 30 хвілін у дзень",
-  "learn_meta_title": "{targetLang} мова — Lingo7",
-  "learn_meta_description": "{targetLang} мова: паралельнае чытанне, аўдыё і інтэрвальнае паўтарэнне — усяго за 30 хвілін у дзень з Lingo7",
+  "learn_meta_title": "Вывучайце {targetLang}: Паралельныя кнігі, Аўдыё & Слоўнік",
+  "learn_meta_description": "Чытайце кнігі на {targetLang} з паралельным перакладам на вашу мову. Слухайце аўдыё ад носьбітаў падчас чытання. Папаўняйце слоўнік {targetLang} з інтэрвальным паўтарэннем. Бясплатны дадатак для iOS & Android.",
   "nav_features": "Магчымасці",
   "nav_how_it_works": "Як гэта працуе",
   "nav_reviews": "Водгукі",

@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Выучи язык за 30 минут в день",
-  "learn_meta_title": "Учите {targetLang} с Lingo7",
-  "learn_meta_description": "Освойте {targetLang} через параллельное чтение, аудио и интервальное повторение — всего за 30 минут в день",
+  "learn_meta_title": "Учите {targetLang}: Параллельные книги, Аудио & Словарный запас",
+  "learn_meta_description": "Читайте книги на {targetLang} с параллельным переводом на ваш язык. Слушайте аудио от носителей во время чтения. Пополняйте словарный запас {targetLang} с интервальным повторением. Бесплатное приложение для iOS & Android.",
   "nav_features": "Возможности",
   "nav_how_it_works": "Как это работает",
   "nav_reviews": "Отзывы",
