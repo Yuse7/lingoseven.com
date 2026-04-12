@@ -66,6 +66,53 @@ const learnLanguageLinks = enabled.map((l) => ({
   name: getTargetLanguageName(l.code, uiCode),
   url: `/${uiCode}/learn/${codeToSlug[l.code]}`,
 }));
+
+// Strip HTML tags for JSON-LD (FAQ answers contain <strong> etc.)
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, '');
+}
+
+// JSON-LD structured data
+const faqItems = [1, 2, 3, 4, 5].map((i) => {
+  const question = (translations[`faq2_item${i}_question`] || '').replace(/{targetLang}/g, targetLangName);
+  const principle = stripHtml((translations[`faq2_item${i}_principle`] || '').replace(/{targetLang}/g, targetLangName));
+  const how = stripHtml((translations[`faq2_item${i}_how`] || '').replace(/{targetLang}/g, targetLangName));
+  return { question, answer: `${principle} ${how}` };
+});
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://lingoseven.com" },
+      { "@type": "ListItem", "position": 2, "name": `Learn ${targetLangName}`, "item": `https://lingoseven.com/${uiCode}/learn/${targetSlug}` },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItems.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": { "@type": "Answer", "text": faq.answer },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Lingo7",
+    "applicationCategory": "EducationApplication",
+    "operatingSystem": "iOS, Android",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": description,
+    "url": "https://lingoseven.com",
+    "downloadUrl": [
+      "https://apps.apple.com/app/id6471030440",
+      "https://play.google.com/store/apps/details?id=com.doublereading",
+    ],
+  },
+];
 ---
 
 <BaseLayout
@@ -74,6 +121,7 @@ const learnLanguageLinks = enabled.map((l) => ({
   lang={uiCode}
   canonicalUrl={`https://lingoseven.com/${uiCode}/learn/${targetSlug}`}
   hreflangAlternates={hreflangAlternates}
+  jsonLd={jsonLd}
   translations={translations}
   uiLang={uiCode}
   uiLanguages={uiLanguages}

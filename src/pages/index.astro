@@ -16,11 +16,44 @@ const langToCountry: Record<string, string> = {
 };
 
 const languages = getEnabledLanguages();
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Lingo7",
+    "applicationCategory": "EducationApplication",
+    "operatingSystem": "iOS, Android",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+    },
+    "description": "Learn languages through parallel reading, audio, and spaced repetition. 90+ languages supported.",
+    "url": "https://lingoseven.com",
+    "downloadUrl": [
+      "https://apps.apple.com/app/id6471030440",
+      "https://play.google.com/store/apps/details?id=com.doublereading",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Lingo7",
+    "url": "https://lingoseven.com",
+    "logo": "https://lingoseven.com/images/logo.svg",
+    "sameAs": [
+      "https://apps.apple.com/app/id6471030440",
+      "https://play.google.com/store/apps/details?id=com.doublereading",
+    ],
+  },
+];
 ---
 
 <BaseLayout
   title="Learn Languages Through Reading — Parallel Books, Audio & Spaced Repetition"
   description="Read books in a foreign language with side-by-side translation. Listen to native audio while reading. Build vocabulary with spaced repetition. 90+ languages. Free app for iOS & Android."
+  jsonLd={jsonLd}
 >
   <HeroSection />
 
@@ -31,7 +64,7 @@ const languages = getEnabledLanguages();
           <a href={`/en/learn/${codeToSlug[lang.code]}`} class="choose-language-pill">
             <img
               src={`https://flagcdn.com/24x18/${langToCountry[lang.code] ?? lang.code}.png`}
-              alt=""
+              alt={`Learn ${lang.name}`}
               class="choose-language-flag"
             />
             <span>Learn {lang.name}</span>

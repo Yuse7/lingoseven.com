@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Impara una lingua in 30 minuti al giorno",
-  "learn_meta_title": "Impara il {targetLang}: Libri paralleli, Audio & Vocabolario",
-  "learn_meta_description": "Leggi libri in {targetLang} con traduzione parallela nella tua lingua. Ascolta l'audio di madrelingua mentre leggi. Amplia il tuo vocabolario in {targetLang} con la ripetizione spaziata. App gratuita per iOS & Android.",
+  "learn_meta_title": "Impara {targetLang} con Lingo7",
+  "learn_meta_description": "Padroneggia {targetLang} attraverso la lettura parallela, l'audio e la ripetizione spaziata — in soli 30 minuti al giorno",
   "nav_features": "Funzionalità",
   "nav_how_it_works": "Come funziona",
   "nav_reviews": "Recensioni",

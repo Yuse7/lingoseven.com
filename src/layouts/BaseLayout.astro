@@ -23,6 +23,7 @@ interface Props {
   canonicalUrl?: string;
   ogImage?: string;
   hreflangAlternates?: Array<{ lang: string; url: string }>;
+  jsonLd?: Record<string, any>[];
   translations?: Record<string, string>;
   uiLang?: string;
   uiLanguages?: UiLanguage[];
@@ -37,6 +38,7 @@ const {
   canonicalUrl,
   ogImage,
   hreflangAlternates,
+  jsonLd,
   translations,
   uiLang = 'en',
   uiLanguages,
@@ -55,6 +57,7 @@ const {
     canonicalUrl={canonicalUrl}
     ogImage={ogImage}
     hreflangAlternates={hreflangAlternates}
+    jsonLd={jsonLd}
   />
   <Analytics />
 </head>
