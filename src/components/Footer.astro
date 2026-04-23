@@ -23,6 +23,7 @@ const { translations, uiLang = 'en', uiLanguages, learnLanguageLinks } = Astro.p
 const privacyText = translations?.['footer_privacy'] ?? 'Privacy Policy';
 const termsText = translations?.['footer_terms'] ?? 'Terms of Use';
 const contactText = translations?.['footer_contact'] ?? 'Contact';
+const blogText = translations?.['blog_nav'] ?? 'Blog';
 const copyrightText = translations?.['footer_copyright'] ?? '© 2024–2026 Lingo7. All rights reserved.';
 const learnLangTemplate = translations?.['learn_language'] ?? 'Learn {lang}';
 
@@ -69,6 +70,7 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
         <img src="/images/logo.svg" alt="Lingo7" class="logo-img" />
       </a>
       <div class="footer-links-inline">
+        <a href={`/${uiLang}/blog/`}>{blogText}</a>
         <a href="/privacypolicy">{privacyText}</a>
         <a href="/terms">{termsText}</a>
         <a href="mailto:support@lingoseven.com">support@lingoseven.com</a>

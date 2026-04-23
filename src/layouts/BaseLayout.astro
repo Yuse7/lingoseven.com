@@ -16,12 +16,22 @@ interface LearnLanguageLink {
   url: string;
 }
 
+interface OgArticle {
+  publishedTime: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
+}
+
 interface Props {
   title: string;
   description: string;
   lang?: string;
   canonicalUrl?: string;
   ogImage?: string;
+  ogType?: string;
+  ogArticle?: OgArticle;
   hreflangAlternates?: Array<{ lang: string; url: string }>;
   jsonLd?: Record<string, any>[];
   translations?: Record<string, string>;
@@ -29,6 +39,7 @@ interface Props {
   uiLanguages?: UiLanguage[];
   learnLanguageLinks?: LearnLanguageLink[];
   showNav?: boolean;
+  blogUrl?: string;
 }
 
 const {
@@ -37,6 +48,8 @@ const {
   lang = 'en',
   canonicalUrl,
   ogImage,
+  ogType,
+  ogArticle,
   hreflangAlternates,
   jsonLd,
   translations,
@@ -44,6 +57,7 @@ const {
   uiLanguages,
   learnLanguageLinks,
   showNav = false,
+  blogUrl,
 } = Astro.props;
 ---
 
@@ -56,6 +70,8 @@ const {
     lang={lang}
     canonicalUrl={canonicalUrl}
     ogImage={ogImage}
+    ogType={ogType}
+    ogArticle={ogArticle}
     hreflangAlternates={hreflangAlternates}
     jsonLd={jsonLd}
   />
@@ -67,6 +83,7 @@ const {
     uiLang={uiLang}
     uiLanguages={uiLanguages}
     showNav={showNav}
+    blogUrl={blogUrl}
   />
   <slot />
   <Footer

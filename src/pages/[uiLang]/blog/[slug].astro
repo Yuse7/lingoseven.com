@@ -1,0 +1,107 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { getEnabledLanguages, getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { getTranslations } from '../../../utils/i18n';
+import { getTargetLanguageName } from '../../../data/languageNames';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const enabled = getEnabledLanguages();
+
+  // Group posts by slug (last part of id) to handle locale fallback
+  const postsBySlug = new Map<string, typeof posts>();
+  for (const post of posts) {
+    const slug = post.id.includes('/') ? post.id.split('/').pop()! : post.id;
+    if (!postsBySlug.has(slug)) postsBySlug.set(slug, []);
+    postsBySlug.get(slug)!.push(post);
+  }
+
+  const paths = [];
+
+  for (const [slug, slugPosts] of postsBySlug) {
+    // Find English version as fallback
+    const enPost = slugPosts.find((p) => p.data.locale === 'en');
+
+    for (const ui of enabled) {
+      // Prefer localized version, fall back to English
+      const localizedPost = slugPosts.find((p) => p.data.locale === ui.code);
+      const post = localizedPost ?? enPost;
+      if (!post) continue;
+
+      paths.push({
+        params: { uiLang: ui.code, slug },
+        props: { post, uiCode: ui.code },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { post, uiCode } = Astro.props;
+const { Content } = await render(post);
+const translations = getTranslations(uiCode);
+const enabled = getEnabledLanguages();
+
+const slug = post.id.includes('/') ? post.id.split('/').pop()! : post.id;
+
+// Hreflang alternates
+const hreflangAlternates = enabled.map((ui) => ({
+  lang: ui.code,
+  url: `https://lingoseven.com/${ui.code}/blog/${slug}/`,
+}));
+hreflangAlternates.push({
+  lang: 'x-default',
+  url: `https://lingoseven.com/en/blog/${slug}/`,
+});
+
+// Language switcher
+const uiLanguages = enabled.map((l) => ({
+  code: l.code,
+  nativeName: l.nativeName,
+  flag: l.flag,
+  url: `/${l.code}/blog/${slug}/`,
+}));
+
+// Category label
+const categoryKeys: Record<string, string> = {
+  'book-lists': 'blog_category_book_lists',
+  'getting-started': 'blog_category_getting_started',
+  'difficulty-guides': 'blog_category_difficulty_guides',
+  'tips': 'blog_category_tips',
+  'methodology': 'blog_category_methodology',
+};
+const categoryLabel = translations[categoryKeys[post.data.category] ?? ''] ?? post.data.category;
+
+// Target language info for CTA
+const targetLangName = post.data.targetLang
+  ? getTargetLanguageName(post.data.targetLang, uiCode)
+  : undefined;
+const targetLangSlug = post.data.targetLang
+  ? codeToSlug[post.data.targetLang]
+  : undefined;
+---
+
+<BlogLayout
+  title={post.data.title}
+  description={post.data.description}
+  pubDate={post.data.pubDate}
+  updatedDate={post.data.updatedDate}
+  author={post.data.author}
+  category={post.data.category}
+  categoryLabel={categoryLabel}
+  tags={post.data.tags}
+  targetLang={post.data.targetLang}
+  targetLangName={targetLangName}
+  targetLangSlug={targetLangSlug}
+  locale={post.data.locale}
+  uiLang={uiCode}
+  slug={slug}
+  translations={translations}
+  uiLanguages={uiLanguages}
+  hreflangAlternates={hreflangAlternates}
+>
+  <Content />
+</BlogLayout>

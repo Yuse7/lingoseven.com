@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import { getEnabledLanguages } from '../../../data/languages';
+import { getTranslations, t } from '../../../utils/i18n';
+import { getLanguageByCode } from '../../../data/languages';
+import '../../../styles/blog.css';
+
+export function getStaticPaths() {
+  const enabled = getEnabledLanguages();
+  return enabled.map((lang) => ({
+    params: { uiLang: lang.code },
+    props: { uiCode: lang.code },
+  }));
+}
+
+const { uiCode } = Astro.props;
+const translations = getTranslations(uiCode);
+
+// Get all non-draft posts, prefer locale match, fallback to English
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const localePosts = allPosts.filter((p) => p.data.locale === uiCode);
+const enPosts = allPosts.filter((p) => p.data.locale === 'en');
+
+// Use localized posts if available, otherwise English. Deduplicate by slug.
+const slugsWithLocale = new Set(localePosts.map((p) => p.id.split('/').pop()));
+const posts = [
+  ...localePosts,
+  ...enPosts.filter((p) => !slugsWithLocale.has(p.id.split('/').pop())),
+].sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const enabled = getEnabledLanguages();
+
+const title = translations['blog_meta_title'] ?? 'Lingo7 Blog';
+const description = translations['blog_meta_description'] ?? 'Language learning tips and guides';
+
+const hreflangAlternates = enabled.map((ui) => ({
+  lang: ui.code,
+  url: `https://lingoseven.com/${ui.code}/blog/`,
+}));
+hreflangAlternates.push({
+  lang: 'x-default',
+  url: 'https://lingoseven.com/en/blog/',
+});
+
+const uiLanguages = enabled.map((l) => ({
+  code: l.code,
+  nativeName: l.nativeName,
+  flag: l.flag,
+  url: `/${l.code}/blog/`,
+}));
+
+const categoryKeys: Record<string, string> = {
+  'book-lists': 'blog_category_book_lists',
+  'getting-started': 'blog_category_getting_started',
+  'difficulty-guides': 'blog_category_difficulty_guides',
+  'tips': 'blog_category_tips',
+  'methodology': 'blog_category_methodology',
+};
+
+function getCategoryLabel(cat: string): string {
+  return translations[categoryKeys[cat] ?? ''] ?? cat;
+}
+
+// Get unique categories from posts
+const categories = [...new Set(posts.map((p) => p.data.category))];
+
+const allLabel = translations['blog_all_categories'] ?? 'All';
+const readMoreText = translations['blog_read_more'] ?? 'Read more';
+const blogTitle = translations['blog_title'] ?? 'Blog';
+
+function getSlugFromId(id: string): string {
+  const parts = id.split('/');
+  return parts[parts.length - 1];
+}
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description,
+    url: `https://lingoseven.com/${uiCode}/blog/`,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Lingo7',
+      url: 'https://lingoseven.com',
+    },
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang={uiCode}
+  canonicalUrl={`https://lingoseven.com/${uiCode}/blog/`}
+  hreflangAlternates={hreflangAlternates}
+  jsonLd={jsonLd}
+  translations={translations}
+  uiLang={uiCode}
+  uiLanguages={uiLanguages}
+  blogUrl={`/${uiCode}/blog/`}
+>
+  <div class="container">
+    <section class="blog-hero">
+      <span class="blog-hero-pill">{blogTitle}</span>
+      <h1>{title}</h1>
+      <p>{description}</p>
+    </section>
+
+    <div class="blog-categories">
+      <button class="blog-category-pill active" data-filter="all">{allLabel}</button>
+      {categories.map((cat) => (
+        <button class="blog-category-pill" data-filter={cat}>{getCategoryLabel(cat)}</button>
+      ))}
+    </div>
+
+    {posts.length > 0 ? (
+      <div class="blog-grid">
+        {posts.map((post) => {
+          const slug = getSlugFromId(post.id);
+          const flag = post.data.targetLang ? getLanguageByCode(post.data.targetLang)?.flag : undefined;
+          return (
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              category={post.data.category}
+              categoryLabel={getCategoryLabel(post.data.category)}
+              slug={slug}
+              uiLang={uiCode}
+              targetLangFlag={flag}
+              readMoreText={readMoreText}
+            />
+          );
+        })}
+      </div>
+    ) : (
+      <div class="blog-empty">
+        <p>No articles yet.</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const pills = document.querySelectorAll('.blog-category-pill');
+    const cards = document.querySelectorAll('.blog-card');
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        pills.forEach((p) => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const filter = (pill as HTMLElement).dataset.filter;
+        cards.forEach((card) => {
+          const cat = (card as HTMLElement).dataset.category;
+          if (filter === 'all' || cat === filter) {
+            (card as HTMLElement).style.display = '';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

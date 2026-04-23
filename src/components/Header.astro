@@ -11,9 +11,11 @@ interface Props {
   uiLang?: string;
   uiLanguages?: UiLanguage[];
   showNav?: boolean;
+  blogUrl?: string;
 }
 
-const { translations, uiLang = 'en', uiLanguages, showNav = false } = Astro.props;
+const { translations, uiLang = 'en', uiLanguages, showNav = false, blogUrl } = Astro.props;
+const blogLabel = translations?.['blog_nav'] ?? 'Blog';
 
 const navFeatures = translations?.['nav_features'] ?? 'Features';
 const navHowItWorks = translations?.['nav_how_it_works'] ?? 'How it works';
@@ -36,6 +38,10 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
         <li><a href="#testimonials">{navReviews}</a></li>
         <li><a href="#faq">{navFaq}</a></li>
       </ul>
+    )}
+
+    {blogUrl && (
+      <a href={blogUrl} class="header-blog-link">{blogLabel}</a>
     )}
 
     <div class="header-actions">
@@ -93,6 +99,18 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
 </header>
 
 <style>
+  .header-blog-link {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .header-blog-link:hover {
+    color: var(--primary);
+  }
+
   .header-actions {
     display: flex;
     align-items: center;

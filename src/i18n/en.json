@@ -196,5 +196,22 @@
   "library_upload_feat_audio": "Audio narration",
   "library_upload_feat_srs": "Word saving",
   "library_total": "New books are added every week. You can also upload your own EPUB or FB2 book and read it with parallel translation in {targetLang}.",
-  "library_cta": "Explore the full library"
+  "library_cta": "Explore the full library",
+  "blog_nav": "Blog",
+  "blog_title": "Blog",
+  "blog_meta_title": "Lingo7 Blog — Language Learning Tips & Book Recommendations",
+  "blog_meta_description": "Expert guides, book recommendations, and tips for learning languages through reading with Lingo7.",
+  "blog_read_more": "Read more",
+  "blog_published": "Published",
+  "blog_updated": "Updated",
+  "blog_category_book_lists": "Book Lists",
+  "blog_category_getting_started": "Getting Started",
+  "blog_category_difficulty_guides": "Difficulty Guides",
+  "blog_category_tips": "Tips",
+  "blog_category_methodology": "Methodology",
+  "blog_all_categories": "All",
+  "blog_back_to_blog": "Back to blog",
+  "blog_related_learn": "Start learning {targetLang} now",
+  "blog_cta_title": "Ready to start reading?",
+  "blog_cta_subtitle": "Download Lingo7 and begin your language learning journey today."
 }

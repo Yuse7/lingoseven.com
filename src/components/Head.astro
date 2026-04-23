@@ -1,12 +1,22 @@
 ---
 import '../styles/global.css';
 
+interface OgArticle {
+  publishedTime: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
+}
+
 interface Props {
   title: string;
   description: string;
   lang?: string;
   canonicalUrl?: string;
   ogImage?: string;
+  ogType?: string;
+  ogArticle?: OgArticle;
   hreflangAlternates?: Array<{ lang: string; url: string }>;
   jsonLd?: Record<string, any>[];
 }
@@ -17,6 +27,8 @@ const {
   lang = 'en',
   canonicalUrl,
   ogImage = '/pic.png',
+  ogType = 'website',
+  ogArticle,
   hreflangAlternates,
   jsonLd,
 } = Astro.props;
@@ -39,7 +51,12 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
 <meta property="og:description" content={description} />
 <meta property="og:image" content={resolvedOgImage} />
 <meta property="og:url" content={resolvedCanonical} />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
+{ogArticle && <meta property="article:published_time" content={ogArticle.publishedTime} />}
+{ogArticle?.modifiedTime && <meta property="article:modified_time" content={ogArticle.modifiedTime} />}
+{ogArticle?.author && <meta property="article:author" content={ogArticle.author} />}
+{ogArticle?.section && <meta property="article:section" content={ogArticle.section} />}
+{ogArticle?.tags?.map((tag) => <meta property="article:tag" content={tag} />)}
 <meta property="og:site_name" content="Lingo7" />
 
 <!-- Twitter Card -->
