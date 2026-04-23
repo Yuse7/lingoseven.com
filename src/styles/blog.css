@@ -357,6 +357,26 @@
   opacity: 0.9;
 }
 
+/* CTA store buttons — match .download-buttons styling */
+.article-cta .cta-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.article-cta .btn-outline {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.article-cta .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
 /* No results */
 .blog-empty {
   text-align: center;
