@@ -1,0 +1,142 @@
+---
+interface BlogPost {
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+  categoryLabel: string;
+}
+
+interface Props {
+  posts: BlogPost[];
+  uiLang: string;
+  title: string;
+  subtitle: string;
+  readMoreText: string;
+}
+
+const { posts, uiLang, title, subtitle, readMoreText } = Astro.props;
+---
+
+{posts.length > 0 && (
+  <section class="learn-blog">
+    <div class="container">
+      <div class="learn-blog-header">
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
+      </div>
+      <div class="learn-blog-grid">
+        {posts.map((post) => (
+          <a href={`/${uiLang}/blog/${post.slug}/`} class="learn-blog-card">
+            <span class="learn-blog-category">{post.categoryLabel}</span>
+            <h3>{post.title}</h3>
+            <p>{post.description}</p>
+            <span class="learn-blog-link">{readMoreText} &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .learn-blog {
+    padding: 80px 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .learn-blog-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .learn-blog-header h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .learn-blog-header p {
+    color: var(--text-light);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .learn-blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 1024px) {
+    .learn-blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .learn-blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .learn-blog-card {
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .learn-blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .learn-blog-category {
+    display: inline-block;
+    width: fit-content;
+    padding: 2px 10px;
+    background: rgba(74, 222, 128, 0.1);
+    border-radius: 100px;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .learn-blog-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .learn-blog-card p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .learn-blog-link {
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 14px;
+  }
+</style>

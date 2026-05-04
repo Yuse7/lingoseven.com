@@ -12,7 +12,7 @@ locale: "en"
 
 "How many words do I need to know?" This is the single most practical question in language learning, and it has a surprisingly clear answer. Unlike most questions about language -- "How long does fluency take?" or "What is the best method?" -- vocabulary thresholds for reading have been studied rigorously for decades, and the numbers are consistent across researchers and languages.
 
-The short version: you need roughly 3,000 word families to read most fiction with some effort, 5,000 for comfortable reading, and 8,000-9,000 for the kind of smooth, uninterrupted reading experience you have in your native language. But those numbers alone do not tell the full story. What matters is what those numbers feel like in practice, how they vary by language, and how reading itself is the fastest way to reach them.
+The short version: you need roughly 3,000 word families to read most fiction with some effort, 5,000 for comfortable reading, and 8,000-9,000 for the kind of smooth, uninterrupted reading experience you have in your native language. But those numbers alone do not tell the full story. What matters is what those numbers feel like in practice, how they vary by language, and how [reading itself is the fastest way to reach them](/en/blog/why-reading-is-the-best-way-to-learn-a-language/).
 
 ## The Research: Coverage Thresholds That Actually Matter
 
@@ -178,7 +178,7 @@ In French, an English speaker can recognize "important," "different," "possible,
 
 Laufer and Goldstein (2004) found that cognate awareness significantly accelerates vocabulary acquisition in related language pairs. An English speaker learning Spanish effectively starts at 1,500-2,000 recognizable word families before studying a single flashcard. This does not mean they know those words perfectly -- false cognates ("embarazada" means pregnant in Spanish, not embarrassed) and partial cognates cause confusion -- but it dramatically reduces the time to reach reading thresholds.
 
-The practical implication: an English speaker needs to actively learn roughly 5,000-6,000 Spanish word families to reach 8,000 effective families, because 2,000-3,000 come free through cognate recognition.
+The practical implication: an English speaker needs to actively learn roughly 5,000-6,000 Spanish word families to reach 8,000 effective families, because 2,000-3,000 come free through cognate recognition. These [differences in difficulty across languages](/en/blog/which-language-should-you-learn-difficulty-guide/) are worth considering when setting your vocabulary goals.
 
 ### Japanese: Kanji Knowledge Compounds
 
@@ -275,7 +275,7 @@ This is the critical transition -- from learner materials to real books written 
 
 **Method:** Read native-level books with support tools -- parallel translation for when you lose the thread, word lookup for when a recurring word blocks comprehension, and audio narration to reinforce pronunciation and reading speed. The key is to stay in the foreign language as your primary mode and use the support only when needed.
 
-**What to read:** Contemporary fiction with accessible prose. Thrillers, romances, and young adult novels are ideal because they use direct language, short sentences, and modern vocabulary. Avoid literary fiction, poetry, and historical novels at this stage -- their vocabulary and style add difficulty that is not productive yet.
+**What to read:** Contemporary fiction with accessible prose. Thrillers, romances, and young adult novels are ideal because they use direct language, short sentences, and modern vocabulary. Avoid literary fiction, poetry, and historical novels at this stage -- their vocabulary and style add difficulty that is not productive yet. For more specific recommendations, see our guide on [choosing books by language level](/en/blog/best-books-by-language-level/).
 
 **Goal:** Reach 3,000 word families. By the end of this stage, you should be reading native content with minimal support -- perhaps checking the translation once every few pages rather than every few sentences.
 

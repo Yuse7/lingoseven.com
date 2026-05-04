@@ -1,0 +1,118 @@
+---
+interface RelatedPost {
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+  categoryLabel: string;
+  pubDate: Date;
+}
+
+interface Props {
+  posts: RelatedPost[];
+  uiLang: string;
+  title: string;
+  readMoreText: string;
+}
+
+const { posts, uiLang, title, readMoreText } = Astro.props;
+---
+
+{posts.length > 0 && (
+  <section class="related-posts">
+    <h2>{title}</h2>
+    <div class="related-posts-grid">
+      {posts.map((post) => (
+        <a href={`/${uiLang}/blog/${post.slug}/`} class="related-post-card">
+          <div class="related-post-meta">
+            <span class="related-post-category">{post.categoryLabel}</span>
+          </div>
+          <h3>{post.title}</h3>
+          <p>{post.description}</p>
+          <span class="related-post-link">{readMoreText} &rarr;</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-posts {
+    margin-top: 48px;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+
+  .related-posts h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .related-posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .related-post-card {
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .related-post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .related-post-meta {
+    margin-bottom: 10px;
+  }
+
+  .related-post-category {
+    padding: 2px 10px;
+    background: rgba(74, 222, 128, 0.1);
+    border-radius: 100px;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .related-post-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .related-post-card p {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .related-post-link {
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+</style>

@@ -36,7 +36,7 @@ That is the summary. The details are where it gets interesting.
 
 Every morning at 7:00 AM, I sat down at my kitchen table with coffee and read in Spanish for 30 minutes. Not 25 minutes. Not "about half an hour." Thirty minutes, timed. I used a kitchen timer because checking my phone for the time inevitably turned into checking my phone for everything else.
 
-For the first six weeks, I read with sentence-level parallel translation visible. Original Spanish text on one side, English translation accessible when I needed it. My rule was: read the Spanish first, try to understand it, and only check the English when I genuinely could not figure out the meaning from context. In the beginning, that meant checking nearly every sentence. By Week 4, I was checking every third or fourth sentence. By Week 6, I was going entire paragraphs without needing the translation.
+For the first six weeks, I read with sentence-level [parallel translation](/en/blog/parallel-reading-honest-guide/) visible. Original [Spanish](/en/learn/spanish/) text on one side, English translation accessible when I needed it. My rule was: read the Spanish first, try to understand it, and only check the English when I genuinely could not figure out the meaning from context. In the beginning, that meant checking nearly every sentence. By Week 4, I was checking every third or fourth sentence. By Week 6, I was going entire paragraphs without needing the translation.
 
 After Week 6, I started gradually reducing my reliance on parallel text. I would read for 10 minutes with translation available, then switch it off for 10 minutes, then turn it back on for the last 10. By Week 10, I was reading most sessions without parallel text, only turning it on when I hit a passage that was genuinely incomprehensible.
 
@@ -66,7 +66,7 @@ Here is the progression, as honestly as I can reconstruct it. I started tracking
 
 I made my first big mistake in the very first session. I tried to start reading a "real" text -- a news article about Spanish politics -- and understood approximately nothing. Every third word was unknown. Every sentence required checking. After 30 minutes, I had read one paragraph and felt like an idiot.
 
-I adjusted. For the first two weeks, I read children's stories and simple dialogues from a beginner textbook. The texts were boring -- nobody writes compelling literature for people who know 50 words -- but they were manageable. I also front-loaded a high-frequency word list: the 200 most common Spanish words, which I drilled in my spaced repetition system alongside the words I was picking up from reading.
+I adjusted. Choosing the right [first book in a foreign language](/en/blog/first-book-in-a-foreign-language/) matters enormously. For the first two weeks, I read children's stories and simple dialogues from a beginner textbook. The texts were boring -- nobody writes compelling literature for people who know 50 words -- but they were manageable. I also front-loaded a high-frequency word list: the 200 most common Spanish words, which I drilled in my spaced repetition system alongside the words I was picking up from reading.
 
 Those 200 high-frequency words were transformative. Spanish function words -- the articles, prepositions, pronouns, and basic verbs that make up the skeleton of every sentence -- suddenly became recognizable. I was not understanding content yet, but I was understanding structure. I could see where sentences began and ended, where clauses divided, what was a subject and what was an object. It was like putting on glasses for the first time.
 
@@ -196,7 +196,7 @@ To be clear: this is not the same as mastering grammar. My grammar at Week 13 wa
 
 ### The 2,000-Word Threshold Was Real
 
-Multiple researchers (Paul Nation, Batia Laufer, others) have identified vocabulary thresholds at which reading becomes qualitatively different. The one I noticed most dramatically was around 2,000 word families: the point at which reading shifted from "effortful decoding" to "actual reading."
+Multiple researchers (Paul Nation, Batia Laufer, others) have identified [vocabulary thresholds at which reading becomes qualitatively different](/en/blog/how-many-words-to-read-in-a-foreign-language/). The one I noticed most dramatically was around 2,000 word families: the point at which reading shifted from "effortful decoding" to "actual reading."
 
 Below 2,000 words, I was always aware of the act of reading in Spanish. It was work. I was conscious of translating, of assembling meaning, of being in a foreign language. Above 2,000 words, that awareness started fading. Not completely -- I was still clearly reading in a second language -- but the boundary between "reading" and "understanding" began to blur. Simple sentences arrived as meaning rather than as puzzles to solve.
 

@@ -70,6 +70,10 @@ const allLabel = translations['blog_all_categories'] ?? 'All';
 const readMoreText = translations['blog_read_more'] ?? 'Read more';
 const blogTitle = translations['blog_title'] ?? 'Blog';
 
+// Noindex blog index for non-English UI langs (all posts are English-only for now)
+const hasLocalizedPosts = localePosts.length > 0;
+const noindexBlogIndex = uiCode !== 'en' && !hasLocalizedPosts;
+
 function getSlugFromId(id: string): string {
   const parts = id.split('/');
   return parts[parts.length - 1];
@@ -95,13 +99,14 @@ const jsonLd = [
   title={title}
   description={description}
   lang={uiCode}
-  canonicalUrl={`https://lingoseven.com/${uiCode}/blog/`}
+  canonicalUrl={noindexBlogIndex ? `https://lingoseven.com/en/blog/` : `https://lingoseven.com/${uiCode}/blog/`}
   hreflangAlternates={hreflangAlternates}
   jsonLd={jsonLd}
   translations={translations}
   uiLang={uiCode}
   uiLanguages={uiLanguages}
   blogUrl={`/${uiCode}/blog/`}
+  noindex={noindexBlogIndex}
 >
   <div class="container">
     <section class="blog-hero">

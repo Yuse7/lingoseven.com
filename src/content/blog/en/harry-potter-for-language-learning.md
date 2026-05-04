@@ -52,7 +52,7 @@ Not all Harry Potter books are created equal. The jump in difficulty from Book 1
 
 **Language level:** B1 to B2
 
-**Vocabulary:** Roughly 6,000 unique word families. The core vocabulary is heavily weighted toward everyday life -- house, school, food, family, clothing, animals -- with a layer of fantasy terminology on top. Most of the fantasy words are either self-explanatory (broomstick, invisibility cloak) or quickly defined in context (Rowling introduces Quidditch with a full explanation of the rules).
+**Vocabulary:** Roughly [6,000 unique word families](/en/blog/how-many-words-to-read-in-a-foreign-language/). The core vocabulary is heavily weighted toward everyday life -- house, school, food, family, clothing, animals -- with a layer of fantasy terminology on top. Most of the fantasy words are either self-explanatory (broomstick, invisibility cloak) or quickly defined in context (Rowling introduces Quidditch with a full explanation of the rules).
 
 **Sentence complexity:** Short to medium sentences dominate. The narrative voice is clear and direct, rarely embedding more than one subordinate clause. Dialogue is frequent and natural, using common conversational patterns. Descriptions are vivid but not dense.
 
@@ -204,7 +204,7 @@ If you have never read Harry Potter, consider reading Book 1 in English (or watc
 
 ### Option 3: Parallel Reading (Any Level)
 
-Read both languages simultaneously -- the target language text alongside a translation in your native language. This approach lets even A2 learners engage with Harry Potter meaningfully. You read primarily in the target language, referring to the translation when a sentence or passage is unclear. Over time, you refer to the translation less and less.
+Read both languages simultaneously -- the target language text alongside a translation in your native language. This [parallel reading](/en/blog/parallel-reading-honest-guide/) approach lets even A2 learners engage with Harry Potter meaningfully. You read primarily in the target language, referring to the translation when a sentence or passage is unclear. Over time, you refer to the translation less and less.
 
 ### Practical Tips
 
@@ -222,7 +222,7 @@ Read both languages simultaneously -- the target language text alongside a trans
 
 Harry Potter is excellent for many learners, but it is not universal. Here are the situations where you should consider a different book.
 
-**If you are A1 or low A2.** Even Book 1 has roughly 6,000 word families. At A1, you probably know 500 to 1,000. The gap is too large for comfortable reading even with support, and the experience may be discouraging rather than motivating. Start with graded readers or very short children's books and come back to Harry Potter at B1.
+**If you are A1 or low A2.** Even Book 1 has roughly 6,000 word families. At A1, you probably know 500 to 1,000. The gap is too large for comfortable reading even with support, and the experience may be discouraging rather than motivating. Start with graded readers or very short children's books and come back to Harry Potter at B1. For guidance on picking something more accessible, see our advice on [choosing your first book in a foreign language](/en/blog/first-book-in-a-foreign-language/).
 
 **If you do not like fantasy.** This matters more than it might seem. The motivation advantage of Harry Potter only works if you find it engaging. If you have no interest in wizards, magic, or boarding school stories, a book you actually want to read -- even one with fewer "objective" advantages -- will serve you better. Motivation is the most important variable in sustained language learning.
 

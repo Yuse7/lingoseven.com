@@ -63,7 +63,7 @@ The critical insight is this: every word you learn from text without hearing it 
 
 Here is the part that most people miss: having a large phonological gap is a much better problem to have than not knowing the language at all.
 
-Think about what you already possess. You have vocabulary -- potentially thousands of words. You have grammar -- you understand how sentences are constructed. You have reading comprehension -- you can process complex ideas in the target language. You have contextual knowledge -- you know which words tend to appear together, how arguments are structured, how stories unfold.
+Think about what you already possess. You have vocabulary -- potentially thousands of words. You have grammar -- you understand how sentences are constructed. You have [reading comprehension](/en/blog/why-reading-is-the-best-way-to-learn-a-language/) -- you can process complex ideas in the target language. You have contextual knowledge -- you know which words tend to appear together, how arguments are structured, how stories unfold.
 
 All of this knowledge is real and valuable. You are not starting from zero. You are starting from a position of enormous advantage. What you need is not new knowledge -- it is a new connection. You need to link your existing visual word knowledge to the corresponding sound patterns.
 
@@ -231,6 +231,8 @@ Written Arabic typically omits short vowels, which means that the written form o
 
 ## How Lingo7 Helps Bridge This Gap
 
+If the gap feels like part of a broader stall in your progress, you may be experiencing the [intermediate plateau](/en/blog/intermediate-plateau-how-to-break-through/) -- and reading strategically is the way through that, too.
+
 This reading-listening gap is precisely the problem Lingo7 was built to address. The app provides native audio narration synchronized with the text you are reading, with word-by-word highlighting that shows you exactly which word is being spoken at each moment. This is technique number one -- read-along with audio -- built directly into the reading experience.
 
 You see the text in your target language with a parallel translation. You hear a native speaker reading it aloud. The currently spoken word is highlighted so your eyes and ears stay synchronized. And you can adjust the playback speed -- 0.75x to start, 1.0x when you are ready, faster when you want to push yourself. With over 90 languages supported, it works regardless of which language you are learning.
@@ -241,6 +243,6 @@ The result is that every minute you spend reading in Lingo7 is also a minute of 
 
 The gap between reading and listening is not a sign that something is wrong with you or your approach. It is a predictable consequence of how the brain processes written and spoken language through different pathways. The good news is that if you can read in your target language, you already have the hardest part -- the vocabulary and grammar knowledge. What remains is connecting that knowledge to sound.
 
-Start with read-along audio. Progress to audio-first practice. Push yourself with shadowing and speed adaptation. Give it four focused weeks. The gap will not disappear entirely -- building strong listening comprehension is a long-term project -- but it will narrow enough that you can feel the change. And once your ears start catching up to your eyes, a whole new dimension of the language opens up: conversations, podcasts, films, songs, radio, overheard snippets on the street. The language stops being something you read and becomes something you live in.
+Start with read-along audio. Progress to audio-first practice. Push yourself with shadowing and speed adaptation. Even [30 minutes a day](/en/blog/30-minutes-a-day-reading-plan/) is enough to make measurable progress. Give it four focused weeks. The gap will not disappear entirely -- building strong listening comprehension is a long-term project -- but it will narrow enough that you can feel the change. And once your ears start catching up to your eyes, a whole new dimension of the language opens up: conversations, podcasts, films, songs, radio, overheard snippets on the street. The language stops being something you read and becomes something you live in.
 
 That is worth twenty minutes a day.

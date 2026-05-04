@@ -1,7 +1,17 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import CtaButtons from '../components/CtaButtons.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
 import '../styles/blog.css';
+
+interface RelatedPost {
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+  categoryLabel: string;
+  pubDate: Date;
+}
 
 interface Props {
   title: string;
@@ -21,6 +31,7 @@ interface Props {
   translations: Record<string, string>;
   uiLanguages: Array<{ code: string; nativeName: string; flag: string; url: string }>;
   hreflangAlternates: Array<{ lang: string; url: string }>;
+  relatedPosts: RelatedPost[];
 }
 
 const {
@@ -41,6 +52,7 @@ const {
   translations,
   uiLanguages,
   hreflangAlternates,
+  relatedPosts,
 } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('en-US', {
@@ -53,11 +65,18 @@ const blogTitle = translations['blog_title'] ?? 'Blog';
 const backText = translations['blog_back_to_blog'] ?? 'Back to blog';
 const ctaTitle = translations['blog_cta_title'] ?? 'Ready to start reading?';
 const ctaSubtitle = translations['blog_cta_subtitle'] ?? 'Download Lingo7 and begin your language learning journey today.';
+const relatedTitle = translations['blog_related_title'] ?? 'Related Articles';
+const readMoreText = translations['blog_read_more'] ?? 'Read more';
 const learnCta = targetLangName
   ? (translations['blog_related_learn'] ?? 'Start learning {targetLang} now').replace('{targetLang}', targetLangName)
   : null;
 
-const canonicalUrl = `https://lingoseven.com/${uiLang}/blog/${slug}/`;
+// If blog content is not translated for this UI language, noindex and point canonical to English
+const isTranslated = locale === uiLang;
+const noindex = !isTranslated && uiLang !== 'en';
+const canonicalUrl = noindex
+  ? `https://lingoseven.com/en/blog/${slug}/`
+  : `https://lingoseven.com/${uiLang}/blog/${slug}/`;
 
 const jsonLd = [
   {
@@ -132,6 +151,7 @@ const ogArticle = {
   uiLang={uiLang}
   uiLanguages={uiLanguages}
   blogUrl={`/${uiLang}/blog/`}
+  noindex={noindex}
 >
   <main class="article-container">
     <header class="article-header">
@@ -155,6 +175,13 @@ const ogArticle = {
     <article class="prose">
       <slot />
     </article>
+
+    <RelatedPosts
+      posts={relatedPosts}
+      uiLang={uiLang}
+      title={relatedTitle}
+      readMoreText={readMoreText}
+    />
 
     <div class="article-cta">
       <h3>{ctaTitle}</h3>

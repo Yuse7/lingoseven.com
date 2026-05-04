@@ -68,7 +68,7 @@ The implication for dual learning is significant. If you are learning two langua
 
 While interference between similar languages is real, so is transfer. And transfer -- the positive kind -- is powerful.
 
-When you learn Spanish grammar, you are also learning a substantial amount of Italian, Portuguese, and French grammar. The Romance languages share deep structural patterns: gendered nouns, verb conjugation systems, clitic pronouns, subjunctive mood, and preposition usage that follows similar (though not identical) logic. A Spanish learner who starts Italian does not start from zero. They start from a foundation of structural knowledge that maps onto Italian with modest adjustments.
+When you learn Spanish grammar, you are also learning a substantial amount of Italian, Portuguese, and French grammar. The [Romance languages share deep structural patterns](/en/blog/romance-vs-germanic-languages-for-reading/): gendered nouns, verb conjugation systems, clitic pronouns, subjunctive mood, and preposition usage that follows similar (though not identical) logic. A Spanish learner who starts Italian does not start from zero. They start from a foundation of structural knowledge that maps onto Italian with modest adjustments.
 
 Research on cross-linguistic transfer has documented this effect extensively. Ringbom's 2007 work on transfer in L3 acquisition showed that prior knowledge of a related language significantly accelerates learning, particularly in reading comprehension and vocabulary acquisition. The key finding: transfer is strongest when the learner is consciously aware of the relationship between the languages -- which is exactly what happens when you study them in parallel.
 
@@ -124,7 +124,7 @@ This is more important than it might sound. Research on contextual learning show
 
 ## Best Language Pair Strategies
 
-Not all language combinations are equally suited to parallel study. The relationship between the two languages and your current level in each one determine how manageable -- or chaotic -- dual learning will be.
+Not all language combinations are equally suited to parallel study. If you are unsure [which language you should learn](/en/blog/which-language-should-you-learn-difficulty-guide/), the relationship between the two languages and your current level in each one determine how manageable -- or chaotic -- dual learning will be.
 
 ### One Familiar + One New
 
@@ -176,7 +176,7 @@ Spanish Monday, Wednesday, Friday. French Tuesday, Thursday, Saturday. Rest on S
 
 ### Option B: Morning and Evening Split
 
-Language A for 20 minutes in the morning. Language B for 20 minutes in the evening. Every day.
+Language A for 20 minutes in the morning. Language B for 20 minutes in the evening. Every day. A [30-minute daily reading plan](/en/blog/30-minutes-a-day-reading-plan/) can be split across two languages this way.
 
 **Total per language:** ~140 minutes per week.
 

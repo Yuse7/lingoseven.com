@@ -26,7 +26,7 @@ The most common 1,000 words in any language cover roughly 80-85% of everyday spe
 
 But then the math turns against you. To go from 90% comprehension to 95%, you need approximately 3,000 more words. To reach 98% -- the threshold where you can comfortably read a novel without constant dictionary lookups -- you need a total vocabulary of around 8,000-9,000 word families. Each additional word appears less frequently in natural language, which means you encounter it less, practice it less, and retain it less.
 
-At B1, you might know 2,500-3,000 words. You need to roughly triple that to reach genuine advanced proficiency. And the words you need -- "reluctantly," "drought," "to crumble," "accountability" -- simply do not appear in textbook dialogues about booking hotel rooms.
+At B1, you might know 2,500-3,000 words. You need to roughly triple that to reach genuine advanced proficiency. And the words you need -- "reluctantly," "drought," "to crumble," "accountability" -- simply do not appear in textbook dialogues about booking hotel rooms. Understanding [how many words you actually need to read comfortably](/en/blog/how-many-words-to-read-in-a-foreign-language/) puts this gap in perspective.
 
 ### Textbooks hit their ceiling
 
@@ -52,7 +52,7 @@ This gap is actually normal and necessary. Passive knowledge always precedes act
 
 ## Why Reading Is the Way Out
 
-If the plateau is caused by insufficient exposure to diverse, natural language, then the solution is clear: you need massive amounts of comprehensible input. And reading is the most efficient way to get it.
+If the plateau is caused by insufficient exposure to diverse, natural language, then the solution is clear: you need massive amounts of comprehensible input. And [reading is the most efficient way to get it](/en/blog/why-reading-is-the-best-way-to-learn-a-language/).
 
 ### Volume at your own pace
 
@@ -96,7 +96,7 @@ These are the training wheels of extensive reading. The stories are often simpli
 
 ### Level 2: Young Adult and Simplified Native Content
 
-The next step is material written for native speakers, but with inherently simpler language. Young adult fiction, children's novels aimed at ages 10-14, and graphic novels are ideal. The language is authentic but the vocabulary is naturally constrained by the audience.
+The next step is material written for native speakers, but with inherently simpler language. Young adult fiction, children's novels aimed at ages 10-14, and graphic novels are ideal. The language is authentic but the vocabulary is naturally constrained by the audience. Choosing the right book at each stage makes a real difference -- see our [book recommendations by level](/en/blog/best-books-by-language-level/) for specific titles.
 
 For French, this might mean "Le Petit Prince" or a graphic novel series like "Asterix." For Japanese, it could be manga with furigana. For Spanish, young adult novels like those by Laura Gallego provide real language with manageable complexity.
 

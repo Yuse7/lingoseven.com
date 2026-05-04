@@ -9,10 +9,12 @@ import TestimonialsSlider from '../../../components/TestimonialsSlider.astro';
 import FaqAccordion from '../../../components/FaqAccordion.astro';
 import LibrarySection from '../../../components/LibrarySection.astro';
 import DownloadSection from '../../../components/DownloadSection.astro';
+import LearnBlogSection from '../../../components/LearnBlogSection.astro';
 import { getEnabledLanguages, hasAudio } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { getTranslations } from '../../../utils/i18n';
 import { getTargetLanguageName } from '../../../data/languageNames';
+import { getCollection } from 'astro:content';
 
 export function getStaticPaths() {
   const enabled = getEnabledLanguages();
@@ -80,6 +82,49 @@ const faqItems = [1, 2, 3, 4, 5].map((i) => {
   return { question, answer: `${principle} ${how}` };
 });
 
+// Blog posts for this learn page
+const allBlogPosts = await getCollection('blog', ({ data }) => !data.draft);
+const localeBlogPosts = allBlogPosts.filter((p) => p.data.locale === uiCode);
+const enBlogPosts = allBlogPosts.filter((p) => p.data.locale === 'en');
+const blogSlugsWithLocale = new Set(localeBlogPosts.map((p) => (p.id.includes('/') ? p.id.split('/').pop()! : p.id)));
+const blogPosts = [
+  ...localeBlogPosts,
+  ...enBlogPosts.filter((p) => !blogSlugsWithLocale.has(p.id.includes('/') ? p.id.split('/').pop()! : p.id)),
+];
+
+// Prioritize posts with matching targetLang, then methodology/getting-started, then rest
+const categoryPriority: Record<string, number> = {
+  'methodology': 1,
+  'getting-started': 2,
+  'tips': 3,
+  'book-lists': 4,
+  'difficulty-guides': 5,
+};
+const targetLangPosts = blogPosts.filter((p) => p.data.targetLang === targetCode);
+const generalPosts = blogPosts
+  .filter((p) => !p.data.targetLang || p.data.targetLang !== targetCode)
+  .sort((a, b) => (categoryPriority[a.data.category] ?? 99) - (categoryPriority[b.data.category] ?? 99));
+const selectedBlogPosts = [...targetLangPosts, ...generalPosts].slice(0, 3);
+
+const blogCategoryKeys: Record<string, string> = {
+  'book-lists': 'blog_category_book_lists',
+  'getting-started': 'blog_category_getting_started',
+  'difficulty-guides': 'blog_category_difficulty_guides',
+  'tips': 'blog_category_tips',
+  'methodology': 'blog_category_methodology',
+};
+const learnBlogPosts = selectedBlogPosts.map((p) => ({
+  title: p.data.title,
+  description: p.data.description,
+  slug: p.id.includes('/') ? p.id.split('/').pop()! : p.id,
+  category: p.data.category,
+  categoryLabel: translations[blogCategoryKeys[p.data.category] ?? ''] ?? p.data.category,
+}));
+
+const blogSectionTitle = (translations['learn_blog_title'] ?? 'Tips for Learning {targetLang} Through Reading').replace('{targetLang}', targetLangName);
+const blogSectionSubtitle = (translations['learn_blog_subtitle'] ?? 'Expert guides and practical advice to help you read books in {targetLang}.').replace('{targetLang}', targetLangName);
+const blogReadMore = translations['blog_read_more'] ?? 'Read more';
+
 const jsonLd = [
   {
     "@context": "https://schema.org",
@@ -138,5 +183,12 @@ const jsonLd = [
   <HowItWorks targetLangName={targetLangName} translations={translations} />
   <TestimonialsSlider targetLangName={targetLangName} translations={translations} />
   <FaqAccordion targetLangName={targetLangName} translations={translations} />
+  <LearnBlogSection
+    posts={learnBlogPosts}
+    uiLang={uiCode}
+    title={blogSectionTitle}
+    subtitle={blogSectionSubtitle}
+    readMoreText={blogReadMore}
+  />
   <DownloadSection targetLangName={targetLangName} translations={translations} />
 </BaseLayout>

@@ -42,7 +42,7 @@ Then there is the matter of invention. Marquez plays with Spanish in ways that f
 
 There is also the Caribbean Spanish flavor -- the regional vocabulary, the syntax that bends standard Castilian rules, the oral storytelling tradition embedded in the prose. Macondo is a place built from language as much as from imagination, and that language is specifically Colombian, specifically coastal, specifically Marquez. When you read it in English, you are reading a story about Macondo. When you read it in Spanish, you are hearing Macondo speak.
 
-**Reading difficulty:** B2-C1. The vocabulary is rich but not academic. The sentences are long but their structure is logical -- Marquez is telling a story, not writing philosophy. If you can read a Spanish newspaper comfortably, you can start this book. You will need patience for the first fifty pages as you adjust to the rhythm, but once it clicks, the prose carries you.
+**Reading difficulty:** B2-C1. If you are curious about [how many words you need to read in a foreign language](/en/blog/how-many-words-to-read-in-a-foreign-language/), the vocabulary here is rich but not academic. The sentences are long but their structure is logical -- Marquez is telling a story, not writing philosophy. If you can read a Spanish newspaper comfortably, you can start this book. You will need patience for the first fifty pages as you adjust to the rhythm, but once it clicks, the prose carries you.
 
 ---
 
@@ -160,7 +160,7 @@ Looking at these five books together, a pattern emerges. The things that transla
 
 If this article has made you want to read one of these books in its original language -- good. That was the intention. Here is how to get there, even if you are starting from zero.
 
-**Start with parallel reading.** Read both the original and the translation side by side. You do not need to understand the original perfectly -- you need to start noticing the differences. Every time you catch something the translation changed, something the original does that the translation cannot, you are training your ear for the language. These moments of noticing are where acquisition happens.
+**Start with parallel reading.** Read both the original and the translation side by side. You do not need to understand the original perfectly -- you need to start noticing the differences. If you need convincing that [reading is the best way to learn a language](/en/blog/why-reading-is-the-best-way-to-learn-a-language/), the evidence is compelling. Every time you catch something the translation changed, something the original does that the translation cannot, you are training your ear for the language. These moments of noticing are where acquisition happens.
 
 **Read the English first.** If you already know the plot, characters, and major themes, the original becomes dramatically easier to read. You are no longer decoding a story; you are experiencing a familiar story in a new language. This is not cheating. It is the single most effective strategy for reading above your level.
 
@@ -186,6 +186,6 @@ There is a moment that every language learner who reads in the original eventual
 
 That moment is not about language proficiency. It is about intimacy -- the experience of meeting an author's mind in the language it actually thinks in, without an intermediary. Translation is a window. The original is an open door.
 
-These five books are waiting on the other side. And the languages they are written in -- Spanish, French, German, Japanese, Russian -- are not walls. They are paths. Each one leads somewhere no translation can take you.
+These five books are waiting on the other side. And the languages they are written in -- [Spanish](/en/learn/spanish/), [French](/en/learn/french/), [German](/en/learn/german/), Japanese, Russian -- are not walls. They are paths. Each one leads somewhere no translation can take you.
 
 The Italian proverb is right: translators are traitors, at least a little. But the solution is not to blame the translator. It is to learn the language, open the book, and discover for yourself what was lost -- and what, in the original, was there all along.

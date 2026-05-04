@@ -85,7 +85,7 @@ Some grammatical features that are nightmarish for speaking barely affect readin
 
 ### Romance Languages (FSI Category I: 600--750 Hours)
 
-These are the closest major language family to English, thanks to the Norman Conquest flooding English with French vocabulary, and French itself being a descendant of Latin alongside the rest of the group.
+These are the closest major language family to English, thanks to the Norman Conquest flooding English with French vocabulary, and French itself being a descendant of Latin alongside the rest of the group. For a deeper look at how Romance and Germanic languages compare specifically for reading, see our [Romance vs Germanic comparison](/en/blog/romance-vs-germanic-languages-for-reading/).
 
 #### Spanish
 
@@ -99,7 +99,7 @@ The grammar is more complex than English (gendered nouns, subjunctive mood, two 
 
 **Content library:** Massive. Spanish has one of the largest literary traditions in the world, from Cervantes to Garcia Marquez to contemporary bestsellers. News sources, blogs, and online content are abundant.
 
-**The honest assessment:** Spanish is the default recommendation for English speakers for good reason. It is the easiest major language to read, has the most content, and offers the clearest practical benefits (500 million speakers, dominant in the Americas). If you have no strong preference for another language, Spanish is the safest bet.
+**The honest assessment:** [Spanish](/en/learn/spanish/) is the default recommendation for English speakers for good reason. It is the easiest major language to read, has the most content, and offers the clearest practical benefits (500 million speakers, dominant in the Americas). If you have no strong preference for another language, Spanish is the safest bet.
 
 #### French
 
@@ -113,7 +113,7 @@ For reading specifically, this is actually an advantage. You can build strong re
 
 **Content library:** One of the richest in the world. French literature spans centuries of canonical works (Hugo, Camus, Proust) plus a thriving contemporary publishing scene. France publishes more books per capita than almost any other country.
 
-**The honest assessment:** French is slightly harder to read than Spanish because of spelling irregularities, but the cognate advantage partially compensates. If you care about literature, French opens one of the deepest catalogs in existence.
+**The honest assessment:** [French](/en/learn/french/) is slightly harder to read than Spanish because of spelling irregularities, but the cognate advantage partially compensates. If you care about literature, French opens one of the deepest catalogs in existence.
 
 #### Italian
 
@@ -370,7 +370,7 @@ Research on language learning outcomes consistently shows that motivation is the
 
 Languages with large, accessible content libraries are easier to practice with. Spanish, French, German, Russian, Japanese, and Chinese have massive amounts of books, news, blogs, and media. Smaller languages (Slovak, Georgian, Swahili) may have fewer resources, which can slow progress at the intermediate stage when you need large volumes of comprehensible input.
 
-This matters especially for reading-based learning. You need books you actually want to read, at difficulty levels that match your growing ability.
+This matters especially for reading-based learning. You need books you actually want to read, at difficulty levels that match your growing ability. Knowing [how many words you need](/en/blog/how-many-words-to-read-in-a-foreign-language/) for each language helps set realistic expectations.
 
 ### 3. Factor In Script Familiarity
 

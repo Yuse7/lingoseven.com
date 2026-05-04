@@ -40,6 +40,7 @@ interface Props {
   learnLanguageLinks?: LearnLanguageLink[];
   showNav?: boolean;
   blogUrl?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -58,6 +59,7 @@ const {
   learnLanguageLinks,
   showNav = false,
   blogUrl,
+  noindex = false,
 } = Astro.props;
 ---
 
@@ -74,6 +76,7 @@ const {
     ogArticle={ogArticle}
     hreflangAlternates={hreflangAlternates}
     jsonLd={jsonLd}
+    noindex={noindex}
   />
   <Analytics />
 </head>

@@ -31,7 +31,7 @@ Krashen later refined his position into what he calls the "Compelling Input Hypo
 Paul Nation, one of the most cited researchers in vocabulary acquisition, has spent decades studying how learners build word knowledge. His findings (2001, 2006) are directly relevant:
 
 - A learner needs **10 to 15 encounters** with a word in context before it moves into long-term memory. Extensive reading provides these encounters naturally -- important words recur across chapters and books.
-- Learners need roughly **98% text coverage** (knowing 98 out of every 100 words) for comfortable, unassisted reading. For most languages, this means knowing around **8,000 to 9,000 word families**.
+- Learners need roughly **98% text coverage** (knowing 98 out of every 100 words) for comfortable, unassisted reading. For most languages, this means knowing around [**8,000 to 9,000 word families**](/en/blog/how-many-words-to-read-in-a-foreign-language/).
 - **Graded readers** (books written at controlled vocabulary levels) can bring a learner from 2,000 to 5,000 word families efficiently, after which authentic texts become accessible.
 
 These numbers have practical implications. A single novel of 60,000 words contains thousands of repeated encounters with high-frequency vocabulary, far more repetition than any flashcard deck provides -- and in meaningful context rather than isolation.
@@ -132,7 +132,7 @@ This matters because language learning is a long-term project. Reaching conversa
 
 Extensive reading research consistently finds that learners who read for pleasure report higher motivation and lower dropout rates than those using other methods (Day and Bamford, 1998). The reason is simple: when the activity itself is enjoyable, you do not need willpower to continue. Intrinsic motivation is self-sustaining.
 
-The key is choosing the right material. If you hate romance novels in your native language, you will hate them in French too. Read what you actually enjoy: thrillers, science fiction, biographies, history, essays. The content matters more than the difficulty level, because a book you want to finish is always better than a "perfect level" book you abandon after chapter two.
+The key is [choosing the right material](/en/blog/first-book-in-a-foreign-language/). If you hate romance novels in your native language, you will hate them in French too. Read what you actually enjoy: thrillers, science fiction, biographies, history, essays. The content matters more than the difficulty level, because a book you want to finish is always better than a "perfect level" book you abandon after chapter two.
 
 ## How to Start Reading in a Foreign Language: A 5-Step Plan
 
@@ -145,7 +145,7 @@ You need a small vocabulary foundation before reading becomes productive. Aim fo
 Do not begin with a literary novel. Start with material designed for your level:
 
 - **Graded readers** -- books written specifically for language learners, with controlled vocabulary and grammar. Many publishers offer series at A1 through B2 levels.
-- **Parallel texts** -- books with a translation alongside the original. This lets you read above your independent level because the translation provides instant comprehension support.
+- **[Parallel texts](/en/blog/parallel-reading-honest-guide/)** -- books with a translation alongside the original. This lets you read above your independent level because the translation provides instant comprehension support.
 - **Children's literature** -- picture books and early chapter books use simple language and concrete vocabulary. Just choose ones with stories you find at least mildly interesting.
 - **Simplified classics** -- abridged versions of famous novels, rewritten at lower vocabulary levels.
 
@@ -157,7 +157,7 @@ Resist the urge to look up every unfamiliar word. Constant dictionary checks des
 
 ### Step 4: Read Consistently
 
-Frequency matters more than duration. Twenty minutes every day beats two hours on the weekend. Language acquisition depends on regular exposure -- your brain needs repeated encounters with patterns to internalize them.
+Frequency matters more than duration. [Twenty minutes every day](/en/blog/30-minutes-a-day-reading-plan/) beats two hours on the weekend. Language acquisition depends on regular exposure -- your brain needs repeated encounters with patterns to internalize them.
 
 Set a sustainable daily minimum. For most people, 15 to 20 minutes is achievable without disrupting their schedule. Some learners read during their commute, others before bed. The specific time matters less than the consistency.
 

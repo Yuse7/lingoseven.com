@@ -54,7 +54,7 @@ You understand virtually everything you read. Nuance, humor, and cultural refere
 
 **Just right looks like:** Literature, academic writing, specialized non-fiction, satire. The goal at this stage is refinement -- encountering rare vocabulary, understanding literary devices, and appreciating style.
 
-The takeaway: be honest about your level. Most learners overestimate their reading ability because they confuse recognition (seeing a word and vaguely recalling its meaning) with fluency (reading smoothly without internal translation). When in doubt, start one level below where you think you are. You can always move up.
+The takeaway: be honest about your level. Most learners overestimate their reading ability because they confuse recognition (seeing a word and vaguely recalling its meaning) with fluency (reading smoothly without internal translation). When in doubt, start one level below where you think you are. You can always move up. For specific titles at each level, see our [best books by language level](/en/blog/best-books-by-language-level/) guide.
 
 ## Seven Criteria for a Good First Book
 
@@ -94,7 +94,7 @@ Reading a genre you have never explored, in a language you are still learning, m
 
 Having access to a translation is not cheating. It is smart strategy. A translation gives you a safety net: when you truly cannot figure out a passage, you can check the meaning and keep moving instead of getting stuck in a frustration loop.
 
-The key is discipline. Read in the target language first. Try to understand from context. Check the translation only when you genuinely need it, and try to understand why the original says what it says. Used this way, translation support accelerates learning rather than undermining it.
+The key is discipline. Read in the target language first. Try to understand from context. Check the translation only when you genuinely need it, and try to understand why the original says what it says. Used this way, [parallel reading](/en/blog/parallel-reading-honest-guide/) accelerates learning rather than undermining it.
 
 ### 6. Has an Audio Version
 
@@ -200,7 +200,7 @@ The practical rule: if an unknown word appears once, skip it. If it appears agai
 
 Instead, set a page goal: "I will read 5 pages today." On easy days, you will finish in ten minutes. On hard days, it might take forty. But either way, you made measurable progress. You can point to a page number and say, "I was here yesterday. Now I am here." That tangible sense of forward movement is what keeps you going.
 
-Start with a modest goal -- 3 to 5 pages per day -- and increase it as your reading speed improves. Consistency matters far more than volume.
+Start with a modest goal -- 3 to 5 pages per day -- and increase it as your reading speed improves. Consistency matters far more than volume. If you want a structured approach, our [30-minute daily reading plan](/en/blog/30-minutes-a-day-reading-plan/) lays out a full 90-day schedule.
 
 ### Read the Same Book in Translation First
 
@@ -208,7 +208,7 @@ This technique is optional, but remarkably effective, especially at lower levels
 
 This prior knowledge transforms the reading experience. Instead of struggling to figure out what is happening, you can focus on how the language expresses ideas you already understand. Your brain can devote its resources to noticing sentence patterns, learning vocabulary, and absorbing grammar rather than basic plot comprehension.
 
-*Harry Potter* works brilliantly for this approach because nearly everyone already knows the story. *The Little Prince* is short enough to read twice without a significant time investment. Any book you have already read and enjoyed is a candidate.
+[*Harry Potter* works brilliantly for this approach](/en/blog/harry-potter-for-language-learning/) because nearly everyone already knows the story. *The Little Prince* is short enough to read twice without a significant time investment. Any book you have already read and enjoyed is a candidate.
 
 ### Track Progress Visually
 

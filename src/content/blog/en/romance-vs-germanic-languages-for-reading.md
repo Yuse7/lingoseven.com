@@ -70,7 +70,7 @@ Portuguese follows the same pattern:
 
 "The university offers special programs for international students."
 
-This is not cherry-picking. Studies of vocabulary overlap consistently show that English shares between 30% and 40% of its total vocabulary with major Romance languages, and that figure climbs above 50% for academic and formal registers. When you read a newspaper, a nonfiction book, or a scientific article in any Romance language, you are working with a vocabulary that is already partially yours.
+This is not cherry-picking. Studies of vocabulary overlap consistently show that English shares between 30% and 40% of its total vocabulary with major Romance languages, and that figure climbs above 50% for academic and formal registers. This cognate density is one reason [vocabulary thresholds differ significantly](/en/blog/how-many-words-to-read-in-a-foreign-language/) between Romance and other language families. When you read a newspaper, a nonfiction book, or a scientific article in any Romance language, you are working with a vocabulary that is already partially yours.
 
 ### Spelling Transparency
 
@@ -270,11 +270,11 @@ The most honest answer to "which group is easier to read?" is: it depends entire
 
 ### For the Fastest Start Reading
 
-Choose **Spanish** or **Italian**. The combination of massive cognate overlap, transparent spelling, and familiar sentence structure means you can start extracting meaning from real texts almost immediately. Dutch is the Germanic equivalent -- surprisingly readable from day one.
+Choose **[Spanish](/en/learn/spanish/)** or **Italian**. The combination of massive cognate overlap, transparent spelling, and familiar sentence structure means you can start extracting meaning from real texts almost immediately. Dutch is the Germanic equivalent -- surprisingly readable from day one.
 
 ### For the Most Content Available
 
-Choose **French** or **German**. Both have enormous literary traditions, extensive news media, and large online content ecosystems. Spanish also qualifies here and has the added advantage of being easier to start with.
+Choose **[French](/en/learn/french/)** or **[German](/en/learn/german/)**. Both have enormous literary traditions, extensive news media, and large online content ecosystems. Spanish also qualifies here and has the added advantage of being easier to start with. For a broader comparison including non-European languages, see our [language difficulty guide](/en/blog/which-language-should-you-learn-difficulty-guide/).
 
 ### For the Best Gateway to More Languages
 

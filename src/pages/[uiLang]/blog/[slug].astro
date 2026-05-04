@@ -47,6 +47,43 @@ const enabled = getEnabledLanguages();
 
 const slug = post.id.includes('/') ? post.id.split('/').pop()! : post.id;
 
+// Query related posts: same category, excluding current, prefer locale match
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const localePosts = allPosts.filter((p) => p.data.locale === uiCode);
+const enPosts = allPosts.filter((p) => p.data.locale === 'en');
+const slugsWithLocale = new Set(localePosts.map((p) => (p.id.includes('/') ? p.id.split('/').pop()! : p.id)));
+const availablePosts = [
+  ...localePosts,
+  ...enPosts.filter((p) => !slugsWithLocale.has(p.id.includes('/') ? p.id.split('/').pop()! : p.id)),
+].filter((p) => {
+  const pSlug = p.id.includes('/') ? p.id.split('/').pop()! : p.id;
+  return pSlug !== slug;
+});
+
+// Same category first, then other categories, sorted by date
+const sameCat = availablePosts.filter((p) => p.data.category === post.data.category);
+const otherCat = availablePosts.filter((p) => p.data.category !== post.data.category);
+sameCat.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+otherCat.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const relatedRaw = [...sameCat, ...otherCat].slice(0, 3);
+
+const categoryKeys: Record<string, string> = {
+  'book-lists': 'blog_category_book_lists',
+  'getting-started': 'blog_category_getting_started',
+  'difficulty-guides': 'blog_category_difficulty_guides',
+  'tips': 'blog_category_tips',
+  'methodology': 'blog_category_methodology',
+};
+
+const relatedPosts = relatedRaw.map((p) => ({
+  title: p.data.title,
+  description: p.data.description,
+  slug: p.id.includes('/') ? p.id.split('/').pop()! : p.id,
+  category: p.data.category,
+  categoryLabel: translations[categoryKeys[p.data.category] ?? ''] ?? p.data.category,
+  pubDate: p.data.pubDate,
+}));
+
 // Hreflang alternates
 const hreflangAlternates = enabled.map((ui) => ({
   lang: ui.code,
@@ -65,14 +102,6 @@ const uiLanguages = enabled.map((l) => ({
   url: `/${l.code}/blog/${slug}/`,
 }));
 
-// Category label
-const categoryKeys: Record<string, string> = {
-  'book-lists': 'blog_category_book_lists',
-  'getting-started': 'blog_category_getting_started',
-  'difficulty-guides': 'blog_category_difficulty_guides',
-  'tips': 'blog_category_tips',
-  'methodology': 'blog_category_methodology',
-};
 const categoryLabel = translations[categoryKeys[post.data.category] ?? ''] ?? post.data.category;
 
 // Target language info for CTA
@@ -102,6 +131,7 @@ const targetLangSlug = post.data.targetLang
   translations={translations}
   uiLanguages={uiLanguages}
   hreflangAlternates={hreflangAlternates}
+  relatedPosts={relatedPosts}
 >
   <Content />
 </BlogLayout>

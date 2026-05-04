@@ -52,7 +52,7 @@ This matters more than it might seem. Anxiety is not just an emotional inconveni
 
 Perhaps the most practically significant benefit: parallel reading lets beginners engage with authentic, native-level content far earlier than any other method. Without a translation, a beginner in German might be limited to texts like "Die Katze sitzt auf dem Stuhl" for months. With a parallel translation, that same beginner can read Kafka.
 
-This is not just about enjoyment (though enjoyment matters enormously for sustained practice). Authentic texts contain the full richness of a language -- its idioms, its cultural references, its natural rhythms. Graded readers are useful, but they present a simplified version of the language that does not fully prepare you for the real thing. Parallel reading bridges this gap from day one.
+This is not just about enjoyment (though enjoyment matters enormously for sustained practice). Authentic texts contain the full richness of a language -- its idioms, its cultural references, its natural rhythms. Graded readers are useful, but they present a simplified version of the language that does not fully prepare you for the real thing. Parallel reading bridges this gap from day one -- and the [research on why reading is so effective](/en/blog/why-reading-is-the-best-way-to-learn-a-language/) makes a strong case for starting as early as possible.
 
 ## Who It Works Great For
 
@@ -66,7 +66,7 @@ For beginners, the key benefit is not that they will understand the target langu
 
 ### Intermediate Learners Tackling Native Content for the First Time
 
-The jump from textbook language to native content is the most dangerous transition in language learning. This is where the intermediate plateau lives, and this is where most learners quit. You feel like you should be able to read a real book -- you have studied for a year, you know thousands of words -- and then you open one and understand 60% at best. It is demoralizing.
+The jump from textbook language to native content is the most dangerous transition in language learning. This is where the [intermediate plateau](/en/blog/intermediate-plateau-how-to-break-through/) lives, and this is where most learners quit. You feel like you should be able to read a real book -- you have studied for a year, you know thousands of words -- and then you open one and understand 60% at best. It is demoralizing.
 
 Parallel reading provides scaffolding for this transition. You can engage with the difficulty of native content while maintaining the comprehension you need to keep going. As you read, your vocabulary grows, your tolerance for ambiguity increases, and the percentage of each page you understand climbs. The translation becomes less necessary over time, but it is there when you need it.
 
@@ -96,7 +96,7 @@ This does not mean you should abandon parallel texts entirely. It means you shou
 
 This is more common than you might think, and it is a complete waste of time from a language learning perspective. Some learners start by reading the target language text, get frustrated, shift to "just checking" the translation, and gradually start reading the translation first -- or exclusively. At that point, you are reading a book in your native language. You are enjoying a story, which is nice, but you are not learning anything.
 
-If you notice yourself doing this, it is a signal that the text is too difficult for your current level, even with a translation. The solution is not to power through; it is to choose an easier text. With parallel reading, the target language side must remain your primary focus, or the method loses its entire purpose.
+If you notice yourself doing this, it is a signal that the text is too difficult for your current level, even with a translation. The solution is not to power through; it is to [choose an easier text](/en/blog/first-book-in-a-foreign-language/). With parallel reading, the target language side must remain your primary focus, or the method loses its entire purpose.
 
 ### Perfectionists Who Compare Every Sentence
 

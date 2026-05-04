@@ -24,7 +24,7 @@ You do not need to take a formal CEFR exam to figure out where you stand. Your r
 
 ### A1 -- True Beginner
 
-You know fewer than 500 words. You can recognize basic greetings, numbers, days of the week, and common nouns. Reading a full sentence is still an effort. You rely heavily on a dictionary or translation for almost every line.
+You know fewer than 500 words. You can recognize basic greetings, numbers, days of the week, and common nouns. Reading a full sentence is still an effort. You rely heavily on a dictionary or translation for almost every line. If you are here, our guide on [how many words you need to read in a foreign language](/en/blog/how-many-words-to-read-in-a-foreign-language/) explains the vocabulary thresholds ahead.
 
 **The feeling:** You look at a page in your target language and recognize scattered words in a sea of unknown text. You might understand "the," "is," "good," and "day" but the rest is opaque.
 
@@ -72,7 +72,7 @@ The implication is powerful: if a book works for B1 readers of French, it almost
 
 ## A1-A2: Your First Steps
 
-At the beginner stage, your reading muscles are weak. You tire quickly. Unknown words outnumber known ones on most pages. The temptation is to not read at all -- to wait until your vocabulary is "big enough." This is a mistake. Reading at A1-A2 is not about understanding everything. It is about building the habit, training your eyes to move through text in the target language, and starting to recognize patterns.
+At the beginner stage, your reading muscles are weak. You tire quickly. Unknown words outnumber known ones on most pages. The temptation is to not read at all -- to wait until your vocabulary is "big enough." This is a mistake. Reading at A1-A2 is not about understanding everything. It is about building the habit, training your eyes to move through text in the target language, and [starting to recognize patterns](/en/blog/first-book-in-a-foreign-language/).
 
 ### What Works at This Level
 
@@ -97,7 +97,7 @@ Do not fight the dictionary at this stage. Parallel text is essential -- read a 
 
 ## B1: The Transition
 
-B1 is where reading gets interesting -- and frustrating. You know enough to follow a story, but not enough to enjoy it without effort. You can read adapted texts comfortably, but native content still feels like a wall. This is the level where most learners either break through to genuine reading ability or give up and stay in the textbook forever.
+B1 is where reading gets interesting -- and frustrating. You know enough to follow a story, but not enough to enjoy it without effort. You can read adapted texts comfortably, but native content still feels like a wall. This is the level where most learners either [break through the intermediate plateau](/en/blog/intermediate-plateau-how-to-break-through/) or give up and stay in the textbook forever.
 
 The key at B1 is finding books that are written in genuinely simple language -- not simplified, but naturally simple. Some of the world's best authors wrote in plain, direct prose, and their books happen to be perfectly suited for intermediate learners.
 
@@ -141,7 +141,7 @@ B2 is the level where the training wheels come off. You can handle real books --
 
 **"Sapiens" by Yuval Noah Harari** demonstrates why popular non-fiction works so well at B2. Harari writes for a general audience, which means he explains every concept he introduces. When he uses a term like "cognitive revolution," he immediately defines it and gives examples. This built-in explanation style is exactly what a B2 reader needs -- you learn specialized vocabulary through context because the author is already teaching it to you. The book is available in 60+ languages and covers topics (history, evolution, society) that generate vocabulary useful across many domains.
 
-**The "Harry Potter" series by J.K. Rowling** is one of the most popular choices for language learners worldwide -- and for good reason. The first three books (Philosopher's Stone, Chamber of Secrets, Prisoner of Azkaban) are accessible at B2. Rowling writes in clear, visual prose. The plot is engaging enough that you want to keep reading even when the language is challenging. The magical vocabulary (wand, spell, potion) is a minor obstacle that quickly becomes familiar through repetition. And because Harry Potter has been translated into 80+ languages, you can almost certainly find it in your target language. Note that books four through seven grow significantly longer and more complex -- save those for strong B2 or C1.
+**The ["Harry Potter" series by J.K. Rowling](/en/blog/harry-potter-for-language-learning/)** is one of the most popular choices for language learners worldwide -- and for good reason. The first three books (Philosopher's Stone, Chamber of Secrets, Prisoner of Azkaban) are accessible at B2. Rowling writes in clear, visual prose. The plot is engaging enough that you want to keep reading even when the language is challenging. The magical vocabulary (wand, spell, potion) is a minor obstacle that quickly becomes familiar through repetition. And because Harry Potter has been translated into 80+ languages, you can almost certainly find it in your target language. Note that books four through seven grow significantly longer and more complex -- save those for strong B2 or C1.
 
 **Genre fiction in your favorite genre** is an underrated strategy at B2. If you love thrillers in your native language, read thrillers in your target language. If you love romance, read romance. Genre familiarity gives you a structural advantage -- you know how these stories work, what the conventions are, where the plot is heading. This predictability frees cognitive resources for language processing instead of plot comprehension. Authors like Dan Brown (thrillers), Nicholas Sparks (romance), or Isaac Asimov (science fiction) write in accessible prose and are translated into dozens of languages.
 

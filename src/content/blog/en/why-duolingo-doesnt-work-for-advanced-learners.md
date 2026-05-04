@@ -58,7 +58,7 @@ This is why Duolingo users often report a bizarre experience: they can score 90%
 
 ### The vocabulary ceiling
 
-Most Duolingo courses cover approximately 2,000 to 3,000 unique words. This is enough for basic conversation and simple texts -- roughly the A2 to B1 range. The problem is that comfortable reading of native content requires a vocabulary of 5,000 to 8,000 word families, and genuine fluency requires even more.
+Most Duolingo courses cover approximately 2,000 to 3,000 unique words. This is enough for basic conversation and simple texts -- roughly the A2 to B1 range. The problem is that comfortable reading of native content requires a vocabulary of [5,000 to 8,000 word families](/en/blog/how-many-words-to-read-in-a-foreign-language/), and genuine fluency requires even more.
 
 Paul Nation's research (2006) has shown that readers need to understand approximately 98% of the words in a text to read comfortably without constant dictionary lookups. For most languages, that 98% threshold requires knowledge of around 8,000 to 9,000 word families. Duolingo gets you to roughly a third of that.
 
@@ -98,7 +98,7 @@ If Duolingo is the wrong tool after B1, what is the right one? The research poin
 
 ### Extensive reading
 
-This is the single most effective thing an intermediate learner can do. Thirty or more minutes of reading in the target language every day, using native or near-native content, produces vocabulary gains, grammar improvement, and reading fluency that no other method matches at this stage.
+This is the single most effective thing an intermediate learner can do. [Reading is the best way to learn a language](/en/blog/why-reading-is-the-best-way-to-learn-a-language/) at this stage -- thirty or more minutes in the target language every day, using native or near-native content, produces vocabulary gains, grammar improvement, and reading fluency that no other method matches.
 
 The evidence is overwhelming. Elley and Mangubhai's "Book Flood" study (1983) showed that students who simply read books in their target language for 20-30 minutes daily gained more than twice the language proficiency of students receiving traditional instruction. Jeon and Day's meta-analysis (2016) of 71 studies found consistent positive effects of extensive reading on vocabulary, grammar, reading comprehension, writing quality, and reading speed.
 
@@ -136,7 +136,7 @@ This combination is particularly effective for languages where the spelling-to-p
 
 If you have a 200-day streak and the idea of quitting makes you anxious, do not quit cold turkey. You will lose the habit, and the habit is the most valuable thing Duolingo gave you. Instead, redirect that habit gradually.
 
-**Weeks 1-2: Duolingo 5 minutes + Reading 25 minutes.** Keep Duolingo as your warmup. Do one lesson to satisfy the streak, then spend the rest of your study time reading. Choose material slightly below your level -- you should understand at least 90% of the words on the page without looking anything up. If you cannot find material at the right level, use a reader app that provides translation support so you can read harder texts without losing comprehension.
+**Weeks 1-2: Duolingo 5 minutes + Reading 25 minutes.** Keep Duolingo as your warmup. Do one lesson to satisfy the streak, then spend the rest of your study time reading. If you need a structured plan, a [30-minute daily reading routine](/en/blog/30-minutes-a-day-reading-plan/) is a proven starting point. Choose material slightly below your level -- you should understand at least 90% of the words on the page without looking anything up. If you cannot find material at the right level, use a reader app that provides translation support so you can read harder texts without losing comprehension.
 
 **Weeks 3-4: Duolingo 5 minutes + Reading 25 minutes + Listening 10 minutes.** Add a listening component. A podcast episode, a chapter of an audiobook, or a short video in your target language. Use transcripts if you need them. The goal is not to understand everything -- it is to train your ear to process natural speech.
 

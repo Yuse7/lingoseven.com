@@ -30,7 +30,7 @@ Thirty minutes a day for 90 days is 45 hours of reading input. That might sound 
 
 But reading hours are not classroom hours. In a typical language class, a significant portion of the time goes to instructor explanations, student questions, pair work logistics, bathroom breaks, and administrative overhead. Actual contact with the target language might be 30-40% of the total class time. When you are reading, it is 100% input, 100% of the time. Every second of those 30 minutes, your brain is processing the target language. No downtime, no waiting for your turn, no listening to other students make errors.
 
-Paul Nation's research on extensive reading suggests that learners can acquire approximately 1,000 to 2,000 word families through 500,000 words of reading input. At a beginner's reading speed of roughly 50-100 words per minute (which increases rapidly), you will process somewhere between 67,500 and 135,000 words over 90 days. That is a meaningful start -- enough to build a functional reading vocabulary and establish the patterns that make further learning faster.
+Paul Nation's research on extensive reading suggests that learners can acquire approximately 1,000 to 2,000 word families through 500,000 words of reading input. (For a deeper look at what those vocabulary numbers mean in practice, see [how many words you need to read in a foreign language](/en/blog/how-many-words-to-read-in-a-foreign-language/).) At a beginner's reading speed of roughly 50-100 words per minute (which increases rapidly), you will process somewhere between 67,500 and 135,000 words over 90 days. That is a meaningful start -- enough to build a functional reading vocabulary and establish the patterns that make further learning faster.
 
 ### The Habit Factor
 
@@ -58,7 +58,7 @@ For languages with complex writing systems -- Chinese, Japanese, or Arabic -- th
 
 This choice matters more than most people realize. The wrong book will kill your motivation within a week. The right book will carry you through the difficult early stages on the strength of the story alone.
 
-Choose something short -- under 200 pages. Choose something with simple sentence structure. Choose something in a genre you actually enjoy. If you love mysteries, read a mystery. If you love romance, read a romance. "Literary merit" is irrelevant at this stage. The only metric that matters is whether you want to find out what happens next.
+Choose something short -- under 200 pages. Choose something with simple sentence structure. Choose something in a genre you actually enjoy. If you love mysteries, read a mystery. If you love romance, read a romance. "Literary merit" is irrelevant at this stage. The only metric that matters is whether you want to find out what happens next. If you need more guidance on this step, our full guide on [choosing your first book in a foreign language](/en/blog/first-book-in-a-foreign-language/) covers the seven criteria that matter most.
 
 Graded readers (books written specifically for language learners, with controlled vocabulary) are excellent for the first month. After that, children's books and young adult novels work well. Avoid literary fiction, poetry, and anything with heavy dialect or slang until you have several books under your belt.
 
@@ -138,7 +138,7 @@ Month 2 is where the work you did in Month 1 starts to pay off. Your vocabulary 
 - 5 minutes: Vocabulary review
 - 25 minutes: Read a longer book (young adult level or adapted classic)
 
-It is time to level up your reading material. Move from graded readers and children's stories to something more substantial: a young adult novel, an adapted classic, or a contemporary novel written in accessible language. The jump will feel significant -- longer sentences, more varied vocabulary, more complex plot structures -- but your Month 1 foundation is strong enough to handle it.
+It is time to level up your reading material. Move from graded readers and children's stories to something more substantial: a young adult novel, an adapted classic, or a contemporary novel written in accessible language. Our [best books by language level](/en/blog/best-books-by-language-level/) guide has specific titles for each stage of this progression. The jump will feel significant -- longer sentences, more varied vocabulary, more complex plot structures -- but your Month 1 foundation is strong enough to handle it.
 
 The strategic shift this month: start reading the target language first. In Month 1, you may have been reading translation and target text almost simultaneously. Now, read a sentence or paragraph in the target language and try to understand it on your own. Only check the translation when you are genuinely stuck -- when you cannot even guess what a passage means.
 
