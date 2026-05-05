@@ -1,0 +1,117 @@
+---
+import type { LanguageFact } from '../data/languageFacts';
+
+interface Props {
+  targetLangName: string;
+  fact: LanguageFact;
+}
+const { targetLangName, fact } = Astro.props;
+---
+
+<section class="language-intro">
+  <div class="container">
+    <div class="intro-content">
+      <h2 class="intro-title">Why learn {targetLangName}?</h2>
+      <p class="intro-why">{fact.whyLearn}</p>
+      <p class="intro-unique">{fact.whatMakesUnique}</p>
+
+      <div class="intro-stats">
+        <div class="stat-card">
+          <span class="stat-value">{fact.speakers >= 1000 ? `${(fact.speakers / 1000).toFixed(1)}B` : fact.speakers >= 1 ? `${Math.round(fact.speakers)}M` : `${(fact.speakers * 1000).toFixed(0)}K`}</span>
+          <span class="stat-label">Speakers</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">{fact.family}</span>
+          <span class="stat-label">Language family</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">{fact.writingSystem}</span>
+          <span class="stat-label">Writing system</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">{fact.fsiHours > 0 ? `~${fact.fsiHours}h` : 'N/A'}</span>
+          <span class="stat-label">Study hours (FSI)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .language-intro {
+    padding: 4rem 0;
+    background: var(--surface, #1e293b);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .intro-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .intro-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text, #f8fafc);
+    margin-bottom: 1.5rem;
+  }
+
+  .intro-why {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--text-secondary, #94a3b8);
+    margin-bottom: 1rem;
+  }
+
+  .intro-unique {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary, #94a3b8);
+    margin-bottom: 2.5rem;
+  }
+
+  .intro-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: var(--background, #1a2332);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .stat-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--primary, #4ade80);
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #94a3b8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .language-intro {
+      padding: 3rem 0;
+    }
+
+    .intro-title {
+      font-size: 1.5rem;
+    }
+
+    .intro-stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
