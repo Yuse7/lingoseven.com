@@ -125,14 +125,127 @@ const categories: Category[] = [
     ],
   },
 ];
+
+// Featured covers shown inside the "Any book" visual.
+// Each fans out at its own angle to evoke an open library shelf.
+const stackCovers = [
+  { id: 'summary_5', rotate: -14, x: -110, y: 18, z: 1 },
+  { id: 'classic_27', rotate: -6, x: -45, y: 4, z: 2 },
+  { id: 'classic2_106', rotate: 4, x: 25, y: -8, z: 3 },
+];
 ---
 
-<section class="library-section">
+<section class="library-section" id="library">
   <div class="container">
-    <div class="library-header">
-      <span class="section-tag section-tag--blue">{t('library_tag')}</span>
-      <h2>{t('library_title')}</h2>
-      <p class="library-subtitle">{t('library_subtitle')}</p>
+    <!-- ============================================ -->
+    <!-- HERO: Read ANY book in {targetLang}            -->
+    <!-- ============================================ -->
+    <div class="anybook-header">
+      <span class="section-tag section-tag--green">{t('library_tag')}</span>
+      <h2 class="anybook-title" set:html={t('library_title')}></h2>
+      <p class="anybook-subtitle">{t('library_subtitle')}</p>
+    </div>
+
+    <!-- HUGE upload feature card — the centerpiece -->
+    <div class="anybook-card">
+      <div class="anybook-card-border"></div>
+      <div class="anybook-card-glow"></div>
+
+      <div class="anybook-card-inner">
+        <!-- Visual: stack of real covers + "your book" placeholder -->
+        <div class="anybook-visual" aria-hidden="true">
+          <div class="anybook-stack">
+            {stackCovers.map((c) => (
+              <div
+                class="anybook-stack-book"
+                style={`transform: translate(${c.x}px, ${c.y}px) rotate(${c.rotate}deg); z-index: ${c.z};`}
+              >
+                <img src={coverUrl(c.id)} alt="" loading="lazy" width="140" height="210" />
+              </div>
+            ))}
+            <!-- "Your book" — empty slot with plus -->
+            <div
+              class="anybook-stack-book anybook-stack-book--user"
+              style="transform: translate(95px, -22px) rotate(12deg); z-index: 4;"
+            >
+              <div class="anybook-stack-user-inner">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 5v14M5 12h14"/>
+                </svg>
+                <span>{t('library_upload_your_book_chip')}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="anybook-formats-row">
+            <span class="format-badge format-badge--epub">EPUB</span>
+            <span class="format-badge format-badge--fb2">FB2</span>
+            <span class="format-badge format-badge--txt">TXT</span>
+          </div>
+        </div>
+
+        <!-- Content: headline + checklist -->
+        <div class="anybook-content">
+          <div class="anybook-eyebrow">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <span>{t('library_upload_eyebrow')}</span>
+          </div>
+          <h3 class="anybook-headline" set:html={t('library_upload_title')}></h3>
+          <p class="anybook-desc">{t('library_upload_subtitle')}</p>
+          <ul class="anybook-features">
+            <li>
+              <span class="anybook-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span set:html={t('library_upload_feat_any')}></span>
+            </li>
+            <li>
+              <span class="anybook-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span set:html={t('library_upload_feat_read')}></span>
+            </li>
+            <li>
+              <span class="anybook-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span set:html={t('library_upload_feat_audio')}></span>
+            </li>
+            <li>
+              <span class="anybook-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span set:html={t('library_upload_feat_srs')}></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- OR: pick from our library                     -->
+    <!-- ============================================ -->
+    <div class="library-or-divider">
+      <span class="library-or-divider-line"></span>
+      <span class="library-or-divider-text">{t('library_or_browse_eyebrow')}</span>
+      <span class="library-or-divider-line"></span>
+    </div>
+
+    <div class="library-or-header">
+      <h3 class="library-or-title">{t('library_or_browse_title')}</h3>
+      <p class="library-or-subtitle">{t('library_or_browse_desc')}</p>
     </div>
 
     <!-- Category tabs -->
@@ -173,43 +286,9 @@ const categories: Category[] = [
               </div>
             </div>
           ))}
-
         </div>
       </div>
     ))}
-
-    <!-- Upload your own book — highlight banner -->
-    <div class="upload-banner">
-      <!-- Animated gradient border -->
-      <div class="upload-banner-border"></div>
-      <!-- Ambient glow -->
-      <div class="upload-banner-glow"></div>
-
-      <div class="upload-banner-inner">
-        <!-- Lightning icon -->
-        <div class="upload-icon-left" aria-hidden="true">
-          <div class="upload-circle">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Main content -->
-        <div class="upload-body">
-          <h3 class="upload-headline">{t('library_upload_title')}</h3>
-          <p class="upload-desc">{t('library_upload_subtitle')}</p>
-          <div class="upload-formats">
-            <span class="upload-format">EPUB</span>
-            <span class="upload-format-dot"></span>
-            <span class="upload-format">FB2</span>
-            <span class="upload-format-dot"></span>
-            <span class="upload-format">TXT</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
 
     <!-- CTA -->
     <div class="library-footer">
@@ -264,40 +343,343 @@ const categories: Category[] = [
 
 <style>
   .library-section {
-    padding: 100px 0 80px;
+    padding: 110px 0 90px;
   }
 
-  .library-header {
+  /* ====================================================== */
+  /* ANY BOOK — HERO + UPLOAD CARD                          */
+  /* ====================================================== */
+
+  .anybook-header {
     text-align: center;
-    max-width: 640px;
+    max-width: 760px;
     margin: 0 auto 48px;
   }
 
-  .library-header h2 {
-    font-size: 36px;
-    font-weight: 700;
-    margin: 16px 0 12px;
-    color: #fff;
-  }
-
-  .library-subtitle {
-    font-size: 16px;
-    color: var(--text-light);
-    line-height: 1.6;
-  }
-
-  .section-tag--blue {
+  .section-tag--green {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     padding: 8px 16px;
-    background: rgba(96, 165, 250, 0.15);
-    color: #60a5fa;
+    background: rgba(74, 222, 128, 0.14);
+    color: #4ade80;
     border-radius: 20px;
     font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+  }
+
+  .anybook-title {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 18px 0 16px;
+    color: #fff;
+    letter-spacing: -0.03em;
+  }
+
+  .anybook-title :global(.hl) {
+    background: linear-gradient(120deg, #4ade80 0%, #22c55e 50%, #0ea5e9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: hlShift 8s ease-in-out infinite;
+  }
+
+  @keyframes hlShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .anybook-subtitle {
+    font-size: 18px;
+    color: var(--text-light);
+    line-height: 1.6;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ----- the BIG card ----- */
+  .anybook-card {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto 96px;
+    border-radius: 28px;
+    padding: 2px;
+    overflow: hidden;
+  }
+
+  .anybook-card-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #4ade80 0%, #22c55e 25%, #0ea5e9 55%, #a78bfa 100%);
+    background-size: 220% 220%;
+    animation: borderShift 7s ease-in-out infinite;
+  }
+
+  @keyframes borderShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .anybook-card-glow {
+    position: absolute;
+    inset: -40px;
+    border-radius: 40px;
+    background:
+      radial-gradient(ellipse at 25% 50%, rgba(74, 222, 128, 0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 50%, rgba(96, 165, 250, 0.14) 0%, transparent 60%);
+    filter: blur(40px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .anybook-card-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 48px;
+    align-items: center;
+    background: linear-gradient(135deg, #1c2638 0%, #18212f 50%, #1b2638 100%);
+    border-radius: 26px;
+    padding: 56px 56px 56px 48px;
+    min-height: 380px;
+    overflow: hidden;
+  }
+
+  /* ----- visual: book stack ----- */
+  .anybook-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .anybook-stack {
+    position: relative;
+    width: 340px;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .anybook-stack-book {
+    position: absolute;
+    width: 140px;
+    height: 210px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow:
+      0 14px 32px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    transition: transform 0.4s ease;
+  }
+
+  .anybook-stack-book img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* The user's own book — empty slot with plus */
+  .anybook-stack-book--user {
+    background: rgba(74, 222, 128, 0.08);
+    border: 2px dashed rgba(74, 222, 128, 0.55);
+    box-shadow:
+      0 14px 32px rgba(74, 222, 128, 0.2),
+      0 0 0 1px rgba(74, 222, 128, 0.1) inset;
+  }
+
+  .anybook-stack-user-inner {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #4ade80;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .anybook-stack-user-inner span {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+  }
+
+  .anybook-card:hover .anybook-stack-book--user {
+    transform: translate(95px, -32px) rotate(12deg) scale(1.04);
+  }
+
+  /* Format badges row */
+  .anybook-formats-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .format-badge {
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+  }
+
+  .format-badge--epub {
+    background: rgba(74, 222, 128, 0.12);
+    border-color: rgba(74, 222, 128, 0.35);
+    color: #4ade80;
+  }
+
+  .format-badge--fb2 {
+    background: rgba(96, 165, 250, 0.12);
+    border-color: rgba(96, 165, 250, 0.35);
+    color: #60a5fa;
+  }
+
+  .format-badge--txt {
+    background: rgba(167, 139, 250, 0.12);
+    border-color: rgba(167, 139, 250, 0.35);
+    color: #a78bfa;
+  }
+
+  /* ----- content side ----- */
+  .anybook-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .anybook-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #4ade80;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .anybook-headline {
+    font-size: 34px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .anybook-headline :global(.hl) {
+    color: #4ade80;
+  }
+
+  .anybook-desc {
+    font-size: 16px;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  .anybook-features {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .anybook-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.45;
+  }
+
+  .anybook-features li :global(strong) {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .anybook-check {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(74, 222, 128, 0.18);
+    color: #4ade80;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  /* ====================================================== */
+  /* OR — divider into library catalog                      */
+  /* ====================================================== */
+
+  .library-or-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 520px;
+    margin: 0 auto 24px;
+  }
+
+  .library-or-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%);
+  }
+
+  .library-or-divider-text {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .library-or-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 36px;
+  }
+
+  .library-or-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .library-or-subtitle {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
   }
 
   /* Tabs */
@@ -438,134 +820,10 @@ const categories: Category[] = [
     opacity: 0.7;
   }
 
-  /* Upload banner */
-  .upload-banner {
-    position: relative;
-    margin-top: 48px;
-    border-radius: 20px;
-    padding: 2px;
-    overflow: hidden;
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .upload-banner-border {
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #4ade80 0%, #22c55e 30%, #0ea5e9 60%, #a78bfa 100%);
-    background-size: 200% 200%;
-    animation: borderShift 6s ease-in-out infinite;
-  }
-
-  @keyframes borderShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-
-  .upload-banner-glow {
-    position: absolute;
-    inset: -20px;
-    border-radius: 20px;
-    background: radial-gradient(ellipse at 30% 50%, rgba(74, 222, 128, 0.12) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 50%, rgba(96, 165, 250, 0.08) 0%, transparent 60%);
-    filter: blur(24px);
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .upload-banner-inner {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: stretch;
-    background: linear-gradient(135deg, #1e2b3d 0%, #1a2332 40%, #1d2940 100%);
-    border-radius: 18px;
-    min-height: 140px;
-    overflow: hidden;
-  }
-
-  /* Left icon */
-  .upload-icon-left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 32px;
-    flex-shrink: 0;
-  }
-
-  /* Main content */
-  .upload-body {
-    flex: 1;
-    padding: 32px 28px 32px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-  }
-
-  .upload-headline {
-    font-size: 24px;
-    font-weight: 800;
-    color: #fff;
-    margin: 0 0 8px;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-
-  .upload-desc {
-    font-size: 15px;
-    color: var(--text-light);
-    margin: 0 0 16px;
-    line-height: 1.5;
-    max-width: 480px;
-  }
-
-  .upload-formats {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .upload-format {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: rgba(74, 222, 128, 0.7);
-    text-transform: uppercase;
-  }
-
-  .upload-format-dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  .upload-circle {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(74, 222, 128, 0.08);
-    border: 1.5px solid rgba(74, 222, 128, 0.25);
-    color: #4ade80;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .upload-banner:hover .upload-circle {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(74, 222, 128, 0.15);
-    background: rgba(74, 222, 128, 0.12);
-  }
-
   /* Footer */
   .library-footer {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 56px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -576,17 +834,85 @@ const categories: Category[] = [
     font-size: 15px;
     color: var(--text-light);
     line-height: 1.6;
-    max-width: 500px;
+    max-width: 560px;
   }
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .library-section {
-      padding: 60px 0;
+  /* ====================================================== */
+  /* Responsive                                              */
+  /* ====================================================== */
+  @media (max-width: 980px) {
+    .anybook-card-inner {
+      grid-template-columns: 1fr;
+      padding: 44px 32px;
+      gap: 36px;
     }
 
-    .library-header h2 {
-      font-size: 28px;
+    .anybook-content {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .library-section {
+      padding: 64px 0;
+    }
+
+    .anybook-title {
+      font-size: 32px;
+    }
+
+    .anybook-subtitle {
+      font-size: 15px;
+    }
+
+    .anybook-card {
+      margin-bottom: 64px;
+      border-radius: 22px;
+    }
+
+    .anybook-card-border,
+    .anybook-card-inner {
+      border-radius: 22px;
+    }
+
+    .anybook-card-inner {
+      padding: 36px 24px 32px;
+      gap: 28px;
+      min-height: 0;
+    }
+
+    .anybook-stack {
+      width: 280px;
+      height: 220px;
+    }
+
+    .anybook-stack-book {
+      width: 110px;
+      height: 165px;
+    }
+
+    .anybook-card:hover .anybook-stack-book--user {
+      transform: translate(75px, -22px) rotate(12deg);
+    }
+
+    .anybook-headline {
+      font-size: 24px;
+    }
+
+    .anybook-desc {
+      font-size: 15px;
+    }
+
+    .anybook-features li {
+      font-size: 14px;
+    }
+
+    .library-or-title {
+      font-size: 22px;
+    }
+
+    .library-or-subtitle {
+      font-size: 14px;
     }
 
     .library-tabs {
@@ -623,27 +949,12 @@ const categories: Category[] = [
       width: 130px;
       height: 190px;
     }
+  }
 
-    .upload-banner-inner {
-      flex-direction: column;
-      min-height: auto;
+  @media (max-width: 480px) {
+    .anybook-stack {
+      width: 260px;
+      transform: scale(0.92);
     }
-
-    .upload-icon-left {
-      padding-left: 20px;
-    }
-
-    .upload-body {
-      padding: 24px 20px;
-      text-align: center;
-      align-items: center;
-    }
-
-    .upload-headline { font-size: 20px; }
-
-    .upload-formats {
-      justify-content: center;
-    }
-
   }
 </style>
