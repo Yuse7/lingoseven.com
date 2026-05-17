@@ -235,6 +235,119 @@ const stackCovers = [
     </div>
 
     <!-- ============================================ -->
+    <!-- SUPER POWER #1 — auto-translation             -->
+    <!-- ============================================ -->
+    <div class="super-moment super-moment--translate">
+      <div class="super-moment-inner">
+        <div class="super-moment-content">
+          <span class="super-moment-tag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span>{t('library_super_tag')}</span>
+          </span>
+          <h3 class="super-moment-title" set:html={t('library_super1_title')}></h3>
+          <p class="super-moment-desc" set:html={t('library_super1_desc')}></p>
+        </div>
+
+        <div class="super-moment-visual" aria-hidden="true">
+          <div class="translate-illu">
+            <div class="translate-book translate-book--src">
+              <div class="translate-book-cover">
+                <span class="translate-book-flag">🌐</span>
+                <div class="translate-book-lines">
+                  <div class="translate-book-line"></div>
+                  <div class="translate-book-line translate-book-line--short"></div>
+                  <div class="translate-book-line"></div>
+                  <div class="translate-book-line translate-book-line--short"></div>
+                </div>
+              </div>
+              <span class="translate-book-label">{t('library_super_visual_any')}</span>
+            </div>
+
+            <div class="translate-magic">
+              <svg width="48" height="32" viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 16h36"/>
+                <path d="M32 8l8 8-8 8"/>
+              </svg>
+              <div class="translate-magic-sparkle translate-magic-sparkle--1">✦</div>
+              <div class="translate-magic-sparkle translate-magic-sparkle--2">✦</div>
+              <div class="translate-magic-sparkle translate-magic-sparkle--3">✦</div>
+            </div>
+
+            <div class="translate-book translate-book--tgt">
+              <div class="translate-book-cover">
+                <span class="translate-book-flag translate-book-flag--target">✓</span>
+                <div class="translate-book-lines">
+                  <div class="translate-book-line"></div>
+                  <div class="translate-book-line translate-book-line--short"></div>
+                  <div class="translate-book-line"></div>
+                  <div class="translate-book-line translate-book-line--short"></div>
+                </div>
+              </div>
+              <span class="translate-book-label translate-book-label--target">{targetLangName}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SUPER POWER #2 — adapt to your level          -->
+    <!-- ============================================ -->
+    <div class="super-moment super-moment--adapt">
+      <div class="super-moment-inner super-moment-inner--reversed">
+        <div class="super-moment-visual" aria-hidden="true">
+          <div class="adapt-illu">
+            <div class="adapt-page adapt-page--complex">
+              <span class="adapt-page-label adapt-page-label--hard">{t('library_super_visual_hard')}</span>
+              <div class="adapt-page-text">
+                <div class="adapt-line adapt-line--xl"></div>
+                <div class="adapt-line adapt-line--xl"></div>
+                <div class="adapt-line adapt-line--l"></div>
+                <div class="adapt-line adapt-line--xl"></div>
+                <div class="adapt-line adapt-line--m"></div>
+                <div class="adapt-line adapt-line--xl"></div>
+                <div class="adapt-line adapt-line--s"></div>
+              </div>
+            </div>
+
+            <div class="adapt-magic">
+              <svg width="48" height="32" viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 16h36"/>
+                <path d="M32 8l8 8-8 8"/>
+              </svg>
+              <div class="translate-magic-sparkle translate-magic-sparkle--1">✦</div>
+              <div class="translate-magic-sparkle translate-magic-sparkle--2">✦</div>
+              <div class="translate-magic-sparkle translate-magic-sparkle--3">✦</div>
+            </div>
+
+            <div class="adapt-page adapt-page--simple">
+              <span class="adapt-page-label adapt-page-label--easy">{t('library_super_visual_easy')}</span>
+              <div class="adapt-page-text">
+                <div class="adapt-line"></div>
+                <div class="adapt-line adapt-line--m"></div>
+                <div class="adapt-line"></div>
+                <div class="adapt-line adapt-line--s"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="super-moment-content">
+          <span class="super-moment-tag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span>{t('library_super_tag')}</span>
+          </span>
+          <h3 class="super-moment-title" set:html={t('library_super2_title')}></h3>
+          <p class="super-moment-desc" set:html={t('library_super2_desc')}></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
     <!-- OR: pick from our library                     -->
     <!-- ============================================ -->
     <div class="library-or-divider">
@@ -449,6 +562,285 @@ const stackCovers = [
     padding: 56px 56px 56px 48px;
     min-height: 380px;
     overflow: hidden;
+  }
+
+  /* ====================================================== */
+  /* SUPER POWERS — two flagship "moments" below the card   */
+  /* ====================================================== */
+
+  .super-moment {
+    max-width: 1080px;
+    margin: 0 auto 96px;
+    position: relative;
+  }
+
+  .super-moment-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 64px;
+    align-items: center;
+  }
+
+  .super-moment-inner--reversed {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  }
+
+  .super-moment-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: linear-gradient(120deg, rgba(74, 222, 128, 0.14), rgba(96, 165, 250, 0.14));
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    border-radius: 18px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .super-moment-tag svg {
+    color: #4ade80;
+  }
+
+  .super-moment-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    margin: 18px 0 16px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .super-moment-title :global(.hl) {
+    color: #4ade80;
+  }
+
+  .super-moment-desc {
+    font-size: 17px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .super-moment-desc :global(strong) {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  /* ----- Visual 1: translation ----- */
+  .translate-illu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 24px;
+  }
+
+  .translate-book {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .translate-book-cover {
+    width: 130px;
+    height: 180px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2c3a52 0%, #1f2a3d 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .translate-book--src .translate-book-cover {
+    transform: rotate(-3deg);
+  }
+
+  .translate-book--tgt .translate-book-cover {
+    transform: rotate(3deg);
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.18) 0%, rgba(34, 197, 94, 0.10) 100%);
+    border-color: rgba(74, 222, 128, 0.45);
+    box-shadow: 0 14px 32px rgba(74, 222, 128, 0.22);
+  }
+
+  .super-moment:hover .translate-book--src .translate-book-cover {
+    transform: rotate(-5deg) translateY(-3px);
+  }
+
+  .super-moment:hover .translate-book--tgt .translate-book-cover {
+    transform: rotate(5deg) translateY(-3px);
+  }
+
+  .translate-book-flag {
+    font-size: 22px;
+    line-height: 1;
+    opacity: 0.75;
+  }
+
+  .translate-book-flag--target {
+    color: #4ade80;
+    font-weight: 900;
+    font-size: 24px;
+    opacity: 1;
+  }
+
+  .translate-book-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .translate-book-line {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .translate-book-line--short {
+    width: 60%;
+  }
+
+  .translate-book--tgt .translate-book-line {
+    background: rgba(74, 222, 128, 0.5);
+  }
+
+  .translate-book-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .translate-book-label--target {
+    color: #4ade80;
+  }
+
+  .translate-magic {
+    position: relative;
+    color: #4ade80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .translate-magic-sparkle {
+    position: absolute;
+    color: #4ade80;
+    font-size: 12px;
+    opacity: 0;
+    animation: sparkle 2.6s ease-in-out infinite;
+  }
+
+  .translate-magic-sparkle--1 { top: -12px; left: 6px; animation-delay: 0s; }
+  .translate-magic-sparkle--2 { top: 6px; right: -8px; animation-delay: 0.7s; }
+  .translate-magic-sparkle--3 { bottom: -10px; left: 16px; animation-delay: 1.3s; }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0.6); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  /* ----- Visual 2: adaptation ----- */
+  .adapt-illu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 24px;
+  }
+
+  .adapt-page {
+    flex-shrink: 0;
+    width: 130px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2c3a52 0%, #1f2a3d 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+    transition: transform 0.3s ease;
+  }
+
+  .adapt-page--complex {
+    transform: rotate(-3deg);
+  }
+
+  .adapt-page--simple {
+    transform: rotate(3deg);
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.16) 0%, rgba(34, 197, 94, 0.08) 100%);
+    border-color: rgba(74, 222, 128, 0.45);
+    box-shadow: 0 14px 32px rgba(74, 222, 128, 0.22);
+  }
+
+  .super-moment:hover .adapt-page--complex {
+    transform: rotate(-5deg) translateY(-3px);
+  }
+
+  .super-moment:hover .adapt-page--simple {
+    transform: rotate(5deg) translateY(-3px);
+  }
+
+  .adapt-page-label {
+    align-self: flex-start;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .adapt-page-label--easy {
+    background: rgba(74, 222, 128, 0.18);
+    color: #4ade80;
+  }
+
+  .adapt-page-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .adapt-line {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .adapt-line--xl { width: 110%; transform: translateX(-5%); }
+  .adapt-line--l { width: 95%; }
+  .adapt-line--m { width: 70%; }
+  .adapt-line--s { width: 45%; }
+
+  .adapt-page--simple .adapt-line {
+    background: rgba(74, 222, 128, 0.55);
+    height: 5px;
+  }
+
+  .adapt-magic {
+    position: relative;
+    color: #4ade80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
   /* ----- visual: book stack ----- */
@@ -850,6 +1242,20 @@ const stackCovers = [
     .anybook-content {
       text-align: left;
     }
+
+    .super-moment {
+      margin-bottom: 64px;
+    }
+
+    .super-moment-inner,
+    .super-moment-inner--reversed {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .super-moment-inner--reversed .super-moment-visual {
+      order: -1;
+    }
   }
 
   @media (max-width: 768px) {
@@ -879,6 +1285,24 @@ const stackCovers = [
       padding: 36px 24px 32px;
       gap: 28px;
       min-height: 0;
+    }
+
+    .super-moment-title {
+      font-size: 26px;
+    }
+
+    .super-moment-desc {
+      font-size: 15px;
+    }
+
+    .translate-book-cover,
+    .adapt-page {
+      width: 108px;
+    }
+
+    .translate-book-cover {
+      height: 155px;
+      padding: 14px 12px;
     }
 
     .anybook-stack {
