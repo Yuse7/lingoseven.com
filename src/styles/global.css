@@ -306,8 +306,22 @@ h3 {
 
 .nav-links {
     display: flex;
+    align-items: center;
     list-style: none;
-    gap: 32px;
+    gap: 14px;
+}
+
+.nav-links li {
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-links li:not(:last-child)::after {
+    content: '•';
+    margin-left: 14px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.85rem;
+    line-height: 1;
 }
 
 .nav-links a {

@@ -1,7 +1,5 @@
 ---
-// Interactive parallel reader demo — loads real book content via the books2 API.
-// Uses the V2 page format (text + sentence/token offsets) and the /align endpoint
-// for word-level mappings used by the tap-highlight animation.
+// Interactive parallel reader demo — loads real book content via backend API
 interface Props {
   targetLang?: string;
   uiLang?: string;
@@ -314,79 +312,107 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
 </style>
 
 <script>
+  const S3 = 'https://lingo7.s3.eu-central-1.amazonaws.com';
   const BACKEND = 'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api';
   const BOOK = 'summary_11_A';
-  const PAGE = 0;
-  const MAX_RENDERED_ROWS = 8;
-
   const readerRoot = document.querySelector<HTMLElement>('.reader-demo');
   const TGT = readerRoot?.dataset.targetLang || 'de';
   const TRN = readerRoot?.dataset.uiLang || 'en';
 
-  // ── V2 types ──
-  // TokenV2  : { s, e, b?, i? }              offsets into block.text
-  // SentenceV2: { s, e }                      offsets into block.text
-  // BlockV2   : { style, text, sentences[], tokens[] }
-  // PairV2    : { orig: BlockV2, trans: BlockV2 }
-  // /page     → { blocks: PairV2[], generated? }
-  // /align    → { type, alignments[blockIdx][sentenceIdx] = [[origTokIdx, transTokIdx], ...] }
+  // Try S3 first, if fails trigger backend generation and poll
+  async function fetchWithGeneration(s3Url, backendUrl, options = {}) {
+    // 1. Try S3
+    try {
+      const res = await fetch(s3Url);
+      if (res.ok) return await res.json();
+    } catch (e) { /* S3 failed, try backend */ }
 
-  // ── Helpers ──
+    // 2. Trigger generation via backend
+    const res = await fetch(backendUrl);
+    if (!res.ok) throw new Error(`Backend ${res.status}`);
+    let data = await res.json();
 
-  function tokenText(block, tok) {
-    return block.text.slice(tok.s, tok.e);
-  }
+    // 3. If generating/processing, poll
+    const isReady = options.isReady || (d => d[options.statusField || 'status'] === (options.readyValue || 'ready'));
+    const pollDelay = options.pollDelay || 3000;
+    const maxPolls = options.maxPolls || 10;
 
-  /** Return global token-index range [start, end) for tokens within sentence `sentIdx` of block. */
-  function tokenRangeForSentence(block, sentIdx) {
-    const sent = block.sentences[sentIdx];
-    if (!sent) return [0, 0];
-    let start = -1;
-    let end = block.tokens.length;
-    for (let i = 0; i < block.tokens.length; i++) {
-      const t = block.tokens[i];
-      if (t.s >= sent.s && t.e <= sent.e) {
-        if (start === -1) start = i;
-      } else if (start !== -1) {
-        end = i;
-        break;
+    if (!isReady(data)) {
+      for (let i = 0; i < maxPolls; i++) {
+        await new Promise(r => setTimeout(r, pollDelay));
+        const poll = await fetch(backendUrl);
+        if (!poll.ok) continue;
+        data = await poll.json();
+        if (isReady(data)) break;
       }
     }
-    return start === -1 ? [0, 0] : [start, end];
+
+    if (!isReady(data)) throw new Error('Generation timed out');
+
+    // 4. For pages/audio: re-fetch from S3 (backend returns URLs)
+    //    For mappings: data contains elements directly
+    if (options.returnDirect) return data;
+
+    // Re-try S3 after generation
+    const s3Res = await fetch(s3Url);
+    if (s3Res.ok) return await s3Res.json();
+    throw new Error('S3 still unavailable after generation');
   }
 
-  function escapeHtml(s) {
-    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  // Reconstruct text from token array [[word, prefix, suffix], ...]
+  function tokensToText(tokens) {
+    return tokens.map(t => t[1] + t[0] + t[2]).join('');
   }
 
-  /**
-   * Render a slice of block.text [textStart, textEnd) as HTML, wrapping each token
-   * in a span and emitting any inter-token chars (punctuation, whitespace) as plain
-   * text. Token offsets in the slice are global (block.tokens index).
-   */
-  function renderRange(block, startTokenIdx, endTokenIdx, cssClass, blockIdx, textStart, textEnd) {
-    const parts = [];
-    let cursor = textStart;
-    for (let i = startTokenIdx; i < endTokenIdx; i++) {
-      const tok = block.tokens[i];
-      if (tok.s > cursor) parts.push(escapeHtml(block.text.slice(cursor, tok.s)));
-      let cls = cssClass;
-      if (tok.b) cls += ' is-bold';
-      if (tok.i) cls += ' is-italic';
-      parts.push(`<span class="${cls}" data-block="${blockIdx}" data-token="${i}">${escapeHtml(tokenText(block, tok))}</span>`);
-      cursor = tok.e;
+  // Split token array into sentences, returning words + text for each
+  function splitTokensToSentences(tokens) {
+    const sentences = [];
+    let current = [];
+    for (const t of tokens) {
+      current.push(t);
+      if (/[.!?]/.test(t[2])) {
+        sentences.push({ words: current.map(tk => tk[0]), text: tokensToText(current).trim(), tokenCount: current.length });
+        current = [];
+      }
     }
-    if (cursor < textEnd) parts.push(escapeHtml(block.text.slice(cursor, textEnd)));
-    return parts.join('');
+    if (current.length > 0) {
+      sentences.push({ words: current.map(tk => tk[0]), text: tokensToText(current).trim(), tokenCount: current.length });
+    }
+    return sentences;
   }
 
-  async function fetchJson(url) {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`${url} → ${res.status}`);
-    return res.json();
+  // Extract structured data from page JSON, tracking element/token offsets for mappings
+  function parsePage(data) {
+    let title = '';
+    let subtitle = '';
+    const sentences = []; // { words, text, elementIdx, tokenOffset }
+
+    for (let elIdx = 0; elIdx < data.elements.length; elIdx++) {
+      const el = data.elements[elIdx];
+      if (el.type === 'header') {
+        const text = tokensToText(el.data.text.tokens);
+        if (el.data.level === 1) title = text;
+        else if (!subtitle) subtitle = text;
+      } else if (el.type === 'paragraph') {
+        let tokenOffset = 0;
+        for (const textObj of el.data.texts) {
+          const sents = splitTokensToSentences(textObj.tokens);
+          for (const s of sents) {
+            sentences.push({ ...s, elementIdx: elIdx, tokenOffset });
+            tokenOffset += s.tokenCount;
+          }
+        }
+      }
+    }
+    return { title, subtitle, sentences, hash: data.hash };
   }
 
-  // ── Main load + render ──
+  // Build word-wrapped HTML for a sentence
+  function renderWords(words, cssClass) {
+    return words.map((w, i) =>
+      `<span class="${cssClass}" data-word-idx="${i}">${w}</span>`
+    ).join(' ');
+  }
 
   async function loadAndRender() {
     const container = document.getElementById('readerContent');
@@ -394,94 +420,91 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     if (!container) return;
 
     try {
-      const pageData = await fetchJson(
-        `${BACKEND}/books2/${BOOK}/page?page=${PAGE}&orig_lang=${TGT}&target_lang=${TRN}`
-      );
-      const pairs = pageData.blocks || [];
-      if (!pairs.length) throw new Error('empty page');
+      // Fetch pages: try S3 first, fall back to backend generation
+      const [targetRaw, transRaw] = await Promise.all([
+        fetchWithGeneration(
+          `${S3}/pages/${BOOK}/${TGT}/page_0.json`,
+          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${TGT}&trans_lang=${TRN}&page_index=0`
+        ),
+        fetchWithGeneration(
+          `${S3}/pages/${BOOK}/${TRN}/page_0.json`,
+          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${TRN}&trans_lang=${TGT}&page_index=0`
+        ),
+      ]);
 
-      // Pick title (first h1) and subtitle (next h2/h3) for the phone header.
-      let titleText = '';
-      for (const pair of pairs) {
-        if (pair.orig.style === 'h1') { titleText = pair.orig.text; break; }
-      }
-      titleEl.textContent = titleText.length > 22
-        ? titleText.slice(0, 20) + '…'
-        : (titleText || 'Reading');
+      const targetData = parsePage(targetRaw);
+      const transData = parsePage(transRaw);
 
-      // Build HTML. Each block is rendered fully (one row per sentence-pair for p/quote/li,
-      // one row total for header styles). Cap total rows for the compact demo view.
+      // Set header title (truncated)
+      titleEl.textContent = targetData.title.length > 22
+        ? targetData.title.slice(0, 20) + '…'
+        : targetData.title;
+
+      // Build content HTML
       let html = '';
-      let rowCount = 0;
-      const sentenceRows = []; // {blockIdx, sentIdx, origRange:[s,e], transRange:[s,e]}
 
-      for (let bIdx = 0; bIdx < pairs.length && rowCount < MAX_RENDERED_ROWS; bIdx++) {
-        const { orig, trans } = pairs[bIdx];
-        const style = orig.style;
-        const isHeader = style === 'h1' || style === 'h2' || style === 'h3';
+      if (targetData.title) {
+        html += `<div class="reader__chapter">${targetData.title}</div>`;
+        html += `<div class="reader__chapter-trans">${transData.title}</div>`;
+      }
 
-        if (isHeader) {
-          // Render header block as a single centered chapter/subchapter row.
-          const origCls = style === 'h1' ? 'reader__chapter' : 'reader__subchapter';
-          const transCls = style === 'h1' ? 'reader__chapter-trans' : 'reader__subchapter-trans';
-          html += `<div class="${origCls}">${escapeHtml(orig.text)}</div>`;
-          html += `<div class="${transCls}">${escapeHtml(trans.text)}</div>`;
-          rowCount++;
-          continue;
-        }
+      if (targetData.subtitle) {
+        html += `<div class="reader__subchapter">${targetData.subtitle}</div>`;
+        html += `<div class="reader__subchapter-trans">${transData.subtitle}</div>`;
+      }
 
-        // Paragraph / quote / list / idea / desc — split into sentence rows.
-        const sentCount = Math.min(orig.sentences.length, trans.sentences.length);
-        for (let sIdx = 0; sIdx < sentCount && rowCount < MAX_RENDERED_ROWS; sIdx++) {
-          const origRange = tokenRangeForSentence(orig, sIdx);
-          const transRange = tokenRangeForSentence(trans, sIdx);
-          const origSent = orig.sentences[sIdx];
-          const transSent = trans.sentences[sIdx];
-          html += `<div class="reader__pair" data-row="${rowCount}">`;
-          html += `<p class="reader__en" data-line="${rowCount}">${renderRange(orig, origRange[0], origRange[1], 'reader__word', bIdx, origSent.s, origSent.e)}</p>`;
-          html += `<p class="reader__trans" data-line="${rowCount}">${renderRange(trans, transRange[0], transRange[1], 'reader__trans-word', bIdx, transSent.s, transSent.e)}</p>`;
-          html += `</div>`;
-          sentenceRows.push({ blockIdx: bIdx, sentIdx: sIdx, origRange, transRange });
-          rowCount++;
-        }
+      const maxSentences = Math.min(targetData.sentences.length, transData.sentences.length, 8);
+      for (let i = 0; i < maxSentences; i++) {
+        const tgt = targetData.sentences[i];
+        const tr = transData.sentences[i];
+        html += `<div class="reader__pair">`;
+        html += `<p class="reader__en" data-line="${i}">${renderWords(tgt.words, 'reader__word')}</p>`;
+        html += `<p class="reader__trans" data-line="${i}">${renderWords(tr.words, 'reader__trans-word')}</p>`;
+        html += `</div>`;
       }
 
       container.innerHTML = html;
 
-      // Fetch alignments (best-effort — animation works without them too).
-      let alignments = null;
+      // Load mappings: needs page hashes
+      let mappings = null;
       try {
-        const alignData = await fetchJson(
-          `${BACKEND}/books2/${BOOK}/align?page=${PAGE}&orig_lang=${TGT}&target_lang=${TRN}`
+        const origHash = targetRaw.hash;
+        const transHash = transRaw.hash;
+        const contentHash = origHash + transHash; // 8 chars
+
+        mappings = await fetchWithGeneration(
+          `${S3}/mappings/${BOOK}/${TGT}_${TRN}/page_0_${contentHash}.json`,
+          `${BACKEND}/book/mappings?book_code=${BOOK}&orig_lang=${TGT}&trans_lang=${TRN}&page_index=0&content_hash=${contentHash}`,
+          {
+            isReady: d => d.type !== 'processing',
+            returnDirect: true,
+          }
         );
-        alignments = alignData.alignments;
       } catch (e) {
-        console.warn('ReaderDemo: align unavailable', e);
+        console.warn('ReaderDemo: mappings unavailable', e);
       }
 
-      // Show listen indicator and start animation.
-      const listenBtn = document.querySelector<HTMLElement>('.reader__listen');
-      if (listenBtn) listenBtn.style.display = '';
-      startFingerAnimation(sentenceRows, alignments);
+      // Show listen button and start animation
+      document.querySelector('.reader__listen').style.display = '';
+      startFingerAnimation(targetData.sentences, transData.sentences, mappings, maxSentences);
     } catch (e) {
       console.error('ReaderDemo: failed to load book data', e);
     }
   }
 
-  // ── Animation (finger tapping word-by-word with mapping highlights) ──
-
-  function startFingerAnimation(sentenceRows, alignments) {
-    const lines = document.querySelectorAll<HTMLElement>('#readerContent .reader__en[data-line]');
-    const transLines = document.querySelectorAll<HTMLElement>('#readerContent .reader__trans[data-line]');
+  function startFingerAnimation(targetSentences, transSentences, mappings, count) {
+    const lines = document.querySelectorAll('#readerContent .reader__en[data-line]');
+    const transLines = document.querySelectorAll('#readerContent .reader__trans[data-line]');
     const container = document.getElementById('readerContent');
     const finger = document.getElementById('readerFinger');
     const reader = document.getElementById('readerRoot');
-    if (!lines.length || !container || !sentenceRows.length) return;
+    if (!lines.length || !container) return;
 
     const WORD_DELAY = 300;
     const LINE_PAUSE = 500;
     const TAP_HIGHLIGHT_DURATION = 1800;
 
+    // Pick tap word indices: every 5-6 words, prefer words >= 5 chars
     function pickTapWordIndices(words) {
       const indices = [];
       let nextEligible = 3;
@@ -520,20 +543,21 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
       }
     }
 
-    /**
-     * Given a tap on an orig word, find which trans token spans should be highlighted.
-     * Token indices in alignments are global within the block.
-     */
-    function getAlignedTransTokenIdxs(rowIdx, origWordPos) {
-      if (!alignments) return [];
-      const row = sentenceRows[rowIdx];
-      if (!row) return [];
-      const pairs = alignments[row.blockIdx]?.[row.sentIdx];
-      if (!pairs) return [];
-      const origGlobal = row.origRange[0] + origWordPos;
-      return pairs
-        .filter(p => p[0] === origGlobal)
-        .map(p => p[1]);
+    function getTransIndices(sentenceIdx, wordIdx) {
+      if (!mappings) return [];
+      const sent = targetSentences[sentenceIdx];
+      if (!sent) return [];
+      const elMappings = mappings.elements[sent.elementIdx];
+      if (!elMappings || !elMappings[0]) return [];
+      const globalWordIdx = sent.tokenOffset + wordIdx;
+      const mapping = elMappings[0][globalWordIdx];
+      if (!mapping) return [];
+      const transSent = transSentences[sentenceIdx];
+      if (!transSent) return [];
+      const transOffset = transSent.tokenOffset;
+      return mapping[0]
+        .map(idx => idx - transOffset)
+        .filter(idx => idx >= 0 && idx < transSent.words.length);
     }
 
     let lineIdx = 0;
@@ -541,10 +565,9 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     function readLine() {
       const line = lines[lineIdx];
       const transLine = transLines[lineIdx];
-      const words = line.querySelectorAll<HTMLElement>('.reader__word');
-      const transWords = transLine ? transLine.querySelectorAll<HTMLElement>('.reader__trans-word') : [];
+      const words = line.querySelectorAll('.reader__word');
+      const transWords = transLine ? transLine.querySelectorAll('.reader__trans-word') : [];
       const tapWordIndices = pickTapWordIndices(words);
-      const row = sentenceRows[lineIdx];
 
       line.classList.add('is-reading');
       scrollToLine(line);
@@ -558,7 +581,7 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
           setTimeout(() => {
             line.classList.remove('is-reading');
             lineIdx++;
-            if (lineIdx >= sentenceRows.length) {
+            if (lineIdx >= count) {
               lineIdx = 0;
               container.scrollTo({ top: 0, behavior: 'smooth' });
               setTimeout(readLine, 1000);
@@ -575,26 +598,22 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
 
         if (tapWordIndices.includes(wordIdx) && !tapping) {
           tapping = true;
-          // Map this orig word's position-in-sentence to global token idx, then alignments.
-          const transTokenIdxs = getAlignedTransTokenIdxs(lineIdx, wordIdx);
-          const transWordPositions = row
-            ? transTokenIdxs
-                .map(globalIdx => globalIdx - row.transRange[0])
-                .filter(pos => pos >= 0 && pos < transWords.length)
-            : [];
+          const transIdxs = getTransIndices(lineIdx, wordIdx);
           setTimeout(() => {
             finger.classList.add('is-tapping');
             setTimeout(() => finger.classList.remove('is-tapping'), 500);
+            // Highlight after finger presses down
             setTimeout(() => {
               wordEl.classList.add('is-tapped');
-              for (const pos of transWordPositions) {
-                transWords[pos]?.classList.add('is-trans-highlighted');
+              for (const ti of transIdxs) {
+                if (transWords[ti]) transWords[ti].classList.add('is-trans-highlighted');
               }
             }, 250);
+            // Hold, then clear and continue
             setTimeout(() => {
               wordEl.classList.remove('is-tapped');
-              for (const pos of transWordPositions) {
-                transWords[pos]?.classList.remove('is-trans-highlighted');
+              for (const ti of transIdxs) {
+                if (transWords[ti]) transWords[ti].classList.remove('is-trans-highlighted');
               }
               tapping = false;
               wordIdx++;
@@ -611,7 +630,7 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
       moveToWord();
     }
 
-    // Start only when the phone scrolls into view.
+    // Start only when the phone scrolls into view, with no initial delay.
     const demoEl = document.querySelector('.reader-demo');
     if (!demoEl || !('IntersectionObserver' in window)) {
       readLine();

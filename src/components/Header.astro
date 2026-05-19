@@ -17,10 +17,9 @@ interface Props {
 const { translations, uiLang = 'en', uiLanguages, showNav = false, blogUrl } = Astro.props;
 const blogLabel = translations?.['blog_nav'] ?? 'Blog';
 
-const navFeatures = translations?.['nav_features'] ?? 'Features';
-const navHowItWorks = translations?.['nav_how_it_works'] ?? 'How it works';
-const navReviews = translations?.['nav_reviews'] ?? 'Reviews';
-const navFaq = translations?.['nav_faq'] ?? 'FAQ';
+const navFeatures = translations?.['nav_features'] ?? 'Parallel reading';
+const navAudio = translations?.['nav_audio'] ?? 'Audio';
+const navPractice = translations?.['nav_practice'] ?? 'Spaced Repetition';
 
 const currentLang = uiLanguages?.find((l) => l.code === uiLang);
 ---
@@ -34,9 +33,8 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
     {showNav && (
       <ul class="nav-links">
         <li><a href="#features">{navFeatures}</a></li>
-        <li><a href="#how-it-works">{navHowItWorks}</a></li>
-        <li><a href="#testimonials">{navReviews}</a></li>
-        <li><a href="#faq">{navFaq}</a></li>
+        <li><a href="#audio">{navAudio}</a></li>
+        <li><a href="#practice">{navPractice}</a></li>
       </ul>
     )}
 
