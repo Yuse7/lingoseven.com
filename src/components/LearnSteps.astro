@@ -21,7 +21,7 @@ const steps = [
   <div class="container">
     <div class="section-header">
       <span class="section-tag">{t('steps_tag')}</span>
-      <h2>{t('steps_title')}</h2>
+      <h2 set:html={t('steps_title')}></h2>
       <p>{t('steps_subtitle')}</p>
     </div>
     <div class="learn-steps-list">

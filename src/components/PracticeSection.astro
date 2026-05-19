@@ -30,11 +30,11 @@ const typedPrefix = usedChars.join('');
 ---
 
 <!-- Spaced Repetition Practice -->
-<section class="practice-section">
+<section id="practice" class="practice-section">
     <div class="container">
         <div class="practice-header">
             <span class="section-tag section-tag--purple">{t('practice_tag')}</span>
-            <h2>{t('practice_title')}</h2>
+            <h2 set:html={t('practice_title')}></h2>
             <p class="practice-subtitle">{t('practice_subtitle')}</p>
         </div>
 

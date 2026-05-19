@@ -28,6 +28,32 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Green highlight for key words inside headings */
+.hl {
+    color: var(--primary);
+}
+
+/* Pulse highlight when navigating to a section via hero badges */
+.section-highlight {
+    animation: section-highlight-pulse 1.8s ease-out;
+    border-radius: 24px;
+}
+
+@keyframes section-highlight-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 transparent;
+    }
+    20% {
+        box-shadow: 0 0 60px 6px var(--highlight-color, rgba(74, 222, 128, 0.22));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section-highlight {
+        animation: none;
+    }
+}
+
 /* Google Translate Widget - кастомизация */
 .language-selector {
     display: flex;

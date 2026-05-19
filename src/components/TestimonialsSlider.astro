@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
     <div class="container">
         <div class="section-header">
             <span class="section-tag">{t('testimonials_tag')}</span>
-            <h2>{t('testimonials_title')}</h2>
+            <h2 set:html={t('testimonials_title')}></h2>
             <p>{t('testimonials_subtitle')}</p>
         </div>
     </div>

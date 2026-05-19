@@ -19,13 +19,11 @@ function t(key: string): string {
           <span class="hero-pill-dot"></span>
           {t('learn_hero_pill')}
         </div>
-        <h1 class="hero-title-modern">
-          {t('hero_title')}
-        </h1>
+        <h1 class="hero-title-modern" set:html={t('hero_title')}></h1>
         <div class="hero-badges">
-          <span class="hero-badge badge-green">{t('features_slider_tag')}</span>
-          <span class="hero-badge badge-amber">{t('audio_tag')}</span>
-          <span class="hero-badge badge-purple">{t('practice_tag')}</span>
+          <a href="#features" class="hero-badge badge-green" data-highlight-color="rgba(74, 222, 128, 0.22)">{t('features_slider_tag')}</a>
+          <a href="#audio" class="hero-badge badge-amber" data-highlight-color="rgba(251, 191, 36, 0.22)">{t('audio_tag')}</a>
+          <a href="#practice" class="hero-badge badge-purple" data-highlight-color="rgba(165, 180, 252, 0.22)">{t('practice_tag')}</a>
         </div>
         <div class="hero-cta">
           <a href="https://apps.apple.com/app/id6471030440" class="btn btn-primary btn-large">
@@ -73,6 +71,24 @@ function t(key: string): string {
     font-size: 0.875rem;
     font-weight: 600;
     white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .hero-badge:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.18);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  }
+
+  .hero-badge:active {
+    transform: translateY(0);
+  }
+
+  .hero-badge:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
   }
 
   .hero-badge::before {
@@ -123,3 +139,22 @@ function t(key: string): string {
     }
   }
 </style>
+
+<script>
+  const badges = document.querySelectorAll<HTMLAnchorElement>('.hero-badges .hero-badge');
+  badges.forEach((badge) => {
+    badge.addEventListener('click', () => {
+      const href = badge.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const section = document.querySelector<HTMLElement>(href);
+      if (!section) return;
+      const target = section.querySelector<HTMLElement>(':scope > .container') || section;
+      const color = badge.dataset.highlightColor;
+      if (color) target.style.setProperty('--highlight-color', color);
+      target.classList.remove('section-highlight');
+      void target.offsetWidth; // restart animation
+      target.classList.add('section-highlight');
+      window.setTimeout(() => target.classList.remove('section-highlight'), 1900);
+    });
+  });
+</script>

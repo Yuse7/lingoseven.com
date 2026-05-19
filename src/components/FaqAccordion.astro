@@ -18,7 +18,7 @@ const items = [1, 2, 3, 4, 5];
     <div class="container">
         <div class="section-header">
             <span class="section-tag">{t('faq2_tag')}</span>
-            <h2>{t('faq2_title')}</h2>
+            <h2 set:html={t('faq2_title')}></h2>
             <p>{t('faq2_subtitle')}</p>
         </div>
         <div class="faq-list">

@@ -22,12 +22,12 @@ function t(key: string): string {
 ---
 
 <!-- Audio Books -->
-<section class="audio-section">
+<section id="audio" class="audio-section">
     <div class="container">
         <div class="audio-content">
             <div class="audio-text">
                 <span class="section-tag section-tag--amber">{t('audio_tag')}</span>
-                <h2>{t('audio_title')}</h2>
+                <h2 set:html={t('audio_title')}></h2>
                 <p>{t('audio_subtitle')}</p>
                 <ul class="audio-benefits">
                     <li set:html={t('audio_benefit_native')}></li>

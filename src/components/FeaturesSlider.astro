@@ -31,7 +31,7 @@ function t(key: string): string {
             </div>
             <div class="parallel-reading-text">
                 <span class="section-tag">{t('features_slider_tag')}</span>
-                <h2>{t('features_slider_title')}</h2>
+                <h2 set:html={t('features_slider_title')}></h2>
                 <p>{t('features_slider_description')}</p>
                 <ul class="parallel-reading-benefits">
                     <li set:html={t('features_slider_benefit1')}></li>

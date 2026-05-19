@@ -16,7 +16,7 @@ function t(key: string): string {
     <div class="container">
         <div class="section-header">
             <span class="section-tag">{t('how_tag')}</span>
-            <h2>{t('how_title')}</h2>
+            <h2 set:html={t('how_title')}></h2>
             <p>{t('how_subtitle')}</p>
         </div>
         <div class="steps-detailed">

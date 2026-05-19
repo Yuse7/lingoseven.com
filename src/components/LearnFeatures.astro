@@ -24,7 +24,7 @@ const features = [
   <div class="container">
     <div class="section-header">
       <span class="section-tag">{t('features_tag')}</span>
-      <h2>{t('features_title')}</h2>
+      <h2 set:html={t('features_title')}></h2>
       <p>{t('features_subtitle')}</p>
     </div>
     <div class="learn-features-grid">

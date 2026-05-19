@@ -235,9 +235,9 @@ const stackCovers = [
     </div>
 
     <!-- ============================================ -->
-    <!-- SUPER POWER #1 — auto-translation             -->
+    <!-- SUPER POWER #1 — adapt to your level          -->
     <!-- ============================================ -->
-    <div class="super-moment super-moment--translate">
+    <div class="super-moment super-moment--adapt">
       <div class="super-moment-inner">
         <div class="super-moment-content">
           <span class="super-moment-tag">
@@ -246,10 +246,54 @@ const stackCovers = [
             </svg>
             <span>{t('library_super_tag')}</span>
           </span>
-          <h3 class="super-moment-title" set:html={t('library_super1_title')}></h3>
-          <p class="super-moment-desc" set:html={t('library_super1_desc')}></p>
+          <h3 class="super-moment-title" set:html={t('library_super2_title')}></h3>
+          <p class="super-moment-desc" set:html={t('library_super2_desc')}></p>
         </div>
 
+        <div class="super-moment-visual" aria-hidden="true">
+          <div class="adapt-illu">
+            <div class="adapt-page adapt-page--complex">
+              <span class="adapt-page-label adapt-page-label--hard">{t('library_super_visual_hard')}</span>
+              <div class="adapt-page-text">
+                <div class="adapt-line adapt-line--xl"></div>
+                <div class="adapt-line adapt-line--xl"></div>
+                <div class="adapt-line adapt-line--l"></div>
+                <div class="adapt-line adapt-line--xl"></div>
+                <div class="adapt-line adapt-line--m"></div>
+                <div class="adapt-line adapt-line--xl"></div>
+                <div class="adapt-line adapt-line--s"></div>
+              </div>
+            </div>
+
+            <div class="adapt-magic">
+              <svg width="48" height="32" viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 16h36"/>
+                <path d="M32 8l8 8-8 8"/>
+              </svg>
+              <div class="translate-magic-sparkle translate-magic-sparkle--1">✦</div>
+              <div class="translate-magic-sparkle translate-magic-sparkle--2">✦</div>
+              <div class="translate-magic-sparkle translate-magic-sparkle--3">✦</div>
+            </div>
+
+            <div class="adapt-page adapt-page--simple">
+              <span class="adapt-page-label adapt-page-label--easy">{t('library_super_visual_easy')}</span>
+              <div class="adapt-page-text">
+                <div class="adapt-line"></div>
+                <div class="adapt-line adapt-line--m"></div>
+                <div class="adapt-line"></div>
+                <div class="adapt-line adapt-line--s"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SUPER POWER #2 — auto-translation             -->
+    <!-- ============================================ -->
+    <div class="super-moment super-moment--translate">
+      <div class="super-moment-inner super-moment-inner--reversed">
         <div class="super-moment-visual" aria-hidden="true">
           <div class="translate-illu">
             <div class="translate-book translate-book--src">
@@ -289,50 +333,6 @@ const stackCovers = [
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- SUPER POWER #2 — adapt to your level          -->
-    <!-- ============================================ -->
-    <div class="super-moment super-moment--adapt">
-      <div class="super-moment-inner super-moment-inner--reversed">
-        <div class="super-moment-visual" aria-hidden="true">
-          <div class="adapt-illu">
-            <div class="adapt-page adapt-page--complex">
-              <span class="adapt-page-label adapt-page-label--hard">{t('library_super_visual_hard')}</span>
-              <div class="adapt-page-text">
-                <div class="adapt-line adapt-line--xl"></div>
-                <div class="adapt-line adapt-line--xl"></div>
-                <div class="adapt-line adapt-line--l"></div>
-                <div class="adapt-line adapt-line--xl"></div>
-                <div class="adapt-line adapt-line--m"></div>
-                <div class="adapt-line adapt-line--xl"></div>
-                <div class="adapt-line adapt-line--s"></div>
-              </div>
-            </div>
-
-            <div class="adapt-magic">
-              <svg width="48" height="32" viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 16h36"/>
-                <path d="M32 8l8 8-8 8"/>
-              </svg>
-              <div class="translate-magic-sparkle translate-magic-sparkle--1">✦</div>
-              <div class="translate-magic-sparkle translate-magic-sparkle--2">✦</div>
-              <div class="translate-magic-sparkle translate-magic-sparkle--3">✦</div>
-            </div>
-
-            <div class="adapt-page adapt-page--simple">
-              <span class="adapt-page-label adapt-page-label--easy">{t('library_super_visual_easy')}</span>
-              <div class="adapt-page-text">
-                <div class="adapt-line"></div>
-                <div class="adapt-line adapt-line--m"></div>
-                <div class="adapt-line"></div>
-                <div class="adapt-line adapt-line--s"></div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <div class="super-moment-content">
           <span class="super-moment-tag">
@@ -341,8 +341,8 @@ const stackCovers = [
             </svg>
             <span>{t('library_super_tag')}</span>
           </span>
-          <h3 class="super-moment-title" set:html={t('library_super2_title')}></h3>
-          <p class="super-moment-desc" set:html={t('library_super2_desc')}></p>
+          <h3 class="super-moment-title" set:html={t('library_super1_title')}></h3>
+          <p class="super-moment-desc" set:html={t('library_super1_desc')}></p>
         </div>
       </div>
     </div>
