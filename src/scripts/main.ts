@@ -1,3 +1,5 @@
+console.log('[lingo7] site build: 2026-05-20 — adaptation copy v2');
+
 // ========== Platform-aware CTA buttons ==========
 // Highlight App Store button on iOS/macOS, Google Play on Android.
 // Other platforms keep the default (App Store primary).
