@@ -316,8 +316,13 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
   const BACKEND = 'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api';
   const BOOK = 'summary_11_A';
   const readerRoot = document.querySelector<HTMLElement>('.reader-demo');
-  const TGT = readerRoot?.dataset.targetLang || 'de';
-  const TRN = readerRoot?.dataset.uiLang || 'en';
+  const INITIAL_TGT = readerRoot?.dataset.targetLang || 'de';
+  const INITIAL_TRN = readerRoot?.dataset.uiLang || 'en';
+
+  // Cancellation token: every load bumps this; running setTimeouts bail if stale.
+  let currentRequestId = 0;
+  // First reveal waits for viewport intersection; subsequent reloads start immediately.
+  let hasRevealed = false;
 
   // Try S3 first, if fails trigger backend generation and poll
   async function fetchWithGeneration(s3Url, backendUrl, options = {}) {
@@ -414,23 +419,33 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     ).join(' ');
   }
 
-  async function loadAndRender() {
+  async function loadAndRender(tgtLang, trnLang) {
+    const requestId = ++currentRequestId;
     const container = document.getElementById('readerContent');
     const titleEl = document.getElementById('readerTitle');
     if (!container) return;
+
+    // Reset UI for new render
+    container.innerHTML = '<div class="reader__loading">Loading…</div>';
+    if (titleEl) titleEl.textContent = 'Loading…';
+    const listenBtn = document.querySelector<HTMLElement>('.reader__listen');
+    if (listenBtn) listenBtn.style.display = 'none';
+    const fingerEl = document.getElementById('readerFinger');
+    if (fingerEl) fingerEl.classList.remove('is-visible');
 
     try {
       // Fetch pages: try S3 first, fall back to backend generation
       const [targetRaw, transRaw] = await Promise.all([
         fetchWithGeneration(
-          `${S3}/pages/${BOOK}/${TGT}/page_0.json`,
-          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${TGT}&trans_lang=${TRN}&page_index=0`
+          `${S3}/pages/${BOOK}/${tgtLang}/page_0.json`,
+          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${tgtLang}&trans_lang=${trnLang}&page_index=0`
         ),
         fetchWithGeneration(
-          `${S3}/pages/${BOOK}/${TRN}/page_0.json`,
-          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${TRN}&trans_lang=${TGT}&page_index=0`
+          `${S3}/pages/${BOOK}/${trnLang}/page_0.json`,
+          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${trnLang}&trans_lang=${tgtLang}&page_index=0`
         ),
       ]);
+      if (requestId !== currentRequestId) return;
 
       const targetData = parsePage(targetRaw);
       const transData = parsePage(transRaw);
@@ -473,8 +488,8 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
         const contentHash = origHash + transHash; // 8 chars
 
         mappings = await fetchWithGeneration(
-          `${S3}/mappings/${BOOK}/${TGT}_${TRN}/page_0_${contentHash}.json`,
-          `${BACKEND}/book/mappings?book_code=${BOOK}&orig_lang=${TGT}&trans_lang=${TRN}&page_index=0&content_hash=${contentHash}`,
+          `${S3}/mappings/${BOOK}/${tgtLang}_${trnLang}/page_0_${contentHash}.json`,
+          `${BACKEND}/book/mappings?book_code=${BOOK}&orig_lang=${tgtLang}&trans_lang=${trnLang}&page_index=0&content_hash=${contentHash}`,
           {
             isReady: d => d.type !== 'processing',
             returnDirect: true,
@@ -483,16 +498,19 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
       } catch (e) {
         console.warn('ReaderDemo: mappings unavailable', e);
       }
+      if (requestId !== currentRequestId) return;
 
       // Show listen button and start animation
-      document.querySelector('.reader__listen').style.display = '';
-      startFingerAnimation(targetData.sentences, transData.sentences, mappings, maxSentences);
+      if (listenBtn) listenBtn.style.display = '';
+      startFingerAnimation(targetData.sentences, transData.sentences, mappings, maxSentences, requestId);
     } catch (e) {
+      if (requestId !== currentRequestId) return;
       console.error('ReaderDemo: failed to load book data', e);
     }
   }
 
-  function startFingerAnimation(targetSentences, transSentences, mappings, count) {
+  function startFingerAnimation(targetSentences, transSentences, mappings, count, requestId) {
+    const isStale = () => requestId !== currentRequestId;
     const lines = document.querySelectorAll('#readerContent .reader__en[data-line]');
     const transLines = document.querySelectorAll('#readerContent .reader__trans[data-line]');
     const container = document.getElementById('readerContent');
@@ -563,6 +581,7 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     let lineIdx = 0;
 
     function readLine() {
+      if (isStale()) return;
       const line = lines[lineIdx];
       const transLine = transLines[lineIdx];
       const words = line.querySelectorAll('.reader__word');
@@ -576,9 +595,11 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
       let tapping = false;
 
       function moveToWord() {
+        if (isStale()) return;
         if (wordIdx >= words.length) {
           finger.classList.remove('is-visible');
           setTimeout(() => {
+            if (isStale()) return;
             line.classList.remove('is-reading');
             lineIdx++;
             if (lineIdx >= count) {
@@ -600,10 +621,12 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
           tapping = true;
           const transIdxs = getTransIndices(lineIdx, wordIdx);
           setTimeout(() => {
+            if (isStale()) return;
             finger.classList.add('is-tapping');
-            setTimeout(() => finger.classList.remove('is-tapping'), 500);
+            setTimeout(() => { if (!isStale()) finger.classList.remove('is-tapping'); }, 500);
             // Highlight after finger presses down
             setTimeout(() => {
+              if (isStale()) return;
               wordEl.classList.add('is-tapped');
               for (const ti of transIdxs) {
                 if (transWords[ti]) transWords[ti].classList.add('is-trans-highlighted');
@@ -611,6 +634,7 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
             }, 250);
             // Hold, then clear and continue
             setTimeout(() => {
+              if (isStale()) return;
               wordEl.classList.remove('is-tapped');
               for (const ti of transIdxs) {
                 if (transWords[ti]) transWords[ti].classList.remove('is-trans-highlighted');
@@ -630,9 +654,10 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
       moveToWord();
     }
 
-    // Start only when the phone scrolls into view, with no initial delay.
+    // First reveal waits for the phone to enter viewport; reloads run immediately.
     const demoEl = document.querySelector('.reader-demo');
-    if (!demoEl || !('IntersectionObserver' in window)) {
+    if (hasRevealed || !demoEl || !('IntersectionObserver' in window)) {
+      hasRevealed = true;
       readLine();
       return;
     }
@@ -640,6 +665,8 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
       for (const entry of entries) {
         if (entry.isIntersecting) {
           obs.disconnect();
+          if (isStale()) return;
+          hasRevealed = true;
           readLine();
           break;
         }
@@ -648,5 +675,11 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     io.observe(demoEl);
   }
 
-  loadAndRender();
+  // Expose a reload hook for FeaturesSlider's inline language dropdown.
+  // Reloading keeps targetLang (the book language) but swaps the translation language.
+  window.__lingoseven_reloadReader = function (newTrnLang) {
+    loadAndRender(INITIAL_TGT, newTrnLang);
+  };
+
+  loadAndRender(INITIAL_TGT, INITIAL_TRN);
 </script>

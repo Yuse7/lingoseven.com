@@ -1,5 +1,7 @@
 ---
 import ReaderDemo from './ReaderDemo.astro';
+import { getEnabledLanguages } from '../data/languages';
+import { languageNames } from '../data/languageNames';
 
 interface Props {
   targetLangName?: string;
@@ -16,10 +18,41 @@ const {
   translations = {},
 } = Astro.props;
 
+function tTpl(key: string): string {
+  return (translations[key] || key).replace(/{targetLang}/g, targetLangName);
+}
 function t(key: string): string {
   const val = translations[key] || key;
   return val.replace(/{targetLang}/g, targetLangName).replace(/{uiLang}/g, uiLangName);
 }
+
+// Build dropdown languages list with names localized in current uiLang
+const enabled = getEnabledLanguages();
+const dropdownLanguages = enabled
+  .filter((lang) => lang.code !== targetLang)
+  .map((lang) => ({
+    code: lang.code,
+    name: languageNames[uiLang]?.[lang.code] ?? languageNames['en']?.[lang.code] ?? lang.name,
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name, uiLang));
+
+// Split title around the first {uiLang} so the inline dropdown sits in H2
+const titleTpl = tTpl('features_slider_title');
+const uiPlaceholderIdx = titleTpl.indexOf('{uiLang}');
+const titleBefore = uiPlaceholderIdx >= 0 ? titleTpl.slice(0, uiPlaceholderIdx) : titleTpl;
+const titleAfter = uiPlaceholderIdx >= 0 ? titleTpl.slice(uiPlaceholderIdx + '{uiLang}'.length) : '';
+
+// Raw {uiLang} templates for client-side substitution (description + benefits)
+const descTpl = tTpl('features_slider_description');
+const benefit1Tpl = tTpl('features_slider_benefit1');
+const benefit2Tpl = tTpl('features_slider_benefit2');
+const benefit3Tpl = tTpl('features_slider_benefit3');
+
+// Code -> localized name lookup (current uiLang locale, serialized for client)
+const langNameMap: Record<string, string> = {};
+for (const lang of dropdownLanguages) langNameMap[lang.code] = lang.name;
+langNameMap[uiLang] = uiLangName;
+const langNameMapJson = JSON.stringify(langNameMap);
 ---
 
 <!-- Parallel Reading -->
@@ -31,17 +64,127 @@ function t(key: string): string {
             </div>
             <div class="parallel-reading-text">
                 <span class="section-tag">{t('features_slider_tag')}</span>
-                <h2 set:html={t('features_slider_title')}></h2>
-                <p>{t('features_slider_description')}</p>
+                <h2 class="features-slider-title">
+                    <Fragment set:html={titleBefore} />
+                    <button type="button" class="ui-lang-trigger" id="uiLangTrigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="uiLangMenu" data-lang-names={langNameMapJson}>
+                        <span class="ui-lang-name" id="uiLangName">{uiLangName}</span>
+                        <svg class="ui-lang-arrow" width="14" height="14" viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <Fragment set:html={titleAfter} />
+                </h2>
+                <ul id="uiLangMenu" class="ui-lang-menu" role="listbox" hidden>
+                    {dropdownLanguages.map((lang) => (
+                        <li role="option" class={lang.code === uiLang ? 'is-selected' : ''} data-code={lang.code} tabindex="-1">{lang.name}</li>
+                    ))}
+                </ul>
+                <p id="featuresDesc" data-tpl={descTpl}>{t('features_slider_description')}</p>
                 <ul class="parallel-reading-benefits">
-                    <li set:html={t('features_slider_benefit1')}></li>
-                    <li set:html={t('features_slider_benefit2')}></li>
-                    <li set:html={t('features_slider_benefit3')}></li>
+                    <li id="featuresBenefit1" data-tpl={benefit1Tpl} set:html={t('features_slider_benefit1')}></li>
+                    <li id="featuresBenefit2" data-tpl={benefit2Tpl} set:html={t('features_slider_benefit2')}></li>
+                    <li id="featuresBenefit3" data-tpl={benefit3Tpl} set:html={t('features_slider_benefit3')}></li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+  (function () {
+    const trigger = document.getElementById('uiLangTrigger');
+    const menu = document.getElementById('uiLangMenu');
+    const nameEl = document.getElementById('uiLangName');
+    const desc = document.getElementById('featuresDesc');
+    const b1 = document.getElementById('featuresBenefit1');
+    const b2 = document.getElementById('featuresBenefit2');
+    const b3 = document.getElementById('featuresBenefit3');
+    if (!trigger || !menu || !nameEl || !desc || !b1 || !b2 || !b3) return;
+
+    const rawLangMap = trigger.getAttribute('data-lang-names') || '{}';
+    let langNameMap = {};
+    try { langNameMap = JSON.parse(rawLangMap); } catch (e) { return; }
+
+    const descTpl = desc.getAttribute('data-tpl') || '';
+    const b1Tpl = b1.getAttribute('data-tpl') || '';
+    const b2Tpl = b2.getAttribute('data-tpl') || '';
+    const b3Tpl = b3.getAttribute('data-tpl') || '';
+
+    function fillUiLang(tpl, name) {
+      return tpl.split('{uiLang}').join(name);
+    }
+
+    const positionContainer = trigger.closest('.parallel-reading-text');
+
+    function positionMenu() {
+      if (!positionContainer) return;
+      const tr = trigger.getBoundingClientRect();
+      const cr = positionContainer.getBoundingClientRect();
+      menu.style.top = (tr.bottom - cr.top + 8) + 'px';
+      menu.style.left = (tr.left - cr.left) + 'px';
+    }
+
+    function openMenu() {
+      positionMenu();
+      menu.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      const selected = menu.querySelector('li.is-selected');
+      if (selected) selected.scrollIntoView({ block: 'nearest' });
+    }
+    function closeMenu() {
+      menu.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+    function toggleMenu() { if (menu.hidden) openMenu(); else closeMenu(); }
+
+    window.addEventListener('resize', function () { if (!menu.hidden) positionMenu(); });
+    window.addEventListener('scroll', function () { if (!menu.hidden) positionMenu(); }, { passive: true });
+
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    document.addEventListener('click', function (e) {
+      if (menu.hidden) return;
+      const t = e.target;
+      if (trigger.contains(t) || menu.contains(t)) return;
+      closeMenu();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !menu.hidden) {
+        closeMenu();
+        trigger.focus();
+      }
+    });
+
+    menu.addEventListener('click', function (e) {
+      const li = e.target.closest('li[data-code]');
+      if (!li) return;
+      const code = li.getAttribute('data-code');
+      if (code) setLanguage(code);
+      closeMenu();
+      trigger.focus();
+    });
+
+    function setLanguage(code) {
+      const name = langNameMap[code];
+      if (!name) return;
+      nameEl.textContent = name;
+      desc.textContent = fillUiLang(descTpl, name);
+      b1.innerHTML = fillUiLang(b1Tpl, name);
+      b2.innerHTML = fillUiLang(b2Tpl, name);
+      b3.innerHTML = fillUiLang(b3Tpl, name);
+      const items = menu.querySelectorAll('li[data-code]');
+      for (let i = 0; i < items.length; i++) {
+        items[i].classList.toggle('is-selected', items[i].getAttribute('data-code') === code);
+      }
+      const reload = window.__lingoseven_reloadReader;
+      if (typeof reload === 'function') reload(code);
+    }
+  })();
+</script>
 
 <style>
     .parallel-reading {
@@ -60,7 +203,11 @@ function t(key: string): string {
         justify-content: center;
     }
 
-    .parallel-reading-text h2 {
+    .parallel-reading-text {
+        position: relative;
+    }
+
+    .features-slider-title {
         margin-top: 16px;
         margin-bottom: 16px;
     }
@@ -101,6 +248,88 @@ function t(key: string): string {
         color: var(--text-primary, #fff);
     }
 
+    /* Inline H2 language dropdown */
+    .ui-lang-trigger {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        font: inherit;
+        color: var(--primary, #4ade80);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.18em;
+        vertical-align: baseline;
+        line-height: inherit;
+    }
+
+    .ui-lang-trigger:hover { color: #6ee497; }
+    .ui-lang-trigger:focus { outline: none; }
+    .ui-lang-trigger:focus-visible {
+        outline: 2px solid var(--primary, #4ade80);
+        outline-offset: 4px;
+        border-radius: 4px;
+    }
+
+    .ui-lang-name {
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 0.18em;
+    }
+
+    .ui-lang-arrow {
+        flex-shrink: 0;
+        width: 0.7em;
+        height: 0.7em;
+        transition: transform 0.2s ease;
+        align-self: center;
+        transform: translateY(0.05em);
+    }
+    .ui-lang-trigger[aria-expanded="true"] .ui-lang-arrow {
+        transform: rotate(180deg) translateY(-0.05em);
+    }
+
+    .ui-lang-menu {
+        position: absolute;
+        z-index: 50;
+        list-style: none;
+        padding: 6px 0;
+        margin: 0;
+        background: #243248;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        max-height: 320px;
+        overflow-y: auto;
+        min-width: 220px;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+    }
+
+    .ui-lang-menu[hidden] { display: none; }
+
+    .ui-lang-menu li {
+        padding: 8px 16px;
+        color: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+        transition: background 0.12s;
+    }
+
+    .ui-lang-menu li:hover,
+    .ui-lang-menu li:focus {
+        background: rgba(74, 222, 128, 0.1);
+        outline: none;
+    }
+
+    .ui-lang-menu li.is-selected {
+        color: var(--primary, #4ade80);
+        font-weight: 600;
+    }
+
     @media (max-width: 768px) {
         .parallel-reading {
             padding: 48px 0;
@@ -109,6 +338,11 @@ function t(key: string): string {
         .parallel-reading-content {
             grid-template-columns: 1fr;
             gap: 32px;
+        }
+
+        .ui-lang-menu {
+            min-width: 200px;
+            max-height: 260px;
         }
     }
 </style>
