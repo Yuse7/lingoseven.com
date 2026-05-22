@@ -2533,3 +2533,21 @@ export const languageNames: LanguageNamesMap = {
 export function getTargetLanguageName(targetCode: string, uiCode: string): string {
   return languageNames[uiCode]?.[targetCode] ?? languageNames["en"]?.[targetCode] ?? targetCode;
 }
+
+// Prepositional case of the language name (e.g., "английском" for ru, falls back to nominative otherwise).
+export function getTargetLanguagePrepositional(targetCode: string, uiCode: string): string {
+  const name = getTargetLanguageName(targetCode, uiCode);
+  if (uiCode === "ru" && name.endsWith("ий")) {
+    return name.slice(0, -2) + "ом";
+  }
+  return name;
+}
+
+// Genitive case for Russian (e.g., "английского"), falls back to nominative otherwise.
+export function getTargetLanguageGenitive(targetCode: string, uiCode: string): string {
+  const name = getTargetLanguageName(targetCode, uiCode);
+  if (uiCode === "ru" && name.endsWith("ий")) {
+    return name.slice(0, -2) + "ого";
+  }
+  return name;
+}

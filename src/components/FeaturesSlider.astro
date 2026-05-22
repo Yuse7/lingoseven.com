@@ -5,6 +5,8 @@ import { languageNames } from '../data/languageNames';
 
 interface Props {
   targetLangName?: string;
+  targetLangNamePrep?: string;
+  targetLangNameGen?: string;
   uiLangName?: string;
   targetLang?: string;
   uiLang?: string;
@@ -12,6 +14,8 @@ interface Props {
 }
 const {
   targetLangName = '',
+  targetLangNamePrep = '',
+  targetLangNameGen = '',
   uiLangName = '',
   targetLang = 'de',
   uiLang = 'en',
@@ -19,11 +23,18 @@ const {
 } = Astro.props;
 
 function tTpl(key: string): string {
-  return (translations[key] || key).replace(/{targetLang}/g, targetLangName);
+  return (translations[key] || key)
+    .replace(/{targetLang}/g, targetLangName)
+    .replace(/{targetLangPrep}/g, targetLangNamePrep || targetLangName)
+    .replace(/{targetLangGen}/g, targetLangNameGen || targetLangName);
 }
 function t(key: string): string {
   const val = translations[key] || key;
-  return val.replace(/{targetLang}/g, targetLangName).replace(/{uiLang}/g, uiLangName);
+  return val
+    .replace(/{targetLang}/g, targetLangName)
+    .replace(/{targetLangPrep}/g, targetLangNamePrep || targetLangName)
+    .replace(/{targetLangGen}/g, targetLangNameGen || targetLangName)
+    .replace(/{uiLang}/g, uiLangName);
 }
 
 // Build dropdown languages list with names localized in current uiLang

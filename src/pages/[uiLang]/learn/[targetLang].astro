@@ -12,7 +12,7 @@ import LearnBlogSection from '../../../components/LearnBlogSection.astro';
 import { getEnabledLanguages, hasAudio } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { getTranslations } from '../../../utils/i18n';
-import { getTargetLanguageName } from '../../../data/languageNames';
+import { getTargetLanguageName, getTargetLanguagePrepositional, getTargetLanguageGenitive } from '../../../data/languageNames';
 import { getCollection } from 'astro:content';
 
 export function getStaticPaths() {
@@ -36,11 +36,18 @@ export function getStaticPaths() {
 const { targetCode, uiCode } = Astro.props;
 const translations = getTranslations(uiCode);
 const targetLangName = getTargetLanguageName(targetCode, uiCode);
+const targetLangNamePrep = getTargetLanguagePrepositional(targetCode, uiCode);
+const targetLangNameGen = getTargetLanguageGenitive(targetCode, uiCode);
 const uiLangName = getTargetLanguageName(uiCode, uiCode);
 const targetSlug = codeToSlug[targetCode];
 
-const title = translations['learn_meta_title']?.replace('{targetLang}', targetLangName) ?? `Learn ${targetLangName}`;
-const description = translations['learn_meta_description']?.replace('{targetLang}', targetLangName) ?? `Learn ${targetLangName} with Lingo7`;
+const applyVars = (s: string) => s
+  .replace(/{targetLang}/g, targetLangName)
+  .replace(/{targetLangPrep}/g, targetLangNamePrep)
+  .replace(/{targetLangGen}/g, targetLangNameGen);
+
+const title = applyVars(translations['learn_meta_title'] ?? `Learn ${targetLangName}`);
+const description = applyVars(translations['learn_meta_description'] ?? `Learn ${targetLangName} with Lingo7`);
 
 const enabled = getEnabledLanguages();
 
@@ -75,9 +82,9 @@ function stripHtml(html: string): string {
 
 // JSON-LD structured data
 const faqItems = [1, 2, 3, 4, 5].map((i) => {
-  const question = (translations[`faq2_item${i}_question`] || '').replace(/{targetLang}/g, targetLangName);
-  const principle = stripHtml((translations[`faq2_item${i}_principle`] || '').replace(/{targetLang}/g, targetLangName));
-  const how = stripHtml((translations[`faq2_item${i}_how`] || '').replace(/{targetLang}/g, targetLangName));
+  const question = applyVars(translations[`faq2_item${i}_question`] || '');
+  const principle = stripHtml(applyVars(translations[`faq2_item${i}_principle`] || ''));
+  const how = stripHtml(applyVars(translations[`faq2_item${i}_how`] || ''));
   return { question, answer: `${principle} ${how}` };
 });
 
@@ -120,8 +127,8 @@ const learnBlogPosts = selectedBlogPosts.map((p) => ({
   categoryLabel: translations[blogCategoryKeys[p.data.category] ?? ''] ?? p.data.category,
 }));
 
-const blogSectionTitle = (translations['learn_blog_title'] ?? 'Tips for Learning {targetLang} Through Reading').replace('{targetLang}', targetLangName);
-const blogSectionSubtitle = (translations['learn_blog_subtitle'] ?? 'Expert guides and practical advice to help you read books in {targetLang}.').replace('{targetLang}', targetLangName);
+const blogSectionTitle = applyVars(translations['learn_blog_title'] ?? 'Tips for Learning {targetLang} Through Reading');
+const blogSectionSubtitle = applyVars(translations['learn_blog_subtitle'] ?? 'Expert guides and practical advice to help you read books in {targetLang}.');
 const blogReadMore = translations['blog_read_more'] ?? 'Read more';
 
 const jsonLd = [
@@ -172,15 +179,15 @@ const jsonLd = [
   learnLanguageLinks={learnLanguageLinks}
   showNav={true}
 >
-  <LearnHero targetLangName={targetLangName} translations={translations} />
-  <FeaturesSlider targetLangName={targetLangName} uiLangName={uiLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
+  <LearnHero targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
+  <FeaturesSlider targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} uiLangName={uiLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
   {hasAudio(targetCode) && (
-    <AudioSection targetLangName={targetLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
+    <AudioSection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} targetLang={targetCode} uiLang={uiCode} translations={translations} />
   )}
-  <PracticeSection targetLangName={targetLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
-  <LibrarySection targetLangName={targetLangName} translations={translations} />
-  <TestimonialsSlider targetLangName={targetLangName} translations={translations} />
-  <FaqAccordion targetLangName={targetLangName} translations={translations} />
+  <PracticeSection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} targetLang={targetCode} uiLang={uiCode} translations={translations} />
+  <LibrarySection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
+  <TestimonialsSlider targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
+  <FaqAccordion targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
   <LearnBlogSection
     posts={learnBlogPosts}
     uiLang={uiCode}
@@ -188,5 +195,5 @@ const jsonLd = [
     subtitle={blogSectionSubtitle}
     readMoreText={blogReadMore}
   />
-  <DownloadSection targetLangName={targetLangName} translations={translations} />
+  <DownloadSection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
 </BaseLayout>

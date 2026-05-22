@@ -3,15 +3,20 @@ import { practiceWordByLang, practiceOptionsByUi, fallbackWord, fallbackOptions 
 
 interface Props {
   targetLangName?: string;
+  targetLangNamePrep?: string;
+  targetLangNameGen?: string;
   targetLang?: string;
   uiLang?: string;
   translations?: Record<string, any>;
 }
-const { targetLangName = '', targetLang = 'en', uiLang = 'en', translations = {} } = Astro.props;
+const { targetLangName = '', targetLangNamePrep = '', targetLangNameGen = '', targetLang = 'en', uiLang = 'en', translations = {} } = Astro.props;
 
 function t(key: string): string {
   const val = translations[key] || key;
-  return val.replace(/{targetLang}/g, targetLangName);
+  return val
+    .replace(/{targetLang}/g, targetLangName)
+    .replace(/{targetLangPrep}/g, targetLangNamePrep || targetLangName)
+    .replace(/{targetLangGen}/g, targetLangNameGen || targetLangName);
 }
 
 const word = practiceWordByLang[targetLang] ?? fallbackWord;

@@ -3,6 +3,8 @@ import AudioDemo from './AudioDemo.astro';
 
 interface Props {
   targetLangName?: string;
+  targetLangNamePrep?: string;
+  targetLangNameGen?: string;
   targetLang?: string;
   uiLang?: string;
   translations?: Record<string, any>;
@@ -10,6 +12,8 @@ interface Props {
 
 const {
   targetLangName = '',
+  targetLangNamePrep = '',
+  targetLangNameGen = '',
   targetLang = 'de',
   uiLang = 'en',
   translations = {},
@@ -17,7 +21,10 @@ const {
 
 function t(key: string): string {
   const val = translations[key] || key;
-  return val.replace(/{targetLang}/g, targetLangName);
+  return val
+    .replace(/{targetLang}/g, targetLangName)
+    .replace(/{targetLangPrep}/g, targetLangNamePrep || targetLangName)
+    .replace(/{targetLangGen}/g, targetLangNameGen || targetLangName);
 }
 ---
 

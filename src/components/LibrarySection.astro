@@ -1,14 +1,19 @@
 ---
 interface Props {
   targetLangName?: string;
+  targetLangNamePrep?: string;
+  targetLangNameGen?: string;
   translations?: Record<string, any>;
 }
 
-const { targetLangName = '', translations = {} } = Astro.props;
+const { targetLangName = '', targetLangNamePrep = '', targetLangNameGen = '', translations = {} } = Astro.props;
 
 function t(key: string): string {
   const val = translations[key] || key;
-  return val.replace(/{targetLang}/g, targetLangName);
+  return val
+    .replace(/{targetLang}/g, targetLangName)
+    .replace(/{targetLangPrep}/g, targetLangNamePrep || targetLangName)
+    .replace(/{targetLangGen}/g, targetLangNameGen || targetLangName);
 }
 
 const coverUrl = (id: string) => `https://lingo7.s3.eu-central-1.amazonaws.com/covers/250x250/${id}.webp`;
@@ -285,64 +290,6 @@ const stackCovers = [
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- SUPER POWER #2 — auto-translation             -->
-    <!-- ============================================ -->
-    <div class="super-moment super-moment--translate">
-      <div class="super-moment-inner super-moment-inner--reversed">
-        <div class="super-moment-visual" aria-hidden="true">
-          <div class="translate-illu">
-            <div class="translate-book translate-book--src">
-              <div class="translate-book-cover">
-                <span class="translate-book-flag">🌐</span>
-                <div class="translate-book-lines">
-                  <div class="translate-book-line"></div>
-                  <div class="translate-book-line translate-book-line--short"></div>
-                  <div class="translate-book-line"></div>
-                  <div class="translate-book-line translate-book-line--short"></div>
-                </div>
-              </div>
-              <span class="translate-book-label">{t('library_super_visual_any')}</span>
-            </div>
-
-            <div class="translate-magic">
-              <svg width="48" height="32" viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 16h36"/>
-                <path d="M32 8l8 8-8 8"/>
-              </svg>
-              <div class="translate-magic-sparkle translate-magic-sparkle--1">✦</div>
-              <div class="translate-magic-sparkle translate-magic-sparkle--2">✦</div>
-              <div class="translate-magic-sparkle translate-magic-sparkle--3">✦</div>
-            </div>
-
-            <div class="translate-book translate-book--tgt">
-              <div class="translate-book-cover">
-                <span class="translate-book-flag translate-book-flag--target">✓</span>
-                <div class="translate-book-lines">
-                  <div class="translate-book-line"></div>
-                  <div class="translate-book-line translate-book-line--short"></div>
-                  <div class="translate-book-line"></div>
-                  <div class="translate-book-line translate-book-line--short"></div>
-                </div>
-              </div>
-              <span class="translate-book-label translate-book-label--target">{targetLangName}</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="super-moment-content">
-          <span class="super-moment-tag">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-            </svg>
-            <span>{t('library_super_tag')}</span>
-          </span>
-          <h3 class="super-moment-title" set:html={t('library_super1_title')}></h3>
-          <p class="super-moment-desc" set:html={t('library_super1_desc')}></p>
         </div>
       </div>
     </div>
