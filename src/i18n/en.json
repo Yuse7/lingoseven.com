@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Learn a language through reading",
-  "learn_meta_title": "Learn {targetLang} with Lingo7",
-  "learn_meta_description": "Master {targetLang} through parallel reading, audio, and spaced repetition",
+  "learn_meta_title": "Improve your {targetLang} while enjoying your favorite books — Lingo7",
+  "learn_meta_description": "Parallel reading with translation, native-narrated audio, and spaced repetition that makes vocabulary stick. Read any book in {targetLang}.",
   "nav_features": "Parallel reading",
   "nav_audio": "Audio",
   "nav_practice": "Spaced Repetition",
