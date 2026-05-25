@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Lär dig ett språk på 30 minuter om dagen",
-  "learn_meta_title": "Lär dig {targetLang} med Lingo7",
-  "learn_meta_description": "Bemästra {targetLang} genom parallellläsning, ljud och utspridd repetition — på bara 30 minuter om dagen",
+  "learn_meta_title": "Förbättra din {targetLang} med dina favoritböcker — Lingo7",
+  "learn_meta_description": "Parallelläsning med översättning, ljud inläst av modersmålstalare och utspridd repetition som fäster orden. Läs vilken bok som helst på {targetLang}.",
   "nav_features": "Funktioner",
   "nav_how_it_works": "Hur det fungerar",
   "nav_reviews": "Omdömen",
