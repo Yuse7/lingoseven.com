@@ -41,6 +41,7 @@ interface Props {
   showNav?: boolean;
   blogUrl?: string;
   noindex?: boolean;
+  playListing?: string;
 }
 
 const {
@@ -60,11 +61,12 @@ const {
   showNav = false,
   blogUrl,
   noindex = false,
+  playListing,
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang={lang}>
+<html lang={lang} data-play-listing={playListing}>
 <head>
   <Head
     title={title}

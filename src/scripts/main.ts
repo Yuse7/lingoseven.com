@@ -34,22 +34,21 @@ console.log('[lingo7] site build: 2026-05-20 — adaptation copy v2');
   }
 })();
 
-// ========== Custom Google Play store listing per locale ==========
-// These locales have a dedicated Google Play custom store listing. Appending
-// `&listing=<locale>` makes Play open that localized listing instead of the
-// default one. Keyed on <html lang> (set per UI language by BaseLayout); runs
-// on every platform, since desktop users open the same Play page.
+// ========== Custom Google Play store listing per target language ==========
+// Learn/blog pages set <html data-play-listing="<code>"> when their target
+// language (the language the user wants to learn) has a dedicated Google Play
+// custom store listing. Append `&listing=<code>` so Play opens that listing
+// instead of the default. Runs on every platform (desktop opens the same page).
 (() => {
-  const CUSTOM_LISTING_LOCALES = new Set(['de', 'en', 'es', 'fr', 'it', 'pt', 'ru', 'sr']);
-  const lang = (document.documentElement.lang || 'en').toLowerCase();
-  if (!CUSTOM_LISTING_LOCALES.has(lang)) return;
+  const listing = document.documentElement.dataset.playListing;
+  if (!listing) return;
 
   document
     .querySelectorAll<HTMLAnchorElement>('a[href*="play.google.com/store/apps/details"]')
     .forEach((el) => {
       const url = new URL(el.href);
       if (url.searchParams.has('listing')) return;
-      url.searchParams.set('listing', lang);
+      url.searchParams.set('listing', listing);
       el.href = url.toString();
     });
 })();

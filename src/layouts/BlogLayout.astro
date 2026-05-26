@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import CtaButtons from '../components/CtaButtons.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
+import { getPlayListing } from '../utils/storeListing';
 import '../styles/blog.css';
 
 interface RelatedPost {
@@ -152,6 +153,7 @@ const ogArticle = {
   uiLanguages={uiLanguages}
   blogUrl={`/${uiLang}/blog/`}
   noindex={noindex}
+  playListing={getPlayListing(targetLang)}
 >
   <main class="article-container">
     <header class="article-header">

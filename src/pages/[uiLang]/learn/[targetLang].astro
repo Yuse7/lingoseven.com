@@ -13,6 +13,7 @@ import { getEnabledLanguages, hasAudio } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { getTranslations } from '../../../utils/i18n';
 import { getTargetLanguageName, getTargetLanguagePrepositional, getTargetLanguageGenitive } from '../../../data/languageNames';
+import { getPlayListing } from '../../../utils/storeListing';
 import { getCollection } from 'astro:content';
 
 export function getStaticPaths() {
@@ -178,6 +179,7 @@ const jsonLd = [
   uiLanguages={uiLanguages}
   learnLanguageLinks={learnLanguageLinks}
   showNav={true}
+  playListing={getPlayListing(targetCode)}
 >
   <LearnHero targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
   <FeaturesSlider targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} uiLangName={uiLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
