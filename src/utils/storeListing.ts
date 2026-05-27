@@ -3,6 +3,7 @@
 const PLAY_CUSTOM_LISTINGS = new Set([
   'de', 'en', 'es', 'fr', 'it', 'pt', 'ru', 'sr',
   'nl', 'sv', 'no', 'da', 'ro', 'uk', 'pl', 'cs', 'sk', 'hr',
+  'bs', 'bg', 'mk', 'sl', 'lv', 'lt', 'fi', 'hu', 'et', 'tr',
 ]);
 
 // Returns the custom-listing id for a learn page's target language, or
