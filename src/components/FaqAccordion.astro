@@ -4,8 +4,10 @@ interface Props {
   targetLangNamePrep?: string;
   targetLangNameGen?: string;
   translations?: Record<string, any>;
+  /** Extra language-specific FAQ items (HTML allowed in answer). Appended after the standard items. */
+  extraFaq?: Array<{ question: string; answer: string }>;
 }
-const { targetLangName = '', targetLangNamePrep = '', targetLangNameGen = '', translations = {} } = Astro.props;
+const { targetLangName = '', targetLangNamePrep = '', targetLangNameGen = '', translations = {}, extraFaq = [] } = Astro.props;
 
 function t(key: string): string {
   const val = translations[key] || key;
@@ -36,6 +38,17 @@ const items = [1, 2, 3, 4, 5];
                     <div class="faq-answer">
                         <p set:html={t(`faq2_item${i}_principle`)}></p>
                         <p set:html={t(`faq2_item${i}_how`)}></p>
+                    </div>
+                </div>
+            ))}
+            {extraFaq.map((f) => (
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>{f.question}</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p set:html={f.answer}></p>
                     </div>
                 </div>
             ))}

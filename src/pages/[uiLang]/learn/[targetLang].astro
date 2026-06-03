@@ -9,6 +9,9 @@ import FaqAccordion from '../../../components/FaqAccordion.astro';
 import LibrarySection from '../../../components/LibrarySection.astro';
 import DownloadSection from '../../../components/DownloadSection.astro';
 import LearnBlogSection from '../../../components/LearnBlogSection.astro';
+import LanguageIntro from '../../../components/LanguageIntro.astro';
+import { languageFacts } from '../../../data/languageFacts';
+import { appRating } from '../../../data/appRating';
 import { getEnabledLanguages, hasAudio } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { getTranslations } from '../../../utils/i18n';
@@ -81,13 +84,20 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, '');
 }
 
+// Per-target-language facts (English-only content). Rendered only on English UI
+// pages to avoid mixing English copy into localized pages. See docs/marketing/seo-lingoseven.md.
+const isEn = uiCode === 'en';
+const fact = languageFacts[targetCode];
+const showLanguageFacts = isEn && !!fact;
+const extraFaq = showLanguageFacts ? fact.faq : [];
+
 // JSON-LD structured data
 const faqItems = [1, 2, 3, 4, 5].map((i) => {
   const question = applyVars(translations[`faq2_item${i}_question`] || '');
   const principle = stripHtml(applyVars(translations[`faq2_item${i}_principle`] || ''));
   const how = stripHtml(applyVars(translations[`faq2_item${i}_how`] || ''));
   return { question, answer: `${principle} ${how}` };
-});
+}).concat(extraFaq.map((f) => ({ question: f.question, answer: stripHtml(f.answer) })));
 
 // Blog posts for this learn page
 const allBlogPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -157,6 +167,13 @@ const jsonLd = [
     "applicationCategory": "EducationApplication",
     "operatingSystem": "iOS, Android",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": appRating.ratingValue,
+      "ratingCount": appRating.ratingCount,
+      "bestRating": appRating.bestRating,
+      "worstRating": appRating.worstRating,
+    },
     "description": description,
     "url": "https://lingoseven.com",
     "downloadUrl": [
@@ -182,6 +199,7 @@ const jsonLd = [
   playListing={getPlayListing(targetCode)}
 >
   <LearnHero targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
+  {showLanguageFacts && <LanguageIntro targetLangName={targetLangName} fact={fact} />}
   <FeaturesSlider targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} uiLangName={uiLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
   {hasAudio(targetCode) && (
     <AudioSection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} targetLang={targetCode} uiLang={uiCode} translations={translations} />
@@ -189,7 +207,7 @@ const jsonLd = [
   <PracticeSection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} targetLang={targetCode} uiLang={uiCode} translations={translations} />
   <LibrarySection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
   <TestimonialsSlider targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
-  <FaqAccordion targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
+  <FaqAccordion targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} extraFaq={extraFaq} />
   <LearnBlogSection
     posts={learnBlogPosts}
     uiLang={uiCode}
