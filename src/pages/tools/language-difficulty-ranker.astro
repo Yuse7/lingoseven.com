@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaButtons from '../../components/CtaButtons.astro';
+import { languageFacts } from '../../data/languageFacts';
+import { languages } from '../../data/languages';
+import { codeToSlug } from '../../data/languageSlugs';
+
+// --- Language branch map ---------------------------------------------------
+// languageFacts only stores the top-level `family` ("Indo-European" covers
+// Spanish, Russian and German alike), which is too coarse to estimate how
+// hard one language is for a speaker of another. This finer sub-family map
+// powers the "for your native language" closeness estimate below.
+const BRANCH: Record<string, string> = {
+  // Indo-European
+  fr: 'Romance', es: 'Romance', it: 'Romance', pt: 'Romance', ro: 'Romance', ca: 'Romance', gl: 'Romance',
+  en: 'Germanic', de: 'Germanic', nl: 'Germanic', sv: 'Germanic', no: 'Germanic', da: 'Germanic', is: 'Germanic', af: 'Germanic',
+  ru: 'Slavic', uk: 'Slavic', be: 'Slavic', pl: 'Slavic', cs: 'Slavic', sk: 'Slavic', hr: 'Slavic',
+  bs: 'Slavic', sr: 'Slavic', bg: 'Slavic', mk: 'Slavic', sl: 'Slavic',
+  lv: 'Baltic', lt: 'Baltic',
+  el: 'Hellenic', sq: 'Albanian', hy: 'Armenian',
+  // Other families
+  fi: 'Finno-Ugric', hu: 'Finno-Ugric', et: 'Finno-Ugric',
+  tr: 'Turkic', az: 'Turkic', kk: 'Turkic', uz: 'Turkic', ky: 'Turkic',
+  id: 'Malayo-Polynesian', ms: 'Malayo-Polynesian', tl: 'Malayo-Polynesian',
+  vi: 'Vietic', ka: 'Kartvelian', mn: 'Mongolic', eu: 'Isolate',
+  sw: 'Bantu', zu: 'Bantu',
+};
+
+const FSI_HOURS_LABEL: Record<string, string> = {
+  I: 'Easiest (Cat. I)',
+  II: 'Easy (Cat. II)',
+  III: 'Hard (Cat. III)',
+  IV: 'Hardest (Cat. IV)',
+};
+
+// Build the dataset (all languages that have facts + a learn page slug).
+const rows = Object.values(languageFacts)
+  .map((f) => {
+    const lang = languages.find((l) => l.code === f.code);
+    return {
+      code: f.code,
+      name: lang?.name ?? f.code,
+      flag: lang?.flag ?? '',
+      slug: codeToSlug[f.code] ?? '',
+      family: f.family,
+      branch: BRANCH[f.code] ?? f.family,
+      writingSystem: f.writingSystem,
+      fsiCategory: f.fsiCategory,
+      fsiHours: f.fsiHours,
+    };
+  })
+  .filter((r) => r.slug && r.fsiHours > 0);
+
+// Default (English-native) ranking, rendered server-side so the page is fully
+// indexable without JavaScript. The client re-ranks when a native language is
+// picked (see the inline script).
+const defaultRows = [...rows].sort((a, b) => a.fsiHours - b.fsiHours || a.name.localeCompare(b.name));
+
+const title = 'Language Difficulty Ranker — Easiest & Hardest Languages to Learn | Lingo7';
+const description =
+  'Rank 50 languages by difficulty for your native language, using FSI study hours, language family, and writing system. Find your easiest next language to learn by reading.';
+
+const faq = [
+  {
+    question: 'What is the easiest language to learn for English speakers?',
+    answer:
+      'For native English speakers, the FSI rates Category I languages as easiest — Spanish, French, Italian, Portuguese, Dutch, Norwegian, Swedish, Danish and Romanian — each needing roughly 600–750 hours to reach professional working proficiency. They share Latin script and thousands of cognates with English.',
+  },
+  {
+    question: 'What is the hardest language to learn?',
+    answer:
+      'The hardest languages for English speakers are FSI Category IV (Arabic, Mandarin Chinese, Japanese, Korean), at about 2,200 hours. Among the languages Lingo7 supports, the most demanding are Category III languages such as Russian, Greek, Hungarian, Finnish and Turkish, at roughly 1,100 hours.',
+  },
+  {
+    question: 'What does FSI language difficulty mean?',
+    answer:
+      'The Foreign Service Institute (FSI) of the U.S. State Department groups languages into categories by the average classroom hours a native English speaker needs to reach professional proficiency. It is the most widely cited difficulty benchmark, though it measures English speakers specifically.',
+  },
+  {
+    question: 'Does my native language change how hard a language is to learn?',
+    answer:
+      'Yes, significantly. A language that shares your language family and writing system is far easier than the raw FSI figure suggests — Italian is much easier for a Spanish speaker than for an English speaker. This tool estimates that adjustment from shared family, sub-family branch and script; the FSI hours themselves are still measured for English speakers.',
+  },
+  {
+    question: 'What is the fastest way to learn a language?',
+    answer:
+      'Extensive reading is one of the most efficient paths, because it builds vocabulary and grammatical intuition in context at scale. Lingo7 lets you read real books with parallel translation and native-narrated audio, so you absorb a language faster than with flashcards alone.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Language Difficulty Ranker',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: 'https://lingoseven.com/tools/language-difficulty-ranker/',
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" jsonLd={jsonLd}>
+  <section class="ranker">
+    <div class="container">
+      <header class="ranker-head">
+        <p class="ranker-eyebrow">Free tool</p>
+        <h1>Which language is easiest to learn? Rank 50 languages for your native tongue.</h1>
+        <p class="ranker-intro">
+          Every language difficulty chart assumes you speak English. This one doesn't. Pick your
+          native language and we'll re-rank all 50 languages by how hard each is likely to be
+          <em>for you</em> — combining official FSI study hours with language family and writing
+          system. Then start the easy way: by reading real books.
+        </p>
+
+        <div class="ranker-controls">
+          <label for="native-select">I speak:</label>
+          <select id="native-select" aria-label="Your native language">
+            <option value="en" selected>English</option>
+            {
+              [...rows]
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map((r) => <option value={r.code}>{r.name}</option>)
+            }
+          </select>
+        </div>
+        <p class="ranker-note" id="ranker-caption">
+          Ranked easiest → hardest for <strong>English</strong> speakers. FSI hours are measured for
+          English speakers; the “for you” estimate adjusts them from shared family and script and is
+          approximate.
+        </p>
+      </header>
+
+      <div class="table-wrap">
+        <table class="ranker-table" id="ranker-table">
+          <thead>
+            <tr>
+              <th class="col-rank">#</th>
+              <th class="col-lang">Language</th>
+              <th class="col-est">Est. hours <span>for you</span></th>
+              <th class="col-fsi">FSI difficulty <span>(English)</span></th>
+              <th class="col-family">Family</th>
+              <th class="col-script">Script</th>
+            </tr>
+          </thead>
+          <tbody id="ranker-body">
+            {
+              defaultRows.map((r, i) => (
+                <tr data-code={r.code}>
+                  <td class="col-rank">{i + 1}</td>
+                  <td class="col-lang">
+                    <a href={`/en/learn/${r.slug}/`}>
+                      <span class="flag">{r.flag}</span>
+                      {r.name}
+                    </a>
+                  </td>
+                  <td class="col-est"><strong>{r.fsiHours}</strong> h</td>
+                  <td class="col-fsi">
+                    <span class={`pill pill-${r.fsiCategory}`}>{FSI_HOURS_LABEL[r.fsiCategory]}</span>
+                  </td>
+                  <td class="col-family">{r.branch}</td>
+                  <td class="col-script">{r.writingSystem}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ranker-explainer">
+        <h2>How this ranking works</h2>
+        <p>
+          The base figure is the <strong>FSI study-hour estimate</strong> — how many classroom hours
+          the U.S. Foreign Service Institute found a native English speaker needs to reach
+          professional proficiency. Category&nbsp;I languages (≈600–750&nbsp;h) are easiest;
+          Category&nbsp;III (≈1,100&nbsp;h) are the hardest among the languages we support.
+        </p>
+        <p>
+          When you pick a different native language, we adjust that figure for
+          <strong>linguistic distance</strong>: languages in your own sub-family branch (Romance,
+          Germanic, Slavic, Turkic…) and sharing your writing system get easier; those in an
+          unrelated family with a different script get harder. This adjustment is an estimate —
+          the FSI never measured every native-language pairing — but it reflects the well-documented
+          fact that related languages transfer.
+        </p>
+        <p>
+          Whatever you pick, the fastest route through those hours is <strong>reading</strong>:
+          seeing words in real sentences, again and again, until they stick. That's exactly what
+          Lingo7 is built for.
+        </p>
+      </div>
+
+      <div class="ranker-cta">
+        <h2>Start with your easiest language — by reading</h2>
+        <p>Read real books with parallel translation and native-narrated audio. Free to start.</p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="ranker-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="ranker-data" set:html={JSON.stringify(rows)} />
+  <script>
+    type Row = {
+      code: string; name: string; flag: string; slug: string;
+      family: string; branch: string; writingSystem: string;
+      fsiCategory: 'I' | 'II' | 'III' | 'IV'; fsiHours: number;
+    };
+
+    const FSI_LABEL: Record<string, string> = {
+      I: 'Easiest (Cat. I)', II: 'Easy (Cat. II)', III: 'Hard (Cat. III)', IV: 'Hardest (Cat. IV)',
+    };
+
+    const dataEl = document.getElementById('ranker-data');
+    const rows: Row[] = dataEl ? JSON.parse(dataEl.textContent || '[]') : [];
+    const byCode = new Map(rows.map((r) => [r.code, r]));
+    // English is selectable as a native language but isn't in `rows` (no learn
+    // page is ranked for English natives differently); synthesize its profile.
+    const EN: Row = {
+      code: 'en', name: 'English', flag: '', slug: 'english', family: 'Indo-European',
+      branch: 'Germanic', writingSystem: 'Latin', fsiCategory: 'I', fsiHours: 0,
+    };
+    byCode.set('en', EN);
+
+    const scripts = (w: string) => w.split(',').map((s) => s.trim());
+    const shareScript = (a: string, b: string) =>
+      scripts(a).some((s) => scripts(b).includes(s));
+
+    // Closeness factor: lower = easier. Relative to a notional English baseline.
+    function factor(nativeCode: string, t: Row): number {
+      const n = byCode.get(nativeCode);
+      if (!n) return 1;
+      const sameBranch = n.branch === t.branch;
+      const sameFamily = n.family === t.family;
+      const sameScript = shareScript(n.writingSystem, t.writingSystem);
+      if (sameBranch && sameScript) return 0.55;
+      if (sameBranch) return 0.7;
+      if (sameFamily && sameScript) return 0.85;
+      if (sameScript) return 0.95;
+      if (sameFamily) return 1.05;
+      return 1.2;
+    }
+
+    function estHours(nativeCode: string, t: Row): number {
+      if (nativeCode === 'en') return t.fsiHours;
+      const adj = factor(nativeCode, t) / factor('en', t);
+      return Math.max(300, Math.round((t.fsiHours * adj) / 25) * 25);
+    }
+
+    function tag(nativeCode: string, t: Row): { label: string; cls: string } {
+      const f = factor(nativeCode, t);
+      if (f <= 0.6) return { label: 'Very close', cls: 'I' };
+      if (f <= 0.85) return { label: 'Related', cls: 'II' };
+      if (f <= 1.05) return { label: 'Distant', cls: 'III' };
+      return { label: 'Very different', cls: 'IV' };
+    }
+
+    const body = document.getElementById('ranker-body')!;
+    const caption = document.getElementById('ranker-caption')!;
+    const select = document.getElementById('native-select') as HTMLSelectElement;
+
+    function render(nativeCode: string) {
+      const nativeName = byCode.get(nativeCode)?.name ?? 'English';
+      const ranked = rows
+        .filter((r) => r.code !== nativeCode)
+        .map((r) => ({ r, est: estHours(nativeCode, r), t: tag(nativeCode, r) }))
+        .sort((a, b) => a.est - b.est || a.r.name.localeCompare(b.r.name));
+
+      body.innerHTML = ranked
+        .map(({ r, est, t }, i) => `
+          <tr data-code="${r.code}">
+            <td class="col-rank">${i + 1}</td>
+            <td class="col-lang"><a href="/en/learn/${r.slug}/"><span class="flag">${r.flag}</span>${r.name}</a></td>
+            <td class="col-est"><strong>${est}</strong> h ${nativeCode !== 'en' ? `<span class="pill pill-${t.cls} tag-est">${t.label}</span>` : ''}</td>
+            <td class="col-fsi"><span class="pill pill-${r.fsiCategory}">${FSI_LABEL[r.fsiCategory]}</span></td>
+            <td class="col-family">${r.branch}</td>
+            <td class="col-script">${r.writingSystem}</td>
+          </tr>`)
+        .join('');
+
+      caption.innerHTML =
+        nativeCode === 'en'
+          ? 'Ranked easiest → hardest for <strong>English</strong> speakers. FSI hours are measured for English speakers; the “for you” estimate adjusts them from shared family and script and is approximate.'
+          : `Ranked easiest → hardest if you speak <strong>${nativeName}</strong>. Estimated hours adjust the English-speaker FSI figure for your language family and script — approximate, not official.`;
+    }
+
+    select.addEventListener('change', () => render(select.value));
+  </script>
+</BaseLayout>
+
+<style>
+  .ranker { padding: 3rem 0 4rem; }
+  .ranker-head { max-width: 760px; margin: 0 auto 2rem; text-align: center; }
+  .ranker-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    color: var(--primary); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .ranker-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .ranker-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0 0 1.5rem; }
+  .ranker-controls {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.6rem 1rem; border-radius: 12px; font-size: 1.05rem;
+  }
+  .ranker-controls label { font-weight: 600; }
+  .ranker-controls select {
+    background: var(--background, #1a2332); color: inherit; font-size: 1.05rem; font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 8px; padding: 0.45rem 0.7rem; cursor: pointer;
+  }
+  .ranker-note { font-size: 0.88rem; color: var(--text-muted, #9fb0c3); margin: 1rem auto 0; max-width: 640px; }
+
+  .table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.08); }
+  .ranker-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+  .ranker-table th, .ranker-table td { padding: 0.7rem 0.9rem; text-align: left; }
+  .ranker-table thead th {
+    background: rgba(255, 255, 255, 0.04); font-size: 0.82rem; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--text-muted, #9fb0c3); border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .ranker-table thead th span { display: block; font-size: 0.7rem; text-transform: none; letter-spacing: 0; opacity: 0.7; }
+  .ranker-table tbody tr { border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+  .ranker-table tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+  .col-rank { width: 2.5rem; color: var(--text-muted, #9fb0c3); font-variant-numeric: tabular-nums; }
+  .col-lang a { display: inline-flex; align-items: center; gap: 0.5rem; color: inherit; font-weight: 600; text-decoration: none; }
+  .col-lang a:hover { color: var(--primary); }
+  .flag { font-size: 1.2rem; }
+  .col-est { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .pill { display: inline-block; padding: 0.18rem 0.55rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; }
+  .pill-I { background: rgba(74, 222, 128, 0.16); color: #4ade80; }
+  .pill-II { background: rgba(132, 204, 22, 0.16); color: #a3e635; }
+  .pill-III { background: rgba(249, 115, 22, 0.16); color: #fb923c; }
+  .pill-IV { background: rgba(239, 68, 68, 0.16); color: #f87171; }
+  .tag-est { margin-left: 0.35rem; }
+  .col-family, .col-script { color: var(--text-muted, #9fb0c3); font-size: 0.9rem; }
+
+  .ranker-explainer, .ranker-faq { max-width: 760px; margin: 3rem auto 0; }
+  .ranker-explainer h2, .ranker-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .ranker-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+
+  .ranker-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .ranker-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .ranker-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; }
+  .ranker-cta :global(.cta-buttons) { justify-content: center; }
+
+  .ranker-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .ranker-faq summary { cursor: pointer; font-weight: 600; }
+  .ranker-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  @media (max-width: 600px) {
+    .col-family { display: none; }
+  }
+</style>

@@ -33,6 +33,10 @@ const { targetLangName, fact } = Astro.props;
           <span class="stat-label">Study hours (FSI)</span>
         </div>
       </div>
+
+      <p class="intro-tool-link">
+        <a href="/tools/language-difficulty-ranker/">See how {targetLangName} ranks against 48 languages by difficulty &rarr;</a>
+      </p>
     </div>
   </div>
 </section>
@@ -70,6 +74,21 @@ const { targetLangName, fact } = Astro.props;
     line-height: 1.7;
     color: var(--text-secondary, #94a3b8);
     margin-bottom: 2.5rem;
+  }
+
+  .intro-tool-link {
+    margin-top: 1.75rem;
+    font-size: 0.95rem;
+  }
+
+  .intro-tool-link a {
+    color: var(--primary, #4ade80);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .intro-tool-link a:hover {
+    text-decoration: underline;
   }
 
   .intro-stats {
