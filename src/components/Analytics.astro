@@ -41,12 +41,10 @@
   gtag('config', 'G-DCNBF6FH70');
 </script>
 
-<!-- Event snippet for Purchase (1) conversion page -->
-<script is:inline>
-  gtag('event', 'conversion', {
-    'send_to': 'AW-17781135403/iWDBCLqphNAbEKuw2p5C',
-    'value': 1.0,
-    'currency': 'USD',
-    'transaction_id': ''
-  });
-</script>
+<!--
+  NOTE: the "Purchase (1)" Google Ads conversion is fired on actual App Store /
+  Google Play link clicks in src/scripts/main.ts (trackStoreClick). It used to
+  also fire here on every page load, which logged a $1 conversion per pageview
+  and poisoned Smart Bidding — that duplicate page-load snippet was removed.
+-->
+
