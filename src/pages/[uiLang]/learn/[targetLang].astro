@@ -199,7 +199,6 @@ const jsonLd = [
   playListing={getPlayListing(targetCode)}
 >
   <LearnHero targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
-  {showLanguageFacts && <LanguageIntro targetLangName={targetLangName} fact={fact} />}
   <FeaturesSlider targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} uiLangName={uiLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
   {hasAudio(targetCode) && (
     <AudioSection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} targetLang={targetCode} uiLang={uiCode} translations={translations} />
@@ -215,5 +214,6 @@ const jsonLd = [
     subtitle={blogSectionSubtitle}
     readMoreText={blogReadMore}
   />
+  {showLanguageFacts && <LanguageIntro targetLangName={targetLangName} fact={fact} />}
   <DownloadSection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
 </BaseLayout>
