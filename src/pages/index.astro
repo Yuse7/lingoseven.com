@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import { getEnabledLanguages } from '../data/languages';
 import { codeToSlug } from '../data/languageSlugs';
+import { appRating } from '../data/appRating';
 
 // Map language code to country code for flagcdn.com
 const langToCountry: Record<string, string> = {
@@ -28,6 +29,13 @@ const jsonLd = [
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD",
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": appRating.ratingValue,
+      "ratingCount": appRating.ratingCount,
+      "bestRating": appRating.bestRating,
+      "worstRating": appRating.worstRating,
     },
     "description": "Learn languages through parallel reading, audio, and spaced repetition. 90+ languages supported.",
     "url": "https://lingoseven.com",
@@ -61,11 +69,13 @@ const jsonLd = [
     <div class="container">
       <div class="choose-language-grid">
         {languages.map((lang) => (
-          <a href={`/en/learn/${codeToSlug[lang.code]}`} class="choose-language-pill">
+          <a href={`/en/learn/${codeToSlug[lang.code]}/`} class="choose-language-pill">
             <img
               src={`https://flagcdn.com/24x18/${langToCountry[lang.code] ?? lang.code}.png`}
               alt={`Learn ${lang.name}`}
               class="choose-language-flag"
+              loading="lazy"
+              decoding="async"
             />
             <span>Learn {lang.name}</span>
           </a>

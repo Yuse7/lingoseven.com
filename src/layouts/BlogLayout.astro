@@ -26,6 +26,7 @@ interface Props {
   targetLang?: string;
   targetLangName?: string;
   targetLangSlug?: string;
+  ogImage?: string;
   locale: string;
   uiLang: string;
   slug: string;
@@ -47,6 +48,7 @@ const {
   targetLang,
   targetLangName,
   targetLangSlug,
+  ogImage,
   locale,
   uiLang,
   slug,
@@ -79,11 +81,16 @@ const canonicalUrl = noindex
   ? `https://lingoseven.com/en/blog/${slug}/`
   : `https://lingoseven.com/${uiLang}/blog/${slug}/`;
 
+const articleImage = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : `https://lingoseven.com${ogImage}`)
+  : 'https://lingoseven.com/images/pic.png';
+
 const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: title,
+    image: articleImage,
     description,
     datePublished: pubDate.toISOString(),
     ...(updatedDate && { dateModified: updatedDate.toISOString() }),
@@ -144,6 +151,7 @@ const ogArticle = {
   description={description}
   lang={uiLang}
   canonicalUrl={canonicalUrl}
+  ogImage={ogImage}
   ogType="article"
   ogArticle={ogArticle}
   hreflangAlternates={hreflangAlternates}
