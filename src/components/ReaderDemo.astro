@@ -3,11 +3,13 @@
 interface Props {
   targetLang?: string;
   uiLang?: string;
+  /** Screenshot mode: freeze on a representative still frame instead of animating. */
+  still?: boolean;
 }
-const { targetLang = 'de', uiLang = 'en' } = Astro.props;
+const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
 ---
 
-<div class="reader-demo" data-target-lang={targetLang} data-ui-lang={uiLang}>
+<div class="reader-demo" data-target-lang={targetLang} data-ui-lang={uiLang} data-still={still ? '1' : undefined}>
   <div class="reader-demo__phone-wrap">
     <img src="/images/phone-clean.svg" alt="" class="reader-demo__shell" />
     <div class="reader-demo__frame">
@@ -312,104 +314,88 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
 </style>
 
 <script>
-  const S3 = 'https://lingo7.s3.eu-central-1.amazonaws.com';
   const BACKEND = 'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api';
-  const BOOK = 'summary_11_A';
+  const BOOK = 'summary_11_A2';
   const readerRoot = document.querySelector<HTMLElement>('.reader-demo');
   const INITIAL_TGT = readerRoot?.dataset.targetLang || 'de';
   const INITIAL_TRN = readerRoot?.dataset.uiLang || 'en';
+  // Screenshot mode: render one clean frame (tapped word + highlighted
+  // translation) and signal readiness via window.__shotReady — no animation.
+  const STILL = readerRoot?.dataset.still === '1';
 
   // Cancellation token: every load bumps this; running setTimeouts bail if stale.
   let currentRequestId = 0;
   // First reveal waits for viewport intersection; subsequent reloads start immediately.
   let hasRevealed = false;
 
-  // Try S3 first, if fails trigger backend generation and poll
-  async function fetchWithGeneration(s3Url, backendUrl, options = {}) {
-    // 1. Try S3
-    try {
-      const res = await fetch(s3Url);
-      if (res.ok) return await res.json();
-    } catch (e) { /* S3 failed, try backend */ }
+  // Fetch JSON from the v2 backend. The /page and /align endpoints generate
+  // synchronously on a cache miss (they block until ready), so no polling is
+  // needed — just retry a couple of times on transient network/5xx errors.
+  async function fetchJson(url, retries = 2) {
+    let lastErr;
+    for (let i = 0; i <= retries; i++) {
+      try {
+        const res = await fetch(url);
+        if (res.ok) return await res.json();
+        lastErr = new Error(`Backend ${res.status}`);
+      } catch (e) { lastErr = e; }
+      if (i < retries) await new Promise(r => setTimeout(r, 1500));
+    }
+    throw lastErr;
+  }
 
-    // 2. Trigger generation via backend
-    const res = await fetch(backendUrl);
-    if (!res.ok) throw new Error(`Backend ${res.status}`);
-    let data = await res.json();
-
-    // 3. If generating/processing, poll
-    const isReady = options.isReady || (d => d[options.statusField || 'status'] === (options.readyValue || 'ready'));
-    const pollDelay = options.pollDelay || 3000;
-    const maxPolls = options.maxPolls || 10;
-
-    if (!isReady(data)) {
-      for (let i = 0; i < maxPolls; i++) {
-        await new Promise(r => setTimeout(r, pollDelay));
-        const poll = await fetch(backendUrl);
-        if (!poll.ok) continue;
-        data = await poll.json();
-        if (isReady(data)) break;
+  // Group a v2 block's tokens by sentence using its pre-split sentence ranges.
+  // Returns one entry per sentence: { words, text, tokenOffset } where
+  // tokenOffset is the index of the sentence's first token within the block's
+  // token array — the same index space the v2 alignments use.
+  function blockToSentences(block) {
+    const sents = block.sentences || [];
+    const groups = sents.map(() => ({ words: [], text: '', tokenOffset: -1 }));
+    for (let ti = 0; ti < block.tokens.length; ti++) {
+      const t = block.tokens[ti];
+      let si = 0;
+      for (let j = 0; j < sents.length; j++) {
+        if (t.s >= sents[j].s && t.e <= sents[j].e) { si = j; break; }
       }
+      const g = groups[si];
+      if (!g) continue;
+      if (g.tokenOffset < 0) g.tokenOffset = ti;
+      g.words.push(block.text.substring(t.s, t.e));
     }
-
-    if (!isReady(data)) throw new Error('Generation timed out');
-
-    // 4. For pages/audio: re-fetch from S3 (backend returns URLs)
-    //    For mappings: data contains elements directly
-    if (options.returnDirect) return data;
-
-    // Re-try S3 after generation
-    const s3Res = await fetch(s3Url);
-    if (s3Res.ok) return await s3Res.json();
-    throw new Error('S3 still unavailable after generation');
+    for (let si = 0; si < sents.length; si++) {
+      groups[si].text = block.text.substring(sents[si].s, sents[si].e).trim();
+    }
+    return groups;
   }
 
-  // Reconstruct text from token array [[word, prefix, suffix], ...]
-  function tokensToText(tokens) {
-    return tokens.map(t => t[1] + t[0] + t[2]).join('');
-  }
-
-  // Split token array into sentences, returning words + text for each
-  function splitTokensToSentences(tokens) {
-    const sentences = [];
-    let current = [];
-    for (const t of tokens) {
-      current.push(t);
-      if (/[.!?]/.test(t[2])) {
-        sentences.push({ words: current.map(tk => tk[0]), text: tokensToText(current).trim(), tokenCount: current.length });
-        current = [];
-      }
-    }
-    if (current.length > 0) {
-      sentences.push({ words: current.map(tk => tk[0]), text: tokensToText(current).trim(), tokenCount: current.length });
-    }
-    return sentences;
-  }
-
-  // Extract structured data from page JSON, tracking element/token offsets for mappings
-  function parsePage(data) {
+  // Extract title/subtitle + flat sentence list from one side ('orig' | 'trans')
+  // of a v2 page response. Sentences carry their block index + within-block
+  // sentence index so word taps can look up the matching alignment entry.
+  function parseSide(page, side) {
     let title = '';
     let subtitle = '';
-    const sentences = []; // { words, text, elementIdx, tokenOffset }
-
-    for (let elIdx = 0; elIdx < data.elements.length; elIdx++) {
-      const el = data.elements[elIdx];
-      if (el.type === 'header') {
-        const text = tokensToText(el.data.text.tokens);
-        if (el.data.level === 1) title = text;
+    const sentences = []; // { words, text, blockIdx, sentIdx, tokenOffset }
+    for (let bi = 0; bi < page.blocks.length; bi++) {
+      const block = page.blocks[bi][side];
+      const style = block.style;
+      if (style === 'h1' || style === 'h2' || style === 'h3') {
+        const text = block.text.trim();
+        if (style === 'h1' && !title) title = text;
         else if (!subtitle) subtitle = text;
-      } else if (el.type === 'paragraph') {
-        let tokenOffset = 0;
-        for (const textObj of el.data.texts) {
-          const sents = splitTokensToSentences(textObj.tokens);
-          for (const s of sents) {
-            sentences.push({ ...s, elementIdx: elIdx, tokenOffset });
-            tokenOffset += s.tokenCount;
-          }
-        }
+        continue;
+      }
+      const groups = blockToSentences(block);
+      for (let si = 0; si < groups.length; si++) {
+        sentences.push({
+          words: groups[si].words,
+          text: groups[si].text,
+          blockIdx: bi,
+          sentIdx: si,
+          tokenOffset: groups[si].tokenOffset,
+        });
       }
     }
-    return { title, subtitle, sentences, hash: data.hash };
+    return { title, subtitle, sentences };
   }
 
   // Build word-wrapped HTML for a sentence
@@ -434,21 +420,18 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     if (fingerEl) fingerEl.classList.remove('is-visible');
 
     try {
-      // Fetch pages: try S3 first, fall back to backend generation
-      const [targetRaw, transRaw] = await Promise.all([
-        fetchWithGeneration(
-          `${S3}/pages/${BOOK}/${tgtLang}/page_0.json`,
-          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${tgtLang}&trans_lang=${trnLang}&page_index=0`
-        ),
-        fetchWithGeneration(
-          `${S3}/pages/${BOOK}/${trnLang}/page_0.json`,
-          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${trnLang}&trans_lang=${tgtLang}&page_index=0`
-        ),
-      ]);
+      // v2: one call returns orig (target lang) + trans (ui lang) paired, with
+      // sentences already split server-side (locale-aware) and orig/trans
+      // sentence counts guaranteed equal — so a short sentence can never be
+      // paired with a whole paragraph the way the old client-side splitter
+      // (Latin-only /[.!?]/) did for scripts like Armenian.
+      const page = await fetchJson(
+        `${BACKEND}/books2/${BOOK}/page?page=0&orig_lang=${tgtLang}&target_lang=${trnLang}`
+      );
       if (requestId !== currentRequestId) return;
 
-      const targetData = parsePage(targetRaw);
-      const transData = parsePage(transRaw);
+      const targetData = parseSide(page, 'orig');
+      const transData = parseSide(page, 'trans');
 
       // Set header title (truncated)
       titleEl.textContent = targetData.title.length > 22
@@ -480,36 +463,30 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
 
       container.innerHTML = html;
 
-      // Load mappings: needs page hashes
-      let mappings = null;
+      // Load word-level alignments (v2): alignments[blockIdx][sentIdx] is a list
+      // of [origTokenIdx, transTokenIdx] pairs, token indices global within the
+      // block — the same space parseSide records as tokenOffset.
+      let alignments = null;
       try {
-        const origHash = targetRaw.hash;
-        const transHash = transRaw.hash;
-        const contentHash = origHash + transHash; // 8 chars
-
-        mappings = await fetchWithGeneration(
-          `${S3}/mappings/${BOOK}/${tgtLang}_${trnLang}/page_0_${contentHash}.json`,
-          `${BACKEND}/book/mappings?book_code=${BOOK}&orig_lang=${tgtLang}&trans_lang=${trnLang}&page_index=0&content_hash=${contentHash}`,
-          {
-            isReady: d => d.type !== 'processing',
-            returnDirect: true,
-          }
+        const alignRes = await fetchJson(
+          `${BACKEND}/books2/${BOOK}/align?page=0&orig_lang=${tgtLang}&target_lang=${trnLang}`
         );
+        alignments = alignRes.alignments;
       } catch (e) {
-        console.warn('ReaderDemo: mappings unavailable', e);
+        console.warn('ReaderDemo: alignments unavailable', e);
       }
       if (requestId !== currentRequestId) return;
 
       // Show listen button and start animation
       if (listenBtn) listenBtn.style.display = '';
-      startFingerAnimation(targetData.sentences, transData.sentences, mappings, maxSentences, requestId);
+      startFingerAnimation(targetData.sentences, transData.sentences, alignments, maxSentences, requestId);
     } catch (e) {
       if (requestId !== currentRequestId) return;
       console.error('ReaderDemo: failed to load book data', e);
     }
   }
 
-  function startFingerAnimation(targetSentences, transSentences, mappings, count, requestId) {
+  function startFingerAnimation(targetSentences, transSentences, alignments, count, requestId) {
     const isStale = () => requestId !== currentRequestId;
     const lines = document.querySelectorAll('#readerContent .reader__en[data-line]');
     const transLines = document.querySelectorAll('#readerContent .reader__trans[data-line]');
@@ -540,11 +517,15 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     function positionFinger(wordEl) {
       const rect = wordEl.getBoundingClientRect();
       const readerRect = reader.getBoundingClientRect();
-      const maxTop = readerRect.height * 0.85;
-      const top = Math.min(rect.top - readerRect.top + rect.height * 0.5, maxTop);
+      // The phone may be CSS-transform-scaled (store screenshots). getBoundingClientRect
+      // returns scaled screen px, but finger.style.top/left live in the reader's own
+      // (unscaled) coordinate space — normalize by the scale so they line up.
+      const scale = (readerRect.width / reader.offsetWidth) || 1;
+      const maxTop = reader.offsetHeight * 0.85;
+      const top = Math.min((rect.top - readerRect.top) / scale + (rect.height / scale) * 0.5, maxTop);
       const left = Math.max(0, Math.min(
-        rect.left - readerRect.left + rect.width / 2 - 6,
-        readerRect.width - 40
+        (rect.left - readerRect.left) / scale + (rect.width / scale) / 2 - 6,
+        reader.offsetWidth - 40
       ));
       finger.style.top = top + 'px';
       finger.style.left = left + 'px';
@@ -562,20 +543,53 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     }
 
     function getTransIndices(sentenceIdx, wordIdx) {
-      if (!mappings) return [];
+      if (!alignments) return [];
       const sent = targetSentences[sentenceIdx];
-      if (!sent) return [];
-      const elMappings = mappings.elements[sent.elementIdx];
-      if (!elMappings || !elMappings[0]) return [];
-      const globalWordIdx = sent.tokenOffset + wordIdx;
-      const mapping = elMappings[0][globalWordIdx];
-      if (!mapping) return [];
       const transSent = transSentences[sentenceIdx];
-      if (!transSent) return [];
-      const transOffset = transSent.tokenOffset;
-      return mapping[0]
-        .map(idx => idx - transOffset)
-        .filter(idx => idx >= 0 && idx < transSent.words.length);
+      if (!sent || !transSent) return [];
+      const blockAlign = alignments[sent.blockIdx];
+      if (!blockAlign) return [];
+      const sentAlign = blockAlign[sent.sentIdx];
+      if (!sentAlign) return [];
+      const origTok = sent.tokenOffset + wordIdx;
+      const out = [];
+      for (const pair of sentAlign) {
+        if (pair[0] === origTok) {
+          const within = pair[1] - transSent.tokenOffset;
+          if (within >= 0 && within < transSent.words.length) out.push(within);
+        }
+      }
+      return out;
+    }
+
+    // Screenshot mode: freeze on a representative frame and bail out.
+    if (STILL) {
+      const li = Math.min(1, lines.length - 1);
+      const line = lines[li];
+      const transLine = transLines[li];
+      const words = line.querySelectorAll('.reader__word');
+      const transWords = transLine ? transLine.querySelectorAll('.reader__trans-word') : [];
+      const taps = pickTapWordIndices(words);
+      const wi = taps.length ? taps[0] : Math.min(3, words.length - 1);
+      const wordEl = words[wi];
+      // Highlights don't depend on layout — apply immediately.
+      line.classList.add('is-reading');
+      if (wordEl) {
+        wordEl.classList.add('is-tapped');
+        for (const ti of getTransIndices(li, wi)) {
+          if (transWords[ti]) transWords[ti].classList.add('is-trans-highlighted');
+        }
+      }
+      // Position the finger only AFTER the web font has loaded and the layout
+      // has settled — otherwise the text reflows down and the finger lands on
+      // the wrong line. Signal readiness once it's correctly placed.
+      const placeFinger = () => {
+        if (wordEl) { positionFinger(wordEl); finger.classList.add('is-visible'); }
+        (window as any).__shotReady = true;
+      };
+      const fontsReady = (document as any).fonts?.ready || Promise.resolve();
+      fontsReady.then(() => requestAnimationFrame(() => requestAnimationFrame(placeFinger)));
+      return;
     }
 
     let lineIdx = 0;

@@ -1,0 +1,132 @@
+---
+// WordsMock — static phone screen for the spaced-repetition word review feature.
+// The reviewed word + example are in the target language; the translation is in
+// the UI language. Rendered with an English/en baseline server-side, then
+// localized client-side from the URL `tgt`/`ui` params. Sets window.__shotReady.
+import { mockUi, reviewCard } from '../data/screenshotMocks';
+const m = mockUi('en');
+const card = reviewCard('en', 'en');
+const DUE = 12;
+---
+
+<div class="wd-demo">
+  <div class="wd-demo__phone-wrap">
+    <img src="/images/phone-clean.svg" alt="" class="wd-demo__shell" />
+    <div class="wd-demo__frame">
+      <div class="wd-screen">
+        <div class="wd-screen__head">
+          <span class="wd-screen__back">&#8249;</span>
+          <span class="wd-screen__title">{m.review.title}</span>
+        </div>
+
+        <div class="wd-screen__progress">
+          <div class="wd-screen__bar"><span style="width:42%"></span></div>
+          <span class="wd-screen__due">{m.review.due.replace('{n}', String(DUE))}</span>
+        </div>
+
+        <div class="wd-screen__body">
+          <div class="wd-card">
+            <div class="wd-card__img"><img src={card.image} alt="" /></div>
+            <div class="wd-card__word-row">
+              <span class="wd-card__word">{card.word}</span>
+              <span class="wd-card__audio" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.8 6a9 9 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+            </div>
+            <span class="wd-card__trans">{card.translation}</span>
+            <div class="wd-card__divider"></div>
+            <p class="wd-card__example">{card.example}</p>
+            <p class="wd-card__example-trans">{card.exampleTrans}</p>
+          </div>
+        </div>
+
+        <div class="wd-screen__actions">
+          <button class="wd-btn wd-btn--again"><span class="wd-btn__label">{m.review.again}</span></button>
+          <button class="wd-btn wd-btn--good"><span class="wd-btn__label">{m.review.good}</span></button>
+          <button class="wd-btn wd-btn--easy"><span class="wd-btn__label">{m.review.easy}</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .wd-demo { display: flex; justify-content: center; align-items: center; }
+  .wd-demo__phone-wrap { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .wd-demo__shell { position: absolute; width: 332px; height: 645px; top: -2px; left: -6px; z-index: 20; pointer-events: none; }
+  .wd-demo__frame { width: 320px; height: 640px; background: #fff; border-radius: 36px; overflow: hidden; position: relative; }
+
+  .wd-screen { width: 100%; height: 100%; background: #f6f7f9; display: flex; flex-direction: column; font-family: 'Inter', sans-serif; overflow: hidden; }
+
+  .wd-screen__head { display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: #fff; border-bottom: 1px solid #eef0f3; flex-shrink: 0; }
+  .wd-screen__back { font-size: 20px; color: #f97316; font-weight: 600; line-height: 1; }
+  .wd-screen__title { font-size: 14px; font-weight: 700; color: #1a1a2e; }
+
+  .wd-screen__progress { display: flex; flex-direction: column; gap: 6px; padding: 14px 22px 6px; background: #fff; }
+  .wd-screen__bar { height: 6px; border-radius: 3px; background: #eef0f3; overflow: hidden; }
+  .wd-screen__bar span { display: block; height: 100%; background: #4ade80; border-radius: 3px; }
+  .wd-screen__due { font-size: 11px; color: #8b93a1; font-weight: 600; }
+
+  .wd-screen__body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px 20px 6px; }
+  .wd-card {
+    width: 100%; background: #fff; border-radius: 20px; box-shadow: 0 8px 28px rgba(20,30,50,0.10);
+    padding: 16px 18px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 7px;
+  }
+  .wd-card__img { width: 100%; height: 132px; border-radius: 14px; overflow: hidden; background: #f0f2f5; }
+  .wd-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .wd-card__word-row { display: flex; align-items: center; gap: 9px; margin-top: 4px; }
+  .wd-card__word { font-size: 27px; font-weight: 800; color: #1a1a2e; letter-spacing: -0.3px; }
+  .wd-card__audio {
+    width: 30px; height: 30px; border-radius: 50%; background: rgba(249,115,22,0.12); color: #f97316;
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .wd-card__audio svg { width: 17px; height: 17px; }
+  .wd-card__trans { font-size: 17px; font-weight: 700; color: #f97316; }
+  .wd-card__divider { width: 40px; height: 2px; background: #eef0f3; border-radius: 1px; margin: 4px 0; }
+  .wd-card__example { margin: 0; font-size: 13px; line-height: 1.4; color: #374151; }
+  .wd-card__example-trans { margin: 0; font-size: 12px; line-height: 1.35; color: #9aa3b2; font-style: italic; }
+
+  .wd-screen__actions { display: flex; gap: 10px; padding: 8px 18px 18px; background: #fff; flex-shrink: 0; }
+  .wd-btn { flex: 1; padding: 13px 0; border: none; border-radius: 14px; font-size: 13px; font-weight: 700; font-family: inherit; }
+  .wd-btn--again { background: rgba(248,113,113,0.14); color: #ef4444; }
+  .wd-btn--good { background: rgba(96,165,250,0.16); color: #2563eb; }
+  .wd-btn--easy { background: #4ade80; color: #0f2417; }
+</style>
+
+<script>
+  import { mockUi, reviewCard } from '../data/screenshotMocks';
+
+  const root = document.querySelector('.wd-demo');
+  if (root) {
+    const q = new URLSearchParams(location.search);
+    const tgt = q.get('tgt') || 'de';
+    const ui = q.get('ui') || 'en';
+    const m = mockUi(ui);
+    const card = reviewCard(tgt, ui);
+    const DUE = 12;
+    const set = (sel, txt) => { const el = root.querySelector(sel); if (el && txt != null) el.textContent = txt; };
+
+    set('.wd-screen__title', m.review.title);
+    set('.wd-screen__due', m.review.due.replace('{n}', String(DUE)));
+    set('.wd-card__word', card.word);
+    set('.wd-card__trans', card.translation);
+    set('.wd-card__example', card.example);
+    set('.wd-card__example-trans', card.exampleTrans);
+    set('.wd-btn--again .wd-btn__label', m.review.again);
+    set('.wd-btn--good .wd-btn__label', m.review.good);
+    set('.wd-btn--easy .wd-btn__label', m.review.easy);
+
+    // Word illustration: swap to the right word, and drop it if it 404s so the
+    // card falls back cleanly (and so the readiness check isn't blocked).
+    const img = root.querySelector('.wd-card__img img');
+    if (img) {
+      img.addEventListener('error', () => { const box = root.querySelector('.wd-card__img'); if (box) box.remove(); });
+      if (img.getAttribute('src') !== card.image) img.setAttribute('src', card.image);
+    }
+
+    const ready = () => { (window as any).__shotReady = true; };
+    if (document.readyState === 'complete') ready();
+    else window.addEventListener('load', ready);
+    setTimeout(ready, 4000);
+  }
+</script>

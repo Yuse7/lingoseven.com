@@ -1,12 +1,18 @@
 ---
+import { adaptExamples, adaptBook } from '../data/adaptExamples';
+
 interface Props {
   targetLangName?: string;
   targetLangNamePrep?: string;
   targetLangNameGen?: string;
+  targetLang?: string;
   translations?: Record<string, any>;
 }
 
-const { targetLangName = '', targetLangNamePrep = '', targetLangNameGen = '', translations = {} } = Astro.props;
+const { targetLangName = '', targetLangNamePrep = '', targetLangNameGen = '', targetLang = 'en', translations = {} } = Astro.props;
+
+// Real before/after passage for this target language (falls back to English).
+const adapt = adaptExamples[targetLang] ?? adaptExamples['en'];
 
 function t(key: string): string {
   const val = translations[key] || key;
@@ -242,7 +248,7 @@ const stackCovers = [
     <!-- ============================================ -->
     <!-- SUPER POWER #1 — adapt to your level          -->
     <!-- ============================================ -->
-    <div class="super-moment super-moment--adapt">
+    <div class="super-moment super-moment--adapt" id="adaptation">
       <div class="super-moment-inner">
         <div class="super-moment-content">
           <span class="super-moment-tag">
@@ -255,25 +261,20 @@ const stackCovers = [
           <p class="super-moment-desc" set:html={t('library_super2_desc')}></p>
         </div>
 
-        <div class="super-moment-visual" aria-hidden="true">
+        <div class="super-moment-visual">
           <div class="adapt-illu">
             <div class="adapt-page adapt-page--complex">
-              <span class="adapt-page-label adapt-page-label--hard">{t('library_super_visual_hard')}</span>
-              <div class="adapt-page-text">
-                <div class="adapt-line adapt-line--xl"></div>
-                <div class="adapt-line adapt-line--xl"></div>
-                <div class="adapt-line adapt-line--l"></div>
-                <div class="adapt-line adapt-line--xl"></div>
-                <div class="adapt-line adapt-line--m"></div>
-                <div class="adapt-line adapt-line--xl"></div>
-                <div class="adapt-line adapt-line--s"></div>
+              <div class="adapt-page-head">
+                <span class="adapt-page-label adapt-page-label--hard">{t('library_super_visual_hard')}</span>
+                <span class="adapt-page-cite">{adaptBook.author}</span>
               </div>
+              <p class="adapt-page-text">{adapt.hard}</p>
             </div>
 
             <div class="adapt-magic">
-              <svg width="48" height="32" viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 16h36"/>
-                <path d="M32 8l8 8-8 8"/>
+              <svg width="32" height="40" viewBox="0 0 32 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 4v30"/>
+                <path d="M8 26l8 8 8-8"/>
               </svg>
               <div class="translate-magic-sparkle translate-magic-sparkle--1">✦</div>
               <div class="translate-magic-sparkle translate-magic-sparkle--2">✦</div>
@@ -281,13 +282,10 @@ const stackCovers = [
             </div>
 
             <div class="adapt-page adapt-page--simple">
-              <span class="adapt-page-label adapt-page-label--easy">{t('library_super_visual_easy')}</span>
-              <div class="adapt-page-text">
-                <div class="adapt-line"></div>
-                <div class="adapt-line adapt-line--m"></div>
-                <div class="adapt-line"></div>
-                <div class="adapt-line adapt-line--s"></div>
+              <div class="adapt-page-head">
+                <span class="adapt-page-label adapt-page-label--easy">{t('library_super_visual_easy')}</span>
               </div>
+              <p class="adapt-page-text">{adapt.easy}</p>
             </div>
           </div>
         </div>
@@ -699,54 +697,48 @@ const stackCovers = [
     50% { opacity: 1; transform: scale(1.1); }
   }
 
-  /* ----- Visual 2: adaptation ----- */
+  /* ----- Visual 2: adaptation (real before/after passage) ----- */
   .adapt-illu {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
-    gap: 14px;
-    padding: 24px;
+    gap: 8px;
+    padding: 8px 4px;
   }
 
   .adapt-page {
-    flex-shrink: 0;
-    width: 130px;
-    border-radius: 10px;
+    border-radius: 14px;
     background: linear-gradient(135deg, #2c3a52 0%, #1f2a3d 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 16px 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    padding: 16px 18px;
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
     transition: transform 0.3s ease;
   }
 
-  .adapt-page--complex {
-    transform: rotate(-3deg);
-  }
-
   .adapt-page--simple {
-    transform: rotate(3deg);
-    background: linear-gradient(135deg, rgba(74, 222, 128, 0.16) 0%, rgba(34, 197, 94, 0.08) 100%);
-    border-color: rgba(74, 222, 128, 0.45);
-    box-shadow: 0 14px 32px rgba(74, 222, 128, 0.22);
-  }
-
-  .super-moment:hover .adapt-page--complex {
-    transform: rotate(-5deg) translateY(-3px);
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.14) 0%, rgba(34, 197, 94, 0.06) 100%);
+    border-color: rgba(74, 222, 128, 0.4);
+    box-shadow: 0 14px 32px rgba(74, 222, 128, 0.18);
   }
 
   .super-moment:hover .adapt-page--simple {
-    transform: rotate(5deg) translateY(-3px);
+    transform: translateY(-3px);
+  }
+
+  .adapt-page-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
   }
 
   .adapt-page-label {
-    align-self: flex-start;
     padding: 3px 8px;
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.06);
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -758,27 +750,29 @@ const stackCovers = [
     color: #4ade80;
   }
 
+  .adapt-page-cite {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--text-light);
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .adapt-page-text {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-top: 4px;
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.78);
   }
 
-  .adapt-line {
-    height: 4px;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.18);
+  .adapt-page--complex .adapt-page-text {
+    color: rgba(255, 255, 255, 0.62);
   }
 
-  .adapt-line--xl { width: 110%; transform: translateX(-5%); }
-  .adapt-line--l { width: 95%; }
-  .adapt-line--m { width: 70%; }
-  .adapt-line--s { width: 45%; }
-
-  .adapt-page--simple .adapt-line {
-    background: rgba(74, 222, 128, 0.55);
-    height: 5px;
+  .adapt-page--simple .adapt-page-text {
+    color: rgba(255, 255, 255, 0.92);
   }
 
   .adapt-magic {
@@ -788,6 +782,7 @@ const stackCovers = [
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    margin: -2px 0;
   }
 
   /* ----- visual: book stack ----- */
@@ -1242,14 +1237,14 @@ const stackCovers = [
       font-size: 15px;
     }
 
-    .translate-book-cover,
-    .adapt-page {
-      width: 108px;
-    }
-
     .translate-book-cover {
+      width: 108px;
       height: 155px;
       padding: 14px 12px;
+    }
+
+    .adapt-page-text {
+      font-size: 13px;
     }
 
     .anybook-stack {

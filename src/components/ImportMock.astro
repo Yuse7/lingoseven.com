@@ -1,0 +1,130 @@
+---
+// ImportMock — static phone screen for the "upload your own book" feature, used
+// in store screenshots. UI chrome is localized to the listing language (English
+// server-side, re-localized client-side from the URL `ui` param). Signals
+// window.__shotReady on load.
+import { mockUi } from '../data/screenshotMocks';
+const cover = (id: string) => `https://lingo7.s3.eu-central-1.amazonaws.com/covers/250x250/${id}.webp`;
+const m = mockUi('en');
+---
+
+<div class="imp-demo">
+  <div class="imp-demo__phone-wrap">
+    <img src="/images/phone-clean.svg" alt="" class="imp-demo__shell" />
+    <div class="imp-demo__frame">
+      <div class="imp-screen">
+        <div class="imp-screen__head">
+          <span class="imp-screen__back">&#8249;</span>
+          <span class="imp-screen__title">{m.impTitle}</span>
+        </div>
+
+        <div class="imp-screen__body">
+          <div class="imp-covers" aria-hidden="true">
+            <img class="imp-cover a" src={cover('summary_5')} alt="" />
+            <img class="imp-cover b" src={cover('classic_26')} alt="" />
+            <div class="imp-cover imp-cover--you">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              <span class="imp-you__label">{m.impYou}</span>
+            </div>
+          </div>
+
+          <div class="imp-drop">
+            <div class="imp-drop__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="imp-drop__title">{m.impDrop}</div>
+            <div class="imp-drop__formats">
+              <span class="imp-fmt epub">EPUB</span>
+              <span class="imp-fmt pdf">PDF</span>
+              <span class="imp-fmt docx">DOCX</span>
+              <span class="imp-fmt txt">TXT</span>
+            </div>
+          </div>
+
+          <ul class="imp-feats">
+            {m.impFeats.map((f) => (
+              <li>
+                <span class="imp-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                <span class="imp-feat__label">{f}</span>
+              </li>
+            ))}
+          </ul>
+
+          <button class="imp-btn">{m.impChoose}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .imp-demo { display: flex; justify-content: center; align-items: center; }
+  .imp-demo__phone-wrap { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .imp-demo__shell { position: absolute; width: 332px; height: 645px; top: -2px; left: -6px; z-index: 20; pointer-events: none; }
+  .imp-demo__frame { width: 320px; height: 640px; background: #fff; border-radius: 36px; overflow: hidden; position: relative; }
+
+  .imp-screen { width: 100%; height: 100%; background: #fff; display: flex; flex-direction: column; font-family: 'Inter', sans-serif; overflow: hidden; }
+
+  .imp-screen__head { display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid #eef0f3; flex-shrink: 0; }
+  .imp-screen__back { font-size: 20px; color: #f97316; font-weight: 600; line-height: 1; }
+  .imp-screen__title { font-size: 14px; font-weight: 700; color: #1a1a2e; }
+
+  .imp-screen__body { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 22px 22px; gap: 18px; }
+
+  /* Fanned covers + your-book slot */
+  .imp-covers { position: relative; width: 200px; height: 124px; margin-top: 4px; }
+  .imp-cover { position: absolute; width: 84px; height: 118px; border-radius: 8px; object-fit: cover; box-shadow: 0 10px 22px rgba(20,30,50,0.22); top: 0; left: 58px; }
+  .imp-cover.a { transform: translateX(-52px) rotate(-12deg); }
+  .imp-cover.b { transform: translateX(-4px) rotate(-3deg); z-index: 1; }
+  .imp-cover--you {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    transform: translateX(52px) rotate(11deg); z-index: 2;
+    background: rgba(74,222,128,0.10); border: 2px dashed rgba(74,222,128,0.6);
+    color: #16a34a; box-shadow: 0 10px 22px rgba(74,222,128,0.22);
+  }
+  .imp-cover--you svg { width: 22px; height: 22px; }
+  .imp-cover--you span { font-size: 10px; font-weight: 700; text-align: center; padding: 0 4px; }
+
+  .imp-drop {
+    width: 100%; border: 2px dashed #e3b58c; background: rgba(249,115,22,0.05);
+    border-radius: 16px; padding: 18px 14px; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .imp-drop__icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(249,115,22,0.12); display: flex; align-items: center; justify-content: center; }
+  .imp-drop__icon svg { width: 22px; height: 22px; }
+  .imp-drop__title { font-size: 13px; font-weight: 700; color: #1a1a2e; text-align: center; }
+  .imp-drop__formats { display: flex; gap: 6px; }
+  .imp-fmt { font-size: 9px; font-weight: 800; letter-spacing: 0.04em; padding: 3px 7px; border-radius: 6px; }
+  .imp-fmt.epub { color: #16a34a; background: rgba(74,222,128,0.14); }
+  .imp-fmt.pdf { color: #ef4444; background: rgba(248,113,113,0.14); }
+  .imp-fmt.docx { color: #3b82f6; background: rgba(96,165,250,0.16); }
+  .imp-fmt.txt { color: #6b7280; background: #f0f2f5; }
+
+  .imp-feats { list-style: none; padding: 0; margin: 0; width: 100%; display: flex; flex-direction: column; gap: 10px; }
+  .imp-feats li { display: flex; align-items: flex-start; gap: 9px; font-size: 12px; color: #374151; line-height: 1.35; }
+  .imp-check { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; background: #4ade80; display: inline-flex; align-items: center; justify-content: center; }
+  .imp-check svg { width: 11px; height: 11px; }
+
+  .imp-btn { margin-top: auto; width: 100%; padding: 13px; border: none; border-radius: 14px; background: #f97316; color: #fff; font-size: 14px; font-weight: 700; font-family: inherit; }
+</style>
+
+<script>
+  import { mockUi } from '../data/screenshotMocks';
+
+  const root = document.querySelector('.imp-demo');
+  if (root) {
+    const ui = new URLSearchParams(location.search).get('ui') || 'en';
+    const m = mockUi(ui);
+    const set = (sel, txt) => { const el = root.querySelector(sel); if (el && txt != null) el.textContent = txt; };
+
+    set('.imp-screen__title', m.impTitle);
+    set('.imp-you__label', m.impYou);
+    set('.imp-drop__title', m.impDrop);
+    set('.imp-btn', m.impChoose);
+    root.querySelectorAll('.imp-feat__label').forEach((el, i) => { if (m.impFeats[i]) el.textContent = m.impFeats[i]; });
+
+    const ready = () => { (window as any).__shotReady = true; };
+    if (document.readyState === 'complete') ready();
+    else window.addEventListener('load', ready);
+    setTimeout(ready, 6000);
+  }
+</script>

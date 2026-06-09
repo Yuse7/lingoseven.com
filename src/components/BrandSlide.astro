@@ -1,0 +1,135 @@
+---
+// BrandSlide — logo + slogan store screenshot (no phone). Decorative language
+// flags up top, big Lingo7 logo, then the slogan. Same brand background and
+// data-device sizing as StoreFrame so it sits in the same screenshot set.
+import { languages } from '../data/languages';
+
+interface Props {
+  device?: 'iphone67' | 'android' | 'ipad';
+  slogan: string;
+  sub?: string;
+}
+const { device = 'iphone67', slogan, sub = '' } = Astro.props;
+
+// A wide spread of flags for the decorative grid (single-codepoint regional
+// flags only, so they render identically across platforms).
+const flags = languages
+  .filter((l) => l.enabled && l.flag && [...l.flag].length === 2)
+  .slice(0, 28)
+  .map((l) => l.flag);
+---
+
+<div class="brand-slide" data-device={device}>
+  <div class="brand-slide__glow"></div>
+
+  <div class="brand-slide__flags" aria-hidden="true">
+    {flags.map((f) => <span class="brand-flag">{f}</span>)}
+  </div>
+
+  <div class="brand-slide__logo">
+    <img src="/images/logo.svg" alt="Lingo7" />
+  </div>
+
+  <p class="brand-slide__slogan" id="shotTitle">{slogan}</p>
+  <p class="brand-slide__sub" id="shotSub" style={sub ? '' : 'display:none'}>{sub}</p>
+</div>
+
+<style>
+  .brand-slide[data-device='iphone67'] {
+    --w: 430px; --h: 932px; --padX: 40px; --slogan: 38px; --sub: 17px; --logoW: 230px; --flag: 34px; --gap: 16px; --cols: 7;
+  }
+  .brand-slide[data-device='android'] {
+    --w: 360px; --h: 640px; --padX: 28px; --slogan: 27px; --sub: 13px; --logoW: 175px; --flag: 26px; --gap: 11px; --cols: 7;
+  }
+  .brand-slide[data-device='ipad'] {
+    --w: 1024px; --h: 1366px; --padX: 130px; --slogan: 64px; --sub: 30px; --logoW: 430px; --flag: 62px; --gap: 30px; --cols: 7;
+  }
+
+  .brand-slide {
+    width: var(--w);
+    height: var(--h);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--slogan) * 0.7);
+    padding: 0 var(--padX);
+    text-align: center;
+    background:
+      radial-gradient(120% 70% at 50% 0%, #24344f 0%, rgba(36, 52, 79, 0) 55%),
+      linear-gradient(165deg, #1a2332 0%, #131b28 60%, #0e1521 100%);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .brand-slide__glow {
+    position: absolute;
+    top: 34%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 40%;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(74, 222, 128, 0.18) 0%, rgba(74, 222, 128, 0) 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .brand-slide__flags {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), auto);
+    justify-content: center;
+    gap: var(--gap);
+    margin-bottom: calc(var(--slogan) * 0.3);
+  }
+  .brand-flag {
+    font-size: var(--flag);
+    line-height: 1;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+  }
+
+  .brand-slide__logo {
+    position: relative;
+    z-index: 1;
+  }
+  .brand-slide__logo img {
+    width: var(--logoW);
+    height: auto;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));
+  }
+
+  .brand-slide__slogan {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: #fff;
+    font-size: var(--slogan);
+    line-height: 1.16;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    max-width: 16ch;
+  }
+  .brand-slide__sub {
+    position: relative;
+    z-index: 1;
+    margin: calc(var(--sub) * -0.3) 0 0;
+    color: #aeb8c8;
+    font-size: var(--sub);
+    line-height: 1.45;
+    font-weight: 600;
+    max-width: 26ch;
+  }
+</style>
+
+<script>
+  // Only signal readiness if this slide is actually present (the screenshot page
+  // removes it when another widget is selected).
+  function ready() {
+    if (document.querySelector('.brand-slide')) (window as any).__shotReady = true;
+  }
+  if (document.readyState === 'complete') ready();
+  else window.addEventListener('load', ready);
+  setTimeout(ready, 4000);
+</script>

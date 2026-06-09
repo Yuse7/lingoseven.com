@@ -1,0 +1,126 @@
+---
+// WordsChooseMock — word2 screenshot: a multiple-choice review exercise (a
+// different card type than the WordsMock flashcard). The prompt word is in the
+// target language with an audio button; the four options are translations in the
+// UI language, one correct (highlighted). Rendered en/en server-side, then
+// re-localized client-side from the URL `tgt`/`ui` params. Sets window.__shotReady.
+import { mockUi, reviewChoice } from '../data/screenshotMocks';
+const m = mockUi('en');
+const card = reviewChoice('en', 'en');
+const DUE = 12;
+---
+
+<div class="w2-demo">
+  <div class="w2-demo__phone-wrap">
+    <img src="/images/phone-clean.svg" alt="" class="w2-demo__shell" />
+    <div class="w2-demo__frame">
+      <div class="w2-screen">
+        <div class="w2-screen__head">
+          <span class="w2-screen__back">&#8249;</span>
+          <span class="w2-screen__title">{m.review.title}</span>
+        </div>
+
+        <div class="w2-screen__progress">
+          <div class="w2-screen__bar"><span style="width:58%"></span></div>
+          <span class="w2-screen__due">{m.review.due.replace('{n}', String(DUE))}</span>
+        </div>
+
+        <div class="w2-screen__body">
+          <span class="w2-prompt__label">{card.prompt}</span>
+          <div class="w2-prompt">
+            <span class="w2-prompt__word">{card.word}</span>
+            <span class="w2-prompt__audio" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18.8 6a9 9 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+          </div>
+
+          <div class="w2-options">
+            {card.options.map((o) => (
+              <button class={`w2-opt ${o.correct ? 'is-correct' : ''}`}>
+                <span class="w2-opt__text">{o.text}</span>
+                {o.correct && (
+                  <span class="w2-opt__check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .w2-demo { display: flex; justify-content: center; align-items: center; }
+  .w2-demo__phone-wrap { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .w2-demo__shell { position: absolute; width: 332px; height: 645px; top: -2px; left: -6px; z-index: 20; pointer-events: none; }
+  .w2-demo__frame { width: 320px; height: 640px; background: #fff; border-radius: 36px; overflow: hidden; position: relative; }
+
+  .w2-screen { width: 100%; height: 100%; background: #f6f7f9; display: flex; flex-direction: column; font-family: 'Inter', sans-serif; overflow: hidden; }
+
+  .w2-screen__head { display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: #fff; border-bottom: 1px solid #eef0f3; flex-shrink: 0; }
+  .w2-screen__back { font-size: 20px; color: #f97316; font-weight: 600; line-height: 1; }
+  .w2-screen__title { font-size: 14px; font-weight: 700; color: #1a1a2e; }
+
+  .w2-screen__progress { display: flex; flex-direction: column; gap: 6px; padding: 14px 22px 6px; background: #fff; }
+  .w2-screen__bar { height: 6px; border-radius: 3px; background: #eef0f3; overflow: hidden; }
+  .w2-screen__bar span { display: block; height: 100%; background: #4ade80; border-radius: 3px; }
+  .w2-screen__due { font-size: 11px; color: #8b93a1; font-weight: 600; }
+
+  .w2-screen__body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 16px 20px 22px; gap: 14px; }
+
+  .w2-prompt__label { text-align: center; font-size: 12px; font-weight: 600; color: #8b93a1; }
+  .w2-prompt {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: #fff; border-radius: 18px; padding: 26px 18px; box-shadow: 0 8px 24px rgba(20,30,50,0.08);
+  }
+  .w2-prompt__word { font-size: 30px; font-weight: 800; color: #1a1a2e; letter-spacing: -0.3px; }
+  .w2-prompt__audio {
+    width: 34px; height: 34px; border-radius: 50%; background: rgba(249,115,22,0.12); color: #f97316;
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .w2-prompt__audio svg { width: 19px; height: 19px; }
+
+  .w2-options { display: flex; flex-direction: column; gap: 10px; }
+  .w2-opt {
+    display: flex; align-items: center; justify-content: center; position: relative;
+    padding: 15px 16px; border: 1.5px solid #e6e9ef; border-radius: 14px; background: #fff;
+    font-family: inherit; font-size: 15px; font-weight: 700; color: #374151;
+  }
+  .w2-opt.is-correct { border-color: #4ade80; background: rgba(74,222,128,0.12); color: #15803d; }
+  .w2-opt__check {
+    position: absolute; right: 14px; width: 22px; height: 22px; border-radius: 50%; background: #4ade80;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .w2-opt__check svg { width: 13px; height: 13px; }
+</style>
+
+<script>
+  import { mockUi, reviewChoice } from '../data/screenshotMocks';
+
+  const root = document.querySelector('.w2-demo');
+  if (root) {
+    const q = new URLSearchParams(location.search);
+    const tgt = q.get('tgt') || 'de';
+    const ui = q.get('ui') || 'en';
+    const m = mockUi(ui);
+    const card = reviewChoice(tgt, ui);
+    const DUE = 12;
+    const set = (sel, txt) => { const el = root.querySelector(sel); if (el && txt != null) el.textContent = txt; };
+
+    set('.w2-screen__title', m.review.title);
+    set('.w2-screen__due', m.review.due.replace('{n}', String(DUE)));
+    set('.w2-prompt__label', card.prompt);
+    set('.w2-prompt__word', card.word);
+    root.querySelectorAll('.w2-opt').forEach((el, i) => {
+      const o = card.options[i];
+      if (!o) return;
+      const t = el.querySelector('.w2-opt__text'); if (t) t.textContent = o.text;
+    });
+
+    const ready = () => { (window as any).__shotReady = true; };
+    if (document.readyState === 'complete') ready();
+    else window.addEventListener('load', ready);
+    setTimeout(ready, 4000);
+  }
+</script>

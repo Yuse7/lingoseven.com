@@ -1,0 +1,117 @@
+---
+// StoreFrame — marketing canvas for App Store / Google Play screenshots.
+// Renders a brand-styled background with a headline at the top and a demo phone
+// (passed via <slot/>) at the bottom. Sizing is driven entirely by the
+// `data-device` attribute (CSS vars below) so it can be switched client-side;
+// the capture script uses deviceScaleFactor=3 to export at full store res.
+//
+//   iphone67 -> 430×932 logical -> 1290×2796 @3x
+//   android  -> 360×640 logical -> 1080×1920 @3x
+//
+// Title/sub carry ids so the /shot page can override them client-side from the
+// URL query (static pages can't read query params at request time).
+interface Props {
+  device?: 'iphone67' | 'android' | 'ipad';
+  caption: string;
+  sub?: string;
+}
+const { device = 'iphone67', caption, sub } = Astro.props;
+---
+
+<div class="store-frame" data-device={device}>
+  <div class="store-frame__glow"></div>
+  <div class="store-frame__caption">
+    <h1 class="store-frame__title" id="shotTitle">{caption}</h1>
+    <p class="store-frame__sub" id="shotSub" style={sub ? '' : 'display:none'}>{sub}</p>
+  </div>
+  <div class="store-frame__stage">
+    <div class="store-frame__phone"><slot /></div>
+  </div>
+</div>
+
+<style>
+  .store-frame[data-device='iphone67'] {
+    --w: 430px; --h: 932px; --padTop: 58px; --padX: 36px;
+    --title: 37px; --subSize: 18px; --phoneScale: 1.0; --stageGap: 26px;
+  }
+  .store-frame[data-device='android'] {
+    --w: 360px; --h: 640px; --padTop: 36px; --padX: 26px;
+    --title: 27px; --subSize: 14px; --phoneScale: 0.72; --stageGap: 16px;
+  }
+  .store-frame[data-device='ipad'] {
+    --w: 1024px; --h: 1366px; --padTop: 96px; --padX: 110px;
+    --title: 60px; --subSize: 30px; --phoneScale: 1.5; --stageGap: 52px;
+  }
+
+  .store-frame {
+    width: var(--w);
+    height: var(--h);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background:
+      radial-gradient(120% 80% at 50% -10%, #24344f 0%, rgba(36, 52, 79, 0) 55%),
+      linear-gradient(165deg, #1a2332 0%, #131b28 60%, #0e1521 100%);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* Soft brand accent glow behind the phone */
+  .store-frame__glow {
+    position: absolute;
+    bottom: -18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130%;
+    height: 60%;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(74, 222, 128, 0.20) 0%, rgba(74, 222, 128, 0) 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .store-frame__caption {
+    position: relative;
+    z-index: 2;
+    padding: var(--padTop) var(--padX) 0;
+    text-align: center;
+    max-width: 100%;
+  }
+  .store-frame__title {
+    margin: 0;
+    color: #fff;
+    font-size: var(--title);
+    line-height: 1.18;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+  }
+  .store-frame__sub {
+    margin: calc(var(--subSize) * 0.6) auto 0;
+    color: #aebbcd;
+    font-size: var(--subSize);
+    line-height: 1.35;
+    font-weight: 500;
+    max-width: 92%;
+  }
+
+  .store-frame__stage {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: var(--stageGap);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .store-frame__phone {
+    transform: scale(var(--phoneScale));
+    /* Anchor top under the caption; any overflow bleeds off the bottom. */
+    transform-origin: top center;
+    flex-shrink: 0;
+    /* Drop shadow under the phone for depth */
+    filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
+  }
+</style>

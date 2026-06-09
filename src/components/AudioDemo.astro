@@ -4,11 +4,13 @@
 interface Props {
   targetLang?: string;
   uiLang?: string;
+  /** Screenshot mode: freeze on a representative still frame instead of animating. */
+  still?: boolean;
 }
-const { targetLang = 'de', uiLang = 'en' } = Astro.props;
+const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
 ---
 
-<div class="audio-demo" data-target-lang={targetLang} data-ui-lang={uiLang}>
+<div class="audio-demo" data-target-lang={targetLang} data-ui-lang={uiLang} data-still={still ? '1' : undefined}>
   <div class="audio-demo__phone-wrap">
     <img src="/images/phone-clean.svg" alt="" class="audio-demo__shell" />
     <div class="audio-demo__frame">
@@ -338,114 +340,88 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
 </style>
 
 <script>
-  const S3 = 'https://lingo7.s3.eu-central-1.amazonaws.com';
   const BACKEND = 'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api';
-  const BOOK = 'summary_11_A';
+  const BOOK = 'summary_11_A2';
   const audioRoot = document.querySelector<HTMLElement>('.audio-demo');
   const TGT = audioRoot?.dataset.targetLang || 'de';
   const TRN = audioRoot?.dataset.uiLang || 'en';
+  // Screenshot mode: render one clean "playing" frame and signal readiness via
+  // window.__shotReady — skip the audio load/playback entirely.
+  const STILL = audioRoot?.dataset.still === '1';
 
-  // Try S3 first, if fails trigger backend generation and poll
-  async function fetchWithGeneration(s3Url, backendUrl, options = {}) {
-    // 1. Try S3
-    try {
-      const res = await fetch(s3Url);
-      if (res.ok) return await res.json();
-    } catch (e) { /* S3 failed, try backend */ }
-
-    // 2. Trigger generation via backend
-    const res = await fetch(backendUrl);
-    if (!res.ok) throw new Error(`Backend ${res.status}`);
-    let data = await res.json();
-
-    // 3. If generating/processing, poll
-    const isReady = options.isReady || (d => d[options.statusField || 'status'] === (options.readyValue || 'ready'));
-    const pollDelay = options.pollDelay || 3000;
-    const maxPolls = options.maxPolls || 10;
-
-    if (!isReady(data)) {
-      for (let i = 0; i < maxPolls; i++) {
-        await new Promise(r => setTimeout(r, pollDelay));
-        const poll = await fetch(backendUrl);
-        if (!poll.ok) continue;
-        data = await poll.json();
-        if (isReady(data)) break;
-      }
+  // Fetch JSON from the v2 backend. /page and /align block until ready on a
+  // cache miss; /audio returns status='generating' and is polled separately.
+  async function fetchJson(url, retries = 2) {
+    let lastErr;
+    for (let i = 0; i <= retries; i++) {
+      try {
+        const res = await fetch(url);
+        if (res.ok) return await res.json();
+        lastErr = new Error(`Backend ${res.status}`);
+      } catch (e) { lastErr = e; }
+      if (i < retries) await new Promise(r => setTimeout(r, 1500));
     }
-
-    if (!isReady(data)) throw new Error('Generation timed out');
-
-    // 4. For pages/audio: re-fetch from S3 (backend returns URLs)
-    //    For mappings: data contains elements directly
-    if (options.returnDirect) return data;
-
-    // Re-try S3 after generation
-    const s3Res = await fetch(s3Url);
-    if (s3Res.ok) return await s3Res.json();
-    throw new Error('S3 still unavailable after generation');
+    throw lastErr;
   }
 
   // ── Helpers ──
 
-  function tokensToText(tokens) {
-    return tokens.map(t => t[1] + t[0] + t[2]).join('');
+  // Group a v2 block's tokens by sentence using its pre-split sentence ranges.
+  // Each entry: { words, text, tokenOffset } where tokenOffset is the index of
+  // the sentence's first token within the block — the index space the audio
+  // transcript (transcript[blockIdx][tokenIdx]) also uses.
+  function blockToSentences(block) {
+    const sents = block.sentences || [];
+    const groups = sents.map(() => ({ words: [], text: '', tokenOffset: -1 }));
+    for (let ti = 0; ti < block.tokens.length; ti++) {
+      const t = block.tokens[ti];
+      let si = 0;
+      for (let j = 0; j < sents.length; j++) {
+        if (t.s >= sents[j].s && t.e <= sents[j].e) { si = j; break; }
+      }
+      const g = groups[si];
+      if (!g) continue;
+      if (g.tokenOffset < 0) g.tokenOffset = ti;
+      g.words.push(block.text.substring(t.s, t.e));
+    }
+    for (let si = 0; si < sents.length; si++) {
+      groups[si].text = block.text.substring(sents[si].s, sents[si].e).trim();
+    }
+    return groups;
   }
 
-  /** Returns array of { text, wordCount } per "sentence" (split on sentence-ending punctuation) */
-  function splitTokensToSentences(tokens) {
-    const sentences = [];
-    let current = [];
-    for (const t of tokens) {
-      current.push(t);
-      if (/[.!?]/.test(t[2])) {
-        sentences.push(current);
-        current = [];
-      }
+  // Collapse a header block's sentence groups into a single line carrying its
+  // block index + first token offset (for audio sync).
+  function makeLine(groups, blockIdx, text) {
+    const words = [];
+    let tokenOffset = -1;
+    for (const g of groups) {
+      if (tokenOffset < 0) tokenOffset = g.tokenOffset;
+      words.push(...g.words);
     }
-    if (current.length) sentences.push(current);
-    return sentences.map(toks => ({
-      text: tokensToText(toks).trim(),
-      wordCount: toks.filter(t => t[0].trim()).length,
-    }));
+    return { words, text, blockIdx, tokenOffset: tokenOffset < 0 ? 0 : tokenOffset };
   }
 
-  /** Parse page JSON into title, subtitle, and sentences (with word counts for transcript mapping) */
-  function parsePage(data) {
-    let title = '';
-    let subtitle = '';
-    const sentences = [];       // { text, wordCount }
-    const elementWordCounts = []; // per-element total word count (for transcript alignment)
-
-    for (const el of data.elements) {
-      if (el.type === 'header') {
-        const text = tokensToText(el.data.text.tokens);
-        const wc = el.data.text.tokens.filter(t => t[0].trim()).length;
-        if (el.data.level === 1) { title = text; }
-        else if (!subtitle) { subtitle = text; }
-        elementWordCounts.push(wc);
-      } else if (el.type === 'paragraph') {
-        let elWords = 0;
-        for (const textObj of el.data.texts) {
-          const sents = splitTokensToSentences(textObj.tokens);
-          sentences.push(...sents);
-          for (const s of sents) elWords += s.wordCount;
-        }
-        elementWordCounts.push(elWords);
-      } else if (el.type === 'quote') {
-        // Treat like paragraph
-        const tokens = el.data.text ? el.data.text.tokens : [];
-        if (tokens.length) {
-          const sents = splitTokensToSentences(tokens);
-          sentences.push(...sents);
-          elementWordCounts.push(sents.reduce((a, s) => a + s.wordCount, 0));
-        } else {
-          elementWordCounts.push(0);
-        }
-      } else {
-        elementWordCounts.push(0);
+  /** Parse one side ('orig' | 'trans') of a v2 page into title/subtitle lines + sentences. */
+  function parseSide(page, side) {
+    let titleLine = null;
+    let subtitleLine = null;
+    const sentences = []; // { words, text, blockIdx, tokenOffset }
+    for (let bi = 0; bi < page.blocks.length; bi++) {
+      const block = page.blocks[bi][side];
+      const groups = blockToSentences(block);
+      const style = block.style;
+      if (style === 'h1' || style === 'h2' || style === 'h3') {
+        const line = makeLine(groups, bi, block.text.trim());
+        if (style === 'h1' && !titleLine) titleLine = line;
+        else if (!subtitleLine) subtitleLine = line;
+        continue;
+      }
+      for (let si = 0; si < groups.length; si++) {
+        sentences.push({ words: groups[si].words, text: groups[si].text, blockIdx: bi, tokenOffset: groups[si].tokenOffset });
       }
     }
-    return { title, subtitle, sentences, elementWordCounts };
+    return { titleLine, subtitleLine, sentences };
   }
 
   // ── DOM refs ──
@@ -474,36 +450,38 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
   let currentSentenceIdx = -1;
   let animFrameId = null;
   let audioFailed = false;
+  let lineMeta = [];      // parallel to sentenceEls: { blockIdx, tokenOffset } for audio sync
 
   // ── Main ──
 
   async function init() {
+    // Bail if the widget was removed before init (e.g. screenshot page drops the
+    // unused widget) — avoids needless backend fetches.
+    if (!audioRoot || !container) return;
     try {
-      // Fetch pages: try S3 first, fall back to backend generation
-      const [tgtJson, trnJson] = await Promise.all([
-        fetchWithGeneration(
-          `${S3}/pages/${BOOK}/${TGT}/page_0.json`,
-          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${TGT}&trans_lang=${TRN}&page_index=0`
-        ),
-        fetchWithGeneration(
-          `${S3}/pages/${BOOK}/${TRN}/page_0.json`,
-          `${BACKEND}/book/page?book_code=${BOOK}&orig_lang=${TRN}&trans_lang=${TGT}&page_index=0`
-        ),
-      ]);
-      const tgtData = parsePage(tgtJson);
-      const trnData = parsePage(trnJson);
-      const hash = tgtJson.hash;
+      // v2: one call returns orig (spoken lang) + trans (ui lang) paired, with
+      // sentences already split server-side and orig/trans counts guaranteed equal.
+      const page = await fetchJson(
+        `${BACKEND}/books2/${BOOK}/page?page=0&orig_lang=${TGT}&target_lang=${TRN}`
+      );
+      const tgtData = parseSide(page, 'orig');
+      const trnData = parseSide(page, 'trans');
 
       // Set title
-      titleEl.textContent = tgtData.title.length > 22
-        ? tgtData.title.slice(0, 20) + '\u2026'
-        : tgtData.title;
+      const titleText = tgtData.titleLine ? tgtData.titleLine.text : '';
+      titleEl.textContent = titleText.length > 22 ? titleText.slice(0, 20) + '\u2026' : titleText;
 
       // Render content
       renderContent(tgtData, trnData);
 
+      // Screenshot mode: freeze on a clean "playing" frame, skip audio load.
+      if (STILL) {
+        freezeStill();
+        return;
+      }
+
       // Try to load audio and transcript
-      await loadAudio(hash, tgtData, tgtJson);
+      await loadAudio();
     } catch (e) {
       console.error('AudioDemo: failed to load data', e);
       // Fall back to timer-based karaoke
@@ -512,82 +490,78 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     }
   }
 
+  // Render the spoken-side words as <span> tokens (one per v2 token) so audio
+  // timings can be attached per token; the translation side is plain text.
+  function renderWords(words) {
+    return words.map(w => `<span class="audio-reader__word">${w}</span>`).join(' ');
+  }
+
   function renderContent(tgtData, trnData) {
     let html = '';
     let lineIdx = 0;
+    lineMeta = [];
 
-    if (tgtData.title) {
+    if (tgtData.titleLine) {
       html += `<div class="audio-reader__pair">`;
-      html += `<div class="audio-reader__chapter audio-reader__en" data-line="${lineIdx}">${tgtData.title}</div>`;
-      html += `<div class="audio-reader__chapter-trans">${trnData.title}</div>`;
+      html += `<div class="audio-reader__chapter audio-reader__en" data-line="${lineIdx}">${renderWords(tgtData.titleLine.words)}</div>`;
+      html += `<div class="audio-reader__chapter-trans">${trnData.titleLine ? trnData.titleLine.text : ''}</div>`;
       html += `</div>`;
+      lineMeta.push({ blockIdx: tgtData.titleLine.blockIdx, tokenOffset: tgtData.titleLine.tokenOffset });
       lineIdx++;
     }
-    if (tgtData.subtitle) {
+    if (tgtData.subtitleLine) {
       html += `<div class="audio-reader__pair">`;
-      html += `<div class="audio-reader__subchapter audio-reader__en" data-line="${lineIdx}">${tgtData.subtitle}</div>`;
-      html += `<div class="audio-reader__subchapter-trans">${trnData.subtitle}</div>`;
+      html += `<div class="audio-reader__subchapter audio-reader__en" data-line="${lineIdx}">${renderWords(tgtData.subtitleLine.words)}</div>`;
+      html += `<div class="audio-reader__subchapter-trans">${trnData.subtitleLine ? trnData.subtitleLine.text : ''}</div>`;
       html += `</div>`;
+      lineMeta.push({ blockIdx: tgtData.subtitleLine.blockIdx, tokenOffset: tgtData.subtitleLine.tokenOffset });
       lineIdx++;
     }
 
     const maxSentences = Math.min(tgtData.sentences.length, trnData.sentences.length, 8);
     for (let i = 0; i < maxSentences; i++) {
+      const s = tgtData.sentences[i];
       html += `<div class="audio-reader__pair">`;
-      html += `<p class="audio-reader__en" data-line="${lineIdx}">${tgtData.sentences[i].text}</p>`;
+      html += `<p class="audio-reader__en" data-line="${lineIdx}">${renderWords(s.words)}</p>`;
       html += `<p class="audio-reader__trans">${trnData.sentences[i].text}</p>`;
       html += `</div>`;
+      lineMeta.push({ blockIdx: s.blockIdx, tokenOffset: s.tokenOffset });
       lineIdx++;
     }
 
     container.innerHTML = html;
-
-    // Wrap words in spans
     sentenceEls = Array.from(container.querySelectorAll('.audio-reader__en[data-line]'));
-    sentenceEls.forEach(line => {
-      const words = line.textContent.split(/\s+/).filter(w => w);
-      line.innerHTML = words.map(w => `<span class="audio-reader__word">${w}</span>`).join(' ');
-    });
   }
 
-  async function loadAudio(hash, tgtData, tgtJson) {
-    const audioUrl = `${S3}/audio/${BOOK}/${TGT}/page_0_${hash}.mp3`;
-    const transcriptUrl = `${S3}/audio/${BOOK}/${TGT}/page_0_${hash}.json`;
+  async function loadAudio() {
+    let audioUrl;
     let transcriptData;
 
-    // Try loading transcript from S3 first, fall back to backend generation
+    // v2 /audio returns status='generating' while TTS runs; poll until ready,
+    // then read the transcript JSON it points to.
     try {
-      const res = await fetch(transcriptUrl);
-      if (!res.ok) throw new Error('not on S3');
-      transcriptData = await res.json();
-    } catch (e) {
-      // Trigger generation via backend, poll until ready
-      try {
-        const apiUrl = `${BACKEND}/book/audio?book_code=${BOOK}&orig_lang=${TGT}&page_index=0&content_hash=${hash}`;
-        let apiRes = await fetch(apiUrl);
-        let apiData = await apiRes.json();
-
-        for (let i = 0; i < 10 && apiData.status !== 'ready'; i++) {
-          await new Promise(r => setTimeout(r, 3000));
-          apiRes = await fetch(apiUrl);
-          apiData = await apiRes.json();
-        }
-
-        if (apiData.status !== 'ready') throw new Error('Audio generation timed out');
-
-        // Now fetch transcript from S3
-        const tRes = await fetch(transcriptUrl);
-        transcriptData = await tRes.json();
-      } catch (e2) {
-        console.warn('AudioDemo: audio unavailable, using fallback', e2);
-        audioFailed = true;
-        startFallbackKaraoke();
-        return;
+      const apiUrl = `${BACKEND}/books2/${BOOK}/audio?page=0&orig_lang=${TGT}`;
+      let apiData = await fetchJson(apiUrl);
+      for (let i = 0; i < 12 && apiData.status !== 'ready'; i++) {
+        await new Promise(r => setTimeout(r, 3000));
+        apiData = await fetchJson(apiUrl);
       }
+      if (apiData.status !== 'ready' || !apiData.audio_url) {
+        throw new Error('Audio generation timed out');
+      }
+      audioUrl = apiData.audio_url;
+      const tRes = await fetch(apiData.transcript_url);
+      if (!tRes.ok) throw new Error('transcript fetch failed');
+      transcriptData = await tRes.json();
+    } catch (e2) {
+      console.warn('AudioDemo: audio unavailable, using fallback', e2);
+      audioFailed = true;
+      startFallbackKaraoke();
+      return;
     }
 
     // Build word timings from transcript
-    buildWordTimings(transcriptData, tgtData, tgtJson);
+    buildWordTimings(transcriptData);
 
     // Create audio element
     audio = new Audio();
@@ -634,53 +608,26 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
   }
 
   /**
-   * Build a flat list of word timings from the transcript.
-   * Transcript has per-element arrays of per-word start times.
-   * We need to map these to our rendered sentences.
+   * Map the v2 transcript to rendered word spans. The transcript is
+   * transcript[blockIdx][tokenIdx] = start time (seconds); each rendered line
+   * carries its blockIdx + first-token offset (lineMeta), and its word spans are
+   * exactly the block's tokens in order — so timings line up one-to-one.
    */
-  function buildWordTimings(transcriptData, tgtData, tgtJson) {
-    const transcript = transcriptData.transcript;
-    const duration = transcriptData.duration;
-    const elements = tgtJson.elements;
+  function buildWordTimings(transcriptData) {
+    const transcript = transcriptData.transcript || [];
 
-    // Flatten transcript timings. Must match the order of rendered sentenceEls:
-    // title (level-1 header) → subtitle (first non-level-1 header) → paragraphs/quotes.
-    let flatTimings = [];
-    let titleIncluded = false;
-    let subtitleIncluded = false;
-
-    for (let i = 0; i < transcript.length && i < elements.length; i++) {
-      const el = elements[i];
-      let include = false;
-      if (el.type === 'header') {
-        if (el.data.level === 1 && !titleIncluded) {
-          include = true;
-          titleIncluded = true;
-        } else if (el.data.level !== 1 && !subtitleIncluded) {
-          include = true;
-          subtitleIncluded = true;
-        }
-      } else if (el.type === 'paragraph' || el.type === 'quote') {
-        include = true;
-      }
-      if (include) {
-        const times = transcript[i];
-        if (times) flatTimings.push(...times);
-      }
-    }
-
-    // Map flat timings to our sentence/word structure
     wordTimings = [];
     allWordSpans = [];
-    let timingIdx = 0;
 
     sentenceEls.forEach((sentEl, sIdx) => {
+      const meta = lineMeta[sIdx] || { blockIdx: -1, tokenOffset: 0 };
+      const blockTimes = transcript[meta.blockIdx] || [];
       const spans = Array.from(sentEl.querySelectorAll('.audio-reader__word'));
       spans.forEach((span, wIdx) => {
-        const time = timingIdx < flatTimings.length ? flatTimings[timingIdx] : null;
+        const ti = meta.tokenOffset + wIdx;
+        const time = ti < blockTimes.length ? blockTimes[ti] : null;
         wordTimings.push({ time, sentenceIdx: sIdx, wordIdx: wIdx });
         allWordSpans.push(span);
-        timingIdx++;
       });
     });
   }
@@ -810,7 +757,7 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
 
   // ── Mute toggle ──
 
-  muteBtn.addEventListener('click', () => {
+  muteBtn?.addEventListener('click', () => {
     if (!audio) return;
     isMuted = !isMuted;
     audio.muted = isMuted;
@@ -887,6 +834,27 @@ const { targetLang = 'de', uiLang = 'en' } = Astro.props;
     }
 
     setTimeout(readLine, 1500);
+  }
+
+  // ── Screenshot still frame ──
+
+  function freezeStill() {
+    // Show the active "Listening" pill, hide the interactive mute CTA.
+    muteBtn.style.display = 'none';
+    playBtn.style.display = '';
+    progressEl.style.width = '38%';
+
+    // Highlight a sentence + one spoken word to read as "playing now".
+    const lineEls = Array.from(container.querySelectorAll('.audio-reader__en[data-line]'));
+    const li = Math.min(1, lineEls.length - 1);
+    const line = lineEls[li];
+    if (line) {
+      line.classList.add('is-reading');
+      const words = line.querySelectorAll('.audio-reader__word');
+      const wi = Math.min(2, words.length - 1);
+      if (words[wi]) words[wi].classList.add('is-spoken');
+    }
+    (window as any).__shotReady = true;
   }
 
   // ── Start ──
