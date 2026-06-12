@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Leer een taal in 30 minuten per dag",
-  "learn_meta_title": "Verbeter je {targetLang} terwijl je geniet van je favoriete boeken — Lingo7",
+  "learn_meta_title": "Verbeter je {targetLang} terwijl je geniet van de beste boeken ter wereld — Lingo7",
   "learn_meta_description": "Parallel lezen met vertaling, audio ingesproken door moedertaalsprekers en gespreide herhaling waardoor woordenschat blijft hangen. Lees elk boek in {targetLang}.",
   "nav_features": "Functies",
   "nav_practice": "Aanpassing",
@@ -10,7 +10,7 @@
   "nav_faq": "FAQ",
   "nav_home": "Home",
   "nav_all_languages": "Alle talen",
-  "hero_title": "Verbeter je {targetLang} met je favoriete boeken",
+  "hero_title": "Verbeter je {targetLang} met de beste boeken ter wereld",
   "learn_hero_pill": "Wetenschappelijk onderbouwde methode",
   "start_learning": "Begin met {targetLang} leren",
   "download_app": "Download de app",

@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Научи језик за 30 минута дневно",
-  "learn_meta_title": "Усавршите {targetLang} уз омиљене књиге — Lingo7",
+  "learn_meta_title": "Усавршите {targetLang} уз најбоље књиге на свету — Lingo7",
   "learn_meta_description": "Паралелно читање са преводом, аудио снимци изворних говорника и размакнуто понављање које учвршћује речник. Читајте било коју књигу на {targetLang}.",
   "nav_features": "Функције",
   "nav_practice": "Адаптација",
@@ -10,7 +10,7 @@
   "nav_faq": "FAQ",
   "nav_home": "Почетна",
   "nav_all_languages": "Сви језици",
-  "hero_title": "Усавршите {targetLang} језик уз омиљене књиге",
+  "hero_title": "Усавршите {targetLang} језик уз најбоље књиге на свету",
   "learn_hero_pill": "Научно утемељена метода",
   "start_learning": "Почните да учите {targetLang}",
   "download_app": "Преузмите апликацију",

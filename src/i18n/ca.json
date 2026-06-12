@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Aprèn un idioma en 30 minuts al dia",
-  "learn_meta_title": "Millora el teu {targetLang} gaudint dels teus llibres preferits — Lingo7",
+  "learn_meta_title": "Millora el teu {targetLang} gaudint dels millors llibres del món — Lingo7",
   "learn_meta_description": "Lectura paral·lela amb traducció, àudio narrat per nadius i repetició espaiada que fixa el vocabulari. Llegeix qualsevol llibre en {targetLang}.",
   "nav_features": "Funcionalitats",
   "nav_practice": "Adaptació",
@@ -10,7 +10,7 @@
   "nav_faq": "FAQ",
   "nav_home": "Inici",
   "nav_all_languages": "Tots els idiomes",
-  "hero_title": "Milloreu el vostre {targetLang} gaudint dels vostres llibres preferits",
+  "hero_title": "Milloreu el vostre {targetLang} gaudint dels millors llibres del món",
   "learn_hero_pill": "Mètode avalat per la ciència",
   "start_learning": "Comença a aprendre {targetLang}",
   "download_app": "Descarrega l'aplicació",

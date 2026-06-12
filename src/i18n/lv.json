@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Apgūstiet valodu 30 minūtēs dienā",
-  "learn_meta_title": "Pilnveidojiet {targetLang} valodu, lasot iemīļotās grāmatas — Lingo7",
+  "learn_meta_title": "Pilnveidojiet {targetLang} valodu, lasot pasaules labākās grāmatas — Lingo7",
   "learn_meta_description": "Paralēlā lasīšana ar tulkojumu, dzimtās valodas ierunāts audio un izkliedētā atkārtošana, kas palīdz iegaumēt vārdus. Lasiet jebkuru grāmatu {targetLang} valodā.",
   "nav_features": "Funkcijas",
   "nav_practice": "Pielāgojums",
@@ -10,7 +10,7 @@
   "nav_faq": "FAQ",
   "nav_home": "Sākums",
   "nav_all_languages": "Visas valodas",
-  "hero_title": "Uzlabojiet savu {targetLang} valodu, lasot iemīļotās grāmatas",
+  "hero_title": "Uzlabojiet savu {targetLang} valodu, lasot pasaules labākās grāmatas",
   "learn_hero_pill": "Zinātniski pamatota metode",
   "start_learning": "Sāciet mācīties {targetLang} valodu",
   "download_app": "Lejupielādējiet lietotni",

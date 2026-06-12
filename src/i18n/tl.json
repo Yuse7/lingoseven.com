@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Matuto ng wika sa 30 minuto bawat araw",
-  "learn_meta_title": "Pagbutihin ang {targetLang} habang binabasa ang paboritong libro — Lingo7",
+  "learn_meta_title": "Pagbutihin ang {targetLang} habang binabasa ang pinakamahusay na libro sa mundo — Lingo7",
   "learn_meta_description": "Parallel na pagbabasa na may salin, audio mula sa katutubong tagapagsalita at spaced repetition para tumatak ang bokabularyo. Basahin ang kahit anong libro sa {targetLang}.",
   "nav_features": "Mga Tampok",
   "nav_practice": "Pag-angkop",
@@ -10,7 +10,7 @@
   "nav_faq": "FAQ",
   "nav_home": "Home",
   "nav_all_languages": "Lahat ng wika",
-  "hero_title": "Pahusayin ang iyong {targetLang} habang tinatangkilik ang paboritong libro",
+  "hero_title": "Pahusayin ang iyong {targetLang} habang tinatangkilik ang pinakamahusay na libro sa mundo",
   "learn_hero_pill": "Pamamaraang batay sa siyensya",
   "start_learning": "Simulan matuto ng {targetLang}",
   "download_app": "I-download ang app",

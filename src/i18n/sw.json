@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Jifunze lugha kwa dakika 30 kwa siku",
-  "learn_meta_title": "Boresha {targetLang} ukifurahia vitabu unavyopenda — Lingo7",
+  "learn_meta_title": "Boresha {targetLang} ukifurahia vitabu bora zaidi duniani — Lingo7",
   "learn_meta_description": "Usomaji sambamba wenye tafsiri, sauti za wazungumzaji asilia na marudio ya nafasi yanayodumisha msamiati. Soma kitabu chochote kwa {targetLang}.",
   "nav_features": "Vipengele",
   "nav_practice": "Urekebishaji",
@@ -10,7 +10,7 @@
   "nav_faq": "Maswali",
   "nav_home": "Nyumbani",
   "nav_all_languages": "Lugha zote",
-  "hero_title": "Boresha {targetLang} yako huku ukifurahia vitabu unavyopenda",
+  "hero_title": "Boresha {targetLang} yako huku ukifurahia vitabu bora zaidi duniani",
   "learn_hero_pill": "Mbinu iliyothibitishwa kisayansi",
   "start_learning": "Anza kujifunza {targetLang}",
   "download_app": "Pakua programu",

@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Tanulj meg egy nyelvet napi 30 perc alatt",
-  "learn_meta_title": "Fejleszd a {targetLang} tudásod kedvenc könyveiddel — Lingo7",
+  "learn_meta_title": "Fejleszd a {targetLang} tudásod a világ legjobb könyveivel — Lingo7",
   "learn_meta_description": "Párhuzamos olvasás fordítással, anyanyelvi felolvasású hang és a szókincset rögzítő elosztott ismétlés. Olvass bármilyen könyvet {targetLang} nyelven.",
   "nav_features": "Funkciók",
   "nav_practice": "Adaptáció",
@@ -10,7 +10,7 @@
   "nav_faq": "GYIK",
   "nav_home": "Főoldal",
   "nav_all_languages": "Minden nyelv",
-  "hero_title": "Fejleszd {targetLang} nyelvtudásod kedvenc könyveiddel",
+  "hero_title": "Fejleszd {targetLang} nyelvtudásod a világ legjobb könyveivel",
   "learn_hero_pill": "Tudományosan igazolt módszer",
   "start_learning": "Kezdj el {targetLang} nyelvet tanulni",
   "download_app": "Töltsd le az alkalmazást",

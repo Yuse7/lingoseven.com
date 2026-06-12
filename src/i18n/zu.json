@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Funda ulimi ngemizuzu engu-30 ngosuku",
-  "learn_meta_title": "Thuthukisa {targetLang} ufunda izincwadi ozithandayo — Lingo7",
+  "learn_meta_title": "Thuthukisa {targetLang} ufunda izincwadi ezingcono kunazo zonke emhlabeni — Lingo7",
   "learn_meta_description": "Ukufunda okuhambisanayo nokuhumusha, umsindo wabakhulumi bolimi lwendabuko nokuphinda okuhlukanisiwe okwenza amagama anamathele. Funda noma iyiphi incwadi nge-{targetLang}.",
   "nav_features": "Izici",
   "nav_practice": "Ukulungiselela",
@@ -10,7 +10,7 @@
   "nav_faq": "FAQ",
   "nav_home": "Ikhasi lasekhaya",
   "nav_all_languages": "Zonke izilimi",
-  "hero_title": "Thuthukisa {targetLang} yakho ngenkathi uthokozela izincwadi ozithandayo",
+  "hero_title": "Thuthukisa {targetLang} yakho ngenkathi uthokozela izincwadi ezingcono kunazo zonke emhlabeni",
   "learn_hero_pill": "Indlela esekelwe ucwaningo",
   "start_learning": "Qala ukufunda {targetLang}",
   "download_app": "Landa uhlelo lokusebenza",

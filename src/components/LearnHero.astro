@@ -14,6 +14,15 @@ function t(key: string): string {
     .replace(/{targetLangPrep}/g, targetLangNamePrep || targetLangName)
     .replace(/{targetLangGen}/g, targetLangNameGen || targetLangName);
 }
+
+// Like t(), but highlights the target-language name in the accent (green) color.
+function tAccent(key: string): string {
+  const val = translations[key] || key;
+  return val
+    .replace(/{targetLang}/g, `<span class="hero-lang-accent">${targetLangName}</span>`)
+    .replace(/{targetLangPrep}/g, `<span class="hero-lang-accent">${targetLangNamePrep || targetLangName}</span>`)
+    .replace(/{targetLangGen}/g, `<span class="hero-lang-accent">${targetLangNameGen || targetLangName}</span>`);
+}
 ---
 
 <section class="hero hero-split">
@@ -24,7 +33,7 @@ function t(key: string): string {
           <span class="hero-pill-dot"></span>
           {t('learn_hero_pill')}
         </div>
-        <h1 class="hero-title-modern" set:html={t('hero_title')}></h1>
+        <h1 class="hero-title-modern" set:html={tAccent('hero_title')}></h1>
         <div class="hero-badges">
           <a href="#features" class="hero-badge badge-green" data-highlight-color="rgba(74, 222, 128, 0.22)">{t('features_slider_tag')}</a>
           <a href="#audio" class="hero-badge badge-amber" data-highlight-color="rgba(251, 191, 36, 0.22)">{t('audio_tag')}</a>
@@ -59,6 +68,11 @@ function t(key: string): string {
 </section>
 
 <style>
+  /* Injected via set:html, so it must be global to take effect */
+  :global(.hero-title-modern .hero-lang-accent) {
+    color: var(--primary);
+  }
+
   .hero-badges {
     display: flex;
     gap: 12px;

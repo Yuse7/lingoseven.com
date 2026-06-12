@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Lærðu tungumál á 30 mínútum á dag",
-  "learn_meta_title": "Bættu {targetLang} kunnáttu þína við lestur uppáhaldsbóka — Lingo7",
+  "learn_meta_title": "Bættu {targetLang} kunnáttu þína við lestur bestu bóka heims — Lingo7",
   "learn_meta_description": "Samhliða lestur með þýðingu, hljóð frá innfæddum lesendum og dreifð endurtekning sem festir orðaforðann. Lestu hvaða bók sem er á {targetLang}.",
   "nav_features": "Eiginleikar",
   "nav_practice": "Aðlögun",
@@ -10,7 +10,7 @@
   "nav_faq": "Algengar spurningar",
   "nav_home": "Forsíða",
   "nav_all_languages": "Öll tungumál",
-  "hero_title": "Bættu {targetLang}-kunnáttu þína með uppáhaldsbókunum þínum",
+  "hero_title": "Bættu {targetLang}-kunnáttu þína með bestu bókum heims",
   "learn_hero_pill": "Vísindalega sönnuð aðferð",
   "start_learning": "Byrjaðu að læra {targetLang} tungumál",
   "download_app": "Hlaða niður appinu",

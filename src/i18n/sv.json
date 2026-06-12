@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Lär dig ett språk på 30 minuter om dagen",
-  "learn_meta_title": "Förbättra din {targetLang} med dina favoritböcker — Lingo7",
+  "learn_meta_title": "Förbättra din {targetLang} med världens bästa böcker — Lingo7",
   "learn_meta_description": "Parallelläsning med översättning, ljud inläst av modersmålstalare och utspridd repetition som fäster orden. Läs vilken bok som helst på {targetLang}.",
   "nav_features": "Funktioner",
   "nav_practice": "Anpassning",
@@ -10,7 +10,7 @@
   "nav_faq": "FAQ",
   "nav_home": "Hem",
   "nav_all_languages": "Alla språk",
-  "hero_title": "Förbättra din {targetLang} med dina favoritböcker",
+  "hero_title": "Förbättra din {targetLang} med världens bästa böcker",
   "learn_hero_pill": "Vetenskapligt beprövad metod",
   "start_learning": "Börja lära dig {targetLang}",
   "download_app": "Ladda ner appen",

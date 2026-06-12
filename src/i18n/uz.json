@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Kuniga 30 daqiqada til o'rganing",
-  "learn_meta_title": "Sevimli kitoblar bilan {targetLang} tilini yaxshilang — Lingo7",
+  "learn_meta_title": "Dunyodagi eng yaxshi kitoblar bilan {targetLang} tilini yaxshilang — Lingo7",
   "learn_meta_description": "Tarjima bilan parallel o'qish, ona tilida so'zlovchilar ovozi va so'zlarni mustahkamlovchi oraliq takrorlash. {targetLang} tilida istalgan kitobni o'qing.",
   "nav_features": "Imkoniyatlar",
   "nav_practice": "Moslashtirish",
@@ -10,7 +10,7 @@
   "nav_faq": "FAQ",
   "nav_home": "Bosh sahifa",
   "nav_all_languages": "Barcha tillar",
-  "hero_title": "Sevimli kitoblaringizni o'qib, {targetLang} tilini mukammallashtiring",
+  "hero_title": "Dunyodagi eng yaxshi kitoblarni o'qib, {targetLang} tilini mukammallashtiring",
   "learn_hero_pill": "Ilmiy asoslangan uslub",
   "start_learning": "{targetLang} o'rganishni boshlang",
   "download_app": "Ilovani yuklab oling",

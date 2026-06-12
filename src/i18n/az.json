@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Gündə 30 dəqiqəyə dil öyrənin",
-  "learn_meta_title": "Sevimli kitablarınızı oxuyaraq {targetLang} dilini inkişaf etdirin — Lingo7",
+  "learn_meta_title": "Dünyanın ən yaxşı kitablarını oxuyaraq {targetLang} dilini inkişaf etdirin — Lingo7",
   "learn_meta_description": "Tərcüməli paralel oxu, ana dili daşıyıcılarının səsləndirməsi və sözləri yaddaşda saxlayan aralıqlı təkrar. {targetLang} dilində istənilən kitabı oxuyun.",
   "nav_features": "Xüsusiyyətlər",
   "nav_practice": "Uyğunlaşdırma",
@@ -10,7 +10,7 @@
   "nav_faq": "FAQ",
   "nav_home": "Ana səhifə",
   "nav_all_languages": "Bütün dillər",
-  "hero_title": "Sevimli kitablarınızdan həzz alaraq {targetLang} dilinizi təkmilləşdirin",
+  "hero_title": "Dünyanın ən yaxşı kitablarından həzz alaraq {targetLang} dilinizi təkmilləşdirin",
   "learn_hero_pill": "Elmi əsaslı öyrənmə metodu",
   "start_learning": "{targetLang} öyrənməyə başlayın",
   "download_app": "Tətbiqi yükləyin",

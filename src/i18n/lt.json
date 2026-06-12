@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Išmokite kalbą per 30 minučių per dieną",
-  "learn_meta_title": "Tobulinkite {targetLang} kalbą skaitydami mėgstamas knygas — Lingo7",
+  "learn_meta_title": "Tobulinkite {targetLang} kalbą skaitydami geriausias pasaulio knygas — Lingo7",
   "learn_meta_description": "Lygiagretus skaitymas su vertimu, gimtakalbių įgarsinimas ir išskaidytas kartojimas, padedantis įsiminti žodyną. Skaitykite bet kurią knygą {targetLang} kalba.",
   "nav_features": "Funkcijos",
   "nav_practice": "Pritaikymas",
@@ -10,7 +10,7 @@
   "nav_faq": "DUK",
   "nav_home": "Pradžia",
   "nav_all_languages": "Visos kalbos",
-  "hero_title": "Tobulinkite {targetLang} kalbą skaitydami mėgstamas knygas",
+  "hero_title": "Tobulinkite {targetLang} kalbą skaitydami geriausias pasaulio knygas",
   "learn_hero_pill": "Moksliškai pagrįstas metodas",
   "start_learning": "Pradėkite mokytis {targetLang} kalbos",
   "download_app": "Atsisiųskite programėlę",

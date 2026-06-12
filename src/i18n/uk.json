@@ -1,7 +1,7 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Вивчіть мову за 30 хвилин на день",
-  "learn_meta_title": "Удосконалюйте {targetLang} за улюбленими книгами — Lingo7",
+  "learn_meta_title": "Удосконалюйте {targetLang} за найкращими книгами світу — Lingo7",
   "learn_meta_description": "Паралельне читання з перекладом, озвучення носіями мови та інтервальне повторення, що закріплює слова. Читайте будь-яку книгу мовою {targetLang}.",
   "nav_features": "Можливості",
   "nav_practice": "Адаптація",
@@ -10,7 +10,7 @@
   "nav_faq": "FAQ",
   "nav_home": "Головна",
   "nav_all_languages": "Усі мови",
-  "hero_title": "Вдосконалюйте свою {targetLang} мову, читаючи улюблені книги",
+  "hero_title": "Вдосконалюйте свою {targetLang} мову, читаючи найкращі книги світу",
   "learn_hero_pill": "Науково обґрунтований метод",
   "start_learning": "Почати вивчати {targetLang} мову",
   "download_app": "Завантажити додаток",
