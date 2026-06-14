@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lingo7 — Instagram Grid (9 постов)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root{
+    --ff: "Manrope", system-ui, -apple-system, sans-serif;
+    --green: #1fae66;
+    --green-top: #28ba6f;
+    --green-bot: #169a59;
+    --spine: #0f8a4f;
+    --cream: #f3ecd9;
+    --cream-2: #e7ddc4;
+    --ink: #16261a;
+    --leaf: #2ec275;
+    /* page chrome */
+    --page-bg:#0f141b; --panel:#161d27; --line:rgba(255,255,255,.08);
+    --dim:#8a95a4; --txt:#e9eef4;
+  }
+  html,body{ background:var(--page-bg); color:var(--txt); font-family:var(--ff); -webkit-font-smoothing:antialiased; }
+  body{ padding: 72px 40px 140px; }
+  .wrap{ max-width: 1180px; margin: 0 auto; }
+
+  /* ---------- doc headers ---------- */
+  .kicker{ font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--leaf); }
+  h1{ font-size:46px; font-weight:800; letter-spacing:-.02em; margin:14px 0 0; line-height:1.04; }
+  .lede{ color:var(--dim); font-size:18px; line-height:1.5; max-width:660px; margin-top:18px; }
+  .sec{ margin-top:96px; }
+  .sec-h{ display:flex; align-items:baseline; gap:18px; margin-bottom:30px; }
+  .sec-h h2{ font-size:26px; font-weight:800; letter-spacing:-.01em; }
+  .sec-h span{ color:var(--dim); font-size:15px; }
+
+  /* ---------- IG profile mock ---------- */
+  .phone{ width:430px; margin:0 auto; background:#000; border-radius:42px; padding:12px; box-shadow:0 40px 90px -40px rgba(0,0,0,.8); }
+  .phone-in{ background:#0b0d10; border-radius:32px; overflow:hidden; }
+  .ig-top{ display:flex; align-items:center; gap:8px; padding:14px 18px; border-bottom:1px solid rgba(255,255,255,.06); font-weight:700; font-size:15px; }
+  .ig-top .dot{ margin-left:auto; color:var(--dim); letter-spacing:.1em; }
+  .ig-head{ display:flex; align-items:center; gap:22px; padding:20px 18px 8px; }
+  .ig-av{ width:78px; height:78px; border-radius:50%; padding:3px; background:conic-gradient(from 200deg,#1fae66,#7ce0a8,#1fae66); flex:none; }
+  .ig-av img{ width:100%; height:100%; border-radius:50%; object-fit:cover; border:3px solid #0b0d10; }
+  .ig-stats{ display:flex; gap:26px; }
+  .ig-stat b{ display:block; font-size:18px; font-weight:800; }
+  .ig-stat span{ font-size:12.5px; color:var(--dim); }
+  .ig-bio{ padding:4px 18px 16px; }
+  .ig-bio .nm{ font-weight:800; font-size:14.5px; }
+  .ig-bio .ds{ font-size:13.5px; color:#c4cdd8; line-height:1.45; margin-top:2px; }
+  .ig-bio .lk{ color:#6fb3ff; font-size:13.5px; }
+  .ig-tabs{ display:flex; border-top:1px solid rgba(255,255,255,.07); }
+  .ig-tabs div{ flex:1; height:44px; display:grid; place-items:center; color:var(--dim); }
+  .ig-tabs div:first-child{ color:#fff; box-shadow:inset 0 -2px 0 #fff; }
+  .ig-tabs i{ width:20px; height:20px; border:2px solid currentColor; display:block; }
+  .ig-tabs div:first-child i{ border-radius:0; background:
+      linear-gradient(currentColor,currentColor) 0 0/100% 2px no-repeat,
+      linear-gradient(currentColor,currentColor) 0 50%/100% 2px no-repeat,
+      linear-gradient(currentColor,currentColor) 0 100%/100% 2px no-repeat; border:none; height:16px;}
+
+  .ig-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:#0b0d10; }
+  .ig-grid .cell{ position:relative; aspect-ratio:1; overflow:hidden; }
+
+  /* ---------- the continuous artwork (3240 coordinate space) ---------- */
+  .artbox{ overflow:hidden; }
+  .artbox .scaler{ position:relative; top:0; left:0; }
+  .art{
+    position:absolute; top:0; left:0; width:3240px; height:3240px;
+    transform-origin:top left; overflow:hidden;
+    background:
+      radial-gradient(1500px 1200px at 50% 46%, #34c47d 0%, rgba(52,196,125,0) 60%),
+      linear-gradient(170deg, var(--green-top), var(--green-bot));
+    font-family:var(--ff);
+  }
+  /* confetti */
+  .cf{ position:absolute; width:130px; height:10px; border-radius:6px; background:rgba(11,70,40,.4); }
+  .cf.l{ background:rgba(220,255,235,.42); }
+
+  /* book */
+  .book{ position:absolute; left:1620px; top:1660px; transform:translate(-50%,-50%); width:1560px; height:1040px; }
+  .book::before{ content:""; position:absolute; left:50%; bottom:-30px; transform:translateX(-50%);
+    width:1280px; height:200px; background:radial-gradient(50% 50%,rgba(8,50,28,.55),transparent 70%); filter:blur(8px); }
+  .pg{ position:absolute; top:0; width:760px; height:1010px;
+    background:linear-gradient(180deg,#fbf6ea,#ece0c6);
+    background-image:
+      repeating-linear-gradient(180deg, transparent 0 86px, rgba(20,30,20,.10) 86px 88px),
+      linear-gradient(180deg,#fbf6ea,#ece0c6);
+    box-shadow:0 30px 60px -30px rgba(6,40,24,.5);
+  }
+  .pg.left{ left:18px; transform-origin:right center; transform:perspective(2800px) rotateY(24deg);
+    border-radius:26px 8px 8px 26px; box-shadow:inset -40px 0 60px -30px rgba(20,30,20,.28), 0 30px 60px -30px rgba(6,40,24,.5); }
+  .pg.right{ right:18px; transform-origin:left center; transform:perspective(2800px) rotateY(-24deg);
+    border-radius:8px 26px 26px 8px; box-shadow:inset 40px 0 60px -30px rgba(20,30,20,.28), 0 30px 60px -30px rgba(6,40,24,.5); }
+  .spine{ position:absolute; left:50%; top:-12px; transform:translateX(-50%); width:30px; height:1034px;
+    background:linear-gradient(180deg,#1fc377,var(--spine)); border-radius:8px; box-shadow:0 0 0 2px rgba(8,50,28,.25); }
+
+  /* light-mode reader phone resting on the book */
+  .rphone{ position:absolute; left:1620px; top:1620px; transform:translate(-50%,-50%); width:646px; height:1090px;
+    background:#0c0f13; border-radius:92px; padding:18px;
+    box-shadow:0 100px 120px -50px rgba(6,40,24,.6), inset 0 0 0 2px rgba(255,255,255,.05); }
+  .rphone::after{ content:""; position:absolute; left:50%; bottom:-70px; transform:translateX(-50%);
+    width:760px; height:130px; border-radius:50%; background:radial-gradient(50% 50%, rgba(6,46,26,.5), transparent 72%); filter:blur(6px); z-index:-1; }
+  .rscreen{ position:relative; width:100%; height:100%; background:#faf8f3; border-radius:70px; overflow:hidden;
+    color:#211d16; display:flex; flex-direction:column; }
+  .rnotch{ position:absolute; left:50%; top:14px; transform:translateX(-50%); width:150px; height:30px; background:#0c0f13; border-radius:20px; z-index:6; }
+  .rstatus{ display:flex; justify-content:space-between; align-items:center; padding:22px 42px 4px; font-size:24px; font-weight:700; }
+  .rstatus .ic{ display:flex; gap:9px; align-items:center; }
+  .rstatus .ic svg{ height:22px; }
+  .rhead{ display:flex; align-items:center; gap:18px; padding:16px 34px 18px; border-bottom:1px solid rgba(48,40,28,.10); }
+  .rhead .hb{ width:38px; height:38px; flex:none; }
+  .rhead .ht{ flex:1; }
+  .rhead .ht b{ display:block; font-size:28px; font-weight:800; letter-spacing:-.01em; }
+  .rhead .ht span{ font-size:21px; color:#756d5e; }
+  .rhead .play{ width:54px; height:54px; flex:none; border-radius:16px; background:#0fa45c; color:#fff; display:grid; place-items:center; }
+  .rhead .play svg{ width:26px; }
+  .rbody{ padding:26px 38px 0; flex:1; }
+  .rpara{ margin-bottom:22px; }
+  .rorig{ font-size:30px; font-weight:700; line-height:1.42; color:#211d16; }
+  .rtrans{ font-size:22px; line-height:1.4; color:#8a8275; margin-top:7px; }
+  .rw{ background:#d4f0e0; color:#0c7a44; border-radius:7px; padding:1px 7px;
+    box-decoration-break:clone; -webkit-box-decoration-break:clone; }
+  .rpop{ position:absolute; left:38px; right:60px; top:540px; background:#fff; border-radius:26px; padding:26px 28px 24px;
+    box-shadow:0 46px 80px -34px rgba(20,30,20,.42), inset 0 0 0 1px rgba(48,40,28,.07); }
+  .rpop .caret{ position:absolute; left:130px; top:-15px; width:30px; height:30px; background:#fff; transform:rotate(45deg); border-radius:6px; }
+  .rpop .pw{ font-size:38px; font-weight:800; color:#161109; }
+  .rpop .pe{ font-size:22px; color:#756d5e; margin-top:4px; }
+  .rpop .pacts{ display:flex; gap:12px; margin-top:20px; }
+  .rpop .pb{ flex:1; border-radius:16px; padding:14px 6px 12px; text-align:center; background:#f3f0ea; border:1px solid rgba(48,40,28,.08); }
+  .rpop .pb.on{ background:#e3f6ec; border-color:rgba(15,164,92,.3); color:#0c7a44; }
+  .rpop .pb svg{ width:26px; height:26px; display:block; margin:0 auto 8px; }
+  .rpop .pb span{ font-size:19px; font-weight:700; }
+  .rbottom{ padding:16px 40px 30px; }
+  .rtrack{ height:10px; border-radius:6px; background:#e7e0d2; position:relative; }
+  .rfill{ position:absolute; left:0; top:0; height:100%; width:38%; border-radius:6px; background:#0fa45c; }
+  .rmeta{ display:flex; justify-content:space-between; margin-top:13px; font-size:19px; color:#756d5e; font-weight:600; white-space:nowrap; }
+
+  /* reader app screen wrapped in a clean dark device frame — the centerpiece */
+  .readerwrap{ position:absolute; left:1620px; top:1620px; transform:translate(-50%,-50%); width:780px;
+    background:#0c0f13; border-radius:120px; padding:22px;
+    box-shadow:0 110px 130px -45px rgba(6,40,24,.6), inset 0 0 0 2px rgba(255,255,255,.06); }
+  .readerwrap::after{ content:""; position:absolute; left:50%; bottom:-46px; transform:translateX(-50%);
+    width:820px; height:140px; border-radius:50%; background:radial-gradient(50% 50%, rgba(6,46,26,.5), transparent 72%); filter:blur(7px); z-index:-1; }
+  .readerimg{ display:block; width:100%; height:auto; }
+
+  /* cards */
+  .card{ position:absolute; width:470px; padding:46px 52px 50px; background:linear-gradient(180deg,var(--cream),var(--cream-2));
+    border-radius:34px; box-shadow:0 46px 70px -34px rgba(6,40,24,.55); }
+  .card .pin{ position:absolute; left:50%; top:-22px; transform:translateX(-50%); width:46px; height:46px; border-radius:50%;
+    background:radial-gradient(circle at 36% 32%,#5fe39d,#19a85f); box-shadow:0 10px 16px -6px rgba(6,40,24,.5), inset 0 -6px 10px rgba(8,60,32,.4); }
+  .card .src{ font-size:86px; font-weight:800; letter-spacing:-.02em; color:var(--ink); line-height:1; }
+  .card .tr{ margin-top:18px; font-size:50px; font-weight:700; color:#1a9a5b; display:flex; align-items:center; gap:14px; }
+  .card .tr i{ font-style:normal; color:#48c98a; font-weight:800; }
+
+  /* brand lockup */
+  .brand{ position:absolute; display:flex; align-items:center; gap:34px; }
+  .brand .mark{ width:200px; height:200px; border-radius:50px; box-shadow:0 30px 50px -24px rgba(6,40,24,.6); }
+  .brand .wm{ font-size:128px; font-weight:800; letter-spacing:-.03em; color:#f4fbf6; line-height:1; }
+  .brand .tag{ margin-top:16px; font-size:42px; font-weight:600; color:rgba(238,255,246,.82); letter-spacing:.005em; line-height:1.26; max-width:600px; text-wrap:balance; }
+
+  /* tag hero (bottom center) */
+  .taghero{ position:absolute; left:1620px; transform:translateX(-50%); text-align:center; width:1040px; }
+  .taghero .row{ display:flex; align-items:center; justify-content:center; gap:30px; }
+  .taghero .mk{ width:120px; height:120px; border-radius:30px; }
+  .taghero .nm{ font-size:118px; font-weight:800; letter-spacing:-.03em; color:#f4fbf6; }
+  .taghero .sub{ margin-top:26px; font-size:58px; font-weight:700; }
+  .taghero .sub .a{ color:#f4fbf6; font-weight:700; }
+  .taghero .sub b{ color:#16e08a; font-weight:800; }
+
+  .corner{ position:absolute; font-size:48px; font-weight:700; color:rgba(238,255,246,.72); letter-spacing:.02em; }
+
+  /* language strip */
+  .langlabel{ position:absolute; left:1620px; transform:translateX(-50%); font-size:48px; font-weight:800;
+    letter-spacing:.03em; color:#f4fbf6; white-space:nowrap; }
+  .flags{ position:absolute; display:flex; justify-content:space-between; align-items:center; }
+  .flags .flag{ width:86px; height:86px; flex:none; border-radius:50%; border:5px solid #fff;
+    box-shadow:0 12px 22px -10px rgba(6,40,24,.5); }
+
+  /* ---------- standalone tiles grid ---------- */
+  .tiles{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .tile{ position:relative; border-radius:18px; overflow:hidden; box-shadow:0 24px 50px -30px rgba(0,0,0,.7); }
+  .tile .num{ position:absolute; top:12px; left:14px; z-index:5; font-size:14px; font-weight:800; color:#fff;
+    background:rgba(6,40,24,.5); width:34px; height:34px; border-radius:50%; display:grid; place-items:center; backdrop-filter:blur(4px); }
+
+  .note{ margin-top:34px; background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--leaf);
+    border-radius:14px; padding:22px 26px; font-size:15.5px; line-height:1.6; color:#c4cdd8; max-width:760px; }
+  .note b{ color:#fff; }
+  .order{ display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+  .order span{ font-weight:800; font-size:14px; background:#0d121a; border:1px solid var(--line); color:#cdd6e0;
+    width:40px; height:40px; border-radius:10px; display:grid; place-items:center; }
+  .order span.last{ border-color:var(--leaf); color:#7ce0a8; }
+
+  .twocol{ display:grid; grid-template-columns:430px 1fr; gap:64px; align-items:start; }
+  @media (max-width:980px){ .twocol{ grid-template-columns:1fr; gap:40px; } .phone{ margin:0; } }
+
+  /* export viewport */
+  #exp{ position:fixed; top:0; left:0; width:1080px; height:1080px; overflow:hidden; z-index:99999; display:none; background:#000; }
+  body.exporting{ overflow:hidden; }
+  body.exporting #exp{ display:block; }
+</style>
+</head>
+<body>
+
+<!-- ===================== ARTWORK TEMPLATE ===================== -->
+<template id="art-tpl">
+  <div class="art">
+    <!-- confetti -->
+    <div class="cf"   style="left:230px;  top:560px;  transform:rotate(28deg);"></div>
+    <div class="cf l" style="left:470px;  top:330px;  transform:rotate(-18deg);"></div>
+    <div class="cf"   style="left:1180px; top:720px;  transform:rotate(40deg);"></div>
+    <div class="cf l" style="left:1520px; top:880px;  transform:rotate(-30deg);"></div>
+    <div class="cf"   style="left:2380px; top:620px;  transform:rotate(18deg);"></div>
+    <div class="cf l" style="left:2680px; top:840px;  transform:rotate(-42deg);"></div>
+    <div class="cf"   style="left:150px;  top:1820px; transform:rotate(-24deg);"></div>
+    <div class="cf l" style="left:2980px; top:1980px; transform:rotate(34deg);"></div>
+    <div class="cf"   style="left:980px;  top:2520px; transform:rotate(-36deg);"></div>
+    <div class="cf l" style="left:1900px; top:2380px; transform:rotate(22deg);"></div>
+    <div class="cf"   style="left:2520px; top:2680px; transform:rotate(-20deg);"></div>
+    <div class="cf l" style="left:700px;  top:1500px; transform:rotate(44deg);"></div>
+
+    <!-- reader app screenshot (store reader phone) — the centerpiece -->
+    <div class="readerwrap">
+      <img class="readerimg" src="reader-phone.png" alt="Lingo7 reader">
+    </div>
+
+    <!-- brand lockup (tile 1) -->
+    <div class="brand" style="left:170px; top:200px;">
+      <img class="mark" src="icon-1024.png" alt="">
+      <div>
+        <div class="wm">Lingo7</div>
+        <div class="tag">Learn language while enjoying<br>world’s best books</div>
+      </div>
+    </div>
+
+    <!-- vocab cards -->
+    <div class="card" style="left:1395px; top:215px; transform:rotate(-3deg);"><span class="pin"></span><div class="src">story</div><div class="tr"><i>→</i> история</div></div>
+    <div class="card" style="left:2470px; top:300px; transform:rotate(4deg);"><span class="pin"></span><div class="src">dream</div><div class="tr"><i>→</i> мечта</div></div>
+    <div class="card" style="left:130px;  top:1430px; transform:rotate(3deg);"><span class="pin"></span><div class="src">wisdom</div><div class="tr"><i>→</i> мудрость</div></div>
+    <div class="card" style="left:2600px; top:1430px; transform:rotate(-4deg);"><span class="pin"></span><div class="src">memory</div><div class="tr"><i>→</i> память</div></div>
+    <div class="card" style="left:130px;  top:2440px; transform:rotate(-3deg);"><span class="pin"></span><div class="src">nature</div><div class="tr"><i>→</i> природа</div></div>
+    <div class="card" style="left:2600px; top:2440px; transform:rotate(3deg);"><span class="pin"></span><div class="src">spirit</div><div class="tr"><i>→</i> душа</div></div>
+
+    <!-- tag hero (tile 8) -->
+    <div class="taghero" style="top:2630px;">
+      <div class="row">
+        <img class="mk" src="icon-1024.png" alt="">
+        <div class="nm">Lingo7</div>
+      </div>
+      <div class="sub"><span class="a">учи язык,</span> <b>читая</b></div>
+    </div>
+
+    <!-- 50+ languages label + full-width flag strip -->
+    <div class="langlabel" style="top:2880px;">50+ языков</div>
+    <div class="flags" style="left:120px; right:120px; top:3006px;">
+      <div class="flag" style="background:linear-gradient(180deg,#AA151B 0 25%,#F1BF00 25% 75%,#AA151B 75%);"></div>
+      <div class="flag" style="background:linear-gradient(90deg,#0055A4 0 33.34%,#fff 33.34% 66.67%,#EF4135 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#111 0 33.34%,#DD0000 33.34% 66.67%,#FFCE00 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(90deg,#008C45 0 33.34%,#fff 33.34% 66.67%,#CD212A 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#AE1C28 0 33.34%,#fff 33.34% 66.67%,#21468B 66.67%);"></div>
+      <div class="flag" style="background:radial-gradient(circle at 50% 50%, #BC002D 0 21%, #fff 21%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#fff 0 33.34%,#0039A6 33.34% 66.67%,#D52B1E 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(90deg,#111 0 33.34%,#FDDA24 33.34% 66.67%,#EF3340 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(90deg,#169B62 0 33.34%,#fff 33.34% 66.67%,#FF883E 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(90deg,#002B7F 0 33.34%,#FCD116 33.34% 66.67%,#CE1126 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#ED2939 0 33.34%,#fff 33.34% 66.67%,#ED2939 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#0057B7 0 50%,#FFD700 50%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#fff 0 50%,#DC143C 50%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#CD2A3E 0 33.34%,#fff 33.34% 66.67%,#436F4D 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#fff 0 33.34%,#00966E 33.34% 66.67%,#D62612 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#FDB913 0 33.34%,#006A44 33.34% 66.67%,#C1272D 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#FF0000 0 50%,#fff 50%);"></div>
+      <div class="flag" style="background:linear-gradient(90deg,#D91023 0 33.34%,#fff 33.34% 66.67%,#D91023 66.67%);"></div>
+      <div class="flag" style="background:linear-gradient(180deg,#A51931 0 16.66%,#F4F5F8 16.66% 33.33%,#2D2A4A 33.33% 66.66%,#F4F5F8 66.66% 83.33%,#A51931 83.33%);"></div>
+      <div class="flag" style="background:radial-gradient(circle at 45% 50%, #F42A41 0 22%, #006A4E 22%);"></div>
+    </div>
+  </div>
+</template>
+
+<!-- export viewport -->
+<div id="exp"></div>
+
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Lingo7 · Instagram</div>
+    <h1>Девять постов — одна картина</h1>
+    <p class="lede">Единое полотно 3240×3240 нарезано на девять квадратов 1080×1080. В ленте каждый квадрат — отдельный пост, а в профиле они складываются в цельную иллюстрацию.</p>
+  </header>
+
+  <!-- PROFILE PREVIEW -->
+  <section class="sec">
+    <div class="sec-h"><h2>Как это в профиле</h2><span>сетка 3×3 в Instagram</span></div>
+    <div class="twocol">
+      <div class="phone">
+        <div class="phone-in">
+          <div class="ig-top"><span>lingo7.app</span><span class="dot">···</span></div>
+          <div class="ig-head">
+            <div class="ig-av"><img src="icon-1024.png" alt=""></div>
+            <div class="ig-stats">
+              <div class="ig-stat"><b>312</b><span>постов</span></div>
+              <div class="ig-stat"><b>48,9K</b><span>читателей</span></div>
+              <div class="ig-stat"><b>27</b><span>языков</span></div>
+            </div>
+          </div>
+          <div class="ig-bio">
+            <div class="nm">Lingo7 — учи язык, читая</div>
+            <div class="ds">Тапни любое слово — мгновенный перевод. 1000+ книг и историй.</div>
+            <div class="lk">lingo7.app</div>
+          </div>
+          <div class="ig-tabs"><div><i></i></div><div><i></i></div><div><i></i></div></div>
+          <div class="ig-grid" id="ig-grid"></div>
+        </div>
+      </div>
+      <div>
+        <div class="note">
+          <b>Принцип сетки.</b> Крупный объект — экран читалки в светлой теме — держит центр и не попадает на стыки плиток. Карточки‑стикеры и подписи аккуратно ложатся внутрь своих квадратов, поэтому тонкие зазоры Instagram их не разрезают.
+        </div>
+        <div class="note" style="border-left-color:#e8b65a;">
+          <b>Порядок публикации — обратный.</b> Instagram ставит новый пост в левый‑верхний угол, поэтому выкладывай плитки от №9 к №1. Последним опубликуется пост №1 (бренд).
+          <div class="order">
+            <span>9</span><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span class="last">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL ARTWORK -->
+  <section class="sec">
+    <div class="sec-h"><h2>Полотно целиком</h2><span>3240 × 3240</span></div>
+    <div class="artbox" id="full"></div>
+  </section>
+
+  <!-- NINE TILES -->
+  <section class="sec">
+    <div class="sec-h"><h2>Девять постов</h2><span>каждый — 1080 × 1080</span></div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var tpl = document.getElementById('art-tpl');
+  function makeArt(){ return tpl.content.firstElementChild.cloneNode(true); }
+
+  // build a single scaled, clipped tile (n: 0..8) or full (n=-1)
+  function viewport(n, sizePx){
+    var cells = (n<0) ? 3 : 1;
+    var box = document.createElement('div');
+    box.style.width = sizePx+'px';
+    box.style.height = sizePx+'px';
+    box.style.position = 'relative';
+    box.style.overflow = 'hidden';
+    var f = sizePx / (cells*1080);
+    var art = makeArt();
+    art.style.transform = 'scale('+f+')';
+    if(n>=0){
+      var col = n%3, row = Math.floor(n/3);
+      art.style.left = (-col*1080*f)+'px';
+      art.style.top  = (-row*1080*f)+'px';
+    }
+    box.appendChild(art);
+    return box;
+  }
+
+  // --- profile grid ---
+  var ig = document.getElementById('ig-grid');
+  var cellPx = Math.round((430-24)/3); // ~135
+  for(var i=0;i<9;i++){
+    var c = document.createElement('div'); c.className='cell';
+    c.appendChild(viewport(i, ig.clientWidth ? Math.floor((ig.clientWidth-4)/3) : 134));
+    ig.appendChild(c);
+  }
+  // fix sizing after layout
+  function sizeIG(){
+    var w = ig.clientWidth; var s = Math.floor((w-4)/3);
+    [].forEach.call(ig.children, function(cell, idx){
+      cell.innerHTML=''; cell.appendChild(viewport(idx, s));
+    });
+  }
+  requestAnimationFrame(sizeIG);
+  window.addEventListener('resize', sizeIG);
+
+  // --- full artwork ---
+  var full = document.getElementById('full');
+  function sizeFull(){
+    var w = full.clientWidth; full.innerHTML='';
+    full.appendChild(viewport(-1, w));
+    full.style.height = w+'px';
+  }
+  sizeFull(); window.addEventListener('resize', sizeFull);
+
+  // --- nine tiles ---
+  var tiles = document.getElementById('tiles');
+  function sizeTiles(){
+    tiles.innerHTML='';
+    var w = tiles.clientWidth; var s = Math.floor((w-44)/3);
+    for(var i=0;i<9;i++){
+      var t = document.createElement('div'); t.className='tile';
+      t.style.width=s+'px'; t.style.height=s+'px';
+      var num = document.createElement('div'); num.className='num'; num.textContent=i+1;
+      t.appendChild(num);
+      t.appendChild(viewport(i, s));
+      tiles.appendChild(t);
+    }
+  }
+  sizeTiles(); window.addEventListener('resize', sizeTiles);
+
+  // --- export: render one tile at 1:1 (1080) into #exp ---
+  window.exportTile = function(n){
+    var exp = document.getElementById('exp');
+    exp.innerHTML='';
+    exp.appendChild(viewport(n, 1080));
+    document.body.classList.add('exporting');
+    window.scrollTo(0,0);
+  };
+  window.exportDone = function(){
+    document.body.classList.remove('exporting');
+    document.getElementById('exp').innerHTML='';
+  };
+})();
+</script>
+</body>
+</html>
