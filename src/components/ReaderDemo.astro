@@ -95,6 +95,11 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   }
   .reader__finger.is-visible { opacity: 1; }
   .reader__finger.is-tapping { animation: finger-tap 0.5s ease; }
+  /* Float above the word, pointing down — keeps the translation line clear. */
+  .reader__finger.is-above img { transform: scaleY(-1); }
+  /* Small, angled tap pose: smaller hand tilted so it points up-left at the word
+     from below while its body swings off into the margin. */
+  .reader__finger.is-tap-pose img { width: 26px; height: 26px; transform: rotate(-24deg); transform-origin: 50% 12%; }
 
   @keyframes finger-tap {
     0% { transform: scale(1); }
@@ -322,6 +327,13 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   // Screenshot mode: render one clean frame (tapped word + highlighted
   // translation) and signal readiness via window.__shotReady — no animation.
   const STILL = readerRoot?.dataset.still === '1';
+  // Optional still-frame overrides (used by the Instagram-grid centerpiece, not the
+  // store screenshots): tap a specific, more evocative word and float the finger
+  // ABOVE it (pointing down) so it never covers the highlighted translation below.
+  const STILL_TAP_WORD = (readerRoot?.dataset.stillTapWord || '').toLowerCase();
+  // Finger placement mode for the still frame: 'above' (points down from above),
+  // 'angled' (small tilted hand below the word), or '' (default centered below).
+  const FINGER_MODE = readerRoot?.dataset.finger || '';
 
   // Cancellation token: every load bumps this; running setTimeouts bail if stale.
   let currentRequestId = 0;
@@ -514,19 +526,35 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
       return indices;
     }
 
-    function positionFinger(wordEl) {
+    function positionFinger(wordEl, mode) {
       const rect = wordEl.getBoundingClientRect();
       const readerRect = reader.getBoundingClientRect();
       // The phone may be CSS-transform-scaled (store screenshots). getBoundingClientRect
       // returns scaled screen px, but finger.style.top/left live in the reader's own
       // (unscaled) coordinate space — normalize by the scale so they line up.
       const scale = (readerRect.width / reader.offsetWidth) || 1;
-      const maxTop = reader.offsetHeight * 0.85;
-      const top = Math.min((rect.top - readerRect.top) / scale + (rect.height / scale) * 0.5, maxTop);
-      const left = Math.max(0, Math.min(
-        (rect.left - readerRect.left) / scale + (rect.width / scale) / 2 - 6,
-        reader.offsetWidth - 40
-      ));
+      const wx = (rect.left - readerRect.left) / scale;
+      const wy = (rect.top - readerRect.top) / scale;
+      const ww = rect.width / scale;
+      const wh = rect.height / scale;
+      const clampL = (v) => Math.max(0, Math.min(v, reader.offsetWidth - 24));
+      finger.classList.toggle('is-above', mode === 'above');
+      finger.classList.toggle('is-tap-pose', mode === 'angled');
+      let top, left;
+      if (mode === 'above') {
+        // Sit above the word, fingertip (flipped) pointing down at it; the body
+        // extends up into the gap, never onto the translation line below.
+        left = clampL(wx + ww / 2 - 6);
+        top = Math.max(2, wy - 30);
+      } else if (mode === 'angled') {
+        // Small angled hand touching the word from below; body swings down-right.
+        left = clampL(wx + ww / 2 - 4);
+        top = wy + wh * 0.7;
+      } else {
+        const maxTop = reader.offsetHeight * 0.85;
+        left = clampL(wx + ww / 2 - 6);
+        top = Math.min(wy + wh * 0.5, maxTop);
+      }
       finger.style.top = top + 'px';
       finger.style.left = left + 'px';
     }
@@ -564,13 +592,26 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
 
     // Screenshot mode: freeze on a representative frame and bail out.
     if (STILL) {
-      const li = Math.min(1, lines.length - 1);
+      let li = Math.min(1, lines.length - 1);
+      let wi;
+      // If a specific tap word was requested, find it across the visible lines.
+      if (STILL_TAP_WORD) {
+        const norm = (s) => (s || '').toLowerCase().replace(/[^\p{L}]/gu, '');
+        for (let l = 0; l < lines.length && wi === undefined; l++) {
+          const ws = lines[l].querySelectorAll('.reader__word');
+          for (let i = 0; i < ws.length; i++) {
+            if (norm(ws[i].textContent) === STILL_TAP_WORD) { li = l; wi = i; break; }
+          }
+        }
+      }
       const line = lines[li];
       const transLine = transLines[li];
       const words = line.querySelectorAll('.reader__word');
       const transWords = transLine ? transLine.querySelectorAll('.reader__trans-word') : [];
-      const taps = pickTapWordIndices(words);
-      const wi = taps.length ? taps[0] : Math.min(3, words.length - 1);
+      if (wi === undefined) {
+        const taps = pickTapWordIndices(words);
+        wi = taps.length ? taps[0] : Math.min(3, words.length - 1);
+      }
       const wordEl = words[wi];
       // Highlights don't depend on layout — apply immediately.
       line.classList.add('is-reading');
@@ -584,7 +625,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
       // has settled — otherwise the text reflows down and the finger lands on
       // the wrong line. Signal readiness once it's correctly placed.
       const placeFinger = () => {
-        if (wordEl) { positionFinger(wordEl); finger.classList.add('is-visible'); }
+        if (wordEl) { positionFinger(wordEl, FINGER_MODE); finger.classList.add('is-visible'); }
         (window as any).__shotReady = true;
       };
       const fontsReady = (document as any).fonts?.ready || Promise.resolve();
