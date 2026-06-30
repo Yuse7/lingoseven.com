@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { VOCAB_LANG_CODES } from '../../../data/vocabWords';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+
+// Hub page: picks the language, then sends you to the per-language test.
+const langs = VOCAB_LANG_CODES.filter((code) => codeToSlug[code]).map((code) => {
+  const l = getLanguageByCode(code);
+  return { name: l?.name ?? code, flag: l?.flag ?? '', slug: codeToSlug[code] };
+});
+
+const canonicalUrl = 'https://lingoseven.com/tools/vocabulary-size-estimator/';
+const title = 'Vocabulary Size Test — How Many Words Do You Know? | Lingo7';
+const description =
+  'Free vocabulary size test. Pick your language and estimate how many words you know, from beginner to near-native, with a frequency-based check that corrects for guessing. 10 languages.';
+
+const faq = [
+  {
+    question: 'What is a vocabulary size test?',
+    answer:
+      'It estimates how many words you know in a language. You check the words you recognise from a list sampled across the whole frequency range — from the most common words to rare ones. The share you know in each band is scaled up to the size of that band and summed. Hidden made-up words catch over-claiming, so the number stays honest.',
+  },
+  {
+    question: 'Which languages can I test?',
+    answer:
+      'Spanish, French, German, Italian, Portuguese, English, Russian, Dutch, Swedish and Turkish. Pick one above to start its test. Each test uses real frequency data for that language and takes about a minute.',
+  },
+  {
+    question: 'How many words do you need to be fluent?',
+    answer:
+      'Roughly 2,000-3,000 of the most frequent word families cover everyday conversation (around B1). To read a novel comfortably you usually need about 8,000-9,000 word families (B2-C1). Educated native speakers know somewhere around 15,000-20,000.',
+  },
+  {
+    question: 'What is the fastest way to grow my vocabulary?',
+    answer:
+      'Meeting words again and again in real context. Extensive reading does exactly that at scale, which is why it grows vocabulary faster than flashcards alone. Lingo7 lets you read real books with parallel translation and native-narrated audio.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Vocabulary Size Test',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: langs.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `${l.name} vocabulary size test`,
+      url: `https://lingoseven.com/tools/vocabulary-size-estimator/${l.slug}/`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="vocab">
+    <div class="container">
+      <header class="vocab-head">
+        <p class="vocab-eyebrow">Free tool</p>
+        <h1>How many words do you know?</h1>
+        <p class="vocab-intro">
+          Estimate your vocabulary size in any of 10 languages. You'll check the words you know from a
+          list sampled across the whole frequency range — the test scales that up to a total and
+          corrects for guessing. Pick a language to begin.
+        </p>
+      </header>
+
+      <div class="lang-grid">
+        {langs.map((l) => (
+          <a class="lang-card" href={`/tools/vocabulary-size-estimator/${l.slug}/`}>
+            <span class="lang-flag">{l.flag}</span>
+            <span class="lang-name">{l.name}</span>
+            <span class="lang-sub">vocabulary test &rarr;</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="vocab-cta">
+        <h2>Grow your vocabulary the natural way — by reading</h2>
+        <p>
+          Whatever your score, the fastest way past it is meeting words again and again in real
+          sentences. Lingo7 lets you read real books with tap-to-translate and native-narrated audio.
+          Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="vocab-explainer">
+        <h2>How the test works</h2>
+        <p>
+          Each language's words are sorted by <strong>frequency</strong> — how often they appear in
+          real usage — and split into six bands, from the 600 most common words down to words ranked
+          around 25,000th. You see eight words from each band and check the ones you know.
+        </p>
+        <p>
+          The share you know in a band is scaled up to the whole band, and the bands are summed.
+          The list also hides <strong>invented words</strong> that look real but aren't; ticking
+          those tells the test you're guessing, and it scales your score down to match. The result is
+          an honest estimate, plus a level and a breakdown of where your vocabulary thins out.
+        </p>
+      </div>
+
+      <p class="vocab-tool-link">
+        <a href="/tools/language-difficulty-ranker/">Wondering which language to learn next? Rank 50 languages by difficulty &rarr;</a>
+      </p>
+
+      <div class="vocab-faq">
+        <h2>Frequently asked questions</h2>
+        {faq.map((f) => (
+          <details>
+            <summary>{f.question}</summary>
+            <p>{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .vocab { padding: 3rem 0 4rem; }
+  .vocab-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .vocab-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    color: var(--primary); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .vocab-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .vocab-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0 0 1.5rem; }
+
+  .lang-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.8rem; max-width: 820px; margin: 1.5rem auto 0;
+  }
+  .lang-card {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+    text-decoration: none; text-align: center;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; padding: 1.2rem 1rem; transition: all 0.15s ease;
+  }
+  .lang-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+  .lang-flag { font-size: 2rem; }
+  .lang-name { color: var(--text, #e8eef5); font-weight: 700; font-size: 1.05rem; }
+  .lang-sub { color: var(--text-muted, #9fb0c3); font-size: 0.82rem; }
+
+  .vocab-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .vocab-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .vocab-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .vocab-cta :global(.cta-buttons) { justify-content: center; }
+
+  .vocab-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .vocab-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .vocab-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+
+  .vocab-tool-link { max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: 0.95rem; }
+  .vocab-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .vocab-tool-link a:hover { text-decoration: underline; }
+
+  .vocab-faq { max-width: 760px; margin: 3rem auto 0; }
+  .vocab-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .vocab-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .vocab-faq summary { cursor: pointer; font-weight: 600; }
+  .vocab-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+</style>

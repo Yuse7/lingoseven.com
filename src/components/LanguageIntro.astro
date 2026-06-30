@@ -1,11 +1,20 @@
 ---
 import type { LanguageFact } from '../data/languageFacts';
+import { codeToSlug } from '../data/languageSlugs';
+import { VOCAB_LANG_CODES } from '../data/vocabWords';
 
 interface Props {
   targetLangName: string;
   fact: LanguageFact;
 }
 const { targetLangName, fact } = Astro.props;
+
+// Deep-link to this language's own vocabulary test if one exists, else the hub.
+const vocabSlug = codeToSlug[fact.code];
+const hasVocabTest = VOCAB_LANG_CODES.includes(fact.code) && !!vocabSlug;
+const vocabUrl = hasVocabTest
+  ? `/tools/vocabulary-size-estimator/${vocabSlug}/`
+  : '/tools/vocabulary-size-estimator/';
 ---
 
 <section class="language-intro">
@@ -38,7 +47,7 @@ const { targetLangName, fact } = Astro.props;
         <a href="/tools/language-difficulty-ranker/">See how {targetLangName} ranks against 48 languages by difficulty &rarr;</a>
       </p>
       <p class="intro-tool-link">
-        <a href="/tools/vocabulary-size-estimator/">Test how many {targetLangName} words you already know &rarr;</a>
+        <a href={vocabUrl}>Test how many {targetLangName} words you already know &rarr;</a>
       </p>
     </div>
   </div>
