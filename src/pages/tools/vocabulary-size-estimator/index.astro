@@ -14,7 +14,7 @@ const langs = VOCAB_LANG_CODES.filter((code) => codeToSlug[code]).map((code) => 
 const canonicalUrl = 'https://lingoseven.com/tools/vocabulary-size-estimator/';
 const title = 'Vocabulary Size Test — How Many Words Do You Know? | Lingo7';
 const description =
-  'Free vocabulary size test. Pick your language and estimate how many words you know, from beginner to near-native, with a frequency-based check that corrects for guessing. 10 languages.';
+  `Free vocabulary size test. Pick your language and estimate how many words you know, from beginner to near-native, with a frequency-based check that corrects for guessing. ${langs.length} languages.`;
 
 const faq = [
   {
@@ -25,7 +25,7 @@ const faq = [
   {
     question: 'Which languages can I test?',
     answer:
-      'Spanish, French, German, Italian, Portuguese, English, Russian, Dutch, Swedish and Turkish. Pick one above to start its test. Each test uses real frequency data for that language and takes about a minute.',
+      'Dozens of languages across Europe and beyond — the major Romance, Germanic, Slavic, Baltic and Finno-Ugric languages, plus Greek, Albanian, Basque, Indonesian, Malay and more. Pick one above to start its test. Each test uses real frequency data for that language and takes about a minute.',
   },
   {
     question: 'How many words do you need to be fluent?',
@@ -80,7 +80,7 @@ const jsonLd = [
         <p class="vocab-eyebrow">Free tool</p>
         <h1>How many words do you know?</h1>
         <p class="vocab-intro">
-          Estimate your vocabulary size in any of 10 languages. You'll check the words you know from a
+          Estimate your vocabulary size in any of {langs.length} languages. You'll check the words you know from a
           list sampled across the whole frequency range — the test scales that up to a total and
           corrects for guessing. Pick a language to begin.
         </p>
