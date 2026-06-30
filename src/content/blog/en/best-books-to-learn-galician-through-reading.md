@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["galician", "galego", "reading", "book-recommendations", "beginner", "intermediate", "romance-languages"]
 targetLang: "gl"
 locale: "en"
+summary: "The best books to learn Galician through reading depend on your level: start with O Principiño (The Little Prince) and the contos populares folk tales at A1-A2, move to Xosé Neira Vilas's Memorias dun neno labrego and Manuel Rivas's O lapis do carpinteiro at B1-B2, then climb to Rosalía de Castro, Castelao and Álvaro Cunqueiro at C1 and beyond."
+faq:
+  - question: "Can you learn Galician through reading if you already know Spanish or Portuguese?"
+    answer: "Yes, and it is the biggest head-start in the language. Galician shares a medieval ancestor with Portuguese and remains highly mutually intelligible, so a comfortable Portuguese reader can follow a Galician page with little friction. Spanish gives a smaller but still large boost through dense cognates. Learn the function words that differ, like o, a, e, non and moi, and you progress fast."
+  - question: "What is the best book for a beginner learning Galician?"
+    answer: "Start with O Principiño, the Galician translation of The Little Prince by Carlos Casares, and the contos populares, Galicia's folk tales. O Principiño works because the prose is short and you likely know the story already; the folk tales are short, self-contained, and built on familiar fairy-tale logic. A collection like Contos populares da provincia de Lugo is a verifiable starting point."
+  - question: "Are there graded readers for Galician?"
+    answer: "Not really. Because Galician is a smaller language, the learner-tiered graded readers that exist for Spanish or French barely exist for it, so you read real books written for native readers earlier than usual. The children's and young-adult shelf, such as Ledicia Costas's Escarlatina, a cociñeira defunta, is the most learner-friendly modern option, and parallel text with audio fills the gap."
 ---
 
 # Best Books to Learn Galician Through Reading: A Level-by-Level Guide from Beginner to Advanced

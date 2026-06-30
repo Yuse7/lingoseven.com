@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["spanish", "reading", "book-recommendations", "beginner", "intermediate", "advanced", "graded-readers"]
 targetLang: "es"
 locale: "en"
+summary: "The best books to learn Spanish through reading depend on your level: start at A1 with Olly Richards short stories, Paco Ardit's Spanish Novels, and Pobre Ana, move to El Principito and La sombra del viento at B1 to B2, then climb to García Márquez and Borges at C1. Spanish is FSI Category I, roughly 600 to 750 hours."
+faq:
+  - question: "What is the best book for a beginner learning Spanish?"
+    answer: "For absolute beginners the guide recommends graded readers: Short Stories in Spanish for Beginners by Olly Richards (controlled vocabulary, roughly A2 to B1) and Paco Ardit's Spanish Novels series, which starts at a genuine A1. For a first complete novel, Pobre Ana by Blaine Ray uses only about 300 words, and Mira Canion's cognate-heavy easy readers like Fiesta fatal also work well."
+  - question: "What Spanish books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, bridge from graded readers into authentic prose with El Principito (The Little Prince), a gentle first real book, then familiar children's and young-adult classics in translation. La sombra del viento by Carlos Ruiz Zafón is a propulsive but harder stretch goal (closer to B2 into C1), and Paco Ardit's B1 and B2 bands smooth the gap."
+  - question: "Is Spanish hard to learn by reading?"
+    answer: "Spanish is one of the easiest languages for English speakers, an FSI Category I language at roughly 600 to 750 hours. Its spelling is almost perfectly phonetic, hundreds of words are near-identical cognates, and the volume of Spanish content is endless. The main rule is to choose by difficulty first: pick a book you can almost read, not the most famous one."
 ---
 
 # Best Books to Learn Spanish Through Reading: A Level-by-Level Guide from Beginner to Advanced

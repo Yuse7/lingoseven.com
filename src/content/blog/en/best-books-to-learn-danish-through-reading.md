@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [danish, learn-danish, danish-books, reading, beginner, letlaesning, cefr-levels]
 targetLang: "da"
 locale: "en"
+summary: "The best books to learn Danish through reading depend on your level: start at A1 with Olly Richards Short Stories in Danish for Beginners, graded letlæsning readers, and Den lille prins, then move to Jussi Adler-Olsen crime novels and Peter Høeg Frøken Smillas fornemmelse for sne, reaching Tove Ditlevsen at C1."
+faq:
+  - question: "Is Danish hard to learn by reading?"
+    answer: "Danish is one of the easiest languages for English speakers to read, ranked Foreign Service Institute Category I at roughly 600 to 750 hours, with many shared Germanic words like hus for house and bog for book. The catch is pronunciation: spoken Danish swallows sounds, so read with audio to bridge the gap between page and ear."
+  - question: "What is the best book for a beginner learning Danish?"
+    answer: "Start with Olly Richards Short Stories in Danish for Beginners, eight short genre stories with built-in glossaries, pitched at A2 to B1. Denmark also grades its letlæsning easy readers by a transparent lix number, so you can climb one rung at a time. Den lille prins (The Little Prince) is another gentle first read."
+  - question: "What Danish books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, let story pull you: Ole Lund Kirkegaard Gummi-Tarzan, H.C. Andersen eventyr (read for culture, since the language is nineteenth-century), and Jussi Adler-Olsen Afdeling Q crime series starting with Kvinden i buret. Peter Høeg Frøken Smillas fornemmelse for sne is your bridge from B2 toward C1."
 ---
 
 # The Best Books to Learn Danish Through Reading: A1 to C1+

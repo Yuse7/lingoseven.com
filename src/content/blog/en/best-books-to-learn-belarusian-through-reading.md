@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [belarusian, learn-belarusian, belarusian-books, reading, beginner, cefr-levels]
 targetLang: "be"
 locale: "en"
+summary: "The best books to learn Belarusian through reading depend on your level: start at A1 to A2 with Belarusian folk tales like Лёгкі хлеб, move at B1 to B2 to Маленькі прынц (The Little Prince), Yanka Kupala's comedy Паўлінка, and Karatkievich's Дзікае паляванне караля Стаха, then reach C1 with Vasil Bykaŭ's war novellas Знак бяды and Сотнікаў."
+faq:
+  - question: "What is the best book for a beginner learning Belarusian?"
+    answer: "For a beginner, start with Belarusian folk tales (беларускія народныя казкі) such as the trickster tale Лёгкі хлеб (Easy Bread), rated A1 to A2 with support. Their short sentences, everyday vocabulary, and heavy repetition make them the closest thing Belarusian has to natural beginner texts. Pair them with short parallel-text passages, since purpose-built graded readers barely exist for the language."
+  - question: "Is it easier to learn Belarusian if I already know Russian?"
+    answer: "Yes, enormously. Belarusian and Russian share the Cyrillic alphabet (plus the Belarusian-only ў and і), most grammar, and a large core of vocabulary, so a reader with solid Russian can often grasp the gist of a Belarusian page on the first pass. You then study the divergences: the distinctly Belarusian words, the phonetic akanye spelling, and the grammatical differences. Without Russian, treat it as a full Slavic apprenticeship."
+  - question: "What Belarusian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, read Маленькі прынц (The Little Prince), translated by Nina Matyash, as your first real book, then Yanka Kupala's 1912 folk comedy Паўлінка, which is almost all lively dialogue. For a page-turner, take on Uladzimir Karatkievich's gothic mystery Дзікае паляванне караля Стаха (King Stakh's Wild Hunt), which has an English translation for parallel reading."
 ---
 
 # Best Books to Learn Belarusian Through Reading: A Level-by-Level Guide From Beginner to Advanced

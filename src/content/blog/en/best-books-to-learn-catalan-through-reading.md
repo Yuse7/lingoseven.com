@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["catalan", "reading", "book-recommendations", "beginner", "intermediate", "advanced", "romance-languages"]
 targetLang: "ca"
 locale: "en"
+summary: "The best books to learn Catalan through reading depend on your level: begin at A1 with rondalles folk tales, El petit príncep, and El zoo d'en Pitus, advance at B2 to Mercè Rodoreda La plaça del Diamant and Quim Monzó short stories, then tackle Josep Pla El quadern gris at C1."
+faq:
+  - question: "Is Catalan hard to learn by reading if I already know Spanish?"
+    answer: "No, it is on the easier end for anyone who already knows a Romance language. If you read Spanish you recognise roughly eighty per cent of Catalan vocabulary on sight, and French covers much of the rest. You mainly learn a short list of distinctive features, like the articles el, la, els, les and the system of weak pronouns."
+  - question: "What is a good first book to read in Catalan?"
+    answer: "Start with the language, not the prestige. Good first choices are the rondalles folk tales, El petit príncep, and Sebastià Sorribas El zoo d'en Pitus, a children classic with short chapters and clean standard grammar. Avoid opening with La plaça del Diamant, whose stream-of-consciousness voice is demanding even for native speakers."
+  - question: "What are the best advanced Catalan books to read?"
+    answer: "At C1 and above, read Josep Pla El quadern gris (The Grey Notebook), prized for its precise prose, Jaume Cabré thousand-page epic Jo confesso (Confessions), and Víctor Català Solitud (1905), a landmark of Catalan Modernisme. All three are demanding even for educated native speakers, so reach them once reading Catalan is a pleasure."
 ---
 
 # Best Books to Learn Catalan Through Reading: A Level-by-Level Guide from Beginner to Advanced

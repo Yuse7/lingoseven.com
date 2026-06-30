@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["serbian", "reading", "book-recommendations", "beginner", "cyrillic", "graded-readers", "intermediate"]
 targetLang: "sr"
 locale: "en"
+summary: "The best books to learn Serbian through reading depend on your level: start at A1 with Mali princ and Ježeva kućica by Branko Ćopić, move to the folk tales collected by Vuk Karadžić and Nušić's Autobiografija at B1 to B2, then climb to Na Drini ćuprija by Ivo Andrić at C1. Serbian is FSI Category IV, roughly 1,100 hours."
+faq:
+  - question: "Do I need to learn both the Cyrillic and Latin alphabets for Serbian?"
+    answer: "Yes. Serbian is written in two scripts, Cyrillic and Latin, and a literate reader uses both, so learning only one leaves you functionally illiterate half the time. The good news is they map almost one-to-one: both have thirty letters and the spelling is phonetic. Most English speakers should read their first book in Cyrillic, since it needs the practice most."
+  - question: "What is the best book for a beginner learning Serbian?"
+    answer: "Mali princ (The Little Prince) is the most reliable A2 entry point, published in Serbian in both scripts, with short sentences and a story you already know. Beyond it, Ježeva kućica by Branko Ćopić and the short children's poems of Jovan Jovanović Zmaj are rhythmic, repetitive, and short enough to finish, which matters most in the first weeks."
+  - question: "What Serbian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2 the guide recommends folk narrative and comic prose: the Srpske narodne pripovetke collected by Vuk Karadžić, whose repetition and formulaic structure suit intermediate readers, and Branislav Nušić's Autobiografija, a warm, ironic mock-memoir in conversational modern Serbian. Nušić's comedies, such as Gospođa ministarka, make a natural next step into spoken-style dialogue."
 ---
 
 # Best Books to Learn Serbian Through Reading: From Beginner to Advanced

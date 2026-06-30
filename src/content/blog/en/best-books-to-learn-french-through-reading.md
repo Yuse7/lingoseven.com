@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["french", "reading", "book-recommendations", "beginner", "intermediate", "advanced", "graded-readers"]
 targetLang: "fr"
 locale: "en"
+summary: "The best books to learn French through reading depend on your level: start with graded readers like Olly Richards's Short Stories in French for Beginners at A1-A2, move to Le Petit Nicolas, Le Petit Prince and Maupassant's short stories at B1-B2, then read Camus's L'Étranger, Dumas's Le Comte de Monte-Cristo and Hugo's Les Misérables at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning French?"
+    answer: "For a beginner, start with graded readers written for learners, not native classics. Olly Richards's Short Stories in French for Beginners offers eight original stories with controlled vocabulary, glossaries and comprehension questions, so you are never stranded. Publisher series like Lire en français facile and CLE International, clearly labelled A1 upward, let you step up one notch at a time."
+  - question: "Is French hard to learn by reading?"
+    answer: "French is one of the easiest languages for English speakers, rated FSI Category I at roughly 750 class hours, and it shares thousands of cognates with English. The real catch is that its spelling is not phonetic: silent letters and liaison mean you can recognize a word in print yet miss it in speech. Pairing reading with native audio closes that gap."
+  - question: "What French books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2 you can leave learner material and read real but accessible books. Le Petit Nicolas offers short, funny, self-contained stories at B1; Le Petit Prince suits a solid B1 and above; Bonjour tristesse by Françoise Sagan is a clean B2 read; and Maupassant's short stories, like La Parure, work at B2 with a glossary. Each is finishable in short sittings."
 ---
 
 # Best Books to Learn French Through Reading: From Beginner to Advanced

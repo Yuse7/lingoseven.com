@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [kyrgyz, learn-kyrgyz, kyrgyz-books, reading, beginner, cefr-levels]
 targetLang: "ky"
 locale: "en"
+summary: "The best books to learn Kyrgyz through reading depend on your level: start with Кичинекей ханзада (The Little Prince) and Kyrgyz folk tales at A1 to A2, move to Chingiz Aitmatov's Жамийла and Биринчи мугалим at B1 to B2, then climb to his Ак кеме and Жаныбарым, Гүлсарым and finally the epic Манас at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Kyrgyz?"
+    answer: "The article names Кичинекей ханзада, the Kyrgyz Little Prince, as a genuine gift to the beginning reader, since you likely know the plot and the prose is gentle and repetitive. The country's folk tales (жомок), such as those in The Faint-Hearted Hare and Other Kyrgyz Folk Tales, are the other strong A2 starting point."
+  - question: "Why is Chingiz Aitmatov good for learning Kyrgyz?"
+    answer: "Aitmatov is the centerpiece of the article's plan because he is one of the most translated authors of the twentieth century, so his Kyrgyz exists beside trustworthy English editions for sentence-by-sentence parallel reading. Start with the short novella Жамийла (Jamila) at B1, then Биринчи мугалим (The First Teacher), warm, humane stories rather than difficult for difficulty's sake."
+  - question: "Can a learner read the epic of Manas?"
+    answer: "Only in part. The article calls Манас the summit and reckons it the longest epic poem in the world, written in archaic, oral-formulaic language that is realistically beyond even very advanced learners. Do not attempt the whole thing in the original; seek a modernized or abridged edition and pair it with a partial English translation, treating it as a cultural pilgrimage."
 ---
 
 # Best Books to Learn Kyrgyz Through Reading: A Level-by-Level Guide From Beginner to Advanced

@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["filipino", "tagalog", "reading", "tagalog-books", "beginner-filipino", "cefr-levels", "language-learning"]
 targetLang: "tl"
 locale: "en"
+summary: "The best books to learn Filipino through reading depend on your level: start with illustrated Adarna House children's books and bilingual editions at A1-A2, move to folk tales like Mga Kuwento ni Lola Basyang and Bob Ong's ABNKKBSNPLAko?! at B1-B2, then take on José Rizal's Noli Me Tángere and Lualhati Bautista's Dekada '70 at C1 and beyond."
+faq:
+  - question: "Can you learn Filipino just by reading books?"
+    answer: "Reading takes you a long way, especially because Filipino uses the Latin alphabet, spells words close to how they sound, and is full of Spanish and English loanwords you half-recognize. The FSI rates it Category III, but most of that difficulty is grammar and speaking. To bridge into the spoken language, pair reading with native audio and conversation; Bob Ong's everyday Taglish is a good start."
+  - question: "What is the best Filipino book for a beginner?"
+    answer: "For a true beginner, start with the illustrated children's books from Adarna House, the Philippines' largest children's publisher, and with bilingual Filipino-English editions. The short, declarative sentences and pictures let you confirm meaning without a dictionary, and many titles come in dual-language form that turns one book into an instant parallel text. The vocabulary is everyday and high-frequency, exactly what to drill first."
+  - question: "What Filipino books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2, read the folk tales and the contemporary bestsellers. Severino Reyes's Mga Kuwento ni Lola Basyang and a prose retelling of Ibong Adarna give narrative momentum and cultural fluency. Then cross into the living language with Bob Ong, whose ABNKKBSNPLAko?! and Bakit Baligtad Magbasa ng Libro ang mga Pilipino? are written in the everyday Taglish-inflected Tagalog Filipinos actually speak."
 ---
 
 # The Best Books to Learn Filipino Through Reading: A Level-by-Level Guide to Tagalog Books (A1 to C1+)

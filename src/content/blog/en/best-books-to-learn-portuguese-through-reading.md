@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["portuguese", "reading", "book-recommendations", "beginner", "intermediate", "advanced", "graded-readers"]
 targetLang: "pt"
 locale: "en"
+summary: "The best books to learn Portuguese through reading depend on your level: start at A1 with Olly Richards short stories and O Pequeno Príncipe, move to O Alquimista and Meu Pé de Laranja Lima at B1, then climb to Dom Casmurro by Machado de Assis at C1. Portuguese is an FSI Category I language, roughly 600 to 750 hours."
+faq:
+  - question: "What is the best book for a beginner learning Portuguese?"
+    answer: "For a true beginner, the most reliable on-ramp is Short Stories in Brazilian Portuguese for Beginners by Olly Richards, with eight short, learner-controlled stories, glossed vocabulary, and native audio. A close second is O Pequeno Príncipe (The Little Prince), whose short sentences and present-tense narration make it a gentle first real book, available in Brazilian and European editions."
+  - question: "What Portuguese books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2 the guide points to accessible native novels: O Alquimista by Paulo Coelho, written in clean, parable-like Brazilian Portuguese, and Meu Pé de Laranja Lima by José Mauro de Vasconcelos, told largely in a childlike register. When you can read Coelho without a dictionary, step up to Capitães da Areia by Jorge Amado."
+  - question: "Is Portuguese hard to learn by reading?"
+    answer: "Not especially. The US Foreign Service Institute rates Portuguese a Category I language, its easiest tier for English speakers, at roughly 600 to 750 hours to professional proficiency. It shares a Latin backbone with English, so cognates like importante and natural appear constantly. The main early choice is Brazilian versus European Portuguese, which matters more for audio than for reading."
 ---
 
 # Best Books to Learn Portuguese Through Reading: A Level-by-Level Guide from Beginner to Advanced

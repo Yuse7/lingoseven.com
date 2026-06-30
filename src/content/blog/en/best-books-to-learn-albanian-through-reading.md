@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [albanian, learn-albanian, albanian-books, reading, beginner, cefr-levels]
 targetLang: "sq"
 locale: "en"
+summary: "The best books to learn Albanian through reading depend on your level: begin at A1 to A2 with Princi i vogël and collections of përralla shqiptare, move at B1 to B2 to Ismail Kadare's Gjenerali i ushtrisë së vdekur and Kronikë në gur plus Fatos Kongoli's I humburi, then reach Kadare's Pallati i ëndrrave and Prilli i thyer at C1."
+faq:
+  - question: "What is the best book for a beginner learning Albanian?"
+    answer: "For a beginner, start with Princi i vogël, the Albanian translation of The Little Prince, rated around A2. Its sentences are short, its vocabulary is concrete (a rose, a fox, a star), and most learners already know the plot, so you decode the Albanian instead of puzzling out the meaning. Pair it with collections of përralla shqiptare (Albanian folk tales), whose repetitive framing phrases make each tale easier than the last."
+  - question: "Are there graded readers for Albanian?"
+    answer: "Honestly, no. Albanian is a lower-resource language for learners, so you will not find the deep shelves of leveled graded readers that exist for Spanish or French. Its saving grace is a small number of internationally translated authors, above all Ismail Kadare, whose books exist in excellent English versions. That makes parallel reading the main path, supplemented by folk tales and children's classics like Princi i vogël."
+  - question: "What Albanian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, your first real literature is Ismail Kadare. Read Gjenerali i ushtrisë së vdekur (The General of the Dead Army), the 1963 novel that made his name, and the semi-autobiographical Kronikë në gur (Chronicle in Stone, 1971). Add Fatos Kongoli's I humburi (The Loser, 1992) for a more contemporary voice. All three have fine English translations for parallel reading."
 ---
 
 # Best Books to Learn Albanian Through Reading: A Level-by-Level Guide From Beginner to Advanced

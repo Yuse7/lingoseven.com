@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [romanian, learn-romanian, reading, graded-readers, romanian-books, beginner, romance-languages]
 targetLang: "ro"
 locale: "en"
+summary: "The best books to learn Romanian through reading depend on your level: start at A1 with 25 Short Stories for Romanian Learners by Alina Vasile and Micul Prinț, move to Mihail Sebastian and Mircea Eliade at B1, then climb to Liviu Rebreanu and Mircea Cărtărescu at C1. Romanian is an FSI Category I language, roughly 600 to 750 hours."
+faq:
+  - question: "What is the best book for a beginner learning Romanian?"
+    answer: "Start with 25 Short Stories for Romanian Learners by Alina Vasile, a bilingual collection with controlled vocabulary and short units built for beginners and early intermediates. Pair it with Micul Prinț, the Romanian Little Prince, whose short sentences and familiar plot let you read for the language while leaning on a story you already know. Both work best with translation support."
+  - question: "Are the famous Romanian children's classics good for beginners?"
+    answer: "No, and this is the guide's main warning. Ion Creangă's Amintiri din copilărie and Petre Ispirescu's fairy tales are cultural cornerstones, but they are written in a nineteenth-century, regional, partly archaic Romanian that even natives need glossed. They are really B2-and-up reads. For early levels, prefer modern children's books and Micul Prinț over the nineteenth-century originals."
+  - question: "Is Romanian hard to learn by reading?"
+    answer: "Romanian is an FSI Category I language, roughly 600 to 750 hours, and its Latin core means cognates like important and libertate open much of a page for free. The catches are a surviving noun-case system, a definite article attached to the end of the noun (lup, lupul), and a Slavic vocabulary core (da, prieten, iubire) that cognates will not predict."
 ---
 
 # Best Books to Learn Romanian Through Reading: A Level-by-Level Guide From Beginner to Advanced

@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["italian", "reading", "book-recommendations", "beginner", "intermediate", "advanced", "graded-readers"]
 targetLang: "it"
 locale: "en"
+summary: "The best books to learn Italian through reading depend on your level: start with graded readers like Olly Richards's Short Stories in Italian and Rodari's Favole al telefono at A1 to A2, move to Collodi's Pinocchio and Ammaniti's Io non ho paura at B1 to B2, then reach Calvino, Ferrante's L'amica geniale, and Primo Levi at C1."
+faq:
+  - question: "What is the best book for a beginner learning Italian?"
+    answer: "For true beginners the article recommends graded readers built for learners: Olly Richards's Short Stories in Italian for Beginners, mapped to roughly A2 to B1 around the 1,000 most frequent words, and Alma Edizioni's Italiano facile series with professional audio. Gianni Rodari's Favole al telefono adds very short, plain-vocabulary tales you can finish in minutes."
+  - question: "Is Italian easy to learn by reading?"
+    answer: "Relatively, yes. The article notes that the Foreign Service Institute places Italian in Category I, its easiest tier, at roughly 600 to 750 class hours. Italian spelling is almost perfectly phonetic, so reading and listening reinforce each other and you can pronounce almost any word on the first try, which makes the read-and-listen method especially effective."
+  - question: "What Italian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2 the article recommends plain-spoken native books: Carlo Collodi's Le avventure di Pinocchio, the Italian Il Piccolo Principe, Niccolo Ammaniti's Io non ho paura (told by a nine-year-old, so the language stays accessible), and Italo Calvino's Marcovaldo, twenty short linked stories that make a manageable on-ramp to a major author."
 ---
 
 # Best Books to Learn Italian Through Reading: From Beginner to Advanced

@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [mongolian, learn-mongolian, mongolian-books, reading, beginner, cefr-levels]
 targetLang: "mn"
 locale: "en"
+summary: "The best books to learn Mongolian through reading depend on your level: start with Mongolian folk tales (Монгол ардын үлгэр) and Бяцхан хунтайж (The Little Prince) at A1-A2, move to D. Natsagdorj and Sengiin Erdene's short stories at B1-B2, and reach Lodoidamba's Тунгалаг Тамир and the Secret History of the Mongols at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Mongolian?"
+    answer: "Mongolian folk tales (Монгол ардын үлгэр) are the natural first reading: short, repetitive, and built around concrete things like animals, herders, and the steppe. After them, the Mongolian Little Prince (Бяцхан хунтайж) is close to a perfect early reader because you likely already know the story and a small set of words (rose, fox, sheep, star) recur throughout."
+  - question: "Is Mongolian hard to learn by reading?"
+    answer: "Mongolian is a Category IV language for English speakers, with stacking suffixes, vowel harmony, and verbs that wait at the end of the sentence. But the Cyrillic script is learnable in days, there is no gender or articles, and the grammar is very regular. Reading trains the suffix patterns better than any grammar table, especially when paired with audio."
+  - question: "What Mongolian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2 turn to the founders of modern Mongolian writing. D. Natsagdorj, the father of the modern literature, wrote the short poem Миний нутаг (My Homeland) and accessible short stories. Sengiin Erdene, pioneer of the modern Mongolian short story, is the next step, with longer sentences and richer emotional vocabulary that genuinely read as literature."
 ---
 
 # Best Books to Learn Mongolian Through Reading: A Level-by-Level Guide From Beginner to Advanced

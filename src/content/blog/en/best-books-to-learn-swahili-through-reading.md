@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [swahili, learn-swahili, swahili-books, reading, beginner, cefr-levels]
 targetLang: "sw"
 locale: "en"
+summary: "The best books to learn Swahili through reading depend on your level: start at A1 to A2 with the Abunuwasi folk tales and the Swahili Little Prince (Mwana Mdogo wa Mfalme), build at B1 to B2 with Shaaban Robert (Adili na Nduguze, Kusadikika), then read Kezilahabi's Rosa Mistika at C1."
+faq:
+  - question: "What is the best book for a beginner learning Swahili?"
+    answer: "For an absolute beginner, start with the Hekaya za Abunuwasi folk tales or the Swahili Little Prince (Mwana Mdogo wa Mfalme, published by Mkuki na Nyota in 2011). The Abunuwasi tales are short and self-contained, so you finish a whole story early, and the Little Prince lets you lean on a plot you already know. Both sit around A2 to B1."
+  - question: "Can you learn Swahili just by reading books?"
+    answer: "Reading is one of the best routes into Swahili, especially for the noun-class system, which repeats in every sentence until the agreement prefixes feel automatic. The article recommends pairing reading with audio, since Swahili spelling is phonetic, and keeping an English anchor nearby. The 2025 Yale translation of Rosa Mistika makes sentence-by-sentence parallel reading genuinely possible."
+  - question: "What Swahili books should I read at an intermediate level?"
+    answer: "At B1 to B2 the article points to Shaaban Robert, the father of modern Swahili literature. His short allegorical novels Adili na Nduguze (1952), Kusadikika (1951), and Kufikirika (written 1946, published 1967) are taught in schools and bridge folk tale and full literature in clear prose. Reading three by one author lets his style and vocabulary compound."
 ---
 
 # Best Books to Learn Swahili Through Reading: A Level-by-Level Guide From Beginner to Advanced

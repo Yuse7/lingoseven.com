@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [hungarian, reading, books, beginner, graded-readers, cefr, parallel-text]
 targetLang: "hu"
 locale: "en"
+summary: "The best books to learn Hungarian through reading depend on your level: start with Marék Veronika's Boribon and Kippkopp and A kis herceg at A1 to A2, move to Magda Szabó's Az ajtó at B2, then climb to Márai's A gyertyák csonkig égnek, Kosztolányi's Édes Anna, and Kertész's Sorstalanság at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Hungarian?"
+    answer: "The article recommends starting with Hungarian children's books, since dedicated graded readers are scarce. Marék Veronika's Boribon and Kippkopp stories sit at A1 to A2 with short, declarative sentences and concrete vocabulary, and the folk tales of Benedek Elek plus A kis herceg (The Little Prince) follow naturally as your first real reading."
+  - question: "Is Hungarian hard to learn by reading?"
+    answer: "Hungarian is genuinely hard, a Foreign Service Institute Category IV language needing roughly 1,100 classroom hours, because it is Uralic, agglutinative, and uses around eighteen cases plus vowel harmony. Reading softens this: the spelling is almost perfectly phonetic and stress always falls on the first syllable, so you can read aloud correctly long before you fully understand."
+  - question: "What Hungarian books should I read at an advanced (C1) level?"
+    answer: "At C1 the article recommends the literary classics: Sándor Márai's A gyertyák csonkig égnek (Embers), Dezső Kosztolányi's Édes Anna, and Imre Kertész's Nobel-winning Sorstalanság (Fatelessness). All three have respected English translations, so you can read them in parallel, and each rewards a reader who has already finished a B2 novel with comfort."
 ---
 
 # Best Books to Learn Hungarian Through Reading: A Level-by-Level Guide from Beginner to Advanced

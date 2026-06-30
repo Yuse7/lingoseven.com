@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [latvian, reading, books, beginner, language-learning, baltic, folk-songs]
 targetLang: "lv"
 locale: "en"
+summary: "The best books to learn Latvian through reading depend on your level: start with the four-line dainas folk songs and Margarita Stāraste picture books like Zīļuks at A1-A2, move to Mazais princis (The Little Prince) and Nora Ikstena's Mātes piens (Soviet Milk) at B1-B2, and reach Rainis and Regīna Ezera at C1."
+faq:
+  - question: "What is the best book for a beginner learning Latvian?"
+    answer: "For absolute beginners the best starting point is the dainas, Latvia's four-line folk songs, which are short, repetitive, and built from high-frequency words. Beyond them, Margarita Stāraste's illustrated children's books like Zīļuks work well because the pictures carry meaning. When you can follow a short story, Mazais princis (The Little Prince) makes the ideal first full-length book."
+  - question: "What Latvian book should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2 the standout is Nora Ikstena's Mātes piens, published in English as Soviet Milk, a clear, restrained contemporary novel with a high-quality English translation that suits parallel reading. Anna Brigadere's fairy-tale play Sprīdītis and Rūdolfs Blaumanis's short stories, such as Nāves ēnā, also fit this level."
+  - question: "Are there graded readers for Latvian?"
+    answer: "No, dedicated graded readers for Latvian learners are scarce. With under two million native speakers, there is no large catalogue of simplified A1 and A2 fiction like you find for Spanish or German. The workaround is to lean on short authentic texts (dainas and folk tales) and use parallel translations to make full books accessible earlier than they would otherwise be."
 ---
 
 # Best Books to Learn Latvian Through Reading: A Level-by-Level Guide From Beginner to Advanced

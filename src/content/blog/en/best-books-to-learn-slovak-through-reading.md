@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["slovak", "reading", "graded-readers", "beginner-slovak", "slovak-books", "cefr-levels", "language-learning"]
 targetLang: "sk"
 locale: "en"
+summary: "The best books to learn Slovak through reading depend on your level: start at A1 with Malý princ, Podjavorinská's animal tales, and Danka a Janka, move to the realists Martin Kukučín and Timrava at B1 to B2, then climb to Vilikovský and Tatarka at C1. Slovak sits in the FSI's harder tiers, well over a thousand hours."
+faq:
+  - question: "What is the best book for a beginner learning Slovak?"
+    answer: "Malý princ (The Little Prince) is the most reliable first book, with short declarative sentences and a story most learners already know. From there, Ľudmila Podjavorinská's rhymed animal tales such as Čin-Čin, and Danka a Janka by Mária Ďuríčková, give you everyday modern Slovak in short, episodic pieces you can finish in one sitting."
+  - question: "Can I use Czech books to help learn Slovak?"
+    answer: "Yes, and the guide recommends it. Slovak and Czech are among the most mutually intelligible language pairs in Europe, often estimated above ninety percent in both directions, while Slovak has far less graded learner material. If you find a beginner-friendly Czech text with no Slovak equivalent, use it, just keep track of which language you ultimately want to produce."
+  - question: "Are Slovak folk tales good for beginners?"
+    answer: "Not as a first step. Pavol Dobšinský's canonical collection, the Prostonárodné slovenské povesti, is foundational to Slovak culture, but it is written in a deliberately archaic, ornate folk register that is not simple modern Slovak. Treat these tales as a B1 to B2 cultural reward, read with parallel translation and audio, rather than the gentle on-ramp the fairy-tale label implies."
 ---
 
 # The Best Books to Learn Slovak Through Reading: A Level-by-Level Guide (A1 to C1+)

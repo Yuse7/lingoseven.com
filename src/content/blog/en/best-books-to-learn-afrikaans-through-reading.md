@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [afrikaans, learn-afrikaans, afrikaans-books, reading, beginner, cefr-levels]
 targetLang: "af"
 locale: "en"
+summary: "The best books to learn Afrikaans through reading depend on your level: start at A1 to A2 with Die Klein Prinsie, Liewe Heksie, and Trompie, move to Deon Meyer's thriller Infanta and Marita van der Vyver's Griet skryf n sprokie at B1 to B2, then reach Dalene Matthee's Kringe in n bos and van Heerden's Toorberg at C1."
+faq:
+  - question: "What is the best book for a beginner learning Afrikaans?"
+    answer: "For an absolute beginner, start with Die Klein Prinsie (The Little Prince), translated by André P. Brink and rated around A2, because you likely already know the story. Pair it with the beloved children's classics Liewe Heksie (A1 to A2) by Verna Vels and Trompie (A2) by Topsy Smith, where short sentences and everyday vocabulary build momentum."
+  - question: "Can you really learn Afrikaans just by reading books?"
+    answer: "Reading is an unusually strong path into Afrikaans because the grammar throws few curveballs: no verb conjugation by person, no grammatical gender, and no Dutch-style cases. Afrikaans also shares a large amount of vocabulary with English and Dutch, so you arrive at many sentences already half understanding them. The gentle grammar lets you climb from children's books to adult fiction faster than in most languages."
+  - question: "What Afrikaans books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, read Deon Meyer's fast-moving crime thriller Infanta (published in English as Devil's Peak), which Meyer writes in Afrikaans first, and Marita van der Vyver's Griet skryf n sprokie (Entertaining Angels), rated B2. Both have professional English translations, so you can read in parallel, checking yourself sentence by sentence when the plot quickens past your vocabulary."
 ---
 
 # Best Books to Learn Afrikaans Through Reading: A Level-by-Level Guide From Beginner to Advanced

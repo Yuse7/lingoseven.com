@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["czech", "reading", "graded-readers", "beginner-czech", "czech-books", "cefr-levels", "language-learning"]
 targetLang: "cs"
 locale: "en"
+summary: "The best books to learn Czech through reading depend on your level: start with graded readers and children classics like Povídání o pejskovi a kočičce and Malý princ, move up to Karel Čapek Válka s mloky and R.U.R. at B1 to B2, then reach C1 with Hašek Švejk."
+faq:
+  - question: "What is the best book for a beginner learning Czech?"
+    answer: "After graded readers from the Czech Step by Step series by Lída Holá, the best beginner books are the children classics: Josef Čapek Povídání o pejskovi a kočičce, Karel Čapek Dášeňka, and Malý princ (The Little Prince). All are short, written in clean standard Czech, and let you meet the seven cases in gentle context."
+  - question: "Why is Czech so hard to read?"
+    answer: "Czech is a Foreign Service Institute Category III language needing about 1,100 hours. It has seven grammatical cases that reshape almost every noun ending, tough consonant clusters, the rare ř sound, and diglossia: the standard written čeština used in books differs from the colloquial Czech of speech, which shows up in novel dialogue."
+  - question: "What Czech books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, read Karel Čapek, whose narration stays in clean standard Czech: the satirical novel Válka s mloky (War with the Newts) and the play R.U.R., which coined the word robot. Then step up to Bohumil Hrabal short novel Ostře sledované vlaky (Closely Watched Trains) to meet a distinctive authorial voice."
 ---
 
 # The Best Books to Learn Czech Through Reading: A Level-by-Level Guide (A1 to C1+)

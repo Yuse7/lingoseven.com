@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [norwegian, learn-norwegian, norwegian-books, reading, beginner, bokmal, cefr-levels]
 targetLang: "no"
 locale: "en"
+summary: "The best books to learn Norwegian through reading depend on your level: start with lettlest graded readers, Olly Richards's Short Stories in Norwegian, and the children's classics of Egner and Vestly at A1-A2, move to Maria Parr, Jo Nesbø, and Sofies verden at B1-B2, and reach Hamsun's Sult and Knausgård's Min kamp at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Norwegian?"
+    answer: "Start with a lettlest (easy-read) graded reader, or Olly Richards's Short Stories in Norwegian for Beginners, which uses the most frequent 1,000 words with glossaries. Pad it with the children's classics nearly every Norwegian grew up on, Thorbjørn Egner's Karius og Baktus and Anne-Cath. Vestly's series. Den lille prinsen (The Little Prince) is a reliable A2 bridge because you know the plot."
+  - question: "Should I read Bokmål or Nynorsk to learn Norwegian?"
+    answer: "Default to Bokmål. It is what 85 to 90 percent of Norwegians write, and nearly all textbooks, graded readers, and learner material assume it. Add Nynorsk later as a known variation. This matters for book choice: Maria Parr writes in Nynorsk (her title Vaffelhjarte signals it), so save her until you are solidly at B1 and can tell the two standards apart."
+  - question: "What Norwegian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2 you can read books written for native readers. Jo Nesbø's Harry Hole crime series (starting with Flaggermusmannen) pulls you forward with momentum and sits around B2. Jostein Gaarder's Sofies verden teaches philosophy in calm, well-signposted prose. Maria Parr's warm children's novels are wonderful too, with the caveat that she writes in Nynorsk."
 ---
 
 # The Best Books to Learn Norwegian Through Reading: A1 to C1+

@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [macedonian, reading, books, beginner, cyrillic, parallel-reading, cefr-levels]
 targetLang: "mk"
 locale: "en"
+summary: "The best books to learn Macedonian through reading depend on your level: start with Малиот принц (The Little Prince) and Marko Cepenkov's folk tales at A1-A2, move to Kočo Racin's Бели мугри and Janevski's Село зад седумте јасени at B1-B2, and reach Andreevski's Пиреј and Smilevski's Freud's Sister at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Macedonian?"
+    answer: "The best first book is Малиот принц (The Little Prince), whose short chapters, simple syntax, and familiar plot let you focus on the language. Marko Cepenkov's folk tales are the other strong A1-A2 choice, since their repetitive formulas and everyday vocabulary drill core grammar naturally. Learn the 31-letter Cyrillic alphabet first; it takes only a week or two."
+  - question: "Is Macedonian hard to learn by reading?"
+    answer: "Macedonian is more approachable than its Slavic reputation suggests. Almost alone among Slavic languages, it lost its noun cases, so you learn a word once and recognize it everywhere. The Cyrillic alphabet is one-letter-one-sound, so pronunciation is predictable. The real work is verb aspect and the postposed definite article, which reading teaches naturally."
+  - question: "What Macedonian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2 you can read the foundations of modern Macedonian literature: Blaže Koneski's poetry (he shaped the standard language), Kočo Racin's 1939 collection Бели мугри (White Dawns), and Slavko Janevski's Село зад седумте јасени, the first novel ever written in Macedonian. Pick one and finish it rather than sampling several."
 ---
 
 # Best Books to Learn Macedonian Through Reading: A Level-by-Level Guide from Beginner to Advanced

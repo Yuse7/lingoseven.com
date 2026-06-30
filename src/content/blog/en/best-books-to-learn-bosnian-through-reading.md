@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["bosnian", "reading", "book-recommendations", "beginner", "graded-readers", "slavic-languages", "bcs"]
 targetLang: "bs"
 locale: "en"
+summary: "The best books to learn Bosnian through reading depend on your level: start at A1 to A2 with Mali princ (The Little Prince) and Bosnian folk tales, move at B1 to B2 to Miljenko Jergović's Sarajevski Marlboro and Ivo Andrić's Na Drini ćuprija, then reach the canon at B2 to C1 with Meša Selimović's Derviš i smrt and Tvrđava."
+faq:
+  - question: "What is the best book for a beginner learning Bosnian?"
+    answer: "For an early learner, anchor your reading with Mali princ, the Bosnian translation of The Little Prince (strong A2, reachable at late A1 with support), since you almost certainly already know the story. Pair it with collections of Bosnian folk tales (narodne bajke and priče), whose repetitive formulas and short, self-contained units make them an excellent beginner resource."
+  - question: "Is Bosnian hard to learn by reading?"
+    answer: "Bosnian is genuinely hard: the Foreign Service Institute places it in Category IV (around 1,100 class hours), with seven cases, three genders, and pitch accent. But two advantages help readers. It uses a clean, fully phonetic Latin alphabet of 30 letters, so you can read aloud almost correctly on day one, and it belongs to the BCS continuum, letting you supplement with plentiful Croatian and Serbian material."
+  - question: "What Bosnian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2 you graduate straight to real literature. Start with Miljenko Jergović's short-story collection Sarajevski Marlboro (1994), the gentlest landing and ideal for finishable units. Then take on Ivo Andrić's Nobel-winning Na Drini ćuprija (The Bridge on the Drina), reading it chapter by chapter as self-contained stories with translation alongside. Selimović's denser novels come next, at B2 to C1."
 ---
 
 # Best Books to Learn Bosnian Through Reading: From Beginner to Advanced

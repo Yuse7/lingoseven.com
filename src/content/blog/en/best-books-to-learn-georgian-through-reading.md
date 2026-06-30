@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [georgian, learn-georgian, georgian-books, reading, beginner, cefr-levels]
 targetLang: "ka"
 locale: "en"
+summary: "The best books to learn Georgian through reading depend on your level, after you make the Mkhedruli alphabet automatic: start with Georgian folk tales and ნაცარქექია (Natsarkekia) and პატარა უფლისწული (The Little Prince) at A1-A2, move to Nodar Dumbadze's მე ვხედავ მზეს and Aka Morchiladze at B1-B2, then climb to Rustaveli's ვეფხისტყაოსანი at C2."
+faq:
+  - question: "Is Georgian hard to learn by reading?"
+    answer: "Georgian sits in the FSI's harder tiers, with its own Mkhedruli script, seven cases, ergative-style subject marking, and verbs that fold subject and objects into one word. But it offers a real gift: spelling is almost perfectly phonetic, so once the 33 letters are automatic, anything you can read you can say. Reading lets you meet the grammar in context rather than in tables."
+  - question: "What is the best book for a beginner learning Georgian?"
+    answer: "After making the Mkhedruli alphabet automatic, start with Georgian folk tales and the trickster character ნაცარქექია (Natsarkekia), whose plots follow familiar fairy-tale logic, and with პატარა უფლისწული (The Little Prince), where the chapters are short and you likely know the story. Choose modern children's editions over scholarly collections, and read with a parallel translation to carry you over the gaps."
+  - question: "What Georgian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2 the modern classics open up, above all Nodar Dumbadze, whose warm, lyrical prose is a pleasure to read. Begin with მე ვხედავ მზეს (I See the Sun) and მე, ბებია, ილიკო და ილარიონი (Granny, Iliko, Illarion, and I), both of which have English translations for parallel reading. For a contemporary voice, add Aka Morchiladze's Journey to Karabakh."
 ---
 
 # Best Books to Learn Georgian Through Reading: A Level-by-Level Guide From Beginner to Advanced

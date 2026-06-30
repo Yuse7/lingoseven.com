@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [bulgarian, reading, books, beginner, cyrillic, parallel-reading, cefr-levels]
 targetLang: "bg"
 locale: "en"
+summary: "The best books to learn Bulgarian through reading depend on your level: start at A1 with Малкият принц (The Little Prince) and Angel Karaliychev folk tales, build B2 stamina with Yordan Yovkov and Elin Pelin, then reach C1 with Georgi Gospodinov Времеубежище (Time Shelter), the 2023 International Booker winner."
+faq:
+  - question: "What is the best book for a beginner learning Bulgarian?"
+    answer: "The standard first book is Малкият принц (The Little Prince), the Bulgarian translation of the Saint-Exupery classic. Its short chapters, simple language, and a plot you likely already know let you focus on the Cyrillic alphabet and high-frequency words. Angel Karaliychev folk tales and Elin Pelin children stories work well right after."
+  - question: "Do you need to learn Cyrillic to read Bulgarian?"
+    answer: "Yes. Bulgarian is written in Cyrillic, so you learn the 30-letter alphabet before reading a word. The good news is that the script was born in Bulgaria at the Preslav Literary School, the spelling is largely phonetic, and the new letter shapes can be drilled in a weekend and consolidated within a week of light reading."
+  - question: "What Bulgarian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, move into Elin Pelin village stories and Yordan Yovkov Старопланински легенди (Legends of Stara Planina), both short and self-contained. As a top-of-B2 stretch, try Ivan Vazov Под игото (Under the Yoke), the national novel, though its 1880s Bulgarian is noticeably archaic with older vocabulary and Ottoman-era loanwords."
 ---
 
 # Best Books to Learn Bulgarian Through Reading: A Level-by-Level Guide from Beginner to Advanced

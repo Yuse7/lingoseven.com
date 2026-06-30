@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["dutch", "reading", "graded-readers", "beginner-dutch", "dutch-books", "cefr-levels", "language-learning"]
 targetLang: "nl"
 locale: "en"
+summary: "The best books to learn Dutch through reading depend on your level: start at A1 with Olly Richards Short Stories in Dutch and Annie M.G. Schmidt Jip en Janneke, move to Anne Frank Het Achterhuis and Herman Koch Het Diner at B2, then reach C1 with Harry Mulisch De Aanslag."
+faq:
+  - question: "Is Dutch easy to learn by reading?"
+    answer: "Yes, relatively. Dutch sits between English and German, ranked Foreign Service Institute Category I at about 600 to 750 hours, and shares hundreds of cognates: water is water, boek is book, huis is house. Those overlaps mean the gap between absolute beginner and following a real sentence is unusually small, which makes reading an efficient way in."
+  - question: "What is the best book for a beginner learning Dutch?"
+    answer: "Good first choices are Olly Richards Short Stories in Dutch for Beginners (A2, with glossaries) and Annie M.G. Schmidt Jip en Janneke, simple native children stories that many learners finish end to end. Her longer Pluk van de Petteflet and De kleine prins (The Little Prince) make natural second reads."
+  - question: "What Dutch books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, read real books written for adults: Anne Frank Het Achterhuis, whose diary entries are short and clear, and Herman Koch Het Diner, a tense modern novel in clean conversational Dutch. Hella S. Haasse novella Oeroeg is a short literary step up once a full novel feels manageable."
 ---
 
 # The Best Books to Learn Dutch Through Reading: A Level-by-Level Guide (A1 to C1+)

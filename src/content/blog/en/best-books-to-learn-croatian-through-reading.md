@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["croatian", "reading", "book-recommendations", "beginner", "graded-readers", "intermediate", "slavic-languages"]
 targetLang: "hr"
 locale: "en"
+summary: "The best books to learn Croatian through reading depend on your level: start at A1 with Mali princ (The Little Prince) and Ivana Brlić-Mažuranić Čudnovate zgode šegrta Hlapića, read Slavenka Drakulić and Robert Perišić at B2, then reach C1 with Ivo Andrić Na Drini ćuprija (The Bridge on the Drina)."
+faq:
+  - question: "Is Croatian hard to learn by reading?"
+    answer: "Croatian is genuinely hard, a Foreign Service Institute Category IV language with seven cases and pervasive verbal aspect, on a par with Polish and Hungarian. But it has one big advantage for readers: a clean, fully phonetic Latin alphabet, so you can read and pronounce text from day one with no Cyrillic to decode. That makes reading the most practical way in."
+  - question: "What is the best book for a beginner learning Croatian?"
+    answer: "The best A1 starting point is Mali princ, the Croatian Little Prince, because you likely already know the story and can focus on case endings. From there move to the children classic Čudnovate zgode šegrta Hlapića by Ivana Brlić-Mažuranić, and to traditional folk and fairy tales, whose repetition drills grammar into place."
+  - question: "Are there graded readers for Croatian?"
+    answer: "Purpose-built graded readers for Croatian are scarce, with no polished A1-to-B2 series like those for Spanish or German. The workaround is to read real books with support: start with something familiar like Mali princ, use sentence-level parallel translation and native audio, and re-read short texts so case endings become automatic."
 ---
 
 # Best Books to Learn Croatian Through Reading: From Beginner to Advanced

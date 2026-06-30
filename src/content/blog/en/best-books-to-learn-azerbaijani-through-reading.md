@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [azerbaijani, learn-azerbaijani, azerbaijani-books, reading, beginner, cefr-levels]
 targetLang: "az"
 locale: "en"
+summary: "The best books to learn Azerbaijani through reading depend on your level: start at A1 to A2 with folk tales like Məlik Məmməd, the Molla Nəsrəddin anecdotes, and Balaca Şahzadə (The Little Prince), build stamina at B1 to B2 with Çingiz Abdullayev's thrillers and the story Poçt qutusu, then reach Anar's Ağ qoç, qara qoç and Kitabi-Dədə Qorqud."
+faq:
+  - question: "What is the best book for a beginner learning Azerbaijani?"
+    answer: "For a beginner, start with Azerbaijani folk tales (nağıllar) such as Məlik Məmməd, built from simple, repetitive sentence patterns, and the bite-sized Molla Nəsrəddin anecdotes, each a complete text just a few sentences long. Then read Balaca Şahzadə (The Little Prince), rated A2 to B1, where a familiar plot frees your attention to land on the language itself."
+  - question: "Can you learn Azerbaijani just by reading books?"
+    answer: "Reading suits Azerbaijani well because it lets you slow the language down and look at it. Azerbaijani is agglutinative, stacking suffixes onto a root, and reading lets you take a long suffixed word apart at your own pace and meet the same patterns until they stop being strange. The Latin alphabet, near-phonetic spelling, and no grammatical gender all make reading a practical entry point."
+  - question: "What Azerbaijani books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, build reading stamina with the detective and spy thrillers of Çingiz Abdullayev, whose Drongo series sold in the millions and pulls you forward page after page. Add the canonical short story Poçt qutusu (1903) by Cəlil Məmmədquluzadə, famous for its clarity, and Anar's allegorical novella Ağ qoç, qara qoç (B2 to C1) for a step up toward literary prose."
 ---
 
 # Best Books to Learn Azerbaijani Through Reading: A Level-by-Level Guide From Beginner to Advanced

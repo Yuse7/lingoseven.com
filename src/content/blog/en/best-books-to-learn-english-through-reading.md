@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [english, learn-english, english-books, reading, beginner, cefr-levels]
 targetLang: "en"
 locale: "en"
+summary: "The best books to learn English through reading depend on your level: start at A1 with graded readers like Oxford Bookworms and Olly Richards Short Stories in English, move to Roald Dahl, Holes, and Of Mice and Men at B1 to B2, then reach C1 with Never Let Me Go and The Great Gatsby."
+faq:
+  - question: "What is the best book for a beginner learning English?"
+    answer: "Start with a graded reader. English has the three best series: Oxford Bookworms (A1 to C1, 270-plus titles), Penguin Readers, and Macmillan Readers, most with audio. Olly Richards Short Stories in English for Beginners, controlled to the 1,000 most frequent words, is another strong A2 choice. Finishing an easy book beats abandoning a hard one."
+  - question: "Can you learn English just by reading books?"
+    answer: "Reading is one of the best tools, especially for the things classes skip: the thousands of phrasal verbs like put up with and idioms like the ball is in your court, which you absorb in context. But because English spelling is a poor guide to sound, pair reading with audio so you also learn how words are actually pronounced."
+  - question: "What English books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, read accessible real books: Roald Dahl Charlie and the Chocolate Factory and Matilda, E.B. White Charlotte's Web, Louis Sachar Holes, John Steinbeck Of Mice and Men, and George Orwell Animal Farm. They use clear, concrete language and strong plots that pull you past unfamiliar words."
 ---
 
 # Best Books to Learn English Through Reading: A Level-by-Level Guide From Beginner to Advanced

@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [armenian, learn-armenian, armenian-books, reading, beginner, cefr-levels]
 targetLang: "hy"
 locale: "en"
+summary: "The best books to learn Armenian through reading depend on your level: begin at A1 to A2 with Փոքրիկ իշխանը (The Little Prince) and Armenian folk tales, move at B1 to B2 to Hovhannes Tumanyan's fairy tales, Գիքոր, and the verse tragedy Անուշ, then reach C1 with Isahakyan's Աբու Լալա Մահարի, Raffi's Խենթը, and Charents's Գիրք ճանապարհի."
+faq:
+  - question: "What is the best book for a beginner learning Armenian?"
+    answer: "Learn the 39-letter alphabet first, then start with Փոքրիկ իշխանը (The Little Prince), rated about A2, where short sentences and a familiar plot let the new script settle in. Pair it with Armenian folk tales (ժողովրդական հեքիաթներ), whose repetitive, formulaic openings and everyday vocabulary of kings, farmers, and clever fools make them the most welcoming beginner reading in the language."
+  - question: "Is Armenian hard to learn by reading?"
+    answer: "Armenian sits in the Foreign Service Institute's Category IV, with seven noun cases, agglutination, and an entirely new 39-letter alphabet. But the difficulty is front-loaded: the script is phonetic and learnable in a focused week or two, after which reading reinforces letters, sounds, and vocabulary at once. Reading lets you meet the grammar slowly in context rather than drilling case tables in the abstract."
+  - question: "Who is the best Armenian author for an intermediate reader?"
+    answer: "Hovhannes Tumanyan, the national poet, is the single best bridge into real Armenian literature. Start with his fairy tales such as Քաջ Նազար (Brave Nazar) and Սուտասանը (The Liar) at B1, move to his short story Գիքոր (B1 to B2), then read the lyrical poem-tragedy Անուշ (B2), which became Armenia's national opera. His prose is deliberately clear and musical, polished by retelling."
 ---
 
 # Best Books to Learn Armenian Through Reading: A Level-by-Level Guide From Beginner to Advanced

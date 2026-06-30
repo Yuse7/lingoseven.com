@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [estonian, learn-estonian, estonian-books, reading, beginner, lihtne-keel, cefr-levels]
 targetLang: "et"
 locale: "en"
+summary: "The best books to learn Estonian through reading depend on your level: start with lihtne keel plain-language texts and Väike prints (The Little Prince) at A1-A2, move to Naksitrallid, Kevade and Kivirähk's Rehepapp ehk November at B1-B2, then climb to The Man Who Spoke Snakish and Tammsaare's Tõde ja õigus at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Estonian?"
+    answer: "For an absolute beginner, lean on Estonia's lihtne keel (plain-language) texts and Väike prints, the Estonian translation of The Little Prince. The lihtne keel material gives you controlled vocabulary and short sentences, while Väike prints offers short chapters and a story you likely already know, so you can read for meaning before you can read for vocabulary. Both sit at A1-A2."
+  - question: "Is Estonian hard to learn by reading?"
+    answer: "Estonian is genuinely hard for English speakers. The US Foreign Service Institute places it in Category IV, with fourteen grammatical cases and vocabulary unlike anything in English. But reading is more forgiving than speaking: spelling is almost perfectly phonetic, stress always falls on the first syllable, and a few hundred high-frequency words carry you a long way. Reading may be the single best way in."
+  - question: "Are there graded readers for Estonian?"
+    answer: "Estonian has very little learner-graded literature, unlike Finnish with its selkokieli easy-reader industry. Instead you rely on the country's lihtne keel (plain-language) materials from public broadcasters, libraries and integration organizations, plus a handful of accessible classics. Children's books like Naksitrallid and titles with existing English translations, such as The Man Who Spoke Snakish, let you read in parallel to fill the gap."
 ---
 
 # Best Books to Learn Estonian Through Reading: A Level-by-Level Guide From Beginner to Advanced

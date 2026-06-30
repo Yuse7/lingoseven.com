@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["greek", "reading", "book-recommendations", "beginner", "greek-alphabet", "graded-readers", "intermediate"]
 targetLang: "el"
 locale: "en"
+summary: "The best books to learn Greek through reading depend on your level: start with Deltos graded readers and Aesop's fables in Modern Greek at A1 to A2, move to Ο μικρός πρίγκιπας and the Inspector Charitos crime novels of Petros Markaris at B1 to B2, then reach Kazantzakis and the poetry of Cavafy at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Greek?"
+    answer: "For absolute beginners the article recommends the Deltos Greek Easy Readers, original short stories graded from A1 up to roughly C1, with built-in Greek, English, French, and German glosses. Aesop's fables in Modern Greek (Μύθοι του Αισώπου) are a strong A2 to B1 partner, since you already know the plots and each fable is short enough to reread."
+  - question: "Do I need to learn the Greek alphabet before reading?"
+    answer: "Yes. The article calls alphabet fluency a genuine prerequisite, not an optional warm-up, and most committed learners reach comfortable decoding in two to four weeks of daily practice. The good news is that Modern Greek is largely phonetic and every word carries a stress accent (τόνος), so once decoding is automatic you can pronounce almost any word you see."
+  - question: "What Greek books should I read at an advanced (C1) level?"
+    answer: "At C1 and beyond the article points to the heart of Modern Greek literature: the muscular prose of Nikos Kazantzakis, including Βίος και Πολιτεία του Αλέξη Ζορμπά (Zorba the Greek) and Ο Χριστός Ξανασταυρώνεται, plus the poetry of Constantine Cavafy and George Seferis. Keep an English translation within reach and accept that you will read slowly."
 ---
 
 # Best Books to Learn Greek Through Reading: From Beginner to Advanced

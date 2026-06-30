@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [malay, bahasa-melayu, reading, language-learning, books, beginner, southeast-asia]
 targetLang: "ms"
 locale: "en"
+summary: "The best books to learn Malay through reading depend on your level: start with Sang Kancil folk tales and bilingual picture books at A1-A2, move to popular fiction like Ombak Rindu and accessible classics such as Salina and Interlok at B1-B2, and reach Ranjau Sepanjang Jalan and Hikayat Hang Tuah at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Malay?"
+    answer: "The most useful beginner material is the Sang Kancil cycle, the tales of the clever mouse-deer who outwits larger animals. The plots are short, the vocabulary is concrete, and children's retellings use simple, repetitive sentences. Bilingual Malay-English picture books from publishers like Kidkiddos and Mantra Lingua also work well because the English sits right beside the Malay."
+  - question: "Can you learn Malay just by reading books?"
+    answer: "Yes, reading suits Malay especially well. There are no tones, no grammatical gender, and verbs do not conjugate, so you get a fast start. The real work is affixation, the me-, ber-, -kan and -an system, and reading teaches it efficiently because one root like ajar appears as belajar, mengajar, pelajar and more across a few pages."
+  - question: "What Malay books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2 contemporary popular fiction is your best territory: the romance Ombak Rindu by Fauziah Ashari, and the crime, horror, and thriller titles from the publisher Buku FIXI, written in everyday spoken Malay. By upper B2 you can stretch into accessible classics like A. Samad Said's Salina and Abdullah Hussain's Interlok, ideally with translation support."
 ---
 
 # The Best Books to Learn Malay Through Reading: A Level-by-Level Guide for Beginners to Advanced

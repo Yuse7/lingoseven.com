@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["slovenian", "reading", "book-recommendations", "beginner", "graded-readers", "intermediate", "slavic-languages"]
 targetLang: "sl"
 locale: "en"
+summary: "The best books to learn Slovenian through reading depend on your level: start at A1 with Mali princ, Martin Krpan by Fran Levstik, and Svetlana Makarovič's children's stories, move to Ivan Cankar's novellas at B1 to B2, then climb to Drago Jančar and Boris Pahor at C1. Slovenian is a hard Slavic language, roughly 1,100 hours of study."
+faq:
+  - question: "What is the best book for a beginner learning Slovenian?"
+    answer: "Mali princ (The Little Prince) is the single most reliable first book, with short sentences and a familiar story that frees your attention for the grammar. After it, Martin Krpan by Fran Levstik is a cultural milestone and a step up in register, while Svetlana Makarovič's children's stories such as Pekarna Mišmaš offer warm, modern, everyday language."
+  - question: "What is the dual in Slovenian, and does reading help with it?"
+    answer: "The dual (dvojina) is a separate grammatical number for exactly two of something, a rare feature Slovenian preserved when almost every other European language lost it. Two books is dve knjigi, and we two are reading is midva bereva. Reading teaches it painlessly: whenever two characters appear, the dual shows up naturally and the parallel English quietly marks where it falls."
+  - question: "Is Slovenian hard to learn by reading?"
+    answer: "Slovenian is a hard Slavic language, roughly 1,100 hours to professional proficiency, with six cases, verbal aspect, and the rare dual. It has very little graded learner material, so the guide's path leans on familiar texts: Mali princ and the folk classics first, then Ivan Cankar, with parallel translation carrying you over the unfamiliar word endings."
 ---
 
 # Best Books to Learn Slovenian Through Reading: From Beginner to Advanced

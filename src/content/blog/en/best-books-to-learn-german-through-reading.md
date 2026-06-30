@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["german", "reading", "graded-readers", "beginner-german", "german-books", "cefr-levels", "language-learning"]
 targetLang: "de"
 locale: "en"
+summary: "The best books to learn German through reading depend on your level: start with graded readers like Olly Richards's Short Stories in German for Beginners at A1-A2, move to Der kleine Prinz and Kästner's Emil und die Detektive at B1-B2, then read Kafka's Die Verwandlung, Hesse's Demian and Remarque's Im Westen nichts Neues at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning German?"
+    answer: "Start with a purpose-built graded reader rather than a children's book. Olly Richards's Short Stories in German for Beginners uses roughly the 1,000 most frequent German words, with a glossary and comprehension questions in every chapter. André Klein's Dino lernt Deutsch and Angelika Bohn's Einfach Deutsch lesen series are also genuinely beginner-friendly and ladder up through the levels."
+  - question: "Is German hard to learn by reading?"
+    answer: "German earns its FSI Category II rating, about 900 class hours, mostly through grammar: four cases, gendered nouns, and verbs that land at the end of the sentence. But on the page you have time to work that out, and German shares hundreds of everyday words with English. Hand is Hand, Wasser is water, Buch is book. Reading is where that kinship pays off fastest."
+  - question: "What German books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2, step from graded readers to carefully chosen real books. Der kleine Prinz (The Little Prince) is a solid B1 read with a familiar story; Erich Kästner's Emil und die Detektive is a brisk, modern page-turner that makes a natural first real novel; and Remarque's Im Westen nichts Neues, in plain, direct prose, is one of the gentlest landings into serious literature."
 ---
 
 # The Best Books to Learn German Through Reading: A Level-by-Level Guide (A1 to C1+)

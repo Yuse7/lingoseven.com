@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [vietnamese, learn-vietnamese, vietnamese-books, reading, beginner, graded-readers, cefr-levels]
 targetLang: "vi"
 locale: "en"
+summary: "The best books to learn Vietnamese through reading depend on your level: start at A1 to A2 with bilingual children's books, the folk tale Tấm Cám, and Tô Hoài's Dế Mèn phiêu lưu ký, move to Nguyễn Nhật Ánh (Cho tôi xin một vé đi tuổi thơ, Mắt biếc) at B1 to B2, then read Bảo Ninh and Nguyễn Du's Truyện Kiều at C1."
+faq:
+  - question: "What is the best book for a beginner learning Vietnamese?"
+    answer: "The article points beginners to bilingual children's books and short graded readers, then the folk tale Tấm Cám (Vietnam's Cinderella), whose familiar plot scaffolds your comprehension. Tô Hoài's Dế Mèn phiêu lưu ký (Diary of a Cricket), the most-translated Vietnamese book, is a strong A2 stretch in illustrated or abridged form. Always read with audio so the tone marks become audible."
+  - question: "Is Vietnamese hard to learn by reading?"
+    answer: "Vietnamese is a Category IV language (about 1,100 class hours), but the difficulty is almost entirely in the sound, not the script. The Latin-based chữ Quốc ngữ alphabet lets you decode words on day one, and the grammar has no conjugation, gender, or cases. The real work is the six tones, which live in the diacritics, so the article stresses never reading without native audio."
+  - question: "What Vietnamese books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2 the article leans on Nguyễn Nhật Ánh, Vietnam's most popular author for young people: Cho tôi xin một vé đi tuổi thơ (2008), Mắt biếc, and Tôi thấy hoa vàng trên cỏ xanh, several adapted into films that give a comprehension safety net. There is almost no intermediate-learner tier, so you read accessible native fiction with parallel text and audio as scaffolding."
 ---
 
 # Best Books to Learn Vietnamese Through Reading: A Level-by-Level Guide (A1 to C1+)

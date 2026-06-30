@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["russian", "reading", "book-recommendations", "beginner", "cyrillic", "graded-readers", "intermediate"]
 targetLang: "ru"
 locale: "en"
+summary: "The best books to learn Russian through reading depend on your level: after learning Cyrillic, start at A1 with Short Stories in Russian for Beginners by Olly Richards and the Zlatoust graded readers, move to Маленький принц and Chekhov at B1, then climb to Bulgakov, Pushkin, Tolstoy, and Dostoevsky at C1. Russian is FSI Category IV, roughly 1,100 hours."
+faq:
+  - question: "Do I need to learn the Cyrillic alphabet before reading Russian books?"
+    answer: "Yes. The guide treats Cyrillic as the one prerequisite you cannot skip: spend one to two weeks getting the thirty-three letters to automaticity before you start reading books, ideally with audio so word stress lodges from the start. The script is genuinely a weekend's work, and several letters (А, К, М, О, Т) already look and sound familiar."
+  - question: "What is the best book for a beginner learning Russian?"
+    answer: "Short Stories in Russian for Beginners by Olly Richards is the most reliable starting point, built on the 1,000 most frequent words with glossed vocabulary and audio. Alongside it, the Zlatoust graded-reader series climbs through tiers from about 760 words upward, and Korney Chukovsky's children's verse drills stress and rhythm through its insistent meter."
+  - question: "Is Russian hard to learn by reading?"
+    answer: "Yes, but reading is the best way through it. Russian is FSI Category IV, roughly 1,100 hours, with six cases and an unpredictable, unmarked stress system. The cases that defeat flashcards become intuitive when you meet them hundreds of times in context, and synchronized audio fixes the gap between the spelling on the page and the sound in the air."
 ---
 
 # Best Books to Learn Russian Through Reading: From Beginner to Advanced

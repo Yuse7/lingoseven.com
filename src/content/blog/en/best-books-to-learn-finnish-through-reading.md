@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [finnish, learn-finnish, finnish-books, reading, beginner, selkokieli, cefr-levels]
 targetLang: "fi"
 locale: "en"
+summary: "The best books to learn Finnish through reading depend on your level: start with selkokieli easy readers and the easy-Finnish Pikku prinssi at A1-A2, move through the Moomins and Mauri Kunnas to Arto Paasilinna's Jäniksen vuosi at B1-B2, then climb to Väinö Linna's Tuntematon sotilas, Sofi Oksanen's Puhdistus and Aleksis Kivi's Seitsemän veljestä at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Finnish?"
+    answer: "Start with Finland's selkokieli (Easy Finnish) readers, a whole publishing category of full-length books written at controlled difficulty and certified with a SELKO symbol. An easy-Finnish edition of Pikku prinssi (The Little Prince) is an especially soft landing: a familiar plot, simple original, and plain-language adaptation combined. Both sit at A1-A2 and let you read complete texts almost immediately."
+  - question: "Are there graded readers for Finnish?"
+    answer: "Yes, and they are unusually good. Finland has a mature selkokieli (plain-language) tradition that exists almost nowhere else: simplified standard Finnish with shorter sentences and common vocabulary, certified by the Finnish Centre for Easy Language. Selko editions cover news, biographies, novels and classics, and scale from A1 up toward B1, which makes them close to a cheat code for learners."
+  - question: "Is Finnish hard to learn by reading?"
+    answer: "Finnish is a Category IV language with around fifteen cases and vowel harmony, so the grammar is demanding. But the difficulty is in comprehension, not decoding: spelling is almost perfectly phonetic and stress always falls on the first syllable, so you can read any word aloud from your first week. Reading is the fastest way to turn the case system into intuition."
 ---
 
 # Best Books to Learn Finnish Through Reading: A Level-by-Level Guide From Beginner to Advanced

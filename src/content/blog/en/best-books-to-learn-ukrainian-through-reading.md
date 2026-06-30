@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["ukrainian", "reading", "book-recommendations", "beginner", "cyrillic", "graded-readers", "intermediate"]
 targetLang: "uk"
 locale: "en"
+summary: "The best books to learn Ukrainian through reading depend on your level: learn the Cyrillic alphabet first, then start at A1 to A2 with Dniprova's First Ukrainian Reader and Маленький принц, move to Nestaiko's Тореадори з Васюківки and Kurkov at B1 to B2, then read Zhadan and Shevchenko's Кобзар at C1."
+faq:
+  - question: "What is the best book for a beginner learning Ukrainian?"
+    answer: "After learning the alphabet, the article recommends a purpose-built bilingual reader, the First Ukrainian Reader for Beginners by Olena Dniprova (A1 to A2), with English alongside and online audio. Маленький принц, the Ukrainian Little Prince, works as a confident-beginner stretch goal since you already know the plot. Children's books written for ages six to ten are another dependable beginner source."
+  - question: "Is Ukrainian hard to learn by reading?"
+    answer: "Ukrainian is a Category IV language by the Foreign Service Institute, about 1,100 class hours, the same tier as Russian and Turkish. The difficulty is grammar and vocabulary (seven cases, perfective and imperfective verbs), not the alphabet, which is broadly phonetic and learnable in a week or two. Graded readers are scarce, so the article leans heavily on sentence-level parallel text."
+  - question: "What Ukrainian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2 the article suggests Vsevolod Nestaiko's Тореадори з Васюківки (1964), Ukraine's best-loved children's classic, and Andrey Kurkov's Death and the Penguin (1996), with the honest caveat that Kurkov writes in Russian so you read him in Ukrainian translation. Serhiy Zhadan's contemporary novels are upper-B2 and above, best once you are genuinely comfortable."
 ---
 
 # Best Books to Learn Ukrainian Through Reading: From Beginner to Advanced

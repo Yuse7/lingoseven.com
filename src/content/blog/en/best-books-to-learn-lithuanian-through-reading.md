@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [lithuanian, learn-lithuanian, lithuanian-books, reading, beginner, baltic-languages, parallel-reading]
 targetLang: "lt"
 locale: "en"
+summary: "The best books to learn Lithuanian through reading depend on your level: begin with folk tales, Vytautė Žilinskaitė, and Mažasis princas (The Little Prince) at A1-A2, move to Žemaitė's Marti and Jonas Biliūnas at B1-B2, and reach Donelaitis's Metai and Sabaliauskaitė's Silva rerum at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Lithuanian?"
+    answer: "Folk tales (lietuvių liaudies pasakos) are the natural first text, since they use a small, repeating cast of everyday nouns and simple past-tense narration. For contemporary language, Vytautė Žilinskaitė's children's books like Kelionė į Tandadriką work well, and Mažasis princas (The Little Prince) is a reliable first full-length book because you likely know the story already."
+  - question: "Can you learn Lithuanian just by reading books?"
+    answer: "Reading is an unusually efficient way into Lithuanian because the spelling is phonetic, so you can pronounce almost any word you meet. The friction is grammatical, not orthographic, and reading lets the seven-case system settle in through repeated exposure. Purpose-built graded readers are scarce, so pair authentic texts with parallel translation and, where possible, audio."
+  - question: "What Lithuanian books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2 the realists are ideal: Žemaitė, the mother of Lithuanian realism, whose best-known story Marti follows the mistreated Katrė, and Jonas Biliūnas, whose clear, restrained short stories and the novella Liūdna pasaka (A Sad Tale) make a gentle entry into serious literature. Both are short, concrete, and emotionally direct."
 ---
 
 # Best Books to Learn Lithuanian Through Reading: A Level-by-Level Guide from Beginner to Advanced

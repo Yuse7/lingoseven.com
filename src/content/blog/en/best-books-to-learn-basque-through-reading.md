@@ -7,6 +7,14 @@ category: "book-lists"
 tags: [basque, learn-basque, basque-books, reading, beginner, cefr-levels]
 targetLang: "eu"
 locale: "en"
+summary: "The best books to learn Basque through reading depend on your level: begin at A1 to A2 with Printze txikia (The Little Prince) and Bernardo Atxaga's Bambulo: Lehen urratsak, move at B1 to B2 to Behi euskaldun baten memoriak and Kirmen Uribe's Bilbao-New York-Bilbao, then reach C1 with Atxaga's Obabakoak and Soinujolearen semea."
+faq:
+  - question: "What is the best book for a beginner learning Basque?"
+    answer: "For a beginner, start with Printze txikia (The Little Prince), translated by Patxi Zubizarreta and rated A2, because a familiar plot lets you focus entirely on the Basque. Then move to Bernardo Atxaga's Bambulo: Lehen urratsak (A2 to B1), a children's series in natural Euskara Batua with short chapters and illustrations that support comprehension."
+  - question: "Is Basque hard to learn by reading?"
+    answer: "Basque is a language isolate with no relatives and almost no cognates, so little transfers from English and you start closer to zero than usual. But the spelling is consistently phonetic, so you can read any word aloud correctly from day one, and there is no grammatical gender. With volume, repetition, and parallel translation, reading is the most effective way in despite the unfamiliar grammar."
+  - question: "What Basque books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1 to B2, read Bernardo Atxaga's warm, funny Behi euskaldun baten memoriak (Memoirs of a Basque Cow), an ideal first real adult book, and Kirmen Uribe's Bilbao-New York-Bilbao, which won Spain's National Prize for Literature and has a fine English translation by Elizabeth Macklin for parallel reading. Toti Martínez de Lezea's historical novel Antso Nagusia (B2 to C1) is a page-turning step up."
 ---
 
 # Best Books to Learn Basque Through Reading: A Level-by-Level Guide From Beginner to Advanced

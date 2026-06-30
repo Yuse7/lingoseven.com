@@ -7,6 +7,14 @@ category: "book-lists"
 tags: ["polish", "reading", "graded-readers", "beginner-polish", "polish-books", "cefr-levels", "language-learning"]
 targetLang: "pl"
 locale: "en"
+summary: "The best books to learn Polish through reading depend on your level: start with graded readers and the children's poetry of Brzechwa and Tuwim at A1-A2, move to Mały Książę (The Little Prince) and Sapkowski's Wiedźmin (The Witcher) at B1-B2, and reach Olga Tokarczuk, Stanisław Lem, and (carefully) Sienkiewicz at C1 and beyond."
+faq:
+  - question: "What is the best book for a beginner learning Polish?"
+    answer: "At A1-A2, start with graded readers written for learners, such as the First Polish Reader for Students by Wiktor Kopernikus or Glossa's Czytaj krok po kroku series, which use controlled vocabulary and short sentences. Add the children's poetry of Jan Brzechwa and Julian Tuwim (Lokomotywa) for concrete vocabulary and pronunciation, but treat the poems as enrichment, not your grammar foundation."
+  - question: "Is Polish hard to learn by reading?"
+    answer: "Polish is a Category III language with seven cases, dense consonant clusters, and verb aspect, but reading is where it hurts you least. You only have to recognize a case ending, not produce it under pressure, and recognition is what extensive reading builds. Parallel text and synchronized audio remove the friction so you keep reading long enough for the patterns to dissolve."
+  - question: "What Polish books should I read at an intermediate (B1 to B2) level?"
+    answer: "At B1-B2, Mały Książę (The Little Prince) is the universal first real book because the familiar plot lets you read for language. If it motivates you, Andrzej Sapkowski's Wiedźmin (The Witcher), starting with Ostatnie życzenie (The Last Wish), is a solid B2 read with strong narrative pull. Polish translations of books you already know also work well."
 ---
 
 # The Best Books to Learn Polish Through Reading: A Level-by-Level Guide (A1 to C1+)
