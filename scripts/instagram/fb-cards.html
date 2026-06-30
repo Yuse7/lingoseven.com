@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lingo7 — Facebook cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root{
+    --ff: "Manrope", system-ui, -apple-system, sans-serif;
+    --serif: "Lora", Georgia, serif;
+    --green: #1fae66;
+    --green-top: #28ba6f;
+    --green-bot: #169a59;
+    --spine: #0f8a4f;
+    --cream: #f3ecd9;
+    --cream-2: #e7ddc4;
+    --ink: #16261a;
+    --leaf: #2ec275;
+    --page-bg:#0f141b; --panel:#161d27; --line:rgba(255,255,255,.08);
+    --dim:#8a95a4; --txt:#e9eef4;
+  }
+  html,body{ background:var(--page-bg); color:var(--txt); font-family:var(--ff); -webkit-font-smoothing:antialiased; }
+  body{ padding: 48px 40px 140px; }
+  .wrap{ max-width: 1180px; margin: 0 auto; }
+  .kicker{ font-size:13px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--leaf); }
+  h1{ font-size:40px; font-weight:800; letter-spacing:-.02em; margin:12px 0 0; }
+  .lede{ color:var(--dim); font-size:17px; line-height:1.5; max-width:680px; margin-top:14px; }
+  .gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:46px; }
+  .gitem{ position:relative; }
+  .gitem .num{ position:absolute; top:10px; left:12px; z-index:6; font-size:13px; font-weight:800; color:#fff;
+    background:rgba(6,40,24,.55); width:30px; height:30px; border-radius:50%; display:grid; place-items:center; backdrop-filter:blur(4px); }
+  .gitem .thumb{ border-radius:16px; overflow:hidden; box-shadow:0 24px 50px -30px rgba(0,0,0,.7); }
+  .gitem .cap{ margin-top:10px; font-size:13px; color:var(--dim); }
+
+  /* ============ POST CANVAS (1080 x 1350, 4:5) ============ */
+  .post{
+    position:relative; width:1080px; height:1350px; overflow:hidden;
+    font-family:var(--ff); color:#f4fbf6;
+    background:
+      radial-gradient(1200px 1000px at 50% 40%, #36c87f 0%, rgba(54,200,127,0) 62%),
+      linear-gradient(168deg, var(--green-top), var(--green-bot));
+  }
+  /* confetti motif */
+  .cf{ position:absolute; width:120px; height:9px; border-radius:6px; background:rgba(11,70,40,.38); }
+  .cf.l{ background:rgba(220,255,235,.40); }
+  /* soft vignette for text legibility */
+  .post::after{ content:""; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 42%, transparent 55%, rgba(6,46,26,.28) 100%); }
+
+  /* top badge */
+  .badge{ position:absolute; top:84px; left:50%; transform:translateX(-50%); z-index:3;
+    display:flex; align-items:center; gap:14px; padding:18px 34px; border-radius:100px;
+    background:rgba(8,52,30,.34); border:1.5px solid rgba(244,251,246,.30); backdrop-filter:blur(3px);
+    font-size:30px; font-weight:700; letter-spacing:.01em; color:#f4fbf6; white-space:nowrap; }
+  .badge .fl{ width:42px; height:42px; border-radius:50%; border:3px solid #fff; flex:none;
+    box-shadow:0 6px 14px -6px rgba(6,40,24,.6); }
+
+  /* footer brand strip (motif on every card) */
+  .foot{ position:absolute; left:0; right:0; bottom:0; height:150px; z-index:3;
+    display:flex; align-items:center; justify-content:center; gap:22px;
+    background:linear-gradient(0deg, rgba(7,44,26,.42), rgba(7,44,26,0)); }
+  .foot .chip{ width:74px; height:74px; border-radius:20px; box-shadow:0 14px 24px -12px rgba(6,40,24,.7); }
+  .foot .url{ font-size:40px; font-weight:800; letter-spacing:.01em; color:#f4fbf6; }
+  .foot .heart{ font-size:34px; }
+
+  /* ---------- WORD card ---------- */
+  .word-card{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) rotate(-2deg);
+    width:912px; padding:92px 56px 96px; border-radius:50px;
+    background:linear-gradient(180deg,var(--cream),var(--cream-2));
+    box-shadow:0 60px 90px -40px rgba(6,40,24,.6); text-align:center; }
+  .word-card .pin{ position:absolute; left:50%; top:-30px; transform:translateX(-50%); width:60px; height:60px; border-radius:50%;
+    background:radial-gradient(circle at 36% 32%,#5fe39d,#19a85f); box-shadow:0 12px 20px -6px rgba(6,40,24,.5), inset 0 -7px 12px rgba(8,60,32,.4); }
+  .word-card .w{ font-size:128px; font-weight:800; letter-spacing:-.03em; color:var(--ink); line-height:1; white-space:nowrap; }
+  .word-card .ipa{ margin-top:18px; font-family:var(--serif); font-style:italic; font-size:40px; color:#6b7d6f; }
+  .word-card .rule{ width:120px; height:6px; border-radius:6px; margin:40px auto 36px;
+    background:linear-gradient(90deg,#07D494,#00C2B2); }
+  .word-card .mean{ font-size:50px; font-weight:600; line-height:1.28; color:#27402e; }
+  .word-card .mean b{ color:#1a9a5b; font-weight:800; }
+
+  /* ---------- QUOTE card ---------- */
+  .quote{ position:absolute; left:110px; right:110px; top:50%; transform:translateY(-50%); text-align:left; }
+  .quote .mk{ font-family:var(--serif); font-size:280px; line-height:.6; color:rgba(244,251,246,.30); height:150px; }
+  .quote .qt{ font-size:88px; font-weight:800; letter-spacing:-.02em; line-height:1.14; color:#f4fbf6; }
+  .quote .qt b{ color:#caffe4; }
+  .quote .by{ margin-top:46px; font-size:34px; font-weight:600; color:rgba(238,255,246,.78); }
+  .quote .bar{ width:130px; height:8px; border-radius:8px; margin-top:30px;
+    background:linear-gradient(90deg,#eafff4,#9be9c4); }
+
+  /* ---------- FACT card ---------- */
+  .fact{ position:absolute; left:90px; right:90px; top:50%; transform:translateY(-50%); text-align:center; }
+  .fact .big{ font-size:300px; font-weight:800; letter-spacing:-.04em; line-height:.9;
+    background:linear-gradient(180deg,#ffffff,#bff0d6); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .fact .lab{ margin-top:8px; font-size:46px; font-weight:800; letter-spacing:.02em; color:#eafff4; }
+  .fact .txt{ margin-top:40px; font-size:48px; font-weight:600; line-height:1.32; color:rgba(244,251,246,.92); }
+  .fact .txt b{ color:#caffe4; font-weight:800; }
+
+  /* ---------- REVIEW card ---------- */
+  .review{ position:absolute; left:96px; right:96px; top:50%; transform:translateY(-50%); }
+  .review .stars{ font-size:54px; letter-spacing:6px; color:#ffd66b; }
+  .review .rt{ margin-top:36px; font-family:var(--serif); font-size:60px; font-weight:500; line-height:1.32; color:#f4fbf6; }
+  .review .rt b{ color:#caffe4; font-weight:600; font-style:italic; }
+  .review .who{ margin-top:42px; font-size:34px; font-weight:700; color:rgba(238,255,246,.82); }
+
+  /* ---------- COMPARE card ---------- */
+  .cmp{ position:absolute; left:90px; right:90px; top:230px; bottom:200px; display:flex; flex-direction:column; gap:40px; }
+  .cmp .head{ text-align:center; font-size:58px; font-weight:800; letter-spacing:-.01em; color:#f4fbf6; }
+  .cmp .row{ flex:1; display:grid; grid-template-rows:1fr 1fr; gap:34px; }
+  .cmp .box{ border-radius:34px; padding:50px 56px; display:flex; flex-direction:column; justify-content:center; }
+  .cmp .box .t{ font-size:34px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; margin-bottom:16px; }
+  .cmp .box .d{ font-size:46px; font-weight:600; line-height:1.26; }
+  .cmp .no{ background:rgba(8,40,24,.30); border:1.5px solid rgba(244,251,246,.18); color:rgba(238,255,246,.7); }
+  .cmp .no .t{ color:rgba(255,180,170,.9); }
+  .cmp .yes{ background:linear-gradient(180deg,var(--cream),var(--cream-2)); color:#27402e; box-shadow:0 50px 80px -44px rgba(6,40,24,.6); }
+  .cmp .yes .t{ color:#1a9a5b; }
+
+  /* export viewport */
+  #exp{ position:fixed; top:0; left:0; width:1080px; height:1350px; overflow:hidden; z-index:99999; display:none; background:#000; }
+  body.exporting{ overflow:hidden; }
+  body.exporting #exp{ display:block; }
+</style>
+</head>
+<body>
+
+<div id="exp"></div>
+
+<div class="wrap">
+  <header>
+    <div class="kicker">Lingo7 · Facebook</div>
+    <h1>Unique post cards</h1>
+    <p class="lede">Each card is its own format on the brand scene (emerald gradient, Manrope, cream cards, confetti, footer strip). 1080×1350. Exported to <code>posts-fb/</code> via <code>fb-capture.mjs</code>.</p>
+  </header>
+  <div class="gallery" id="gallery"></div>
+</div>
+
+<script>
+// ============ POST DATA ============
+// Each entry renders one 1080x1350 card. type drives the layout.
+const ICON = 'icon-1024.png';
+const CF = [ // confetti positions (x,y,rotate,light)
+  [120,300,28,0],[300,180,-18,1],[860,250,40,1],[980,470,-30,0],
+  [120,980,-24,1],[940,1040,34,0],[520,1180,-36,1],[300,1090,22,0],
+];
+function confetti(){ return CF.map(([x,y,r,l])=>`<div class="cf ${l?'l':''}" style="left:${x}px; top:${y}px; transform:rotate(${r}deg);"></div>`).join(''); }
+function foot(){ return `<div class="foot"><img class="chip" src="${ICON}" alt=""><span class="url">lingoseven.com</span><span class="heart">💚</span></div>`; }
+
+const POSTS = [
+  {
+    id:'word-es-madrugada', type:'word',
+    badge:{ text:'Untranslatable · Spanish', flag:'linear-gradient(180deg,#AA151B 0 25%,#F1BF00 25% 75%,#AA151B 75%)' },
+    word:'madrugada', ipa:'/ma.ðɾuˈɣa.ða/',
+    mean:'the quiet hours <b>between midnight and dawn</b>',
+  },
+  {
+    id:'quote-every-word', type:'quote',
+    qt:`You don't need to know <b>every word</b> to fall in love with a book.`,
+    by:'How reading a language actually works',
+  },
+  {
+    id:'fact-spanish-485m', type:'fact',
+    big:'485M', lab:'SPEAK SPANISH',
+    txt:'One of them wrote the book you will love. <b>Read it in Spanish.</b>',
+  },
+];
+
+// ============ RENDER ============
+function badge(b){ if(!b) return '';
+  const fl = b.flag ? `<span class="fl" style="background:${b.flag}"></span>` : '';
+  return `<div class="badge">${fl}<span>${b.text}</span></div>`; }
+
+function render(p){
+  let inner = '';
+  if(p.type==='word'){
+    const len=(p.word||'').length;
+    const fs = len<=6?140 : len<=8?118 : len<=9?104 : len<=11?86 : len<=13?74 : 64;
+    inner = badge(p.badge) + `<div class="word-card"><span class="pin"></span>
+      <div class="w" style="font-size:${fs}px">${p.word}</div>
+      ${p.ipa?`<div class="ipa">${p.ipa}</div>`:''}
+      <div class="rule"></div>
+      <div class="mean">${p.mean}</div></div>`;
+  } else if(p.type==='quote'){
+    inner = `<div class="quote"><div class="mk">“</div><div class="qt">${p.qt}</div>
+      <div class="bar"></div><div class="by">${p.by||''}</div></div>`;
+  } else if(p.type==='fact'){
+    inner = `<div class="fact"><div class="big">${p.big}</div><div class="lab">${p.lab}</div>
+      <div class="txt">${p.txt}</div></div>`;
+  } else if(p.type==='review'){
+    inner = `<div class="review"><div class="stars">★★★★★</div>
+      <div class="rt">${p.rt}</div><div class="who">${p.who||''}</div></div>`;
+  } else if(p.type==='compare'){
+    inner = `<div class="cmp"><div class="head">${p.head}</div><div class="row">
+      <div class="box no"><div class="t">${p.no.t}</div><div class="d">${p.no.d}</div></div>
+      <div class="box yes"><div class="t">${p.yes.t}</div><div class="d">${p.yes.d}</div></div></div></div>`;
+  }
+  return `<div class="post" data-id="${p.id}">${confetti()}${inner}${foot()}</div>`;
+}
+
+// gallery preview (scaled thumbnails)
+const gal = document.getElementById('gallery');
+POSTS.forEach((p,i)=>{
+  const it = document.createElement('div'); it.className='gitem';
+  it.innerHTML = `<div class="num">${i+1}</div>
+    <div class="thumb"><div class="thumbscale"></div></div>
+    <div class="cap">${p.id}</div>`;
+  const host = it.querySelector('.thumb');
+  const scale = 360/1080;
+  const holder = document.createElement('div');
+  holder.style.cssText = `width:1080px; height:1350px; transform:scale(${scale}); transform-origin:top left;`;
+  holder.innerHTML = render(p);
+  host.style.cssText = `width:${1080*scale}px; height:${1350*scale}px; overflow:hidden;`;
+  host.appendChild(holder);
+  gal.appendChild(it);
+});
+
+// ============ EXPORT HOOKS (used by fb-capture.mjs) ============
+window.__POSTS = POSTS.map(p=>p.id);
+window.exportCard = function(n){
+  const exp = document.getElementById('exp');
+  exp.innerHTML = render(POSTS[n]);
+  document.body.classList.add('exporting');
+};
+window.exportDone = function(){
+  document.body.classList.remove('exporting');
+  document.getElementById('exp').innerHTML='';
+};
+</script>
+</body>
+</html>
