@@ -5,6 +5,7 @@ import { languageFacts } from '../../../data/languageFacts';
 import { languages, getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { BRANCH, FSI_HOURS_LABEL, EN_PROFILE, estHoursForNative } from '../../../data/fsiDistance';
+import { CEFR_LANG_CODES } from '../../../data/cefrTest';
 
 // One static page per language that has FSI facts + a URL slug.
 // English (fsiHours = 0) is the reference, so it gets no "how long" page.
@@ -294,6 +295,12 @@ const clientData = { targetCode, fsiHours: lf.fsiHours, targetProfile, milestone
           }
         </div>
       </div>
+
+      {CEFR_LANG_CODES.includes(targetCode) && (
+        <p class="hltl-tool-link">
+          <a href={`/tools/cefr-level-test/${slug}/`}>What's your {name} level right now? Take the CEFR test (A1-C2) &rarr;</a>
+        </p>
+      )}
 
       <p class="hltl-tool-link">
         <a href="/tools/language-difficulty-ranker/">Compare all 50 languages by difficulty for your native tongue &rarr;</a>

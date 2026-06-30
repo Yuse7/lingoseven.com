@@ -1,0 +1,629 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { cefrTest, CEFR_LANG_CODES, CEFR_LEVELS } from '../../../data/cefrTest';
+import { languageFacts } from '../../../data/languageFacts';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+
+// One static page per supported language: /tools/cefr-level-test/spanish/ etc.
+export function getStaticPaths() {
+  return CEFR_LANG_CODES.filter((code) => codeToSlug[code] && cefrTest[code]).map((code) => ({
+    params: { lang: codeToSlug[code] },
+    props: { targetCode: code },
+  }));
+}
+
+const { targetCode } = Astro.props;
+const lang = getLanguageByCode(targetCode);
+const name = lang?.name ?? targetCode;
+const slug = codeToSlug[targetCode];
+const lf = languageFacts[targetCode];
+
+// Order the bank easy → hard so the stepper ramps up in difficulty.
+const order = Object.fromEntries(CEFR_LEVELS.map((l, i) => [l, i]));
+const questions = [...cefrTest[targetCode]].sort((a, b) => order[a.level] - order[b.level]);
+const total = questions.length;
+const grammarCount = questions.filter((q) => q.skill === 'grammar').length;
+
+// Other CEFR-test languages (cross-link cluster).
+const others = CEFR_LANG_CODES.filter((c) => codeToSlug[c] && cefrTest[c] && c !== targetCode).map((c) => {
+  const l = getLanguageByCode(c);
+  return { name: l?.name ?? c, flag: l?.flag ?? '', slug: codeToSlug[c] };
+});
+
+const speakersLabel = lf
+  ? lf.speakers >= 1000
+    ? `${(lf.speakers / 1000).toFixed(1)}B`
+    : `${Math.round(lf.speakers)}M`
+  : null;
+
+const canonicalUrl = `https://lingoseven.com/tools/cefr-level-test/${slug}/`;
+const title = `${name} Level Test: Find Your CEFR Level (A1-C2) | Lingo7`;
+const description =
+  `Free ${name} level test. Answer ${total} quick questions and find your CEFR level from A1 to C2, with grammar and vocabulary subscores. About 5 minutes, no sign-up.`;
+
+const faq = [
+  {
+    question: `What is my ${name} level?`,
+    answer:
+      `This free test estimates it on the CEFR scale (A1 to C2) in about five minutes. You answer ${total} ${name} questions that get harder as you go, covering grammar and vocabulary. Your level is the highest band where you keep answering correctly, so it reflects what you can reliably do, not your single best guess.`,
+  },
+  {
+    question: 'What do the CEFR levels A1-C2 mean?',
+    answer:
+      'CEFR is the standard European scale. A1 and A2 are beginner and elementary: simple phrases and everyday basics. B1 and B2 are intermediate and upper-intermediate: holding conversations, then working and reading novels in the language. C1 and C2 are advanced and proficient: near-native command with full nuance. Most learners aiming to "use" a language are heading for B2.',
+  },
+  {
+    question: `How accurate is this ${name} level test?`,
+    answer:
+      `It is a quick placement estimate, not an exam. Because it samples a handful of items per level it can land a half-step off, especially if your skills are uneven. Read it as a level and a profile: the grammar and vocabulary subscores and the per-level breakdown show exactly where your ${name} starts to thin out, which is more useful than a single number.`,
+  },
+  {
+    question: `Is this an official ${name} certificate?`,
+    answer:
+      `No. Official CEFR certification comes from accredited exams${
+        targetCode === 'en'
+          ? ' such as Cambridge, IELTS or TOEFL'
+          : targetCode === 'es'
+            ? ' such as the DELE or SIELE'
+            : targetCode === 'fr'
+              ? ' such as the DELF/DALF or TCF'
+              : targetCode === 'de'
+                ? ' such as the Goethe-Zertifikat or telc'
+                : targetCode === 'it'
+                  ? ' such as the CILS or CELI'
+                  : targetCode === 'pt'
+                    ? ' such as the CAPLE or Celpe-Bras'
+                    : targetCode === 'ru'
+                      ? ' such as the TORFL / ТРКИ'
+                      : ''
+      }, which test all four skills under controlled conditions. This tool is a free self-assessment to point you at the right level and the fastest way to climb it.`,
+  },
+  {
+    question: `How do I improve my ${name} level fastest?`,
+    answer:
+      `Meet the language in real context, again and again. Once you are past the basics, extensive reading is one of the most efficient ways to climb, because it grows vocabulary and grammatical intuition at the same time. Lingo7 lets you read real books in ${name} at your level with tap-to-translate and native-narrated audio.`,
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: `${name} CEFR Level Test`,
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lingoseven.com/' },
+      { '@type': 'ListItem', position: 2, name: 'CEFR Level Test', item: 'https://lingoseven.com/tools/cefr-level-test/' },
+      { '@type': 'ListItem', position: 3, name: `${name} test`, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="cefr">
+    <div class="container">
+      <header class="cefr-head">
+        <p class="cefr-eyebrow"><a href="/tools/cefr-level-test/">CEFR level test</a></p>
+        <h1>What's your <span>{name}</span> level?</h1>
+        <p class="cefr-intro">
+          Find your level on the CEFR scale, from <strong>A1</strong> (beginner) to <strong>C2</strong>
+          (proficient). Answer {total} {name} questions that get harder as you go. We score grammar and
+          vocabulary, pinpoint where your {name} starts to thin out, and show the fastest way to climb:
+          reading real books.
+        </p>
+      </header>
+
+      <div class="cefr-quiz" id="cefr-quiz" data-lang-name={name} data-total={total}>
+        <div class="cefr-progress" id="cefr-progress" hidden>
+          <span class="cefr-progress-track"><span class="cefr-progress-fill" id="cefr-progress-fill"></span></span>
+          <span class="cefr-progress-label" id="cefr-progress-label"></span>
+        </div>
+
+        <form id="cefr-form">
+          {
+            questions.map((q, i) => (
+              <fieldset class="cefr-q" data-level={q.level} data-skill={q.skill} data-answer={q.answer} hidden={false}>
+                <legend class="cefr-q-stem">
+                  <span class="cefr-q-num">{i + 1}.</span> {q.text}
+                </legend>
+                <div class="cefr-q-opts">
+                  {q.options.map((o, oi) => (
+                    <label class="cefr-opt">
+                      <input type="radio" name={`q${i}`} value={oi} />
+                      <span>{o}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            ))
+          }
+        </form>
+
+        <div class="cefr-nav" id="cefr-nav" hidden>
+          <button type="button" class="cefr-back" id="cefr-back">&larr; Back</button>
+          <button type="button" class="cefr-next" id="cefr-next" disabled>Next</button>
+        </div>
+
+        <div class="cefr-startwrap" id="cefr-startwrap">
+          <button type="button" class="cefr-go" id="cefr-start">Start the {name} test</button>
+          <span class="cefr-startnote">{total} questions · about 5 minutes · free, no sign-up</span>
+        </div>
+      </div>
+
+      <div class="cefr-result" id="cefr-result" hidden>
+        <p class="result-eyebrow">Your estimated {name} level</p>
+        <p class="result-level"><span id="result-tag">B1</span></p>
+        <p class="result-name" id="result-name"></p>
+        <p class="result-blurb" id="result-blurb"></p>
+        <div id="result-detail"></div>
+        <button type="button" class="cefr-retake" id="cefr-retake">Retake the test</button>
+      </div>
+
+      <div class="cefr-cta">
+        <h2>The fastest way up the CEFR scale in {name} is reading</h2>
+        <p>
+          Whatever your level, you climb quicker by meeting {name} in real sentences, again and again.
+          Lingo7 lets you read real books in {name} at your level, with tap-to-translate and
+          native-narrated audio. Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="cefr-explainer">
+        <h2>How this test estimates your level</h2>
+        <p>
+          The {total} questions are split evenly across the six CEFR levels (five at each of
+          <strong>A1, A2, B1, B2, C1 and C2</strong>) and ordered from easiest to hardest. Roughly half
+          check <strong>grammar</strong> (verb forms, agreement, structure) and half check
+          <strong> vocabulary</strong> (the right word in context), so the result reflects both.
+        </p>
+        <p>
+          Your level is the highest band where you stay above 60% correct. We climb from A1 upward and
+          stop at the first level you can no longer hold. That ceiling is your estimate, because it
+          reflects what you can do <em>reliably</em>, not a single lucky answer. The breakdown then shows
+          your score at every level and your grammar-versus-vocabulary balance.
+        </p>
+        <p>
+          It's an estimate, not a certificate. What it's genuinely good at is showing
+          <em>where</em> your {name} thins out, and that the surest way to push that ceiling higher is
+          to keep reading at, and just above, your level.
+        </p>
+      </div>
+
+      {lf && (
+        <div class="cefr-facts">
+          <h2>About learning {name}</h2>
+          <p>{lf.whyLearn}</p>
+          <div class="facts-stats">
+            <div class="facts-stat"><strong>A1-C2</strong><span>CEFR levels this test covers</span></div>
+            {speakersLabel && <div class="facts-stat"><strong>{speakersLabel}</strong><span>speakers worldwide</span></div>}
+            {lf && <div class="facts-stat"><strong>{lf.family}</strong><span>language family</span></div>}
+          </div>
+        </div>
+      )}
+
+      <div class="cefr-others">
+        <h2>Test your level in another language</h2>
+        <div class="cefr-others-grid">
+          {
+            others.map((o) => (
+              <a class="cefr-other" href={`/tools/cefr-level-test/${o.slug}/`}>
+                <span class="cefr-other-flag">{o.flag}</span>
+                {o.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <p class="cefr-tool-link">
+        <a href={`/tools/vocabulary-size-estimator/${slug}/`}>How many {name} words do you know? Take the vocabulary test &rarr;</a>
+      </p>
+      {targetCode !== 'en' && (
+        <p class="cefr-tool-link">
+          <a href={`/tools/how-long-to-learn-a-language/${slug}/`}>How long does it take to learn {name}? See the timeline &rarr;</a>
+        </p>
+      )}
+      <p class="cefr-tool-link">
+        <a href="/tools/language-difficulty-ranker/">Wondering which language to learn next? Rank 50 languages by difficulty &rarr;</a>
+      </p>
+
+      <div class="cefr-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+    // index 0 = below A1; 1..6 = A1..C2
+    const META = [
+      { tag: 'Pre-A1', name: 'Just getting started', blurb: 'You are right at the beginning. The most common words and a few set phrases are where it all starts, and reading very simple, supported texts is the gentlest way in.' },
+      { tag: 'A1', name: 'Beginner', blurb: 'You handle the basics: simple phrases, everyday words, the present tense. The next jump comes from meeting those words again and again in real sentences.' },
+      { tag: 'A2', name: 'Elementary', blurb: 'You can deal with simple, familiar situations. You are building toward B1, where real conversations and simple stories open up.' },
+      { tag: 'B1', name: 'Intermediate', blurb: 'You can hold everyday conversations and follow the gist of simple authentic texts. Graded readers and easier novels are within reach now.' },
+      { tag: 'B2', name: 'Upper-intermediate', blurb: 'You are around the level where novels and films become comfortable. Reading widely is what carries you from "I understand most of it" to "I barely notice the language".' },
+      { tag: 'C1', name: 'Advanced', blurb: 'You read real books and follow nuanced discussion. The remaining gains are rarer words and finer shades, best met in lots of varied reading.' },
+      { tag: 'C2', name: 'Proficient', blurb: 'An exceptional command, near an educated native speaker. Wide reading is what keeps even this level sharp and growing.' },
+    ];
+    // What to read next, keyed by level index.
+    const RECO = [
+      'Start with the simplest supported texts and the most frequent words.',
+      'Begin with very easy graded readers and picture-supported stories.',
+      'Easy graded readers at A2-B1 are your sweet spot right now.',
+      'Graded readers and gentle novels at B1-B2 will move you fastest.',
+      'Real novels with tap-to-translate support are right for you now.',
+      'Read widely across genres, since the last gains hide in the harder material.',
+      'Keep reading broadly and authentically to stay sharp at the top.',
+    ];
+
+    const quiz = document.getElementById('cefr-quiz') as HTMLDivElement;
+    const LANG = quiz.dataset.langName || 'the language';
+    const form = document.getElementById('cefr-form') as HTMLFormElement;
+    const qs = Array.from(form.querySelectorAll<HTMLFieldSetElement>('.cefr-q'));
+    const n = qs.length;
+
+    const startWrap = document.getElementById('cefr-startwrap') as HTMLDivElement;
+    const startBtn = document.getElementById('cefr-start') as HTMLButtonElement;
+    const nav = document.getElementById('cefr-nav') as HTMLDivElement;
+    const backBtn = document.getElementById('cefr-back') as HTMLButtonElement;
+    const nextBtn = document.getElementById('cefr-next') as HTMLButtonElement;
+    const progress = document.getElementById('cefr-progress') as HTMLDivElement;
+    const progFill = document.getElementById('cefr-progress-fill') as HTMLElement;
+    const progLabel = document.getElementById('cefr-progress-label') as HTMLElement;
+    const result = document.getElementById('cefr-result') as HTMLDivElement;
+    const retakeBtn = document.getElementById('cefr-retake') as HTMLButtonElement;
+
+    let cur = 0;
+
+    function answered(i: number): boolean {
+      return !!qs[i].querySelector('input:checked');
+    }
+
+    function show(i: number) {
+      qs.forEach((q, idx) => (q.hidden = idx !== i));
+      progFill.style.width = `${Math.round(((i + 1) / n) * 100)}%`;
+      progLabel.textContent = `Question ${i + 1} of ${n}`;
+      backBtn.disabled = i === 0;
+      nextBtn.disabled = !answered(i);
+      nextBtn.textContent = i === n - 1 ? 'See my level' : 'Next';
+    }
+
+    function start() {
+      startWrap.hidden = true;
+      progress.hidden = false;
+      nav.hidden = false;
+      cur = 0;
+      show(0);
+      progress.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function next() {
+      if (!answered(cur)) return;
+      if (cur < n - 1) {
+        cur++;
+        show(cur);
+      } else {
+        finish();
+      }
+    }
+
+    function back() {
+      if (cur > 0) {
+        cur--;
+        show(cur);
+      }
+    }
+
+    function finish() {
+      const perLevel: Record<string, { c: number; t: number }> = {};
+      LEVELS.forEach((l) => (perLevel[l] = { c: 0, t: 0 }));
+      const perSkill: Record<string, { c: number; t: number }> = {
+        grammar: { c: 0, t: 0 },
+        vocab: { c: 0, t: 0 },
+      };
+      let totalC = 0;
+
+      qs.forEach((q) => {
+        const lvl = q.dataset.level as string;
+        const sk = q.dataset.skill as string;
+        const ans = Number(q.dataset.answer);
+        const sel = q.querySelector<HTMLInputElement>('input:checked');
+        const ok = sel ? Number(sel.value) === ans : false;
+        perLevel[lvl].t++;
+        if (perSkill[sk]) perSkill[sk].t++;
+        if (ok) {
+          perLevel[lvl].c++;
+          if (perSkill[sk]) perSkill[sk].c++;
+          totalC++;
+        }
+      });
+
+      // Ceiling: highest level held at >= 60%, climbing from A1 with no gaps.
+      let passed = 0;
+      for (const l of LEVELS) {
+        if (perLevel[l].t > 0 && perLevel[l].c / perLevel[l].t >= 0.6) passed++;
+        else break;
+      }
+      const meta = META[passed];
+
+      (document.getElementById('result-tag') as HTMLElement).textContent = meta.tag;
+      (document.getElementById('result-name') as HTMLElement).textContent = meta.name;
+      (document.getElementById('result-blurb') as HTMLElement).textContent = meta.blurb;
+
+      const pct = (o: { c: number; t: number }) => (o.t ? Math.round((o.c / o.t) * 100) : 0);
+      const subRow = (label: string, o: { c: number; t: number }) => `
+        <div class="sub-row">
+          <span class="sub-label">${label}</span>
+          <span class="sub-track"><span class="sub-fill" style="width:${pct(o)}%"></span></span>
+          <span class="sub-val">${o.c}/${o.t}</span>
+        </div>`;
+
+      const lvlRows = LEVELS.map((l, i) => {
+        const o = perLevel[l];
+        const isCeiling = i + 1 === passed;
+        return `
+          <div class="lvl-row${isCeiling ? ' is-ceiling' : ''}">
+            <span class="lvl-tag">${l}</span>
+            <span class="lvl-track"><span class="lvl-fill" style="width:${pct(o)}%"></span></span>
+            <span class="lvl-val">${o.c}/${o.t}</span>
+          </div>`;
+      }).join('');
+
+      (document.getElementById('result-detail') as HTMLElement).innerHTML = `
+        <p class="result-score">You answered <strong>${totalC}</strong> of ${n} correct.</p>
+        <div class="result-sub">
+          <p class="result-sub-title">By skill</p>
+          ${subRow('Grammar', perSkill.grammar)}
+          ${subRow('Vocabulary', perSkill.vocab)}
+        </div>
+        <div class="result-levels">
+          <p class="result-sub-title">By CEFR level</p>
+          ${lvlRows}
+        </div>
+        <p class="result-reco"><strong>Where to go next in ${LANG}:</strong> ${RECO[passed]}</p>`;
+
+      form.hidden = true;
+      progress.hidden = true;
+      nav.hidden = true;
+      result.hidden = false;
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function retake() {
+      form.querySelectorAll<HTMLInputElement>('input:checked').forEach((i) => (i.checked = false));
+      result.hidden = true;
+      form.hidden = false;
+      start();
+    }
+
+    form.addEventListener('change', () => {
+      nextBtn.disabled = !answered(cur);
+    });
+    startBtn.addEventListener('click', start);
+    nextBtn.addEventListener('click', next);
+    backBtn.addEventListener('click', back);
+    retakeBtn.addEventListener('click', retake);
+
+    // Progressive enhancement: with JS on, hide every question behind the Start
+    // gate (no-JS visitors see all questions server-rendered, for indexability).
+    qs.forEach((q) => (q.hidden = true));
+    form.hidden = false;
+  </script>
+</BaseLayout>
+
+<style>
+  .cefr { padding: 3rem 0 4rem; }
+  .cefr-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .cefr-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .cefr-eyebrow a { color: var(--primary); text-decoration: none; }
+  .cefr-eyebrow a:hover { text-decoration: underline; }
+  .cefr-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .cefr-head h1 span { color: var(--primary); }
+  .cefr-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+  .cefr-intro strong { color: var(--text, #e8eef5); }
+
+  .cefr-quiz { max-width: 640px; margin: 2rem auto 0; }
+
+  /* These use display:flex, which would override the [hidden] attribute's
+     display:none, so hide them explicitly when the JS toggles `hidden`. */
+  .cefr-progress[hidden],
+  .cefr-nav[hidden],
+  .cefr-startwrap[hidden] { display: none; }
+
+  .cefr-progress { display: flex; align-items: center; gap: 0.8rem; margin: 0 0 1.4rem; }
+  .cefr-progress-track {
+    flex: 1; height: 8px; background: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden;
+  }
+  .cefr-progress-fill { display: block; height: 100%; background: var(--primary); border-radius: 999px; transition: width 0.3s ease; }
+  .cefr-progress-label {
+    font-size: 0.82rem; color: var(--text-muted, #9fb0c3); white-space: nowrap; font-variant-numeric: tabular-nums;
+  }
+
+  .cefr-q {
+    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px;
+    padding: 1.6rem 1.4rem; margin: 0; background: rgba(255, 255, 255, 0.02);
+  }
+  .cefr-q[hidden] { display: none; }
+  .cefr-q-stem { font-size: 1.15rem; line-height: 1.5; font-weight: 600; padding: 0; margin: 0 0 1.1rem; }
+  .cefr-q-num { color: var(--primary); font-weight: 800; margin-right: 0.3rem; }
+  .cefr-q-opts { display: grid; gap: 0.6rem; }
+  .cefr-opt {
+    display: flex; align-items: center; gap: 0.7rem; cursor: pointer; user-select: none;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 12px;
+    padding: 0.75rem 1rem; font-size: 1.02rem; line-height: 1.3;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .cefr-opt:hover { border-color: rgba(255, 255, 255, 0.34); }
+  .cefr-opt input { accent-color: var(--primary); width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+  .cefr-opt:has(input:checked) {
+    background: rgba(74, 222, 128, 0.12); border-color: var(--primary);
+  }
+  .cefr-opt:has(input:focus-visible) { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+  .cefr-nav { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin: 1.4rem 0 0; }
+  .cefr-back {
+    background: transparent; color: var(--text-muted, #9fb0c3);
+    border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 10px;
+    padding: 0.7rem 1.1rem; font-size: 0.98rem; font-weight: 600; cursor: pointer;
+  }
+  .cefr-back:hover:not(:disabled) { border-color: rgba(255, 255, 255, 0.4); color: var(--text, #e8eef5); }
+  .cefr-back:disabled { opacity: 0.4; cursor: default; }
+  .cefr-next {
+    background: var(--gradient, linear-gradient(135deg, #4ade80, #22c55e)); color: #0b1220;
+    border: none; border-radius: 10px; padding: 0.75rem 1.7rem; font-size: 1.02rem; font-weight: 700; cursor: pointer;
+  }
+  .cefr-next:hover:not(:disabled) { filter: brightness(1.05); }
+  .cefr-next:disabled { opacity: 0.45; cursor: default; }
+
+  .cefr-startwrap { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
+  .cefr-go {
+    background: var(--gradient, linear-gradient(135deg, #4ade80, #22c55e)); color: #0b1220;
+    border: none; border-radius: 10px; padding: 0.9rem 2rem; font-size: 1.08rem; font-weight: 700; cursor: pointer;
+  }
+  .cefr-go:hover { filter: brightness(1.05); }
+  .cefr-startnote { color: var(--text-muted, #9fb0c3); font-size: 0.86rem; }
+
+  .cefr-result {
+    max-width: 620px; margin: 2.5rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.2);
+    border-radius: 18px; padding: 2.2rem 1.6rem;
+  }
+  .result-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem;
+    color: var(--text-muted, #9fb0c3); margin: 0 0 0.5rem;
+  }
+  .result-level { margin: 0; font-size: clamp(3rem, 11vw, 5rem); font-weight: 800; line-height: 1; color: var(--primary); }
+  .result-name { margin: 0.3rem 0 0; font-size: 1.2rem; font-weight: 700; }
+  .result-blurb { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 1rem auto 0; max-width: 480px; }
+
+  /* result-detail is injected by client JS (innerHTML) → no Astro scope attr.
+     Scope under the server-rendered .cefr-result and mark dynamic parts :global(). */
+  .cefr-result :global(.result-score) { margin: 1.6rem 0 0; color: var(--text, #e8eef5); }
+  .cefr-result :global(.result-score strong) { color: var(--primary); font-variant-numeric: tabular-nums; }
+  .cefr-result :global(.result-sub),
+  .cefr-result :global(.result-levels) { max-width: 420px; margin: 1.6rem auto 0; text-align: left; }
+  .cefr-result :global(.result-sub-title) {
+    text-transform: uppercase; letter-spacing: 0.07em; font-size: 0.72rem;
+    color: var(--text-muted, #9fb0c3); margin: 0 0 0.6rem; font-weight: 700;
+  }
+  .cefr-result :global(.sub-row),
+  .cefr-result :global(.lvl-row) {
+    display: grid; grid-template-columns: 5.2rem 1fr 2.4rem; align-items: center; gap: 0.6rem; margin: 0 0 0.5rem;
+  }
+  .cefr-result :global(.sub-label),
+  .cefr-result :global(.lvl-tag) { font-size: 0.85rem; color: var(--text-muted, #9fb0c3); }
+  .cefr-result :global(.lvl-row.is-ceiling .lvl-tag) { color: var(--primary); font-weight: 800; }
+  .cefr-result :global(.sub-track),
+  .cefr-result :global(.lvl-track) { height: 8px; background: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden; }
+  .cefr-result :global(.sub-fill),
+  .cefr-result :global(.lvl-fill) { display: block; height: 100%; background: var(--primary); border-radius: 999px; }
+  .cefr-result :global(.lvl-row.is-ceiling .lvl-fill) { background: var(--primary); }
+  .cefr-result :global(.sub-val),
+  .cefr-result :global(.lvl-val) { font-size: 0.8rem; color: var(--text-muted, #9fb0c3); text-align: right; font-variant-numeric: tabular-nums; }
+  .cefr-result :global(.result-reco) {
+    margin: 1.6rem auto 0; max-width: 480px; line-height: 1.55; color: var(--text-muted, #9fb0c3);
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px; padding: 0.9rem 1.1rem; font-size: 0.95rem;
+  }
+  .cefr-result :global(.result-reco strong) { color: var(--text, #e8eef5); }
+
+  .cefr-retake {
+    margin: 1.8rem 0 0; background: transparent; color: var(--text, #e8eef5);
+    border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 10px;
+    padding: 0.7rem 1.3rem; font-size: 0.98rem; font-weight: 600; cursor: pointer;
+  }
+  .cefr-retake:hover { border-color: rgba(255, 255, 255, 0.42); }
+
+  .cefr-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .cefr-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .cefr-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .cefr-cta :global(.cta-buttons) { justify-content: center; }
+
+  .cefr-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .cefr-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .cefr-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .cefr-explainer strong { color: var(--text, #e8eef5); }
+
+  .cefr-facts { max-width: 760px; margin: 3rem auto 0; }
+  .cefr-facts h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .cefr-facts p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .facts-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 1.4rem 0 0; }
+  .facts-stat {
+    display: flex; flex-direction: column; gap: 0.25rem;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px; padding: 1rem;
+  }
+  .facts-stat strong { color: var(--primary); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+  .facts-stat span { color: var(--text-muted, #9fb0c3); font-size: 0.8rem; line-height: 1.3; }
+
+  .cefr-others { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+  .cefr-others h2 { font-size: 1.3rem; margin: 0 0 1rem; }
+  .cefr-others-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .cefr-other {
+    display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    color: var(--text, #e8eef5); font-weight: 600; font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; padding: 0.4rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .cefr-other:hover { border-color: var(--primary); color: var(--primary); }
+  .cefr-other-flag { font-size: 1.1rem; }
+
+  .cefr-tool-link { max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: 0.95rem; }
+  .cefr-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .cefr-tool-link a:hover { text-decoration: underline; }
+
+  .cefr-faq { max-width: 760px; margin: 3rem auto 0; }
+  .cefr-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .cefr-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .cefr-faq summary { cursor: pointer; font-weight: 600; }
+  .cefr-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  @media (max-width: 600px) {
+    .cefr-q { padding: 1.3rem 1.1rem; }
+    .cefr-q-stem { font-size: 1.08rem; }
+    .facts-stats { grid-template-columns: 1fr; }
+    .cefr-result :global(.sub-row),
+    .cefr-result :global(.lvl-row) { grid-template-columns: 4.4rem 1fr 2.2rem; }
+  }
+</style>
+</BaseLayout>

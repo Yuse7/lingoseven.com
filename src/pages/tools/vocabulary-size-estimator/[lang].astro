@@ -6,6 +6,7 @@ import { vocabFacts } from '../../../data/vocabFacts';
 import { languageFacts } from '../../../data/languageFacts';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
+import { CEFR_LANG_CODES } from '../../../data/cefrTest';
 
 // One static page per supported language: /tools/vocabulary-size-estimator/spanish/ etc.
 export function getStaticPaths() {
@@ -221,6 +222,12 @@ const jsonLd = [
           ))}
         </div>
       </div>
+
+      {CEFR_LANG_CODES.includes(targetCode) && (
+        <p class="vocab-tool-link">
+          <a href={`/tools/cefr-level-test/${slug}/`}>What's your {name} level? Take the CEFR test (A1-C2) &rarr;</a>
+        </p>
+      )}
 
       <p class="vocab-tool-link">
         <a href="/tools/language-difficulty-ranker/">Wondering which language to learn next? Rank 50 languages by difficulty &rarr;</a>
