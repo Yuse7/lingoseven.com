@@ -4,34 +4,7 @@ import CtaButtons from '../../components/CtaButtons.astro';
 import { languageFacts } from '../../data/languageFacts';
 import { languages } from '../../data/languages';
 import { codeToSlug } from '../../data/languageSlugs';
-
-// --- Language branch map ---------------------------------------------------
-// languageFacts only stores the top-level `family` ("Indo-European" covers
-// Spanish, Russian and German alike), which is too coarse to estimate how
-// hard one language is for a speaker of another. This finer sub-family map
-// powers the "for your native language" closeness estimate below.
-const BRANCH: Record<string, string> = {
-  // Indo-European
-  fr: 'Romance', es: 'Romance', it: 'Romance', pt: 'Romance', ro: 'Romance', ca: 'Romance', gl: 'Romance',
-  en: 'Germanic', de: 'Germanic', nl: 'Germanic', sv: 'Germanic', no: 'Germanic', da: 'Germanic', is: 'Germanic', af: 'Germanic',
-  ru: 'Slavic', uk: 'Slavic', be: 'Slavic', pl: 'Slavic', cs: 'Slavic', sk: 'Slavic', hr: 'Slavic',
-  bs: 'Slavic', sr: 'Slavic', bg: 'Slavic', mk: 'Slavic', sl: 'Slavic',
-  lv: 'Baltic', lt: 'Baltic',
-  el: 'Hellenic', sq: 'Albanian', hy: 'Armenian',
-  // Other families
-  fi: 'Finno-Ugric', hu: 'Finno-Ugric', et: 'Finno-Ugric',
-  tr: 'Turkic', az: 'Turkic', kk: 'Turkic', uz: 'Turkic', ky: 'Turkic',
-  id: 'Malayo-Polynesian', ms: 'Malayo-Polynesian', tl: 'Malayo-Polynesian',
-  vi: 'Vietic', ka: 'Kartvelian', mn: 'Mongolic', eu: 'Isolate',
-  sw: 'Bantu', zu: 'Bantu',
-};
-
-const FSI_HOURS_LABEL: Record<string, string> = {
-  I: 'Easiest (Cat. I)',
-  II: 'Easy (Cat. II)',
-  III: 'Hard (Cat. III)',
-  IV: 'Hardest (Cat. IV)',
-};
+import { BRANCH, FSI_HOURS_LABEL } from '../../data/fsiDistance';
 
 // Build the dataset (all languages that have facts + a learn page slug).
 const rows = Object.values(languageFacts)
@@ -208,6 +181,10 @@ const jsonLd = [
         <CtaButtons size="large" />
       </div>
 
+      <p class="ranker-tool-link">
+        <a href="/tools/how-long-to-learn-a-language/">Picked one? See how long it takes to learn it &rarr;</a>
+      </p>
+
       <div class="ranker-faq">
         <h2>Frequently asked questions</h2>
         {
@@ -354,6 +331,10 @@ const jsonLd = [
   .pill-IV { background: rgba(239, 68, 68, 0.16); color: #f87171; }
   .tag-est { margin-left: 0.35rem; }
   .col-family, .col-script { color: var(--text-muted, #9fb0c3); font-size: 0.9rem; }
+
+  .ranker-tool-link { max-width: 760px; margin: 2.5rem auto 0; text-align: center; font-size: 0.95rem; }
+  .ranker-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .ranker-tool-link a:hover { text-decoration: underline; }
 
   .ranker-explainer, .ranker-faq { max-width: 760px; margin: 3rem auto 0; }
   .ranker-explainer h2, .ranker-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }

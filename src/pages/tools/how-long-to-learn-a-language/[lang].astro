@@ -1,0 +1,526 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { languageFacts } from '../../../data/languageFacts';
+import { languages, getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { BRANCH, FSI_HOURS_LABEL, EN_PROFILE, estHoursForNative } from '../../../data/fsiDistance';
+
+// One static page per language that has FSI facts + a URL slug.
+// English (fsiHours = 0) is the reference, so it gets no "how long" page.
+const LANGS = Object.values(languageFacts).filter((f) => codeToSlug[f.code] && f.fsiHours > 0);
+
+export function getStaticPaths() {
+  return Object.values(languageFacts)
+    .filter((f) => codeToSlug[f.code] && f.fsiHours > 0)
+    .map((f) => ({ params: { lang: codeToSlug[f.code] }, props: { targetCode: f.code } }));
+}
+
+const { targetCode } = Astro.props;
+const lang = getLanguageByCode(targetCode);
+const name = lang?.name ?? targetCode;
+const slug = codeToSlug[targetCode];
+const lf = languageFacts[targetCode];
+
+const targetProfile = {
+  family: lf.family,
+  branch: BRANCH[targetCode] ?? lf.family,
+  writingSystem: lf.writingSystem,
+};
+
+// CEFR milestones as fractions of the full FSI "professional proficiency"
+// figure (≈C1). Proportions follow widely cited CEFR guided-learning-hour
+// ratios, scaled so C1 = the FSI total. Approximate, not official.
+const MILESTONES = [
+  { level: 'A1', frac: 0.13, label: 'Tourist basics', desc: 'Greetings, simple phrases, ordering food' },
+  { level: 'A2', frac: 0.26, label: 'Elementary', desc: 'Everyday tasks and short personal exchanges' },
+  { level: 'B1', frac: 0.45, label: 'Conversational', desc: 'Hold a real conversation, travel on your own' },
+  { level: 'B2', frac: 0.70, label: 'Fluent', desc: 'Work in the language, read novels, follow films' },
+  { level: 'C1', frac: 1.0, label: 'Professional', desc: 'Near-native command for academic or work use' },
+];
+
+// Native-language options (English first, then every language with a profile).
+const nativeOptions = [
+  { code: 'en', name: 'English' },
+  ...LANGS.filter((f) => f.code !== targetCode)
+    .map((f) => ({ code: f.code, name: getLanguageByCode(f.code)?.name ?? f.code }))
+    .sort((a, b) => a.name.localeCompare(b.name)),
+];
+
+// Profiles for every selectable native language, embedded for the client.
+const nativeProfiles: Record<string, { family: string; branch: string; writingSystem: string }> = {
+  en: EN_PROFILE,
+};
+for (const f of LANGS) {
+  nativeProfiles[f.code] = { family: f.family, branch: BRANCH[f.code] ?? f.family, writingSystem: f.writingSystem };
+}
+
+const DEFAULT_MIN = 60; // 1 hour/day default
+const STUDY_OPTS = [
+  { min: 15, label: '15 min / day' },
+  { min: 30, label: '30 min / day' },
+  { min: 45, label: '45 min / day' },
+  { min: 60, label: '1 hour / day' },
+  { min: 90, label: '1.5 hours / day' },
+  { min: 120, label: '2 hours / day' },
+  { min: 180, label: '3 hours / day' },
+];
+
+// --- Server-render the default (English native, 1h/day) so the page is fully
+// indexable with JS off. The client recomputes on input change.
+function fmtDuration(days: number): string {
+  if (days < 14) return `${Math.round(days)} days`;
+  if (days < 70) return `${Math.round(days / 7)} weeks`;
+  if (days < 365 * 2) return `${Math.round(days / 30.4)} months`;
+  const years = Math.floor(days / 365);
+  let months = Math.round((days % 365) / 30.4);
+  let y = years;
+  if (months === 12) {
+    y += 1;
+    months = 0;
+  }
+  return months > 0 ? `${y} yr ${months} mo` : `${y} yr`;
+}
+
+const baseHours = lf.fsiHours; // English-native default
+const defaultRows = MILESTONES.map((m) => {
+  const hours = Math.round((baseHours * m.frac) / 5) * 5;
+  const days = (hours * 60) / DEFAULT_MIN;
+  return { ...m, hours, time: fmtDuration(days) };
+});
+const b1 = defaultRows.find((r) => r.level === 'B1')!;
+
+const speakersLabel = lf.speakers >= 1000 ? `${(lf.speakers / 1000).toFixed(1)}B` : `${Math.round(lf.speakers)}M`;
+
+// Cross-link cluster: every other language.
+const others = LANGS.filter((f) => f.code !== targetCode).map((f) => {
+  const l = getLanguageByCode(f.code);
+  return { name: l?.name ?? f.code, flag: l?.flag ?? '', slug: codeToSlug[f.code] };
+});
+
+const canonicalUrl = `https://lingoseven.com/tools/how-long-to-learn-a-language/${slug}/`;
+const title = `How Long Does It Take to Learn ${name}? Free Time Calculator | Lingo7`;
+const description =
+  `How long does it take to learn ${name}? Estimate the time to each CEFR level from your study hours and native language, based on FSI data. Free calculator, ${name} learning timeline.`;
+
+const faq = [
+  {
+    question: `How long does it take to learn ${name}?`,
+    answer:
+      `For an English speaker, the U.S. Foreign Service Institute estimates about ${lf.fsiHours} hours of study to reach professional working proficiency (roughly C1) in ${name}, which is FSI Category ${lf.fsiCategory}. At one hour a day that is ${defaultRows[defaultRows.length - 1].time}; conversational level (B1) comes far sooner, around ${b1.time}. Your own pace, native language and method shift the figure, which is why the calculator above lets you adjust them.`,
+  },
+  {
+    question: `How long to become conversational in ${name}?`,
+    answer:
+      `Conversational ability (CEFR B1) takes roughly ${b1.hours} hours, about ${b1.time} at an hour a day. At B1 you can handle everyday conversations, travel independently and follow the gist of simple authentic texts. Reading real ${name} books with parallel translation gets you there faster because you meet useful words again and again in context.`,
+  },
+  {
+    question: `Is ${name} hard to learn?`,
+    answer:
+      `${name} is FSI Category ${lf.fsiCategory}${
+        lf.fsiCategory === 'I'
+          ? ', one of the easier tiers for English speakers'
+          : lf.fsiCategory === 'II'
+            ? ', a moderately challenging tier for English speakers'
+            : ', one of the harder tiers for English speakers'
+      }. ${lf.whatMakesUnique} How hard it actually is depends heavily on the languages you already speak. A related language and shared script cut the time considerably, which the calculator reflects when you pick your native language.`,
+  },
+  {
+    question: `Can I learn ${name} faster?`,
+    answer:
+      `Yes. The FSI hours assume classroom study; immersion and daily contact with the language compress the calendar time. The biggest levers are consistency (a little every day beats long gaps) and meeting the language in real context. Extensive reading with audio is one of the most efficient methods, because it builds vocabulary and grammatical intuition at scale.`,
+  },
+  // Append one complementary language-specific question from languageFacts,
+  // skipping anything already covered above (time / difficulty / hours).
+  ...lf.faq
+    .filter((f) => !/how long|how hard|hard to learn|is it (easy|hard)|how many .*(word|hour)|faster|conversational/i.test(f.question))
+    .slice(0, 1),
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: `How Long to Learn ${name} Calculator`,
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lingoseven.com/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'How Long to Learn a Language',
+        item: 'https://lingoseven.com/tools/how-long-to-learn-a-language/',
+      },
+      { '@type': 'ListItem', position: 3, name: `${name}`, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+
+const clientData = { targetCode, fsiHours: lf.fsiHours, targetProfile, milestones: MILESTONES, nativeProfiles };
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="hltl">
+    <div class="container">
+      <header class="hltl-head">
+        <p class="hltl-eyebrow"><a href="/tools/how-long-to-learn-a-language/">How long to learn a language</a></p>
+        <h1>How long does it take to learn <span>{name}</span>?</h1>
+        <p class="hltl-intro">
+          The honest answer is "it depends": on how much you study, what you already speak, and what
+          you mean by "learn". So set those below and get a real timeline. The base figures come from
+          the U.S. Foreign Service Institute, which puts {name} at about
+          <strong>{lf.fsiHours} hours</strong> to professional proficiency (Category {lf.fsiCategory}).
+        </p>
+      </header>
+
+      <div class="hltl-controls">
+        <label class="hltl-field">
+          <span>I'm a native speaker of</span>
+          <select id="native-select" aria-label="Your native language">
+            {nativeOptions.map((o) => <option value={o.code} selected={o.code === 'en'}>{o.name}</option>)}
+          </select>
+        </label>
+        <label class="hltl-field">
+          <span>I can study</span>
+          <select id="pace-select" aria-label="Study time per day">
+            {STUDY_OPTS.map((o) => <option value={o.min} selected={o.min === DEFAULT_MIN}>{o.label}</option>)}
+          </select>
+        </label>
+      </div>
+
+      <div class="hltl-headline" id="hltl-headline">
+        <p class="hltl-headline-eyebrow">Time to hold a conversation (B1)</p>
+        <p class="hltl-headline-time" id="headline-time">{b1.time}</p>
+        <p class="hltl-headline-sub" id="headline-sub">
+          about {b1.hours.toLocaleString('en-US')} hours of study · {name} for English speakers
+        </p>
+      </div>
+
+      <div class="hltl-timeline" id="hltl-timeline">
+        {
+          defaultRows.map((r) => (
+            <div class="milestone">
+              <span class="ms-level">{r.level}</span>
+              <span class="ms-body">
+                <span class="ms-label">{r.label}</span>
+                <span class="ms-desc">{r.desc}</span>
+              </span>
+              <span class="ms-time">
+                <strong>{r.time}</strong>
+                <span class="ms-hours">{r.hours.toLocaleString('en-US')} h</span>
+              </span>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="hltl-note" id="hltl-note">
+        Estimates only. FSI hours are measured for native English speakers in intensive classroom
+        study; the "for you" adjustment scales them by how close {name} is to your native language and
+        script. Real timelines vary with method, motivation and exposure.
+      </p>
+
+      <div class="hltl-cta">
+        <h2>The fastest hours are the ones you enjoy, so read</h2>
+        <p>
+          Whatever your timeline, you get there quicker by meeting {name} in real sentences, again and
+          again. Lingo7 lets you read real books in {name} with tap-to-translate and native-narrated
+          audio. Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="hltl-explainer">
+        <h2>How this calculator works</h2>
+        <p>
+          The base figure is the <strong>FSI study-hour estimate</strong>: how many classroom hours
+          the U.S. Foreign Service Institute found a native English speaker needs to reach professional
+          working proficiency. {name} is <strong>Category {lf.fsiCategory}</strong>, about
+          {' '}{lf.fsiHours} hours. That number maps to roughly CEFR C1, so the earlier levels (A1
+          through B2) are scaled down from it using standard CEFR effort ratios.
+        </p>
+        <p>
+          When you pick a different native language, the total is adjusted for
+          <strong>linguistic distance</strong>: a language in your own family branch and sharing your
+          writing system transfers a lot and gets easier; an unrelated language with a different script
+          gets harder. Then your <strong>daily study time</strong> turns those hours into calendar
+          time, since the same hours spread over more minutes a day simply finish sooner.
+        </p>
+        <p>
+          It's an estimate, not a guarantee. What it's genuinely good at is showing that
+          <em>conversational</em> {name} arrives much sooner than "fluent", and that steady daily
+          contact, especially reading, is what moves the timeline.
+        </p>
+      </div>
+
+      <div class="hltl-facts">
+        <h2>About learning {name}</h2>
+        <p>{lf.whyLearn}</p>
+        <div class="facts-stats">
+          <div class="facts-stat"><strong>{FSI_HOURS_LABEL[lf.fsiCategory]}</strong><span>FSI difficulty for English speakers</span></div>
+          <div class="facts-stat"><strong>{lf.fsiHours} h</strong><span>to professional proficiency</span></div>
+          <div class="facts-stat"><strong>{speakersLabel}</strong><span>speakers worldwide</span></div>
+        </div>
+      </div>
+
+      <div class="hltl-others">
+        <h2>How long to learn another language?</h2>
+        <div class="hltl-others-grid">
+          {
+            others.map((o) => (
+              <a class="hltl-other" href={`/tools/how-long-to-learn-a-language/${o.slug}/`}>
+                <span class="hltl-other-flag">{o.flag}</span>
+                {o.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <p class="hltl-tool-link">
+        <a href="/tools/language-difficulty-ranker/">Compare all 50 languages by difficulty for your native tongue &rarr;</a>
+      </p>
+
+      <div class="hltl-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="hltl-data" set:html={JSON.stringify(clientData)} />
+  <script>
+    import { closenessFactor, EN_PROFILE } from '../../../data/fsiDistance';
+
+    type Profile = { family: string; branch: string; writingSystem: string };
+    type Milestone = { level: string; frac: number; label: string; desc: string };
+    type Data = {
+      targetCode: string;
+      fsiHours: number;
+      targetProfile: Profile;
+      milestones: Milestone[];
+      nativeProfiles: Record<string, Profile>;
+    };
+
+    const el = document.getElementById('hltl-data');
+    const DATA: Data = el ? JSON.parse(el.textContent || '{}') : (null as any);
+
+    const nativeSel = document.getElementById('native-select') as HTMLSelectElement;
+    const paceSel = document.getElementById('pace-select') as HTMLSelectElement;
+    const timeline = document.getElementById('hltl-timeline') as HTMLDivElement;
+    const headTime = document.getElementById('headline-time') as HTMLElement;
+    const headSub = document.getElementById('headline-sub') as HTMLElement;
+
+    function estHours(nativeCode: string): number {
+      if (nativeCode === 'en') return DATA.fsiHours;
+      const n = DATA.nativeProfiles[nativeCode];
+      if (!n) return DATA.fsiHours;
+      const adj = closenessFactor(n, DATA.targetProfile) / closenessFactor(EN_PROFILE, DATA.targetProfile);
+      return Math.max(300, Math.round((DATA.fsiHours * adj) / 25) * 25);
+    }
+
+    function fmtDuration(days: number): string {
+      if (days < 14) return `${Math.round(days)} days`;
+      if (days < 70) return `${Math.round(days / 7)} weeks`;
+      if (days < 365 * 2) return `${Math.round(days / 30.4)} months`;
+      const years = Math.floor(days / 365);
+      let months = Math.round((days % 365) / 30.4);
+      let y = years;
+      if (months === 12) {
+        y += 1;
+        months = 0;
+      }
+      return months > 0 ? `${y} yr ${months} mo` : `${y} yr`;
+    }
+
+    const fmt = (n: number) => n.toLocaleString('en-US');
+
+    function render() {
+      const total = estHours(nativeSel.value);
+      const minPerDay = Number(paceSel.value);
+      const nativeName = nativeSel.options[nativeSel.selectedIndex].text;
+
+      const rows = DATA.milestones.map((m) => {
+        const hours = Math.round((total * m.frac) / 5) * 5;
+        const days = (hours * 60) / minPerDay;
+        return { ...m, hours, time: fmtDuration(days) };
+      });
+
+      timeline.innerHTML = rows
+        .map(
+          (r) => `
+          <div class="milestone">
+            <span class="ms-level">${r.level}</span>
+            <span class="ms-body">
+              <span class="ms-label">${r.label}</span>
+              <span class="ms-desc">${r.desc}</span>
+            </span>
+            <span class="ms-time">
+              <strong>${r.time}</strong>
+              <span class="ms-hours">${fmt(r.hours)} h</span>
+            </span>
+          </div>`
+        )
+        .join('');
+
+      const b1 = rows.find((r) => r.level === 'B1')!;
+      headTime.textContent = b1.time;
+      headSub.textContent =
+        nativeSel.value === 'en'
+          ? `about ${fmt(b1.hours)} hours of study · for English speakers`
+          : `about ${fmt(b1.hours)} hours of study · for ${nativeName} speakers`;
+    }
+
+    nativeSel.addEventListener('change', render);
+    paceSel.addEventListener('change', render);
+  </script>
+</BaseLayout>
+
+<style>
+  .hltl { padding: 3rem 0 4rem; }
+  .hltl-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .hltl-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .hltl-eyebrow a { color: var(--primary); text-decoration: none; }
+  .hltl-eyebrow a:hover { text-decoration: underline; }
+  .hltl-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .hltl-head h1 span { color: var(--primary); }
+  .hltl-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+  .hltl-intro strong { color: var(--text, #e8eef5); }
+
+  .hltl-controls {
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+    max-width: 760px; margin: 2rem auto 0;
+  }
+  .hltl-field {
+    display: flex; flex-direction: column; gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1rem; border-radius: 12px; min-width: 220px; flex: 1; max-width: 320px;
+  }
+  .hltl-field span { font-size: 0.82rem; color: var(--text-muted, #9fb0c3); font-weight: 600; }
+  .hltl-field select {
+    background: var(--background, #1a2332); color: inherit; font-size: 1.05rem; font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 8px; padding: 0.5rem 0.7rem; cursor: pointer;
+  }
+
+  .hltl-headline {
+    max-width: 620px; margin: 2.2rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.2);
+    border-radius: 18px; padding: 1.8rem 1.6rem;
+  }
+  .hltl-headline-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem;
+    color: var(--text-muted, #9fb0c3); margin: 0 0 0.4rem;
+  }
+  .hltl-headline-time {
+    margin: 0; font-size: clamp(2.4rem, 7vw, 3.6rem); font-weight: 800; line-height: 1;
+    color: var(--primary); font-variant-numeric: tabular-nums;
+  }
+  .hltl-headline-sub { margin: 0.7rem 0 0; color: var(--text-muted, #9fb0c3); font-size: 0.92rem; }
+
+  .hltl-timeline { max-width: 680px; margin: 2rem auto 0; display: grid; gap: 0.6rem; }
+  /* Rows are re-rendered by client JS (innerHTML), so they carry no Astro scope
+     attribute. Scope under .hltl-timeline and mark the dynamic part :global(). */
+  .hltl-timeline :global(.milestone) {
+    display: grid; grid-template-columns: 2.6rem 1fr auto; align-items: center; gap: 0.9rem;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px; padding: 0.85rem 1.1rem;
+  }
+  .hltl-timeline :global(.ms-level) {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 2.6rem; height: 2.6rem; border-radius: 50%;
+    background: rgba(74, 222, 128, 0.14); color: var(--primary);
+    font-weight: 800; font-size: 0.9rem;
+  }
+  .hltl-timeline :global(.ms-body) { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+  .hltl-timeline :global(.ms-label) { font-weight: 700; color: var(--text, #e8eef5); }
+  .hltl-timeline :global(.ms-desc) { font-size: 0.84rem; color: var(--text-muted, #9fb0c3); line-height: 1.3; }
+  .hltl-timeline :global(.ms-time) { text-align: right; display: flex; flex-direction: column; gap: 0.15rem; white-space: nowrap; }
+  .hltl-timeline :global(.ms-time strong) { color: var(--primary); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+  .hltl-timeline :global(.ms-hours) { font-size: 0.78rem; color: var(--text-muted, #9fb0c3); font-variant-numeric: tabular-nums; }
+
+  .hltl-note { max-width: 680px; margin: 1.2rem auto 0; font-size: 0.84rem; line-height: 1.55; color: var(--text-muted, #9fb0c3); text-align: center; }
+
+  .hltl-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .hltl-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .hltl-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .hltl-cta :global(.cta-buttons) { justify-content: center; }
+
+  .hltl-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .hltl-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .hltl-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .hltl-explainer strong { color: var(--text, #e8eef5); }
+
+  .hltl-facts { max-width: 760px; margin: 3rem auto 0; }
+  .hltl-facts h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .hltl-facts p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .facts-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 1.4rem 0 0; }
+  .facts-stat {
+    display: flex; flex-direction: column; gap: 0.25rem;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px; padding: 1rem;
+  }
+  .facts-stat strong { color: var(--primary); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+  .facts-stat span { color: var(--text-muted, #9fb0c3); font-size: 0.8rem; line-height: 1.3; }
+
+  .hltl-others { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+  .hltl-others h2 { font-size: 1.3rem; margin: 0 0 1rem; }
+  .hltl-others-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .hltl-other {
+    display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    color: var(--text, #e8eef5); font-weight: 600; font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; padding: 0.4rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .hltl-other:hover { border-color: var(--primary); color: var(--primary); }
+  .hltl-other-flag { font-size: 1.1rem; }
+
+  .hltl-tool-link { max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: 0.95rem; }
+  .hltl-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .hltl-tool-link a:hover { text-decoration: underline; }
+
+  .hltl-faq { max-width: 760px; margin: 3rem auto 0; }
+  .hltl-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .hltl-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .hltl-faq summary { cursor: pointer; font-weight: 600; }
+  .hltl-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  @media (max-width: 600px) {
+    .hltl-timeline :global(.milestone) { grid-template-columns: 2.2rem 1fr auto; gap: 0.6rem; padding: 0.7rem 0.8rem; }
+    .facts-stats { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,208 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { languageFacts } from '../../../data/languageFacts';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { FSI_HOURS_LABEL } from '../../../data/fsiDistance';
+
+// Hub: pick a language, jump to its per-language timeline. English (fsiHours 0)
+// is the reference, so it has no page of its own.
+const langs = Object.values(languageFacts)
+  .filter((f) => codeToSlug[f.code] && f.fsiHours > 0)
+  .map((f) => {
+    const l = getLanguageByCode(f.code);
+    return {
+      name: l?.name ?? f.code,
+      flag: l?.flag ?? '',
+      slug: codeToSlug[f.code],
+      fsiHours: f.fsiHours,
+      fsiCategory: f.fsiCategory,
+    };
+  })
+  .sort((a, b) => a.fsiHours - b.fsiHours || a.name.localeCompare(b.name));
+
+const canonicalUrl = 'https://lingoseven.com/tools/how-long-to-learn-a-language/';
+const title = 'How Long Does It Take to Learn a Language? Free Calculator | Lingo7';
+const description =
+  `How long does it take to learn a language? Pick from ${langs.length} languages and estimate the time to each CEFR level from your study hours and native language, based on FSI data.`;
+
+const faq = [
+  {
+    question: 'How long does it take to learn a language?',
+    answer:
+      'It depends on the language, your native tongue, how much you study and what "learn" means. The U.S. Foreign Service Institute estimates 600 to 750 hours for the easiest languages (Spanish, French, Italian), rising to about 2,200 hours for the hardest (Arabic, Chinese, Japanese, Korean), to reach professional proficiency. Conversational ability comes far sooner, often in a few hundred hours. Pick a language above for its own timeline.',
+  },
+  {
+    question: 'What are FSI language difficulty categories?',
+    answer:
+      'The Foreign Service Institute groups languages by the classroom hours a native English speaker needs for professional working proficiency. Category I (around 600 to 750h) covers most Romance and Germanic languages; Category II (around 900h) German and Indonesian; Category III (around 1,100h) Slavic, Turkic, Greek, Finnish and more; Category IV (around 2,200h) Arabic, Mandarin, Japanese and Korean.',
+  },
+  {
+    question: 'How long does it take to become conversational?',
+    answer:
+      'Conversational ability (CEFR B1) usually arrives at roughly 40 to 45% of the hours needed for full proficiency, often a few hundred hours. For an easy language at an hour a day, that can be under a year. It comes much sooner than "fluent" because everyday conversation relies on a few thousand high-frequency words you can build quickly through reading and listening.',
+  },
+  {
+    question: 'What is the fastest way to learn a language?',
+    answer:
+      'Consistency and real context. A little every day beats long gaps, and meeting the language in real sentences builds vocabulary and grammar faster than isolated drills. Extensive reading with audio is one of the most efficient methods. Lingo7 lets you read real books with parallel translation and native-narrated audio.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'How Long to Learn a Language Calculator',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: langs.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `How long to learn ${l.name}`,
+      url: `https://lingoseven.com/tools/how-long-to-learn-a-language/${l.slug}/`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="hltl">
+    <div class="container">
+      <header class="hltl-head">
+        <p class="hltl-eyebrow">Free tool</p>
+        <h1>How long does it take to learn a language?</h1>
+        <p class="hltl-intro">
+          Pick a language to get a real timeline. Each estimate starts from official U.S. Foreign
+          Service Institute study hours, then adjusts for your native language and how much you study a
+          day, then shows when you'll reach each level, from tourist basics to professional fluency.
+        </p>
+      </header>
+
+      <div class="lang-grid">
+        {
+          langs.map((l) => (
+            <a class="lang-card" href={`/tools/how-long-to-learn-a-language/${l.slug}/`}>
+              <span class="lang-flag">{l.flag}</span>
+              <span class="lang-name">{l.name}</span>
+              <span class="lang-sub">{l.fsiHours} h · {FSI_HOURS_LABEL[l.fsiCategory]}</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="hltl-cta">
+        <h2>However long it takes, reading is the shortcut</h2>
+        <p>
+          The surest way through the hours is meeting the language in real sentences, again and again.
+          Lingo7 lets you read real books with tap-to-translate and native-narrated audio. Free to
+          start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="hltl-explainer">
+        <h2>How the estimates work</h2>
+        <p>
+          The base figure for each language is the <strong>FSI study-hour estimate</strong>: the
+          classroom hours a native English speaker needs to reach professional working proficiency
+          (roughly CEFR C1). Earlier levels (A1 through B2) are scaled down from it using standard CEFR
+          effort ratios, so you can see that conversational ability arrives long before full fluency.
+        </p>
+        <p>
+          On each language's page you can set your <strong>native language</strong> (a related
+          language and shared script cut the time) and your <strong>daily study time</strong>, which
+          turns the hours into weeks, months and years. The numbers are estimates, but they're honest
+          about one thing: steady daily contact, especially reading, is what moves the timeline.
+        </p>
+      </div>
+
+      <p class="hltl-tool-link">
+        <a href="/tools/language-difficulty-ranker/">Compare all 50 languages by difficulty for your native tongue &rarr;</a>
+      </p>
+
+      <div class="hltl-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hltl { padding: 3rem 0 4rem; }
+  .hltl-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .hltl-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    color: var(--primary); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .hltl-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .hltl-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  .lang-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.8rem; max-width: 820px; margin: 2rem auto 0;
+  }
+  .lang-card {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+    text-decoration: none; text-align: center;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; padding: 1.2rem 1rem; transition: all 0.15s ease;
+  }
+  .lang-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+  .lang-flag { font-size: 2rem; }
+  .lang-name { color: var(--text, #e8eef5); font-weight: 700; font-size: 1.05rem; }
+  .lang-sub { color: var(--text-muted, #9fb0c3); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+
+  .hltl-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .hltl-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .hltl-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .hltl-cta :global(.cta-buttons) { justify-content: center; }
+
+  .hltl-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .hltl-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .hltl-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .hltl-explainer strong { color: var(--text, #e8eef5); }
+
+  .hltl-tool-link { max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: 0.95rem; }
+  .hltl-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .hltl-tool-link a:hover { text-decoration: underline; }
+
+  .hltl-faq { max-width: 760px; margin: 3rem auto 0; }
+  .hltl-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .hltl-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .hltl-faq summary { cursor: pointer; font-weight: 600; }
+  .hltl-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+</style>

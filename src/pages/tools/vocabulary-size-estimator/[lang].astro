@@ -226,6 +226,12 @@ const jsonLd = [
         <a href="/tools/language-difficulty-ranker/">Wondering which language to learn next? Rank 50 languages by difficulty &rarr;</a>
       </p>
 
+      {targetCode !== 'en' && (
+        <p class="vocab-tool-link">
+          <a href={`/tools/how-long-to-learn-a-language/${slug}/`}>How long does it take to learn {name}? See the timeline &rarr;</a>
+        </p>
+      )}
+
       <div class="vocab-faq">
         <h2>Frequently asked questions</h2>
         {faq.map((f) => (
