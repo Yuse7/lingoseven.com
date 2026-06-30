@@ -1,0 +1,472 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaButtons from '../../components/CtaButtons.astro';
+import { vocabWords, VOCAB_LANG_CODES } from '../../data/vocabWords';
+import { getLanguageByCode } from '../../data/languages';
+import { codeToSlug } from '../../data/languageSlugs';
+
+// Languages the test supports (top learning languages). English name + flag + slug
+// come from the shared language data so this stays in sync with the rest of the site.
+const langMeta = VOCAB_LANG_CODES.map((code) => {
+  const l = getLanguageByCode(code);
+  return { code, name: l?.name ?? code, flag: l?.flag ?? '', slug: codeToSlug[code] ?? '' };
+});
+
+const DEFAULT_LANG = 'es';
+const defaultName = langMeta.find((l) => l.code === DEFAULT_LANG)?.name ?? 'Spanish';
+
+// Server-render the default-language word grid so the page has real, indexable
+// content without JavaScript. The client reshuffles and rebuilds it on load and
+// whenever the language changes (see the inline script).
+const dflt = vocabWords[DEFAULT_LANG];
+const defaultItems = [
+  ...dflt.bands.flatMap((b, bi) => b.words.map((w) => ({ w, band: bi }))),
+  ...dflt.pseudowords.map((w) => ({ w, band: -1 })),
+].sort((a, b) => a.w.localeCompare(b.w, DEFAULT_LANG));
+
+const title = 'Vocabulary Size Estimator — How Many Words Do You Know? | Lingo7';
+const description =
+  'Free vocabulary size test: check the words you know and estimate how many words you know in Spanish, French, German and 7 more languages. Frequency-based, with a built-in guessing check.';
+
+const faq = [
+  {
+    question: 'How many words do I know in Spanish (or another language)?',
+    answer:
+      'This test estimates it in about a minute. You check every word you genuinely know from a list sampled across the whole frequency range — from the 500 most common words down to rare ones. The share you know in each frequency band is scaled up to the size of that band, and the totals are added together. The list also contains made-up words; checking those lowers your score, which corrects for guessing.',
+  },
+  {
+    question: 'How is the vocabulary size estimate calculated?',
+    answer:
+      'The words come from real frequency lists, split into six bands by how common each word is. If you know 6 of 8 words in a band that represents 2,000 word families, that band contributes roughly 1,500 known words. We sum every band, then apply a guessing correction based on how many non-existent (pseudo) words you marked as known. The result is an estimate of your written vocabulary up to about 25,000 word families.',
+  },
+  {
+    question: 'What are the made-up words for?',
+    answer:
+      'About a fifth of the list are pseudowords — invented strings that follow the spelling rules of the language but are not real words. They look plausible, so if you tick them you are guessing. The test subtracts that guessing rate from your real score so the estimate stays honest. Be strict: only check a word if you actually know what it means.',
+  },
+  {
+    question: 'How many words do you need to be fluent?',
+    answer:
+      'Roughly 2,000-3,000 of the most frequent word families cover everyday conversation (around B1). To read a novel comfortably you usually need about 8,000-9,000 word families (B2-C1). Educated native speakers know somewhere around 15,000-20,000. More than vocabulary count, what matters is meeting those words repeatedly in real context.',
+  },
+  {
+    question: 'How accurate is this vocabulary test?',
+    answer:
+      'It is a quick estimate, not an exam. Because it samples only a few words per frequency band, the number can swing by a few hundred to a couple of thousand. It is best read as a range and a level, and as a way to see which frequency bands you have already mastered and where your next words will come from. Reading real books is the fastest way to grow that number.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Vocabulary Size Estimator',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: 'https://lingoseven.com/tools/vocabulary-size-estimator/',
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" jsonLd={jsonLd}>
+  <section class="vocab">
+    <div class="container">
+      <header class="vocab-head">
+        <p class="vocab-eyebrow">Free tool</p>
+        <h1>How many words do you know in <span id="vocab-lang-name">{defaultName}</span>?</h1>
+        <p class="vocab-intro">
+          Tick every word below whose meaning you actually know. The list spans the whole frequency
+          range — from the most common words to rare ones — and hides a few invented words to keep
+          you honest. We turn your answers into an estimate of your total vocabulary, then show you
+          the fastest way to grow it: reading real books.
+        </p>
+
+        <div class="vocab-controls">
+          <label for="vocab-select">I'm learning:</label>
+          <select id="vocab-select" aria-label="Language you are learning">
+            {langMeta.map((l) => (
+              <option value={l.code} selected={l.code === DEFAULT_LANG}>{l.name}</option>
+            ))}
+          </select>
+        </div>
+        <p class="vocab-hint">
+          Check a word only if you know what it means. Some words on the list are not real — don't
+          guess.
+        </p>
+      </header>
+
+      <div class="vocab-grid" id="vocab-grid">
+        {defaultItems.map((it) => (
+          <label class="chip" data-band={it.band}>
+            <input type="checkbox" />
+            <span>{it.w}</span>
+          </label>
+        ))}
+      </div>
+
+      <div class="vocab-actions">
+        <button type="button" id="vocab-estimate" class="vocab-go">Estimate my vocabulary</button>
+        <button type="button" id="vocab-reset" class="vocab-clear">Clear</button>
+        <span class="vocab-count-live" id="vocab-count-live"></span>
+      </div>
+
+      <div class="vocab-result" id="vocab-result" hidden>
+        <p class="result-eyebrow">Your estimated vocabulary</p>
+        <p class="result-number"><span id="result-count">0</span> <span class="result-unit">words</span></p>
+        <p class="result-level"><span class="result-level-pill" id="result-level"></span></p>
+        <p class="result-blurb" id="result-blurb"></p>
+
+        <div class="result-bars" id="result-bars"></div>
+
+        <p class="result-note" id="result-note" hidden></p>
+
+        <div class="result-context">
+          <div class="ctx-item"><strong>2,000-3,000</strong><span>everyday conversation</span></div>
+          <div class="ctx-item"><strong>~8,000</strong><span>read novels comfortably</span></div>
+          <div class="ctx-item"><strong>15,000-20,000</strong><span>educated native speaker</span></div>
+        </div>
+      </div>
+
+      <div class="vocab-cta" id="vocab-cta">
+        <h2>Grow your vocabulary the natural way — by reading</h2>
+        <p>
+          The fastest way past these numbers is meeting words again and again in real sentences.
+          Lingo7 lets you read real books in <span id="cta-lang-name">{defaultName}</span> with
+          tap-to-translate and native-narrated audio. Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="vocab-explainer">
+        <h2>How the estimate works</h2>
+        <p>
+          The hardest part of measuring vocabulary is that you can't be asked about every word. So
+          this test samples them. Each language's words are sorted by <strong>frequency</strong> —
+          how often they appear in real usage — and split into six bands, from the 600 most common
+          words down to words ranked around 25,000th. You see eight words from each band.
+        </p>
+        <p>
+          The share you know in a band is scaled up to the whole band. Know six of eight words in a
+          band that stands for 2,000 word families, and you've likely got about 1,500 of them.
+          Adding every band gives your estimate. Then comes the honesty check: the list also holds
+          <strong>invented words</strong> that look real but aren't. The more of those you tick, the
+          more the test assumes you were guessing, and it scales your score down to match.
+        </p>
+        <p>
+          It's an estimate, not an exam — read it as a range and a level. What it's genuinely good at
+          is showing <em>where</em> your vocabulary thins out, and that the surest way to thicken it
+          is to keep reading.
+        </p>
+      </div>
+
+      <p class="vocab-tool-link">
+        <a href="/tools/language-difficulty-ranker/">Wondering which language to learn next? Rank 50 languages by difficulty &rarr;</a>
+      </p>
+
+      <div class="vocab-faq">
+        <h2>Frequently asked questions</h2>
+        {faq.map((f) => (
+          <details>
+            <summary>{f.question}</summary>
+            <p>{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="vocab-data" set:html={JSON.stringify({ words: vocabWords, meta: langMeta })} />
+  <script>
+    type Band = { width: number; words: string[] };
+    type LangData = { bands: Band[]; pseudowords: string[] };
+    type Meta = { code: string; name: string; flag: string; slug: string };
+
+    const dataEl = document.getElementById('vocab-data');
+    const parsed = dataEl ? JSON.parse(dataEl.textContent || '{}') : { words: {}, meta: [] };
+    const WORDS: Record<string, LangData> = parsed.words;
+    const META: Meta[] = parsed.meta;
+    const metaByCode = new Map(META.map((m) => [m.code, m]));
+
+    const grid = document.getElementById('vocab-grid') as HTMLDivElement;
+    const select = document.getElementById('vocab-select') as HTMLSelectElement;
+    const result = document.getElementById('vocab-result') as HTMLDivElement;
+    const estimateBtn = document.getElementById('vocab-estimate') as HTMLButtonElement;
+    const resetBtn = document.getElementById('vocab-reset') as HTMLButtonElement;
+    const liveCount = document.getElementById('vocab-count-live') as HTMLSpanElement;
+    const langNameEl = document.getElementById('vocab-lang-name') as HTMLSpanElement;
+    const ctaLangNameEl = document.getElementById('cta-lang-name') as HTMLSpanElement;
+
+    // Deterministic-per-render shuffle: real words and pseudowords interleaved so
+    // the made-up ones aren't clustered or guessable from position.
+    function shuffle<T>(arr: T[]): T[] {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    type Item = { w: string; band: number };
+
+    function buildItems(code: string): Item[] {
+      const d = WORDS[code];
+      const items: Item[] = [];
+      d.bands.forEach((b, bi) => b.words.forEach((w) => items.push({ w, band: bi })));
+      d.pseudowords.forEach((w) => items.push({ w, band: -1 }));
+      return shuffle(items);
+    }
+
+    function renderGrid(code: string) {
+      const items = buildItems(code);
+      grid.innerHTML = items
+        .map(
+          (it) =>
+            `<label class="chip" data-band="${it.band}"><input type="checkbox" /><span>${it.w}</span></label>`
+        )
+        .join('');
+      result.hidden = true;
+      updateLive();
+      const name = metaByCode.get(code)?.name ?? '';
+      langNameEl.textContent = name;
+      ctaLangNameEl.textContent = name;
+    }
+
+    function checkedChips(): HTMLInputElement[] {
+      return Array.from(grid.querySelectorAll<HTMLInputElement>('input:checked'));
+    }
+
+    function updateLive() {
+      const n = checkedChips().length;
+      liveCount.textContent = n > 0 ? `${n} selected` : '';
+    }
+
+    function fmt(n: number): string {
+      return n.toLocaleString('en-US');
+    }
+
+    function level(n: number): { tag: string; blurb: string } {
+      if (n < 750)
+        return { tag: 'A1 · Beginner', blurb: "You're at the start. The first few hundred words already carry a lot of everyday meaning — keep going." };
+      if (n < 1500)
+        return { tag: 'A2 · Elementary', blurb: 'You can handle simple, familiar topics. Building toward the ~3,000 words that unlock real conversations.' };
+      if (n < 3000)
+        return { tag: 'B1 · Intermediate', blurb: 'You know enough to hold everyday conversations. Graded and simple authentic texts are within reach.' };
+      if (n < 6000)
+        return { tag: 'B2 · Upper-intermediate', blurb: "You're closing in on the ~8,000 words that make novels comfortable. Reading widely will get you there fastest." };
+      if (n < 10000)
+        return { tag: 'C1 · Advanced', blurb: 'You can read real books and follow nuanced discussion. The remaining words are rarer and best met in context.' };
+      return { tag: 'C2 · Near-native', blurb: 'An exceptional vocabulary — in the range of an educated native speaker. Reading keeps even this sharp.' };
+    }
+
+    function estimate(code: string) {
+      const d = WORDS[code];
+      const checked = checkedChips();
+      let pseudoHits = 0;
+      const bandKnown = new Array(d.bands.length).fill(0);
+      checked.forEach((input) => {
+        const band = Number((input.closest('.chip') as HTMLElement).dataset.band);
+        if (band === -1) pseudoHits++;
+        else bandKnown[band]++;
+      });
+      const pseudoTotal = d.pseudowords.length;
+      const f = pseudoTotal > 0 ? pseudoHits / pseudoTotal : 0;
+
+      let total = 0;
+      const bars = d.bands.map((b, i) => {
+        const h = bandKnown[i] / b.words.length;
+        let c = f < 1 ? (h - f) / (1 - f) : 0;
+        c = Math.max(0, Math.min(1, c));
+        total += c * b.width;
+        return { known: bandKnown[i], of: b.words.length, pct: Math.round(c * 100) };
+      });
+      const rounded = Math.round(total / 100) * 100;
+      return { count: rounded, f, pseudoHits, pseudoTotal, bars };
+    }
+
+    function showResult(code: string) {
+      const r = estimate(code);
+      (document.getElementById('result-count') as HTMLElement).textContent = fmt(r.count);
+      const lv = level(r.count);
+      (document.getElementById('result-level') as HTMLElement).textContent = lv.tag;
+      (document.getElementById('result-blurb') as HTMLElement).textContent = lv.blurb;
+
+      const bandLabels = ['Top 600', '600-1.8k', '1.8k-4k', '4k-8k', '8k-15k', '15k-25k'];
+      (document.getElementById('result-bars') as HTMLElement).innerHTML = r.bars
+        .map(
+          (b, i) => `
+          <div class="bar-row">
+            <span class="bar-label">${bandLabels[i]}</span>
+            <span class="bar-track"><span class="bar-fill" style="width:${b.pct}%"></span></span>
+            <span class="bar-val">${b.known}/${b.of}</span>
+          </div>`
+        )
+        .join('');
+
+      const note = document.getElementById('result-note') as HTMLElement;
+      if (r.pseudoHits === 0) {
+        note.hidden = true;
+      } else {
+        note.hidden = false;
+        const strong = r.f >= 0.4;
+        note.textContent = strong
+          ? `Heads up: you marked ${r.pseudoHits} of ${r.pseudoTotal} made-up words as known, so this estimate is adjusted down and is rough. Retake it and only check words you're sure of.`
+          : `You marked ${r.pseudoHits} of ${r.pseudoTotal} made-up words as known, so we adjusted the score down a little to correct for guessing.`;
+      }
+
+      result.hidden = false;
+      result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    grid.addEventListener('change', updateLive);
+    estimateBtn.addEventListener('click', () => showResult(select.value));
+    resetBtn.addEventListener('click', () => renderGrid(select.value));
+    select.addEventListener('change', () => renderGrid(select.value));
+
+    // Build the grid client-side on load so words are shuffled (the server render
+    // is alphabetical, purely for indexability).
+    renderGrid(select.value);
+  </script>
+</BaseLayout>
+
+<style>
+  .vocab { padding: 3rem 0 4rem; }
+  .vocab-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .vocab-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    color: var(--primary); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .vocab-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .vocab-head h1 span { color: var(--primary); }
+  .vocab-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0 0 1.5rem; }
+  .vocab-controls {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.6rem 1rem; border-radius: 12px; font-size: 1.05rem;
+  }
+  .vocab-controls label { font-weight: 600; }
+  .vocab-controls select {
+    background: var(--background, #1a2332); color: inherit; font-size: 1.05rem; font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 8px; padding: 0.45rem 0.7rem; cursor: pointer;
+  }
+  .vocab-hint { font-size: 0.88rem; color: var(--text-muted, #9fb0c3); margin: 1rem auto 0; max-width: 560px; }
+
+  .vocab-grid {
+    display: flex; flex-wrap: wrap; gap: 0.55rem; justify-content: center;
+    max-width: 820px; margin: 1.5rem auto 0;
+  }
+  /* Chips are injected by client JS (innerHTML), so they carry no Astro scope
+     attribute. Scope these rules under the server-rendered .vocab-grid and mark
+     the dynamic part :global() so the styles still reach them. */
+  .vocab-grid :global(.chip) {
+    display: inline-flex; align-items: center; cursor: pointer; user-select: none;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px;
+    padding: 0.45rem 0.95rem; font-size: 1rem; line-height: 1;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .vocab-grid :global(.chip input) { position: absolute; opacity: 0; width: 0; height: 0; }
+  .vocab-grid :global(.chip:hover) { border-color: rgba(255, 255, 255, 0.32); }
+  .vocab-grid :global(.chip:has(input:checked)) {
+    background: var(--primary); color: #0b1220; border-color: var(--primary); font-weight: 600;
+  }
+  .vocab-grid :global(.chip:has(input:focus-visible)) { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+  .vocab-actions {
+    display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+    flex-wrap: wrap; margin: 1.8rem auto 0;
+  }
+  .vocab-go {
+    background: var(--gradient, linear-gradient(135deg, #4ade80, #22c55e)); color: #0b1220;
+    border: none; border-radius: 10px; padding: 0.8rem 1.6rem; font-size: 1.02rem; font-weight: 700;
+    cursor: pointer;
+  }
+  .vocab-go:hover { filter: brightness(1.05); }
+  .vocab-clear {
+    background: transparent; color: var(--text, #e8eef5);
+    border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 10px;
+    padding: 0.8rem 1.2rem; font-size: 1.02rem; font-weight: 600; cursor: pointer;
+  }
+  .vocab-clear:hover { border-color: rgba(255, 255, 255, 0.4); }
+  .vocab-count-live { color: var(--text-muted, #9fb0c3); font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+
+  .vocab-result {
+    max-width: 620px; margin: 2.5rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.2);
+    border-radius: 18px; padding: 2.2rem 1.6rem;
+  }
+  .result-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem;
+    color: var(--text-muted, #9fb0c3); margin: 0 0 0.4rem;
+  }
+  .result-number { margin: 0; font-size: clamp(2.6rem, 8vw, 4rem); font-weight: 800; line-height: 1; color: var(--primary); font-variant-numeric: tabular-nums; }
+  .result-number .result-unit { font-size: 1.2rem; font-weight: 600; color: var(--text, #e8eef5); }
+  .result-level { margin: 0.9rem 0 0; }
+  .result-level-pill {
+    display: inline-block; background: rgba(255, 255, 255, 0.08); border-radius: 999px;
+    padding: 0.3rem 0.85rem; font-size: 0.92rem; font-weight: 600;
+  }
+  .result-blurb { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 1rem auto 0; max-width: 460px; }
+
+  .result-bars { margin: 1.6rem auto 0; max-width: 420px; text-align: left; display: grid; gap: 0.5rem; }
+  /* Bar rows are injected by client JS, so the dynamic parts must be :global(). */
+  .result-bars :global(.bar-row) { display: grid; grid-template-columns: 4.6rem 1fr 2.2rem; align-items: center; gap: 0.6rem; }
+  .result-bars :global(.bar-label) { font-size: 0.8rem; color: var(--text-muted, #9fb0c3); font-variant-numeric: tabular-nums; }
+  .result-bars :global(.bar-track) { height: 8px; background: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden; }
+  .result-bars :global(.bar-fill) { display: block; height: 100%; background: var(--primary); border-radius: 999px; transition: width 0.4s ease; }
+  .result-bars :global(.bar-val) { font-size: 0.8rem; color: var(--text-muted, #9fb0c3); text-align: right; font-variant-numeric: tabular-nums; }
+
+  .result-note {
+    margin: 1.4rem auto 0; max-width: 480px; font-size: 0.88rem; line-height: 1.55;
+    color: #fbbf24; background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.22);
+    border-radius: 10px; padding: 0.7rem 0.9rem;
+  }
+
+  .result-context {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem;
+    margin: 1.8rem auto 0; max-width: 480px;
+  }
+  .ctx-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .ctx-item strong { color: var(--text, #e8eef5); font-size: 1rem; font-variant-numeric: tabular-nums; }
+  .ctx-item span { color: var(--text-muted, #9fb0c3); font-size: 0.78rem; line-height: 1.3; }
+
+  .vocab-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .vocab-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .vocab-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .vocab-cta :global(.cta-buttons) { justify-content: center; }
+
+  .vocab-explainer, .vocab-faq { max-width: 760px; margin: 3rem auto 0; }
+  .vocab-explainer h2, .vocab-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .vocab-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+
+  .vocab-tool-link { max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: 0.95rem; }
+  .vocab-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .vocab-tool-link a:hover { text-decoration: underline; }
+
+  .vocab-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .vocab-faq summary { cursor: pointer; font-weight: 600; }
+  .vocab-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  @media (max-width: 600px) {
+    .vocab-grid :global(.chip) { font-size: 0.95rem; padding: 0.4rem 0.8rem; }
+    .result-context { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+</style>
