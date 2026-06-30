@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "tips"
 tags: ["duolingo", "advanced-learning", "plateau", "alternatives", "extensive-reading"]
 locale: "en"
+summary: "Duolingo stops working around B1 because it teaches isolated, artificial sentences, tests passive recognition instead of comprehension, caps out at roughly 2,000 to 3,000 words, and provides too little input. Comfortable reading of native content needs 8,000 to 9,000 word families. What works at B1 and above is extensive reading, listening, writing, and conversation."
+faq:
+  - question: "Why doesn't Duolingo work for advanced learners?"
+    answer: "Duolingo teaches isolated, artificial sentences and tests recognition rather than real comprehension, so the skills do not transfer to reading or conversation. Its courses cover only about 2,000 to 3,000 words, and short daily lessons provide too little input. Comfortable reading of native content needs roughly 8,000 to 9,000 word families, far beyond what the app delivers."
+  - question: "What should I use instead of Duolingo at B1 and above?"
+    answer: "The research points to extensive reading (30 or more minutes a day of native content), listening to podcasts and audiobooks, writing about 100 words a day, and conversation with native speakers. Reading and listening combined, following an audiobook while reading the text, is especially powerful. Do not quit Duolingo cold turkey; redirect the daily habit into reading."
+  - question: "How many words does Duolingo teach?"
+    answer: "Most Duolingo courses cover roughly 2,000 to 3,000 unique words, about the A2 to B1 range. That leaves out common words like reluctantly, postpone, scattered, ceiling, and thorough that fill real books and conversations. Paul Nation's research shows you need to know about 98 percent of a text's words to read it comfortably, which means around 8,000 to 9,000 word families."
 ---
 
 # Why Duolingo Doesn't Work for Advanced Learners (And What Does)

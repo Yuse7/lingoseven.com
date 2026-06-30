@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "tips"
 tags: ["vocabulary", "retention", "spaced-repetition", "reading", "memory", "language-learning"]
 locale: "en"
+summary: "Remembering words you read means moving them from a single fleeting encounter into long-term memory through spaced, in-context review. A word met once sits at the top of the forgetting curve and vanishes by tomorrow; most words need eight to a dozen meaningful encounters, saved with their sentence and reviewed before you forget, to become yours."
+faq:
+  - question: "Why do I forget words right after I look them up?"
+    answer: "Because a single encounter sits at the top of the steepest part of Ebbinghaus's forgetting curve, where most of what you learn is gone within a day unless something reinforces it. One exposure barely registers. Most words need roughly eight to a dozen meaningful encounters, spaced over time, before they are securely yours."
+  - question: "How many times do I need to see a word before I remember it?"
+    answer: "Research spans from about five encounters in early estimates to ten or more in later work, with abstract words needing more. A reasonable working figure is eight to a dozen meaningful encounters. Knowing a word is not a switch; each encounter adds a layer of meaning, spelling, gender, or the words it travels with."
+  - question: "Is spaced repetition better than just re-reading?"
+    answer: "Yes, because two mechanisms do the work. The spacing effect means reviews spread across days beat the same time crammed into one sitting. The testing effect means pulling a word from memory strengthens it far more than seeing it again. Re-reading only lets you recognize the answer sitting in front of you; spaced review forces real recall."
 ---
 
 # How to Remember the Words You Read in a Foreign Language

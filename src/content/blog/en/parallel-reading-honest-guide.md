@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "methodology"
 tags: ["parallel-reading", "bilingual-texts", "methodology", "reading-strategies"]
 locale: "en"
+summary: "Parallel reading means reading a text in your target language next to its translation, side by side or tap to reveal. It lets you understand every sentence without a dictionary, so you learn vocabulary in context while still enjoying a real story. It works best from late beginner through advanced."
+faq:
+  - question: "Does parallel reading actually work for language learning?"
+    answer: "Yes, for the right learner. Parallel reading removes the friction of constant dictionary lookups, so you read more and meet words in context, which is how vocabulary sticks. It works best once you know basic grammar; absolute beginners still need some foundation first. <strong>The translation is a support, not a crutch to lean on for every line.</strong>"
+  - question: "Does parallel reading create a translation dependency?"
+    answer: "It can, if you let it become permanent. The risk is real for upper-intermediate learners who check the translation for every sentence, or who drift into reading only the translation side. The fix is a staged plan: read both sides freely at first, then read the target language first, then cover the translation, then go monolingual."
+  - question: "Who should not use parallel reading?"
+    answer: "Three groups should be careful. Upper-intermediate learners at B2 or above who lean on it for every paragraph risk stalling their independent reading. People who end up reading only the native-language side learn nothing, a sign the text is too hard. And perfectionists who compare every sentence turn reading into slow translation analysis."
 ---
 
 # Parallel Reading: An Honest Guide -- Who It Works For and Who It Doesn't

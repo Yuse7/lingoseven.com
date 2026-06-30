@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "methodology"
 tags: ["cefr", "reading-levels", "a1-c2", "methodology", "vocabulary-size", "graded-readers", "self-assessment"]
 locale: "en"
+summary: "The CEFR sorts reading ability into six levels: A1 and A2 handle signs, labels, and short predictable texts; B1 reads straightforward connected stories; B2 reads authentic novels and opinion with effort; C1 reads complex specialised text across fields; C2 reads virtually anything with ease. Each level roughly tracks vocabulary size."
+faq:
+  - question: "What CEFR level do I need to read books?"
+    answer: "B2 is the level where authentic novels genuinely open up: you can follow a modern book while missing some words without losing the thread. B1 readers manage graded readers and young-adult fiction but find adult books exhausting. Comfortable, near-native reading of almost anything arrives at C1, where unknown words become rare enough to ignore."
+  - question: "How much vocabulary do I need for each CEFR level?"
+    answer: "Rough estimates, which vary by source and language: around 500 words at A1, 1,000 to 1,500 at A2, 2,000 to 3,000 at B1, 3,500 to 6,000 at B2, 6,000 to 9,000 at C1, and 9,000 and up at C2. A typical novel needs about 8,000 to 9,000 word families for comfortable reading."
+  - question: "How do I find my own reading level?"
+    answer: "Take a page you want to read and mark every unknown word. Missing more than about one word in twenty (5 percent) means it is above your comfortable independent level; one in fifty (2 percent) or fewer means it is in range. Cross-check against the can-do descriptors and graded readers labelled by level."
 ---
 
 # CEFR Levels for Readers: What A1 to C2 Actually Mean for Reading

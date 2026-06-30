@@ -22,6 +22,14 @@ const blog = defineCollection({
     targetLang: z.string().optional(),
     locale: z.string().default('en'),
     draft: z.boolean().default(false),
+    // GEO: a 40-60 word direct answer to the post's core question, definitional
+    // first sentence. Rendered as a "Quick answer" callout at the top of the post.
+    summary: z.string().optional(),
+    // GEO: FAQ phrased as real AI prompts. Rendered as a visible accordion and
+    // emitted as FAQPage JSON-LD. Answers may contain inline HTML (<strong>, <a>).
+    faq: z
+      .array(z.object({ question: z.string(), answer: z.string() }))
+      .optional(),
   }),
 });
 

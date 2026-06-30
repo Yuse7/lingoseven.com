@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "methodology"
 tags: ["comprehensible-input", "krashen", "input-hypothesis", "methodology", "language-learning", "reading-strategies", "cefr"]
 locale: "en"
+summary: "Comprehensible input is language you understand even though parts of it are new, the idea Stephen Krashen called i+1: input one step beyond your current level. You acquire a language by understanding messages, not by drilling grammar. Reading slightly-challenging books is one of the most reliable ways to get it."
+faq:
+  - question: "What is comprehensible input in simple terms?"
+    answer: "Comprehensible input is language you can mostly understand even when some words or structures are new to you. Stephen Krashen argued that you acquire a language by understanding messages a little above your current level, which he called <strong>i+1</strong>, rather than by memorizing rules."
+  - question: "Is comprehensible input enough to learn a language on its own?"
+    answer: "Most researchers now treat it as necessary but not sufficient. You need large amounts of understandable input to acquire a language, but output practice (speaking and writing) and some attention to form, raised by critics like Swain and Long, speed up accuracy. Reading supplies the input; an app or tutor supplies the rest."
+  - question: "How do I find input at the right level?"
+    answer: "Aim for material where you understand roughly 90 to 98 percent of the words without a dictionary. For reading that usually means graded readers at A1 to B1 and accessible originals at B2 and up. If you stop every sentence to look things up, the text is too hard; if nothing is new, it is too easy."
 ---
 
 # Comprehensible Input Explained: What It Is, Krashen's i+1, and How to Find Yours

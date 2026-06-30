@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "methodology"
 tags: ["case-study", "vocabulary", "spanish", "reading-method", "progress-tracking"]
 locale: "en"
+summary: "You can build a 3,000-word reading vocabulary in about three months by reading roughly 30 minutes a day with parallel text and saving 10 to 15 new words per session to a spaced repetition system. The author went from 47 to 3,047 Spanish words in 90 days, on about 40 minutes daily."
+faq:
+  - question: "How many words can you learn in 3 months through reading?"
+    answer: "In this case study the writer went from 47 to 3,047 saved Spanish words in 90 days, plus an estimated 4,500 passive words recognized in context. The method was about 40 minutes a day: 30 minutes reading with parallel text and 10 minutes reviewing 10 to 15 new words in a spaced repetition system."
+  - question: "How much should you read each day to build vocabulary fast?"
+    answer: "The routine here was 40 minutes daily, split into 30 minutes of reading and 10 minutes reviewing saved words before each session. Consistency mattered more than volume: the writer missed only 3 of 90 days and never two in a row. The 10-minute review is the step most people skip, and it is what turns recognition into lasting memory."
+  - question: "What should a beginner read to learn Spanish through reading?"
+    answer: "Start with the 200 most common words plus simple texts, then move to The Little Prince with parallel text, then short stories and B1 adapted classics, and only later real fiction. Jumping to adult novels at 800 words backfired here. You want roughly one unknown word every 15 to 20, which needs about 3,000 words for most Spanish fiction."
 ---
 
 # How I Learned 3,000 Words in 3 Months Through Reading (Method)

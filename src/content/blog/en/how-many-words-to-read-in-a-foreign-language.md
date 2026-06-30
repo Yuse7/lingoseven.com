@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "methodology"
 tags: ["vocabulary", "word-frequency", "reading-comprehension", "research"]
 locale: "en"
+summary: "To read books in a foreign language you need roughly 3,000 word families for fiction with effort, 5,000 for comfortable reading, and 8,000 to 9,000 for smooth, unassisted reading at 98 percent text coverage. Reading itself is the fastest way to reach those numbers."
+faq:
+  - question: "How many words do I need to read a novel in a foreign language?"
+    answer: "For most contemporary fiction, around 3,000 word families gets you reading for the story rather than the words, with roughly one unknown word per line that rarely blocks comprehension. At 5,000 families reading becomes comfortable, and at 8,000 to 9,000 (98 percent coverage) it feels as smooth as reading in your native language."
+  - question: "What is a word family in language learning?"
+    answer: "A word family is a base word plus all its inflected and closely related forms. Run, runs, running, ran, runner are one family, not five words. This matters because researchers count families, not forms, so <strong>8,000 word families translates to roughly 15,000 to 25,000 individual word forms</strong> in practice."
+  - question: "Do I need fewer words to read Spanish than to read Finnish or Chinese?"
+    answer: "Yes, the threshold shifts by language. English speakers get 2,000 to 3,000 Spanish word families free through cognates, so you actively learn fewer. Chinese reaches high coverage with fewer base units because characters combine compositionally, and agglutinative languages like Finnish are counted in lemmas instead of word families."
 ---
 
 # How Many Words Do You Need to Read Books in a Foreign Language?

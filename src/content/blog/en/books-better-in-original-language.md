@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "book-lists"
 tags: ["original-language", "translation", "literature", "reading-motivation", "world-literature"]
 locale: "en"
+summary: "Some masterpieces lose their defining quality in translation because wordplay, formal and informal address, deliberate ambiguity, sentence rhythm, and culturally loaded word choices rarely survive the crossing. Five books illustrate this: One Hundred Years of Solitude (Spanish), The Little Prince (French), The Metamorphosis (German), No Longer Human (Japanese), and The Master and Margarita (Russian)."
+faq:
+  - question: "Which books are better in the original than in translation?"
+    answer: "This article highlights five: One Hundred Years of Solitude in Spanish, The Little Prince in French, The Metamorphosis in German, No Longer Human in Japanese, and The Master and Margarita in Russian. Each leans on features English cannot reproduce, like formal and informal address, untranslatable wordplay, or deliberate ambiguity, so the original delivers something the translation cannot."
+  - question: "What is the easiest of these classics to read in the original?"
+    answer: "The Little Prince is the most accessible, readable at A2 to B1 in French. Its vocabulary is limited, its grammar is straightforward, and most readers already know the story. Saint-Exupery's plain prose is exactly what makes it lose so much in translation, because every simple word carries weight, but that same simplicity makes it an ideal first book."
+  - question: "Why does so much get lost in translation?"
+    answer: "Translators must resolve what authors left open. Formal and informal address (tu and vous, ty and vy), puns, deliberate ambiguity like Kafka's Ungeziefer, sentence rhythm, and culturally loaded words carry meaning that English's single you, or its nearest equivalent, cannot hold. A translator picks one option where the original offered two, which flattens the effect."
 ---
 
 # 5 Books That Are Better in the Original Than in Translation

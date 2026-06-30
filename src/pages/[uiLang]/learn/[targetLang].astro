@@ -10,6 +10,7 @@ import LibrarySection from '../../../components/LibrarySection.astro';
 import DownloadSection from '../../../components/DownloadSection.astro';
 import LearnBlogSection from '../../../components/LearnBlogSection.astro';
 import LanguageIntro from '../../../components/LanguageIntro.astro';
+import LearnDirectAnswer from '../../../components/LearnDirectAnswer.astro';
 import { languageFacts } from '../../../data/languageFacts';
 import { appRating } from '../../../data/appRating';
 import { getEnabledLanguages, hasAudio } from '../../../data/languages';
@@ -199,6 +200,7 @@ const jsonLd = [
   playListing={getPlayListing(targetCode)}
 >
   <LearnHero targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
+  {isEn && <LearnDirectAnswer targetLangName={targetLangName} />}
   <FeaturesSlider targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} uiLangName={uiLangName} targetLang={targetCode} uiLang={uiCode} translations={translations} />
   {hasAudio(targetCode) && (
     <AudioSection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} targetLang={targetCode} uiLang={uiCode} translations={translations} />

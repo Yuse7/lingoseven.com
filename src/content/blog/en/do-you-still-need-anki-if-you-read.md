@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "tips"
 tags: ["anki", "spaced-repetition", "vocabulary", "tips", "reading", "language-learning"]
 locale: "en"
+summary: "If you already read a lot, you probably need Anki less than you think, but rarely zero. Spaced repetition drives chosen words into durable recall, which reading does least reliably for rare and production vocabulary. Reading supplies the volume, context, and automaticity a deck cannot. Most learners do best with a small deck fed by reading."
+faq:
+  - question: "Should I use Anki or just read to learn vocabulary?"
+    answer: "Do both, weighted toward reading. Reading delivers volume, context, collocation, and the automaticity that only comes from meeting words at speed. Anki adds deliberate, durable recall for the rare or production words reading alone tends to lose. The practical path is read first, then mine only the high-value words into a small deck. <strong>Reading is the engine; the deck patches its gaps.</strong>"
+  - question: "Can you learn vocabulary just from reading without flashcards?"
+    answer: "Partly. Learning words from reading is incidental: it works, but slowly and unevenly. It commonly takes a dozen or more meaningful encounters before a word is reliably yours, so high-frequency words stick fast while rarer ones slip, because you meet them seldom. Pure reading leaves strong passive recognition of common words and weak active command of rarer ones."
+  - question: "How do I avoid Anki burnout?"
+    answer: "Anki burnout usually comes from adding cards faster than you review them. Cap new cards per day, well below what feels generous, and mine sparingly so the deck stays a curated set, not a dumping ground. Keep cards clear and answerable, and treat a backlog after a break as normal. A tiny deck you keep beats a huge one you abandon."
 ---
 
 # Do You Still Need Anki If You Read a Lot?

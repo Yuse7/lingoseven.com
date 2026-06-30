@@ -1,0 +1,50 @@
+---
+// GEO direct-answer block for learn pages. A 40-60 word, definitional answer to
+// "what is Lingo7 / how do I learn {language} by reading", placed right after the
+// hero so AI answer engines can extract it. English-only (rendered only on the
+// English UI), matching the LanguageIntro policy, to avoid mixing English copy
+// into the localized learn-page shells.
+interface Props {
+  targetLangName: string;
+}
+const { targetLangName } = Astro.props;
+---
+
+<section class="direct-answer-learn">
+  <div class="container">
+    <p class="da-text">
+      <strong>Lingo7 is a mobile app for learning {targetLangName} by reading real books.</strong>
+      Every sentence appears as parallel text, so you tap any word for an instant
+      translation, hear native narration, and save new words to review later. It
+      works on iOS and Android, and you can import your own books in {targetLangName}.
+    </p>
+  </div>
+</section>
+
+<style>
+  .direct-answer-learn {
+    padding: 2.5rem 0 0;
+  }
+
+  .da-text {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface, #1e293b);
+    border-left: 3px solid var(--primary, #4ade80);
+    border-radius: 8px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-secondary, #94a3b8);
+  }
+
+  .da-text strong {
+    color: var(--text, #f8fafc);
+  }
+
+  @media (max-width: 768px) {
+    .direct-answer-learn {
+      padding: 1.5rem 0 0;
+    }
+  }
+</style>

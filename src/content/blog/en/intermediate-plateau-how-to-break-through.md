@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "tips"
 tags: ["intermediate", "plateau", "advanced", "reading-strategy", "vocabulary-growth"]
 locale: "en"
+summary: "The intermediate plateau happens because high-frequency words stop carrying you and textbooks run out of new material. Reading native content is the most reliable way through, because it floods you with the low-frequency vocabulary, natural phrasing, and repeated exposure you need. Going from B1 to advanced means roughly tripling your vocabulary to 8,000 to 9,000 word families."
+faq:
+  - question: "Why am I stuck at intermediate in my language?"
+    answer: "Beginner progress feels fast because the first 2,000 words cover about 90 percent of everyday speech. After that the math turns against you: reaching 98 percent comprehension needs 8,000 to 9,000 word families, and each new word appears less often. Textbooks cannot supply that volume, so progress stalls until you switch to reading native content."
+  - question: "How can reading help me break through the intermediate plateau?"
+    answer: "Reading gives you massive comprehensible input at your own pace, exposes you to low-frequency words that conversation avoids, and repeats vocabulary naturally (Nation estimates 12 to 15 encounters are needed to retain a word). It also builds a feel for natural phrasing and a large passive vocabulary, which gradually converts to active use through repeated, meaningful encounters."
+  - question: "How do I know if a book is too easy for breaking the plateau?"
+    answer: "If you understand 98 percent of every page without effort, you are reviewing, not learning. Growth happens where you understand 85 to 95 percent and have to work for the rest. Track unknown words per page each month: at the start of native-novel reading expect 15 to 25, dropping toward fewer than 3 to 5 as you reach advanced proficiency."
 ---
 
 # Stuck at Intermediate? How to Break Through the Language Plateau by Reading

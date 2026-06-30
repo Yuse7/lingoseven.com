@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "tips"
 tags: ["listening", "reading", "comprehension", "audio", "skills-gap"]
 locale: "en"
+summary: "Reading and listening are different skills processed by different neural pathways, so a strong reader can still fail to follow speech. The cause is the phonological gap: you know words visually but not by sound. The fix is connecting existing word knowledge to sound through read-along audio, audio-first practice, shadowing, and speed adaptation, over roughly four focused weeks."
+faq:
+  - question: "Why can I read a language but not understand it when spoken?"
+    answer: "Reading and listening use separate brain networks. Reading lets you control pace and gives visual word boundaries; listening is real-time with words blurred together by connected speech. If you learned vocabulary mainly through text, words live in your visual lexicon but not your sound lexicon. This is called the phonological gap, and it is the default outcome of reading-heavy learning."
+  - question: "How do I improve listening when my reading is already good?"
+    answer: "Treat it as a connection task, not new learning. Start with read-along audio at 0.75x speed for 15 to 20 minutes a day, then move to audio-first practice, shadowing, minimal pairs, and speed adaptation. A four-week plan that gradually removes text support can take a podcast you understood at 30 percent up toward 50 to 60 percent."
+  - question: "Which languages have the worst reading-listening gap?"
+    answer: "French may be the worst, with silent letters, liaisons, and casual reductions (je ne sais pas becomes chepa). English has chaotic spelling (ough has seven pronunciations). Irish orthography barely resembles its sound, Mandarin hides tones from readers, and Arabic omits short vowels. Spanish, Italian, Finnish, and Korean have closer spelling-to-sound matches, so the gap is milder."
 ---
 
 # I Can Read But Can't Understand Speech -- What to Do

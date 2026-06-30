@@ -229,6 +229,8 @@
   "blog_cta_title": "Ready to start reading?",
   "blog_cta_subtitle": "Download Lingo7 and begin your language learning journey today.",
   "blog_related_title": "Related Articles",
+  "blog_quick_answer": "Quick answer",
+  "blog_faq_title": "Frequently asked questions",
   "learn_blog_title": "Tips for Learning {targetLang} Through Reading",
   "learn_blog_subtitle": "Expert guides and practical advice to help you read books in {targetLang}."
 }

@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "methodology"
 tags: ["reading", "methodology", "vocabulary", "extensive-reading", "input-hypothesis"]
 locale: "en"
+summary: "Reading books in your target language is the most effective way to learn it because it delivers large amounts of comprehensible input in real context. You meet words 10 to 15 times across a story, absorb grammar as patterns rather than rules, and stay motivated because you want to know what happens next."
+faq:
+  - question: "Is reading really better than apps like Duolingo for learning a language?"
+    answer: "For overall language growth, yes. A typical Duolingo session gives you 50 to 100 words of input, mostly isolated sentences, while a single book gives you 60,000 to 100,000 words in context. A 2023 study by Loewen and colleagues found app users made grammar and vocabulary gains but showed <strong>no evidence of communicative competence</strong>."
+  - question: "How many times do I need to see a word while reading before I remember it?"
+    answer: "Research by Paul Nation puts it at roughly 10 to 15 encounters with a word in meaningful context before it settles into long-term memory. Extensive reading supplies these naturally, because high-frequency words recur across chapters and books, far more repetition than any flashcard deck offers, and always wrapped in real context."
+  - question: "Can reading alone make me fluent in a foreign language?"
+    answer: "Not on its own. Reading is the most efficient way to build vocabulary and grammatical intuition, but it does not train speaking, pronunciation, or conversational patterns, since books are input rather than output. <strong>The honest approach is to build your foundation through reading, then activate it with real speaking practice.</strong>"
 ---
 
 # Why Reading Books Is the Most Effective Way to Learn a Language

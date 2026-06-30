@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "getting-started"
 tags: ["reading-plan", "daily-routine", "beginner", "schedule", "habit-building"]
 locale: "en"
+summary: "Thirty minutes of reading a day for 90 days is enough to go from zero to finishing your first book in a foreign language. That is 45 hours of pure input, and daily practice beats one long weekly session because spaced repetition aids memory. The plan runs in three phases: foundation, growth, and breakthrough, each one month long."
+faq:
+  - question: "Can I really learn to read a foreign language in 30 minutes a day?"
+    answer: "Yes, for reading. Thirty minutes daily for 90 days is 45 hours of input, and unlike class time it is 100 percent contact with the language. It will not make you fluent (that takes years), but it is enough to finish your first book. Consistency matters more than length, because spaced daily practice retains better than rare long sessions."
+  - question: "What does a 3-month daily reading plan look like?"
+    answer: "Month 1 (foundation) builds the habit and core vocabulary using parallel text and high-frequency words. Month 2 (growth) moves to young adult novels and pushes reading speed. Month 3 (breakthrough) takes on native-level content and alternates supported with unsupported reading. By the end you know roughly 1,500 to 2,000 words and have read two to four books."
+  - question: "What should I do when I miss a day of my reading plan?"
+    answer: "Do not try to make up the time. If you miss a day, just do your normal 30 minutes the next day, never 60. If you miss a week, return to where you left off rather than restarting. Accumulating debt turns each session into an obligation and crushes motivation. Miss a day, forgive yourself, show up tomorrow."
 ---
 
 # 30 Minutes a Day: A Realistic 3-Month Reading Plan for Language Learning

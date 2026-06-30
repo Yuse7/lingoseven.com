@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "difficulty-guides"
 tags: ["romance-languages", "germanic-languages", "comparison", "reading-difficulty", "language-families"]
 locale: "en"
+summary: "For reading, Romance languages (Spanish, French, Italian, Portuguese, Romanian) are usually the easier choice for English speakers because their Latin-derived vocabulary matches English's formal and academic words. Germanic languages win for simple, everyday text, and Dutch stays readable across registers thanks to its mixed vocabulary."
+faq:
+  - question: "Are Romance or Germanic languages easier to read for English speakers?"
+    answer: "It depends on the text. For formal, academic, and news writing, Romance languages win clearly because English borrowed that vocabulary from Latin and French. For simple, everyday, and children's text, Germanic languages have the edge through shared core words like house, water, and good. Dutch is the exception that stays readable at every register."
+  - question: "Which language gets English speakers to their first book fastest?"
+    answer: "By cognate density, spelling transparency, and grammar, the fastest are Spanish and Italian, then Dutch, which mixes Germanic and Romance vocabulary with simple grammar. Norwegian and Swedish follow, then Portuguese, then French (slowed by silent letters), then German, where cases and verb-final clauses need the most adjustment."
+  - question: "Why is Dutch considered the easiest language for English speakers to read?"
+    answer: "Dutch combines two advantages most languages have only one of. It shares Germanic core vocabulary with English (water is water, boek is book) and also borrowed many French and Latin words, so cognate density rivals Romance languages. Its grammar is simpler than German, with no case system and two genders, making basic texts readable with minimal study."
 ---
 
 # Romance vs Germanic Languages: Which Are Easier to Read?

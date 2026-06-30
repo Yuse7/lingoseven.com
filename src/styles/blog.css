@@ -217,6 +217,60 @@
   line-height: 1.6;
 }
 
+/* Direct-answer callout (GEO): 40-60 word answer above the article body */
+.direct-answer {
+  margin: 0 0 40px;
+  padding: 20px 24px;
+  background: var(--background-alt);
+  border-left: 3px solid var(--primary);
+  border-radius: 8px;
+}
+
+.direct-answer-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.direct-answer p {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Blog FAQ (GEO): visible accordion + FAQPage JSON-LD. Reuses the global
+   .faq-item / .faq-question / .faq-answer hooks but without full-section chrome. */
+.blog-faq {
+  margin: 56px 0 8px;
+}
+
+.blog-faq-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* Override the global 200px cap so longer answers are not clipped. */
+.blog-faq .faq-item.active .faq-answer {
+  max-height: 1200px;
+}
+
+.blog-faq .faq-answer p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.blog-faq .faq-answer a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* Prose styles for rendered markdown */
 .prose h2 {
   font-size: 1.5rem;

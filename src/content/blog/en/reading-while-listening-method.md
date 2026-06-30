@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "methodology"
 tags: ["reading-while-listening", "audiobooks", "listening", "methodology", "listening-reading", "reading-strategies", "input"]
 locale: "en"
+summary: "Reading while listening means following a written text with your eyes while you hear the audiobook or narration at the same time. It links spelling to sound, builds reading speed, and trains your ear, which helps close the common gap where learners can read a language but cannot understand it spoken. It suits all levels."
+faq:
+  - question: "What is the reading while listening method?"
+    answer: "It is reading a text and listening to its audio at the same time, so your eyes and ears process the same words together. This pairs spelling with pronunciation, pulls your reading speed up to the narrator's pace, and trains listening comprehension. <strong>It is one of the most efficient ways to fix the read-but-cannot-hear gap.</strong>"
+  - question: "Does reading while listening actually work according to research?"
+    answer: "Yes. Webb and Chang's 2015 study found high vocabulary gains, on the order of 44 percent immediately after a graded-reader program, with much retained months later. Chang's audiobook-assisted reading research reported the reading-while-listening group improving dramatically on dictation, in some measures more than doubling their scores, which directly measures the ability to segment connected speech that silent reading never touches."
+  - question: "How should I use reading while listening at my level?"
+    answer: "At A1 to A2, pick easy material and slow the audio to about 0.75x, doing several passes. At B1 to B2, use native-paced audio: read a chapter silently, then read it again while listening to turn known-on-paper words into known-in-sound ones. At C1 to C2, use it for hard or fast material and try listening while reading the translation."
 ---
 
 # Reading While Listening: The Listening-Reading (L-R) Method for Language Learning

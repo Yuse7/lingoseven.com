@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "difficulty-guides"
 tags: ["language-choice", "difficulty", "FSI", "comparison", "beginner"]
 locale: "en"
+summary: "Which language you should learn depends most on motivation, but for English speakers Spanish is the easiest major language to read, with transparent spelling, dense cognates, and a huge content library. FSI ranks languages from 600 hours (Spanish, French) to 2,200 (Japanese, Chinese, Arabic, Korean)."
+faq:
+  - question: "What is the easiest language to learn for English speakers?"
+    answer: "By FSI data, the Category I languages take about 600 to 750 hours: Spanish, French, Italian, Portuguese, Dutch, Swedish, Norwegian, Danish, and Romanian. For reading specifically, <strong>Spanish is the easiest major language</strong> thanks to its transparent spelling and heavy cognate overlap, with Dutch the closest Germanic language to English."
+  - question: "How long does it take to learn Japanese compared to Spanish?"
+    answer: "The FSI estimates roughly 600 to 750 hours for Spanish and 2,200 hours for Japanese, a ratio near 3.5 to 1. Spread over daily practice that is advanced reading in about two years versus five or six. Both are achievable; the bigger risk to either is boredom, not difficulty."
+  - question: "Is a language with a different alphabet much harder to read?"
+    answer: "It adds an upfront cost, not a wall. Cyrillic, Greek, Hangul, and Devanagari map fairly regularly to sounds and take days to a few weeks to learn. Chinese characters and Japanese kanji are the real exception, a multi-year investment, since you cannot sound out an unfamiliar character."
 ---
 
 # Which Language Should You Learn? A Difficulty Guide for English Speakers

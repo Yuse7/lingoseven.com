@@ -30,6 +30,8 @@ interface Props {
   locale: string;
   uiLang: string;
   slug: string;
+  summary?: string;
+  faq?: Array<{ question: string; answer: string }>;
   translations: Record<string, string>;
   uiLanguages: Array<{ code: string; nativeName: string; flag: string; url: string }>;
   hreflangAlternates: Array<{ lang: string; url: string }>;
@@ -52,11 +54,20 @@ const {
   locale,
   uiLang,
   slug,
+  summary,
+  faq,
   translations,
   uiLanguages,
   hreflangAlternates,
   relatedPosts,
 } = Astro.props;
+
+// Direct-answer + FAQ only render on the English (canonical) version of a post,
+// since post copy is English-only. Avoids mixing English into localized shells.
+const showEnrichment = uiLang === 'en';
+const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '');
+const faqLabel = translations['blog_faq_title'] ?? 'Frequently asked questions';
+const summaryLabel = translations['blog_quick_answer'] ?? 'Quick answer';
 
 const formattedDate = pubDate.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -137,6 +148,18 @@ const jsonLd = [
   },
 ];
 
+if (showEnrichment && faq && faq.length > 0) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: stripHtml(f.answer) },
+    })),
+  });
+}
+
 const ogArticle = {
   publishedTime: pubDate.toISOString(),
   ...(updatedDate && { modifiedTime: updatedDate.toISOString() }),
@@ -182,9 +205,35 @@ const ogArticle = {
       <p class="article-description">{description}</p>
     </header>
 
+    {showEnrichment && summary && (
+      <aside class="direct-answer">
+        <span class="direct-answer-label">{summaryLabel}</span>
+        <p>{summary}</p>
+      </aside>
+    )}
+
     <article class="prose">
       <slot />
     </article>
+
+    {showEnrichment && faq && faq.length > 0 && (
+      <section class="blog-faq">
+        <h2 class="blog-faq-title">{faqLabel}</h2>
+        <div class="faq-list">
+          {faq.map((f) => (
+            <div class="faq-item">
+              <button class="faq-question" type="button">
+                <span>{f.question}</span>
+                <span class="faq-icon">+</span>
+              </button>
+              <div class="faq-answer">
+                <p set:html={f.answer}></p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
 
     <RelatedPosts
       posts={relatedPosts}

@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "tips"
 tags: ["reading", "tolerance-for-ambiguity", "guessing-from-context", "dictionary", "fluency", "extensive-reading", "vocabulary"]
 locale: "en"
+summary: "Reading without a dictionary means letting most unknown words go instead of stopping to look up each one. Constant lookups empty your working memory and kill reading speed. You guess from context, mark words to check in a later pass, and stop only when a word genuinely blocks the main idea."
+faq:
+  - question: "How do I read a foreign language book without looking up every word?"
+    answer: "Read in larger chunks and finish each sentence before deciding what to do about an unknown word; the rest of the sentence often resolves it. Mark words you skip with a light underline instead of stopping, then do a separate second pass for the few that matter. Apply one test: is this word blocking the main idea?"
+  - question: "When should I actually look up a word?"
+    answer: "Look it up when it genuinely blocks the main idea, when the same word keeps recurring and your confusion compounds, or when it appears in a plot-critical sentence. A word you have now seen three times is worth checking, because resolving it pays off repeatedly. A word that merely adds colour you can safely let go."
+  - question: "How much of a text do I need to understand to read it comfortably?"
+    answer: "Research associated with Paul Nation puts the comfortable, unassisted threshold around 98 percent of the running words, about one unknown word in fifty, with 95 percent as a rough minimum for basic comprehension. If you are looking up a word every other sentence, the text is below that level and you need an easier book."
 ---
 
 # How to Read in a Foreign Language Without a Dictionary: Building Tolerance for Ambiguity

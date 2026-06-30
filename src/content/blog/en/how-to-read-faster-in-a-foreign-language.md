@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "tips"
 tags: ["reading-speed", "fluency", "automaticity", "extensive-reading", "comprehension", "tips"]
 locale: "en"
+summary: "Reading speed in a foreign language is a byproduct of comprehension and volume, not a skill you train directly. You read faster by building automaticity: meeting common words so often that recognition becomes effortless. Read a lot at around 98 percent known words, use audio to pace your eyes, and tolerate small unknowns."
+faq:
+  - question: "Why is reading so slow in a foreign language?"
+    answer: "Slow reading is not about how fast your eyes move. It comes from effort: word recognition is still partly conscious (low automaticity), every dictionary lookup breaks the sentence, a slow inner voice drags you down, and a foreign sentence overloads short-term memory. <strong>Each word and clause demands effort, and that effort, not eye speed, is the real bottleneck.</strong>"
+  - question: "Does speed reading work for a foreign language?"
+    answer: "No. Classic speed-reading tricks (suppressing your inner voice, forcing your eyes faster, training wider fixations) trade comprehension for speed even in your native language. In a foreign language they are weaker still, because your bottleneck is word recognition and comprehension, not eye movement. You cannot speed-read past vocabulary you do not yet know automatically."
+  - question: "How much faster will I read in my second language over time?"
+    answer: "Gains are real and measurable. In one study, learners raised their reading speed about 31 percent over roughly 30 weeks of extensive reading. Early readers often sit below 100 words per minute, and even fluent bilinguals read their second language around 30 percent slower than their first. Your target is steady improvement, not native speed."
 ---
 
 # How to Read Faster in a Foreign Language

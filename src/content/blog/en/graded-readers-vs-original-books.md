@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "methodology"
 tags: ["graded-readers", "authentic-texts", "reading-material", "methodology", "comprehensible-input", "reading-strategies"]
 locale: "en"
+summary: "Graded readers are books rewritten with a controlled vocabulary for a specific level, while original books use the full unsimplified language. Graded readers let you read smoothly and build confidence early; originals give you authentic language but demand a bigger vocabulary. Most learners use graded readers through B1, then bridge to originals with parallel text."
+faq:
+  - question: "Should I read graded readers or original books?"
+    answer: "Use graded readers while you are below about B1, then start bridging to originals. Graded readers control the vocabulary to your level so you can read whole books smoothly, which builds fluency and confidence. Originals expose you to authentic language but require knowing far more words. <strong>Parallel text is a useful bridge between the two.</strong>"
+  - question: "What level do you need to read original books?"
+    answer: "You need to know around 98 percent of the words in a text to read it comfortably, which usually means B2 or above for authentic novels. Below roughly B2, an original book often sits at 80 to 90 percent coverage, far under that threshold, which is why it feels impossible. Parallel text raises your usable coverage so you can start sooner."
+  - question: "Are graded readers good for language learning?"
+    answer: "Yes, especially early on. Graded readers keep vocabulary at your level, so you read whole books smoothly, build volume, and gain confidence. Their limits are flat prose, thin supply outside major languages, and a ceiling around B2 (about 2,500 headwords). They are a bridge, not a destination, so move to originals once your vocabulary can reach them."
 ---
 
 # Graded Readers vs Original Books: Which Should You Read?

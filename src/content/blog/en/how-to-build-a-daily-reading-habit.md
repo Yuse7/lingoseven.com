@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "tips"
 tags: ["reading-habit", "consistency", "motivation", "tips", "habit-stacking", "language-learning", "daily-routine"]
 locale: "en"
+summary: "A daily reading habit is built on a system, not motivation or discipline. Attach reading to an existing daily cue (habit stacking), shrink the minimum to one page (the two-minute rule), keep the book one tap away, and read easy, enjoyable material. When you miss a day, the only rule that matters is never miss twice."
+faq:
+  - question: "How do I read in a foreign language every day?"
+    answer: "Stop relying on motivation and build a loop. Attach reading to a habit you already have (after my morning coffee, I read one page), make the daily minimum tiny so you cannot fail it, and keep the book on your phone, one tap away. Read material easy and fun enough that the story pulls you forward. <strong>Consistency beats intensity.</strong>"
+  - question: "How long does it take to form a reading habit?"
+    answer: "Longer than the popular myth. A University College London study (Lally and colleagues, 2010) found everyday habits took a median of about 66 days to feel automatic, with a range from 18 to 254 days depending on the person and the behavior. The 21-days claim has no real basis, so plan for a couple of months of patient, low-stakes showing up."
+  - question: "What should I do if I miss a day of reading?"
+    answer: "Get back on the next day. The rule is never miss twice: missing once is a harmless blip, but missing twice starts a new pattern of not reading. Do not try to make up lost time by reading double, which makes reading feel like punishment. Just open the book again the next morning, even for one sentence, and the habit survives."
 ---
 
 # How to Build a Daily Reading Habit in a Foreign Language

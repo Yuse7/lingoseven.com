@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "getting-started"
 tags: ["reading", "first-book", "beginner", "book-selection", "motivation"]
 locale: "en"
+summary: "Your first book in a foreign language should be one you already know well, written simply, and short enough to finish. Children's classics, graded readers, and books you have read in your native language all work because the familiar plot carries you past the unfamiliar words. Finishing one easy book matters more than choosing an impressive one."
+faq:
+  - question: "What book should I read first in a new language?"
+    answer: "Pick something short, simple, and familiar. A graded reader at your level, a children's classic, or a book you have already read in your own language all work well, because a known plot lets you guess unknown words instead of looking up every one. <strong>Finishing an easy book beats abandoning a hard one.</strong>"
+  - question: "How many unknown words per page is too many for a first book?"
+    answer: "Use the five-page test. Open a page in the middle and count unknown words. Fewer than 3 per page means the book is too easy and you will not learn much. More than 10 to 12 per page means it is too hard. The sweet spot is 5 to 8 unknown words per page, where you can guess meaning from context."
+  - question: "Should I look up every word I do not know while reading?"
+    answer: "No. Looking up every word destroys reading flow and teaches you less. If you understand roughly 95 percent of a page, infer the rest from context. The practical rule: skip an unknown word the first and second time you see it. If it appears a third time and the meaning is still unclear, then look it up."
 ---
 
 # Your First Book in a Foreign Language: How to Choose and Not Give Up

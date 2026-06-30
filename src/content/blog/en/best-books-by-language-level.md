@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "book-lists"
 tags: ["book-recommendations", "CEFR-levels", "reading-list", "beginner", "intermediate", "advanced"]
 locale: "en"
+summary: "The best book to read depends far more on your CEFR level than on which language you are learning. At A1 to A2 use picture books and fairy tales, at B1 try The Alchemist and young adult novels, at B2 read clear native fiction like 1984 and Harry Potter, and at C1 move to literature and journalism. Most of these titles exist in dozens of languages."
+faq:
+  - question: "How do I choose a book at my language level?"
+    answer: "Match the book to your CEFR level, not the language. A1 to A2 readers want very short, repetitive, familiar texts like picture books and fairy tales. B1 readers want longer plots in simple modern prose. B2 readers can handle clear native fiction. C1 readers move to literature and journalism. Use the 90 percent rule: if you understand 90 percent of a page, it fits your level."
+  - question: "What are the best books for beginners learning a language?"
+    answer: "At A1 to A2, children's picture books like The Very Hungry Caterpillar (about 200 unique words, 60-plus languages) and Goodnight Moon work well, along with classic Grimm and Andersen fairy tales whose plots you already know. The Little Prince, translated into over 300 languages with roughly 1,500 unique words, is widely considered the best bridge to your first real book."
+  - question: "What books work well at B2 in a foreign language?"
+    answer: "Choose native authors who write plainly. 1984 by Orwell and The Old Man and the Sea by Hemingway use short, concrete sentences. Sapiens by Harari explains every term it introduces, teaching vocabulary as you read. The first three Harry Potter books are accessible at B2. Genre fiction in a genre you already love adds predictability that compensates for vocabulary gaps."
 ---
 
 # Best Books for Every Language Level: From A1 Beginner to C1 Advanced

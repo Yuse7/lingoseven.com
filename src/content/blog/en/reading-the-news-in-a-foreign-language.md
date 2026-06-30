@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "tips"
 tags: ["news", "reading-material", "authentic-texts", "tips", "easy-news", "intermediate", "reading-strategies"]
 locale: "en"
+summary: "Authentic news is excellent foreign-language reading material (free, endless, current, and full of high-frequency civic vocabulary) but it is a B1-and-up activity, most comfortable from B2. Below that, read news rewritten for learners. Read stories you already know first, treat headlines as the hard part, and never make news your only reading."
+faq:
+  - question: "What level do you need to read the news in a foreign language?"
+    answer: "Authentic, unmodified news is a B1-and-up activity and most comfortable from B2, because the register is formal and the topic range is wide. At A1 to A2, start with news written for learners instead. At B1 you can dip into real articles on familiar topics. Reading real news too early is a fast way to feel bad at the language."
+  - question: "What are good easy-news sources for language learners?"
+    answer: "For major languages there are several. Spanish has News in Slow Spanish and Practica Español (sorted A1 to C2). French has RFI's Journal en français facile. German has Nachrichtenleicht. Italian has News in Slow Italian. Japanese has NHK News Web Easy. Easy-news options are plentiful for big languages and scarce or nonexistent for smaller ones."
+  - question: "Can I learn a language by only reading the news?"
+    answer: "No. News is narrow: it covers politics, economics, crime, sport, weather, and disaster in a formal register, and almost nothing about emotions, relationships, humor, dialogue, or everyday life. A news-only diet leaves you able to discuss interest rates but unable to tell a story about your weekend. Make news one ingredient and read fiction and conversation-rich books for the rest."
 ---
 
 # Reading the News in a Foreign Language: A Practical Guide

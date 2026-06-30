@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "book-lists"
 tags: ["harry-potter", "reading-guide", "book-analysis", "vocabulary", "difficulty"]
 locale: "en"
+summary: "Harry Potter is one of the best book series for language learning because you usually already know the plot, the Hogwarts vocabulary repeats across all seven books, and the difficulty grows gradually from B1 to C1. It exists in 85 languages with audiobooks in dozens, though roughly 25 to 30 percent of its distinctive vocabulary is fantasy-specific."
+faq:
+  - question: "Is Harry Potter good for learning a language?"
+    answer: "Yes, it is the most frequently recommended series for learners. You usually already know the plot, which frees attention for the language, the Hogwarts vocabulary repeats across all seven books, and difficulty rises gradually from B1 to C1. It exists in 85 languages with audiobooks in dozens. <strong>Just skip the invented words like spells and creature names.</strong>"
+  - question: "What level do you need to read Harry Potter in a foreign language?"
+    answer: "Book one (Philosopher's Stone) is realistic for B1 to B2 learners who know roughly 3,000 to 4,000 word families, especially with some support. The series climbs steadily: Prisoner of Azkaban is solid B2, and the later books from Order of the Phoenix onward reach B2 to C1. Below A2, start with graded readers and come back at B1."
+  - question: "How many languages is Harry Potter translated into?"
+    answer: "Harry Potter is translated into 85 languages, far more than the 15 to 25 typical of popular novels, with audiobooks in German, French, Spanish, Italian, Dutch, Japanese, Korean, and others. For learners of less commonly taught languages, it is sometimes the only widely known novel available in their target language, which is part of why it gets recommended so often."
 ---
 
 # Harry Potter for Language Learning: A Detailed Breakdown

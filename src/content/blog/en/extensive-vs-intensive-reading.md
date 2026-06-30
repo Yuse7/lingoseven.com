@@ -6,6 +6,14 @@ author: "Lingo7 Team"
 category: "methodology"
 tags: ["extensive-reading", "intensive-reading", "methodology", "comprehensible-input", "reading-strategies", "graded-readers"]
 locale: "en"
+summary: "Extensive reading means reading large amounts of easy text fast for general meaning, building speed, automaticity, and vocabulary breadth. Intensive reading means studying a short, hard passage closely to crack grammar and precise meaning. They are different tools, not rivals; most successful learners read roughly 80 percent extensively and 20 percent intensively, shifting toward volume as they advance."
+faq:
+  - question: "What is the difference between extensive and intensive reading?"
+    answer: "Extensive reading is wide and shallow: large volumes of easy text read fast for meaning and pleasure, letting unknown words go. Intensive reading is narrow and deep: a short, difficult passage studied closely, parsing grammar and looking up every word. One builds reading speed and vocabulary breadth; the other builds depth, grammar, and precision."
+  - question: "What is the 98 percent rule in reading?"
+    answer: "Research by Hu and Nation found learners generally need to know around 98 percent of the words in a text for full, unassisted comprehension, with 95 percent as a rough minimum. That works out to one unknown word in fifty. A text at 98 percent coverage suits extensive reading; one well below 95 percent suits short intensive study."
+  - question: "Should I read extensively or intensively to learn a language?"
+    answer: "Both, on a deliberate schedule. Extensive reading should carry most of your volume at every level, with intensive study as the smaller, sharper supplement. A useful default is about 80 percent extensive and 20 percent intensive, leaning more intensive as a beginner and more extensive as you advance. The mistake is doing only one mode forever."
 ---
 
 # Extensive vs Intensive Reading: How to Use Both to Learn a Language Faster
