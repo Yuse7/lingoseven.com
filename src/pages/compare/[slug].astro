@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaButtons from '../../components/CtaButtons.astro';
+import { LINGO7, getApp, COMPARISONS, featLabel, AS_OF, type ReadingApp } from '../../data/readingApps';
+
+export function getStaticPaths() {
+  return COMPARISONS.map((c) => ({ params: { slug: c.slug }, props: { competitorSlug: c.competitorSlug } }));
+}
+
+const { competitorSlug } = Astro.props;
+const them = getApp(competitorSlug)!;
+const us = LINGO7;
+const vs = them.vs!;
+
+// Feature rows for the two-column table.
+const ROWS: { label: string; key: keyof ReadingApp['feats'] }[] = [
+  { label: 'Read your own books (upload)', key: 'importBooks' },
+  { label: 'Parallel side-by-side translation', key: 'parallel' },
+  { label: 'Tap-a-word dictionary', key: 'tapWord' },
+  { label: 'Sentence translation', key: 'sentence' },
+  { label: 'Audio narration synced to text', key: 'audio' },
+  { label: 'Vocabulary trainer (spaced repetition)', key: 'srs' },
+  { label: 'Speaking practice (AI conversation)', key: 'speaking' },
+  { label: 'Offline reading', key: 'offline' },
+];
+
+const canonicalUrl = `https://lingoseven.com/compare/lingo7-vs-${them.slug}/`;
+const title = `Lingo7 vs ${them.name}: Which Is Better for Reading Books? (2026) | Lingo7`;
+const description =
+  `Lingo7 vs ${them.name} compared for reading books in a foreign language: parallel translation, audio, imports, vocabulary tools, languages and price. Honest 2026 comparison.`;
+
+const faq = [
+  {
+    question: `Is Lingo7 a good ${them.name} alternative?`,
+    answer: vs.verdict,
+  },
+  {
+    question: `Does ${them.name} let you read your own books?`,
+    answer:
+      them.feats.importBooks === true
+        ? `Yes, ${them.name} lets you import your own files and read them. ${vs.theyDoWell}`
+        : `No. ${them.name} gives you a fixed catalog rather than letting you import your own EPUB or PDF. Lingo7 does let you upload your own books (EPUB, PDF, FB2, TXT, DOCX, HTML) and read them with a sentence-by-sentence parallel translation and audio.`,
+  },
+  {
+    question: `${them.name} vs Lingo7: which has more languages?`,
+    answer:
+      `Lingo7 supports ${us.languages.length} languages for reading. ${them.name} supports ${them.languageNote}. ` +
+      `If your target language is outside the major European set, check both before you commit, since coverage is where these apps differ most.`,
+  },
+  {
+    question: `How much do Lingo7 and ${them.name} cost?`,
+    answer:
+      `Lingo7 is free to start, with an optional premium subscription. ${them.name} offers ${them.pricing}. ` +
+      `Both let you try reading before you pay. Prices are current as of ${AS_OF}; check each store listing for your region.`,
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lingoseven.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Compare', item: 'https://lingoseven.com/compare/' },
+      { '@type': 'ListItem', position: 3, name: `Lingo7 vs ${them.name}`, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+
+const otherCompares = COMPARISONS.filter((c) => c.competitorSlug !== them.slug).map((c) => {
+  const a = getApp(c.competitorSlug)!;
+  return { slug: c.slug, name: a.name };
+});
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="cmp">
+    <div class="container">
+      <header class="cmp-head">
+        <p class="cmp-eyebrow"><a href="/compare/">Compare reading apps</a></p>
+        <h1>Lingo7 vs {them.name}: which is better for reading books?</h1>
+      </header>
+
+      <p class="cmp-answer">{vs.verdict}</p>
+
+      <div class="cmp-table-wrap">
+        <div class="cmp-table-scroll">
+          <table class="cmp-table">
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col" class="cmp-col-us">Lingo7</th>
+                <th scope="col">{them.name}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                ROWS.map((r) => (
+                  <tr>
+                    <th scope="row">{r.label}</th>
+                    <td class="cmp-col-us" data-v={featLabel(us.feats[r.key])}>{featLabel(us.feats[r.key])}</td>
+                    <td data-v={featLabel(them.feats[r.key])}>{featLabel(them.feats[r.key])}</td>
+                  </tr>
+                ))
+              }
+              <tr>
+                <th scope="row">Languages</th>
+                <td class="cmp-col-us">{us.languageNote}</td>
+                <td>{them.languageNote}</td>
+              </tr>
+              <tr>
+                <th scope="row">Platforms</th>
+                <td class="cmp-col-us">{us.platforms.join(', ')}</td>
+                <td>{them.platforms.join(', ')}</td>
+              </tr>
+              <tr>
+                <th scope="row">Price</th>
+                <td class="cmp-col-us">{us.priceShort}</td>
+                <td>{them.priceShort}</td>
+              </tr>
+              <tr>
+                <th scope="row">Free tier</th>
+                <td class="cmp-col-us">{us.freeTier}</td>
+                <td>{them.freeTier}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cmp-table-note">As of {AS_OF}. Verify current details on each app's store listing.</p>
+      </div>
+
+      <div class="cmp-choose">
+        <div class="cmp-choose-card cmp-choose-us">
+          <h2>Choose Lingo7 if</h2>
+          <ul>
+            {vs.chooseUsIf.map((b) => <li>{b}</li>)}
+          </ul>
+        </div>
+        <div class="cmp-choose-card">
+          <h2>Choose {them.name} if</h2>
+          <ul>
+            {vs.chooseThemIf.map((b) => <li>{b}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div class="cmp-prose">
+        <h2>What {them.name} does well</h2>
+        <p>{vs.theyDoWell}</p>
+        <h2>How Lingo7 is different</h2>
+        <p>{vs.weDiffer}</p>
+      </div>
+
+      <div class="cmp-cta">
+        <h2>Read any book, in parallel, with audio</h2>
+        <p>
+          Lingo7 lets you read real books, ours or your own upload, with the original and a
+          sentence-by-sentence translation side by side, native-narrated audio, and a tap to send new
+          words to a spaced-repetition trainer. Free to start, in {us.languages.length} languages.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="cmp-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+
+      <div class="cmp-links">
+        <h2>More reading-app comparisons</h2>
+        <div class="cmp-links-grid">
+          {
+            otherCompares.map((c) => (
+              <a class="cmp-link" href={`/compare/${c.slug}/`}>Lingo7 vs {c.name} &rarr;</a>
+            ))
+          }
+          <a class="cmp-link" href="/best-apps-to-read-books-in/">Best apps to read books by language &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cmp { padding: 3rem 0 4rem; }
+  .cmp-head { max-width: 820px; margin: 0 auto 1.2rem; text-align: center; }
+  .cmp-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem; font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .cmp-eyebrow a { color: var(--primary); text-decoration: none; }
+  .cmp-eyebrow a:hover { text-decoration: underline; }
+  .cmp-head h1 { font-size: clamp(1.6rem, 4vw, 2.5rem); line-height: 1.15; margin: 0; }
+
+  .cmp-answer {
+    max-width: 760px; margin: 0 auto; text-align: left;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.2);
+    border-radius: 16px; padding: 1.3rem 1.5rem; color: var(--text, #e8eef5); font-size: 1.05rem; line-height: 1.65;
+  }
+
+  .cmp-table-wrap { max-width: 760px; margin: 2.5rem auto 0; }
+  .cmp-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cmp-table { width: 100%; border-collapse: collapse; min-width: 480px; font-size: 0.92rem; }
+  .cmp-table th, .cmp-table td { padding: 0.7rem 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-align: center; }
+  .cmp-table thead th { color: var(--text-muted, #9fb0c3); font-weight: 700; border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
+  .cmp-table thead th.cmp-col-us { color: var(--primary); }
+  .cmp-table tbody th[scope='row'] { text-align: left; color: var(--text, #e8eef5); font-weight: 600; }
+  .cmp-table td { color: var(--text-muted, #9fb0c3); }
+  .cmp-table td.cmp-col-us { background: rgba(74, 222, 128, 0.07); color: var(--text, #e8eef5); }
+  .cmp-table td.cmp-col-us[data-v='Yes'] { color: var(--primary); font-weight: 700; }
+  .cmp-table-note { color: var(--text-muted, #9fb0c3); font-size: 0.82rem; text-align: center; margin: 0.8rem 0 0; }
+
+  .cmp-choose { max-width: 820px; margin: 3rem auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .cmp-choose-card { border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 1.4rem 1.5rem; background: rgba(255, 255, 255, 0.03); }
+  .cmp-choose-card.cmp-choose-us { border-color: rgba(74, 222, 128, 0.3); background: rgba(74, 222, 128, 0.06); }
+  .cmp-choose-card h2 { font-size: 1.2rem; margin: 0 0 0.8rem; }
+  .cmp-choose-us h2 { color: var(--primary); }
+  .cmp-choose-card ul { margin: 0; padding-left: 1.1rem; }
+  .cmp-choose-card li { color: var(--text-muted, #9fb0c3); line-height: 1.55; margin-bottom: 0.4rem; }
+
+  .cmp-prose { max-width: 760px; margin: 3rem auto 0; }
+  .cmp-prose h2 { font-size: 1.4rem; margin: 1.6rem 0 0.8rem; }
+  .cmp-prose h2:first-child { margin-top: 0; }
+  .cmp-prose p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0; }
+
+  .cmp-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .cmp-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .cmp-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .cmp-cta :global(.cta-buttons) { justify-content: center; }
+
+  .cmp-faq { max-width: 760px; margin: 3rem auto 0; }
+  .cmp-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .cmp-faq details { border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 0.7rem; }
+  .cmp-faq summary { cursor: pointer; font-weight: 600; }
+  .cmp-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  .cmp-links { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+  .cmp-links h2 { font-size: 1.3rem; margin: 0 0 1rem; }
+  .cmp-links-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; }
+  .cmp-link {
+    color: var(--primary); font-weight: 600; text-decoration: none; font-size: 0.95rem;
+    border: 1px solid rgba(74, 222, 128, 0.3); border-radius: 999px; padding: 0.5rem 1rem; background: rgba(74, 222, 128, 0.06);
+  }
+  .cmp-link:hover { background: rgba(74, 222, 128, 0.12); }
+
+  @media (max-width: 600px) {
+    .cmp-choose { grid-template-columns: 1fr; }
+  }
+</style>
