@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
 import { languageFacts } from '../../../data/languageFacts';
 import { getLanguageByCode } from '../../../data/languages';
@@ -96,6 +97,11 @@ const jsonLd = [
           day, then shows when you'll reach each level, from tourist basics to professional fluency.
         </p>
       </header>
+
+      <ToolDirectAnswer
+        lead={`Reaching professional working proficiency in a new language takes roughly 600 to 2,200 hours of study, depending on how far it sits from your native language, according to the U.S. Foreign Service Institute.`}
+        body={`FSI rates Spanish and French near 600 to 750 hours and Arabic, Chinese, Japanese, and Korean near 2,200. This free calculator maps those hours to CEFR milestones for ${langs.length} languages.`}
+      />
 
       <div class="lang-grid">
         {

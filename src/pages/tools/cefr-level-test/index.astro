@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
 import { cefrTest, CEFR_LANG_CODES } from '../../../data/cefrTest';
 import { getLanguageByCode } from '../../../data/languages';
@@ -85,6 +86,11 @@ const jsonLd = [
           your level starts to thin out, and points you at the fastest way up: reading real books.
         </p>
       </header>
+
+      <ToolDirectAnswer
+        lead={`The CEFR is the standard six-level scale for language ability, running A1, A2, B1, B2, C1, and C2 from beginner to mastery.`}
+        body={`This free test estimates your level in ${langs.length} languages from 30 grammar and vocabulary questions, with per-level subscores and a reading recommendation.`}
+      />
 
       <div class="lang-grid">
         {

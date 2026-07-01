@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
 import { VOCAB_LANG_CODES } from '../../../data/vocabWords';
 import { getLanguageByCode } from '../../../data/languages';
@@ -85,6 +86,11 @@ const jsonLd = [
           corrects for guessing. Pick a language to begin.
         </p>
       </header>
+
+      <ToolDirectAnswer
+        lead={`Vocabulary size is the number of word families you recognize: a B1 speaker knows roughly 2,000 to 3,000, a B2 reader 8,000 to 9,000, and an educated native speaker 15,000 to 20,000.`}
+        body={`This free test estimates yours in ${langs.length} languages in about a minute, sampling words across six frequency bands and correcting for guessing with hidden pseudowords.`}
+      />
 
       <div class="lang-grid">
         {langs.map((l) => (

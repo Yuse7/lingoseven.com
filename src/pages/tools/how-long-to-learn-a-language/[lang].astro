@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
 import { languageFacts } from '../../../data/languageFacts';
 import { languages, getLanguageByCode } from '../../../data/languages';
@@ -191,6 +192,11 @@ const clientData = { targetCode, fsiHours: lf.fsiHours, targetProfile, milestone
           <strong>{lf.fsiHours} hours</strong> to professional proficiency (Category {lf.fsiCategory}).
         </p>
       </header>
+
+      <ToolDirectAnswer
+        lead={`${name} takes about ${lf.fsiHours} hours of study to reach professional working proficiency (about CEFR C1) for an English speaker, according to the U.S. Foreign Service Institute.`}
+        body={`That places it in FSI Category ${lf.fsiCategory}; conversational B1 arrives far sooner. This calculator turns those hours into A1 to C1 milestones and adjusts for your native language and daily study time.`}
+      />
 
       <div class="hltl-controls">
         <label class="hltl-field">

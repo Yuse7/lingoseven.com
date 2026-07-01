@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
 import { vocabWords, VOCAB_LANG_CODES } from '../../../data/vocabWords';
 import { vocabFacts } from '../../../data/vocabFacts';
@@ -128,6 +129,11 @@ const jsonLd = [
           guess.
         </p>
       </header>
+
+      <ToolDirectAnswer
+        lead={`An educated native ${name} speaker knows roughly 15,000 to 20,000 word families, a B2 reader about 8,000 to 9,000, and a B1 speaker around 2,000 to 3,000.`}
+        body={`This free test estimates your own ${name} vocabulary in about a minute, from a yes/no check across six frequency bands, with hidden pseudowords to correct for guessing.`}
+      />
 
       <div class="vocab-grid" id="vocab-grid">
         {items.map((it) => (

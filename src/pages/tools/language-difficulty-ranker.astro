@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../components/CtaButtons.astro';
 import { languageFacts } from '../../data/languageFacts';
 import { languages } from '../../data/languages';
@@ -115,6 +116,11 @@ const jsonLd = [
           approximate.
         </p>
       </header>
+
+      <ToolDirectAnswer
+        lead={`The easiest language to learn depends on your native one: for English speakers the U.S. Foreign Service Institute rates Spanish, French, Italian, Portuguese, and Dutch among the fastest, at roughly 600 to 750 hours to professional working proficiency.`}
+        body={`This free tool re-ranks 50 languages by difficulty for your own native language, weighing FSI study hours against shared family and writing system.`}
+      />
 
       <div class="table-wrap">
         <table class="ranker-table" id="ranker-table">

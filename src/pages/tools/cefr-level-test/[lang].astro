@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
 import { cefrTest, CEFR_LANG_CODES, CEFR_LEVELS } from '../../../data/cefrTest';
 import { languageFacts } from '../../../data/languageFacts';
@@ -133,6 +134,11 @@ const jsonLd = [
           reading real books.
         </p>
       </header>
+
+      <ToolDirectAnswer
+        lead={`The CEFR rates ${name} ability on six levels, from A1 (beginner) through B1 and B2 (independent user) up to C2 (mastery).`}
+        body={`This free test estimates your ${name} level from ${total} grammar and vocabulary questions in about five minutes, then recommends what to read next.`}
+      />
 
       <div class="cefr-quiz" id="cefr-quiz" data-lang-name={name} data-total={total}>
         <div class="cefr-progress" id="cefr-progress" hidden>
