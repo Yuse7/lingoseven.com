@@ -1,0 +1,439 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { CEFR_LANG_CODES } from '../../../data/cefrTest';
+import { READING_LANG_CODES } from '../../../data/readingBooks';
+import { flashcards, FLASHCARD_LANGS } from '../../../data/flashcards';
+
+// One static page per language that has a curated flashcard deck.
+export function getStaticPaths() {
+  return FLASHCARD_LANGS.filter((code) => codeToSlug[code]).map((code) => ({
+    params: { lang: codeToSlug[code] },
+    props: { code },
+  }));
+}
+
+const { code } = Astro.props;
+const lang = getLanguageByCode(code);
+const name = lang?.name ?? code;
+const slug = codeToSlug[code];
+const cards = flashcards[code];
+const count = cards.length;
+
+// GEO freshness stamp (build date).
+const updated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+const canonicalUrl = `https://lingoseven.com/tools/flashcards/${slug}/`;
+const title = `Free ${name} Flashcards: ${count} Common Words + CSV | Lingo7`;
+const description =
+  `Free ${name} flashcards for the ${count} most common words. Each card shows the word, its English meaning, and an example sentence. Download as CSV for Anki or Quizlet.`;
+
+// Real sample words for the direct answer (first, highest-frequency entries).
+const sample = cards.slice(0, 3).map((c) => c.word);
+const answerLead = `The best ${name} flashcards to learn first are the words you meet most often.`;
+const answerBody =
+  `This free deck pairs the ${count} most common ${name} words, like ${sample.join(', ')}, with a plain English meaning and a real example sentence for each. Download it as a CSV for Anki or Quizlet, or learn the words in context by reading.`;
+
+const faq = [
+  {
+    question: `What are the best flashcards to learn ${name}?`,
+    answer:
+      `Start with the most frequent words. A few thousand high-frequency ${name} words cover the majority of everyday text, so each of those cards pays off far more than a rare one. This deck gives you the top ${count} to begin with, each with a meaning and an example sentence, so you learn the word in context rather than in isolation. When a card sticks, meet the word again in a real book to lock it in.`,
+  },
+  {
+    question: `How do I import these ${name} flashcards into Anki?`,
+    answer:
+      `Click Download CSV to save the deck, then in Anki choose File, Import and select the file. Map the first column to the front (the ${name} word) and the second to the back (the meaning); the third column holds an example sentence you can add to the back too. The first row is a header, so tell Anki to ignore it or delete that one card. For Quizlet, use Copy for Quizlet and paste into the import box with Tab between term and definition.`,
+  },
+  {
+    question: `Are flashcards enough to learn ${name}?`,
+    answer:
+      `Flashcards are excellent for building recognition and drilling the first few thousand words, but on their own they teach words out of context. You learn to use ${name}, not just recognize it, by reading and hearing the words in real sentences. The efficient combination is flashcards for raw vocabulary plus reading for context, collocation and grammar. That is exactly what Lingo7 is built around.`,
+  },
+  {
+    question: `How many ${name} words do I need to know to read a book?`,
+    answer:
+      `Roughly 2,000 to 3,000 common words cover most everyday ${name} text, and around 5,000 gets you comfortably through many novels. You do not need all of them before you start: with sentence-aligned translation you can begin reading real ${name} at a couple of thousand words and pick up the rest from context. This deck is a fast way to front-load the most useful ${count}.`,
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: `${name} Flashcards`,
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${count} most common ${name} words`,
+    itemListElement: cards.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `${c.word} (${c.translation})`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lingoseven.com/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Flashcards',
+        item: 'https://lingoseven.com/tools/flashcards/',
+      },
+      { '@type': 'ListItem', position: 3, name, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+
+// Cross-link cluster: every other language with a deck.
+const others = FLASHCARD_LANGS.filter((c) => c !== code && codeToSlug[c])
+  .map((c) => {
+    const l = getLanguageByCode(c);
+    return { name: l?.name ?? c, flag: l?.flag ?? '', slug: codeToSlug[c] };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+// Client payload: compact triples + a filename for the CSV download.
+const clientData = {
+  filename: `${slug}-flashcards.csv`,
+  cards: cards.map((c) => [c.word, c.translation, c.example]),
+};
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="fc">
+    <div class="container">
+      <header class="fc-head">
+        <p class="fc-eyebrow"><a href="/tools/flashcards/">Flashcards</a></p>
+        <h1>Free <span>{name}</span> flashcards</h1>
+        <p class="fc-intro">
+          The fastest words to learn are the ones you see most. This deck lists the {count} most common
+          {name} words, each with a clear English meaning and a real example sentence. Study them below, or
+          download the deck for Anki or Quizlet.
+        </p>
+      </header>
+
+      <ToolDirectAnswer lead={answerLead} body={answerBody} />
+
+      <div class="fc-actions">
+        <button type="button" class="fc-download" id="fc-download">Download CSV</button>
+        <button type="button" class="fc-copy" id="fc-copy">Copy for Quizlet</button>
+        <span class="fc-note" id="fc-note" role="status" aria-live="polite"></span>
+      </div>
+      <p class="fc-hint">
+        CSV columns are word, translation, example (with a header row). Ready to import into Anki, Quizlet,
+        or any spaced-repetition app.
+      </p>
+
+      <p class="fc-caption">{count} most common {name} words &middot; Updated {updated}</p>
+
+      <div class="fc-table-wrap">
+        <table class="fc-table">
+          <thead>
+            <tr>
+              <th>{name}</th>
+              <th>Meaning</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              cards.map((c) => (
+                <tr>
+                  <td class="fc-word">{c.word}</td>
+                  <td class="fc-tr">{c.translation}</td>
+                  <td class="fc-ex">{c.example}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fc-cta">
+        <h2>Learn {name} faster by reading, not just drilling</h2>
+        <p>
+          Flashcards fix words in memory; reading teaches you to use them. Lingo7 lets you read real books in
+          {name} with sentence-aligned translation and native-narrated audio, and save any word to review
+          later. Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="fc-explainer">
+        <h2>How to use these flashcards</h2>
+        <p>
+          The deck is built from <strong>high-frequency words</strong>, the ones that make up most of
+          everyday {name}. Learning them first gives you the biggest return per card, because you will meet
+          them again and again the moment you start reading or listening.
+        </p>
+        <p>
+          Flashcards work best with <strong>spaced repetition</strong>: review a card, and if you knew it,
+          wait longer before seeing it again. Anki and Quizlet both do this automatically. Download the CSV,
+          import it, and review a few minutes a day. Keep the example sentence on the card so you learn how
+          the word actually behaves, not just its dictionary gloss.
+        </p>
+        <p>
+          One honest limit: flashcards build <strong>recognition</strong>, but you learn to <em>use</em> a
+          word by meeting it in real context. Pair this deck with reading. When a word you drilled shows up
+          in a story, it stops being a flashcard and becomes part of the language. That pairing is what
+          reading in Lingo7 is built for.
+        </p>
+      </div>
+
+      <div class="fc-links">
+        {
+          READING_LANG_CODES.includes(code) && (
+            <p class="fc-tool-link">
+              <a href={`/tools/reading-level-recommender/${slug}/`}>Best {name} books for your level (A1 to C1) &rarr;</a>
+            </p>
+          )
+        }
+        {
+          CEFR_LANG_CODES.includes(code) && (
+            <p class="fc-tool-link">
+              <a href={`/tools/cefr-level-test/${slug}/`}>Not sure of your level? Take the {name} CEFR test (A1 to C2) &rarr;</a>
+            </p>
+          )
+        }
+        {
+          code !== 'en' && (
+            <p class="fc-tool-link">
+              <a href={`/tools/how-long-to-learn-a-language/${slug}/`}>How long does it take to learn {name}? See the timeline &rarr;</a>
+            </p>
+          )
+        }
+        <p class="fc-tool-link">
+          <a href="/tools/language-difficulty-ranker/">Rank {name} against 48 languages by difficulty &rarr;</a>
+        </p>
+        <p class="fc-tool-link">
+          <a href={`/en/learn/${slug}/`}>Learn {name} by reading real books with Lingo7 &rarr;</a>
+        </p>
+      </div>
+
+      <div class="fc-others">
+        <h2>Flashcards for another language</h2>
+        <div class="fc-others-grid">
+          {
+            others.map((o) => (
+              <a class="fc-other" href={`/tools/flashcards/${o.slug}/`}>
+                <span class="fc-other-flag">{o.flag}</span>
+                {o.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="fc-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="fc-data" set:html={JSON.stringify(clientData)} />
+  <script>
+    type Data = { filename: string; cards: string[][] };
+    const el = document.getElementById('fc-data');
+    const DATA: Data = el ? JSON.parse(el.textContent || '{}') : { filename: 'flashcards.csv', cards: [] };
+    const note = document.getElementById('fc-note');
+
+    let noteTimer = 0;
+    function flash(msg: string) {
+      if (!note) return;
+      note.textContent = msg;
+      note.classList.add('is-visible');
+      clearTimeout(noteTimer);
+      noteTimer = window.setTimeout(() => note.classList.remove('is-visible'), 2600);
+    }
+
+    // RFC 4180 field: wrap in quotes, double any inner quotes. Data has commas and semicolons.
+    function csvField(s: string): string {
+      return '"' + String(s).replace(/"/g, '""') + '"';
+    }
+
+    const downloadBtn = document.getElementById('fc-download');
+    downloadBtn?.addEventListener('click', () => {
+      const rows = [['word', 'translation', 'example'], ...DATA.cards];
+      const csv = rows.map((r) => r.map(csvField).join(',')).join('\r\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = DATA.filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      flash('Downloaded ' + DATA.filename);
+    });
+
+    const copyBtn = document.getElementById('fc-copy');
+    copyBtn?.addEventListener('click', async () => {
+      // Quizlet paste import: term, then Tab, then definition; one card per line.
+      const text = DATA.cards.map((c) => c[0] + '\t' + c[1]).join('\n');
+      const done = () => flash('Copied ' + DATA.cards.length + ' cards. Paste into Quizlet.');
+      try {
+        await navigator.clipboard.writeText(text);
+        done();
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          done();
+        } catch {
+          flash('Copy failed. Use Download CSV instead.');
+        }
+        ta.remove();
+      }
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .fc { padding: 3rem 0 4rem; }
+  .fc-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .fc-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .fc-eyebrow a { color: var(--primary); text-decoration: none; }
+  .fc-eyebrow a:hover { text-decoration: underline; }
+  .fc-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .fc-head h1 span { color: var(--primary); }
+  .fc-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  .fc-actions {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem;
+    max-width: 760px; margin: 2.2rem auto 0;
+  }
+  .fc-download {
+    font: inherit; cursor: pointer; font-weight: 700; color: #0b1120;
+    background: var(--gradient, #4ade80); border: none;
+    border-radius: 999px; padding: 0.7rem 1.5rem; transition: filter 0.12s ease;
+  }
+  .fc-download:hover { filter: brightness(1.06); }
+  .fc-copy {
+    font: inherit; cursor: pointer; font-weight: 700; color: var(--text, #e8eef5);
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px; padding: 0.7rem 1.3rem; transition: all 0.12s ease;
+  }
+  .fc-copy:hover { border-color: var(--primary); color: var(--primary); }
+  .fc-note {
+    font-size: 0.85rem; font-weight: 600; color: var(--primary);
+    opacity: 0; transition: opacity 0.15s ease;
+  }
+  .fc-note.is-visible { opacity: 1; }
+
+  .fc-hint {
+    max-width: 620px; margin: 0.8rem auto 0; text-align: center;
+    font-size: 0.82rem; line-height: 1.5; color: var(--text-muted, #9fb0c3);
+  }
+  .fc-caption {
+    max-width: 760px; margin: 1.8rem auto 0.6rem; text-align: center;
+    color: var(--text-muted, #9fb0c3); font-size: 0.9rem;
+  }
+
+  .fc-table-wrap {
+    max-width: 760px; margin: 0 auto; overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px;
+  }
+  .fc-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .fc-table th {
+    text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--text-muted, #9fb0c3); font-weight: 700; padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.02);
+    white-space: nowrap;
+  }
+  .fc-table td {
+    padding: 0.7rem 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    vertical-align: top; line-height: 1.4;
+  }
+  .fc-table tbody tr:last-child td { border-bottom: none; }
+  .fc-table tbody tr:hover { background: rgba(74, 222, 128, 0.04); }
+  .fc-word { font-weight: 700; color: var(--primary); white-space: nowrap; }
+  .fc-tr { color: var(--text, #e8eef5); }
+  .fc-ex { color: var(--text-muted, #9fb0c3); font-style: italic; }
+
+  .fc-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .fc-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .fc-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .fc-cta :global(.cta-buttons) { justify-content: center; }
+
+  .fc-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .fc-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .fc-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .fc-explainer strong { color: var(--text, #e8eef5); }
+  .fc-explainer em { color: var(--text, #e8eef5); font-style: italic; }
+
+  .fc-links { max-width: 760px; margin: 2.4rem auto 0; }
+  .fc-tool-link { margin: 0.6rem 0 0; text-align: center; font-size: 0.95rem; }
+  .fc-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .fc-tool-link a:hover { text-decoration: underline; }
+
+  .fc-others { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+  .fc-others h2 { font-size: 1.3rem; margin: 0 0 1rem; }
+  .fc-others-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .fc-other {
+    display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    color: var(--text, #e8eef5); font-weight: 600; font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; padding: 0.4rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .fc-other:hover { border-color: var(--primary); color: var(--primary); }
+  .fc-other-flag { font-size: 1.1rem; }
+
+  .fc-faq { max-width: 760px; margin: 3rem auto 0; }
+  .fc-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .fc-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .fc-faq summary { cursor: pointer; font-weight: 600; }
+  .fc-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  @media (max-width: 600px) {
+    .fc-table { font-size: 0.9rem; }
+    .fc-table th, .fc-table td { padding: 0.55rem 0.6rem; }
+    .fc-word { white-space: normal; }
+  }
+</style>

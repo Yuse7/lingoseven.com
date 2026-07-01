@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { idioms, IDIOM_LANGS } from '../../../data/idioms';
+
+// Hub: pick a language, jump to its idiom list.
+const langs = IDIOM_LANGS.filter((code) => codeToSlug[code] && idioms[code]?.length)
+  .map((code) => {
+    const l = getLanguageByCode(code);
+    return {
+      name: l?.name ?? code,
+      flag: l?.flag ?? '',
+      slug: codeToSlug[code],
+      count: idioms[code]?.length ?? 0,
+    };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const totalIdioms = langs.reduce((sum, l) => sum + l.count, 0);
+
+// A real, verified sample for the direct answer (English is always present).
+const sample = idioms['en']?.[0];
+
+const canonicalUrl = 'https://lingoseven.com/tools/common-idioms/';
+const title = 'Common Idioms with Meanings and Examples | Lingo7';
+const description =
+  `Browse ${totalIdioms} common idioms across ${langs.length} languages, each with its literal translation, real meaning, and an example sentence. Learn the expressions natives actually use.`;
+
+const faq = [
+  {
+    question: 'What is an idiom?',
+    answer:
+      'An idiom is a fixed phrase whose meaning is set by convention rather than assembled from its individual words. "Break the ice" has nothing to do with ice, it means to ease tension at the start of a social situation. Because the words do not add up to the meaning, idioms have to be learned as whole units.',
+  },
+  {
+    question: 'What are some common idioms and what do they mean?',
+    answer:
+      'Every language has hundreds. In English you "spill the beans" to reveal a secret and feel "under the weather" when ill; in Spanish "ser pan comido" (to be eaten bread) means something is very easy; in German "Schwein haben" (to have pig) means to be lucky. Pick a language above for a full, verified list.',
+  },
+  {
+    question: 'Why are idioms hard for language learners?',
+    answer:
+      'Because you cannot translate them word for word. A literal reading gives nonsense, and the real meaning is often cultural, so idioms resist the usual dictionary lookup. They also come thick and fast in real speech and writing, which is why meeting them in context, again and again, is the only thing that makes them stick.',
+  },
+  {
+    question: 'What is the best way to learn idioms in a foreign language?',
+    answer:
+      'Learn a few at a time in context, not in long lists. Notice them while you read and listen, check the meaning, then reuse them in your own sentences. Reading real books with sentence-aligned translation and audio, the way Lingo7 works, exposes you to idioms in natural context and lets you tap any line you do not understand.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Common Idioms',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: langs.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `Common ${l.name} idioms`,
+      url: `https://lingoseven.com/tools/common-idioms/${l.slug}/`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="idioms">
+    <div class="container">
+      <header class="idioms-head">
+        <p class="idioms-eyebrow">Free tool</p>
+        <h1>Common idioms and what they really mean</h1>
+        <p class="idioms-intro">
+          Idioms are the phrases you cannot translate word for word, and they are everywhere in real speech.
+          Pick a language and get the most common idioms, each with its literal translation, real meaning, and
+          an example sentence. Every entry is a real expression natives use.
+        </p>
+      </header>
+
+      <ToolDirectAnswer
+        lead={`An idiom is a common phrase whose meaning cannot be worked out from its individual words.`}
+        body={sample
+          ? `For example, to "${sample.idiom}" in English means ${sample.meaning}. This free tool collects ${totalIdioms} real idioms across ${langs.length} languages, each with its literal translation, meaning, and an example sentence.`
+          : `This free tool collects ${totalIdioms} real idioms across ${langs.length} languages, each with its literal translation, meaning, and an example sentence, so you learn the expressions natives actually use.`}
+      />
+
+      <div class="lang-grid">
+        {
+          langs.map((l) => (
+            <a class="lang-card" href={`/tools/common-idioms/${l.slug}/`}>
+              <span class="lang-flag">{l.flag}</span>
+              <span class="lang-name">{l.name}</span>
+              <span class="lang-sub">{l.count} idioms</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="idioms-cta">
+        <h2>Then meet those idioms in real books</h2>
+        <p>
+          A list gets you the meaning, but idioms only stick when you see them in context. Lingo7 lets you read
+          real books with sentence-aligned translation and native-narrated audio, so you catch idioms in the
+          wild and tap any line you do not get. Save them and review later. Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="idioms-explainer">
+        <h2>How to read the entries</h2>
+        <p>
+          Each idiom shows three things: the <strong>literal</strong> translation (what the words say), the
+          <strong> meaning</strong> (what speakers actually intend), and an <strong>example</strong> sentence in
+          context. The gap between literal and meaning is the whole point of an idiom, and it is usually where
+          the culture and the humor live.
+        </p>
+        <p>
+          The guiding rule is the same in every language: <strong>do not translate word for word</strong>. Learn
+          a handful of idioms at a time, notice them while you read and listen, and reuse them in your own
+          sentences. Parallel text and audio let you meet idioms in natural context, which is exactly what
+          reading in Lingo7 is built for.
+        </p>
+      </div>
+
+      <p class="idioms-tool-link">
+        <a href="/tools/reading-level-recommender/">Find the right book for your level in any language &rarr;</a>
+      </p>
+      <p class="idioms-tool-link">
+        <a href="/tools/cefr-level-test/">Not sure of your level? Take the CEFR test (A1-C2) &rarr;</a>
+      </p>
+      <p class="idioms-tool-link">
+        <a href="/tools/how-long-to-learn-a-language/">How long does it take to learn a language? &rarr;</a>
+      </p>
+      <p class="idioms-tool-link">
+        <a href="/tools/language-difficulty-ranker/">Compare all 50 languages by difficulty for your native tongue &rarr;</a>
+      </p>
+
+      <div class="idioms-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .idioms { padding: 3rem 0 4rem; }
+  .idioms-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .idioms-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    color: var(--primary); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .idioms-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .idioms-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  .lang-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.8rem; max-width: 820px; margin: 2rem auto 0;
+  }
+  .lang-card {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+    text-decoration: none; text-align: center;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; padding: 1.2rem 1rem; transition: all 0.15s ease;
+  }
+  .lang-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+  .lang-flag { font-size: 2rem; }
+  .lang-name { color: var(--text, #e8eef5); font-weight: 700; font-size: 1.05rem; }
+  .lang-sub { color: var(--text-muted, #9fb0c3); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+
+  .idioms-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .idioms-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .idioms-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .idioms-cta :global(.cta-buttons) { justify-content: center; }
+
+  .idioms-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .idioms-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .idioms-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .idioms-explainer strong { color: var(--text, #e8eef5); }
+
+  .idioms-tool-link { max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: 0.95rem; }
+  .idioms-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .idioms-tool-link a:hover { text-decoration: underline; }
+
+  .idioms-faq { max-width: 760px; margin: 3rem auto 0; }
+  .idioms-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .idioms-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .idioms-faq summary { cursor: pointer; font-weight: 600; }
+  .idioms-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+</style>

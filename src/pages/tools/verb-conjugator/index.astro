@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { conjugations, CONJ_LANGS } from '../../../data/conjugations';
+
+// Hub: pick a language, jump to its full conjugation tables.
+const langs = CONJ_LANGS.filter((code) => codeToSlug[code])
+  .map((code) => {
+    const l = getLanguageByCode(code);
+    const verbs = conjugations[code] ?? [];
+    return {
+      name: l?.name ?? code,
+      flag: l?.flag ?? '',
+      slug: codeToSlug[code],
+      count: verbs.length,
+      tenses: verbs[0]?.tenses.length ?? 0,
+    };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const totalVerbs = langs.reduce((sum, l) => sum + l.count, 0);
+
+const canonicalUrl = 'https://lingoseven.com/tools/verb-conjugator/';
+const title = 'Verb Conjugator: Present, Past and Future Tables | Lingo7';
+const description =
+  `Free verb conjugator for ${langs.length} major languages. See full present, past and future tables for the most common verbs, regular and irregular. Pick a language to start.`;
+
+const faq = [
+  {
+    question: 'What does it mean to conjugate a verb?',
+    answer:
+      'To conjugate a verb is to change its form to match the subject (who is acting) and the tense (when the action happens). In English the change is small, like "I go" versus "she goes." In most other languages the endings, and sometimes the stem, change more, which is why a full table for each verb is so useful.',
+  },
+  {
+    question: 'Which verbs should I learn to conjugate first?',
+    answer:
+      'Start with the highest-frequency verbs: to be, to have, to go, to do, to say, to want, to know. They appear in almost every sentence, and they tend to be the most irregular, so learning them early pays off fast. Each language page here opens with exactly these workhorse verbs.',
+  },
+  {
+    question: 'What is the difference between regular and irregular verbs?',
+    answer:
+      'Regular verbs follow a fixed pattern: learn the endings for one verb and you can conjugate thousands more the same way. Irregular verbs break the pattern in the stem or the endings and have to be learned individually. The most common verbs are usually irregular, which is why they get so much attention.',
+  },
+  {
+    question: 'Do I have to memorize every conjugation?',
+    answer:
+      'No. You memorize the regular patterns once, then learn the common irregular verbs through use rather than rote. The forms become automatic when you meet them repeatedly in real sentences. That is why reading works so well: you see the same conjugations in context again and again until they stick.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Verb Conjugator',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: langs.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `${l.name} verb conjugator`,
+      url: `https://lingoseven.com/tools/verb-conjugator/${l.slug}/`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="vc">
+    <div class="container">
+      <header class="vc-head">
+        <p class="vc-eyebrow">Free tool</p>
+        <h1>How do you conjugate a verb?</h1>
+        <p class="vc-intro">
+          Pick a language, then a verb, and see it fully conjugated in the present, past and future, for
+          every person. Every form is standard textbook grammar, checked by hand, from the most common
+          regular verbs to the irregular ones you cannot avoid.
+        </p>
+      </header>
+
+      <ToolDirectAnswer
+        lead={`Verb conjugation is changing a verb's form to match its subject and tense, and it is the backbone of saying anything correctly in a new language.`}
+        body={`This free conjugator shows full present, past and future tables for ${totalVerbs} of the most common verbs across ${langs.length} major languages. Pick a language, then tap a verb to see every form, regular or irregular.`}
+      />
+
+      <div class="lang-grid">
+        {
+          langs.map((l) => (
+            <a class="lang-card" href={`/tools/verb-conjugator/${l.slug}/`}>
+              <span class="lang-flag">{l.flag}</span>
+              <span class="lang-name">{l.name}</span>
+              <span class="lang-sub">{l.count} verbs &middot; {l.tenses} tenses</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="vc-cta">
+        <h2>Then make the forms stick by reading them in context</h2>
+        <p>
+          Tables get you started, but verbs become automatic when you meet them in real sentences. Lingo7
+          lets you read real books with sentence-aligned translation and native-narrated audio, so you see
+          these conjugations again and again where they actually live. Tap any word to save it. Free to
+          start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="vc-explainer">
+        <h2>How to use these conjugation tables</h2>
+        <p>
+          Each language page opens with its highest-frequency verbs, the ones that show up in nearly every
+          sentence: <strong>to be, to have, to go, to do, to say</strong>. Tap a verb and its full table
+          appears, with the subject running down the left and the matching form beside it, across three
+          core tenses.
+        </p>
+        <p>
+          Learn the <strong>regular patterns</strong> once and they apply to thousands of verbs. Spend your
+          real effort on the common irregular verbs, which break the pattern and have to be learned one by
+          one. That small set of irregulars carries a huge share of everyday speech, so it is worth the
+          time.
+        </p>
+        <p>
+          The tables are the map, not the territory. You internalize conjugations by using them, and the
+          most efficient way to do that is to read: meet the same forms in context, over and over, until
+          they feel obvious. That is exactly what reading in Lingo7 is built for.
+        </p>
+      </div>
+
+      <p class="vc-tool-link">
+        <a href="/tools/reading-level-recommender/">Find books at your level to read next (A1 to C1) &rarr;</a>
+      </p>
+      <p class="vc-tool-link">
+        <a href="/tools/cefr-level-test/">Not sure of your level? Find it with the CEFR test (A1-C2) &rarr;</a>
+      </p>
+      <p class="vc-tool-link">
+        <a href="/tools/how-long-to-learn-a-language/">How long does it take to learn a language? &rarr;</a>
+      </p>
+      <p class="vc-tool-link">
+        <a href="/tools/language-difficulty-ranker/">Compare all 48 languages by difficulty for your native tongue &rarr;</a>
+      </p>
+
+      <div class="vc-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .vc { padding: 3rem 0 4rem; }
+  .vc-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .vc-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    color: var(--primary); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .vc-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .vc-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  .lang-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.8rem; max-width: 820px; margin: 2rem auto 0;
+  }
+  .lang-card {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+    text-decoration: none; text-align: center;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; padding: 1.2rem 1rem; transition: all 0.15s ease;
+  }
+  .lang-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+  .lang-flag { font-size: 2rem; }
+  .lang-name { color: var(--text, #e8eef5); font-weight: 700; font-size: 1.05rem; }
+  .lang-sub { color: var(--text-muted, #9fb0c3); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+
+  .vc-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .vc-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .vc-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .vc-cta :global(.cta-buttons) { justify-content: center; }
+
+  .vc-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .vc-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .vc-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .vc-explainer strong { color: var(--text, #e8eef5); }
+
+  .vc-tool-link { max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: 0.95rem; }
+  .vc-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .vc-tool-link a:hover { text-decoration: underline; }
+
+  .vc-faq { max-width: 760px; margin: 3rem auto 0; }
+  .vc-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .vc-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .vc-faq summary { cursor: pointer; font-weight: 600; }
+  .vc-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+</style>

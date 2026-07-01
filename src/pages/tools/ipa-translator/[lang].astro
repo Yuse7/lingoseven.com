@@ -1,0 +1,494 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { languageFacts } from '../../../data/languageFacts';
+import { CEFR_LANG_CODES } from '../../../data/cefrTest';
+import { READING_LANG_CODES } from '../../../data/readingBooks';
+import { ipaExamples, IPA_LANGS } from '../../../data/ipaExamples';
+
+// One static page per language that has a baked IPA example set.
+export function getStaticPaths() {
+  return IPA_LANGS.filter((code) => codeToSlug[code]).map((code) => ({
+    params: { lang: codeToSlug[code] },
+    props: { code },
+  }));
+}
+
+const { code } = Astro.props;
+const lang = getLanguageByCode(code);
+const name = lang?.name ?? code;
+const slug = codeToSlug[code];
+const examples = ipaExamples[code] ?? [];
+const e0 = examples[0];
+const e1 = examples[1] ?? examples[0];
+
+// HTTPS backend proxy (added separately) that wraps the NLP phonetics service.
+const endpoint = 'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api/ipa';
+
+const asOf = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+
+const lf = languageFacts[code];
+const scriptPhrase =
+  lf && lf.writingSystem && lf.writingSystem !== 'Latin'
+    ? ` ${name} is written in ${lf.writingSystem} script, so its IPA is especially handy for reading pronunciation off the page.`
+    : '';
+
+const canonicalUrl = `https://lingoseven.com/tools/ipa-translator/${slug}/`;
+const title = `${name} IPA Translator: Phonetic Transcription | Lingo7`;
+const description =
+  `Type any ${name} word and get its IPA phonetic transcription. A free ${name} to IPA translator with ${examples.length} worked examples, powered by Lingo7's NLP service.`;
+
+const answerLead = `The ${name} IPA translator converts any ${name} word into its International Phonetic Alphabet (IPA) transcription.`;
+const answerBody = `Type a word, press Transcribe, and Lingo7's NLP service returns the phonetic symbols that show exactly how it is pronounced. The table below lists ${examples.length} common ${name} words already transcribed, so the page is useful even before you type.`;
+
+const faq = [
+  {
+    question: `How do you write ${name} words in IPA?`,
+    answer:
+      e0 && e1
+        ? `You look up each word's transcription in the International Phonetic Alphabet, where every symbol maps to one distinct sound. In ${name}, ${e0.word} is /${e0.ipa}/ and ${e1.word} is /${e1.ipa}/. This tool transcribes any ${name} word you type, and the table above shows ${examples.length} common words with their IPA.`
+        : `You look up each word's transcription in the International Phonetic Alphabet, where every symbol maps to one distinct sound. Type any ${name} word above and the tool returns its IPA.`,
+  },
+  {
+    question: e0 ? `What is the IPA for "${e0.word}" in ${name}?` : `What does IPA look like in ${name}?`,
+    answer:
+      e0
+        ? `In ${name}, ${e0.word} is written /${e0.ipa}/ in the IPA. The symbols stand for individual sounds rather than letters, so you can read the pronunciation straight off the transcription. Type any other ${name} word above to see its IPA.`
+        : `IPA gives every ${name} sound its own symbol, so a transcription tells you how a word is pronounced no matter how it is spelled. Type a word above to see it.`,
+  },
+  {
+    question: `Is this ${name} IPA transcription accurate?`,
+    answer:
+      `The transcriptions come from Lingo7's NLP phonetics engine, the same one used inside the app. They reflect standard ${name} pronunciation. Regional accents vary, and some words have more than one common variant, so treat the IPA as a reliable guide and confirm the finer points with native audio.`,
+  },
+  {
+    question: `How does learning IPA help me pronounce ${name}?`,
+    answer:
+      `IPA takes the guesswork out of spelling. Once you can see that two ${name} sounds are genuinely different, you stop merging them. Pair the symbols with real audio and read words in context, and pronunciation becomes muscle memory instead of a rule you recite.${scriptPhrase}`,
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: `${name} IPA Translator`,
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `Common ${name} words with IPA phonetic transcription`,
+    itemListElement: examples.map((e, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `${e.word}: /${e.ipa}/`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lingoseven.com/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'IPA Translator',
+        item: 'https://lingoseven.com/tools/ipa-translator/',
+      },
+      { '@type': 'ListItem', position: 3, name, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+
+// Cross-link cluster: every other language with an IPA page.
+const others = IPA_LANGS.filter((c) => c !== code && codeToSlug[c])
+  .map((c) => {
+    const l = getLanguageByCode(c);
+    return { name: l?.name ?? c, flag: l?.flag ?? '', slug: codeToSlug[c] };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const clientCfg = { code, endpoint };
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="ipa">
+    <div class="container">
+      <header class="ipa-head">
+        <p class="ipa-eyebrow"><a href="/tools/ipa-translator/">IPA translator</a></p>
+        <h1>Translate <span>{name}</span> words into IPA</h1>
+        <p class="ipa-intro">
+          The International Phonetic Alphabet writes down exactly how a word sounds. Type any {name} word
+          below to get its IPA transcription, or scan the {examples.length} worked examples in the table.
+        </p>
+      </header>
+
+      <ToolDirectAnswer lead={answerLead} body={answerBody} />
+
+      <form class="ipa-form" id="ipa-form" role="group" aria-label={`Transcribe a ${name} word into IPA`}>
+        <label class="ipa-controls-label" for="ipa-input">{name} word</label>
+        <div class="ipa-form-row">
+          <input
+            class="ipa-input"
+            id="ipa-input"
+            type="text"
+            name="word"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder={e0 ? `Type a ${name} word, e.g. ${e0.word}` : `Type a ${name} word`}
+          />
+          <button class="ipa-go" id="ipa-go" type="submit">Transcribe</button>
+        </div>
+      </form>
+
+      <div class="ipa-result" id="ipa-result" aria-live="polite" hidden>
+        <p class="ipa-result-word" id="ipa-result-word"></p>
+        <p class="ipa-result-ipa" id="ipa-result-ipa"></p>
+        <p class="ipa-result-error" id="ipa-result-error" hidden></p>
+      </div>
+
+      <div class="ipa-examples">
+        <h2>Common {name} words in IPA</h2>
+        <p class="ipa-examples-note">Worked examples, as of {asOf}.</p>
+        <table class="ipa-table">
+          <thead>
+            <tr>
+              <th scope="col">Word</th>
+              <th scope="col">IPA</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              examples.map((e) => (
+                <tr>
+                  <td class="ipa-cell-word">{e.word}</td>
+                  <td class="ipa-cell-ipa">/{e.ipa}/</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ipa-cta">
+        <h2>Learn {name} faster by reading real books</h2>
+        <p>
+          Knowing how a word sounds is only the first step. Lingo7 lets you read real books in {name} with
+          tap-to-hear native audio and sentence-aligned translation, so pronunciation and meaning stick
+          together. Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="ipa-explainer">
+        <h2>How the IPA translator works</h2>
+        <p>
+          The <strong>International Phonetic Alphabet</strong> gives every distinct speech sound its own
+          symbol, so /ʃ/ is always the <em>sh</em> sound whatever the spelling around it. Once you can read
+          IPA, a transcription tells you how a word sounds without hearing it first.
+        </p>
+        <p>
+          When you type a {name} word, the tool sends it to <strong>Lingo7's NLP service</strong>, the same
+          phonetics engine that powers transcription inside the app. It returns the IPA for that word, which
+          appears above the examples. The baked table stays useful even when you are offline or just
+          browsing.
+        </p>
+        <p>
+          Spelling and sound drift apart in every language, {name} included. Reading with audio is how you
+          close that gap: you see the word, hear a native voice say it, and the IPA stops being abstract. That
+          is exactly what reading in Lingo7 is built for.
+        </p>
+      </div>
+
+      <div class="ipa-links">
+        <p class="ipa-tool-link">
+          <a href={`/en/learn/${slug}/`}>Start reading {name} with Lingo7 &rarr;</a>
+        </p>
+        {READING_LANG_CODES.includes(code) && (
+          <p class="ipa-tool-link">
+            <a href={`/tools/reading-level-recommender/${slug}/`}>Best {name} books for your level (A1 to C1) &rarr;</a>
+          </p>
+        )}
+        {CEFR_LANG_CODES.includes(code) && (
+          <p class="ipa-tool-link">
+            <a href={`/tools/cefr-level-test/${slug}/`}>Not sure of your level? Take the {name} CEFR test &rarr;</a>
+          </p>
+        )}
+        {code !== 'en' && (
+          <p class="ipa-tool-link">
+            <a href={`/tools/how-long-to-learn-a-language/${slug}/`}>How long does it take to learn {name}? &rarr;</a>
+          </p>
+        )}
+        <p class="ipa-tool-link">
+          <a href="/tools/language-difficulty-ranker/">Compare all 48 languages by difficulty &rarr;</a>
+        </p>
+      </div>
+
+      <div class="ipa-others">
+        <h2>Transcribe another language into IPA</h2>
+        <div class="ipa-others-grid">
+          {
+            others.map((o) => (
+              <a class="ipa-other" href={`/tools/ipa-translator/${o.slug}/`}>
+                <span class="ipa-other-flag">{o.flag}</span>
+                {o.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="ipa-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="ipa-data" set:html={JSON.stringify(clientCfg)} />
+  <script>
+    const cfgEl = document.getElementById('ipa-data');
+    const CFG = cfgEl ? JSON.parse(cfgEl.textContent || '{}') : {};
+    const CODE: string = CFG.code || '';
+    const ENDPOINT: string = CFG.endpoint || '';
+
+    const form = document.getElementById('ipa-form') as HTMLFormElement | null;
+    const input = document.getElementById('ipa-input') as HTMLInputElement | null;
+    const go = document.getElementById('ipa-go') as HTMLButtonElement | null;
+    const result = document.getElementById('ipa-result') as HTMLElement | null;
+    const wordEl = document.getElementById('ipa-result-word') as HTMLElement | null;
+    const ipaEl = document.getElementById('ipa-result-ipa') as HTMLElement | null;
+    const errEl = document.getElementById('ipa-result-error') as HTMLElement | null;
+
+    // Turn whatever shape the proxy returns into a single display string.
+    // Handles: a plain string, { ipa: "..." }, or a dialect map { us: "...", gb: "..." }.
+    function formatIpa(data: any): string | null {
+      const items: { label: string; ipa: string }[] = [];
+      if (typeof data === 'string') {
+        if (data.trim()) items.push({ label: '', ipa: data.trim() });
+      } else if (data && typeof data === 'object') {
+        if (typeof data.ipa === 'string' && data.ipa.trim()) {
+          items.push({ label: '', ipa: data.ipa.trim() });
+        } else {
+          for (const [k, v] of Object.entries(data)) {
+            if (typeof v === 'string' && (v as string).trim()) {
+              items.push({ label: k, ipa: (v as string).trim() });
+            }
+          }
+        }
+      }
+      const seen = new Set<string>();
+      const uniq: { label: string; ipa: string }[] = [];
+      for (const it of items) {
+        if (seen.has(it.ipa)) continue;
+        seen.add(it.ipa);
+        uniq.push(it);
+      }
+      if (!uniq.length) return null;
+      const multi = uniq.length > 1;
+      return uniq
+        .map((it) => '/' + it.ipa + '/' + (multi && it.label ? ' (' + it.label + ')' : ''))
+        .join('    ');
+    }
+
+    if (form && input && go && result && wordEl && ipaEl && errEl) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const word = input.value.trim();
+        if (!word) {
+          input.focus();
+          return;
+        }
+
+        errEl.hidden = true;
+        errEl.textContent = '';
+        ipaEl.textContent = '';
+        wordEl.textContent = word;
+        result.hidden = false;
+
+        const original = go.textContent;
+        go.disabled = true;
+        go.textContent = 'Transcribing…';
+
+        try {
+          const url =
+            ENDPOINT + '?word=' + encodeURIComponent(word) + '&lang=' + encodeURIComponent(CODE);
+          const res = await fetch(url, { headers: { Accept: 'application/json' } });
+          if (!res.ok) {
+            throw new Error('Transcription service returned status ' + res.status);
+          }
+          const ct = res.headers.get('content-type') || '';
+          const data = ct.includes('application/json') ? await res.json() : await res.text();
+          const text = formatIpa(data);
+          if (text) {
+            ipaEl.textContent = text;
+          } else {
+            errEl.hidden = false;
+            errEl.textContent = 'No transcription came back for that word. Try another one.';
+          }
+        } catch (err) {
+          // Surface the failure, never hide it.
+          console.error('IPA transcription failed', err);
+          errEl.hidden = false;
+          errEl.textContent =
+            'Could not reach the transcription service. Please check your connection and try again.';
+        } finally {
+          go.disabled = false;
+          go.textContent = original;
+        }
+      });
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  .ipa { padding: 3rem 0 4rem; }
+  .ipa-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .ipa-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .ipa-eyebrow a { color: var(--primary); text-decoration: none; }
+  .ipa-eyebrow a:hover { text-decoration: underline; }
+  .ipa-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .ipa-head h1 span { color: var(--primary); }
+  .ipa-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  .ipa-form {
+    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+    max-width: 620px; margin: 2.2rem auto 0;
+  }
+  .ipa-controls-label {
+    font-size: 0.82rem; color: var(--text-muted, #9fb0c3); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .ipa-form-row { display: flex; gap: 0.5rem; width: 100%; }
+  .ipa-input {
+    flex: 1 1 auto; min-width: 0; font: inherit; color: var(--text, #e8eef5);
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px; padding: 0.7rem 1.2rem; transition: border-color 0.12s ease;
+  }
+  .ipa-input::placeholder { color: var(--text-muted, #9fb0c3); opacity: 0.8; }
+  .ipa-input:focus { outline: none; border-color: var(--primary); }
+  .ipa-go {
+    flex: 0 0 auto; font: inherit; font-weight: 700; cursor: pointer; color: #0b1120;
+    background: var(--gradient); border: none; border-radius: 999px; padding: 0.7rem 1.5rem;
+    transition: transform 0.12s ease, opacity 0.12s ease;
+  }
+  .ipa-go:hover { transform: translateY(-1px); }
+  .ipa-go:disabled { opacity: 0.6; cursor: default; transform: none; }
+
+  .ipa-result {
+    max-width: 620px; margin: 1.2rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 1.4rem 1.5rem;
+  }
+  .ipa-result[hidden] { display: none; }
+  .ipa-result-word {
+    margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-muted, #9fb0c3);
+  }
+  .ipa-result-ipa {
+    margin: 0.3rem 0 0; font-size: clamp(1.6rem, 5vw, 2.2rem); font-weight: 700;
+    color: var(--primary); line-height: 1.25; word-break: break-word;
+  }
+  .ipa-result-ipa:empty { display: none; }
+  .ipa-result-error {
+    margin: 0.4rem 0 0; font-size: 0.95rem; line-height: 1.5; color: #fca5a5;
+  }
+  .ipa-result-error[hidden] { display: none; }
+
+  .ipa-examples { max-width: 620px; margin: 2.6rem auto 0; }
+  .ipa-examples h2 { font-size: 1.4rem; margin: 0 0 0.3rem; text-align: center; }
+  .ipa-examples-note {
+    margin: 0 0 1rem; text-align: center; font-size: 0.82rem; color: var(--text-muted, #9fb0c3);
+  }
+  .ipa-table {
+    width: 100%; border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px; overflow: hidden;
+  }
+  .ipa-table th, .ipa-table td {
+    padding: 0.7rem 1.1rem; text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .ipa-table thead th {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted, #9fb0c3); font-weight: 700;
+  }
+  .ipa-table tbody tr:last-child td { border-bottom: none; }
+  .ipa-cell-word { color: var(--text, #e8eef5); font-weight: 600; }
+  .ipa-cell-ipa { color: var(--primary); font-size: 1.05rem; white-space: nowrap; }
+
+  .ipa-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .ipa-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .ipa-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .ipa-cta :global(.cta-buttons) { justify-content: center; }
+
+  .ipa-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .ipa-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .ipa-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .ipa-explainer strong { color: var(--text, #e8eef5); }
+  .ipa-explainer em { color: var(--text, #e8eef5); font-style: italic; }
+
+  .ipa-links { max-width: 760px; margin: 2.4rem auto 0; }
+  .ipa-tool-link { margin: 0.6rem 0 0; text-align: center; font-size: 0.95rem; }
+  .ipa-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .ipa-tool-link a:hover { text-decoration: underline; }
+
+  .ipa-others { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+  .ipa-others h2 { font-size: 1.3rem; margin: 0 0 1rem; }
+  .ipa-others-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .ipa-other {
+    display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    color: var(--text, #e8eef5); font-weight: 600; font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; padding: 0.4rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .ipa-other:hover { border-color: var(--primary); color: var(--primary); }
+  .ipa-other-flag { font-size: 1.1rem; }
+
+  .ipa-faq { max-width: 760px; margin: 3rem auto 0; }
+  .ipa-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .ipa-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .ipa-faq summary { cursor: pointer; font-weight: 600; }
+  .ipa-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  @media (max-width: 600px) {
+    .ipa-form-row { flex-direction: column; }
+    .ipa-go { width: 100%; }
+    .ipa-table th, .ipa-table td { padding: 0.6rem 0.8rem; }
+  }
+</style>

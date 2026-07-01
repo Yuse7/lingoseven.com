@@ -1,0 +1,465 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { languageFacts } from '../../../data/languageFacts';
+import { CEFR_LANG_CODES } from '../../../data/cefrTest';
+import { VOCAB_LANG_CODES } from '../../../data/vocabWords';
+import {
+  readingBooks,
+  READING_LANG_CODES,
+  LEVELS,
+  levelIndex,
+  levelLabel,
+  coversLevel,
+  type BookRec,
+} from '../../../data/readingBooks';
+
+// One static page per language that has a curated, level-graded book list.
+export function getStaticPaths() {
+  return READING_LANG_CODES.filter((code) => codeToSlug[code]).map((code) => ({
+    params: { lang: codeToSlug[code] },
+    props: { code },
+  }));
+}
+
+const { code } = Astro.props;
+const lang = getLanguageByCode(code);
+const name = lang?.name ?? code;
+const slug = codeToSlug[code];
+const data = readingBooks[code];
+
+// Books sorted beginner -> advanced (by min level, then max level).
+const books: BookRec[] = [...data.books].sort(
+  (a, b) => levelIndex(a.min) - levelIndex(b.min) || levelIndex(a.max) - levelIndex(b.max)
+);
+
+// Representative titles for the direct answer, deduped.
+const easiest = books[0];
+const hardest = [...books].sort((a, b) => levelIndex(b.max) - levelIndex(a.max))[0];
+const bridge = books.find((b) => coversLevel(b, 'B1')) ?? books[Math.floor(books.length / 2)];
+const repTitles = [...new Set([easiest?.title, bridge?.title, hardest?.title].filter(Boolean))] as string[];
+
+const beginnerTitles = books.filter((b) => coversLevel(b, 'A1') || coversLevel(b, 'A2')).map((b) => b.title);
+
+const lf = languageFacts[code];
+const fsiPhrase =
+  lf && lf.fsiHours > 0 ? ` ${name} is FSI Category ${lf.fsiCategory}, about ${lf.fsiHours} hours to professional proficiency.` : '';
+
+const canonicalUrl = `https://lingoseven.com/tools/reading-level-recommender/${slug}/`;
+const title = `Best Books to Learn ${name} by Level (A1 to C1) | Lingo7`;
+const description =
+  `Find the best ${name} books for your level. Pick a CEFR level (A1 to C1) for honest, level-matched picks, from graded readers to real literature.`;
+
+const answerBody =
+  repTitles.length >= 3
+    ? `Beginners (A1 to A2) start with approachable picks like ${repTitles[0]}, intermediate readers (B1 to B2) bridge into ${repTitles[1]}, and advanced readers (C1) reach ${repTitles[2]}. This free tool sorts ${books.length} real ${name} books by CEFR level, so pick your level to see yours.`
+    : `This free tool sorts ${books.length} real, level-graded ${name} books from beginner (A1) to advanced (C1), including approachable picks like ${repTitles[0]}. Pick your level to see the titles that fit you now.`;
+
+// Cross-links.
+const blogSlug = `best-books-to-learn-${slug}-through-reading`;
+
+const faq = [
+  {
+    question: `What are the best books to learn ${name} for beginners?`,
+    answer:
+      beginnerTitles.length > 0
+        ? `For beginners (CEFR A1 to A2), start with the most approachable, level-graded titles: ${beginnerTitles
+            .slice(0, 3)
+            .join(', ')}. Choose by difficulty first, not fame, and pick a book you can almost read. Parallel translation and audio let you start a level or two earlier than you could unaided.`
+        : `For beginners (CEFR A1 to A2), the surest start in ${name} is short, high-frequency material: graded readers, children's classics, folk tales and The Little Prince in translation. Choose by difficulty first, not fame. Parallel translation and audio let you start earlier than you could unaided.`,
+  },
+  {
+    question: `What level do I need to read novels in ${name}?`,
+    answer:
+      `Most learners can read their first authentic ${name} book around CEFR B1${
+        bridge ? `, and ${bridge.title} is a common bridge title` : ''
+      }. Full literary novels are usually a B2 to C1 read. The honest shortcut is sentence-aligned parallel text: it lets a B1 reader get through a B2 book by checking one line at a time without losing the story.`,
+  },
+  {
+    question: `Can you learn ${name} just by reading books?`,
+    answer:
+      `Reading is one of the most efficient ways to build ${name} vocabulary and grammatical intuition, because you meet useful words again and again in real context. It works best paired with audio, so you connect spelling to sound, and with a little speaking or writing practice. Lingo7 combines reading with native-narrated audio for exactly this.`,
+  },
+  {
+    question: `How do I choose a ${name} book at my level?`,
+    answer:
+      `Choose by difficulty first, interest second, reputation last. A book you can almost read is the goal: you follow the story and meet new words in clear enough context to guess at them. If two levels seem to fit, pick the lower one. Not sure where you stand? Take the CEFR test, then use this tool to match a book to your level.${fsiPhrase}`,
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: `Best ${name} Books by Level`,
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `Best books to learn ${name} through reading, by CEFR level`,
+    itemListElement: books.map((b, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: b.author ? `${b.title} by ${b.author}` : b.title,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lingoseven.com/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Reading Level Recommender',
+        item: 'https://lingoseven.com/tools/reading-level-recommender/',
+      },
+      { '@type': 'ListItem', position: 3, name, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+
+// Cross-link cluster: every other language with a page.
+const others = READING_LANG_CODES.filter((c) => c !== code && codeToSlug[c])
+  .map((c) => {
+    const l = getLanguageByCode(c);
+    return { name: l?.name ?? c, flag: l?.flag ?? '', slug: codeToSlug[c] };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const clientData = { levels: LEVELS };
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="rlr">
+    <div class="container">
+      <header class="rlr-head">
+        <p class="rlr-eyebrow"><a href="/tools/reading-level-recommender/">Reading level recommender</a></p>
+        <h1>Best books to learn <span>{name}</span> by reading</h1>
+        <p class="rlr-intro">
+          The best book is the one you can <em>almost</em> read. Pick your level below and get honest,
+          level-matched {name} picks, from graded readers for absolute beginners to real literature for
+          advanced readers. {data.intro}
+        </p>
+      </header>
+
+      <ToolDirectAnswer lead={`The best books to learn ${name} through reading depend on your current level.`} body={answerBody} />
+
+      <div class="rlr-controls" role="group" aria-label="Choose your level">
+        <span class="rlr-controls-label">I'm at level</span>
+        <div class="rlr-pills" id="rlr-pills">
+          <button type="button" class="rlr-pill is-active" data-level="all">All</button>
+          {LEVELS.map((lv) => <button type="button" class="rlr-pill" data-level={lv}>{lv}</button>)}
+        </div>
+      </div>
+
+      <p class="rlr-caption" id="rlr-caption">All {books.length} {name} books, beginner to advanced.</p>
+
+      <p class="rlr-fallback" id="rlr-fallback" hidden></p>
+
+      <div class="rlr-books" id="rlr-books">
+        {
+          books.map((b) => (
+            <article class="rlr-book" data-min={b.min} data-max={b.max}>
+              <span class="rlr-book-level">{levelLabel(b)}</span>
+              <div class="rlr-book-body">
+                <h3 class="rlr-book-title">
+                  {b.title}
+                  {b.author && <span class="rlr-book-author">{b.author}</span>}
+                </h3>
+                <p class="rlr-book-why">{b.why}</p>
+              </div>
+              <span class="rlr-book-kind">{b.kind}</span>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="rlr-cta">
+        <h2>Read your pick in {name}, one tapped sentence at a time</h2>
+        <p>
+          Lingo7 lets you read real books in {name} with sentence-aligned translation and native-narrated
+          audio, so a book a level above you becomes readable. Save words as you go and review them later.
+          Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="rlr-explainer">
+        <h2>How to pick the right book</h2>
+        <p>
+          Choose by <strong>difficulty first</strong>, interest second, reputation last. The most common
+          mistake is opening a famous book that is a notch too hard, looking up forty words a page, and
+          concluding you are bad at languages. The book was not the problem, the match was.
+        </p>
+        <p>
+          The levels here follow the <strong>CEFR scale</strong>. A1 to A2 is graded readers and simple
+          stories built on high-frequency words. B1 to B2 is your first authentic books, bridging from
+          learner material into native prose. C1 is real literature read for pleasure, not practice. Many
+          titles span a range, so they show up for every level they suit.
+        </p>
+        <p>
+          One honest shortcut changes the math: <strong>parallel text and audio</strong>. When the
+          translation sits beside each sentence and you can check a single line without losing your place,
+          you can read a level or two above your unaided level. That is the whole idea behind reading in
+          Lingo7.
+        </p>
+      </div>
+
+      <div class="rlr-links">
+        <p class="rlr-tool-link">
+          <a href={`/en/blog/${blogSlug}/`}>Read the full {name} reading guide, level by level &rarr;</a>
+        </p>
+        {CEFR_LANG_CODES.includes(code) && (
+          <p class="rlr-tool-link">
+            <a href={`/tools/cefr-level-test/${slug}/`}>Not sure of your level? Take the {name} CEFR test (A1-C2) &rarr;</a>
+          </p>
+        )}
+        {VOCAB_LANG_CODES.includes(code) && (
+          <p class="rlr-tool-link">
+            <a href={`/tools/vocabulary-size-estimator/${slug}/`}>How many {name} words do you know? Estimate your vocabulary &rarr;</a>
+          </p>
+        )}
+        {code !== 'en' && (
+          <p class="rlr-tool-link">
+            <a href={`/tools/how-long-to-learn-a-language/${slug}/`}>How long does it take to learn {name}? See the timeline &rarr;</a>
+          </p>
+        )}
+        <p class="rlr-tool-link">
+          <a href={`/en/learn/${slug}/`}>Start reading {name} with Lingo7 &rarr;</a>
+        </p>
+      </div>
+
+      <div class="rlr-others">
+        <h2>Books to learn another language</h2>
+        <div class="rlr-others-grid">
+          {
+            others.map((o) => (
+              <a class="rlr-other" href={`/tools/reading-level-recommender/${o.slug}/`}>
+                <span class="rlr-other-flag">{o.flag}</span>
+                {o.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="rlr-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="rlr-data" set:html={JSON.stringify(clientData)} />
+  <script>
+    type Data = { levels: string[] };
+    const el = document.getElementById('rlr-data');
+    const DATA: Data = el ? JSON.parse(el.textContent || '{}') : { levels: [] };
+    const LEVELS = DATA.levels;
+    const li = (l: string) => LEVELS.indexOf(l);
+
+    const pills = Array.from(document.querySelectorAll<HTMLButtonElement>('.rlr-pill'));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.rlr-book'));
+    const caption = document.getElementById('rlr-caption') as HTMLElement;
+    const fallback = document.getElementById('rlr-fallback') as HTMLElement;
+
+    const total = cards.length;
+
+    function covers(card: HTMLElement, level: string): boolean {
+      const min = card.dataset.min || 'A1';
+      const max = card.dataset.max || 'C1';
+      return li(min) <= li(level) && li(level) <= li(max);
+    }
+
+    // Distance from a card's [min,max] range to a level (0 if inside).
+    function distance(card: HTMLElement, level: string): number {
+      const lo = li(card.dataset.min || 'A1');
+      const hi = li(card.dataset.max || 'C1');
+      const x = li(level);
+      if (x < lo) return lo - x;
+      if (x > hi) return x - hi;
+      return 0;
+    }
+
+    function apply(level: string) {
+      fallback.hidden = true;
+      fallback.textContent = '';
+
+      if (level === 'all') {
+        cards.forEach((c) => c.classList.remove('is-hidden'));
+        caption.textContent = `All ${total} books, beginner to advanced.`;
+        return;
+      }
+
+      const matches = cards.filter((c) => covers(c, level));
+      if (matches.length > 0) {
+        cards.forEach((c) => c.classList.toggle('is-hidden', !covers(c, level)));
+        const noun = matches.length === 1 ? 'book' : 'books';
+        caption.textContent = `${matches.length} ${noun} for a ${level} reader.`;
+      } else {
+        // No book sits exactly at this level. Reveal the closest ones.
+        const min = Math.min(...cards.map((c) => distance(c, level)));
+        cards.forEach((c) => c.classList.toggle('is-hidden', distance(c, level) !== min));
+        const shown = cards.filter((c) => distance(c, level) === min).length;
+        caption.textContent = `Closest picks to ${level}.`;
+        fallback.hidden = false;
+        fallback.textContent =
+          level === LEVELS[LEVELS.length - 1]
+            ? `No dedicated ${level} title in this list yet, so here ${shown === 1 ? 'is the' : 'are the'} most advanced ${shown === 1 ? 'pick' : 'picks'}. Real literature is within reach once you are comfortable at B2.`
+            : `No book sits exactly at ${level} here, so here ${shown === 1 ? 'is the' : 'are the'} closest ${shown === 1 ? 'match' : 'matches'}. Parallel text helps you read slightly above your level.`;
+      }
+    }
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        pills.forEach((p) => p.classList.remove('is-active'));
+        pill.classList.add('is-active');
+        apply(pill.dataset.level || 'all');
+      });
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .rlr { padding: 3rem 0 4rem; }
+  .rlr-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .rlr-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .rlr-eyebrow a { color: var(--primary); text-decoration: none; }
+  .rlr-eyebrow a:hover { text-decoration: underline; }
+  .rlr-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .rlr-head h1 span { color: var(--primary); }
+  .rlr-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+  .rlr-intro em { color: var(--text, #e8eef5); font-style: italic; }
+
+  .rlr-controls {
+    display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+    max-width: 760px; margin: 2.2rem auto 0;
+  }
+  .rlr-controls-label {
+    font-size: 0.82rem; color: var(--text-muted, #9fb0c3); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .rlr-pills { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+  .rlr-pill {
+    font: inherit; cursor: pointer; color: var(--text, #e8eef5); font-weight: 700;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px; padding: 0.5rem 1.1rem; transition: all 0.12s ease;
+  }
+  .rlr-pill:hover { border-color: var(--primary); color: var(--primary); }
+  .rlr-pill.is-active {
+    background: var(--primary); color: #0b1120; border-color: var(--primary);
+  }
+
+  .rlr-caption {
+    max-width: 760px; margin: 1.2rem auto 0; text-align: center;
+    color: var(--text-muted, #9fb0c3); font-size: 0.92rem;
+  }
+  .rlr-fallback {
+    max-width: 680px; margin: 0.8rem auto 0; text-align: center; font-size: 0.86rem;
+    line-height: 1.5; color: var(--text-muted, #9fb0c3);
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 12px; padding: 0.7rem 1rem;
+  }
+  .rlr-fallback[hidden] { display: none; }
+
+  .rlr-books { max-width: 760px; margin: 1.4rem auto 0; display: grid; gap: 0.7rem; }
+  .rlr-book {
+    display: grid; grid-template-columns: 4rem 1fr auto; align-items: start; gap: 1rem;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px; padding: 1rem 1.2rem;
+  }
+  .rlr-book.is-hidden { display: none; }
+  .rlr-book-level {
+    display: inline-flex; align-items: center; justify-content: center; text-align: center;
+    min-width: 4rem; padding: 0.25rem 0.4rem; border-radius: 8px;
+    background: rgba(74, 222, 128, 0.14); color: var(--primary);
+    font-weight: 800; font-size: 0.8rem; line-height: 1.2; white-space: nowrap;
+  }
+  .rlr-book-body { min-width: 0; }
+  .rlr-book-title {
+    margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text, #e8eef5); line-height: 1.3;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem;
+  }
+  .rlr-book-author { font-size: 0.85rem; font-weight: 500; color: var(--text-muted, #9fb0c3); }
+  .rlr-book-why { margin: 0.35rem 0 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-muted, #9fb0c3); }
+  .rlr-book-kind {
+    align-self: center; white-space: nowrap; font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted, #9fb0c3);
+    border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 999px; padding: 0.25rem 0.6rem;
+  }
+
+  .rlr-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .rlr-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .rlr-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .rlr-cta :global(.cta-buttons) { justify-content: center; }
+
+  .rlr-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .rlr-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .rlr-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .rlr-explainer strong { color: var(--text, #e8eef5); }
+
+  .rlr-links { max-width: 760px; margin: 2.4rem auto 0; }
+  .rlr-tool-link { margin: 0.6rem 0 0; text-align: center; font-size: 0.95rem; }
+  .rlr-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .rlr-tool-link a:hover { text-decoration: underline; }
+
+  .rlr-others { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+  .rlr-others h2 { font-size: 1.3rem; margin: 0 0 1rem; }
+  .rlr-others-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .rlr-other {
+    display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    color: var(--text, #e8eef5); font-weight: 600; font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; padding: 0.4rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .rlr-other:hover { border-color: var(--primary); color: var(--primary); }
+  .rlr-other-flag { font-size: 1.1rem; }
+
+  .rlr-faq { max-width: 760px; margin: 3rem auto 0; }
+  .rlr-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .rlr-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .rlr-faq summary { cursor: pointer; font-weight: 600; }
+  .rlr-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  @media (max-width: 600px) {
+    .rlr-book { grid-template-columns: 3.2rem 1fr; gap: 0.7rem; padding: 0.85rem 0.9rem; }
+    .rlr-book-kind { grid-column: 2; justify-self: start; margin-top: 0.2rem; }
+    .rlr-book-level { min-width: 3.2rem; }
+  }
+</style>

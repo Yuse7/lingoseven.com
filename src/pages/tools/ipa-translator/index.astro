@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { ipaExamples, IPA_LANGS } from '../../../data/ipaExamples';
+
+// Hub: pick a language, jump to its IPA translator.
+const langs = IPA_LANGS.filter((code) => codeToSlug[code])
+  .map((code) => {
+    const l = getLanguageByCode(code);
+    return {
+      name: l?.name ?? code,
+      flag: l?.flag ?? '',
+      slug: codeToSlug[code],
+      count: ipaExamples[code]?.length ?? 0,
+    };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const named = langs.slice(0, 4).map((l) => l.name).join(', ');
+
+const canonicalUrl = 'https://lingoseven.com/tools/ipa-translator/';
+const title = 'IPA Translator: Word to Phonetic Transcription | Lingo7';
+const description =
+  `Translate words into IPA phonetic transcription in ${langs.length} languages. A free IPA translator with worked examples for ${named}, and more.`;
+
+const faq = [
+  {
+    question: 'How do I translate a word into IPA?',
+    answer:
+      'Pick your language, type the word, and press Transcribe. The tool returns the International Phonetic Alphabet spelling, where every symbol stands for one distinct sound. Each language page also lists a dozen common words already transcribed, so you can read example pronunciations even before you type anything.',
+  },
+  {
+    question: 'What is IPA and why does it matter for pronunciation?',
+    answer:
+      'The International Phonetic Alphabet is a system where each symbol maps to exactly one speech sound, unlike ordinary spelling. That means /ʃ/ is always the sh sound, in any language. Learning to read IPA lets you look up a word and know how it sounds without needing a recording.',
+  },
+  {
+    question: 'Is this IPA translator free?',
+    answer:
+      'Yes. Every language page is free to use, with no sign-up. Transcription is powered by the Lingo7 NLP phonetics service, the same engine used inside the reading app. The worked example tables are free to read too, and they load instantly.',
+  },
+  {
+    question: 'Which languages can I transcribe into IPA here?',
+    answer:
+      `This tool currently covers ${langs.length} languages: ${langs.map((l) => l.name).join(', ')}. Each has its own page with an input box and a table of common words in IPA. More languages follow the same reading-first approach in the Lingo7 app.`,
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'IPA Translator',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: langs.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `${l.name} IPA translator`,
+      url: `https://lingoseven.com/tools/ipa-translator/${l.slug}/`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="ipa">
+    <div class="container">
+      <header class="ipa-head">
+        <p class="ipa-eyebrow">Free tool</p>
+        <h1>Turn any word into IPA</h1>
+        <p class="ipa-intro">
+          The International Phonetic Alphabet writes down exactly how a word sounds, one symbol per sound.
+          Pick a language, type a word, and get its IPA transcription, or read the worked examples on each
+          page. Powered by Lingo7's NLP service.
+        </p>
+      </header>
+
+      <ToolDirectAnswer
+        lead={`An IPA translator converts a written word into its International Phonetic Alphabet transcription, a one-symbol-per-sound spelling of how it is pronounced.`}
+        body={`Pick a language, type a word, and Lingo7's NLP service returns the IPA. This free tool covers ${langs.length} languages and ships with worked example tables, so every page is useful the moment it loads.`}
+      />
+
+      <div class="lang-grid">
+        {
+          langs.map((l) => (
+            <a class="lang-card" href={`/tools/ipa-translator/${l.slug}/`}>
+              <span class="lang-flag">{l.flag}</span>
+              <span class="lang-name">{l.name}</span>
+              <span class="lang-sub">{l.count} words · to IPA</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="ipa-cta">
+        <h2>Hear the words, then read whole books</h2>
+        <p>
+          IPA tells you how a word should sound. Lingo7 lets you read real books with tap-to-hear native
+          audio and sentence-aligned translation, so spelling, sound, and meaning stick together. Free to
+          start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="ipa-explainer">
+        <h2>How the IPA translator works</h2>
+        <p>
+          Ordinary spelling is a poor guide to pronunciation. The same letters sound different across words
+          and languages, and silent letters hide everywhere. The <strong>International Phonetic Alphabet</strong>
+          fixes this by giving every distinct speech sound its own symbol, so a transcription reads the same
+          way every time.
+        </p>
+        <p>
+          Type a word on any language page and it is sent to <strong>Lingo7's NLP service</strong>, the same
+          phonetics engine that powers transcription inside the app. It returns the IPA for that word. Each
+          page also bakes in a table of common words already transcribed, so it stays useful offline and is
+          fully indexable.
+        </p>
+        <p>
+          IPA is a shortcut, not a substitute for listening. The fastest way to fix pronunciation is to pair
+          the symbols with real audio and meet words again and again in context, which is exactly what
+          reading in Lingo7 is built for.
+        </p>
+      </div>
+
+      <p class="ipa-tool-link">
+        <a href="/tools/reading-level-recommender/">Find the best books for your level (A1 to C1) &rarr;</a>
+      </p>
+      <p class="ipa-tool-link">
+        <a href="/tools/cefr-level-test/">Not sure of your level? Take the CEFR test &rarr;</a>
+      </p>
+      <p class="ipa-tool-link">
+        <a href="/tools/how-long-to-learn-a-language/">How long does it take to learn a language? &rarr;</a>
+      </p>
+      <p class="ipa-tool-link">
+        <a href="/tools/language-difficulty-ranker/">Compare all 48 languages by difficulty &rarr;</a>
+      </p>
+
+      <div class="ipa-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ipa { padding: 3rem 0 4rem; }
+  .ipa-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .ipa-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    color: var(--primary); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .ipa-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .ipa-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  .lang-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.8rem; max-width: 820px; margin: 2rem auto 0;
+  }
+  .lang-card {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+    text-decoration: none; text-align: center;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; padding: 1.2rem 1rem; transition: all 0.15s ease;
+  }
+  .lang-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+  .lang-flag { font-size: 2rem; }
+  .lang-name { color: var(--text, #e8eef5); font-weight: 700; font-size: 1.05rem; }
+  .lang-sub { color: var(--text-muted, #9fb0c3); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+
+  .ipa-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .ipa-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .ipa-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .ipa-cta :global(.cta-buttons) { justify-content: center; }
+
+  .ipa-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .ipa-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .ipa-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .ipa-explainer strong { color: var(--text, #e8eef5); }
+
+  .ipa-tool-link { max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: 0.95rem; }
+  .ipa-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .ipa-tool-link a:hover { text-decoration: underline; }
+
+  .ipa-faq { max-width: 760px; margin: 3rem auto 0; }
+  .ipa-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .ipa-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .ipa-faq summary { cursor: pointer; font-weight: 600; }
+  .ipa-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+</style>

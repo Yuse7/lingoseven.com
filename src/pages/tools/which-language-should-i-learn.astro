@@ -1,0 +1,717 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../data/languages';
+import { codeToSlug } from '../../data/languageSlugs';
+import { languageFacts } from '../../data/languageFacts';
+import { READING_LANG_CODES } from '../../data/readingBooks';
+import { quizLangs, type QuizLang } from '../../data/quizLangs';
+
+// Which language should I learn? A 6-question fit quiz over the real languages we
+// support. Server-renders a sensible default result (goal = travel) so the page
+// is useful with JS off; the inline script re-scores when the visitor answers.
+// English is excluded from the recommendations: the audience learns a NEW language.
+
+type Reason = { w: number; text: string };
+type Answers = { goal: string; time: string; script: string; region: string; difficulty: string; reach: string };
+type Cand = QuizLang & { name: string; flag: string; slug: string; hasReading: boolean; hasHowLong: boolean };
+
+// Which languages have a per-language reading-level page / how-long page (so the
+// per-pick links never 404). how-long excludes English (fsiHours = 0).
+const HOW_LONG = new Set(Object.values(languageFacts).filter((f) => f.fsiHours > 0).map((f) => f.code));
+
+const candidates: Cand[] = Object.values(quizLangs)
+  .filter((L) => L.code !== 'en' && codeToSlug[L.code])
+  .map((L) => {
+    const lang = getLanguageByCode(L.code);
+    return {
+      ...L,
+      name: lang?.name ?? L.code,
+      flag: lang?.flag ?? '',
+      slug: codeToSlug[L.code],
+      hasReading: READING_LANG_CODES.includes(L.code),
+      hasHowLong: HOW_LONG.has(L.code),
+    };
+  });
+
+// Human-readable maps shared with the client script (kept textually in sync).
+const REGION_DATA: Record<string, string> = { europe: 'Europe', latam: 'Latin America', asia: 'Asia', africa: 'Africa', mideast: 'Middle East' };
+const REGION_LABEL: Record<string, string> = { europe: 'Europe', latam: 'Latin America', asia: 'Asia', africa: 'Africa', mideast: 'the Middle East' };
+const GOAL_REASON: Record<string, string> = {
+  travel: 'it fits your plan to travel and talk to people',
+  culture: 'it opens a rich world of books, film, and culture',
+  business: 'it is valuable for work and business',
+  academia: 'it is useful for study and academia',
+  heritage: 'it connects you to family or heritage roots',
+};
+
+// Honest fit score. Goal and region are the strongest signals; difficulty and
+// weekly time interact; script can gate; reach uses real speaker counts.
+function scoreLang(L: QuizLang, a: Answers): { score: number; reasons: Reason[] } {
+  let s = 0;
+  const reasons: Reason[] = [];
+
+  if (L.goals.includes(a.goal)) {
+    s += 4;
+    reasons.push({ w: 4, text: GOAL_REASON[a.goal] });
+  }
+
+  if (a.region !== 'any') {
+    if (L.regions.includes(REGION_DATA[a.region])) {
+      s += 4;
+      reasons.push({ w: 4, text: `it is spoken across ${REGION_LABEL[a.region]}` });
+    } else {
+      s -= 3;
+    }
+  }
+
+  const isLatin = L.script === 'Latin';
+  if (a.script === 'latin') s += isLatin ? 2 : -6;
+  else if (a.script === 'open') {
+    if (!isLatin) s += 1;
+  } else if (!isLatin) {
+    s += 3;
+    reasons.push({ w: 3, text: `you get to learn the ${L.script} alphabet` });
+  }
+
+  if (a.difficulty === 'easy') {
+    s += [0, 5, 3, 0][L.difficulty];
+    if (L.difficulty === 1) reasons.push({ w: 5, text: 'it is one of the fastest languages for English speakers to pick up' });
+  } else if (a.difficulty === 'balanced') {
+    s += [0, 3, 5, 3][L.difficulty];
+    if (L.difficulty === 2) reasons.push({ w: 4, text: 'it sits at a comfortable middle difficulty' });
+  } else {
+    s += [0, 0, 3, 5][L.difficulty];
+    if (L.difficulty === 3) reasons.push({ w: 5, text: 'it is a genuine challenge to sink your teeth into' });
+  }
+
+  if (a.time === 'casual') s += [0, 3, 1, -2][L.difficulty];
+  else if (a.time === 'steady') s += [0, 1, 1, 0][L.difficulty];
+  else {
+    s += [0, 0, 1, 2][L.difficulty];
+    if (L.difficulty === 3) reasons.push({ w: 2, text: 'your intensive pace can handle its steeper curve' });
+  }
+
+  const sp = L.speakersM;
+  if (a.reach === 'big') {
+    if (sp >= 200) {
+      s += 5;
+      reasons.push({ w: 4, text: `around ${Math.round(sp)} million people speak it` });
+    } else if (sp >= 80) {
+      s += 4;
+      reasons.push({ w: 3, text: `it reaches about ${Math.round(sp)} million speakers` });
+    } else if (sp >= 30) s += 2;
+    else s -= 1;
+  } else if (a.reach === 'some') {
+    if (sp >= 50) s += 2;
+    else if (sp >= 15) s += 1;
+  } else if (sp < 8) {
+    s += 3;
+    reasons.push({ w: 3, text: 'it is a hidden gem with a small, devoted community' });
+  } else if (sp < 20) s += 1;
+
+  return { score: s, reasons };
+}
+
+function capitalize(t: string): string {
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+function reasonText(res: { reasons: Reason[] }): string {
+  const top = [...res.reasons].sort((x, y) => y.w - x.w).slice(0, 2).map((r) => r.text);
+  if (top.length === 0) return 'A solid all-round fit for the answers you gave.';
+  return capitalize(top.join(' and ')) + '.';
+}
+
+function rankPicks(a: Answers): (Cand & { reason: string })[] {
+  return candidates
+    .map((L) => ({ L, r: scoreLang(L, a) }))
+    .sort((x, y) => y.r.score - x.r.score || y.L.speakersM - x.L.speakersM || x.L.code.localeCompare(y.L.code))
+    .slice(0, 3)
+    .map((row) => ({ ...row.L, reason: reasonText(row.r) }));
+}
+
+// Server-rendered default (matches the checked radios below).
+const defaultAnswers: Answers = { goal: 'travel', time: 'steady', script: 'open', region: 'any', difficulty: 'easy', reach: 'some' };
+const defaultPicks = rankPicks(defaultAnswers);
+
+// The other-languages grid (jump straight into any language's learn page).
+const others = [...candidates].sort((a, b) => a.name.localeCompare(b.name));
+
+// Only the fields the client scorer needs, kept small.
+const clientData = candidates.map((c) => ({
+  code: c.code,
+  name: c.name,
+  flag: c.flag,
+  slug: c.slug,
+  regions: c.regions,
+  goals: c.goals,
+  script: c.script,
+  difficulty: c.difficulty,
+  speakersM: c.speakersM,
+  blurb: c.blurb,
+  hasReading: c.hasReading,
+  hasHowLong: c.hasHowLong,
+}));
+
+const canonicalUrl = 'https://lingoseven.com/tools/which-language-should-i-learn/';
+const title = 'Which Language Should I Learn? Take the Free Quiz | Lingo7';
+const description =
+  'Answer 6 quick questions about your goals, time, and interests, and get your top 3 languages to learn, ranked by fit, with an honest one-line reason for each.';
+
+const faq = [
+  {
+    question: 'What language should I learn?',
+    answer:
+      'There is no universally best language, only the best fit for your goals, time, and interests. For most English speakers who want an early win, Spanish, French, and Italian are the easiest and most useful starting points. This quiz weighs six factors and ranks real languages by how well they fit you, then points you to books you can start reading right away.',
+  },
+  {
+    question: 'What is the easiest language to learn for English speakers?',
+    answer:
+      'The easiest languages for English speakers are the FSI Category I languages: Spanish, French, Italian, Portuguese, Dutch, Norwegian, Swedish, Danish, and Romanian. Each needs roughly 600 to 750 hours to reach working proficiency. They share the Latin alphabet and thousands of cognates with English, so reading them feels familiar quickly. Pick the easy-win option in the quiz to surface these first.',
+  },
+  {
+    question: 'Which language is the most useful to learn?',
+    answer:
+      'Usefulness depends on what you want it for. By raw reach, Spanish, French, and Portuguese open the most doors across the most countries, while German is the heavyweight for business inside Europe. For travel, match the language to where you go. Answer the reach and region questions in the quiz and it weighs speaker numbers and regions for you.',
+  },
+  {
+    question: 'How do I decide which language to learn?',
+    answer:
+      'Decide on fit, not fashion. Weigh your real goal (travel, work, culture, heritage), the time you can give each week, whether you are open to a new alphabet, the part of the world you care about, and how much of a challenge you want. This tool scores all of that against real data. Then commit by reading something you enjoy, the step most learners skip.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Which Language Should I Learn Quiz',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+
+// The quiz questions, rendered as SSR radio groups (the first option of each is
+// the default, matching defaultAnswers above).
+const questions = [
+  {
+    name: 'goal',
+    legend: 'What do you most want to do with it?',
+    options: [
+      { value: 'travel', label: 'Travel and everyday talk' },
+      { value: 'culture', label: 'Read books and watch film' },
+      { value: 'business', label: 'Work and business' },
+      { value: 'academia', label: 'Study and research' },
+      { value: 'heritage', label: 'Family or heritage' },
+    ],
+    defaultValue: 'travel',
+  },
+  {
+    name: 'time',
+    legend: 'How much time can you give it each week?',
+    options: [
+      { value: 'casual', label: 'A few minutes a day' },
+      { value: 'steady', label: 'A steady half hour' },
+      { value: 'intensive', label: 'I am going all in' },
+    ],
+    defaultValue: 'steady',
+  },
+  {
+    name: 'script',
+    legend: 'Open to learning a new alphabet?',
+    options: [
+      { value: 'latin', label: 'Keep it to the Latin alphabet' },
+      { value: 'open', label: 'Open to it' },
+      { value: 'eager', label: 'A new alphabet sounds fun' },
+    ],
+    defaultValue: 'open',
+  },
+  {
+    name: 'region',
+    legend: 'Any part of the world pulling you?',
+    options: [
+      { value: 'any', label: 'No preference' },
+      { value: 'europe', label: 'Europe' },
+      { value: 'latam', label: 'Latin America' },
+      { value: 'asia', label: 'Asia' },
+      { value: 'africa', label: 'Africa' },
+      { value: 'mideast', label: 'Middle East' },
+    ],
+    defaultValue: 'any',
+  },
+  {
+    name: 'difficulty',
+    legend: 'What kind of challenge do you want?',
+    options: [
+      { value: 'easy', label: 'An easy win to stay motivated' },
+      { value: 'balanced', label: 'A balanced challenge' },
+      { value: 'hard', label: 'Push me, make it hard' },
+    ],
+    defaultValue: 'easy',
+  },
+  {
+    name: 'reach',
+    legend: 'How much do speakers and content matter?',
+    options: [
+      { value: 'big', label: 'I want lots of speakers and content' },
+      { value: 'some', label: 'Some reach is nice' },
+      { value: 'niche', label: 'I would love a hidden gem' },
+    ],
+    defaultValue: 'some',
+  },
+] as const;
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="quiz">
+    <div class="container">
+      <header class="quiz-head">
+        <p class="quiz-eyebrow">Free tool</p>
+        <h1>Which <span>language</span> should I learn?</h1>
+        <p class="quiz-intro">
+          There is no single best language, only the best one for you. Answer six quick questions about your
+          goals, your time, and what you want out of it, and this free tool ranks the languages that fit you
+          best, each with an honest one-line reason.
+        </p>
+      </header>
+
+      <ToolDirectAnswer
+        lead={`The best language to learn is the one that fits your goals, the time you have, and the places and content you care about.`}
+        body={`This quiz weighs six factors, from your goal and weekly time to script, region, difficulty, and reach, then ranks real languages by fit and shows your top three, each with a plain reason and books to start reading.`}
+      />
+
+      <form class="quiz-form" id="quiz-form">
+        {
+          questions.map((q, qi) => (
+            <fieldset class="quiz-q">
+              <legend class="quiz-legend">
+                <span class="quiz-qnum">{qi + 1}</span>
+                {q.legend}
+              </legend>
+              <div class="quiz-opts">
+                {q.options.map((o) => {
+                  const checked = q.defaultValue === o.value;
+                  return (
+                    <label class="quiz-opt">
+                      <input type="radio" name={q.name} value={o.value} checked={checked} />
+                      <span>{o.label}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </fieldset>
+          ))
+        }
+        <button type="submit" class="quiz-go" id="quiz-go">See my languages</button>
+      </form>
+
+      <div class="quiz-result" id="quiz-result">
+        <p class="quiz-caption" id="quiz-caption">Your top 3 languages, ranked by how well they fit your answers.</p>
+        <ol class="quiz-picks" id="quiz-picks">
+          {
+            defaultPicks.map((p, i) => (
+              <li class="quiz-pick">
+                <div class="quiz-pick-rank">{i + 1}</div>
+                <div class="quiz-pick-main">
+                  <h3 class="quiz-pick-name">
+                    <span class="quiz-pick-flag">{p.flag}</span>
+                    {p.name}
+                  </h3>
+                  <p class="quiz-pick-reason">{p.reason}</p>
+                  <p class="quiz-pick-blurb">{p.blurb}</p>
+                  <div class="quiz-pick-links">
+                    <a href={`/en/learn/${p.slug}/`}>Start reading {p.name} &rarr;</a>
+                    {p.hasReading && <a href={`/tools/reading-level-recommender/${p.slug}/`}>Books by level</a>}
+                    {p.hasHowLong && <a href={`/tools/how-long-to-learn-a-language/${p.slug}/`}>How long it takes</a>}
+                  </div>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="quiz-cta">
+        <h2>Whatever you pick, learn it faster by reading</h2>
+        <p>
+          Lingo7 lets you read real books in your new language with sentence-aligned translation and
+          native-narrated audio, so a book a level above you becomes readable. Save words as you go and
+          review them later. Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="quiz-explainer">
+        <h2>How the quiz works</h2>
+        <p>
+          The quiz scores every language we support against six things you tell it: your goal, how much time
+          you have each week, whether you are open to a new alphabet, the region you care about, how much of a
+          challenge you want, and how much reach matters to you. The numbers behind it are real:
+          <strong> FSI difficulty tiers, speaker counts, writing systems, and the regions</strong> where each
+          language is actually spoken.
+        </p>
+        <p>
+          There is no single best language, and any tool that hands you one is selling something. The best
+          language to learn is usually <strong>the one you will keep going with</strong>, which is why goal and
+          time count as much as raw difficulty. A hard language you love beats an easy one that bores you. When
+          two languages tie, this tool leans toward the one with more speakers and more to read.
+        </p>
+        <p>
+          Whichever way your top three fall, the fastest way to make real progress is to start
+          <strong> reading in the language</strong>, not to grind flashcards. Reading builds vocabulary and
+          grammar intuition in context, and with parallel translation and audio you can take on a book a level
+          above where you would manage alone. That is exactly what reading in Lingo7 is built for.
+        </p>
+      </div>
+
+      <div class="quiz-links">
+        <p class="quiz-tool-link">
+          <a href="/tools/reading-level-recommender/">Find books at your level in any language &rarr;</a>
+        </p>
+        <p class="quiz-tool-link">
+          <a href="/tools/cefr-level-test/">Not sure of your level? Take the CEFR test (A1 to C2) &rarr;</a>
+        </p>
+        <p class="quiz-tool-link">
+          <a href="/tools/how-long-to-learn-a-language/">How long does it take to learn a language? &rarr;</a>
+        </p>
+        <p class="quiz-tool-link">
+          <a href="/tools/language-difficulty-ranker/">Compare all 50 languages by difficulty &rarr;</a>
+        </p>
+      </div>
+
+      <div class="quiz-others">
+        <h2>Prefer to just pick one?</h2>
+        <p class="quiz-others-sub">Jump straight into any language with Lingo7.</p>
+        <div class="quiz-others-grid">
+          {
+            others.map((o) => (
+              <a class="quiz-other" href={`/en/learn/${o.slug}/`}>
+                <span class="quiz-other-flag">{o.flag}</span>
+                {o.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="quiz-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="quiz-data" set:html={JSON.stringify(clientData)} />
+  <script>
+    type Reason = { w: number; text: string };
+    type Answers = { goal: string; time: string; script: string; region: string; difficulty: string; reach: string };
+    type Cand = {
+      code: string; name: string; flag: string; slug: string;
+      regions: string[]; goals: string[]; script: string; difficulty: number; speakersM: number; blurb: string;
+      hasReading: boolean; hasHowLong: boolean;
+    };
+
+    const el = document.getElementById('quiz-data');
+    const CANDS: Cand[] = el ? JSON.parse(el.textContent || '[]') : [];
+
+    const REGION_DATA: Record<string, string> = { europe: 'Europe', latam: 'Latin America', asia: 'Asia', africa: 'Africa', mideast: 'Middle East' };
+    const REGION_LABEL: Record<string, string> = { europe: 'Europe', latam: 'Latin America', asia: 'Asia', africa: 'Africa', mideast: 'the Middle East' };
+    const GOAL_REASON: Record<string, string> = {
+      travel: 'it fits your plan to travel and talk to people',
+      culture: 'it opens a rich world of books, film, and culture',
+      business: 'it is valuable for work and business',
+      academia: 'it is useful for study and academia',
+      heritage: 'it connects you to family or heritage roots',
+    };
+
+    // Same algorithm as the server frontmatter (keep in sync).
+    function scoreLang(L: Cand, a: Answers): { score: number; reasons: Reason[] } {
+      let s = 0;
+      const reasons: Reason[] = [];
+
+      if (L.goals.includes(a.goal)) {
+        s += 4;
+        reasons.push({ w: 4, text: GOAL_REASON[a.goal] });
+      }
+
+      if (a.region !== 'any') {
+        if (L.regions.includes(REGION_DATA[a.region])) {
+          s += 4;
+          reasons.push({ w: 4, text: `it is spoken across ${REGION_LABEL[a.region]}` });
+        } else {
+          s -= 3;
+        }
+      }
+
+      const isLatin = L.script === 'Latin';
+      if (a.script === 'latin') s += isLatin ? 2 : -6;
+      else if (a.script === 'open') {
+        if (!isLatin) s += 1;
+      } else if (!isLatin) {
+        s += 3;
+        reasons.push({ w: 3, text: `you get to learn the ${L.script} alphabet` });
+      }
+
+      if (a.difficulty === 'easy') {
+        s += [0, 5, 3, 0][L.difficulty];
+        if (L.difficulty === 1) reasons.push({ w: 5, text: 'it is one of the fastest languages for English speakers to pick up' });
+      } else if (a.difficulty === 'balanced') {
+        s += [0, 3, 5, 3][L.difficulty];
+        if (L.difficulty === 2) reasons.push({ w: 4, text: 'it sits at a comfortable middle difficulty' });
+      } else {
+        s += [0, 0, 3, 5][L.difficulty];
+        if (L.difficulty === 3) reasons.push({ w: 5, text: 'it is a genuine challenge to sink your teeth into' });
+      }
+
+      if (a.time === 'casual') s += [0, 3, 1, -2][L.difficulty];
+      else if (a.time === 'steady') s += [0, 1, 1, 0][L.difficulty];
+      else {
+        s += [0, 0, 1, 2][L.difficulty];
+        if (L.difficulty === 3) reasons.push({ w: 2, text: 'your intensive pace can handle its steeper curve' });
+      }
+
+      const sp = L.speakersM;
+      if (a.reach === 'big') {
+        if (sp >= 200) {
+          s += 5;
+          reasons.push({ w: 4, text: `around ${Math.round(sp)} million people speak it` });
+        } else if (sp >= 80) {
+          s += 4;
+          reasons.push({ w: 3, text: `it reaches about ${Math.round(sp)} million speakers` });
+        } else if (sp >= 30) s += 2;
+        else s -= 1;
+      } else if (a.reach === 'some') {
+        if (sp >= 50) s += 2;
+        else if (sp >= 15) s += 1;
+      } else if (sp < 8) {
+        s += 3;
+        reasons.push({ w: 3, text: 'it is a hidden gem with a small, devoted community' });
+      } else if (sp < 20) s += 1;
+
+      return { score: s, reasons };
+    }
+
+    function capitalize(t: string): string {
+      return t.charAt(0).toUpperCase() + t.slice(1);
+    }
+    function reasonText(reasons: Reason[]): string {
+      const top = [...reasons].sort((x, y) => y.w - x.w).slice(0, 2).map((r) => r.text);
+      if (top.length === 0) return 'A solid all-round fit for the answers you gave.';
+      return capitalize(top.join(' and ')) + '.';
+    }
+
+    const form = document.getElementById('quiz-form') as HTMLFormElement | null;
+    const picksEl = document.getElementById('quiz-picks') as HTMLElement | null;
+    const resultEl = document.getElementById('quiz-result') as HTMLElement | null;
+
+    function pick(name: string): string {
+      const input = form?.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`);
+      return input ? input.value : '';
+    }
+
+    function render(rows: Array<Cand & { reason: string }>): void {
+      if (!picksEl) return;
+      picksEl.innerHTML = rows
+        .map((p, i) => {
+          const links = [`<a href="/en/learn/${p.slug}/">Start reading ${p.name} →</a>`];
+          if (p.hasReading) links.push(`<a href="/tools/reading-level-recommender/${p.slug}/">Books by level</a>`);
+          if (p.hasHowLong) links.push(`<a href="/tools/how-long-to-learn-a-language/${p.slug}/">How long it takes</a>`);
+          return (
+            `<li class="quiz-pick"><div class="quiz-pick-rank">${i + 1}</div>` +
+            `<div class="quiz-pick-main"><h3 class="quiz-pick-name"><span class="quiz-pick-flag">${p.flag}</span>${p.name}</h3>` +
+            `<p class="quiz-pick-reason">${p.reason}</p><p class="quiz-pick-blurb">${p.blurb}</p>` +
+            `<div class="quiz-pick-links">${links.join('')}</div></div></li>`
+          );
+        })
+        .join('');
+    }
+
+    function run(): void {
+      const a: Answers = {
+        goal: pick('goal'),
+        time: pick('time'),
+        script: pick('script'),
+        region: pick('region'),
+        difficulty: pick('difficulty'),
+        reach: pick('reach'),
+      };
+      const rows = CANDS.map((L) => ({ L, r: scoreLang(L, a) }))
+        .sort((x, y) => y.r.score - x.r.score || y.L.speakersM - x.L.speakersM || x.L.code.localeCompare(y.L.code))
+        .slice(0, 3)
+        .map((row) => ({ ...row.L, reason: reasonText(row.r.reasons) }));
+      render(rows);
+    }
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      run();
+      resultEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .quiz { padding: 3rem 0 4rem; }
+  .quiz-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .quiz-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    color: var(--primary); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .quiz-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .quiz-head h1 span { color: var(--primary); }
+  .quiz-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  /* Quiz form */
+  .quiz-form {
+    max-width: 760px; margin: 2.4rem auto 0; display: grid; gap: 1rem;
+  }
+  .quiz-q {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px;
+    padding: 1.1rem 1.2rem; margin: 0; min-width: 0;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .quiz-legend {
+    display: flex; align-items: center; gap: 0.6rem; padding: 0;
+    font-weight: 700; font-size: 1.02rem; color: var(--text, #e8eef5);
+  }
+  .quiz-qnum {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.6rem; height: 1.6rem; flex: 0 0 auto; border-radius: 999px;
+    background: rgba(74, 222, 128, 0.14); color: var(--primary);
+    font-size: 0.82rem; font-weight: 800;
+  }
+  .quiz-opts { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+  .quiz-opt {
+    position: relative; cursor: pointer; user-select: none;
+    display: inline-flex; align-items: center;
+    color: var(--text, #e8eef5); font-weight: 600; font-size: 0.92rem;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px; padding: 0.5rem 1rem; transition: all 0.12s ease;
+  }
+  .quiz-opt input {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: 0;
+    opacity: 0; pointer-events: none;
+  }
+  .quiz-opt:hover { border-color: var(--primary); color: var(--primary); }
+  .quiz-opt:has(input:checked) {
+    background: var(--primary); color: #0b1120; border-color: var(--primary);
+  }
+  .quiz-opt:has(input:focus-visible) { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+  .quiz-go {
+    justify-self: center; margin-top: 0.6rem; cursor: pointer; font: inherit;
+    font-weight: 800; font-size: 1.02rem; color: #0b1120;
+    background: var(--gradient, var(--primary)); border: none; border-radius: 999px;
+    padding: 0.85rem 2.2rem; transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .quiz-go:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(74, 222, 128, 0.28); }
+  .quiz-go:active { transform: translateY(0); }
+
+  /* Result */
+  .quiz-result { max-width: 760px; margin: 2.4rem auto 0; }
+  .quiz-caption {
+    text-align: center; color: var(--text-muted, #9fb0c3); font-size: 0.92rem; margin: 0 0 1.2rem;
+  }
+  .quiz-picks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; }
+
+  /* Pick cards are also injected at runtime (no scope attribute), so every rule
+     for their internals is nested under the server-rendered .quiz-picks and made
+     :global() so it reaches the injected DOM too. */
+  .quiz-picks :global(.quiz-pick) {
+    display: grid; grid-template-columns: 2.6rem 1fr; align-items: start; gap: 1rem;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 1.2rem 1.3rem;
+  }
+  .quiz-picks :global(.quiz-pick-rank) {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 2.6rem; height: 2.6rem; border-radius: 999px;
+    background: var(--primary); color: #0b1120; font-weight: 800; font-size: 1.1rem;
+  }
+  .quiz-picks :global(.quiz-pick-main) { min-width: 0; }
+  .quiz-picks :global(.quiz-pick-name) {
+    margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--text, #e8eef5);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .quiz-picks :global(.quiz-pick-flag) { font-size: 1.4rem; }
+  .quiz-picks :global(.quiz-pick-reason) {
+    margin: 0.4rem 0 0; font-size: 0.98rem; line-height: 1.5; color: var(--text, #e8eef5);
+  }
+  .quiz-picks :global(.quiz-pick-blurb) {
+    margin: 0.35rem 0 0; font-size: 0.88rem; line-height: 1.5; color: var(--text-muted, #9fb0c3);
+  }
+  .quiz-picks :global(.quiz-pick-links) {
+    margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1rem;
+  }
+  .quiz-picks :global(.quiz-pick-links a) {
+    color: var(--primary); font-weight: 600; font-size: 0.88rem; text-decoration: none;
+  }
+  .quiz-picks :global(.quiz-pick-links a:hover) { text-decoration: underline; }
+
+  .quiz-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .quiz-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .quiz-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .quiz-cta :global(.cta-buttons) { justify-content: center; }
+
+  .quiz-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .quiz-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .quiz-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .quiz-explainer strong { color: var(--text, #e8eef5); }
+
+  .quiz-links { max-width: 760px; margin: 2.4rem auto 0; }
+  .quiz-tool-link { margin: 0.6rem 0 0; text-align: center; font-size: 0.95rem; }
+  .quiz-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .quiz-tool-link a:hover { text-decoration: underline; }
+
+  .quiz-others { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+  .quiz-others h2 { font-size: 1.3rem; margin: 0 0 0.4rem; }
+  .quiz-others-sub { color: var(--text-muted, #9fb0c3); font-size: 0.95rem; margin: 0 0 1rem; }
+  .quiz-others-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .quiz-other {
+    display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    color: var(--text, #e8eef5); font-weight: 600; font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; padding: 0.4rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .quiz-other:hover { border-color: var(--primary); color: var(--primary); }
+  .quiz-other-flag { font-size: 1.1rem; }
+
+  .quiz-faq { max-width: 760px; margin: 3rem auto 0; }
+  .quiz-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .quiz-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .quiz-faq summary { cursor: pointer; font-weight: 600; }
+  .quiz-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  @media (max-width: 600px) {
+    .quiz-picks :global(.quiz-pick) { grid-template-columns: 2.1rem 1fr; gap: 0.7rem; padding: 1rem; }
+    .quiz-picks :global(.quiz-pick-rank) { width: 2.1rem; height: 2.1rem; font-size: 0.95rem; }
+    .quiz-picks :global(.quiz-pick-name) { font-size: 1.08rem; }
+  }
+</style>

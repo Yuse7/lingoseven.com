@@ -1,0 +1,427 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { languageFacts } from '../../../data/languageFacts';
+import { CEFR_LANG_CODES } from '../../../data/cefrTest';
+import { READING_LANG_CODES } from '../../../data/readingBooks';
+import { falseFriends, FALSE_FRIENDS_LANGS } from '../../../data/falseFriends';
+
+// One static page per language that has a curated false-friends list.
+export function getStaticPaths() {
+  return FALSE_FRIENDS_LANGS.filter((code) => codeToSlug[code]).map((code) => ({
+    params: { lang: codeToSlug[code] },
+    props: { code },
+  }));
+}
+
+const { code } = Astro.props;
+const lang = getLanguageByCode(code);
+const name = lang?.name ?? code;
+const slug = codeToSlug[code];
+
+// Keep source order (curated most-recognizable first).
+const pairs = falseFriends[code];
+const n = pairs.length;
+const a = pairs[0];
+const b = pairs[1];
+const last = pairs[n - 1];
+
+// Short first clause of a meaning, for tight inline examples.
+const clip = (m: string) => m.split(',')[0].trim();
+const am = clip(a.meaning);
+const bm = clip(b.meaning);
+
+// Part-of-speech filter chips, only for the parts of speech actually present.
+const POS_ORDER = ['noun', 'verb', 'adj', 'adv', 'num'];
+const POS_TAG: Record<string, string> = {
+  noun: 'Noun',
+  verb: 'Verb',
+  adj: 'Adjective',
+  adv: 'Adverb',
+  num: 'Number',
+};
+const POS_PLURAL: Record<string, string> = {
+  noun: 'Nouns',
+  verb: 'Verbs',
+  adj: 'Adjectives',
+  adv: 'Adverbs',
+  num: 'Numbers',
+};
+const posPresent = POS_ORDER.filter((p) => pairs.some((f) => f.pos === p));
+
+const asOf = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+const lf = languageFacts[code];
+
+const canonicalUrl = `https://lingoseven.com/tools/false-friends/${slug}/`;
+const title = `${name} False Friends: Words That Trick You | Lingo7`;
+const description =
+  `${n} common ${name} false friends, like ${a.word} (not ${a.looksLike}) and ${b.word} (not ${b.looksLike}). What each really means, and how to say the English word.`;
+
+const answerBody =
+  `For example, ${a.word} means ${am}, not ${a.looksLike}, and ${b.word} means ${bm}, not ${b.looksLike}. This free guide lists ${n} real ${name} false friends: the English word each one resembles, what it truly means, and how to say the English sense correctly.`;
+
+const faq = [
+  {
+    question: `What are false friends in ${name}?`,
+    answer:
+      `False friends are ${name} words that look almost identical to an English word but mean something different, like ${a.word}, which looks like "${a.looksLike}" but means "${a.meaning}". They exist because both languages inherited or borrowed from shared roots that then drifted apart. The fix is meeting them in real sentences until the true meaning sticks.`,
+  },
+  {
+    question: `Does ${name} ${a.word} mean ${a.looksLike}?`,
+    answer:
+      `No. ${name} ${a.word} actually means ${a.meaning}, not ${a.looksLike}. ${a.tip} This is one of the most common ${name} false friends for English speakers, so it is worth learning early.`,
+  },
+  {
+    question: `How do I stop confusing false friends in ${name}?`,
+    answer:
+      `Memorizing a list helps for a day; context makes it permanent. When you meet ${name} words like ${a.word} and ${last.word} inside real sentences, with the translation one tap away, the correct meaning attaches to the situation instead of to the English lookalike. That is how reading in Lingo7 trains them out of you.`,
+  },
+  {
+    question: `Are there many false friends between English and ${name}?`,
+    answer:
+      `Yes. ${name} and English share a large amount of vocabulary through Latin, French, and centuries of borrowing, and that overlap is exactly what breeds false friends. This page covers ${n} of the most common ones, from ${a.word} (looks like ${a.looksLike}) to ${last.word} (looks like ${last.looksLike}). Reading in context is the surest way to keep them straight.`,
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: `${name} False Friends`,
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${name} false friends for English speakers`,
+    itemListElement: pairs.map((f, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `${f.word} (looks like ${f.looksLike}, means ${f.meaning})`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lingoseven.com/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'False Friends',
+        item: 'https://lingoseven.com/tools/false-friends/',
+      },
+      { '@type': 'ListItem', position: 3, name, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+
+// Cross-link cluster: every other language with a page.
+const others = FALSE_FRIENDS_LANGS.filter((c) => c !== code && codeToSlug[c])
+  .map((c) => {
+    const l = getLanguageByCode(c);
+    return { name: l?.name ?? c, flag: l?.flag ?? '', slug: codeToSlug[c] };
+  })
+  .sort((x, y) => x.name.localeCompare(y.name));
+
+const clientData = { labels: POS_PLURAL };
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="ff">
+    <div class="container">
+      <header class="ff-head">
+        <p class="ff-eyebrow"><a href="/tools/false-friends/">False friends</a></p>
+        <h1>{name} false friends that trick <span>English speakers</span></h1>
+        <p class="ff-intro">
+          Some {name} words look like an English word you already know, then mean something completely
+          different. Here are {n} of the most common traps, each with the English word it resembles, what it
+          really means, and how to say the English sense instead.
+        </p>
+      </header>
+
+      <ToolDirectAnswer
+        lead={`False friends in ${name} are words that look like an English word but mean something completely different.`}
+        body={answerBody}
+      />
+
+      <div class="ff-controls" role="group" aria-label="Filter by part of speech">
+        <span class="ff-controls-label">Show</span>
+        <div class="ff-chips" id="ff-chips">
+          <button type="button" class="ff-chip is-active" data-pos="all">All</button>
+          {posPresent.map((p) => <button type="button" class="ff-chip" data-pos={p}>{POS_PLURAL[p]}</button>)}
+        </div>
+      </div>
+
+      <p class="ff-caption" id="ff-caption">All {n} {name} false friends.</p>
+
+      <div class="ff-cards" id="ff-cards">
+        {
+          pairs.map((f) => (
+            <article class="ff-card" data-pos={f.pos}>
+              <div class="ff-card-top">
+                <span class="ff-word">{f.word}</span>
+                <span class="ff-pos">{POS_TAG[f.pos] ?? f.pos}</span>
+              </div>
+              <p class="ff-line">
+                <span class="ff-looks">Looks like <strong>{f.looksLike}</strong></span>
+                <span class="ff-arrow" aria-hidden="true">&rarr;</span>
+                <span class="ff-real">Really means <strong>{f.meaning}</strong></span>
+              </p>
+              <p class="ff-tip">{f.tip}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="ff-asof">Data verified as of {asOf}.</p>
+
+      <div class="ff-cta">
+        <h2>Learn {name} words in context, not in a list</h2>
+        <p>
+          False friends stick when you meet them inside a real sentence. Lingo7 lets you read real books in
+          {name} with sentence-aligned translation and native-narrated audio, so the true meaning attaches to
+          the story instead of the English lookalike. Save the tricky words and review them later. Free to
+          start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="ff-explainer">
+        <h2>Why {name} false friends happen</h2>
+        <p>
+          A false friend is a word that <strong>looks or sounds like a word in your language</strong> but
+          carries a different meaning. English and {name} overlap heavily because both borrowed from Latin,
+          Greek, and French, or share older roots. The spelling stayed close while the meaning drifted, so
+          {name} {a.word} still reads like "{a.looksLike}" to an English eye even though it means "{a.meaning}".
+        </p>
+        <p>
+          These slips are common because your brain rewards the shortcut: a familiar-looking word feels
+          safe, so you skip the check. That is fine until <strong>{a.word}</strong> or <strong>{b.word}</strong>
+          changes the meaning of a whole sentence. Recognizing the pattern is half the fix. Knowing the handful
+          of high-frequency offenders on this page is the other half.
+        </p>
+        <p>
+          The durable fix is not memorization but <strong>exposure in context</strong>. When you read {name}
+          and see one of these words doing its real job in a sentence, with a translation a tap away, the
+          correct meaning wins. That is exactly what reading in Lingo7 is built for.
+        </p>
+      </div>
+
+      <div class="ff-links">
+        {READING_LANG_CODES.includes(code) && (
+          <p class="ff-tool-link">
+            <a href={`/tools/reading-level-recommender/${slug}/`}>Find {name} books at your level (A1 to C1) &rarr;</a>
+          </p>
+        )}
+        {CEFR_LANG_CODES.includes(code) && (
+          <p class="ff-tool-link">
+            <a href={`/tools/cefr-level-test/${slug}/`}>Test your {name} level with the CEFR test (A1-C2) &rarr;</a>
+          </p>
+        )}
+        {lf && lf.fsiHours > 0 && (
+          <p class="ff-tool-link">
+            <a href={`/tools/how-long-to-learn-a-language/${slug}/`}>How long does it take to learn {name}? See the timeline &rarr;</a>
+          </p>
+        )}
+        <p class="ff-tool-link">
+          <a href="/tools/language-difficulty-ranker/">Rank every language by difficulty for your native tongue &rarr;</a>
+        </p>
+        <p class="ff-tool-link">
+          <a href={`/en/learn/${slug}/`}>Start reading {name} with Lingo7 &rarr;</a>
+        </p>
+      </div>
+
+      <div class="ff-others">
+        <h2>False friends in another language</h2>
+        <div class="ff-others-grid">
+          {
+            others.map((o) => (
+              <a class="ff-other" href={`/tools/false-friends/${o.slug}/`}>
+                <span class="ff-other-flag">{o.flag}</span>
+                {o.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="ff-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="ff-data" set:html={JSON.stringify(clientData)} />
+  <script>
+    type Data = { labels: Record<string, string> };
+    const el = document.getElementById('ff-data');
+    const DATA: Data = el ? JSON.parse(el.textContent || '{}') : { labels: {} };
+    const LABELS = DATA.labels;
+
+    const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('.ff-chip'));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.ff-card'));
+    const caption = document.getElementById('ff-caption') as HTMLElement;
+    const total = cards.length;
+
+    function apply(pos: string) {
+      if (pos === 'all') {
+        cards.forEach((c) => c.classList.remove('is-hidden'));
+        caption.textContent = `All ${total} false friends.`;
+        return;
+      }
+      let shown = 0;
+      cards.forEach((c) => {
+        const match = c.dataset.pos === pos;
+        c.classList.toggle('is-hidden', !match);
+        if (match) shown += 1;
+      });
+      const label = (LABELS[pos] || 'false friends').toLowerCase();
+      caption.textContent = `${shown} ${shown === 1 ? label.replace(/s$/, '') : label}.`;
+    }
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        chips.forEach((c) => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+        apply(chip.dataset.pos || 'all');
+      });
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .ff { padding: 3rem 0 4rem; }
+  .ff-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .ff-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .ff-eyebrow a { color: var(--primary); text-decoration: none; }
+  .ff-eyebrow a:hover { text-decoration: underline; }
+  .ff-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .ff-head h1 span { color: var(--primary); }
+  .ff-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  .ff-controls {
+    display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+    max-width: 760px; margin: 2.2rem auto 0;
+  }
+  .ff-controls-label {
+    font-size: 0.82rem; color: var(--text-muted, #9fb0c3); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .ff-chips { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+  .ff-chip {
+    font: inherit; cursor: pointer; color: var(--text, #e8eef5); font-weight: 700;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px; padding: 0.5rem 1.1rem; transition: all 0.12s ease;
+  }
+  .ff-chip:hover { border-color: var(--primary); color: var(--primary); }
+  .ff-chip.is-active { background: var(--primary); color: #0b1120; border-color: var(--primary); }
+
+  .ff-caption {
+    max-width: 760px; margin: 1.2rem auto 0; text-align: center;
+    color: var(--text-muted, #9fb0c3); font-size: 0.92rem;
+  }
+
+  .ff-cards {
+    max-width: 900px; margin: 1.4rem auto 0; display: grid; gap: 0.8rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+  .ff-card {
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px; padding: 1.1rem 1.2rem;
+  }
+  .ff-card.is-hidden { display: none; }
+  .ff-card-top { display: flex; align-items: baseline; gap: 0.6rem; }
+  .ff-word { font-size: 1.35rem; font-weight: 800; color: var(--text, #e8eef5); line-height: 1.2; }
+  .ff-pos {
+    margin-left: auto; white-space: nowrap; font-size: 0.68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted, #9fb0c3);
+    border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 999px; padding: 0.2rem 0.55rem;
+  }
+  .ff-line {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.6rem;
+    margin: 0.7rem 0 0; font-size: 0.95rem; line-height: 1.4; color: var(--text-muted, #9fb0c3);
+  }
+  .ff-looks strong { color: var(--accent, #f97316); font-weight: 700; }
+  .ff-real strong { color: var(--primary, #4ade80); font-weight: 700; }
+  .ff-arrow { color: var(--text-muted, #9fb0c3); font-weight: 700; }
+  .ff-tip { margin: 0.6rem 0 0; font-size: 0.88rem; line-height: 1.5; color: var(--text-muted, #9fb0c3); }
+
+  .ff-asof {
+    max-width: 900px; margin: 1rem auto 0; text-align: center;
+    font-size: 0.78rem; color: var(--text-muted, #9fb0c3); opacity: 0.8;
+  }
+
+  .ff-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .ff-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .ff-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .ff-cta :global(.cta-buttons) { justify-content: center; }
+
+  .ff-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .ff-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .ff-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .ff-explainer strong { color: var(--text, #e8eef5); }
+
+  .ff-links { max-width: 760px; margin: 2.4rem auto 0; }
+  .ff-tool-link { margin: 0.6rem 0 0; text-align: center; font-size: 0.95rem; }
+  .ff-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .ff-tool-link a:hover { text-decoration: underline; }
+
+  .ff-others { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+  .ff-others h2 { font-size: 1.3rem; margin: 0 0 1rem; }
+  .ff-others-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .ff-other {
+    display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    color: var(--text, #e8eef5); font-weight: 600; font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; padding: 0.4rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .ff-other:hover { border-color: var(--primary); color: var(--primary); }
+  .ff-other-flag { font-size: 1.1rem; }
+
+  .ff-faq { max-width: 760px; margin: 3rem auto 0; }
+  .ff-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .ff-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .ff-faq summary { cursor: pointer; font-weight: 600; }
+  .ff-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  @media (max-width: 600px) {
+    .ff-cards { grid-template-columns: 1fr; }
+  }
+</style>

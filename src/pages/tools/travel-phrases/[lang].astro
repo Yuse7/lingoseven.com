@@ -1,0 +1,416 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { CEFR_LANG_CODES } from '../../../data/cefrTest';
+import { READING_LANG_CODES } from '../../../data/readingBooks';
+import { travelPhrases, TRAVEL_LANGS, type TravelPhrase } from '../../../data/travelPhrases';
+
+// One static page per language with a curated travel-phrase set.
+export function getStaticPaths() {
+  return TRAVEL_LANGS.filter((code) => codeToSlug[code]).map((code) => ({
+    params: { lang: codeToSlug[code] },
+    props: { code },
+  }));
+}
+
+const { code } = Astro.props;
+const lang = getLanguageByCode(code);
+const name = lang?.name ?? code;
+const slug = codeToSlug[code];
+const phrases = travelPhrases[code];
+
+// Group by category, preserving first-seen order.
+const categories: string[] = [];
+const groups: Record<string, TravelPhrase[]> = {};
+for (const p of phrases) {
+  if (!groups[p.category]) {
+    groups[p.category] = [];
+    categories.push(p.category);
+  }
+  groups[p.category].push(p);
+}
+const total = phrases.length;
+
+// Representative phrases for the copy, looked up by their English meaning so the
+// answer reads naturally. Fall back gracefully if a meaning is missing.
+const byEn = (en: string) => phrases.find((p) => p.english === en);
+const greeting = groups[categories[0]]?.[0] ?? phrases[0];
+const please = byEn('Please') ?? phrases[0];
+const thanks = byEn('Thank you') ?? please;
+const bye = byEn('Goodbye');
+const toilet = byEn('Where is the toilet?');
+const help = byEn('Help!');
+const dontGet = byEn("I don't understand");
+
+const canonicalUrl = `https://lingoseven.com/tools/travel-phrases/${slug}/`;
+const title = `${name} Travel Phrases with Pronunciation | Lingo7`;
+const description =
+  `Essential ${name} travel phrases with pronunciation, grouped by situation: greetings, directions, food, shopping, and emergencies. Free, and built for real trips.`;
+
+const answerBody =
+  `Learn a handful first: ${greeting.phrase} (${greeting.english.toLowerCase()}), ${please.phrase} (please), ${thanks.phrase} (thank you)${
+    toilet ? `, and ${toilet.phrase} (where is the toilet?)` : ''
+  }. This free tool groups ${total} essential ${name} phrases by situation, each with a plain-English pronunciation, so you practice only what your trip needs.`;
+
+const faq = [
+  {
+    question: `What are the most important ${name} phrases for travel?`,
+    answer:
+      `Start with greetings and politeness, then the phrases that solve a real problem: asking directions, ordering, paying, and getting help. On this page that is ${greeting.phrase} (${greeting.english.toLowerCase()}), ${please.phrase} (please), ${thanks.phrase} (thank you)${
+        toilet ? `, ${toilet.phrase} (where is the toilet?)` : ''
+      }${help ? `, and ${help.phrase} (help)` : ''}. Learn those few and you can be polite and safe almost anywhere.`,
+  },
+  {
+    question: `How do you say hello and thank you in ${name}?`,
+    answer:
+      `In ${name}, ${greeting.english.toLowerCase()} is ${greeting.phrase} (pronounced ${greeting.pron}) and thank you is ${thanks.phrase} (${thanks.pron}). Add ${please.phrase} for please${
+        bye ? ` and ${bye.phrase} for goodbye` : ''
+      }, and you have the words that carry most short exchanges with a shopkeeper, waiter, or stranger.`,
+  },
+  {
+    question: `How do you ask where the toilet is in ${name}?`,
+    answer: toilet
+      ? `Ask ${toilet.phrase} (pronounced ${toilet.pron}), which means "where is the toilet?" in ${name}.${
+          dontGet ? ` If you only catch part of the reply, ${dontGet.phrase} (I don't understand) and a smile usually gets it repeated or pointed out.` : ''
+        } It is one of the few phrases worth memorizing word for word before you go.`
+      : `Point and ask politely with ${please.phrase} (please). Restrooms are one of the few things worth memorizing word for word in ${name} before you go, so practice the phrase until it is automatic.`,
+  },
+  {
+    question: `Do I need to learn ${name} before traveling?`,
+    answer:
+      `No, but a dozen ${name} phrases go a long way. Locals warm up fast when you open with ${greeting.phrase} and ${thanks.phrase} instead of English. You do not need grammar or fluency for a trip, just the survival set above. For anything past that, the fastest route to real ${name} is reading, which is exactly what Lingo7 is built for.`,
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: `${name} Travel Phrases`,
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `Essential ${name} travel phrases`,
+    itemListElement: phrases.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `${p.phrase} (${p.english})`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lingoseven.com/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Travel Phrases',
+        item: 'https://lingoseven.com/tools/travel-phrases/',
+      },
+      { '@type': 'ListItem', position: 3, name, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+
+// Sibling tool links: deep-link where the language has its own page, else the hub.
+const readingHref = READING_LANG_CODES.includes(code)
+  ? `/tools/reading-level-recommender/${slug}/`
+  : `/tools/reading-level-recommender/`;
+const cefrHref = CEFR_LANG_CODES.includes(code)
+  ? `/tools/cefr-level-test/${slug}/`
+  : `/tools/cefr-level-test/`;
+
+// Cross-link cluster: every other language with a travel-phrase page.
+const others = TRAVEL_LANGS.filter((c) => c !== code && codeToSlug[c])
+  .map((c) => {
+    const l = getLanguageByCode(c);
+    return { name: l?.name ?? c, flag: l?.flag ?? '', slug: codeToSlug[c] };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="tp">
+    <div class="container">
+      <header class="tp-head">
+        <p class="tp-eyebrow"><a href="/tools/travel-phrases/">Travel phrases</a></p>
+        <h1>Essential <span>{name}</span> travel phrases</h1>
+        <p class="tp-intro">
+          Pack the words that matter. These are the {total} {name} phrases that actually come up on a trip,
+          from your first {greeting.phrase} to calling for help, grouped by situation and written with a
+          simple pronunciation guide.
+        </p>
+      </header>
+
+      <ToolDirectAnswer
+        lead={`The most useful ${name} travel phrases cover greetings, politeness, directions, food, and emergencies.`}
+        body={answerBody}
+      />
+
+      <div class="tp-controls" role="group" aria-label="Filter by situation">
+        <span class="tp-controls-label">Show</span>
+        <div class="tp-cats" id="tp-cats">
+          <button type="button" class="tp-cat is-active" data-cat="all">All</button>
+          {categories.map((c) => <button type="button" class="tp-cat" data-cat={c}>{c}</button>)}
+        </div>
+      </div>
+
+      <p class="tp-caption" id="tp-caption">All {total} phrases, grouped by situation.</p>
+
+      <div class="tp-groups" id="tp-groups">
+        {
+          categories.map((cat) => (
+            <section class="tp-group" data-cat={cat}>
+              <h2 class="tp-group-title">{cat}</h2>
+              <div class="tp-group-list">
+                {groups[cat].map((p) => (
+                  <div class="tp-phrase">
+                    <span class="tp-phrase-native">{p.phrase}</span>
+                    <span class="tp-phrase-meta">
+                      <span class="tp-phrase-en">{p.english}</span>
+                      <span class="tp-phrase-pron">{p.pron}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+
+      <div class="tp-cta">
+        <h2>Go past the phrasebook. Learn {name} by reading</h2>
+        <p>
+          A phrasebook gets you through the airport. Reading real {name} books, with a tap for translation
+          and native audio on every sentence, is how the words start to stick. Lingo7 turns a book a level
+          above you into something you can actually read. Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="tp-explainer">
+        <h2>How to get the most from these phrases</h2>
+        <p>
+          Learn <strong>by situation, not alphabetically</strong>. Your memory files {greeting.phrase} next
+          to the moment you would use it, so run through the greetings before you fly, the restaurant block
+          on the way to dinner, and the emergency block once so it is there if you ever need it.
+        </p>
+        <p>
+          The pronunciation guide is written the way an English speaker would read it aloud, with the
+          <strong> stressed syllable in capitals</strong>. It is a crutch, not the real sound. Say each
+          phrase out loud a few times, and if you can, listen to a native speaker to fix the vowels that
+          plain English spelling cannot capture.
+        </p>
+        <p>
+          Phrases get you to the country. What gets you fluent is meeting the same words again and again in
+          context, which is exactly what reading does. Once {please.phrase} and {thanks.phrase} feel
+          automatic, the next step is a real {name} sentence, then a page, then a book. That is the whole
+          idea behind <strong>reading in Lingo7</strong>.
+        </p>
+      </div>
+
+      <div class="tp-links">
+        <p class="tp-tool-link">
+          <a href={`/en/learn/${slug}/`}>Start reading {name} with Lingo7 &rarr;</a>
+        </p>
+        <p class="tp-tool-link">
+          <a href={readingHref}>What {name} book fits your level? See the picks &rarr;</a>
+        </p>
+        <p class="tp-tool-link">
+          <a href={cefrHref}>Not sure of your {name} level? Take the CEFR test (A1-C2) &rarr;</a>
+        </p>
+        {code !== 'en' && (
+          <p class="tp-tool-link">
+            <a href={`/tools/how-long-to-learn-a-language/${slug}/`}>How long does it take to learn {name}? &rarr;</a>
+          </p>
+        )}
+        <p class="tp-tool-link">
+          <a href="/tools/language-difficulty-ranker/">Compare {name} to other languages by difficulty &rarr;</a>
+        </p>
+      </div>
+
+      <div class="tp-others">
+        <h2>Travel phrases in another language</h2>
+        <div class="tp-others-grid">
+          {
+            others.map((o) => (
+              <a class="tp-other" href={`/tools/travel-phrases/${o.slug}/`}>
+                <span class="tp-other-flag">{o.flag}</span>
+                {o.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="tp-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.tp-cat'));
+    const groups = Array.from(document.querySelectorAll<HTMLElement>('.tp-group'));
+    const caption = document.getElementById('tp-caption');
+    const total = groups.reduce((n, g) => n + g.querySelectorAll('.tp-phrase').length, 0);
+
+    function apply(cat: string) {
+      if (!caption) return;
+      if (cat === 'all') {
+        groups.forEach((g) => g.classList.remove('is-hidden'));
+        caption.textContent = `All ${total} phrases, grouped by situation.`;
+        return;
+      }
+      let shown = 0;
+      groups.forEach((g) => {
+        const match = g.dataset.cat === cat;
+        g.classList.toggle('is-hidden', !match);
+        if (match) shown = g.querySelectorAll('.tp-phrase').length;
+      });
+      caption.textContent = `${shown} ${shown === 1 ? 'phrase' : 'phrases'} for ${cat.toLowerCase()}.`;
+    }
+
+    buttons.forEach((b) => {
+      b.addEventListener('click', () => {
+        buttons.forEach((x) => x.classList.remove('is-active'));
+        b.classList.add('is-active');
+        apply(b.dataset.cat || 'all');
+      });
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .tp { padding: 3rem 0 4rem; }
+  .tp-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .tp-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .tp-eyebrow a { color: var(--primary); text-decoration: none; }
+  .tp-eyebrow a:hover { text-decoration: underline; }
+  .tp-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .tp-head h1 span { color: var(--primary); }
+  .tp-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  .tp-controls {
+    display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+    max-width: 760px; margin: 2.2rem auto 0;
+  }
+  .tp-controls-label {
+    font-size: 0.82rem; color: var(--text-muted, #9fb0c3); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .tp-cats { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+  .tp-cat {
+    font: inherit; cursor: pointer; color: var(--text, #e8eef5); font-weight: 700;
+    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px; padding: 0.5rem 1.1rem; transition: all 0.12s ease;
+  }
+  .tp-cat:hover { border-color: var(--primary); color: var(--primary); }
+  .tp-cat.is-active {
+    background: var(--primary); color: #0b1120; border-color: var(--primary);
+  }
+
+  .tp-caption {
+    max-width: 760px; margin: 1.2rem auto 0; text-align: center;
+    color: var(--text-muted, #9fb0c3); font-size: 0.92rem;
+  }
+
+  .tp-groups { max-width: 760px; margin: 1.4rem auto 0; display: grid; gap: 1.4rem; }
+  .tp-group {
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px; padding: 1.1rem 1.3rem;
+  }
+  .tp-group.is-hidden { display: none; }
+  .tp-group-title {
+    margin: 0 0 0.5rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--primary); font-weight: 800;
+  }
+  .tp-group-list { display: grid; }
+  .tp-phrase { padding: 0.65rem 0; border-top: 1px solid rgba(255, 255, 255, 0.06); }
+  .tp-phrase:first-child { border-top: none; padding-top: 0.25rem; }
+  .tp-phrase-native {
+    display: block; font-weight: 700; font-size: 1.05rem; line-height: 1.35;
+    color: var(--text, #e8eef5);
+  }
+  .tp-phrase-meta {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 0.2rem 1rem; margin-top: 0.15rem;
+  }
+  .tp-phrase-en { color: var(--text-muted, #9fb0c3); font-size: 0.9rem; }
+  .tp-phrase-pron { color: var(--text-muted, #9fb0c3); font-size: 0.82rem; font-style: italic; }
+
+  .tp-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .tp-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .tp-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .tp-cta :global(.cta-buttons) { justify-content: center; }
+
+  .tp-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .tp-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .tp-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .tp-explainer strong { color: var(--text, #e8eef5); }
+
+  .tp-links { max-width: 760px; margin: 2.4rem auto 0; }
+  .tp-tool-link { margin: 0.6rem 0 0; text-align: center; font-size: 0.95rem; }
+  .tp-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .tp-tool-link a:hover { text-decoration: underline; }
+
+  .tp-others { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+  .tp-others h2 { font-size: 1.3rem; margin: 0 0 1rem; }
+  .tp-others-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .tp-other {
+    display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    color: var(--text, #e8eef5); font-weight: 600; font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; padding: 0.4rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .tp-other:hover { border-color: var(--primary); color: var(--primary); }
+  .tp-other-flag { font-size: 1.1rem; }
+
+  .tp-faq { max-width: 760px; margin: 3rem auto 0; }
+  .tp-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .tp-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .tp-faq summary { cursor: pointer; font-weight: 600; }
+  .tp-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+
+  @media (max-width: 600px) {
+    .tp-phrase-meta { flex-direction: column; gap: 0.1rem; }
+  }
+</style>

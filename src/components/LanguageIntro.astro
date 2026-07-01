@@ -2,6 +2,7 @@
 import type { LanguageFact } from '../data/languageFacts';
 import { codeToSlug } from '../data/languageSlugs';
 import { VOCAB_LANG_CODES } from '../data/vocabWords';
+import { READING_LANG_CODES } from '../data/readingBooks';
 
 interface Props {
   targetLangName: string;
@@ -15,6 +16,12 @@ const hasVocabTest = VOCAB_LANG_CODES.includes(fact.code) && !!vocabSlug;
 const vocabUrl = hasVocabTest
   ? `/tools/vocabulary-size-estimator/${vocabSlug}/`
   : '/tools/vocabulary-size-estimator/';
+
+// Deep-link to this language's level-by-level book recommender if one exists, else the hub.
+const readingUrl =
+  READING_LANG_CODES.includes(fact.code) && codeToSlug[fact.code]
+    ? `/tools/reading-level-recommender/${codeToSlug[fact.code]}/`
+    : '/tools/reading-level-recommender/';
 ---
 
 <section class="language-intro">
@@ -43,6 +50,9 @@ const vocabUrl = hasVocabTest
         </div>
       </div>
 
+      <p class="intro-tool-link">
+        <a href={readingUrl}>Find the best {targetLangName} books for your level &rarr;</a>
+      </p>
       <p class="intro-tool-link">
         <a href={`/best-apps-to-read-books-in/${codeToSlug[fact.code]}/`}>The best apps to read books in {targetLangName}, compared &rarr;</a>
       </p>

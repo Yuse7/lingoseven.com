@@ -1,0 +1,219 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { readingBooks, READING_LANG_CODES } from '../../../data/readingBooks';
+
+// Hub: pick a language, jump to its level-by-level book list.
+const langs = READING_LANG_CODES.filter((code) => codeToSlug[code])
+  .map((code) => {
+    const l = getLanguageByCode(code);
+    return {
+      name: l?.name ?? code,
+      flag: l?.flag ?? '',
+      slug: codeToSlug[code],
+      count: readingBooks[code]?.books.length ?? 0,
+    };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const totalBooks = langs.reduce((sum, l) => sum + l.count, 0);
+
+const canonicalUrl = 'https://lingoseven.com/tools/reading-level-recommender/';
+const title = 'Reading Level Recommender: Best Books to Learn a Language | Lingo7';
+const description =
+  `Find the right book for your level in ${langs.length} languages. Pick a language and CEFR level (A1 to C1) and get honest, level-matched reading recommendations, from graded readers to real literature.`;
+
+const faq = [
+  {
+    question: 'How do I choose a book at my language level?',
+    answer:
+      'Choose by difficulty first, interest second, reputation last. Aim for a book you can almost read: you follow the story and can guess most new words from context. If two levels seem to fit, pick the lower one. Starting slightly below your level builds reading speed and confidence, which matter more than ego.',
+  },
+  {
+    question: 'What are graded readers?',
+    answer:
+      'Graded readers are books written or adapted for learners, with controlled vocabulary and grammar tuned to a CEFR level. They are the training wheels of reading: the stories can be simple, but they let you experience reading fluently long before you could manage a native novel. They are almost always the right starting point for A1 to A2.',
+  },
+  {
+    question: 'What CEFR level do I need to read real books?',
+    answer:
+      'Most learners reach their first authentic (non-graded) book around B1, often a gentle title like The Little Prince in translation. Full literary novels are usually a B2 to C1 read. Sentence-aligned parallel text lowers the bar: it lets a B1 reader get through a harder book by checking one line at a time without losing the story.',
+  },
+  {
+    question: 'Can you really learn a language by reading?',
+    answer:
+      'Yes. Reading builds vocabulary and grammatical intuition at scale because you meet high-frequency words again and again in real context. It works best paired with audio, so you link spelling to sound, and with some speaking or writing practice. Lingo7 combines reading with native-narrated audio and tap-to-translate for exactly this.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Reading Level Recommender',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: langs.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `Best books to learn ${l.name}`,
+      url: `https://lingoseven.com/tools/reading-level-recommender/${l.slug}/`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="rlr">
+    <div class="container">
+      <header class="rlr-head">
+        <p class="rlr-eyebrow">Free tool</p>
+        <h1>What should I read at my level?</h1>
+        <p class="rlr-intro">
+          The fastest way to stall is to open a book that is a notch too hard. Pick your language, then
+          your level, and get honest, level-matched book recommendations, from A1 graded readers to real
+          literature at C1. Every pick is a real, verifiable book.
+        </p>
+      </header>
+
+      <ToolDirectAnswer
+        lead={`The best book to learn a language by reading is the one you can almost read, matched to your CEFR level.`}
+        body={`Beginners (A1 to A2) start with graded readers, intermediate readers (B1 to B2) bridge into their first authentic books, and advanced readers (C1) reach real literature. This free tool sorts ${totalBooks} verified books across ${langs.length} languages by level.`}
+      />
+
+      <div class="lang-grid">
+        {
+          langs.map((l) => (
+            <a class="lang-card" href={`/tools/reading-level-recommender/${l.slug}/`}>
+              <span class="lang-flag">{l.flag}</span>
+              <span class="lang-name">{l.name}</span>
+              <span class="lang-sub">{l.count} books · A1 to C1</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="rlr-cta">
+        <h2>Then read your pick, one tapped sentence at a time</h2>
+        <p>
+          Lingo7 lets you read real books with sentence-aligned translation and native-narrated audio, so
+          a book a level above you becomes readable. Save words as you go and review them later. Free to
+          start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="rlr-explainer">
+        <h2>How the recommendations work</h2>
+        <p>
+          Each language's list is drawn from our level-by-level reading guides, curated from real,
+          verifiable books and sorted on the <strong>CEFR scale</strong>. A1 to A2 is graded readers and
+          simple stories built on high-frequency words. B1 to B2 is your first authentic books, the bridge
+          from learner material into native prose. C1 is real literature, read for pleasure rather than
+          practice.
+        </p>
+        <p>
+          The guiding rule is the same in every language: <strong>choose by difficulty first</strong>, not
+          by fame. A famous book that is too hard ends reading habits; a comprehensible book that gently
+          stretches you builds them. Parallel text and audio let you read a level above your unaided level,
+          which is exactly what reading in Lingo7 is built for.
+        </p>
+      </div>
+
+      <p class="rlr-tool-link">
+        <a href="/tools/cefr-level-test/">Not sure of your level? Find it with the CEFR test (A1-C2) &rarr;</a>
+      </p>
+      <p class="rlr-tool-link">
+        <a href="/tools/how-long-to-learn-a-language/">How long does it take to learn a language? &rarr;</a>
+      </p>
+      <p class="rlr-tool-link">
+        <a href="/tools/language-difficulty-ranker/">Compare all 50 languages by difficulty for your native tongue &rarr;</a>
+      </p>
+
+      <div class="rlr-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .rlr { padding: 3rem 0 4rem; }
+  .rlr-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .rlr-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    color: var(--primary); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .rlr-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .rlr-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  .lang-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.8rem; max-width: 820px; margin: 2rem auto 0;
+  }
+  .lang-card {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+    text-decoration: none; text-align: center;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; padding: 1.2rem 1rem; transition: all 0.15s ease;
+  }
+  .lang-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+  .lang-flag { font-size: 2rem; }
+  .lang-name { color: var(--text, #e8eef5); font-weight: 700; font-size: 1.05rem; }
+  .lang-sub { color: var(--text-muted, #9fb0c3); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+
+  .rlr-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .rlr-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .rlr-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .rlr-cta :global(.cta-buttons) { justify-content: center; }
+
+  .rlr-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .rlr-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .rlr-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .rlr-explainer strong { color: var(--text, #e8eef5); }
+
+  .rlr-tool-link { max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: 0.95rem; }
+  .rlr-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .rlr-tool-link a:hover { text-decoration: underline; }
+
+  .rlr-faq { max-width: 760px; margin: 3rem auto 0; }
+  .rlr-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .rlr-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .rlr-faq summary { cursor: pointer; font-weight: 600; }
+  .rlr-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+</style>

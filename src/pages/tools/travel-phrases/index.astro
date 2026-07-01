@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../../components/CtaButtons.astro';
+import { getLanguageByCode } from '../../../data/languages';
+import { codeToSlug } from '../../../data/languageSlugs';
+import { travelPhrases, TRAVEL_LANGS } from '../../../data/travelPhrases';
+
+// Hub: pick a language, jump to its situation-by-situation phrase list.
+const langs = TRAVEL_LANGS.filter((code) => codeToSlug[code])
+  .map((code) => {
+    const l = getLanguageByCode(code);
+    return {
+      name: l?.name ?? code,
+      flag: l?.flag ?? '',
+      slug: codeToSlug[code],
+      count: travelPhrases[code]?.length ?? 0,
+    };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const totalPhrases = langs.reduce((sum, l) => sum + l.count, 0);
+
+const canonicalUrl = 'https://lingoseven.com/tools/travel-phrases/';
+const title = `Travel Phrases in ${langs.length} Languages (with Pronunciation) | Lingo7`;
+const description =
+  `Essential travel phrases in ${langs.length} languages, each with pronunciation and grouped by situation: greetings, directions, food, shopping, and emergencies. Free.`;
+
+const faq = [
+  {
+    question: 'What are the most useful phrases to learn before traveling?',
+    answer:
+      'Six situations cover almost every interaction: greetings (hello, goodbye), politeness (please, thank you, excuse me), directions (where is..., how much is the ticket), eating out (a table for two, the bill please), shopping (how much is it, do you accept cards), and emergencies (help, call a doctor). Learn a few phrases in each and you can be polite and handle a problem anywhere.',
+  },
+  {
+    question: 'How many phrases do you need for a trip?',
+    answer:
+      'About a dozen carries most short trips. You are not aiming for conversation, just to greet people, be polite, ask directions, order, pay, and get help if something goes wrong. A traveler who can say hello, please, thank you, and where is the toilet in the local language is already ahead of most visitors.',
+  },
+  {
+    question: 'Is it better to learn phrases or the whole language for travel?',
+    answer:
+      'For a short trip, phrases are enough, and locals appreciate the effort even if you switch to English after. But memorized phrases fall apart the moment someone answers back. If you want to actually understand the reply, you need real exposure to the language, and reading is the most efficient way to get it.',
+  },
+  {
+    question: 'What is the fastest way to learn a language after the basics?',
+    answer:
+      'Reading. Once you know a handful of phrases, the fastest way forward is meeting the same words again and again in real context, which is exactly what reading gives you. Lingo7 pairs every sentence with a tap-to-translate and native audio, so you can read a book slightly above your level and pick up the language as you go.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Travel Phrases',
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web',
+    url: canonicalUrl,
+    description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    publisher: { '@type': 'Organization', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: langs.map((l, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `${l.name} travel phrases`,
+      url: `https://lingoseven.com/tools/travel-phrases/${l.slug}/`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="tp">
+    <div class="container">
+      <header class="tp-head">
+        <p class="tp-eyebrow">Free tool</p>
+        <h1>Which phrases do you actually need to travel?</h1>
+        <p class="tp-intro">
+          A phrasebook has a thousand phrases and you will use twelve. Pick your language for the ones that
+          actually come up, from your first hello to asking for help, grouped by situation with a simple
+          pronunciation guide. Every phrase is real, natural, and useful.
+        </p>
+      </header>
+
+      <ToolDirectAnswer
+        lead={`The essential travel phrases are greetings, please and thank you, asking directions, ordering food, paying, and calling for help.`}
+        body={`Learn six or seven per situation and you can be polite and handle a problem in most countries. This free tool lists them in ${langs.length} languages, each phrase grouped by situation and written with a simple pronunciation guide.`}
+      />
+
+      <div class="lang-grid">
+        {
+          langs.map((l) => (
+            <a class="lang-card" href={`/tools/travel-phrases/${l.slug}/`}>
+              <span class="lang-flag">{l.flag}</span>
+              <span class="lang-name">{l.name}</span>
+              <span class="lang-sub">{l.count} phrases</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="tp-cta">
+        <h2>Then go past phrases. Learn the language by reading</h2>
+        <p>
+          Phrases get you to the country. Reading gets you the language. Lingo7 lets you read real books
+          with sentence-aligned translation and native-narrated audio, so a book a level above you becomes
+          readable, and the words start to stick. Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+
+      <div class="tp-explainer">
+        <h2>How to choose what to learn</h2>
+        <p>
+          Learn <strong>by situation, not by list</strong>. Greetings and politeness come first because you
+          use them in every interaction. Then add the phrases that solve a real problem: asking directions,
+          ordering, paying, and getting help. Practice each block right before you need it, and the emergency
+          phrases once so they are there if something goes wrong.
+        </p>
+        <p>
+          Each pronunciation is written the way an English speaker would read it aloud, with the
+          <strong> stressed syllable in capitals</strong>. It is a starting point, not a substitute for the
+          real sound, so say the phrases out loud and listen to a native speaker where you can. And when you
+          are ready to move past survival phrases, the fastest route to fluency is reading, which is what
+          reading in Lingo7 is built for.
+        </p>
+      </div>
+
+      <p class="tp-tool-link">
+        <a href="/tools/reading-level-recommender/">What book should you read at your level? &rarr;</a>
+      </p>
+      <p class="tp-tool-link">
+        <a href="/tools/cefr-level-test/">Not sure of your level? Find it with the CEFR test (A1-C2) &rarr;</a>
+      </p>
+      <p class="tp-tool-link">
+        <a href="/tools/how-long-to-learn-a-language/">How long does it take to learn a language? &rarr;</a>
+      </p>
+      <p class="tp-tool-link">
+        <a href="/tools/language-difficulty-ranker/">Compare languages by difficulty for your native tongue &rarr;</a>
+      </p>
+
+      <div class="tp-faq">
+        <h2>Frequently asked questions</h2>
+        {
+          faq.map((f) => (
+            <details>
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tp { padding: 3rem 0 4rem; }
+  .tp-head { max-width: 760px; margin: 0 auto 1.5rem; text-align: center; }
+  .tp-eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.8rem;
+    color: var(--primary); font-weight: 700; margin: 0 0 0.5rem;
+  }
+  .tp-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; margin: 0 0 1rem; }
+  .tp-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
+
+  .lang-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.8rem; max-width: 820px; margin: 2rem auto 0;
+  }
+  .lang-card {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+    text-decoration: none; text-align: center;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; padding: 1.2rem 1rem; transition: all 0.15s ease;
+  }
+  .lang-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+  .lang-flag { font-size: 2rem; }
+  .lang-name { color: var(--text, #e8eef5); font-weight: 700; font-size: 1.05rem; }
+  .lang-sub { color: var(--text-muted, #9fb0c3); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+
+  .tp-cta {
+    max-width: 760px; margin: 3rem auto 0; text-align: center;
+    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 16px; padding: 2.2rem 1.5rem;
+  }
+  .tp-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+  .tp-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
+  .tp-cta :global(.cta-buttons) { justify-content: center; }
+
+  .tp-explainer { max-width: 760px; margin: 3rem auto 0; }
+  .tp-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .tp-explainer p { color: var(--text-muted, #9fb0c3); line-height: 1.7; margin: 0 0 1rem; }
+  .tp-explainer strong { color: var(--text, #e8eef5); }
+
+  .tp-tool-link { max-width: 760px; margin: 2rem auto 0; text-align: center; font-size: 0.95rem; }
+  .tp-tool-link a { color: var(--primary); font-weight: 600; text-decoration: none; }
+  .tp-tool-link a:hover { text-decoration: underline; }
+
+  .tp-faq { max-width: 760px; margin: 3rem auto 0; }
+  .tp-faq h2 { font-size: 1.5rem; margin: 0 0 1rem; }
+  .tp-faq details {
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px;
+    padding: 0.9rem 1.1rem; margin-bottom: 0.7rem;
+  }
+  .tp-faq summary { cursor: pointer; font-weight: 600; }
+  .tp-faq p { color: var(--text-muted, #9fb0c3); line-height: 1.6; margin: 0.7rem 0 0; }
+</style>
