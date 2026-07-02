@@ -68,9 +68,22 @@ function tAccent(key: string): string {
 </section>
 
 <style>
-  /* Injected via set:html, so it must be global to take effect */
+  /* Injected via set:html, so it must be global to take effect.
+     Flowing gradient (gradient-flow keyframe lives in global.css). */
   :global(.hero-title-modern .hero-lang-accent) {
-    color: var(--primary);
+    background: linear-gradient(100deg, #86efac, #4ade80, #22d3ee, #4ade80, #86efac);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradient-flow 7s ease infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.hero-title-modern .hero-lang-accent) {
+      animation: none;
+    }
   }
 
   .hero-badges {

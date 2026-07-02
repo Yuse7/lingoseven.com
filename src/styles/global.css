@@ -2339,3 +2339,57 @@ h3 {
         bottom: 78px;
     }
 }
+
+/* =====================================================================
+   Living gradient accents
+   Subtle animated color to make the page feel alive: a slow shimmer on
+   the primary buttons, a flowing gradient on headline accents, and a
+   breathing glow on the language-pair card. Stops under prefers-reduced-motion.
+   ===================================================================== */
+
+@keyframes gradient-flow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes flags-breathe {
+    0%, 100% { box-shadow: 0 0 40px rgba(74, 222, 128, 0.20); }
+    50%      { box-shadow: 0 0 68px rgba(74, 222, 128, 0.36); }
+}
+
+/* Shimmering primary buttons: a slow green flow across the fill */
+.btn-primary,
+.hero-cta .btn-primary {
+    background: linear-gradient(100deg, #22c55e 0%, #4ade80 30%, #86efac 50%, #4ade80 70%, #22c55e 100%);
+    background-size: 220% 100%;
+    animation: gradient-flow 8s ease infinite;
+}
+
+/* Flowing gradient on the home headline accent (learn accent styled in LearnHero) */
+.hero-title-accent {
+    background: linear-gradient(100deg, #86efac, #4ade80, #22d3ee, #4ade80, #86efac);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradient-flow 7s ease infinite;
+}
+
+/* Breathing glow on the language-pair card; hover takes over its own glow */
+.flags-pair {
+    animation: flags-breathe 4.5s ease-in-out infinite;
+}
+
+.flags-pair:hover {
+    animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-primary, .hero-cta .btn-primary,
+    .hero-title-accent,
+    .flags-pair {
+        animation: none !important;
+    }
+}

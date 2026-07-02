@@ -473,14 +473,36 @@ const stackCovers = [
     position: absolute;
     inset: 0;
     border-radius: 28px;
-    background: linear-gradient(135deg, #4ade80 0%, #22c55e 25%, #0ea5e9 55%, #a78bfa 100%);
-    background-size: 220% 220%;
-    animation: borderShift 7s ease-in-out infinite;
+    overflow: hidden;
   }
 
-  @keyframes borderShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+  /* Rotating conic gradient: the colors travel around the border */
+  .anybook-card-border::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(
+      from 0deg,
+      #4ade80,
+      #22c55e,
+      #0ea5e9,
+      #a78bfa,
+      #0ea5e9,
+      #4ade80
+    );
+    animation: borderSpin 6s linear infinite;
+  }
+
+  @keyframes borderSpin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anybook-card-border::before { animation: none; }
   }
 
   .anybook-card-glow {
