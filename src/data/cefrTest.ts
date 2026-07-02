@@ -24,9 +24,2507 @@ export interface CefrQuestion {
 
 export const CEFR_LEVELS: CefrLevel[] = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
-export const CEFR_LANG_CODES: string[] = ["en","de","fr","es","it","pt","ru","sr","nl","sv","no","da","ro","uk","pl","cs","sk","hr","bs","bg","sl","lv","lt","fi","hu","et","el","vi","id","ms","af","gl","kk","uz","tl","mn","ka","sq","sw","zu","be","ky"];
+export const CEFR_LANG_CODES: string[] = ["en","de","fr","es","it","pt","ru","sr","nl","sv","no","da","ro","uk","pl","cs","sk","hr","bs","bg","sl","lv","lt","fi","hu","et","el","vi","id","ms","af","gl","kk","uz","tl","mn","ka","sq","sw","zu","be","ky","ca","eu","is","mk","tr","az","hy"];
 
 export const cefrTest: Record<string, CefrQuestion[]> = {
+  "az": [
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Mən müəllim___.",
+      "options": [
+        "sən",
+        "ik",
+        "əm",
+        "dir"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Sən hər gün məktəbə ___.",
+      "options": [
+        "gedirəm",
+        "gedirsən",
+        "gedir",
+        "gedirik"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Bu mənim ___dır.",
+      "options": [
+        "kitabın",
+        "kitabı",
+        "kitablar",
+        "kitabım"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Səhər yeməyi zamanı çay və ya ___ içirik.",
+      "options": [
+        "stul",
+        "qəhvə",
+        "kitab",
+        "maşın"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Atamın qardaşına ___ deyirik.",
+      "options": [
+        "əmi",
+        "xala",
+        "bacı",
+        "nənə"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Mən dünən kinoya ___.",
+      "options": [
+        "gedirəm",
+        "gedəcəyəm",
+        "gedirsən",
+        "getdim"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Uşaqlar bağça___ oynayır.",
+      "options": [
+        "dan",
+        "nın",
+        "da",
+        "ya"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Qışda hava çox ___ olur.",
+      "options": [
+        "yaşıl",
+        "soyuq",
+        "şirin",
+        "isti"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Bazar günündən sonra gələn gün ___ adlanır.",
+      "options": [
+        "Çərşənbə",
+        "Şənbə",
+        "Bazar ertəsi",
+        "Cümə"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Ac olanda insan ___ istəyir.",
+      "options": [
+        "yatmaq",
+        "oxumaq",
+        "qaçmaq",
+        "yemək"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Əgər vaxtım ___, sənə kömək edərəm.",
+      "options": [
+        "olsa",
+        "olar",
+        "idi",
+        "olub"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Bu ev 1990-cı ildə ___.",
+      "options": [
+        "tikdi",
+        "tikəcək",
+        "tikildi",
+        "tikilir"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Sağlamlığını qorumaq üçün mütəmadi olaraq ___ etmək lazımdır.",
+      "options": [
+        "xəyanət",
+        "nifrət",
+        "kədər",
+        "idman"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "'Məmnun' sözünə ən yaxın məna daşıyan söz hansıdır?",
+      "options": [
+        "razı",
+        "narahat",
+        "qəzəbli",
+        "yorğun"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Deyilənlərə görə, o, imtahanı uğurla ___.",
+      "options": [
+        "verir",
+        "verib",
+        "versin",
+        "verəydi"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "O, xəstə olmasına ___, işə getdi.",
+      "options": [
+        "görə",
+        "kimi",
+        "baxmayaraq",
+        "üçün"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "O, çətinliklərin öhdəsindən ___ gəldi.",
+      "options": [
+        "uğurla",
+        "təsadüfən",
+        "yorğun",
+        "səhvən"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Şirkətin illik hesabatı ___ təhlil edildi.",
+      "options": [
+        "şirin",
+        "yumşaq",
+        "səsli",
+        "ətraflı"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "'Nadir' sözünün antonimi hansıdır?",
+      "options": [
+        "qəribə",
+        "adi",
+        "təzə",
+        "uzaq"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Hava soyuduqca insanlar daha isti ___.",
+      "options": [
+        "geyinsinlər",
+        "geyinmişdilər",
+        "geyinirlər",
+        "geyinəcəklərdi"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Əgər vaxtında xəbərdar etsəydin, bu problem ___.",
+      "options": [
+        "yaranmayacaq",
+        "yaranmazdı",
+        "yaranmır",
+        "yaransın"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Elmi tədqiqatların nəticələri jurnalda ___ olundu.",
+      "options": [
+        "satış",
+        "sükut",
+        "əyləncə",
+        "dərc"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "'Səmərəli' sözü ən çox hansı mənada işlədilir?",
+      "options": [
+        "gözəl və zərif",
+        "qorxulu və təhlükəli",
+        "faydalı və nəticəli",
+        "qədim və tarixi"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "O, heç nə ___ danışmağa davam etdi.",
+      "options": [
+        "olmayacaqdı",
+        "olmamışcasına",
+        "olmasın",
+        "olmuşdursa"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "Bəziləri bu fikirlə razılaşdığı ___, digərləri ona qəti şəkildə etiraz edir.",
+      "options": [
+        "halda",
+        "zaman",
+        "qədər",
+        "kimi"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Uzun sürən danışıqlardan sonra tərəflər nəhayət bir ___ əldə etdilər.",
+      "options": [
+        "təsadüf",
+        "münaqişə",
+        "konsensus",
+        "ehtiyat"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Onun çıxışı dinləyicilər arasında böyük ___ doğurdu.",
+      "options": [
+        "təsəlli",
+        "ehtiyat",
+        "sərfəlilik",
+        "əks-səda"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "'Ürəyi düşmək' ifadəsi nə deməkdir?",
+      "options": [
+        "çox sevinmək",
+        "çox qorxmaq",
+        "çox yorulmaq",
+        "çox acmaq"
+      ],
+      "answer": 1
+    }
+  ],
+  "hy": [
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Ես ուսանող ___։",
+      "options": [
+        "եմ",
+        "ես",
+        "է",
+        "ենք"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Մենք Երևանից ___։",
+      "options": [
+        "եմ",
+        "ես",
+        "ենք",
+        "է"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Ես երկու ___ ունեմ։",
+      "options": [
+        "գրքեր",
+        "գիրք",
+        "գրքի",
+        "գրքից"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Երկինքը ___ է։",
+      "options": [
+        "կարմիր",
+        "դեղին",
+        "կանաչ",
+        "կապույտ"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Մեկ գումարած մեկ հավասար է ___։",
+      "options": [
+        "երկու",
+        "երեք",
+        "չորս",
+        "հինգ"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Երեկ ես ֆիլմ ___։",
+      "options": [
+        "նայում եմ",
+        "կնայեմ",
+        "նայեցի",
+        "նայեցիր"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Ես ապրում եմ ___։",
+      "options": [
+        "Երևան",
+        "Երևանում",
+        "Երևանից",
+        "Երևանով"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Հոր քույրը կոչվում է ___։",
+      "options": [
+        "մորաքույր",
+        "հորեղբայր",
+        "քեռի",
+        "հորաքույր"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Ուրբաթից հետո գալիս է ___։",
+      "options": [
+        "շաբաթ",
+        "կիրակի",
+        "երկուշաբթի",
+        "չորեքշաբթի"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Ձմռանը մարդիկ հագնում են տաք ___։",
+      "options": [
+        "սանդալ",
+        "շորտ",
+        "վերարկու",
+        "լողազգեստ"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Ես այդ գիրքն արդեն ___։",
+      "options": [
+        "կարդում եմ",
+        "կարդացել եմ",
+        "կկարդամ",
+        "կարդում էի"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Մենք պետք է վաղը առավոտյան ___։",
+      "options": [
+        "գանք",
+        "գամ",
+        "գաս",
+        "գա"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Փիղն ավելի մեծ է, ___ կատուն։",
+      "options": [
+        "որքան",
+        "ինչպես",
+        "բայց",
+        "քան"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Բժիշկն աշխատում է ___։",
+      "options": [
+        "դպրոցում",
+        "գրադարանում",
+        "հիվանդանոցում",
+        "խանութում"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "«Ուրախ» բառի հականիշը ___ է։",
+      "options": [
+        "տխուր",
+        "մեծ",
+        "արագ",
+        "խելացի"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Այս վեպը հայտնի գրողի կողմից ___։",
+      "options": [
+        "գրել է",
+        "գրում է",
+        "կգրի",
+        "գրվել է"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Փողոցով ___, ես մի հին ընկերոջ հանդիպեցի։",
+      "options": [
+        "քայլել",
+        "քայլելիս",
+        "քայլելով",
+        "քայլեցի"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Նա որոշեց մրցույթին ___։",
+      "options": [
+        "հրաժարվել",
+        "հաղթել",
+        "մասնակցել",
+        "պարտվել"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "«Դժվար» բառի հոմանիշը ___ է։",
+      "options": [
+        "հեշտ",
+        "բարդ",
+        "արագ",
+        "գեղեցիկ"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Օդի աղտոտումը վնասում է մարդկանց ___։",
+      "options": [
+        "տրամադրությանը",
+        "հագուստին",
+        "կրթությանը",
+        "առողջությանը"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Ուսուցիչն ամեն օր աշակերտներին նոր բառեր ___։",
+      "options": [
+        "սովորեցնում է",
+        "սովորում է",
+        "սովորեցվում է",
+        "սովորեցրեց"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Եթե ես ժամանակ ունենայի, ես քեզ ___։",
+      "options": [
+        "օգնում եմ",
+        "կօգնեմ",
+        "կօգնեի",
+        "օգնեցի"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Նա շուտ արթնացավ, որպեսզի ___։",
+      "options": [
+        "ուշանա",
+        "չուշանա",
+        "ուշանում է",
+        "ուշացավ"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Այս խնդրի լուծման համար ձեր մասնակցությունը խիստ ___ է։",
+      "options": [
+        "հետաքրքիր",
+        "հանգիստ",
+        "հեռավոր",
+        "անհրաժեշտ"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Նրա ելույթը մեծ ___ թողեց ունկնդիրների վրա։",
+      "options": [
+        "տպավորություն",
+        "քաշ",
+        "հասցե",
+        "գին"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "Երբ ես տուն հասա, նա արդեն ___։",
+      "options": [
+        "գնում էր",
+        "գնացել էր",
+        "գնաց",
+        "կգնար"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "Դա այն գիրքն է, ___ հեղինակին ես անձամբ ճանաչում եմ։",
+      "options": [
+        "որը",
+        "որին",
+        "որի",
+        "ինչի"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Երկու երկրների միջև հարաբերությունների ջերմացումը նպաստեց առևտրի ___։",
+      "options": [
+        "անկմանը",
+        "հասցեին",
+        "գույնին",
+        "աճին"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Երկու ընկերությունները ստորագրեցին առևտրային ___։",
+      "options": [
+        "պայմանագիր",
+        "հայտարարություն",
+        "հարցազրույց",
+        "բողոք"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Գիտնականների վերջին հայտնագործությունն ունեցավ ___ ազդեցություն գիտության զարգացման վրա։",
+      "options": [
+        "թեթև",
+        "նշանակալից",
+        "կարճ",
+        "էժան"
+      ],
+      "answer": 1
+    }
+  ],
+  "ca": [
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Ella ___ professora.",
+      "options": [
+        "és",
+        "són",
+        "sóc",
+        "ets"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "___ llibre és sobre la taula.",
+      "options": [
+        "La",
+        "El",
+        "Els",
+        "Les"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Jo ___ vint anys.",
+      "options": [
+        "tens",
+        "té",
+        "tinc",
+        "tenim"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Quin dia ve després de dilluns?",
+      "options": [
+        "Dijous",
+        "Diumenge",
+        "Dissabte",
+        "Dimarts"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "De quin color és el cel quan fa sol?",
+      "options": [
+        "Blau",
+        "Verd",
+        "Vermell",
+        "Groc"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Ahir jo ___ al cinema.",
+      "options": [
+        "vas anar",
+        "vaig anar",
+        "va anar",
+        "anava"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Aquestes claus són ___ veí.",
+      "options": [
+        "de la",
+        "dels",
+        "del",
+        "de"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "El germà del meu pare és el meu ___.",
+      "options": [
+        "cosí",
+        "nebot",
+        "avi",
+        "oncle"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "L'antònim de 'gran' és ___.",
+      "options": [
+        "petit",
+        "alt",
+        "llarg",
+        "ample"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Ahir, avui i ___ són paraules que indiquen quan passa alguna cosa.",
+      "options": [
+        "abans",
+        "demà",
+        "després",
+        "sempre"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Vull que tu ___ aviat.",
+      "options": [
+        "véns",
+        "vindràs",
+        "vinguis",
+        "vindries"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Aquesta és la casa ___ vaig néixer.",
+      "options": [
+        "que",
+        "qui",
+        "quan",
+        "on"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Vols aquest llibre? Sí, ___ vull.",
+      "options": [
+        "el",
+        "la",
+        "els",
+        "les"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Un sinònim de 'content' és ___.",
+      "options": [
+        "trist",
+        "feliç",
+        "cansat",
+        "enfadat"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Quan algú explica moltes mentides, diem que és una persona ___.",
+      "options": [
+        "sincera",
+        "generosa",
+        "mentidera",
+        "valenta"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Si ___ més temps, viatjaria per tot el món.",
+      "options": [
+        "tinc",
+        "tindré",
+        "he tingut",
+        "tingués"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Aquest vi ___ molt en aquesta regió.",
+      "options": [
+        "es produeix",
+        "produeix",
+        "es produeixen",
+        "han produït"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Un sinònim formal de 'començar' és ___.",
+      "options": [
+        "acabar",
+        "iniciar",
+        "continuar",
+        "aturar"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "La paraula 'malenconia' es refereix a un sentiment de ___.",
+      "options": [
+        "alegria",
+        "por",
+        "tristesa",
+        "ràbia"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Si un text és molt difícil d'entendre, diem que és ___.",
+      "options": [
+        "senzill",
+        "clar",
+        "breu",
+        "complex"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Aquesta és l'empresa per a ___ he treballat deu anys.",
+      "options": [
+        "la qual",
+        "el qual",
+        "que",
+        "qui"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Per molt que ___, no canviaré d'opinió.",
+      "options": [
+        "insisteixes",
+        "insisteixis",
+        "insistiràs",
+        "insistiries"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Vaig donar les claus al meu veí; ___ vaig donar en persona.",
+      "options": [
+        "li les",
+        "els hi",
+        "les hi",
+        "la hi"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Una persona que actua sense pensar en les conseqüències és ___.",
+      "options": [
+        "prudent",
+        "reflexiva",
+        "cautelosa",
+        "imprudent"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "L'expressió 'tirar la tovallola' significa ___.",
+      "options": [
+        "rendir-se",
+        "començar de nou",
+        "celebrar una victòria",
+        "netejar la casa"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "Parlava com si ho ___ tot, però en realitat no sabia res.",
+      "options": [
+        "sap",
+        "sabés",
+        "sabrà",
+        "hauria sabut"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "El professor va exigir que els alumnes ___ a l'hora.",
+      "options": [
+        "arribaven",
+        "arriben",
+        "arribessin",
+        "arribaran"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "En un registre formal o literari, la paraula 'llur' vol dir ___.",
+      "options": [
+        "el meu / la meva",
+        "el teu / la teva",
+        "el nostre / la nostra",
+        "el seu / la seva (d'ells)"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Si diem que algú 'xerra pels descosits', volem dir que ___.",
+      "options": [
+        "parla molt",
+        "no diu res",
+        "parla baix",
+        "s'enfada fàcilment"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Un adjectiu culte que significa 'molt antic' és ___.",
+      "options": [
+        "modern",
+        "vetust",
+        "recent",
+        "jove"
+      ],
+      "answer": 1
+    }
+  ],
+  "eu": [
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Ni Edurne ___.",
+      "options": [
+        "zara",
+        "da",
+        "naiz",
+        "gara"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "___ mahai gainean dago.",
+      "options": [
+        "Liburua",
+        "Liburu",
+        "Liburuak",
+        "Liburuari"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Haiek ikasleak ___.",
+      "options": [
+        "da",
+        "gara",
+        "zarete",
+        "dira"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Elurra ___ da.",
+      "options": [
+        "beltza",
+        "zuria",
+        "gorria",
+        "horia"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Bi gehi bi berdin ___ dira.",
+      "options": [
+        "lau",
+        "hiru",
+        "bost",
+        "sei"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Ni orain etxean ___.",
+      "options": [
+        "naiz",
+        "dago",
+        "gaude",
+        "nago"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Nik auto bat ___.",
+      "options": [
+        "naiz",
+        "dut",
+        "da",
+        "dira"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Nire amaren ama ___ da.",
+      "options": [
+        "aitona",
+        "izeba",
+        "amona",
+        "osaba"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Igandearen aurreko eguna ___ da.",
+      "options": [
+        "larunbata",
+        "astelehena",
+        "ostirala",
+        "asteartea"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Goizetan askotan ___ edaten dut.",
+      "options": [
+        "gatza",
+        "mahaia",
+        "ogia",
+        "kafea"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Duela hamar urte, ni oso gaztea ___.",
+      "options": [
+        "naiz",
+        "nintzen",
+        "zen",
+        "ginen"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Nire etxea zure etxea ___ handiagoa da.",
+      "options": [
+        "baino",
+        "bezala",
+        "arte",
+        "gabe"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Atzo liburu bat irakurri ___.",
+      "options": [
+        "dut",
+        "nintzen",
+        "nuen",
+        "naiz"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Kontzertuan musika ederra entzuteko, ___ ondo erabili behar ditugu.",
+      "options": [
+        "begiak",
+        "eskuak",
+        "oinak",
+        "belarriak"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Hortzak minduta, ___ batengana joango naiz.",
+      "options": [
+        "irakasle",
+        "dentista",
+        "sukaldari",
+        "idazle"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Bihar euria egiten ___, etxean geldituko naiz.",
+      "options": [
+        "badu",
+        "du",
+        "zuen",
+        "dute"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Everest munduko mendirik ___ da.",
+      "options": [
+        "garaiagoa",
+        "garaia",
+        "garaiena",
+        "txikiena"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Azterketa gainditu ondoren, oso ___ nengoen.",
+      "options": [
+        "triste",
+        "nekatuta",
+        "haserre",
+        "pozik"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Gasteiz Euskadiko ___ da.",
+      "options": [
+        "herria",
+        "hiriburua",
+        "mendia",
+        "ibaia"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Bizitzan, askotan, ___ garrantzitsuak hartu behar ditugu.",
+      "options": [
+        "erabaki",
+        "galdera",
+        "erantzun",
+        "arazo"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Dendara joan naiz ogia ___.",
+      "options": [
+        "erosten",
+        "erosi",
+        "erosteko",
+        "erosiko"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Jon atzo iritsi ___ da, baina inork ez du ikusi.",
+      "options": [
+        "beti",
+        "inoiz",
+        "gutxi",
+        "omen"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Hodeiak ikusita, bihar euria egin ___.",
+      "options": [
+        "du",
+        "dezake",
+        "zuen",
+        "genuen"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "___ negua hotza dela Euskal Herrian.",
+      "options": [
+        "Esan gabe doa",
+        "Eskerrik asko",
+        "Barkatu baina",
+        "Zorionak zuri"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Klima aldaketak ___ gero eta gehiago kaltetzen du.",
+      "options": [
+        "jantzia",
+        "kirola",
+        "ingurumena",
+        "musika"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "Urtero, Eguberrietan, nire lagunari opari bat ___.",
+      "options": [
+        "ematen dut",
+        "ematen naiz",
+        "ematen zait",
+        "ematen diot"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "Hodei beltzak ikusita, uste dut bihar euria egingo ___.",
+      "options": [
+        "dela",
+        "duela",
+        "da",
+        "du"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Ekaitzaren ondoren, ___.",
+      "options": [
+        "barealdia",
+        "ekaitza",
+        "hotza",
+        "egarria"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Askok uste dute erraza dela; niri, ___, oso zaila iruditzen zait.",
+      "options": [
+        "edonon",
+        "noizbait",
+        "ordea",
+        "inondik"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Euskaraz mintzatzen den edonori ___ deitzen zaio, jatorria edonon izanda ere.",
+      "options": [
+        "euskotar",
+        "atzerritar",
+        "erdaldun",
+        "euskaldun"
+      ],
+      "answer": 3
+    }
+  ],
+  "is": [
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Ég ___ frá Íslandi.",
+      "options": [
+        "ert",
+        "erum",
+        "er",
+        "eruð"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "___ heiti Anna.",
+      "options": [
+        "Ég",
+        "Þú",
+        "Hann",
+        "Við"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Ég ___ ekki íslensku.",
+      "options": [
+        "talar",
+        "tölum",
+        "talið",
+        "tala"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Þegar ég hitti einhvern segi ég „___“.",
+      "options": [
+        "Bless",
+        "Halló",
+        "Takk",
+        "Já"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Snjór er ___.",
+      "options": [
+        "hvítur",
+        "svartur",
+        "grænn",
+        "gulur"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Þetta er ___ minn.",
+      "options": [
+        "bíll",
+        "bílnum",
+        "bílsins",
+        "bíllinn"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Í gær ___ við í bíó.",
+      "options": [
+        "förum",
+        "fórum",
+        "fer",
+        "fórst"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Á veturna er oft ___ á Íslandi.",
+      "options": [
+        "heitt",
+        "blautt",
+        "kalt",
+        "þurrt"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Ég borða ___ á morgnana.",
+      "options": [
+        "morgunmat",
+        "kvöldmat",
+        "hádegismat",
+        "nesti"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Í búðinni kaupi ég ___ og mjólk.",
+      "options": [
+        "skó",
+        "bók",
+        "stól",
+        "brauð"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Ég kem ___ Íslandi.",
+      "options": [
+        "til",
+        "frá",
+        "í",
+        "með"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Reykjavík er ___ en Akureyri.",
+      "options": [
+        "stór",
+        "stærstur",
+        "stærri",
+        "stærst"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Jón elskar konuna ___.",
+      "options": [
+        "sína",
+        "hans",
+        "hennar",
+        "þeirra"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Á flugvellinum þarf maður að sýna ___.",
+      "options": [
+        "matseðil",
+        "kvittun",
+        "dagatal",
+        "vegabréf"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Hann er atvinnulaus, hann er að leita að ___.",
+      "options": [
+        "mat",
+        "vinnu",
+        "húsi",
+        "bíl"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Ef ég ___ ríkur, myndi ég ferðast um allan heiminn.",
+      "options": [
+        "er",
+        "var",
+        "væri",
+        "verð"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Bókin ___ ég keypti í gær er mjög góð.",
+      "options": [
+        "sem",
+        "sem hana",
+        "hver",
+        "hvað"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Samheiti orðsins „fallegur“ er ___.",
+      "options": [
+        "ljótur",
+        "fagur",
+        "leiðinlegur",
+        "hræðilegur"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Orðatiltækið „að taka til hendinni“ þýðir að ___.",
+      "options": [
+        "sofna",
+        "borða mikið",
+        "hætta að vinna",
+        "byrja að vinna af krafti"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Andheiti orðsins „gleði“ er ___.",
+      "options": [
+        "hamingja",
+        "ást",
+        "sorg",
+        "von"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Hann sagði að hún ___ veik heima.",
+      "options": [
+        "væri",
+        "er",
+        "var",
+        "sé"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "___ langar að læra íslensku.",
+      "options": [
+        "Ég",
+        "Mig",
+        "Mér",
+        "Mín"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Þótt hann ___ þreyttur, hélt hann áfram að vinna.",
+      "options": [
+        "er",
+        "var",
+        "sé",
+        "væri"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Orðið „álykta“ þýðir að ___.",
+      "options": [
+        "spyrja spurningu",
+        "gefa skipun",
+        "draga rökrétta niðurstöðu af einhverju",
+        "syngja lag"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Orðið „skarpgáfaður“ lýsir einhverjum sem er mjög ___.",
+      "options": [
+        "greindur",
+        "latur",
+        "hávær",
+        "feiminn"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "Ég sakna ___ mjög mikið.",
+      "options": [
+        "hana",
+        "hennar",
+        "henni",
+        "hún"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "Lengi ___ Ísland!",
+      "options": [
+        "lifir",
+        "lifði",
+        "lifað",
+        "lifi"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Orðatiltækið „að leggja árar í bát“ merkir að ___.",
+      "options": [
+        "gefast upp",
+        "byrja nýtt verkefni",
+        "fara í siglingu",
+        "verða reiður"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Orðatiltækið „að slá tvær flugur í einu höggi“ merkir að ___.",
+      "options": [
+        "drepa skordýr",
+        "missa af tækifæri",
+        "leysa tvö verkefni með einni aðgerð",
+        "gera mistök tvisvar"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Orðið „feigð“ merkir ___.",
+      "options": [
+        "mikla gleði",
+        "nálægð dauðans",
+        "ríkidæmi",
+        "langlífi"
+      ],
+      "answer": 1
+    }
+  ],
+  "mk": [
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Јас ___ од Германија.",
+      "options": [
+        "си",
+        "е",
+        "сум",
+        "сте"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Едно дете, две ___.",
+      "options": [
+        "деца",
+        "дете",
+        "детиња",
+        "детеа"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Тој сака ___ пие вода.",
+      "options": [
+        "дека",
+        "ако",
+        "што",
+        "да"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Спротивното на 'голем' е ___.",
+      "options": [
+        "долг",
+        "мал",
+        "висок",
+        "тежок"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Бројот по 'девет' е ___.",
+      "options": [
+        "десет",
+        "осум",
+        "единаесет",
+        "седум"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Вчера јас ___ во кино.",
+      "options": [
+        "сум",
+        "ќе бидам",
+        "бев",
+        "бидам"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Утре ние ___ на море.",
+      "options": [
+        "одиме",
+        "ќе одиме",
+        "отидовме",
+        "одевме"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Денот по среда е ___.",
+      "options": [
+        "вторник",
+        "петок",
+        "понеделник",
+        "четврток"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Кога врне дожд, носиме ___.",
+      "options": [
+        "чадор",
+        "очила",
+        "ракавици",
+        "шал"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Место за купување леб и млеко е ___.",
+      "options": [
+        "болница",
+        "училиште",
+        "продавница",
+        "библиотека"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Минатата година тие ___ во Охрид.",
+      "options": [
+        "патуваат",
+        "патуваа",
+        "ќе патуваат",
+        "патувале"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Ако имав пари, ___ нова кола.",
+      "options": [
+        "купувам",
+        "купив",
+        "ќе купувам",
+        "ќе купев"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Секој ден таа ___ кафе наутро.",
+      "options": [
+        "пие",
+        "испие",
+        "пиеше",
+        "ќе испие"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Лекарот работи во ___.",
+      "options": [
+        "училиште",
+        "банка",
+        "болница",
+        "пошта"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Личност која учи ученици во училиште се вика ___.",
+      "options": [
+        "ученик",
+        "наставник",
+        "директор",
+        "родител"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Писмото ___ вчера.",
+      "options": [
+        "беше напишано",
+        "напиша",
+        "ќе напише",
+        "пишува"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Жената ___ живее до мене е лекарка.",
+      "options": [
+        "кој",
+        "кое",
+        "кои",
+        "која"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Личност која никогаш не се откажува и упорно ја продолжува работата се опишува како ___.",
+      "options": [
+        "мрзлива",
+        "упорна",
+        "срамежлива",
+        "невнимателна"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Уметничко дело што се игра во театар со актери се вика ___.",
+      "options": [
+        "роман",
+        "песна",
+        "претстава",
+        "слика"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Човек кој пишува книги се вика ___.",
+      "options": [
+        "писател",
+        "читател",
+        "издавач",
+        "уредник"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Него ___ видов вчера на пазар.",
+      "options": [
+        "му",
+        "си",
+        "се",
+        "го"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "___ е блиску до училиштето.",
+      "options": [
+        "Стара куќата",
+        "Старата куќа",
+        "Куќата стара",
+        "Старо куќата"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Никој ___ дојде на забавата.",
+      "options": [
+        "да",
+        "ќе",
+        "не",
+        "би"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Чувството на разбирање и споделување на туѓа болка се нарекува ___.",
+      "options": [
+        "емпатија",
+        "љубомора",
+        "гордост",
+        "рамнодушност"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Спротивното на 'великодушен' е ___.",
+      "options": [
+        "храбар",
+        "трпелив",
+        "искрен",
+        "себичен"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "___ тој дојде на состанокот, ниту се јави.",
+      "options": [
+        "Или",
+        "Ниту",
+        "Ако",
+        "Бидејќи"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Судија кој одлучува без да фаворизира ниту една страна се смета за ___.",
+      "options": [
+        "нервозен",
+        "нерешителен",
+        "непристрасен",
+        "невнимателен"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Збор со спротивно значење на друг збор се вика ___.",
+      "options": [
+        "синоним",
+        "хомоним",
+        "акроним",
+        "антоним"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Официјален документ со кој некому му се дава овластување се вика ___.",
+      "options": [
+        "потврда",
+        "полномошно",
+        "фактура",
+        "покана"
+      ],
+      "answer": 1
+    }
+  ],
+  "tr": [
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Ben ___.",
+      "options": [
+        "öğretmensin",
+        "öğretmeniz",
+        "öğretmenim",
+        "öğretmensiniz"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Bu ___ çok pahalı.",
+      "options": [
+        "elmalar",
+        "elmaler",
+        "elmaları",
+        "elmalara"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A1",
+      "skill": "grammar",
+      "text": "Bu benim ___.",
+      "options": [
+        "evin",
+        "evi",
+        "eviniz",
+        "evim"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Gökyüzü ___.",
+      "options": [
+        "tatlıdır",
+        "mavidir",
+        "hızlıdır",
+        "uzundur"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A1",
+      "skill": "vocab",
+      "text": "Bu çanta ağır değil, ___.",
+      "options": [
+        "hafif",
+        "tatlı",
+        "yüksek",
+        "ucuz"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Dün akşam sinemaya ___.",
+      "options": [
+        "gideceğim",
+        "gidiyorum",
+        "gittim",
+        "giderim"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "A2",
+      "skill": "grammar",
+      "text": "Yarın ___ gideceğim.",
+      "options": [
+        "okulda",
+        "okula",
+        "okuldan",
+        "okulu"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Annemin annesi benim ___.",
+      "options": [
+        "teyzemdir",
+        "halamdır",
+        "yengemdir",
+        "anneannemdir"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Sabah kalkınca önce dişlerimi ___.",
+      "options": [
+        "fırçalarım",
+        "yıkarım",
+        "keserim",
+        "tararım"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "A2",
+      "skill": "vocab",
+      "text": "Restoranda yemekten önce garson bize bir ___ verdi.",
+      "options": [
+        "fatura",
+        "bahşiş",
+        "menü",
+        "tarif"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Param ___, yeni bir araba alırdım.",
+      "options": [
+        "olursa",
+        "olsa",
+        "olduysa",
+        "olacaksa"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Yarın sınavım var, bu yüzden erken ___.",
+      "options": [
+        "yatarım",
+        "yattım",
+        "yatıyordum",
+        "yatmalıyım"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B1",
+      "skill": "grammar",
+      "text": "Duyduğuma göre, geçen yıl İstanbul'a ___.",
+      "options": [
+        "taşınmışlar",
+        "taşındılar",
+        "taşınacaklar",
+        "taşınıyorlar"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Uçağı kaçırmamak için sabah erken ___ çıktık.",
+      "options": [
+        "eve",
+        "işe",
+        "yola",
+        "okula"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B1",
+      "skill": "vocab",
+      "text": "Bu ürün çok kaliteli ama fiyatı da o kadar ___.",
+      "options": [
+        "büyük",
+        "yüksek",
+        "uzun",
+        "geniş"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Bu roman elli yıl önce yazıldı ve daha sonra birçok dile ___.",
+      "options": [
+        "çevirdi",
+        "çevirtti",
+        "çevrilmişti",
+        "çevrildi"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "B2",
+      "skill": "grammar",
+      "text": "Dün ___ film gerçekten çok etkileyiciydi.",
+      "options": [
+        "izlediğim",
+        "izleyeceğim",
+        "izlediğimde",
+        "izlerken"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Hükümetin aldığı yeni ekonomik ___ halk tarafından tepkiyle karşılandı.",
+      "options": [
+        "hediye",
+        "şaka",
+        "karar",
+        "mektup"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Bu konuda kesin bir ___ varmadan önce daha fazla araştırma yapmalıyız.",
+      "options": [
+        "cevaba",
+        "sonuca",
+        "soruya",
+        "fikre"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "B2",
+      "skill": "vocab",
+      "text": "Şirket, artan maliyetler ___ bazı çalışanlarını işten çıkarmak zorunda kaldı.",
+      "options": [
+        "nedeniyle",
+        "gibi",
+        "sayesinde",
+        "kadar"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Onun bu kadar erken ___ hepimizi şaşırttı.",
+      "options": [
+        "gelmek",
+        "gelmesi",
+        "geldiği",
+        "geleceği"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Işıklar kapalı, demek ki onlar çoktan eve ___.",
+      "options": [
+        "gidiyor olmalılar",
+        "gitmeliler",
+        "gitmiş olsalar",
+        "gitmiş olmalılar"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C1",
+      "skill": "grammar",
+      "text": "Zaman ___ bu şehri daha çok seviyorum.",
+      "options": [
+        "geçince",
+        "geçtiğinde",
+        "geçtikçe",
+        "geçerken"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Yazar, romanında toplumsal sorunları ustaca ___.",
+      "options": [
+        "ele almış",
+        "tutmuş",
+        "almış",
+        "kaldırmış"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C1",
+      "skill": "vocab",
+      "text": "Bilim insanları, deney sürecinde hücrelerin davranışlarını dikkatle ___.",
+      "options": [
+        "seyrettiler",
+        "baktılar",
+        "tahmin ettiler",
+        "gözlemlediler"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "Bu şehre ___ iki yıl oldu.",
+      "options": [
+        "taşınınca",
+        "taşınalı",
+        "taşınmadan",
+        "taşınırken"
+      ],
+      "answer": 1
+    },
+    {
+      "level": "C2",
+      "skill": "grammar",
+      "text": "Çocuk, hiçbir şey ___ oyununa devam etti.",
+      "options": [
+        "olmadığı için",
+        "olmasa da",
+        "olmamışçasına",
+        "olmayınca"
+      ],
+      "answer": 2
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Uzmanlar, piyasadaki belirsizlik nedeniyle yatırımcılara ___ davranmalarını tavsiye ediyor.",
+      "options": [
+        "temkinli",
+        "cesur",
+        "meraklı",
+        "sabırsız"
+      ],
+      "answer": 0
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Yıllardır süren bu tartışmaya nihayet ___ nokta kondu.",
+      "options": [
+        "bitiş",
+        "final",
+        "durak",
+        "son"
+      ],
+      "answer": 3
+    },
+    {
+      "level": "C2",
+      "skill": "vocab",
+      "text": "Mahkeme, sunulan yeni deliller ___ dosyayı yeniden incelemeye karar verdi.",
+      "options": [
+        "gölgesinde",
+        "ışığında",
+        "altında",
+        "yanında"
+      ],
+      "answer": 1
+    }
+  ],
   "en": [
     {
       "level": "A1",
