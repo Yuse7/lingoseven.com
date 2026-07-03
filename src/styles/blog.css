@@ -411,7 +411,7 @@
   opacity: 0.9;
 }
 
-/* CTA store buttons — match .download-buttons styling */
+/* CTA store buttons, match .download-buttons styling */
 .article-cta .cta-buttons {
   display: flex;
   gap: 12px;

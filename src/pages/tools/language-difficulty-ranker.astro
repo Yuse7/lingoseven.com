@@ -30,7 +30,7 @@ const rows = Object.values(languageFacts)
 // picked (see the inline script).
 const defaultRows = [...rows].sort((a, b) => a.fsiHours - b.fsiHours || a.name.localeCompare(b.name));
 
-const title = 'Language Difficulty Ranker — Easiest & Hardest Languages to Learn | Lingo7';
+const title = 'Language Difficulty Ranker, Easiest & Hardest Languages to Learn | Lingo7';
 const description =
   'Rank 50 languages by difficulty for your native language, using FSI study hours, language family, and writing system. Find your easiest next language to learn by reading.';
 
@@ -38,7 +38,7 @@ const faq = [
   {
     question: 'What is the easiest language to learn for English speakers?',
     answer:
-      'For native English speakers, the FSI rates Category I languages as easiest — Spanish, French, Italian, Portuguese, Dutch, Norwegian, Swedish, Danish and Romanian — each needing roughly 600–750 hours to reach professional working proficiency. They share Latin script and thousands of cognates with English.',
+      'For native English speakers, the FSI rates Category I languages as easiest, Spanish, French, Italian, Portuguese, Dutch, Norwegian, Swedish, Danish and Romanian, each needing roughly 600-750 hours to reach professional working proficiency. They share Latin script and thousands of cognates with English.',
   },
   {
     question: 'What is the hardest language to learn?',
@@ -53,7 +53,7 @@ const faq = [
   {
     question: 'Does my native language change how hard a language is to learn?',
     answer:
-      'Yes, significantly. A language that shares your language family and writing system is far easier than the raw FSI figure suggests — Italian is much easier for a Spanish speaker than for an English speaker. This tool estimates that adjustment from shared family, sub-family branch and script; the FSI hours themselves are still measured for English speakers.',
+      'Yes, significantly. A language that shares your language family and writing system is far easier than the raw FSI figure suggests, Italian is much easier for a Spanish speaker than for an English speaker. This tool estimates that adjustment from shared family, sub-family branch and script; the FSI hours themselves are still measured for English speakers.',
   },
   {
     question: 'What is the fastest way to learn a language?',
@@ -95,7 +95,7 @@ const jsonLd = [
         <p class="ranker-intro">
           Every language difficulty chart assumes you speak English. This one doesn't. Pick your
           native language and we'll re-rank all 50 languages by how hard each is likely to be
-          <em>for you</em> — combining official FSI study hours with language family and writing
+          <em>for you</em>, combining official FSI study hours with language family and writing
           system. Then start the easy way: by reading real books.
         </p>
 
@@ -161,17 +161,17 @@ const jsonLd = [
       <div class="ranker-explainer">
         <h2>How this ranking works</h2>
         <p>
-          The base figure is the <strong>FSI study-hour estimate</strong> — how many classroom hours
+          The base figure is the <strong>FSI study-hour estimate</strong>, how many classroom hours
           the U.S. Foreign Service Institute found a native English speaker needs to reach
-          professional proficiency. Category&nbsp;I languages (≈600–750&nbsp;h) are easiest;
+          professional proficiency. Category&nbsp;I languages (≈600-750&nbsp;h) are easiest;
           Category&nbsp;III (≈1,100&nbsp;h) are the hardest among the languages we support.
         </p>
         <p>
           When you pick a different native language, we adjust that figure for
           <strong>linguistic distance</strong>: languages in your own sub-family branch (Romance,
           Germanic, Slavic, Turkic…) and sharing your writing system get easier; those in an
-          unrelated family with a different script get harder. This adjustment is an estimate —
-          the FSI never measured every native-language pairing — but it reflects the well-documented
+          unrelated family with a different script get harder. This adjustment is an estimate, 
+          the FSI never measured every native-language pairing, but it reflects the well-documented
           fact that related languages transfer.
         </p>
         <p>
@@ -182,7 +182,7 @@ const jsonLd = [
       </div>
 
       <div class="ranker-cta">
-        <h2>Start with your easiest language — by reading</h2>
+        <h2>Start with your easiest language, by reading</h2>
         <p>Read real books with parallel translation and native-narrated audio. Free to start.</p>
         <CtaButtons size="large" />
       </div>
@@ -290,7 +290,7 @@ const jsonLd = [
       caption.innerHTML =
         nativeCode === 'en'
           ? 'Ranked easiest → hardest for <strong>English</strong> speakers. FSI hours are measured for English speakers; the “for you” estimate adjusts them from shared family and script and is approximate.'
-          : `Ranked easiest → hardest if you speak <strong>${nativeName}</strong>. Estimated hours adjust the English-speaker FSI figure for your language family and script — approximate, not official.`;
+          : `Ranked easiest → hardest if you speak <strong>${nativeName}</strong>. Estimated hours adjust the English-speaker FSI figure for your language family and script, approximate, not official.`;
     }
 
     select.addEventListener('change', () => render(select.value));

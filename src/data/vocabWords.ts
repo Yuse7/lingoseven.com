@@ -1,5 +1,7 @@
-// AUTO-GENERATED vocabulary test data. Source: hermitdave/FrequencyWords (OpenSubtitles 2018),
-// sampled into 6 frequency bands per language, curated to remove proper nouns / foreign words,
+// AUTO-GENERATED vocabulary test data. Source: hermitdave/FrequencyWords (OpenSubtitles 2018)
+// where available, or the Leipzig Corpora Collection (wortschatz-leipzig.de) for languages absent
+// from or too shallow in FrequencyWords (af, az, be, hy, ka, kk, ky, mn, sw, tl, uz, zu).
+// Sampled into 6 frequency bands per language, curated to remove proper nouns / foreign words,
 // plus 12 verified non-existent pseudowords per language (guessing-correction items).
 // Band widths are the count of distinct cleaned words in each frequency-rank span; the sum (28000)
 // is the upper bound of the vocabulary-size estimate. See docs/marketing/seo-lingoseven.md.
@@ -414,6 +416,149 @@ export const vocabWords: Record<string, VocabLangData> = {
     ],
     pseudowords: ["vrnalo", "šturak", "gmizan", "plovak", "drašnik", "krevoš", "smolnik", "blagura", "trnožak", "švrkan", "klemoš", "zdrupan"],
   },
+  af: {
+    bands: [
+      { width: 600, words: ["praat", "lees", "boek", "geld", "antwoord", "diere", "hulp", "koop"] },
+      { width: 1200, words: ["koning", "natuur", "vis", "taak", "skuldig", "waardeer", "muur", "ontken"] },
+      { width: 2200, words: ["verwysing", "kanker", "skouers", "slagoffer", "verhuis", "akteur", "onafhanklik", "opstand"] },
+      { width: 4000, words: ["parkering", "lidmaat", "ongewone", "bêre", "skuiling", "afgrond", "kraal", "eksotiese"] },
+      { width: 7000, words: ["plafon", "juweel", "potlood", "ruiter", "fabrieke", "standbeelde", "versmoor", "jaarverslag"] },
+      { width: 13000, words: ["koördinering", "selfverdediging", "gemsbok", "geografie", "protagonis", "kandelaar", "verveling", "kwarantyn"] },
+    ],
+    pseudowords: ["vroeselaar", "skelderig", "vlonkerd", "plonkasie", "grewelik", "sprokend", "verpluister", "knatersel", "geblonker", "gloesem", "kwoester", "spuilnaar"],
+  },
+  az: {
+    bands: [
+      { width: 600, words: ["neçə", "lakin", "hərbi", "inkişaf", "əlavə", "imkan", "ehtiyac", "pis"] },
+      { width: 1200, words: ["görmək", "bəzən", "məktəb", "yeganə", "köhnə", "asan", "yemək", "yüz"] },
+      { width: 2200, words: ["üstün", "sevimli", "misal", "fəlakət", "ömür", "məscid", "heyvan", "gümüş"] },
+      { width: 4000, words: ["geyim", "mühit", "peşman", "günorta", "fayda", "məna", "kitabxana", "günəşli"] },
+      { width: 7000, words: ["atışma", "istəmək", "balta", "böyrək", "şüurlu", "yaşlılar", "ağlayır", "sahili"] },
+      { width: 13000, words: ["icad", "xatirələr", "xain", "təşviş", "çarəsi", "gəzdi", "dilənçilik", "həyasız"] },
+    ],
+    pseudowords: ["qumraş", "salqıc", "qontaş", "qurnaş", "tişkəl", "möşgür", "ürpəniş", "bəlişgə", "mölkün", "göyəltiş", "davquş", "somraq"],
+  },
+  be: {
+    bands: [
+      { width: 600, words: ["што", "вельмі", "заўсёды", "народ", "працаваць", "праблема", "маці", "пяць"] },
+      { width: 1200, words: ["чатыры", "вёсцы", "былы", "факт", "жанчына", "гонар", "рынак", "вуліцу"] },
+      { width: 2200, words: ["каманда", "бюджэт", "восем", "нафта", "пераклад", "розум", "дарога", "памятаць"] },
+      { width: 4000, words: ["офіс", "ноччу", "незалежны", "вясна", "сакрэт", "кароль", "калега", "аўтамабіля"] },
+      { width: 7000, words: ["расказваць", "школьнікі", "валюта", "схему", "пакупнікі", "абутку", "нечаканы", "мабільным"] },
+      { width: 13000, words: ["лістапад", "зімовы", "футбольны", "закончыць", "вучоба", "кнігарню", "дылема", "вялізнае"] },
+    ],
+    pseudowords: ["краўтоўка", "мятлівасць", "блукатны", "снаўзель", "гразьнюк", "чмыхатаць", "дробнішча", "цурбаліна", "шчаўронак", "трымцяны", "кудлаўе", "вязьмота"],
+  },
+  hy: {
+    bands: [
+      { width: 600, words: ["երկու", "որտեղ", "պետք", "կարևոր", "սովորաբար", "յուրաքանչյուր", "ուժեղ", "հազվադեպ"] },
+      { width: 1200, words: ["սիրում", "լուրջ", "այսօր", "ուրիշ", "տունը", "համալսարանը", "գնել", "վաճառել"] },
+      { width: 2200, words: ["հյուսիս", "գործունեություն", "հանրահայտ", "առարկա", "արժեք", "սենյակ", "կարդալ", "բազմազան"] },
+      { width: 4000, words: ["նամակը", "դուռը", "բնակավայր", "քննարկել", "գոյատևել", "ցուցակը", "քարտեզի", "կտրականապես"] },
+      { width: 7000, words: ["երկինք", "արևոտ", "հաշվարկել", "թել", "վարք", "կարտոֆիլ", "տեխնոլոգիա", "ծխախոտ"] },
+      { width: 13000, words: ["հագնվում", "զայրույթ", "տպել", "զգուշավոր", "խոստում", "երկրաշարժեր", "հավասարակշիռ", "վատառողջ"] },
+    ],
+    pseudowords: ["մարգուն", "սելվանք", "թորմիկ", "խոնդար", "վաշտոր", "հնջարան", "պրծանիկ", "ձագուռ", "խլվատ", "սարմունք", "թափլուն", "կրնդուշ"],
+  },
+  ka: {
+    bands: [
+      { width: 600, words: ["ძალიან", "უკვე", "რადგან", "ცხოვრება", "დედა", "სახელმწიფო", "ამბობს", "მცირე"] },
+      { width: 1200, words: ["საშუალო", "რამდენი", "ბრძოლა", "წიგნის", "ხელები", "ბრალი", "ცდილობენ", "მშვიდად"] },
+      { width: 2200, words: ["სიმღერა", "ადვილი", "ბუნება", "მოვლენა", "გადავწყვიტე", "ქვეყნებს", "დამცველი", "სხვები"] },
+      { width: 4000, words: ["მეგობრის", "მოხერხდა", "კრებული", "დედოფალი", "ოჯახებს", "ნაყოფიერი", "ნივთის", "დაბლა"] },
+      { width: 7000, words: ["მაგალითს", "გაემგზავრება", "მსვლელობა", "მოსამართლეები", "დაბრკოლება", "სოფლებს", "ვერანაირად", "ნელნელა"] },
+      { width: 13000, words: ["კვამლი", "მოწყენილი", "ბედავს", "კლდეში", "სიმსუქნე", "დაზუსტება", "მიწიერ", "გავიგებ"] },
+    ],
+    pseudowords: ["ლარტანი", "ბოშკელი", "ტრიმანა", "ფარგუნი", "ნაშკური", "გვირთანი", "სხალიბო", "წიბონდა", "დრონკელა", "ღვინტელა", "კრანდული", "ტყემანი"],
+  },
+  kk: {
+    bands: [
+      { width: 600, words: ["жер", "жаңа", "ғарыш", "бүкіл", "шағын", "сауда", "мұнай", "мәдениет"] },
+      { width: 1200, words: ["көмір", "кісі", "көлік", "гүл", "рұқсат", "тиімді", "жылдам", "сұйық"] },
+      { width: 2200, words: ["аңыз", "кеңістік", "қор", "ескерткіштер", "киелі", "қылмыстық", "майлы", "бұталар"] },
+      { width: 4000, words: ["қимыл", "толқындар", "гектар", "электрондар", "былғары", "зеңбірек", "қомақты", "айқындау"] },
+      { width: 7000, words: ["еңбекші", "желбезек", "қайыс", "жауырын", "мұрагер", "толғау", "өнегелі", "ескірген"] },
+      { width: 13000, words: ["теңдеу", "қызметші", "есек", "шеге", "қора", "тұмау", "қысқыш", "кішірейту"] },
+    ],
+    pseudowords: ["қоралдық", "шүреңке", "тәбілдеу", "бұлғаныш", "қаңтырма", "мөлдіреуіш", "жұпаңдық", "тыңғылық", "күреміс", "ноқабыл", "серпелек", "дүрпеген"],
+  },
+  ky: {
+    bands: [
+      { width: 600, words: ["маалымат", "өкмөт", "көз", "күн", "толук", "кылмыш", "жаман", "дүйнө"] },
+      { width: 1200, words: ["таасир", "барак", "жарык", "пайыз", "арыз", "жөнөкөй", "коңшу", "өмүр"] },
+      { width: 2200, words: ["ишмер", "өкүм", "жасалма", "талкуу", "кар", "ооз", "ачкачылык", "көрүнүктүү"] },
+      { width: 4000, words: ["кылым", "аралаш", "түшүндүрмө", "муз", "бейшемби", "калыстык", "баяндама", "жоолук"] },
+      { width: 7000, words: ["кийлигишүү", "чыккынчылык", "бүлүк", "тышкаркы", "жез", "боштондук", "апаат", "түлкү"] },
+      { width: 13000, words: ["өпкө", "кууш", "жаат", "шыйрак", "ченем", "жандануу", "эгиз", "жүзүм"] },
+    ],
+    pseudowords: ["чорпон", "таскыр", "кыртан", "таргын", "дарпын", "зорпош", "сүлкүн", "дүмөк", "төшүлдүк", "бүлкөм", "нүскөр", "миртек"],
+  },
+  mn: {
+    bands: [
+      { width: 600, words: ["газар", "өндөр", "хүү", "авах", "ажил", "уул", "сар", "бөмбөг"] },
+      { width: 1200, words: ["амьдрал", "багш", "эрүүл", "байгаль", "алдаа", "тоглоом", "гэрэл", "баяр"] },
+      { width: 2200, words: ["үхэр", "дүүрэг", "тив", "туршлага", "адуу", "архи", "бороо", "шүд"] },
+      { width: 4000, words: ["тээвэр", "арав", "түлш", "тэмдэглэгээ", "заяа", "хориотой", "өгүүлэх", "осол"] },
+      { width: 7000, words: ["ёсон", "зээр", "шанага", "тоосго", "өргөл", "шөл", "төмөрлөг", "шоргоолж"] },
+      { width: 13000, words: ["зөнч", "хөг", "дэгээ", "хүрд", "өглөг", "цээрлэл", "мойл", "атга"] },
+    ],
+    pseudowords: ["халбор", "тонсаг", "губрал", "насхуу", "дормог", "шалзан", "сэрбэл", "нэвшил", "төлбэн", "үлзэр", "сэвүүн", "хүнрэг"],
+  },
+  sw: {
+    bands: [
+      { width: 600, words: ["wakati", "nyumba", "jua", "biashara", "muhimu", "haraka", "kufanya", "vitabu"] },
+      { width: 1200, words: ["hadithi", "barafu", "mlango", "kutafuta", "kuimba", "bahati", "shamba", "mgonjwa"] },
+      { width: 2200, words: ["ndoto", "matope", "maktaba", "chupa", "kuelezea", "kujitolea", "giza", "afadhali"] },
+      { width: 4000, words: ["kitongoji", "wakili", "kiburi", "mbingu", "paja", "chafu", "kunyonyesha", "kuainisha"] },
+      { width: 7000, words: ["mkahawa", "chandarua", "mwiba", "mwamuzi", "uhaini", "mwanachuoni", "kurefusha", "kulipua"] },
+      { width: 13000, words: ["viganja", "michikichi", "misiba", "majonzi", "ubani", "thuluti", "kustarehe", "kufadhaika"] },
+    ],
+    pseudowords: ["mavuko", "kizungwa", "mtapiko", "ubarazi", "nyamboka", "kupanduka", "mzigano", "vitandua", "kirembwa", "uchamvu", "kitwanga", "msonyako"],
+  },
+  tl: {
+    bands: [
+      { width: 600, words: ["tao", "lahat", "wika", "pamilya", "pagkain", "aklat", "dagat", "kamay"] },
+      { width: 1200, words: ["tula", "gilid", "karanasan", "sasakyan", "sulat", "paliparan", "damdamin", "magsasaka"] },
+      { width: 2200, words: ["mahaba", "tuldok", "paghinga", "maikli", "bakuna", "paningin", "biyernes", "katarungan"] },
+      { width: 4000, words: ["pagsuko", "bandila", "masigasig", "tasa", "talo", "biyaya", "talim", "inihaw"] },
+      { width: 7000, words: ["hapunan", "marupok", "panukat", "kuwarto", "lathala", "katamaran", "pagkit", "ninang"] },
+      { width: 13000, words: ["gayak", "makatuwiran", "kaban", "kasya", "masayahin", "sugal", "kalaro", "kinang"] },
+    ],
+    pseudowords: ["lumasay", "bunlagan", "tagawis", "pinurot", "malikbo", "sumalbot", "hangibol", "kalamsing", "paritok", "dalusaw", "tibangan", "gasindap"],
+  },
+  uz: {
+    bands: [
+      { width: 600, words: ["bilan", "barcha", "kerak", "qishloq", "odam", "maktab", "til", "tabiiy"] },
+      { width: 1200, words: ["korxona", "foydali", "eʼtibor", "xorijiy", "kutubxona", "turmush", "sharoit", "oxirgi"] },
+      { width: 2200, words: ["gazeta", "qazilma", "his", "mol", "aeroport", "jez", "ishonch", "shoyi"] },
+      { width: 4000, words: ["charm", "maxfiy", "zoʻr", "sulola", "shikoyat", "elchi", "tartibsiz", "podsholik"] },
+      { width: 7000, words: ["aqlli", "did", "qutqarish", "kifoya", "ifodali", "shijoat", "kamar", "lapar"] },
+      { width: 13000, words: ["mahal", "semiz", "arboblar", "qarovsiz", "lazzatlanish", "parrakli", "sadoqati", "taʼminlanish"] },
+    ],
+    pseudowords: ["sarqom", "tuzgʻal", "qishvon", "beltoq", "hovrim", "koʻstan", "namildoq", "sergʻun", "toʻlmar", "qadribon", "eshvara", "burloq"],
+  },
+  vi: {
+    bands: [
+      { width: 600, words: ["yêu", "sợ", "mở", "bắn", "khách", "bóng", "nằm", "tuần"] },
+      { width: 1200, words: ["gửi", "đen", "tắm", "giàu", "bơi", "trứng", "vườn", "nghề"] },
+      { width: 2200, words: ["chợ", "dịp", "múa", "gạo", "rách", "lụa", "mứt", "nắng"] },
+      { width: 4000, words: ["tỏi", "sáp", "đèo", "xoăn", "nách", "thềm", "nhím", "chông"] },
+      { width: 7000, words: ["tạnh", "xoài", "giỗ", "sếu", "ngáp", "lẩu", "bún", "thúng"] },
+      { width: 13000, words: ["nướu", "khều", "tráp", "cốm", "niêu", "gấm", "mím", "phèn"] },
+    ],
+    pseudowords: ["trưởm", "khuẩng", "nhuổng", "boẹng", "phuẩn", "khoạm", "dưởn", "phểnh", "khoẻng", "thoạc", "sưởng", "chuổm"],
+  },
+  zu: {
+    bands: [
+      { width: 600, words: ["umuntu", "kakhulu", "kanjani", "amandla", "ithuba", "ukuthola", "ukukhuluma", "iqiniso"] },
+      { width: 1200, words: ["ingozi", "intuthuko", "umfana", "ukuxhumana", "umyeni", "ukuhlola", "ukuphepha", "maduze"] },
+      { width: 2200, words: ["izibalo", "umkakhe", "izinsolo", "ukucabanga", "ukushayela", "udoti", "ukujabula", "icebo"] },
+      { width: 4000, words: ["umbutho", "amagugu", "izimpande", "isizukulwane", "ukuqaphela", "ukuqhuma", "ibalulekile", "uhlanganisa"] },
+      { width: 7000, words: ["isisho", "ukuhlomula", "ugula", "izitho", "ishumi", "ukukhululeka", "ukufana", "emqoka"] },
+      { width: 13000, words: ["elenga", "ziboshwa", "uphela", "angempela", "okhulelwe", "uqophe", "impango", "yalahleka"] },
+    ],
+    pseudowords: ["umhlabezi", "isibhungelo", "ukuhlombeza", "umgqashiyo", "izinkwelezi", "ubuhlwazana", "amantsholo", "ukuzimbuluza", "umphequzo", "isihlwabelo", "umdlabuzo", "ubunkwazana"],
+  },
 };
 
-export const VOCAB_LANG_CODES = ['es', 'fr', 'de', 'it', 'pt', 'en', 'ru', 'nl', 'sv', 'tr', 'no', 'da', 'ro', 'uk', 'pl', 'cs', 'sk', 'hr', 'bs', 'bg', 'mk', 'sl', 'lv', 'lt', 'fi', 'hu', 'et', 'el', 'id', 'ms', 'is', 'ca', 'gl', 'sq', 'eu', 'sr'];
+export const VOCAB_LANG_CODES = ['es', 'fr', 'de', 'it', 'pt', 'en', 'ru', 'nl', 'sv', 'tr', 'no', 'da', 'ro', 'uk', 'pl', 'cs', 'sk', 'hr', 'bs', 'bg', 'mk', 'sl', 'lv', 'lt', 'fi', 'hu', 'et', 'el', 'id', 'ms', 'is', 'ca', 'gl', 'sq', 'eu', 'sr', 'af', 'az', 'be', 'hy', 'ka', 'kk', 'ky', 'mn', 'sw', 'tl', 'uz', 'vi', 'zu'];

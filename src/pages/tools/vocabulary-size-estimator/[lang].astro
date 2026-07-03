@@ -55,7 +55,7 @@ const faq = [
   {
     question: `How many words do I know in ${name}?`,
     answer:
-      `This test estimates it in about a minute. You check every ${name} word you genuinely know from a list sampled across the whole frequency range — from the most common words down to rare ones. The share you know in each frequency band is scaled up to the size of that band, and the totals are added together. The list also hides made-up words; checking those lowers your score, which corrects for guessing.`,
+      `This test estimates it in about a minute. You check every ${name} word you genuinely know from a list sampled across the whole frequency range, from the most common words down to rare ones. The share you know in each frequency band is scaled up to the size of that band, and the totals are added together. The list also hides made-up words; checking those lowers your score, which corrects for guessing.`,
   },
   {
     question: 'How is the vocabulary size estimate calculated?',
@@ -65,7 +65,7 @@ const faq = [
   {
     question: 'What are the made-up words for?',
     answer:
-      `About a fifth of the list are pseudowords — invented strings that follow ${name} spelling rules but are not real words. They look plausible, so if you tick them you are guessing. The test subtracts that guessing rate from your real score so the estimate stays honest. Be strict: only check a word if you actually know what it means.`,
+      `About a fifth of the list are pseudowords, invented strings that follow ${name} spelling rules but are not real words. They look plausible, so if you tick them you are guessing. The test subtracts that guessing rate from your real score so the estimate stays honest. Be strict: only check a word if you actually know what it means.`,
   },
   {
     question: `How many ${name} words do you need to be fluent?`,
@@ -120,12 +120,12 @@ const jsonLd = [
         <h1>How many words do you know in <span>{name}</span>?</h1>
         <p class="vocab-intro">
           Tick every {name} word below whose meaning you actually know. The list spans the whole
-          frequency range — from the most common words to rare ones — and hides a few invented words
+          frequency range, from the most common words to rare ones, and hides a few invented words
           to keep you honest. We turn your answers into an estimate of your total {name} vocabulary,
           then show you the fastest way to grow it: reading real books.
         </p>
         <p class="vocab-hint">
-          Check a word only if you know what it means. Some words on the list are not real — don't
+          Check a word only if you know what it means. Some words on the list are not real, don't
           guess.
         </p>
       </header>
@@ -168,7 +168,7 @@ const jsonLd = [
       </div>
 
       <div class="vocab-cta">
-        <h2>Grow your {name} vocabulary the natural way — by reading</h2>
+        <h2>Grow your {name} vocabulary the natural way, by reading</h2>
         <p>
           The fastest way past these numbers is meeting words again and again in real sentences.
           Lingo7 lets you read real books in {name} with tap-to-translate and native-narrated audio.
@@ -181,8 +181,8 @@ const jsonLd = [
         <h2>How the estimate works</h2>
         <p>
           The hardest part of measuring vocabulary is that you can't be asked about every word. So
-          this test samples them. {name} words are sorted by <strong>frequency</strong> — how often
-          they appear in real usage — and split into six bands, from the 600 most common words down
+          this test samples them. {name} words are sorted by <strong>frequency</strong>, how often
+          they appear in real usage, and split into six bands, from the 600 most common words down
           to words ranked around 25,000th. You see eight words from each band.
         </p>
         <p>
@@ -193,7 +193,7 @@ const jsonLd = [
           more the test assumes you were guessing, and it scales your score down to match.
         </p>
         <p>
-          It's an estimate, not an exam — read it as a range and a level. What it's genuinely good at
+          It's an estimate, not an exam, read it as a range and a level. What it's genuinely good at
           is showing <em>where</em> your {name} vocabulary thins out, and that the surest way to
           thicken it is to keep reading.
         </p>
@@ -207,7 +207,7 @@ const jsonLd = [
             In real usage, the 1,000 most common {name} words already cover about
             <strong>{fact.coverage.top1000}%</strong> of everyday text, and the top 5,000 cover
             roughly <strong>{fact.coverage.top5000}%</strong>. The rarer words beyond that are where
-            vocabularies really differ — which is why this test samples them too, not just the
+            vocabularies really differ, which is why this test samples them too, not just the
             common ones.
           </p>
           <div class="facts-stats">
@@ -310,7 +310,7 @@ const jsonLd = [
 
     function level(n: number): { tag: string; blurb: string } {
       if (n < 750)
-        return { tag: 'A1 · Beginner', blurb: "You're at the start. The first few hundred words already carry a lot of everyday meaning — keep going." };
+        return { tag: 'A1 · Beginner', blurb: "You're at the start. The first few hundred words already carry a lot of everyday meaning, keep going." };
       if (n < 1500)
         return { tag: 'A2 · Elementary', blurb: 'You can handle simple, familiar topics. Building toward the ~3,000 words that unlock real conversations.' };
       if (n < 3000)
@@ -319,7 +319,7 @@ const jsonLd = [
         return { tag: 'B2 · Upper-intermediate', blurb: "You're closing in on the ~8,000 words that make novels comfortable. Reading widely will get you there fastest." };
       if (n < 10000)
         return { tag: 'C1 · Advanced', blurb: 'You can read real books and follow nuanced discussion. The remaining words are rarer and best met in context.' };
-      return { tag: 'C2 · Near-native', blurb: 'An exceptional vocabulary — in the range of an educated native speaker. Reading keeps even this sharp.' };
+      return { tag: 'C2 · Near-native', blurb: 'An exceptional vocabulary, in the range of an educated native speaker. Reading keeps even this sharp.' };
     }
 
     function estimate() {

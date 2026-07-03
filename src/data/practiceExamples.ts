@@ -1,6 +1,6 @@
 export interface PracticeWord {
   word: string; // capitalized form: "Haus", "Maison", "Дом", "House"
-  ipa: string; // IPA pronunciation in brackets, e.g. "[haʊs]" — empty string if not commonly available
+  ipa: string; // IPA pronunciation in brackets, e.g. "[haʊs]", empty string if not commonly available
 }
 
 export interface PracticeOptions {

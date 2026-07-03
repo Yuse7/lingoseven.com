@@ -1,4 +1,4 @@
-console.log('[lingo7] site build: 2026-05-20 — adaptation copy v2');
+console.log('[lingo7] site build: 2026-05-20, adaptation copy v2');
 
 // ========== Platform-aware CTA buttons ==========
 // Highlight App Store button on iOS/macOS, Google Play on Android.
@@ -28,7 +28,7 @@ console.log('[lingo7] site build: 2026-05-20 — adaptation copy v2');
     appStoreLinks.forEach((el) => swap(el, false));
     playStoreLinks.forEach((el) => swap(el, true));
   } else {
-    // iOS — keep default (App Store primary), but ensure consistency
+    // iOS, keep default (App Store primary), but ensure consistency
     appStoreLinks.forEach((el) => swap(el, true));
     playStoreLinks.forEach((el) => swap(el, false));
   }

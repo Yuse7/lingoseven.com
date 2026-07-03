@@ -33,7 +33,7 @@ const faqs = [
       {faqs.map((faq, i) => (
         <div class="faq-item">
           <button class="faq-question">
-            <span>{String(i + 1).padStart(2, '0')} — {t(faq.qKey)}</span>
+            <span>{String(i + 1).padStart(2, '0')}. {t(faq.qKey)}</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">

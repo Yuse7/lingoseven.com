@@ -1,11 +1,13 @@
 // Per-language vocabulary notes for the vocabulary-size-estimator pages. Two parts:
 //  - `blurb`: a short, hand-written, vocabulary-focused paragraph (cognates with
-//    English, false friends, morphology) — unique per language so the pages are
+//    English, false friends, morphology), unique per language so the pages are
 //    not near-duplicates of each other.
 //  - `coverage`: real frequency coverage computed from the same source as the test
-//    (hermitdave/FrequencyWords, OpenSubtitles 2018): the % of running text covered
-//    by the N most common word forms. Lower numbers for inflected/agglutinative
-//    languages (ru, tr) are expected — one root spreads across many forms.
+//    (hermitdave/FrequencyWords OpenSubtitles 2018, or the Leipzig Corpora Collection
+//    for languages absent from FrequencyWords): the % of running text covered by the
+//    N most common word forms. Lower numbers for inflected/agglutinative languages
+//    (ru, tr, and most of the Turkic, Kartvelian and Bantu additions) are expected,
+//    because one root spreads across many forms.
 
 export interface VocabFact {
   blurb: string;
@@ -15,12 +17,12 @@ export interface VocabFact {
 export const vocabFacts: Record<string, VocabFact> = {
   es: {
     blurb:
-      'Spanish shares thousands of Latin-rooted cognates with English — nación/nation, familia/family — so an English speaker starts with a sizeable passive vocabulary. The catch is false friends like embarazada (pregnant, not embarrassed) and éxito (success, not exit). Spelling maps closely to sound, so a word you have read is a word you can say.',
+      'Spanish shares thousands of Latin-rooted cognates with English, nación/nation, familia/family, so an English speaker starts with a sizeable passive vocabulary. The catch is false friends like embarazada (pregnant, not embarrassed) and éxito (success, not exit). Spelling maps closely to sound, so a word you have read is a word you can say.',
     coverage: { top1000: 77, top2000: 83, top5000: 89 },
   },
   fr: {
     blurb:
-      'After 1066, French handed English roughly a quarter of its vocabulary, so French reading is full of familiar words — gouvernement, possible, nation. False friends still trip learners up: librairie is a bookshop, not a library, and actuellement means currently. Silent letters mean the written word often hides how it sounds.',
+      'After 1066, French handed English roughly a quarter of its vocabulary, so French reading is full of familiar words, gouvernement, possible, nation. False friends still trip learners up: librairie is a bookshop, not a library, and actuellement means currently. Silent letters mean the written word often hides how it sounds.',
     coverage: { top1000: 81, top2000: 86, top5000: 92 },
   },
   de: {
@@ -30,7 +32,7 @@ export const vocabFacts: Record<string, VocabFact> = {
   },
   it: {
     blurb:
-      'Italian wears its Latin roots openly, with cognates an English reader recognises on sight — possibile, nazione, famiglia. Spelling is almost perfectly phonetic, so a word read is a word you can pronounce. Watch false friends such as camera (room) and parente (relative, not parent).',
+      'Italian wears its Latin roots openly, with cognates an English reader recognises on sight, possibile, nazione, famiglia. Spelling is almost perfectly phonetic, so a word read is a word you can pronounce. Watch false friends such as camera (room) and parente (relative, not parent).',
     coverage: { top1000: 76, top2000: 83, top5000: 90 },
   },
   pt: {
@@ -45,7 +47,7 @@ export const vocabFacts: Record<string, VocabFact> = {
   },
   ru: {
     blurb:
-      'Russian shares few obvious cognates with English, so most words are genuinely new — though international loanwords (телефон, компьютер) give occasional footholds, and Cyrillic is quickly learned. The real work is inflection: one root appears in many case and verb-aspect forms, which is why a fixed number of words covers less running text than in English.',
+      'Russian shares few obvious cognates with English, so most words are genuinely new, though international loanwords (телефон, компьютер) give occasional footholds, and Cyrillic is quickly learned. The real work is inflection: one root appears in many case and verb-aspect forms, which is why a fixed number of words covers less running text than in English.',
     coverage: { top1000: 70, top2000: 77, top5000: 85 },
   },
   nl: {
@@ -55,7 +57,7 @@ export const vocabFacts: Record<string, VocabFact> = {
   },
   sv: {
     blurb:
-      'Swedish is a Germanic language with a generous share of English cognates — hus, vatten, bok, fisk — and a refreshingly simple grammar. English and Swedish also share many modern loanwords. Compounds are common, so vocabulary often grows by combining familiar roots rather than memorising wholly new words.',
+      'Swedish is a Germanic language with a generous share of English cognates, hus, vatten, bok, fisk, and a refreshingly simple grammar. English and Swedish also share many modern loanwords. Compounds are common, so vocabulary often grows by combining familiar roots rather than memorising wholly new words.',
     coverage: { top1000: 81, top2000: 86, top5000: 92 },
   },
   tr: {
@@ -192,5 +194,70 @@ export const vocabFacts: Record<string, VocabFact> = {
     blurb:
       "Serbian is a South Slavic language, mutually intelligible with Croatian, Bosnian, and Montenegrin, so learning one opens the others. It is unusual in being fully digraphic, written in both the Cyrillic and Latin alphabets, with a strict one-letter-per-sound spelling. Centuries of Ottoman and Austro-Hungarian contact left many Turkish and German loanwords alongside the inherited Slavic core.",
     coverage: { top1000: 71, top2000: 78, top5000: 85 },
+  },
+  af: {
+    blurb:
+      "Afrikaans grew out of Dutch, so its Germanic core lines up neatly with English: water, hand, boek (book), vis (fish), warm, huis (house). Its grammar is strikingly regular, with no noun gender, no case endings, and one unchanging verb form for every subject (ek is, jy is, hy is), so a single root turns up in far fewer shapes than in German or Russian. That regularity is offset by heavy compounding, where words like jaarverslag (annual report) and selfverdediging (self-defence) are assembled from smaller pieces, which spreads running text across many long one-off forms and keeps top-list coverage moderate. Watch a few false friends: kind is a child, bad is a bath, and rok is a dress or skirt.",
+    coverage: { top1000: 68, top2000: 75, top5000: 84 },
+  },
+  az: {
+    blurb:
+      "Azerbaijani is a Turkic language written in a Latin alphabet since 1991, so the script is familiar to English readers apart from the extra letters ə, ç, ğ, ı, ö, ş, and ü. Plenty of international vocabulary lines up with English once you read past the spelling, since words like universitet (university), problem, konsert (concert), format, risk, and diplomatiya arrived through Russian or French. Watch for short false friends where the letters match but the meaning does not: il means year, at means horse, son means last or end, and bal means honey. The grammar is agglutinative with vowel harmony, so a single root spawns dozens of case, possessive, and tense forms, which spreads the counts thin and holds top-1000 coverage below what you see in languages that inflect less.",
+    coverage: { top1000: 49, top2000: 59, top5000: 72 },
+  },
+  be: {
+    blurb:
+      "Belarusian shares a broad layer of Greek and Latin internationalisms with English, so an English reader can already decode праблема (problem), бюджэт (budget), офіс (office) and дылема (dilemma). Outright false friends are rare, though магазін is a shop rather than a magazine, and дыван means a carpet, not a divan. Because the grammar is heavily inflected, with six cases plus gender and verb aspect, one dictionary word surfaces as many different forms, which is why the thousand most common forms still cover under half of running text. Belarusian is also written in two orthographies, so a common word like сёння 'today' also appears spelled сёньня.",
+    coverage: { top1000: 45, top2000: 55, top5000: 67 },
+  },
+  hy: {
+    blurb:
+      "Armenian sits on its own branch of Indo-European, so almost none of its everyday words resemble English; the shared vocabulary you can recognize is mostly modern international borrowings written in Armenian letters, like տեխնոլոգիա (technology), ինֆեկցիա (infection), բալետ (ballet), and դոլար (dollar). These loanwords keep their meanings and often reached Armenian through Russian, so they are dependable rather than false friends, but the core of the language has to be learned from the ground up. Grammar multiplies the word count: nouns take seven cases across singular and plural and verbs spread over many endings, so one dictionary word surfaces as many separate forms (գնել, գնում, գնաց). That inflection is why the most frequent 1000 words cover a smaller share of running text than they would in English, and why the count keeps climbing well past the beginner core.",
+    coverage: { top1000: 44, top2000: 53, top5000: 65 },
+  },
+  ka: {
+    blurb:
+      "Georgian belongs to the Kartvelian family and uses its own Mkhedruli alphabet, so it shares no script and almost no inherited vocabulary with English, and true cognates are rare. The words an English speaker can recognize are modern internationalisms borrowed mostly through Russian, such as პრობლემა (problema, problem), სისტემა (sistema, system) and უნივერსიტეტი (universiteti, university), though shifted spelling and stress make them easy to miss. The language is heavily inflected, with seven noun cases and verbs that agree with both subject and object, so a single root surfaces in many forms and frequency is spread thinly across them. That thin spread is why the top 1000 words here cover only about 38 percent of running text, lower than in languages that inflect less.",
+    coverage: { top1000: 38, top2000: 48, top5000: 60 },
+  },
+  kk: {
+    blurb:
+      "Kazakh is a Turkic language written in Cyrillic here, so an English speaker starts by learning a new alphabet before any word looks familiar. Shared vocabulary is thin and mostly arrives through Russian: international terms like университет, музыка, and театр are recognizable, while сағат (clock, hour) and кітап (book) come from Arabic rather than English. The bigger hurdle is agglutination, because one root such as кітап stacks endings for plural, possession, and case (кітаптарымыздың), so each written form is comparatively rare and coverage climbs slowly. That morphology, plus vowel harmony that reshapes every suffix, is why the top 1000 forms cover less text here than in a language like English.",
+    coverage: { top1000: 44, top2000: 53, top5000: 65 },
+  },
+  ky: {
+    blurb:
+      "Kyrgyz is a Turkic language written in Cyrillic, so an English speaker begins with almost no free cognates and also has to learn a new alphabet plus three extra vowel letters (ң, ө, ү). The most transparent shared vocabulary arrives through Russian: internationalisms like партия (party), миллион (million), and интернет keep their familiar meanings, but they sit next to older Arabic and Persian loans such as пайыз (percent) and арыз (petition) that give an English reader no clue. A couple of false friends trip people up: бар is not a drinking spot but means there is or the command go, and ким means who, not the name Kim. Kyrgyz is strongly agglutinative with tight vowel harmony, so a single root takes long suffix chains for case, possession, number, and tense, and the coverage numbers stay moderate because each inflected form counts as its own token, spreading frequency across many endings instead of piling it onto a few base words.",
+    coverage: { top1000: 51, top2000: 61, top5000: 73 },
+  },
+  mn: {
+    blurb:
+      "Mongolian gives an English speaker very few free cognates. Most modern loanwords arrived through Russian rather than English (доллар for dollar, банк, компьютер, телевиз), and native roots look nothing like their English equivalents. The language is agglutinative with strict vowel harmony, so one root shows up in many suffixed forms for case, number, and possession, which spreads frequency across many surface words and keeps rank-based coverage lower than in English. It is written in Cyrillic, adding two vowels, ө and ү, that Russian does not use.",
+    coverage: { top1000: 50, top2000: 60, top5000: 73 },
+  },
+  sw: {
+    blurb:
+      "Swahili is written in the Latin alphabet and spelled the way it sounds, so an English reader can pronounce a new word on sight. Centuries of contact left a layer of Arabic vocabulary (kitabu for book, hesabu for arithmetic) and a newer layer borrowed from English that is easy to spot: benki (bank), baiskeli (bicycle), polisi (police), kompyuta (computer). The word safari is a false friend, in Swahili it means any journey, not a wildlife tour. Most of the grammar lives in prefixes: nouns carry class markers (m-/wa-, ki-/vi-) and a verb stacks subject, tense, and object onto the root (ninakupenda means I love you), so one root spreads across dozens of forms and a fixed word count covers less running text than it would in English.",
+    coverage: { top1000: 62, top2000: 71, top5000: 80 },
+  },
+  tl: {
+    blurb:
+      "Tagalog gives an English reader an unusual head start, because centuries of Spanish contact left thousands of borrowings (kwento 'story', pader 'wall', mesa 'table'), and a modern English layer surfaces as Taglish, where speakers switch between the two languages in the same sentence. A few false friends still catch people out: libre means free of charge rather than a library, baso is a drinking glass (from Spanish vaso, not a base), and bata means a child. The main hurdle is morphology, since verbs build meaning through prefixes, infixes, and reduplication, so the root kain 'eat' turns into kumain (ate), kinain (eaten), and kakain (will eat). That scatters one word across many forms, though a handful of very frequent particles like ang, ng, and sa keep the top 1000 forms covering roughly three fifths of running text.",
+    coverage: { top1000: 59, top2000: 67, top5000: 77 },
+  },
+  uz: {
+    blurb:
+      "Uzbek is a Turkic language written today in a Latin alphabet, and for an English reader most of its everyday words are genuinely new, since the Turkic core (suv water, til language, bilan with) shares almost no cognates with English. The footholds are international loanwords that arrived through Russian, so gazeta (newspaper), aeroport, and impressionizm are recognisable, and Arabic and Persian religious or cultural terms add another familiar layer. Uzbek is agglutinative: one root takes stacked suffixes for case, possession, and tense (maktab a school, maktabda in a school, maktabimizda in our school), so a fixed count of word forms covers less running text than in English, which keeps the coverage figures low. Note the letters oʻ and gʻ (as in boʻlgan and togʻ), written with a turned comma, mark distinct vowels and a consonant rather than punctuation.",
+    coverage: { top1000: 45, top2000: 55, top5000: 67 },
+  },
+  vi: {
+    blurb:
+      "Vietnamese uses the Latin alphabet, so the letters look familiar, but their values differ (d sounds like English z or y, đ is the English d, and ph is f), which trips up reading more than the vocabulary does. Cognates with English are few and recent, mostly food and tech loans that often arrived through French, such as cà phê (coffee), bia (beer), ga (station, from gare), and ti vi (TV). Words that resemble English ones are usually unrelated: tin means news or to trust, con means child or acts as a classifier for animals, and ban means a committee. Because the language is isolating, words never inflect (no plurals, tenses, or conjugation) and each one is a single syllable, so a small set of frequent forms covers most text, with the top 1000 cleaned words accounting for about 90 percent here.",
+    coverage: { top1000: 90, top2000: 96, top5000: 99 },
+  },
+  zu: {
+    blurb:
+      "Zulu (isiZulu) uses the Latin alphabet, so the letters look familiar, but almost none of the core vocabulary is cognate with English. The clearest overlap is a layer of reshaped loanwords that take a class prefix and open syllables, such as imoto (car), isikole (school), ibhange (bank), and amaphoyisa (police); once you strip the prefix and the extra vowels, the source word shows through. Watch a few false friends that are pure coincidence: into means thing, lapho means there, and yena means he or she. Zulu is strongly agglutinative, with noun classes and stacked subject, tense, and object markers, so one root yields dozens of written forms, which is why the most common 1000 words cover only about 39 percent of ordinary text, much lower than the same count would reach in English.",
+    coverage: { top1000: 39, top2000: 47, top5000: 58 },
   },
 };

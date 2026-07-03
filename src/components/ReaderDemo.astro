@@ -1,5 +1,5 @@
 ---
-// Interactive parallel reader demo — loads real book content via backend API
+// Interactive parallel reader demo, loads real book content via backend API
 interface Props {
   targetLang?: string;
   uiLang?: string;
@@ -95,7 +95,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   }
   .reader__finger.is-visible { opacity: 1; }
   .reader__finger.is-tapping { animation: finger-tap 0.5s ease; }
-  /* Float above the word, pointing down — keeps the translation line clear. */
+  /* Float above the word, pointing down, keeps the translation line clear. */
   .reader__finger.is-above img { transform: scaleY(-1); }
   /* Small, angled tap pose: smaller hand tilted so it points up-left at the word
      from below while its body swings off into the margin. */
@@ -325,7 +325,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   const INITIAL_TGT = readerRoot?.dataset.targetLang || 'de';
   const INITIAL_TRN = readerRoot?.dataset.uiLang || 'en';
   // Screenshot mode: render one clean frame (tapped word + highlighted
-  // translation) and signal readiness via window.__shotReady — no animation.
+  // translation) and signal readiness via window.__shotReady, no animation.
   const STILL = readerRoot?.dataset.still === '1';
   // Optional still-frame overrides (used by the Instagram-grid centerpiece, not the
   // store screenshots): tap a specific, more evocative word and float the finger
@@ -342,7 +342,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
 
   // Fetch JSON from the v2 backend. The /page and /align endpoints generate
   // synchronously on a cache miss (they block until ready), so no polling is
-  // needed — just retry a couple of times on transient network/5xx errors.
+  // needed, just retry a couple of times on transient network/5xx errors.
   async function fetchJson(url, retries = 2) {
     let lastErr;
     for (let i = 0; i <= retries; i++) {
@@ -359,7 +359,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   // Group a v2 block's tokens by sentence using its pre-split sentence ranges.
   // Returns one entry per sentence: { words, text, tokenOffset } where
   // tokenOffset is the index of the sentence's first token within the block's
-  // token array — the same index space the v2 alignments use.
+  // token array, the same index space the v2 alignments use.
   function blockToSentences(block) {
     const sents = block.sentences || [];
     const groups = sents.map(() => ({ words: [], text: '', tokenOffset: -1 }));
@@ -434,7 +434,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
     try {
       // v2: one call returns orig (target lang) + trans (ui lang) paired, with
       // sentences already split server-side (locale-aware) and orig/trans
-      // sentence counts guaranteed equal — so a short sentence can never be
+      // sentence counts guaranteed equal, so a short sentence can never be
       // paired with a whole paragraph the way the old client-side splitter
       // (Latin-only /[.!?]/) did for scripts like Armenian.
       const page = await fetchJson(
@@ -477,7 +477,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
 
       // Load word-level alignments (v2): alignments[blockIdx][sentIdx] is a list
       // of [origTokenIdx, transTokenIdx] pairs, token indices global within the
-      // block — the same space parseSide records as tokenOffset.
+      // block, the same space parseSide records as tokenOffset.
       let alignments = null;
       try {
         const alignRes = await fetchJson(
@@ -531,7 +531,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
       const readerRect = reader.getBoundingClientRect();
       // The phone may be CSS-transform-scaled (store screenshots). getBoundingClientRect
       // returns scaled screen px, but finger.style.top/left live in the reader's own
-      // (unscaled) coordinate space — normalize by the scale so they line up.
+      // (unscaled) coordinate space, normalize by the scale so they line up.
       const scale = (readerRect.width / reader.offsetWidth) || 1;
       const wx = (rect.left - readerRect.left) / scale;
       const wy = (rect.top - readerRect.top) / scale;
@@ -613,7 +613,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
         wi = taps.length ? taps[0] : Math.min(3, words.length - 1);
       }
       const wordEl = words[wi];
-      // Highlights don't depend on layout — apply immediately.
+      // Highlights don't depend on layout, apply immediately.
       line.classList.add('is-reading');
       if (wordEl) {
         wordEl.classList.add('is-tapped');
@@ -622,7 +622,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
         }
       }
       // Position the finger only AFTER the web font has loaded and the layout
-      // has settled — otherwise the text reflows down and the finger lands on
+      // has settled, otherwise the text reflows down and the finger lands on
       // the wrong line. Signal readiness once it's correctly placed.
       const placeFinger = () => {
         if (wordEl) { positionFinger(wordEl, FINGER_MODE); finger.classList.add('is-visible'); }

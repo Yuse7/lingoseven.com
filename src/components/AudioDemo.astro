@@ -1,5 +1,5 @@
 ---
-// AudioDemo — phone widget with real audio playback and word-by-word highlighting
+// AudioDemo, phone widget with real audio playback and word-by-word highlighting
 // Loads book content + audio via backend API, syncs word highlighting to audio transcript timings
 interface Props {
   targetLang?: string;
@@ -199,7 +199,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   }
   .audio-reader__content::-webkit-scrollbar { display: none; }
 
-  /* Sentence pair styles — use :global() for dynamically injected elements */
+  /* Sentence pair styles, use :global() for dynamically injected elements */
   :global(.audio-reader__chapter) {
     font-size: 14px;
     font-weight: 700;
@@ -346,7 +346,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   const TGT = audioRoot?.dataset.targetLang || 'de';
   const TRN = audioRoot?.dataset.uiLang || 'en';
   // Screenshot mode: render one clean "playing" frame and signal readiness via
-  // window.__shotReady — skip the audio load/playback entirely.
+  // window.__shotReady, skip the audio load/playback entirely.
   const STILL = audioRoot?.dataset.still === '1';
 
   // Fetch JSON from the v2 backend. /page and /align block until ready on a
@@ -368,7 +368,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
 
   // Group a v2 block's tokens by sentence using its pre-split sentence ranges.
   // Each entry: { words, text, tokenOffset } where tokenOffset is the index of
-  // the sentence's first token within the block — the index space the audio
+  // the sentence's first token within the block, the index space the audio
   // transcript (transcript[blockIdx][tokenIdx]) also uses.
   function blockToSentences(block) {
     const sents = block.sentences || [];
@@ -456,7 +456,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
 
   async function init() {
     // Bail if the widget was removed before init (e.g. screenshot page drops the
-    // unused widget) — avoids needless backend fetches.
+    // unused widget), avoids needless backend fetches.
     if (!audioRoot || !container) return;
     try {
       // v2: one call returns orig (spoken lang) + trans (ui lang) paired, with
@@ -611,7 +611,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
    * Map the v2 transcript to rendered word spans. The transcript is
    * transcript[blockIdx][tokenIdx] = start time (seconds); each rendered line
    * carries its blockIdx + first-token offset (lineMeta), and its word spans are
-   * exactly the block's tokens in order — so timings line up one-to-one.
+   * exactly the block's tokens in order, so timings line up one-to-one.
    */
   function buildWordTimings(transcriptData) {
     const transcript = transcriptData.transcript || [];
@@ -709,7 +709,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
 
     }
 
-    // Check if we've passed the last rendered word — loop early
+    // Check if we've passed the last rendered word, loop early
     // (audio covers the full page but we only render ~8 sentences)
     if (currentWordIdx === wordTimings.length - 1 && wordTimings[currentWordIdx]?.time !== null) {
       const lastWordTime = wordTimings[currentWordIdx].time;

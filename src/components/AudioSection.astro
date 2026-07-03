@@ -251,7 +251,7 @@ function t(key: string): string {
     if (audioDemo) audioDemo.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 
-  // Speed controls — dispatch custom event consumed by AudioDemo
+  // Speed controls, dispatch custom event consumed by AudioDemo
   speedBtns?.forEach(btn => {
     btn.addEventListener('click', () => {
       const speed = parseFloat(btn.dataset.speed || '1');

@@ -18,22 +18,22 @@ faq:
 
 # Romance vs Germanic Languages: Which Are Easier to Read?
 
-English is a Germanic language with a Romance vocabulary. If that sounds like a contradiction, it is -- and it is also your single greatest advantage as a language learner. Because of English's tangled ancestry, you already have a head start in both of Europe's dominant language families. But when it comes to reading, one of these groups gives you a noticeably faster path to your first book.
+English is a Germanic language with a Romance vocabulary. If that sounds like a contradiction, it is, and it is also your single greatest advantage as a language learner. Because of English's tangled ancestry, you already have a head start in both of Europe's dominant language families. But when it comes to reading, one of these groups gives you a noticeably faster path to your first book.
 
-This guide compares the Romance and Germanic languages side by side, specifically from a reader's perspective. Not speaking, not listening, not passing an exam -- reading. Because the skills that matter on the page are different from the skills that matter in conversation, and the difficulty rankings shift accordingly.
+This guide compares the Romance and Germanic languages side by side, specifically from a reader's perspective. Not speaking, not listening, not passing an exam, reading. Because the skills that matter on the page are different from the skills that matter in conversation, and the difficulty rankings shift accordingly.
 
 ## English's Dual Heritage
 
 To understand why English speakers have options in both families, you need a brief history lesson.
 
-English is, at its core, a West Germanic language. It descends from the Anglo-Saxon dialects brought to Britain in the fifth century. Its basic grammar -- word order, auxiliary verbs, question formation -- is Germanic. Its most common everyday words are Germanic: *house*, *water*, *bread*, *green*, *mother*, *come*, *go*, *think*.
+English is, at its core, a West Germanic language. It descends from the Anglo-Saxon dialects brought to Britain in the fifth century. Its basic grammar, word order, auxiliary verbs, question formation, is Germanic. Its most common everyday words are Germanic: *house*, *water*, *bread*, *green*, *mother*, *come*, *go*, *think*.
 
 Then came 1066. The Norman Conquest put French-speaking rulers in charge of England for centuries. French became the language of law, government, religion, and high culture. Latin remained the language of scholarship. Over the following 400 years, English absorbed an enormous number of French and Latin words. By modern estimates, roughly 60% of English vocabulary has Latin or French origins.
 
 The result is a language with a split personality. Your everyday vocabulary is Germanic. Your formal, academic, and literary vocabulary is Romance. Consider these pairs:
 
 | Germanic (everyday) | Romance (formal) |
-|---------------------|-------------------|
+|, |, |
 | begin | commence |
 | help | assist |
 | buy | purchase |
@@ -48,7 +48,7 @@ The question is which advantage goes further when you sit down to read.
 
 ## Romance Languages for Reading
 
-The major Romance languages -- Spanish, French, Italian, Portuguese, and Romanian -- all descend from Latin. They share a massive common vocabulary with each other and, thanks to English's borrowing history, with English.
+The major Romance languages, Spanish, French, Italian, Portuguese, and Romanian, all descend from Latin. They share a massive common vocabulary with each other and, thanks to English's borrowing history, with English.
 
 ### The Cognate Advantage
 
@@ -92,13 +92,13 @@ Romance languages vary significantly in how faithfully their spelling represents
 
 **Romanian**, despite being the most divergent Romance language structurally, has regular spelling rules that are learnable in a few hours.
 
-**French** is the outlier. Silent final consonants are everywhere. The letters *eau* produce a single vowel sound. The word *oiseaux* ("birds") has seven letters and produces the sound /wazo/. French spelling is opaque by Romance standards -- though still more regular than English. For reading, this matters less than you might think: you do not need to pronounce words correctly to understand them on the page. French cognates are recognizable even if you would mispronounce them.
+**French** is the outlier. Silent final consonants are everywhere. The letters *eau* produce a single vowel sound. The word *oiseaux* ("birds") has seven letters and produces the sound /wazo/. French spelling is opaque by Romance standards, though still more regular than English. For reading, this matters less than you might think: you do not need to pronounce words correctly to understand them on the page. French cognates are recognizable even if you would mispronounce them.
 
 ### Grammar on the Page
 
 Romance languages share several grammatical features that differ from English.
 
-**Gendered nouns** exist in all five major Romance languages. Every noun is masculine or feminine (and neuter in Romanian). This affects articles and adjectives: Spanish *la casa blanca* (the white house) versus *el libro blanco* (the white book). For reading, this is a minor obstacle. Gender rarely affects your ability to understand meaning -- you can ignore whether a noun is masculine or feminine and still follow the text perfectly.
+**Gendered nouns** exist in all five major Romance languages. Every noun is masculine or feminine (and neuter in Romanian). This affects articles and adjectives: Spanish *la casa blanca* (the white house) versus *el libro blanco* (the white book). For reading, this is a minor obstacle. Gender rarely affects your ability to understand meaning, you can ignore whether a noun is masculine or feminine and still follow the text perfectly.
 
 **Verb conjugation** is more complex than in English. Where English relies on auxiliaries ("I have eaten," "she will go"), Romance languages encode tense, person, and mood directly into verb endings. Spanish has over 50 conjugated forms for a single verb. This sounds intimidating, but for reading it is actually helpful: the verb ending tells you who is acting and when, even if you do not fully parse the system. A reader who recognizes that *-amos* means "we" and *-aron* means "they (past)" can follow a narrative without memorizing complete conjugation tables.
 
@@ -114,14 +114,14 @@ For formal, academic, and literary texts, Romance languages offer English reader
 
 ## Germanic Languages for Reading
 
-The major Germanic languages accessible to English learners include German, Dutch, Swedish, Norwegian, and Danish. English itself is part of this family, which means the connections are deep -- but they show up in different places than the Romance connections.
+The major Germanic languages accessible to English learners include German, Dutch, Swedish, Norwegian, and Danish. English itself is part of this family, which means the connections are deep, but they show up in different places than the Romance connections.
 
 ### Shared Core Vocabulary
 
 The Germanic languages share their most basic vocabulary with English. These are the words you use every hundred sentences, the building blocks of everyday communication.
 
 | English | German | Dutch | Swedish | Norwegian |
-|---------|--------|-------|---------|-----------|
+|, |, |, |, |, |
 | water | Wasser | water | vatten | vann |
 | house | Haus | huis | hus | hus |
 | green | grun | groen | gron | gronn |
@@ -141,7 +141,7 @@ The resemblance is unmistakable. At the level of basic nouns, verbs, and adjecti
 Here is where the advantage flips. When English needed words for abstract, scientific, legal, or academic concepts, it borrowed from Latin and French. The other Germanic languages, for the most part, did not. They built compound words from their own native roots.
 
 | English (Latin-derived) | German (native compound) | Meaning |
-|------------------------|--------------------------|---------|
+|, |, |, |
 | television | Fernseher ("far-seer") | TV |
 | hospital | Krankenhaus ("sick-house") | hospital |
 | university | Hochschule ("high-school") | university |
@@ -159,7 +159,7 @@ Dutch, Swedish, Norwegian, and Danish follow the same pattern to varying degrees
 
 Germanic languages are generally phonetic in their spelling, with some important caveats.
 
-**German** spelling is highly regular. Once you learn the rules (which takes a few hours), you can pronounce any word. The challenge is not spelling irregularity but word length: German compounds can be intimidatingly long. *Geschwindigkeitsbegrenzung* (speed limit) is a single word. *Rechtsschutzversicherungsgesellschaften* (legal insurance companies) is another. For reading, these compounds are actually logical once you learn to decompose them -- each is built from smaller, recognizable parts. But the initial visual impact can be discouraging.
+**German** spelling is highly regular. Once you learn the rules (which takes a few hours), you can pronounce any word. The challenge is not spelling irregularity but word length: German compounds can be intimidatingly long. *Geschwindigkeitsbegrenzung* (speed limit) is a single word. *Rechtsschutzversicherungsgesellschaften* (legal insurance companies) is another. For reading, these compounds are actually logical once you learn to decompose them, each is built from smaller, recognizable parts. But the initial visual impact can be discouraging.
 
 **Dutch** spelling is regular and, because the language is so close to English, words often look like their English equivalents: *informatie* (information), *probleem* (problem), *situatie* (situation), *directeur* (director). Dutch also borrowed many French and Latin words, giving it a vocabulary overlap with English that combines both the Germanic base and a significant Romance layer.
 
@@ -175,7 +175,7 @@ However, German cases also carry information. They tell you unambiguously who is
 
 **Dutch** grammar is considerably simpler than German. It has largely shed its case system (surviving mainly in fixed expressions), uses word order more similar to English, and does not pile verbs at the end of clauses as aggressively. For reading, Dutch is significantly more approachable than German.
 
-**Scandinavian languages** (Swedish, Norwegian, Danish) have the simplest grammar in the Germanic family. No case system for nouns. Relatively straightforward verb conjugation -- in fact, verbs do not change by person at all (*jag ar*, *du ar*, *han ar* -- "I am," "you are," "he is" -- all use the same verb form in Swedish). Word order is SVO like English, with a verb-second rule in main clauses that takes minimal adjustment. For reading, Scandinavian grammar presents almost no barrier.
+**Scandinavian languages** (Swedish, Norwegian, Danish) have the simplest grammar in the Germanic family. No case system for nouns. Relatively straightforward verb conjugation, in fact, verbs do not change by person at all (*jag ar*, *du ar*, *han ar*, "I am," "you are," "he is", all use the same verb form in Swedish). Word order is SVO like English, with a verb-second rule in main clauses that takes minimal adjustment. For reading, Scandinavian grammar presents almost no barrier.
 
 ### Dutch: The Closest Major Language to English
 
@@ -197,7 +197,7 @@ Dutch is sometimes called "the language English speakers do not know they can al
 
 ### Reading Verdict: Germanic
 
-Germanic languages offer strong initial familiarity at the basic vocabulary level, and the Scandinavian languages add grammatical simplicity to that advantage. But the formal vocabulary divergence means that as texts become more sophisticated, the advantage diminishes -- sometimes sharply, as with German academic writing.
+Germanic languages offer strong initial familiarity at the basic vocabulary level, and the Scandinavian languages add grammatical simplicity to that advantage. But the formal vocabulary divergence means that as texts become more sophisticated, the advantage diminishes, sometimes sharply, as with German academic writing.
 
 Dutch is the exception: it maintains high readability across registers thanks to its mixed vocabulary and simplified grammar. For the rest of the family, everyday and conversational texts are more accessible than formal or literary ones.
 
@@ -219,12 +219,12 @@ For mixed-register text (novels, general nonfiction): **roughly equal**, with a 
 
 **Most complex:** German. Cases, verb-final clauses, and long compounds create genuine reading difficulty that persists well into the intermediate level.
 
-Dutch sits between Scandinavian and Romance in grammar difficulty -- simpler than German, comparable to the simpler Romance languages.
+Dutch sits between Scandinavian and Romance in grammar difficulty, simpler than German, comparable to the simpler Romance languages.
 
 ### Spelling Transparency
 
 | Language | Transparency | Notes |
-|----------|-------------|-------|
+|, |, |, |
 | Spanish | Very high | Nearly perfect letter-to-sound correspondence |
 | Italian | Very high | Slightly more vowel variation than Spanish |
 | Swedish | High | Regular rules, few exceptions |
@@ -246,13 +246,13 @@ For a reader looking to maximize available content, French, Spanish, and German 
 
 Based on cognate density, grammatical accessibility, and spelling transparency, the languages that get English speakers to their first book fastest are:
 
-1. **Spanish** -- massive cognate overlap, transparent spelling, familiar structure
-2. **Italian** -- nearly identical advantages to Spanish, slightly smaller content library
-3. **Dutch** -- combines Germanic and Romance vocabulary overlap with simple grammar
-4. **Norwegian/Swedish** -- simple grammar, familiar basic vocabulary, regular spelling
-5. **Portuguese** -- strong cognate overlap, slightly less transparent than Spanish
-6. **French** -- enormous cognate overlap, but spelling opacity slows initial decoding
-7. **German** -- familiar basic vocabulary, but cases and sentence structure require more adjustment
+1. **Spanish**, massive cognate overlap, transparent spelling, familiar structure
+2. **Italian**, nearly identical advantages to Spanish, slightly smaller content library
+3. **Dutch**, combines Germanic and Romance vocabulary overlap with simple grammar
+4. **Norwegian/Swedish**, simple grammar, familiar basic vocabulary, regular spelling
+5. **Portuguese**, strong cognate overlap, slightly less transparent than Spanish
+6. **French**, enormous cognate overlap, but spelling opacity slows initial decoding
+7. **German**, familiar basic vocabulary, but cases and sentence structure require more adjustment
 
 ## The Surprise Factor: It Depends on What You Read
 
@@ -264,7 +264,7 @@ The most honest answer to "which group is easier to read?" is: it depends entire
 
 ### Children's Books and Simple Fiction
 
-**Germanic has the advantage.** Children's books use basic, high-frequency vocabulary -- exactly the register where English and its Germanic siblings overlap most. A Swedish children's book about a cat, a house, and a garden uses words that are visually similar to their English equivalents. A Spanish children's book about the same topics uses words (*gato*, *casa*, *jardin*) that are less immediately recognizable.
+**Germanic has the advantage.** Children's books use basic, high-frequency vocabulary, exactly the register where English and its Germanic siblings overlap most. A Swedish children's book about a cat, a house, and a garden uses words that are visually similar to their English equivalents. A Spanish children's book about the same topics uses words (*gato*, *casa*, *jardin*) that are less immediately recognizable.
 
 ### Novels and Literary Fiction
 
@@ -278,7 +278,7 @@ The most honest answer to "which group is easier to read?" is: it depends entire
 
 ### For the Fastest Start Reading
 
-Choose **[Spanish](/en/learn/spanish/)** or **Italian**. The combination of massive cognate overlap, transparent spelling, and familiar sentence structure means you can start extracting meaning from real texts almost immediately. Dutch is the Germanic equivalent -- surprisingly readable from day one.
+Choose **[Spanish](/en/learn/spanish/)** or **Italian**. The combination of massive cognate overlap, transparent spelling, and familiar sentence structure means you can start extracting meaning from real texts almost immediately. Dutch is the Germanic equivalent, surprisingly readable from day one.
 
 ### For the Most Content Available
 
@@ -292,12 +292,12 @@ Choose **Swedish** if you want to unlock the Scandinavian family. Swedish, Norwe
 
 ### For English Speakers Specifically
 
-Recognize that you have advantages in both families. The most strategic approach is to start where your advantage is strongest -- Romance for formal reading, Germanic for casual -- and then expand. Many language learners eventually work in both families, and the skills transfer: learning Spanish makes French easier, and learning Dutch makes German more approachable.
+Recognize that you have advantages in both families. The most strategic approach is to start where your advantage is strongest, Romance for formal reading, Germanic for casual, and then expand. Many language learners eventually work in both families, and the skills transfer: learning Spanish makes French easier, and learning Dutch makes German more approachable.
 
 ## Reading Across Language Families With Lingo7
 
 Whichever group you choose, the core challenge remains the same: bridging the gap between recognizing cognates and actually reading sustained text. Isolated cognates are encouraging, but a full page of foreign text still requires support.
 
-**Lingo7** is designed for exactly this transition. With parallel text in over 90 languages -- spanning both the Romance and Germanic families and well beyond -- you can read real books with sentence-level translation always available. Tap any word to see its meaning, listen to synchronized audio to connect written and spoken forms, and save vocabulary for spaced repetition review. Whether you are reading your first Spanish novel or tackling a German classic, the parallel text ensures comprehension while you build the fluency to read independently.
+**Lingo7** is designed for exactly this transition. With parallel text in over 90 languages, spanning both the Romance and Germanic families and well beyond, you can read real books with sentence-level translation always available. Tap any word to see its meaning, listen to synchronized audio to connect written and spoken forms, and save vocabulary for spaced repetition review. Whether you are reading your first Spanish novel or tackling a German classic, the parallel text ensures comprehension while you build the fluency to read independently.
 
-The cognate advantages described in this guide get you in the door. Consistent reading with the right support is what carries you through to the other side -- where you are reading not because you are studying, but because you are lost in the story.
+The cognate advantages described in this guide get you in the door. Consistent reading with the right support is what carries you through to the other side, where you are reading not because you are studying, but because you are lost in the story.

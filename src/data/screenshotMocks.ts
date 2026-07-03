@@ -1,6 +1,6 @@
 // Localized UI strings for the static screenshot mock screens (library / import).
 // These render the in-app chrome in the UI (listing) language, like the real app
-// — e.g. the en-ru pair shows the catalog in Russian.
+//, e.g. the en-ru pair shows the catalog in Russian.
 //
 // Used both server-side (English baseline) and in each mock's client script,
 // which re-localizes from the URL `ui` param. Missing languages fall back to en.
@@ -16,7 +16,7 @@ export interface MockUi {
   libTitle: string;
   search: string;
   upload: string; // big "Upload your own book" CTA
-  tabs: string[]; // 2 — Catalog / All books
+  tabs: string[]; // 2, Catalog / All books
   sections: MockSection[]; // horizontally-scrolling catalog shelves
   audio: string;
   pagesWord: string;
@@ -375,7 +375,7 @@ export interface ReviewCard {
   translation: string;
   exampleTrans: string;
   /** Illustration for the word ("choose image" exercise). May 404 for some
-   *  words — the screen hides the image gracefully if it fails to load. */
+   *  words, the screen hides the image gracefully if it fails to load. */
   image: string;
 }
 

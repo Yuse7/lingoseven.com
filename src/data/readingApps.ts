@@ -9,7 +9,7 @@
  *
  * Language coverage lists the TARGET (learnable/readable) languages, intersected at
  * render time with our 49 enabled languages. EWA's "35 languages" and Beelinguapp's
- * higher counts are interface localizations, not learnable content — excluded on purpose.
+ * higher counts are interface localizations, not learnable content, excluded on purpose.
  */
 import { getEnabledLanguages } from './languages';
 
