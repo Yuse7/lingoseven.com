@@ -47,6 +47,7 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
   : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 }
 <meta name="yandex-verification" content="850291455455f6e9" />
+<meta name="msvalidate.01" content="E5ACCD4D6E645F18FACDB9A3E048F335" />
 
 <title>{title}</title>
 <meta name="description" content={description} />
@@ -72,6 +73,9 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
 
 <!-- Canonical -->
 <link rel="canonical" href={resolvedCanonical} />
+
+<!-- Blog RSS autodiscovery -->
+<link rel="alternate" type="application/rss+xml" title="Lingo7 Blog" href="/rss.xml" />
 
 <!-- Hreflang alternates -->
 {hreflangAlternates?.map(({ lang: hrefLang, url }) => (

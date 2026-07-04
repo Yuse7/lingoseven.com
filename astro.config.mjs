@@ -28,6 +28,8 @@ export default defineConfig({
         const seg = new URL(page).pathname.split('/').filter(Boolean);
         // Legal pages (root-level, always noindex)
         if (seg[0] === 'privacypolicy' || seg[0] === 'terms') return false;
+        // Custom 404 page (noindex, served by Pages for unknown URLs)
+        if (seg[0] === '404') return false;
         // English-only blog policy: every non-English blog page (index + posts)
         // renders noindex,follow. Revisit this rule if blog translations ship
         // (see docs/marketing/seo-lingoseven.md, Next Step #2).

@@ -1,0 +1,247 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolDirectAnswer from '../../components/ToolDirectAnswer.astro';
+import CtaButtons from '../../components/CtaButtons.astro';
+
+// Hub page: every free tool in one place. Linked from the global footer, so the
+// tool cluster is reachable from any page on the site.
+const tools = [
+  {
+    url: '/tools/cefr-level-test/',
+    name: 'CEFR level test',
+    desc: 'Find your level from A1 to C2 in about five minutes, with grammar and vocabulary subscores.',
+  },
+  {
+    url: '/tools/vocabulary-size-estimator/',
+    name: 'Vocabulary size test',
+    desc: 'Estimate how many words you know from a short yes/no test built on real frequency data.',
+  },
+  {
+    url: '/tools/how-long-to-learn-a-language/',
+    name: 'How long to learn a language',
+    desc: 'Realistic hour estimates per language, based on FSI data and your study pace.',
+  },
+  {
+    url: '/tools/reading-level-recommender/',
+    name: 'Reading level recommender',
+    desc: 'Pick your CEFR level and get real books that match it, from graded readers to classics.',
+  },
+  {
+    url: '/tools/language-difficulty-ranker/',
+    name: 'Language difficulty ranker',
+    desc: 'Languages ranked by learning effort, re-ranked for your native language.',
+  },
+  {
+    url: '/tools/which-language-should-i-learn/',
+    name: 'Which language should I learn?',
+    desc: 'A short quiz that ranks 40+ languages by your goals, effort budget, and interests.',
+  },
+  {
+    url: '/tools/verb-conjugator/',
+    name: 'Verb conjugator',
+    desc: 'Common verbs conjugated across the key tenses, all persons, with clean tables.',
+  },
+  {
+    url: '/tools/ipa-translator/',
+    name: 'IPA translator',
+    desc: 'Turn any word into its phonetic transcription and learn to read IPA symbols.',
+  },
+  {
+    url: '/tools/common-idioms/',
+    name: 'Common idioms',
+    desc: 'Everyday idioms with the literal gloss, the real meaning, and an example.',
+  },
+  {
+    url: '/tools/false-friends/',
+    name: 'False friends',
+    desc: 'Words that look like English words but mean something else, with tips to remember.',
+  },
+  {
+    url: '/tools/travel-phrases/',
+    name: 'Travel phrases',
+    desc: 'Essential phrases grouped by situation, with rough pronunciation hints.',
+  },
+  {
+    url: '/tools/flashcards/',
+    name: 'Starter flashcards',
+    desc: 'High-frequency starter words with examples, exportable as CSV for Anki or Quizlet.',
+  },
+];
+
+const canonicalUrl = 'https://lingoseven.com/tools/';
+const title = 'Free Language Learning Tools | Lingo7';
+const description =
+  'Free online language tools: CEFR level test, vocabulary size test, time-to-fluency calculator, difficulty ranker, verb conjugator, IPA translator, idioms, false friends, travel phrases, and flashcards. No sign-up.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    url: canonicalUrl,
+    description,
+    isPartOf: { '@type': 'WebSite', name: 'Lingo7', url: 'https://lingoseven.com/' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: tools.map((t, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: t.name,
+      url: `https://lingoseven.com${t.url}`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lingoseven.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Tools', item: canonicalUrl },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} lang="en" canonicalUrl={canonicalUrl} jsonLd={jsonLd}>
+  <section class="tools-hub">
+    <div class="container">
+      <header class="tools-hub-head">
+        <p class="tools-hub-eyebrow">Free tools</p>
+        <h1>Free language learning tools</h1>
+        <p class="tools-hub-intro">
+          Twelve free tools for language learners: test your level, size your vocabulary, plan your
+          hours, pick the right language, and drill the details. Every tool works without sign-up,
+          and most cover all 49 languages you can read in Lingo7.
+        </p>
+      </header>
+
+      <ToolDirectAnswer
+        lead={`Lingo7 offers ${tools.length} free online language tools, from a CEFR level test and a vocabulary size estimator to a verb conjugator and an IPA translator.`}
+        body={`Most tools cover 49 languages, run in the browser with no sign-up, and link to level-matched books you can read in the Lingo7 app.`}
+      />
+
+      <div class="tools-grid">
+        {
+          tools.map((t) => (
+            <a class="tool-card" href={t.url}>
+              <span class="tool-card-name">{t.name}</span>
+              <span class="tool-card-desc">{t.desc}</span>
+              <span class="tool-card-more">Open &rarr;</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="tools-hub-cta">
+        <h2>Tools show the gap. Reading closes it.</h2>
+        <p>
+          Whatever a test tells you, the fastest way to improve is meeting the language in real
+          sentences. Lingo7 lets you read real books at your level, with parallel translation and
+          native-narrated audio. Free to start.
+        </p>
+        <CtaButtons size="large" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tools-hub {
+    padding: 120px 0 80px;
+  }
+
+  .tools-hub-head {
+    max-width: 720px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+
+  .tools-hub-eyebrow {
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+  }
+
+  .tools-hub-head h1 {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+  }
+
+  .tools-hub-intro {
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 40px 0 56px;
+  }
+
+  .tool-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .tool-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .tool-card-name {
+    color: var(--text);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .tool-card-desc {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .tool-card-more {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .tools-hub-cta {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .tools-hub-cta h2 {
+    margin-bottom: 12px;
+  }
+
+  .tools-hub-cta p {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .tools-hub {
+      padding: 96px 0 56px;
+    }
+
+    .tools-hub-head h1 {
+      font-size: 1.7rem;
+    }
+  }
+</style>

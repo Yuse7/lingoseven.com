@@ -24,6 +24,9 @@ const privacyText = translations?.['footer_privacy'] ?? 'Privacy Policy';
 const termsText = translations?.['footer_terms'] ?? 'Terms of Use';
 const contactText = translations?.['footer_contact'] ?? 'Contact';
 const blogText = translations?.['blog_nav'] ?? 'Blog';
+const toolsText = translations?.['footer_tools'] ?? 'Free tools';
+const compareText = translations?.['footer_compare'] ?? 'App comparisons';
+const bestAppsText = translations?.['footer_best_apps'] ?? 'Best reading apps';
 const copyrightText = translations?.['footer_copyright'] ?? '© 2024-2026 Lingo7. All rights reserved.';
 const learnLangTemplate = translations?.['learn_language'] ?? 'Learn {lang}';
 
@@ -71,6 +74,9 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
       </a>
       <div class="footer-links-inline">
         <a href={`/${uiLang}/blog/`}>{blogText}</a>
+        <a href="/tools/">{toolsText}</a>
+        <a href="/compare/">{compareText}</a>
+        <a href="/best-apps-to-read-books-in/">{bestAppsText}</a>
         <a href="/privacypolicy">{privacyText}</a>
         <a href="/terms">{termsText}</a>
         <a href="mailto:support@lingoseven.com">support@lingoseven.com</a>

@@ -1,0 +1,38 @@
+# Lingo7
+
+> Lingo7 is a mobile app (iOS and Android) for learning a language by reading real books. It shows any book as parallel text with instant translation, native-narrated audio, tap-to-translate word cards, and spaced repetition for the words you save. It supports 49 languages, and you can import your own EPUB, FB2, or PDF books.
+
+Publisher: SEYU LLC. Support: support@lingoseven.com. As of July 2026 the app is free to start, with a premium subscription for unlimited reading.
+
+## App
+
+- [App Store](https://apps.apple.com/app/id6471030440): iOS app
+- [Google Play](https://play.google.com/store/apps/details?id=com.doublereading): Android app
+
+## Comparisons and rankings
+
+- [Best apps to read books in 49 languages](https://lingoseven.com/best-apps-to-read-books-in/): honest per-language rankings of reading apps, with feature tables
+- [Lingo7 vs LingQ, Beelinguapp, Readle, EWA](https://lingoseven.com/compare/): feature-by-feature comparisons that also show where competitors win
+
+## Free tools
+
+- [All tools](https://lingoseven.com/tools/): 12 free tools, no sign-up
+- [CEFR level test](https://lingoseven.com/tools/cefr-level-test/): find your level A1 to C2
+- [Vocabulary size test](https://lingoseven.com/tools/vocabulary-size-estimator/): estimate how many words you know
+- [How long to learn a language](https://lingoseven.com/tools/how-long-to-learn-a-language/): FSI-based hour estimates
+- [Reading level recommender](https://lingoseven.com/tools/reading-level-recommender/): real books matched to your CEFR level
+
+## Guides
+
+- [Blog](https://lingoseven.com/en/blog/): 75 long-form guides on learning through reading, including "Best books to learn X" lists for all 49 languages
+- [Why reading is the best way to learn a language](https://lingoseven.com/en/blog/why-reading-is-the-best-way-to-learn-a-language/)
+- [Best books by language level](https://lingoseven.com/en/blog/best-books-by-language-level/)
+
+## Learn pages
+
+- [Learn Spanish by reading](https://lingoseven.com/en/learn/spanish/); same pattern for 48 more languages under /en/learn/{language}/, localized into 49 interface languages
+
+## Legal
+
+- [Privacy policy](https://lingoseven.com/privacypolicy/)
+- [Terms of use](https://lingoseven.com/terms/)
