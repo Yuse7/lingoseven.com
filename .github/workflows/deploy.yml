@@ -25,6 +25,11 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      # Snapshot the currently live sitemap BEFORE building, so the indexnow job
+      # can diff it against the freshly deployed one and ping only new URLs.
+      - name: Snapshot live sitemap
+        run: curl -sf --max-time 30 https://lingoseven.com/sitemap-0.xml -o old-sitemap.xml || true
+
       - name: Install dependencies
         run: npm ci
 
@@ -36,6 +41,13 @@ jobs:
         with:
           path: dist
 
+      - name: Upload sitemap snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: old-sitemap
+          path: old-sitemap.xml
+          if-no-files-found: ignore
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -46,3 +58,47 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Ping IndexNow (Bing and friends) with URLs that are new in this deploy.
+  # Key file lives at public/<key>.txt and is served from the site root.
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download sitemap snapshot
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: old-sitemap
+
+      - name: Ping IndexNow with new URLs
+        env:
+          INDEXNOW_KEY: 2c8affe87beacf354977ed03c54aca75
+        run: |
+          set -e
+          extract() { grep -o '<loc>[^<]*</loc>' "$1" 2>/dev/null | sed 's/<[^>]*>//g' | sort -u; }
+          touch old-sitemap.xml
+          curl -sf --max-time 30 https://lingoseven.com/sitemap-0.xml -o new-sitemap.xml
+          extract old-sitemap.xml > old.txt
+          extract new-sitemap.xml > new.txt
+          comm -13 old.txt new.txt > added.txt
+          count=$(wc -l < added.txt | tr -d ' ')
+          if [ ! -s old.txt ]; then
+            echo "No previous sitemap snapshot; skipping ping to avoid submitting the whole site."
+            exit 0
+          fi
+          if [ "$count" -eq 0 ]; then
+            echo "No new URLs in this deploy; nothing to ping."
+            exit 0
+          fi
+          echo "Pinging IndexNow with $count new URL(s):"
+          cat added.txt
+          jq -n --arg host "lingoseven.com" --arg key "$INDEXNOW_KEY" \
+            --argjson urls "$(jq -R -s 'split("\n") | map(select(length > 0)) | .[0:10000]' added.txt)" \
+            '{host: $host, key: $key, keyLocation: ("https://lingoseven.com/" + $key + ".txt"), urlList: $urls}' \
+            > payload.json
+          code=$(curl -s -o response.txt -w "%{http_code}" -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" --data-binary @payload.json)
+          echo "IndexNow response: HTTP $code"
+          cat response.txt || true
+          case "$code" in 200|202) exit 0 ;; *) exit 1 ;; esac
