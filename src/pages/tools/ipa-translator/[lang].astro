@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolsForLanguage from '../../../components/ToolsForLanguage.astro';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { languageFacts } from '../../../data/languageFacts';
@@ -242,6 +243,8 @@ const clientCfg = { code, endpoint };
           <a href="/tools/language-difficulty-ranker/">Compare all 48 languages by difficulty &rarr;</a>
         </p>
       </div>
+
+      <ToolsForLanguage code={code} name={name} currentId="ipa-translator" />
 
       <div class="ipa-others">
         <h2>Transcribe another language into IPA</h2>

@@ -1,0 +1,48 @@
+---
+// Same-language cross-links: from one tool page to every other tool that has a
+// page for this language. Availability comes from data/toolsForLanguage.ts,
+// which mirrors each tool's getStaticPaths, so a link never 404s.
+import { codeToSlug } from '../data/languageSlugs';
+import { toolsForLanguage } from '../data/toolsForLanguage';
+
+interface Props {
+  /** language code of the current page, e.g. 'fr' */
+  code: string;
+  /** language display name, e.g. 'French' */
+  name: string;
+  /** tool id of the current page, excluded from the list */
+  currentId: string;
+}
+
+const { code, name, currentId } = Astro.props;
+const slug = codeToSlug[code];
+const tools = toolsForLanguage(code, currentId);
+---
+
+{
+  tools.length > 0 && (
+    <div class="lang-tools">
+      <h2>More free {name} tools</h2>
+      <div class="lang-tools-grid">
+        {tools.map((t) => (
+          <a class="lang-tools-pill" href={`/tools/${t.id}/${slug}/`}>
+            {t.label(name)}
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .lang-tools { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+  .lang-tools h2 { font-size: 1.3rem; margin: 0 0 1rem; }
+  .lang-tools-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .lang-tools-pill {
+    display: inline-flex; align-items: center; text-decoration: none;
+    color: var(--text, #e8eef5); font-weight: 600; font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 999px; padding: 0.4rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03); transition: all 0.12s ease;
+  }
+  .lang-tools-pill:hover { border-color: var(--primary); color: var(--primary); }
+</style>

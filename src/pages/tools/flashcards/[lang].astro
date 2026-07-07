@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolsForLanguage from '../../../components/ToolsForLanguage.astro';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { CEFR_LANG_CODES } from '../../../data/cefrTest';
@@ -232,6 +233,8 @@ const clientData = {
           <a href={`/en/learn/${slug}/`}>Learn {name} by reading real books with Lingo7 &rarr;</a>
         </p>
       </div>
+
+      <ToolsForLanguage code={code} name={name} currentId="flashcards" />
 
       <div class="fc-others">
         <h2>Flashcards for another language</h2>

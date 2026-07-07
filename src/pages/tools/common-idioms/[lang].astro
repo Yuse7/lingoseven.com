@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolsForLanguage from '../../../components/ToolsForLanguage.astro';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { idioms, IDIOM_LANGS, type Idiom } from '../../../data/idioms';
@@ -221,6 +222,8 @@ const others = IDIOM_LANGS.filter((c) => c !== code && codeToSlug[c] && idioms[c
           <a href="/tools/language-difficulty-ranker/">Compare 50 languages by difficulty for your native tongue &rarr;</a>
         </p>
       </div>
+
+      <ToolsForLanguage code={code} name={name} currentId="common-idioms" />
 
       <div class="idioms-others">
         <h2>Idioms in another language</h2>

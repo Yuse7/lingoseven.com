@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolsForLanguage from '../../../components/ToolsForLanguage.astro';
 import { languageFacts } from '../../../data/languageFacts';
 import { languages, getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
@@ -287,6 +288,8 @@ const clientData = { targetCode, fsiHours: lf.fsiHours, targetProfile, milestone
           <div class="facts-stat"><strong>{speakersLabel}</strong><span>speakers worldwide</span></div>
         </div>
       </div>
+
+      <ToolsForLanguage code={targetCode} name={name} currentId="how-long-to-learn-a-language" />
 
       <div class="hltl-others">
         <h2>How long to learn another language?</h2>

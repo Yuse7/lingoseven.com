@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolsForLanguage from '../../../components/ToolsForLanguage.astro';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { languageFacts } from '../../../data/languageFacts';
@@ -249,6 +250,8 @@ const clientData = { labels: POS_PLURAL };
           <a href={`/en/learn/${slug}/`}>Start reading {name} with Lingo7 &rarr;</a>
         </p>
       </div>
+
+      <ToolsForLanguage code={code} name={name} currentId="false-friends" />
 
       <div class="ff-others">
         <h2>False friends in another language</h2>

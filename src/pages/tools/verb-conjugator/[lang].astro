@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
 import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolsForLanguage from '../../../components/ToolsForLanguage.astro';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { languageFacts } from '../../../data/languageFacts';
@@ -271,6 +272,8 @@ const others = CONJ_LANGS.filter((c) => c !== code && codeToSlug[c])
           <a href="/tools/language-difficulty-ranker/">Compare {name} against 48 languages by difficulty &rarr;</a>
         </p>
       </div>
+
+      <ToolsForLanguage code={code} name={name} currentId="verb-conjugator" />
 
       <div class="vc-others">
         <h2>Conjugate verbs in another language</h2>
