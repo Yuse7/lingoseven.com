@@ -146,6 +146,39 @@ const others = READING_LANG_CODES.filter((c) => c !== code && codeToSlug[c])
   })
   .sort((a, b) => a.name.localeCompare(b.name));
 
+// External "where to get this book" link, generated from title/author so it never
+// 404s and needs no per-book upkeep. Public-domain titles point to a free source
+// (Wikisource in the book's language when one exists, otherwise Project Gutenberg);
+// in-copyright titles point to an Amazon search.
+const WIKISOURCE_LANGS = new Set<string>([
+  'en', 'de', 'fr', 'es', 'it', 'pt', 'ru', 'sr', 'nl', 'sv', 'no', 'da', 'ro', 'uk',
+  'pl', 'cs', 'sk', 'hr', 'bs', 'bg', 'mk', 'sl', 'lt', 'fi', 'hu', 'et', 'tr', 'az',
+  'el', 'vi', 'id', 'ms', 'is', 'ca', 'gl', 'tl', 'ka', 'hy', 'eu', 'be',
+]);
+
+function bookLink(b: BookRec): { url: string; label: string; kind: 'free' | 'buy' } {
+  const query = `${b.title} ${b.author}`.trim();
+  if (b.pd) {
+    if (WIKISOURCE_LANGS.has(code)) {
+      return {
+        url: `https://${code}.wikisource.org/w/index.php?search=${encodeURIComponent(b.title)}&fulltext=1`,
+        label: 'Read free on Wikisource',
+        kind: 'free',
+      };
+    }
+    return {
+      url: `https://www.gutenberg.org/ebooks/search/?query=${encodeURIComponent(query)}`,
+      label: 'Read free on Gutenberg',
+      kind: 'free',
+    };
+  }
+  return {
+    url: `https://www.amazon.com/s?k=${encodeURIComponent(query)}&i=stripbooks`,
+    label: 'Find on Amazon',
+    kind: 'buy',
+  };
+}
+
 const clientData = { levels: LEVELS };
 ---
 
@@ -178,19 +211,30 @@ const clientData = { levels: LEVELS };
 
       <div class="rlr-books" id="rlr-books">
         {
-          books.map((b) => (
-            <article class="rlr-book" data-min={b.min} data-max={b.max}>
-              <span class="rlr-book-level">{levelLabel(b)}</span>
-              <div class="rlr-book-body">
-                <h3 class="rlr-book-title">
-                  {b.title}
-                  {b.author && <span class="rlr-book-author">{b.author}</span>}
-                </h3>
-                <p class="rlr-book-why">{b.why}</p>
-              </div>
-              <span class="rlr-book-kind">{b.kind}</span>
-            </article>
-          ))
+          books.map((b) => {
+            const link = bookLink(b);
+            return (
+              <article class="rlr-book" data-min={b.min} data-max={b.max}>
+                <span class="rlr-book-level">{levelLabel(b)}</span>
+                <div class="rlr-book-body">
+                  <h3 class="rlr-book-title">
+                    {b.title}
+                    {b.author && <span class="rlr-book-author">{b.author}</span>}
+                  </h3>
+                  <p class="rlr-book-why">{b.why}</p>
+                  <a
+                    class={`rlr-book-link is-${link.kind}`}
+                    href={link.url}
+                    target="_blank"
+                    rel="nofollow noopener"
+                  >
+                    {link.label} <span class="rlr-book-link-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+                <span class="rlr-book-kind">{b.kind}</span>
+              </article>
+            );
+          })
         }
       </div>
 
@@ -414,6 +458,14 @@ const clientData = { levels: LEVELS };
   }
   .rlr-book-author { font-size: 0.85rem; font-weight: 500; color: var(--text-muted, #9fb0c3); }
   .rlr-book-why { margin: 0.35rem 0 0; font-size: 0.9rem; line-height: 1.5; color: var(--text-muted, #9fb0c3); }
+  .rlr-book-link {
+    display: inline-flex; align-items: center; gap: 0.3rem; width: fit-content;
+    margin: 0.55rem 0 0; font-size: 0.82rem; font-weight: 600; text-decoration: none;
+  }
+  .rlr-book-link.is-free { color: var(--primary); }
+  .rlr-book-link.is-buy { color: var(--accent, #f97316); }
+  .rlr-book-link:hover { text-decoration: underline; }
+  .rlr-book-link-arrow { font-size: 0.9em; }
   .rlr-book-kind {
     align-self: center; white-space: nowrap; font-size: 0.72rem; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted, #9fb0c3);

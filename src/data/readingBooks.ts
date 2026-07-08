@@ -13,6 +13,7 @@ export interface BookRec {
   max: Cefr; // highest CEFR level the book suits (equals min for a single level)
   kind: string; // Graded reader | Classic | Children | Literary | Folk tales | Poetry | Parallel text | Nonfiction
   why: string; // one short sentence on why it works for learners
+  pd: boolean; // true if the work is public domain (free source: author died <= 1955 AND in the original language, or folklore/anonymous/ancient); false if under active copyright (living/recent author, translation, or a modern graded/parallel-text edition)
 }
 
 export interface LangBooks {
@@ -47,6 +48,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "C1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "The three best graded-reader series, leveled so you climb a clear staircase, most with audio."
       },
       {
@@ -55,6 +57,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Controlled to the 1,000 most frequent words, with plot summaries, glossary, and comprehension questions."
       },
       {
@@ -63,6 +66,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Short sentences, concrete vocabulary, and gripping plots pull you past the occasional unfamiliar word."
       },
       {
@@ -71,6 +75,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "A small masterclass in plain, graceful English, simple sentences carried by emotional warmth."
       },
       {
@@ -79,6 +84,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Short, punchy sentences and clean contemporary American English, with a clockwork plot that grips."
       },
       {
@@ -87,6 +93,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Classic",
+        "pd": false,
         "why": "Built largely from dialogue and economical description, short enough for a realistic first serious novel."
       },
       {
@@ -95,6 +102,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "Plain, direct prose in a short, easy-to-follow fable, remarkably readable for its reputation."
       },
       {
@@ -103,6 +111,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Calm, restrained, almost transparent prose that teaches you to read for tone and implication."
       },
       {
@@ -111,6 +120,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "Under two hundred pages of lyrical, precise sentences, a wonderful model of beautiful English."
       },
       {
@@ -119,6 +129,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "Elegant, ironic, carefully built prose, the closest thing to a course in English style."
       }
     ]
@@ -133,6 +144,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Simplified sentences and practical vocabulary (ordering food, finding a flat), each chapter glossed."
       },
       {
@@ -141,6 +153,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "B2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Ladders across levels with subtle repetition and adult stories, so you keep one author's style as you climb."
       },
       {
@@ -149,6 +162,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Controlled to the 1,000 most frequent words, with a glossary, questions, and an audiobook."
       },
       {
@@ -157,6 +171,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Classic",
+        "pd": false,
         "why": "Short present-tense sentences carried by emotional weight, with bilingual editions and audio."
       },
       {
@@ -165,6 +180,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Children",
+        "pd": false,
         "why": "Clear, brisk, modern prose and a page-turner plot make it a natural first real novel."
       },
       {
@@ -173,6 +189,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Language-controlled Leichte Lektüre editions bridge you toward a full classic that feels out of reach."
       },
       {
@@ -181,6 +198,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Direct, unadorned, often short sentences, one of the gentlest landings into serious literature."
       },
       {
@@ -189,6 +207,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "Precise, clean prose in a short novella you can finish, great practice for verb-final sentences."
       },
       {
@@ -197,6 +216,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Clear, flowing, introspective German that teaches the vocabulary of thought and feeling."
       }
     ]
@@ -211,6 +231,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Eight original genre stories with controlled high-frequency vocabulary, glossaries, and comprehension questions."
       },
       {
@@ -219,6 +240,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Everyday vocabulary, short sentences, and pictures that carry the meaning, cheap and unintimidating."
       },
       {
@@ -227,6 +249,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "CEFR-labelled learner series that let you match your level exactly and step up one notch at a time."
       },
       {
@@ -235,6 +258,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "The single easiest classic in the French canon, simple vocabulary with themes worth holding onto."
       },
       {
@@ -243,6 +267,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Children",
+        "pd": false,
         "why": "Short, funny, self-contained schoolboy stories full of the everyday, colloquial French you actually want."
       },
       {
@@ -251,6 +276,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A short, gripping Riviera novel with clean, classical restraint and contemporary vocabulary."
       },
       {
@@ -259,6 +285,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "Complete, satisfying stories finishable in one sitting, anchored in concrete, observable detail."
       },
       {
@@ -267,6 +294,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Spare, flat prose in short declarative sentences, and it uses the familiar passé composé."
       },
       {
@@ -275,6 +303,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "Thrilling, plot-driven prose pulls you through hundreds of pages on sheer momentum."
       },
       {
@@ -283,6 +312,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "One of the great novels in any language, its emotional set-pieces are extraordinary."
       },
       {
@@ -291,6 +321,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Lyrical, image-rich prose about flight and human solidarity, beautifully constructed."
       }
     ]
@@ -305,6 +336,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Built on about 300 words with heavy repetition, it lets a nervous beginner finish a whole novel."
       },
       {
@@ -313,6 +345,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Cognate-heavy novellas (about 140 new words in Fiesta fatal) with real stakes, short enough to finish fast."
       },
       {
@@ -321,6 +354,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "C1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "A tightly graded series from A1 to C1, written for adults, so you always know the next readable rung."
       },
       {
@@ -329,6 +363,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Eight varied stories engineered to recycle the most common words, with glossaries and comprehension questions."
       },
       {
@@ -337,6 +372,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "Short sentences and concrete vocabulary in a beloved story, with abundant parallel and audio editions."
       },
       {
@@ -345,6 +381,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Children",
+        "pd": false,
         "why": "Knowing the story already lets you spend your energy on the Spanish, not the plot."
       },
       {
@@ -353,6 +390,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A propulsive Barcelona mystery pulls you forward so hard you tolerate the unknown words."
       },
       {
@@ -361,6 +399,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Luminous prose and unforgettable imagery reward years of effort when read in the original."
       },
       {
@@ -369,6 +408,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Magical-realist richness with more linear storytelling and more navigable sentences than García Márquez."
       },
       {
@@ -377,6 +417,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Short, precise, elegant stories you can read in a sitting and reread endlessly."
       }
     ]
@@ -391,6 +432,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Roughly fifty tales, most a page or two, everyday vocabulary, a whole story in minutes."
       },
       {
@@ -399,6 +441,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "C1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Alma Edizioni's learner line, so the Italian feels natural, with excellent professional-actor audio."
       },
       {
@@ -407,6 +450,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Eight self-contained stories on the 1,000 most frequent words, with glossary and audiobook."
       },
       {
@@ -415,6 +459,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Leveled, simplified versions of well-known works let you read a real author before you could unaided."
       },
       {
@@ -423,6 +468,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Literary",
+        "pd": false,
         "why": "A child narrator keeps register and grammar accessible while the tense plot pulls you forward."
       },
       {
@@ -431,6 +477,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Children",
+        "pd": true,
         "why": "Clean, middle-register Tuscan with short sentences and concrete nouns, in a story you half-know."
       },
       {
@@ -439,6 +486,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Classic",
+        "pd": false,
         "why": "Short sentences and a gentle tone with philosophical weight sitting beneath simple words."
       },
       {
@@ -447,6 +495,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Twenty short, self-contained, image-driven stories make a manageable on-ramp to a major author."
       },
       {
@@ -455,6 +504,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Nonfiction",
+        "pd": false,
         "why": "A chemist's rare clarity and restraint make the prose more accessible than its stature suggests."
       },
       {
@@ -463,6 +513,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Famously lucid Italian where the difficulty is in the ideas, not tangled syntax."
       },
       {
@@ -471,6 +522,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A propulsive, emotionally gripping story carries you through long, feeling-mapping sentences."
       }
     ]
@@ -485,6 +537,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "Because the original French is plain, the Portuguese stays gentle, with a repeating core of words."
       },
       {
@@ -493,6 +546,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Controlled-vocabulary readers keep the look-up rate low; favor ones with audio and a stated level."
       },
       {
@@ -501,6 +555,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Eight high-frequency Brazilian stories with glossary, plot summaries, and native audio."
       },
       {
@@ -509,6 +564,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Literary",
+        "pd": false,
         "why": "Clean, direct, parable-like prose with short sentences and concrete vocabulary, an ideal first novel."
       },
       {
@@ -517,6 +573,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Literary",
+        "pd": false,
         "why": "A childlike register keeps vocabulary accessible, and the genuine emotional pull keeps you reading."
       },
       {
@@ -525,6 +582,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A natural storyteller's propulsive plot and lifelike dialogue carry you into Bahian culture."
       },
       {
@@ -533,6 +591,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "A master of irony builds the narrator's self-deception into the sentences themselves."
       },
       {
@@ -541,6 +600,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A short entry into Lispector, who bends Brazilian Portuguese into entirely her own shapes."
       },
       {
@@ -549,6 +609,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A first-rank philosophical novelist whose distinctive voice only the original can convey."
       }
     ]
@@ -563,6 +624,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Poetry",
+        "pd": false,
         "why": "Insistent metrical rhyme locks stress patterns into place and teaches Russian prosody."
       },
       {
@@ -571,6 +633,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "B2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "The closest Russian has to a graded-reader ladder, several editions marking word stress."
       },
       {
@@ -579,6 +642,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Eight genre stories on the 1,000 most frequent words, glossed with bilingual lists and audio."
       },
       {
@@ -587,6 +651,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "You already know the story, so you read for language, in Gal's genuinely good Russian."
       },
       {
@@ -595,6 +660,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": true,
         "why": "Clean sentences and colloquial dialogue in short, finishable stories where verb aspect clicks."
       },
       {
@@ -603,6 +669,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "Clear, economical prose from the writer who invented the modern Russian literary language."
       },
       {
@@ -611,6 +678,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "Twentieth-century prose close to modern Russian, its supernatural comedy pulling you through."
       },
       {
@@ -619,6 +687,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The precision of Tolstoy's observation survives translation only partly; start with his shorter works."
       },
       {
@@ -627,6 +696,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The texture of Dostoevsky's anguished syntax survives translation only partly; start with his shorter novels."
       }
     ]
@@ -641,6 +711,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "Familiar narrative removes the comprehension load, freeing you to absorb Serbian sentence-building."
       },
       {
@@ -649,6 +720,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Short, rhythmic, repetitive children's verse whose recurring words and structures stick fast."
       },
       {
@@ -657,6 +729,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Poetry",
+        "pd": true,
         "why": "Tiny rhymed poems you can finish early, with rhyme making stress patterns audible."
       },
       {
@@ -665,6 +738,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Repetition, formulaic openings, and a closed cast of words suit an intermediate reader."
       },
       {
@@ -673,6 +747,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": true,
         "why": "Warm, ironic mock-memoir in conversational modern Serbian, where comedy pulls you through difficulty."
       },
       {
@@ -681,6 +756,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Short child's-eye autobiographical stories, the most approachable door to a major stylist."
       },
       {
@@ -689,6 +765,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": false,
         "why": "Self-contained historical episodes in grave, measured prose, the essential BCS novel to read."
       },
       {
@@ -697,6 +774,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "The slim, lyrical anti-war debut, a shorter way into Serbian modernism's music."
       },
       {
@@ -705,6 +783,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A larger historical canvas of displaced Serbs, the reward at the road's end."
       }
     ]
@@ -719,6 +798,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Eight learner stories with glossaries and controlled, recycled vocabulary that build a beginner's confidence."
       },
       {
@@ -727,6 +807,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Short, self-contained stories in simple, concrete everyday Dutch, often a learner's first native book finished."
       },
       {
@@ -735,6 +816,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "A continuous story with recurring characters that recycle vocabulary, a natural step up from Jip en Janneke."
       },
       {
@@ -743,6 +825,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "A familiar fable in short, concrete sentences, an easy entry point into parallel reading."
       },
       {
@@ -751,6 +834,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Nonfiction",
+        "pd": false,
         "why": "Short diary entries in clear, conversational Dutch about the everyday vocabulary you most want."
       },
       {
@@ -759,6 +843,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Clean, contemporary Dutch with short sentences and dialogue, often a learner's first grown-up novel."
       },
       {
@@ -767,6 +852,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A short novella in precise, controlled prose, a realistic literary target for upper-intermediate readers."
       },
       {
@@ -775,6 +861,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Clear literary prose and a gripping plot make it an approachable entry into serious Dutch literature."
       },
       {
@@ -783,6 +870,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "The novel that made Nooteboom's name, some of the finest prose in modern Dutch."
       },
       {
@@ -791,6 +879,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Short, strange, and luminous, a manageable way into Nooteboom's dense, allusive style."
       }
     ]
@@ -805,6 +894,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "State-supported easy-to-read books giving adult-interest content at a genuine beginner reading level."
       },
       {
@@ -813,6 +903,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Eight genre stories with controlled, recycled vocabulary and glossaries, built to be finished."
       },
       {
@@ -821,6 +912,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "A gentle story you already know, so you decode Swedish instead of juggling plot."
       },
       {
@@ -829,6 +921,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Bright, dialogue-heavy Swedish in short chapters, so propulsive you read one more without meaning to."
       },
       {
@@ -837,6 +930,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Everyday, concrete farm-life vocabulary in self-contained episodes you can finish one at a time."
       },
       {
@@ -845,6 +939,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "A longer, emotionally serious fantasy that stretches you while keeping Lindgren's clear style."
       },
       {
@@ -853,6 +948,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "A robber chief's daughter in a wild, mythic forest, richer description with real weight."
       },
       {
@@ -861,6 +957,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Clear, unadorned crime prose and the first Wallander, starting a long series at steady difficulty."
       },
       {
@@ -869,6 +966,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A compulsively plotted thriller in modern vocabulary that pulls readers above their comfort level."
       },
       {
@@ -877,6 +975,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "Lagerlöf's romantic, mythic debut in rich, rhythmic prose, a turning point in Swedish literature."
       },
       {
@@ -885,6 +984,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The more approachable Lagerlöf, a tour of Sweden's geography and folklore in rich prose."
       },
       {
@@ -893,6 +993,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "Often called the first modern Swedish novel, a sharp satire of Stockholm society."
       },
       {
@@ -901,6 +1002,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "A vivid, earthier story set in the Stockholm archipelago, muscular and alive."
       }
     ]
@@ -915,6 +1017,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Purpose-built easy-read books with simplified vocabulary and short sentences that let a beginner finish."
       },
       {
@@ -923,6 +1026,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "A short, charming story in clear Bokmål built on repetition and song, read in one sitting."
       },
       {
@@ -931,6 +1035,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Warm, plain, conversational prose close to real speech, full of everyday domestic vocabulary."
       },
       {
@@ -939,6 +1044,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "One of Norway's most quoted children's books, clear Bokmål carried by repetition and song."
       },
       {
@@ -947,6 +1053,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "A story you already know in simple Bokmål with short chapters, so plot carries the vocabulary."
       },
       {
@@ -955,6 +1062,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Eight genre stories built from the thousand most frequent words, with glossaries for dictionary-free reading."
       },
       {
@@ -963,6 +1071,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Warm, funny childhood stories in Nynorsk, rich enough to teach yet clear at B1."
       },
       {
@@ -971,6 +1080,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "An award-winning, warm and emotionally real story, a deliberate, enjoyable introduction to Nynorsk."
       },
       {
@@ -979,6 +1089,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Propulsive Harry Hole crime in contemporary Bokmål, page-turning momentum that pulls you to B2."
       },
       {
@@ -987,6 +1098,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A whole history of philosophy in calm, well-signposted prose, logical and clearly structured."
       },
       {
@@ -995,6 +1107,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The first modern Norwegian novel, a feverish first-person account, intense and stylistically restless."
       },
       {
@@ -1003,6 +1116,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Contemporary, approachable present-day Bokmål, where the challenge is stamina and long introspective sentences."
       }
     ]
@@ -1017,6 +1131,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Easy readers graded on a transparent lix scale, so you climb one rung at a time."
       },
       {
@@ -1025,6 +1140,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "A familiar story in short sentences and concrete vocabulary, a gentle bridge into Danish."
       },
       {
@@ -1033,6 +1149,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Eight self-contained genre stories with glossaries and recycled vocabulary, the gentlest on-ramp into Danish prose."
       },
       {
@@ -1041,6 +1158,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Contemporary, conversational Danish, plain and funny, the kind of book that hides the studying."
       },
       {
@@ -1049,6 +1167,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "Short, famous, self-contained tales that are the cultural bedrock of Danish, read for the culture."
       },
       {
@@ -1057,6 +1176,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Page-turning cold-case crime with clean, functional prose and natural modern Danish dialogue."
       },
       {
@@ -1065,6 +1185,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A literary thriller with forward pull and richness, your bridge from B2 toward C1."
       },
       {
@@ -1073,6 +1194,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Nonfiction",
+        "pd": false,
         "why": "Spare, clear, devastating memoir, one of the most approachable serious works in Danish."
       },
       {
@@ -1081,6 +1203,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": false,
         "why": "A master stylist's gothic tales, an education in what literary Danish can do."
       }
     ]
@@ -1095,6 +1218,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Controlled vocabulary and short bilingual units remove the two things that make beginners quit."
       },
       {
@@ -1103,6 +1227,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "A familiar story with simple syntax that quietly teaches the suffixed article and present tense."
       },
       {
@@ -1111,6 +1236,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Fairy-tale structure repeats in threes, so pattern lets you infer meaning as you read."
       },
       {
@@ -1119,6 +1245,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "Vivid, funny, and culturally foundational, with narrative momentum that pulls you through."
       },
       {
@@ -1127,6 +1254,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": true,
         "why": "Modern, lucid syntax and rich but accessible vocabulary reward your Romance-language cognate instincts."
       },
       {
@@ -1135,6 +1263,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Modern twentieth-century Romanian with a strong narrative pull, readable at novella length first."
       },
       {
@@ -1143,6 +1272,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "Sober, controlled, modern prose, serious literature without the nineteenth-century folk writers' obstacles."
       },
       {
@@ -1151,6 +1281,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "The national poet's masterpiece, where you feel Romanian as a literary instrument."
       },
       {
@@ -1159,6 +1290,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Contemporary Romanian at its most ambitious; if you can read him, you can read anything."
       }
     ]
@@ -1173,6 +1305,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Built for beginners, with vocabulary controlled to your level and the translation alongside."
       },
       {
@@ -1181,6 +1314,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Each short story pairs with a vocabulary list, grammar notes, and comprehension questions."
       },
       {
@@ -1189,6 +1323,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Written to be understood by people still learning, with short present-tense sentences."
       },
       {
@@ -1197,6 +1332,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "Knowing the plot lets you spend all your effort on the language, not the story."
       },
       {
@@ -1205,6 +1341,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Children",
+        "pd": false,
         "why": "Real idiomatic Ukrainian in a concrete, funny world whose momentum carries you forward."
       },
       {
@@ -1213,6 +1350,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Short, self-contained chapters and a gripping plot; the Ukrainian translation reads cleanly."
       },
       {
@@ -1221,6 +1359,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Living, contemporary Ukrainian, serious modern fiction to grow into once you are comfortable."
       },
       {
@@ -1229,6 +1368,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A central text of post-independence culture, and few books reward advanced effort more."
       },
       {
@@ -1237,6 +1377,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "The source of the modern literary language, weaving folk rhythms and spoken vernacular."
       },
       {
@@ -1245,6 +1386,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "Franko's historical novel, the more approachable entry into the classical Ukrainian canon."
       },
       {
@@ -1253,6 +1395,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "Lesya Ukrainka's verse drama on the Don Juan legend, drawing on European themes."
       }
     ]
@@ -1267,6 +1410,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Short stories pitched at A1, native-feeling but controlled, a bridge toward unsupported Polish."
       },
       {
@@ -1275,6 +1419,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "A bilingual graded reader marked for A1 and A2, so you check meaning without leaving the page."
       },
       {
@@ -1283,6 +1428,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Poetry",
+        "pd": false,
         "why": "Short, playful children's verse with concrete vocabulary, memorable rhythm, and superb pronunciation practice."
       },
       {
@@ -1291,6 +1437,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Poetry",
+        "pd": true,
         "why": "A children's poem built around the sound of Polish itself, superb read-aloud pronunciation practice."
       },
       {
@@ -1299,6 +1446,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "A familiar story where you infer unknown words rather than look them up, cementing vocabulary."
       },
       {
@@ -1307,6 +1455,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "The first Witcher book, self-contained stories with the narrative pull of a world you love."
       },
       {
@@ -1315,6 +1464,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "The most approachable entry into a Nobel laureate, a village saga in short, fable-like chapters."
       },
       {
@@ -1323,6 +1473,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Tokarczuk's fragmentary, demanding Man Booker International winner, for after Prawiek."
       },
       {
@@ -1331,6 +1482,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Hard speculative ideas fused with philosophy and dry wit, though inventive neologisms challenge even natives."
       },
       {
@@ -1339,6 +1491,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "A canonical historical epic of Nero's Rome, safest of his works in parallel translation."
       }
     ]
@@ -1353,6 +1506,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Learner-engineered simplified texts in clean standard Czech, with restricted grammar and high-frequency vocabulary."
       },
       {
@@ -1361,6 +1515,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": true,
         "why": "Short, concrete sentences in warm standard Czech, charming rather than babyish, ideal to re-read."
       },
       {
@@ -1369,6 +1524,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": true,
         "why": "A short, affectionate puppy book, the actual prose of Karel Čapek at his most accessible."
       },
       {
@@ -1377,6 +1533,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "A familiar story in clear standard Czech with concrete vocabulary, pairing well with parallel text."
       },
       {
@@ -1385,6 +1542,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "Clear, well-built sentences in a collage of short fake documents that keeps you moving."
       },
       {
@@ -1393,6 +1551,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "Almost all short-line dialogue in standard Czech, idea-driven and short, and it coined robot."
       },
       {
@@ -1401,6 +1560,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A short, re-readable novella blending humor and tragedy, your first distinctive Czech voice."
       },
       {
@@ -1409,6 +1569,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "An anarchic, subversive comic masterpiece and a cornerstone of Czech literature, a real milestone."
       },
       {
@@ -1417,6 +1578,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Precise, intellectual, essayistic Czech prose where the difficulty is conceptual rather than dialectal."
       }
     ]
@@ -1431,6 +1593,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "Short declarative sentences deliver the case system in small doses, in a story you know."
       },
       {
@@ -1439,6 +1602,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": true,
         "why": "Rhymed, rhythmic animal tales whose repetition and recurring endings make the language stick."
       },
       {
@@ -1447,6 +1611,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Everyday modern Slovak in short, episodic twin-sister stories with a real sense of completion."
       },
       {
@@ -1455,6 +1620,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "Warm, humorous realist short stories of village life in concrete, easily pictured vocabulary."
       },
       {
@@ -1463,6 +1629,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Canonical Slovak folk tales with familiar archetypes, a genuine cultural reward at intermediate level."
       },
       {
@@ -1471,6 +1638,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "A sharply ironic look at how the First World War touched an ordinary Slovak village."
       },
       {
@@ -1479,6 +1647,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Clear, dangerously precise contemporary prose where the difficulty is thought and irony, not obscurity."
       },
       {
@@ -1487,6 +1656,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A sharp satire laying bare Stalinist thought control, literature with real intellectual and historical heft."
       },
       {
@@ -1495,6 +1665,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Raw, introspective, autobiographical prose about a frustrated intellectual, immediate and pulling."
       }
     ]
@@ -1509,6 +1680,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "Familiar story and gentle vocabulary make it the cleanest introduction to Croatian case endings."
       },
       {
@@ -1517,6 +1689,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Repetition, predictable structure, and short self-contained units drill grammar into place."
       },
       {
@@ -1525,6 +1698,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": true,
         "why": "A beloved national children's classic with clear sentences and shared cultural literacy."
       },
       {
@@ -1533,6 +1707,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Self-contained Slavic-myth fairy tales, richer and more poetic, with vocabulary recycled across stories."
       },
       {
@@ -1541,6 +1716,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Nonfiction",
+        "pd": false,
         "why": "Clean journalistic essays on everyday post-communist life, an accessible bridge into adult prose."
       },
       {
@@ -1549,6 +1725,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Finishable modern short stories in a distinctive voice that makes you keep reading."
       },
       {
@@ -1557,6 +1734,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Contemporary setting, fast-moving plot, and present-day idiom you can reuse in conversation."
       },
       {
@@ -1565,6 +1743,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": false,
         "why": "Magnificent, unhurried Nobel storytelling with relatively classical, accessible syntax for its level."
       },
       {
@@ -1573,6 +1752,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Short wartime stories keep units manageable while their emotional power pulls you through."
       },
       {
@@ -1581,6 +1761,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": false,
         "why": "The summit of ambitious Croatian prose, and mastering it is a real milestone."
       }
     ]
@@ -1595,6 +1776,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "Familiar plot and short, clean sentences carry the gentle tone over dense grammar."
       },
       {
@@ -1603,6 +1785,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Repetitive formulas and predictable arcs in short, culturally authentic units you can finish."
       },
       {
@@ -1611,6 +1794,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Short contemporary stories, the gentlest landing, in everyday language close to spoken Bosnian."
       },
       {
@@ -1619,6 +1803,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Classic",
+        "pd": false,
         "why": "Clear, measured Nobel prose in self-contained chapters, rooted in Bosnian history and place."
       },
       {
@@ -1627,6 +1812,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "The most authentically Bosnian novel, steeped in Ottoman-heritage vocabulary and the Islamic-Bosnian world."
       },
       {
@@ -1635,6 +1821,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Slightly more accessible and hopeful than Derviš i smrt, with the same Bosnian texture."
       }
     ]
@@ -1649,6 +1836,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "Because you remember the story, attention goes to recognizing letters and matching meaning."
       },
       {
@@ -1657,6 +1845,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": false,
         "why": "Predictable narrative shapes and recurring vocabulary teach the same words several times over."
       },
       {
@@ -1665,6 +1854,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": true,
         "why": "Elin Pelin writes for children without writing down, so language stays natural but not dense."
       },
       {
@@ -1673,6 +1863,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Poetry",
+        "pd": false,
         "why": "Rhymed children's poems, wonderful for ear training and pronunciation when read aloud with audio."
       },
       {
@@ -1681,6 +1872,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": true,
         "why": "Short, vivid, emotionally direct stories of village life, admired for their clarity."
       },
       {
@@ -1689,6 +1881,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": true,
         "why": "Celebrated, painterly short stories with universal emotional logic, easy to find in translation."
       },
       {
@@ -1697,6 +1890,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The Bulgarian national novel, whose conspiracy, romance, and revolution build real reading stamina."
       },
       {
@@ -1705,6 +1899,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "The 2023 International Booker winner, with an acclaimed English translation for checking understanding."
       },
       {
@@ -1713,6 +1908,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Same author and celebrated translator, with a fragmented structure you can read in pieces."
       }
     ]
@@ -1727,6 +1923,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "Short chapters, simple syntax, and a story you half-remember, with parallel editions easy to find."
       },
       {
@@ -1735,6 +1932,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Repetitive formulas and everyday vocabulary drill core grammar; short tales finish in one sitting."
       },
       {
@@ -1743,6 +1941,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Poetry",
+        "pd": false,
         "why": "The clean codified standard from the man who shaped it, in short poems."
       },
       {
@@ -1751,6 +1950,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Poetry",
+        "pd": true,
         "why": "Folk-influenced rhythm and concrete, earthy imagery make Racin more graspable than most poetry."
       },
       {
@@ -1759,6 +1959,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "The first novel written in Macedonian, grounded in village life and concrete detail."
       },
       {
@@ -1767,6 +1968,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Widely regarded as the masterpiece of modern Macedonian prose, powerful and historically rich."
       },
       {
@@ -1775,6 +1977,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Modern, intellectual, and universal, the easiest title here to pair with a translation."
       }
     ]
@@ -1789,6 +1992,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "A plot you can lean on, with clean, standard phrasing rather than dialect."
       },
       {
@@ -1797,6 +2001,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "A rich oral tradition retold in accessible language, with folk-tale repetition and rhythm."
       },
       {
@@ -1805,6 +2010,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Modern, playful everyday children's language in short forms, with memorable invented character names."
       },
       {
@@ -1813,6 +2019,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Classic",
+        "pd": true,
         "why": "A national classic every Slovene knows, with folk-tale rhythm and a clear arc."
       },
       {
@@ -1821,6 +2028,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": true,
         "why": "A tight, powerful novella short enough to finish, in crafted, precise prose."
       },
       {
@@ -1829,6 +2037,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": true,
         "why": "A fuller Cankar novel of poverty and family, a step up in density."
       },
       {
@@ -1837,6 +2046,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "Even a few sonnets reach Slovenian's cultural heart and sharpen attention to every word."
       },
       {
@@ -1845,6 +2055,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Modern standard prose and a gripping five-narrator structure, well served in English translation."
       },
       {
@@ -1853,6 +2064,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Extraordinary clarity and moral weight, with a respected translation making parallel reading feasible."
       }
     ]
@@ -1867,6 +2079,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Poetry",
+        "pd": true,
         "why": "Extremely short four-line songs with concrete, high-frequency words and patterns that recur for natural repetition."
       },
       {
@@ -1875,6 +2088,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Repetitive structures and recurring formulas, giving real connected narrative at a manageable length."
       },
       {
@@ -1883,6 +2097,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Illustrations carry the meaning while short sentences and concrete subject matter build confidence."
       },
       {
@@ -1891,6 +2106,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "A story you already know, in short chapters, the easiest Latvian book to read in parallel."
       },
       {
@@ -1899,6 +2115,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Children",
+        "pd": true,
         "why": "Genuine Latvian drama with a clear quest and mostly dialogue in shorter, natural sentences."
       },
       {
@@ -1907,6 +2124,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Restrained, clear contemporary prose with short chapters and a high-quality translation for parallel reading."
       },
       {
@@ -1915,6 +2133,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "Grounded realism of everyday rural life, in stories short enough to read twice."
       },
       {
@@ -1923,6 +2142,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "Reworks folklore and the Lāčplēsis legend into a symbolic meditation on freedom and awakening."
       },
       {
@@ -1931,6 +2151,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Psychologically intense fiction where interiority and mood carry as much weight as plot."
       }
     ]
@@ -1945,6 +2166,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "A small, repeating cast of everyday nouns and simple past-tense narration drills the core forms beginners need."
       },
       {
@@ -1953,6 +2175,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Clean, modern prose with an imaginative plot whose narrative pull keeps you turning pages."
       },
       {
@@ -1961,6 +2184,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "You likely know the story already, so your attention goes to how Lithuanian says it."
       },
       {
@@ -1969,6 +2193,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "Short, self-contained, and emotionally legible, with concrete household vocabulary that is high-frequency."
       },
       {
@@ -1977,6 +2202,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "Biliūnas writes with clarity and restraint, shorter sentences and a clear emotional through-line."
       },
       {
@@ -1985,6 +2211,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "The first classic poem in Lithuanian and the cornerstone of the national literary canon."
       },
       {
@@ -1993,6 +2220,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "Short, with an immediately graspable central image and musical verse that rewards reading aloud."
       },
       {
@@ -2001,6 +2229,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "Essentially contemporary literary Lithuanian, with a gripping narrative and dark, ironic momentum."
       },
       {
@@ -2009,6 +2238,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Modern, living Lithuanian by a contemporary master stylist, with the narrative drive of a bestseller."
       }
     ]
@@ -2023,6 +2253,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "A familiar plot and simple original, with a certified Easy Finnish edition for the softest landing."
       },
       {
@@ -2031,6 +2262,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "A whole category of certified plain-language books lets you read complete texts almost immediately."
       },
       {
@@ -2039,6 +2271,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Short, warm, episodic stories with concrete vocabulary, hugely available in print and audio."
       },
       {
@@ -2047,6 +2280,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Dense illustrations let you infer meaning and confirm it with concrete, thematically grouped words."
       },
       {
@@ -2055,6 +2289,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Plain, propulsive, episodic prose that pulls you forward, and genuinely manageable as a first novel."
       },
       {
@@ -2063,6 +2298,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": false,
         "why": "Unmatched cultural depth and real exposure to the dialect and spoken registers cleaner prose hides."
       },
       {
@@ -2071,6 +2307,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Contemporary literary Finnish and a gripping structure, a strong bridge from B2 into serious fiction."
       },
       {
@@ -2079,6 +2316,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The headwater of Finnish-language literature, connecting you to everything written downstream."
       }
     ]
@@ -2093,6 +2331,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Short declarative sentences and concrete, high-frequency vocabulary, with situations that repeat so you can predict."
       },
       {
@@ -2101,6 +2340,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Conversational, humorous, everyday language, with a premise funny enough that adults reread it."
       },
       {
@@ -2109,6 +2349,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Folk tales repeat their phrases and arcs, drilling vocabulary and structure almost painlessly."
       },
       {
@@ -2117,6 +2358,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "A story you already know, in short, clean prose that is philosophical without being baroque."
       },
       {
@@ -2125,6 +2367,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Psychologically dense yet sentence-by-sentence readable, with a celebrated translation for parallel reading."
       },
       {
@@ -2133,6 +2376,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": false,
         "why": "A single sustained voice you can ride for pages once you tune into Márai's register."
       },
       {
@@ -2141,6 +2385,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "A stylist's stylist with compact sentences and social-realist vocabulary grounded in daily life."
       },
       {
@@ -2149,6 +2394,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A deliberately flat, reporting voice that makes individual sentences more parseable than lyrical prose."
       }
     ]
@@ -2163,6 +2409,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Authentic, contemporary texts at controlled difficulty, the best staple where graded readers barely exist."
       },
       {
@@ -2171,6 +2418,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "Short, self-contained chapters and a familiar plot let you read for meaning before vocabulary."
       },
       {
@@ -2179,6 +2427,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Concrete vocabulary and clear, easy-to-picture situations, with an English translation for parallel support."
       },
       {
@@ -2187,6 +2436,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "A warm, funny shortcut into the Estonian cultural mind, its rural school setting grounding the vocabulary."
       },
       {
@@ -2195,6 +2445,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Clean, vivid contemporary prose with a strong pull and delightful dark folklore."
       },
       {
@@ -2203,6 +2454,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Witty, propulsive, and emotionally powerful, with a clear voice that makes the length manageable."
       },
       {
@@ -2211,6 +2463,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A master stylist's most accessible novel, its diary frame and moral puzzle pulling you through."
       },
       {
@@ -2219,6 +2472,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The definitive Estonian novel, the fullest portrait of the national character and history."
       }
     ]
@@ -2233,6 +2487,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Classic",
+        "pd": false,
         "why": "You likely know the story, so you read for recognition while the grammar reveals itself."
       },
       {
@@ -2241,6 +2496,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "C1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Specialists sequence vocabulary and grammar so A1 texts use only structures you have already met."
       },
       {
@@ -2249,6 +2505,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Every chapter brings glossaries, a plot summary, and comprehension questions, so beginners read without drowning."
       },
       {
@@ -2257,6 +2514,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Tiny tales you finish in minutes, with humor that pushes you through the hard sentence."
       },
       {
@@ -2265,6 +2523,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Everyday offices and neighbors mean everyday vocabulary, and the satire keeps you moving."
       },
       {
@@ -2273,6 +2532,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Classic",
+        "pd": true,
         "why": "Clear, unshowy prose and a universal love story, with a respected translation for parallel reading."
       },
       {
@@ -2281,6 +2541,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Strong narrative drive and a vivid rural Anatolia that Istanbul-centered books never show."
       },
       {
@@ -2289,6 +2550,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A world-class Nobel laureate's novel you can finally experience in the original Turkish."
       }
     ]
@@ -2303,6 +2565,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Folk tales built from simple, repetitive patterns and a small, recurring core vocabulary."
       },
       {
@@ -2311,6 +2574,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Tiny comic anecdotes, each a complete text of a few sentences, for quick early wins."
       },
       {
@@ -2319,6 +2583,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "The Little Prince, its familiar plot freeing your attention for the language itself."
       },
       {
@@ -2327,6 +2592,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Çingiz Abdullayev's page-turning spy thrillers, clear prose and momentum that carry you book after book."
       },
       {
@@ -2335,6 +2601,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": true,
         "why": "A canonical 1903 short story famous for its clarity, a real first literary read."
       },
       {
@@ -2343,6 +2610,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Anar's contemporary allegorical novella, a satisfying step up from genre fiction toward literary prose."
       },
       {
@@ -2351,6 +2619,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "A lively nineteenth-century comedy, almost all dialogue, skewering greed and pretension."
       },
       {
@@ -2359,6 +2628,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "A moving tragicomedy about the mother tongue, its dramatic structure scaffolding the language."
       },
       {
@@ -2367,6 +2637,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The great Oghuz Turkic epic, archaic and monumental, a destination text read with translation."
       }
     ]
@@ -2381,6 +2652,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "C1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Original graded stories from Deltos with built-in Greek, English, French, and German glosses control every variable."
       },
       {
@@ -2389,6 +2661,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Plots you already know do half the comprehension work, and each fable is short enough to reread."
       },
       {
@@ -2397,6 +2670,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Classic",
+        "pd": false,
         "why": "Deceptively simple prose and short chapters, gentle enough for your first non-graded Greek."
       },
       {
@@ -2405,6 +2679,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Children",
+        "pd": false,
         "why": "A first-rate native author writing living, rhythmic Greek that trains your ear for its music."
       },
       {
@@ -2413,6 +2688,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A plot engine pulls you through, recycling high-frequency vocabulary steeped in contemporary Athens."
       },
       {
@@ -2421,6 +2697,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Rich, muscular, philosophically charged Greek, the summit a serious learner climbs toward."
       },
       {
@@ -2429,6 +2706,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "Famously plain language and short poems make Cavafy far more accessible than his stature suggests."
       }
     ]
@@ -2443,6 +2721,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A1",
         "kind": "Children",
+        "pd": false,
         "why": "Short, illustrated, present-tense stories with English on the page and repetition that drills the tones."
       },
       {
@@ -2451,6 +2730,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Vietnam's Cinderella, whose familiar plot scaffolds comprehension while its narrative past tense recurs."
       },
       {
@@ -2459,6 +2739,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "The most-translated Vietnamese book, a children's classic with simple sentences in illustrated bilingual editions."
       },
       {
@@ -2467,6 +2748,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Warm, episodic childhood vignettes with short chapters and an authoritative English translation for parallel reading."
       },
       {
@@ -2475,6 +2757,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Short dated chapters and concrete rural vocabulary, with a celebrated film to anchor comprehension."
       },
       {
@@ -2483,6 +2766,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A bittersweet love story whose longer narrative builds stamina, backed by a hugely popular film."
       },
       {
@@ -2491,6 +2775,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "The celebrated war novel, mature literary fiction best read beside its acclaimed English version."
       },
       {
@@ -2499,6 +2784,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A compact, unflinching Mekong Delta story, serious contemporary literature in a finishable dose."
       },
       {
@@ -2507,6 +2793,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "The crown of Vietnamese literature, a 3,254-line classical poem to treat as the destination."
       }
     ]
@@ -2521,6 +2808,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "An A1 interlinear story that prints an English gloss under each word, so you never stall."
       },
       {
@@ -2529,6 +2817,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "A bilingual graded reader that reuses earlier words and adds only about thirty new ones per chapter."
       },
       {
@@ -2537,6 +2826,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Short, simple mouse-deer fables with everyday, physical vocabulary that Indonesians know by heart."
       },
       {
@@ -2545,6 +2835,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Well-illustrated storybooks where the pictures carry meaning and the sentences stay short."
       },
       {
@@ -2553,6 +2844,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Graded reader",
+        "pd": false,
         "why": "Graded reading passages around family, school, and community life for beginners moving toward intermediate."
       },
       {
@@ -2561,6 +2853,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Children",
+        "pd": false,
         "why": "The Little Prince in Indonesian, a familiar story that lets you read for language, not plot."
       },
       {
@@ -2569,6 +2862,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Modern, dialogue-driven teenlit that bridges graded readers and literary novels in a living register."
       },
       {
@@ -2577,6 +2871,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Hirata's beloved novel of ten poor children chasing school, with an English translation for parallel reading."
       },
       {
@@ -2585,6 +2880,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Pramoedya's canonical colonial-era novel, with Max Lane's English translation making parallel reading possible even here."
       },
       {
@@ -2593,6 +2889,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Kurniawan's sweeping, history-spanning debut, propulsive and inventive, with a respected English translation alongside."
       },
       {
@@ -2601,6 +2898,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Kurniawan's shorter, more focused novel, a more manageable first taste of literary Indonesian."
       }
     ]
@@ -2615,6 +2913,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Short mouse-deer trickster tales with concrete vocabulary and repetitive sentences in children's retellings."
       },
       {
@@ -2623,6 +2922,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "A bilingual Malay-English picture book with genuinely parallel text and controlled, repetitive vocabulary."
       },
       {
@@ -2631,6 +2931,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "A bilingual graded reader of short, simple passages with English alongside for support."
       },
       {
@@ -2639,6 +2940,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A hit romance in accessible modern Malay, its familiar genre carrying you forward."
       },
       {
@@ -2647,6 +2949,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Contemporary urban crime, horror, and thrillers in the colloquial Malay people speak today."
       },
       {
@@ -2655,6 +2958,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A landmark modern novel, poetic but realistic, its short-story intensity more approachable than the epics."
       },
       {
@@ -2663,6 +2967,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "The intertwined story of Malaysia's Malay, Chinese, and Indian communities in plainer prose."
       },
       {
@@ -2671,6 +2976,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A tight, powerful farming tragedy with a respected English translation to read alongside."
       },
       {
@@ -2679,6 +2985,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": false,
         "why": "Emotionally direct, widely anthologised verse from the People's Poet, much of it translated."
       },
       {
@@ -2687,6 +2994,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The classical Malay epic of the warrior Hang Tuah, gripping but written in archaic language."
       }
     ]
@@ -2701,6 +3009,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Short sentences and concrete vocabulary in a story you likely already know, the single best on-ramp."
       },
       {
@@ -2709,6 +3018,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "An award-winning children's story with everyday vocabulary and clean sentences, imaginative enough to engage an adult."
       },
       {
@@ -2717,6 +3027,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Clear, propulsive prose and short chapters in the modern, everyday Icelandic you actually want to learn."
       },
       {
@@ -2725,6 +3036,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A second crime novel with slightly richer sentences, a natural step up in the same comforting genre."
       },
       {
@@ -2733,6 +3045,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A warm, funny, conversational voice in a child's-eye autobiography grounded in everyday Icelandic life."
       },
       {
@@ -2741,6 +3054,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Some of the finest prose in the language, a Nobel laureate's epic with a faithful English translation."
       },
       {
@@ -2749,6 +3063,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "Icelandic changed so little that the greatest medieval family saga is genuinely readable today."
       }
     ]
@@ -2763,6 +3078,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Short sentences, everyday vocabulary, and gentle repetition let you absorb how Afrikaans is built."
       },
       {
@@ -2771,6 +3087,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "You likely know the story, freeing attention for how Afrikaans says it; short, concrete sentences."
       },
       {
@@ -2779,6 +3096,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Fuller than the simplest books, with recurring characters that recycle vocabulary and an adventurous pull."
       },
       {
@@ -2787,6 +3105,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Clean, contemporary, fast-moving Afrikaans, heavy on dialogue, with an English translation for parallel reading."
       },
       {
@@ -2795,6 +3114,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Contemporary, intimate first-person writing about everyday life, funny and direct, with self-contained fairy-tale passages."
       },
       {
@@ -2803,6 +3123,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Vivid, immersive prose with strong narrative pull, and the author's own faithful English translation."
       },
       {
@@ -2811,6 +3132,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Afrikaans at full literary power, layering ghosts and the living so names and themes deepen as you go."
       }
     ]
@@ -2825,6 +3147,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Short, self-contained tales with repetitive fairy-tale structure and concrete, everyday vocabulary."
       },
       {
@@ -2833,6 +3156,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "You already know the plot, which frees capacity for the language; everyday vocabulary, short and finishable."
       },
       {
@@ -2841,6 +3165,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Written for young Catalan readers, so the grammar is clean, the vocabulary concrete, and the chapters short."
       },
       {
@@ -2849,6 +3174,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Bite-sized stories you finish in one sitting, in clean, modern, contemporary Catalan."
       },
       {
@@ -2857,6 +3183,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Everyday, domestic vocabulary and immense emotional power carry you through the central modern Catalan novel."
       },
       {
@@ -2865,6 +3192,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Nonfiction",
+        "pd": false,
         "why": "Precise, model sentences in short diary entries observing ordinary early-twentieth-century Catalan life."
       },
       {
@@ -2873,6 +3201,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Once you adapt to Cabré's voice, hundreds of pages of consistent style do wonders for fluency."
       },
       {
@@ -2881,6 +3210,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": false,
         "why": "A compact novel of real psychological depth and atmosphere, with rich descriptive nature vocabulary."
       }
     ]
@@ -2895,6 +3225,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "The prose is short, the vocabulary concrete and emotional, and you probably already know the story."
       },
       {
@@ -2903,6 +3234,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Short, self-contained tales built on familiar folklore logic, in plain spoken Galician that recurs."
       },
       {
@@ -2911,6 +3243,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Clear, contemporary Galician with present-day vocabulary and a fast, darkly funny plot."
       },
       {
@@ -2919,6 +3252,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Literary",
+        "pd": false,
         "why": "Brief, self-contained chapters in a plain, direct voice, with emotional clarity that carries you through."
       },
       {
@@ -2927,6 +3261,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Self-contained short stories in an everyday but poetic register, easy to reread until they click."
       },
       {
@@ -2935,6 +3270,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Literary Galician at its most readable, lyrical but not dense, with a plot strong enough to pull you forward."
       },
       {
@@ -2943,6 +3279,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "The foundational poems that revived Galician as a literary language, immensely rewarding to read."
       },
       {
@@ -2951,6 +3288,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "Short prose pieces each paired with a drawing, accessible in length and rich in irony and tenderness."
       },
       {
@@ -2959,6 +3297,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Luminous, fantastical prose full of fables and marvels, one of the glories of Galician literature."
       }
     ]
@@ -2973,6 +3312,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Short trickster tales whose repeating structure recycles everyday vocabulary a beginner meets again and again."
       },
       {
@@ -2981,6 +3321,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Short declarative sentences and a story you already know make it the gentlest way into the language."
       },
       {
@@ -2989,6 +3330,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "A mischievous schoolboy's plain, funny first-person voice makes this beloved novella far more accessible than its reputation."
       },
       {
@@ -2997,6 +3339,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Poetry",
+        "pd": true,
         "why": "Short, vivid lyric poems you can reread many times, absorbing the cultural bedrock in small doses."
       },
       {
@@ -3005,6 +3348,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "Forty-five self-contained prose meditations you can read one at a time, with a full English translation online."
       },
       {
@@ -3013,6 +3357,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "The narrative drive of historical fiction pulls you through, and an English translation makes parallel reading possible."
       },
       {
@@ -3021,6 +3366,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "The multi-volume summit of Kazakh prose, an encyclopedic epic of nineteenth-century steppe life."
       }
     ]
@@ -3035,6 +3381,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Simple, repetitive sentence patterns and concrete nouns, with bilingual editions to check yourself sentence by sentence."
       },
       {
@@ -3043,6 +3390,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Tiny one-paragraph anecdotes ending in a clever twist, perfect for building momentum a textbook cannot."
       },
       {
@@ -3051,6 +3399,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Familiarity is a powerful crutch: you map the Uzbek onto a plot you already understand."
       },
       {
@@ -3059,6 +3408,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A warm cycle of short interlinked stories about family, with a 2024 English translation for parallel reading."
       },
       {
@@ -3067,6 +3417,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "The first Uzbek novel, a dramatic love story now readable beside Mark Reese's careful English translation."
       },
       {
@@ -3075,6 +3426,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "One of the language's most acclaimed stylists, with a recent scholarly English translation supporting parallel reading."
       },
       {
@@ -3083,6 +3435,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "The fifteenth-century founder of Uzbek literature, written in classical Chagatai, a distant summit to admire."
       }
     ]
@@ -3097,6 +3450,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Short, illustrated contemporary Filipino from the country's largest children's publisher, many in bilingual editions."
       },
       {
@@ -3105,6 +3459,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "B1",
         "kind": "Parallel text",
+        "pd": false,
         "why": "Filipino facing English on the page, the closest thing to a true beginner reader."
       },
       {
@@ -3113,6 +3468,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Short, self-contained Filipino fairy tales with immense cultural payload, best in modern retellings."
       },
       {
@@ -3121,6 +3477,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Bob Ong's funny school memoir in everyday Taglish, the best bridge to spoken Filipino."
       },
       {
@@ -3129,6 +3486,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Nonfiction",
+        "pd": false,
         "why": "Short, standalone humorous essays on Filipino life, teaching culture and language at once."
       },
       {
@@ -3137,6 +3495,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The fairy-tale quest every Filipino studies, propulsive in accessible modern prose retellings."
       },
       {
@@ -3145,6 +3504,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": false,
         "why": "The national novel of colonial abuses, dense but navigable in a modern Filipino translation."
       },
       {
@@ -3153,6 +3513,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": false,
         "why": "Rizal's darker sequel, a cultural rite of passage read in Filipino translation."
       },
       {
@@ -3161,6 +3522,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A modern novel written in Filipino, its intimate family frame grounding martial-law history."
       }
     ]
@@ -3175,6 +3537,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Short, repetitive tales built around concrete steppe life, with English retellings to check your understanding."
       },
       {
@@ -3183,6 +3546,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "A gentle, familiar story where the same handful of words recur, so each chapter reinforces the last."
       },
       {
@@ -3191,6 +3555,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Poetry",
+        "pd": true,
         "why": "The father of modern Mongolian literature; his short patriotic poem and stories are clear and manageable."
       },
       {
@@ -3199,6 +3564,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "The pioneer of the modern Mongolian short story, psychologically rich yet short enough to finish."
       },
       {
@@ -3207,6 +3573,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A masterpiece of twentieth-century Mongolian prose following two brothers through revolution, with translations in several languages."
       },
       {
@@ -3215,6 +3582,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A trilogy that deliberately preserves the archaic language and the vanishing pre-revolutionary world, demanding but rewarding."
       },
       {
@@ -3223,6 +3591,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A contemporary meditation on nomadic culture, translated into English by Simon Wickham-Smith for genuine parallel reading."
       },
       {
@@ -3231,6 +3600,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The thirteenth-century foundational chronicle of Genghis Khan, a summit best read in parallel with English."
       }
     ]
@@ -3245,6 +3615,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Georgia's oldest and most welcoming reading, short tales with familiar fairy-tale logic you can reread."
       },
       {
@@ -3253,6 +3624,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "The best-loved trickster of Georgian folklore, an ash-raking ne'er-do-well who outwits giants and devils."
       },
       {
@@ -3261,6 +3633,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Short, gentle, declarative sentences and a story you likely know, the standard bridge into real Georgian prose."
       },
       {
@@ -3269,6 +3642,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Warm, lyrical, emotionally legible prose about a village boy, with a 1968 English translation."
       },
       {
@@ -3277,6 +3651,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Warm, episodic comedy with recurring characters whose banter trains your ear for spoken Georgian."
       },
       {
@@ -3285,6 +3660,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Modern, urban, propulsive Tbilisi Georgian, with a careful English translation for checking yourself."
       },
       {
@@ -3293,6 +3669,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Darker, morally complex late Dumbadze, the ideal bridge from his village novels to the demanding canon."
       },
       {
@@ -3301,6 +3678,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "Georgia's twelfth-century national epic in verse, the summit, read a few quatrains at a time."
       }
     ]
@@ -3315,6 +3693,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "Short sentences, concrete vocabulary, and a familiar plot let the new script settle in as you read."
       },
       {
@@ -3323,6 +3702,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Repetitive, formulaic openings and everyday words (kings, farmers, clever fools) make them the most welcoming reading."
       },
       {
@@ -3331,6 +3711,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "The national poet's clear, musical retellings of folk tales like Brave Nazar, endlessly reread and polished."
       },
       {
@@ -3339,6 +3720,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": true,
         "why": "A linear, daily-life short story with a powerful emotional arc, a cornerstone of Armenian school reading."
       },
       {
@@ -3347,6 +3729,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Poetry",
+        "pd": true,
         "why": "A lyrical poem-tragedy of doomed village love that became Armenia's national opera, best read with audio."
       },
       {
@@ -3355,6 +3738,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": false,
         "why": "A philosophical masterpiece of Armenian lyric poetry, gorgeous and universal, read slowly and aloud."
       },
       {
@@ -3363,6 +3747,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": true,
         "why": "Sweeping, plot-driven nineteenth-century historical novels of Armenian identity; The Fool has an English translation."
       },
       {
@@ -3371,6 +3756,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "The defining modernist poetry collection of twentieth-century Armenia, electric and demanding, the summit to work toward."
       }
     ]
@@ -3385,6 +3771,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Short sentences, concrete vocabulary, and a plot you already know, so you decode the Albanian."
       },
       {
@@ -3393,6 +3780,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Repetitive framing phrases and recurring verbs make each short tale easier than the last."
       },
       {
@@ -3401,6 +3789,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Clear, propulsive storytelling and an outstanding English translation make this the ideal first Kadare."
       },
       {
@@ -3409,6 +3798,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A child's-eye view describes the world in concrete, sensory terms, with a fine English translation."
       },
       {
@@ -3417,6 +3807,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Contemporary, less ornate prose in modern standard Albanian, with an English translation for parallel reading."
       },
       {
@@ -3425,6 +3816,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Kadare at full imaginative strength, a layered, atmospheric allegory with a respected English translation."
       },
       {
@@ -3433,6 +3825,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A gripping, accessible novel of blood feud and honor, with an excellent English translation."
       },
       {
@@ -3441,6 +3834,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "The national poet's foundational celebration of homeland and countryside, a text every Albanian knows."
       },
       {
@@ -3449,6 +3843,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "A slim, fierce volume of social-realist poetry that opened modern Albanian literature."
       },
       {
@@ -3457,6 +3852,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "Heroic oral epic compared to Homer, connecting you to the oldest living layer of Albanian culture."
       }
     ]
@@ -3471,6 +3867,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Children",
+        "pd": false,
         "why": "A gentle story with short chapters and concrete vocabulary you can read knowing the plot already."
       },
       {
@@ -3479,6 +3876,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "Short chapters and illustrations support natural modern Euskara Batua by a top living stylist."
       },
       {
@@ -3487,6 +3885,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Literary",
+        "pd": false,
         "why": "A warm, funny cow's-eye narration between children's and adult fiction, an ideal first real book."
       },
       {
@@ -3495,6 +3894,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Self-contained, essay-like sections and a fine English translation make serious parallel reading easy."
       },
       {
@@ -3503,6 +3903,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Plot-driven historical storytelling with strong pull, recycling its setting vocabulary until it sticks."
       },
       {
@@ -3511,6 +3912,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "The most celebrated Basque book, interlinked stories you can read one complete piece at a time."
       },
       {
@@ -3519,6 +3921,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Atxaga's mature masterpiece, a major literary novel with an admired English translation for parallel reading."
       }
     ]
@@ -3533,6 +3936,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Graded reader",
+        "pd": false,
         "why": "School primers control and reuse vocabulary; the Bible gives clean verse-by-verse parallel reading."
       },
       {
@@ -3541,6 +3945,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "The Little Prince in warm, simple Swahili, a familiar tale that carries you past hard words."
       },
       {
@@ -3549,6 +3954,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Short, self-contained trickster tales in clear language, so you finish a whole story early."
       },
       {
@@ -3557,6 +3963,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "Shaaban Robert's elegant allegory with folk-tale rhythm and easy-to-find study notes."
       },
       {
@@ -3565,6 +3972,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A short, tightly built allegory of justice, a second book in his familiar voice."
       },
       {
@@ -3573,6 +3981,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A third short allegory by the same author, deepening comprehension with little new vocabulary."
       },
       {
@@ -3581,6 +3990,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A landmark novel whose 2025 Yale translation makes sentence-by-sentence parallel reading genuinely possible."
       },
       {
@@ -3589,6 +3999,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "An introspective, philosophical high point of the Swahili novel that pushes comprehension to its limit."
       },
       {
@@ -3597,6 +4008,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A Zanzibari novel of greed with the coast's distinct, Arabic-rich Swahili."
       },
       {
@@ -3605,6 +4017,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Nonfiction",
+        "pd": false,
         "why": "The father of modern Swahili literature turns his moral voice to his own life."
       },
       {
@@ -3613,6 +4026,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "A famous classical utenzi of a mother's counsel, dense archaic verse for the strong reader."
       }
     ]
@@ -3627,6 +4041,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Nineteenth-century folk tales printed with Zulu and English in parallel columns, the patterns recurring."
       },
       {
@@ -3635,6 +4050,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "The Little Prince in isiZulu, concrete vocabulary and a story you can already predict."
       },
       {
@@ -3643,6 +4059,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B2",
         "kind": "Parallel text",
+        "pd": false,
         "why": "The isiZulu Bible, unbeatable for exact verse-by-verse parallel reading against an English one."
       },
       {
@@ -3651,6 +4068,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "The most loved isiZulu novel, a sharp con-man satire with study notes online."
       },
       {
@@ -3659,6 +4077,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Classic",
+        "pd": true,
         "why": "The first isiZulu novel, a fast-moving tale of Shaka's court with an English translation."
       },
       {
@@ -3667,6 +4086,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Dhlomo's rich historical novel of the great king, where language and history meet."
       },
       {
@@ -3675,6 +4095,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "The first book of isiZulu poems, the language at its most musical."
       },
       {
@@ -3683,6 +4104,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "Vilakazi's second collection, a heavier emotional and political capstone to a Zulu reading life."
       }
     ]
@@ -3697,6 +4119,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A1",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Short sentences, everyday vocabulary, and heavy repetition, with the trickster tale Easy Bread a standard starting point."
       },
       {
@@ -3705,6 +4128,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "A genuine published translation whose familiar plot frees you to read for language rather than suspense."
       },
       {
@@ -3713,6 +4137,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": true,
         "why": "A lively 1912 folk comedy, almost all dialogue, living colloquial Belarusian and short enough to finish."
       },
       {
@@ -3721,6 +4146,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "A propulsive gothic mystery in a decaying manor, with an English translation for parallel reading."
       },
       {
@@ -3729,6 +4155,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A psychologically deep WWII-occupation novella in clear modern prose, with a bilingual English-Belarusian edition."
       },
       {
@@ -3737,6 +4164,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A stark short novella of courage and betrayal under interrogation, with an English translation for parallel reading."
       },
       {
@@ -3745,6 +4173,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": false,
         "why": "Kolas's epic verse poem, an encyclopedia of pre-revolutionary peasant life and a foundational national text."
       },
       {
@@ -3753,6 +4182,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "Bahdanovich's landmark 1913 collection, some of the most refined lyric poetry in the language."
       }
     ]
@@ -3767,6 +4197,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "A2",
         "kind": "Folk tales",
+        "pd": true,
         "why": "Short, repetitive жомок built on stock phrases and clear plots about clever animals and trickster heroes."
       },
       {
@@ -3775,6 +4206,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "A2",
         "max": "B1",
         "kind": "Children",
+        "pd": false,
         "why": "A story you already know, with gentle, concrete, repetitive prose, close to ideal for parallel reading."
       },
       {
@@ -3783,6 +4215,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B1",
         "kind": "Literary",
+        "pd": false,
         "why": "A short, plain-voiced village love story, the best entry into Kyrgyz literature, translated into a hundred languages."
       },
       {
@@ -3791,6 +4224,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B1",
         "max": "B2",
         "kind": "Literary",
+        "pd": false,
         "why": "An intimate, linear novella about a young teacher fighting to open a village school, reliably translated."
       },
       {
@@ -3799,6 +4233,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "B2",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "Aitmatov at his most lyrical, braiding folklore and a hard adult world, richer and more demanding."
       },
       {
@@ -3807,6 +4242,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Literary",
+        "pd": false,
         "why": "A fuller, more demanding novel of a herdsman and his horse across the Soviet decades."
       },
       {
@@ -3815,6 +4251,7 @@ export const readingBooks: Record<string, LangBooks> = {
         "min": "C1",
         "max": "C1",
         "kind": "Poetry",
+        "pd": true,
         "why": "The national epic, reckoned the longest epic poem in the world, sampled in a modernized edition."
       }
     ]
