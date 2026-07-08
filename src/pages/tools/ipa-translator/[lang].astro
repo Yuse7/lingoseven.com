@@ -280,6 +280,9 @@ const clientCfg = { code, endpoint };
     const CFG = cfgEl ? JSON.parse(cfgEl.textContent || '{}') : {};
     const CODE: string = CFG.code || '';
     const ENDPOINT: string = CFG.endpoint || '';
+    // The backend proxy rejects words longer than 40 characters.
+    const MAX_WORD_LEN = 40;
+    const ONE_WORD_MSG = 'Enter a single word, up to ' + MAX_WORD_LEN + ' characters.';
 
     const form = document.getElementById('ipa-form') as HTMLFormElement | null;
     const input = document.getElementById('ipa-input') as HTMLInputElement | null;
@@ -328,6 +331,14 @@ const clientCfg = { code, endpoint };
           input.focus();
           return;
         }
+        if (word.length > MAX_WORD_LEN) {
+          wordEl.textContent = '';
+          ipaEl.textContent = '';
+          errEl.textContent = ONE_WORD_MSG;
+          errEl.hidden = false;
+          result.hidden = false;
+          return;
+        }
 
         errEl.hidden = true;
         errEl.textContent = '';
@@ -344,7 +355,17 @@ const clientCfg = { code, endpoint };
             ENDPOINT + '?word=' + encodeURIComponent(word) + '&lang=' + encodeURIComponent(CODE);
           const res = await fetch(url, { headers: { Accept: 'application/json' } });
           if (!res.ok) {
-            throw new Error('Transcription service returned status ' + res.status);
+            if (res.status !== 400) {
+              console.error('IPA transcription failed with status ' + res.status);
+            }
+            errEl.textContent =
+              res.status === 400
+                ? ONE_WORD_MSG
+                : 'The transcription service returned an error (status ' +
+                  res.status +
+                  '). Please try again in a moment.';
+            errEl.hidden = false;
+            return;
           }
           const ct = res.headers.get('content-type') || '';
           const data = ct.includes('application/json') ? await res.json() : await res.text();
