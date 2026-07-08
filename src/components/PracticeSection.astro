@@ -21,17 +21,22 @@ function t(key: string): string {
 
 const word = practiceWordByLang[targetLang] ?? fallbackWord;
 const opts = practiceOptionsByUi[uiLang] ?? fallbackOptions;
-// 4 options: distractor, correct (selected), distractor, distractor
-const optionList = [opts.distractors[0], opts.correct, opts.distractors[1], opts.distractors[2]];
-const selectedIdx = 1;
+// SSR default order (JS shuffles on the client). 4 options: correct + 3 distractors.
+const optionListSSR = [opts.correct, opts.distractors[0], opts.distractors[1], opts.distractors[2]];
 
-// For "spell from letters": use lowercase chars of word.word
-const wordLower = word.word.toLowerCase();
-const wordChars = Array.from(wordLower);
-const halfPoint = Math.ceil(wordChars.length / 2);
-const usedChars = wordChars.slice(0, halfPoint);
-const remainingChars = wordChars.slice(halfPoint);
-const typedPrefix = usedChars.join('');
+// "Spell from letters": build the ORIGINAL (target) word from scrambled tiles.
+// Keep the word's own casing so it stays orthographically correct.
+const spellChars = Array.from(word.word);
+
+// Everything the client controller needs, serialized once per page.
+const practiceData = {
+  word: word.word,
+  wordSpell: word.word,
+  ipa: word.ipa,
+  correct: opts.correct,
+  distractors: opts.distractors,
+  lang: targetLang,
+};
 ---
 
 <!-- Spaced Repetition Practice -->
@@ -89,31 +94,31 @@ const typedPrefix = usedChars.join('');
                         </div>
                         <div class="ex-card ex-card-bottom ex-card-teal">
                             <div class="ex-label">{t('practice_label_choose_translation')}</div>
-                            <div class="ex-grid-2x2">
-                                {optionList.map((opt, i) => (
-                                    <div class={`ex-option${i === selectedIdx ? ' selected' : ''}`}>{opt}</div>
+                            <div class="ex-grid-2x2 js-options">
+                                {optionListSSR.map((opt) => (
+                                    <div class="ex-option">{opt}</div>
                                 ))}
                             </div>
                         </div>
-                        <div class="ex-action-btn ex-btn-teal">{t('practice_btn_check')}</div>
+                        <div class="ex-action-btn ex-btn-teal js-check">{t('practice_btn_check')}</div>
                     </div>
 
                     <div class="ex-panel" data-panel="1">
                         <div class="ex-card ex-card-top ex-card-teal">
                             <div class="ex-label">{t('practice_label_listen')}</div>
-                            <div class="ex-speaker-icon">
+                            <div class="ex-speaker-icon js-speak" role="button" aria-label="play">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="#2DCCC2" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
                             </div>
                         </div>
                         <div class="ex-card ex-card-bottom ex-card-teal">
                             <div class="ex-label">{t('practice_label_choose_translation')}</div>
-                            <div class="ex-grid-2x2">
-                                {optionList.map((opt, i) => (
-                                    <div class={`ex-option${i === selectedIdx ? ' selected' : ''}`}>{opt}</div>
+                            <div class="ex-grid-2x2 js-options">
+                                {optionListSSR.map((opt) => (
+                                    <div class="ex-option">{opt}</div>
                                 ))}
                             </div>
                         </div>
-                        <div class="ex-action-btn ex-btn-teal">{t('practice_btn_check')}</div>
+                        <div class="ex-action-btn ex-btn-teal js-check">{t('practice_btn_check')}</div>
                     </div>
 
                     <div class="ex-panel" data-panel="2">
@@ -122,18 +127,15 @@ const typedPrefix = usedChars.join('');
                         </div>
                         <div class="ex-card ex-card-bottom ex-card-teal">
                             <div class="ex-label">{t('practice_label_form_word')}</div>
-                            <div class="ex-spell-input">{typedPrefix}<span class="ex-cursor">|</span></div>
+                            <div class="ex-spell-input js-spell-input"><span class="ex-typed"></span><span class="ex-cursor">|</span></div>
                             <div class="ex-spell-divider"></div>
-                            <div class="ex-letter-bubbles">
-                                {usedChars.map((ch) => (
-                                    <span class="letter-bubble used">{ch.toUpperCase()}</span>
-                                ))}
-                                {remainingChars.map((ch) => (
-                                    <span class="letter-bubble">{ch.toUpperCase()}</span>
+                            <div class="ex-letter-bubbles js-bubbles">
+                                {spellChars.map((ch) => (
+                                    <span class="letter-bubble">{ch}</span>
                                 ))}
                             </div>
                         </div>
-                        <div class="ex-action-btn ex-btn-inactive">{t('practice_btn_skip')}</div>
+                        <div class="ex-action-btn ex-btn-inactive js-skip">{t('practice_btn_skip')}</div>
                     </div>
 
                     <div class="ex-panel" data-panel="3">
@@ -142,10 +144,10 @@ const typedPrefix = usedChars.join('');
                         </div>
                         <div class="ex-card ex-card-bottom ex-card-teal">
                             <div class="ex-label">{t('practice_label_is_correct')}</div>
-                            <div class="ex-word-answer">{opts.correct}</div>
+                            <div class="ex-word-answer js-candidate">{opts.correct}</div>
                             <div class="ex-yesno-row">
-                                <div class="ex-yesno-btn ex-btn-yes">{t('practice_btn_yes')}</div>
-                                <div class="ex-yesno-btn ex-btn-no">{t('practice_btn_no')}</div>
+                                <div class="ex-yesno-btn ex-btn-yes js-yes">{t('practice_btn_yes')}</div>
+                                <div class="ex-yesno-btn ex-btn-no js-no">{t('practice_btn_no')}</div>
                             </div>
                         </div>
                     </div>
@@ -157,26 +159,36 @@ const typedPrefix = usedChars.join('');
                         </div>
                         <div class="ex-card ex-card-bottom ex-card-teal">
                             <div class="ex-label">{t('practice_label_press_speak')}</div>
-                            <div class="ex-mic-btn">
+                            <div class="ex-mic-btn js-mic" role="button" aria-label="record">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
                             </div>
+                            <div class="ex-wave js-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
                             <div class="ex-mic-hint">{t('practice_label_better_silence')}</div>
+                            <div class="ex-score js-score"></div>
                         </div>
-                        <div class="ex-action-btn ex-btn-inactive">{t('practice_btn_skip')}</div>
+                        <div class="ex-action-btn ex-btn-inactive js-skip">{t('practice_btn_skip')}</div>
                     </div>
 
                     <div class="ex-panel" data-panel="5">
                         <div class="ex-card ex-card-top">
                             <div class="ex-word-main">{word.word}</div>
                             {word.ipa && <div class="ex-ipa">{word.ipa}</div>}
-                            <div class="ex-speaker-small">
+                            <div class="ex-speaker-small js-speak-small" role="button" aria-label="play">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="#2DCCC2" stroke-width="2" width="18" height="18"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                             </div>
                         </div>
                         <div class="ex-card ex-card-bottom ex-card-teal ex-recall-prompt">
-                            <div class="ex-label">{t('practice_label_whats_translation')}</div>
+                            <div class="ex-label js-recall-label">{t('practice_label_whats_translation')}</div>
+                            <div class="ex-recall-answer js-recall-answer"></div>
                         </div>
-                        <div class="ex-action-btn ex-btn-teal">{t('practice_btn_show_translation')}</div>
+                        <div class="ex-action-btn ex-btn-teal js-reveal">{t('practice_btn_show_translation')}</div>
+                    </div>
+
+                    <!-- Session complete flourish -->
+                    <div class="ex-complete">
+                        <div class="ex-complete-check">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -191,6 +203,8 @@ const typedPrefix = usedChars.join('');
                 <p class="ex-desc" data-desc="5">{t('practice_desc_recall')}</p>
             </div>
         </div>
+
+        <script type="application/json" data-practice-data set:html={JSON.stringify(practiceData)}></script>
     </div>
 </section>
 
@@ -319,10 +333,11 @@ const typedPrefix = usedChars.join('');
     }
 
     .ex-progress-fill {
-        width: 35%;
+        width: 16%;
         height: 100%;
         background: #2DCCC2;
         border-radius: 2px;
+        transition: width 0.4s ease;
     }
 
     /* Panels */
@@ -437,6 +452,17 @@ const typedPrefix = usedChars.join('');
         font-weight: 600;
         color: #2DCCC2;
         background: #fff;
+        cursor: pointer;
+        transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+        user-select: none;
+    }
+
+    .ex-option:hover:not(.selected):not(.correct):not(.wrong) {
+        background: rgba(45, 204, 194, 0.1);
+    }
+
+    .ex-option:active {
+        transform: scale(0.97);
     }
 
     .ex-option.selected {
@@ -444,11 +470,47 @@ const typedPrefix = usedChars.join('');
         color: #fff;
     }
 
+    .ex-option.correct {
+        background: #2FBE6A;
+        border-color: #2FBE6A;
+        color: #fff;
+    }
+
+    .ex-option.wrong {
+        background: #EF5350;
+        border-color: #EF5350;
+        color: #fff;
+    }
+
+    .ex-grid-2x2.done .ex-option {
+        cursor: default;
+    }
+
     /* Speaker icon */
     .ex-speaker-icon {
         width: 48px;
         height: 48px;
         margin: 8px auto;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: transform 0.15s ease;
+    }
+
+    .ex-speaker-icon:hover {
+        transform: scale(1.08);
+    }
+
+    .ex-speaker-icon:active {
+        transform: scale(0.95);
+    }
+
+    .ex-speaker-icon.playing {
+        animation: speakerPulse 0.6s ease;
+    }
+
+    @keyframes speakerPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.12); }
     }
 
     .ex-speaker-icon svg {
@@ -461,6 +523,14 @@ const typedPrefix = usedChars.join('');
         right: 16px;
         top: 50%;
         transform: translateY(-50%);
+        cursor: pointer;
+        padding: 6px;
+        border-radius: 50%;
+        transition: transform 0.15s ease;
+    }
+
+    .ex-speaker-small:hover {
+        transform: translateY(-50%) scale(1.12);
     }
 
     /* Spell letters */
@@ -470,6 +540,13 @@ const typedPrefix = usedChars.join('');
         color: #1a1a2e;
         letter-spacing: 2px;
         min-height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ex-spell-input.correct .ex-typed {
+        color: #2FBE6A;
     }
 
     .ex-cursor {
@@ -508,11 +585,32 @@ const typedPrefix = usedChars.join('');
         color: #fff;
         background: #2DCCC2;
         cursor: pointer;
+        transition: opacity 0.2s ease, transform 0.1s ease, background 0.15s ease, border-color 0.15s ease;
+        user-select: none;
+    }
+
+    .letter-bubble:active {
+        transform: scale(0.92);
     }
 
     .letter-bubble.used {
-        background: #fff;
-        color: #2DCCC2;
+        background: #f0f2f5;
+        border-color: #e0e3e8;
+        color: #b7bcc6;
+        opacity: 0.55;
+        pointer-events: none;
+    }
+
+    .letter-bubble.shake {
+        background: #EF5350;
+        border-color: #EF5350;
+        animation: exShake 0.4s ease;
+    }
+
+    @keyframes exShake {
+        0%, 100% { transform: translateX(0); }
+        20%, 60% { transform: translateX(-4px); }
+        40%, 80% { transform: translateX(4px); }
     }
 
     /* Yes/No */
@@ -529,15 +627,45 @@ const typedPrefix = usedChars.join('');
         text-align: center;
         font-size: 0.9rem;
         font-weight: 700;
-        color: #fff;
+        cursor: pointer;
+        transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+        user-select: none;
+    }
+
+    .ex-yesno-btn:active {
+        transform: scale(0.97);
     }
 
     .ex-btn-yes {
         background: #2DCCC2;
+        color: #fff;
+        border: 2px solid #2DCCC2;
     }
 
     .ex-btn-no {
-        background: #2DCCC2;
+        background: #fff;
+        color: #858693;
+        border: 2px solid #e0e0e0;
+    }
+
+    .ex-yesno-btn.correct {
+        background: #2FBE6A;
+        border-color: #2FBE6A;
+        color: #fff;
+    }
+
+    .ex-yesno-btn.wrong {
+        background: #EF5350;
+        border-color: #EF5350;
+        color: #fff;
+    }
+
+    .ex-word-answer.correct {
+        color: #2FBE6A;
+    }
+
+    .ex-word-answer.wrong {
+        color: #EF5350;
     }
 
     /* Microphone */
@@ -551,6 +679,28 @@ const typedPrefix = usedChars.join('');
         justify-content: center;
         margin: 12px auto;
         box-shadow: 0 4px 16px rgba(45, 204, 194, 0.3);
+        cursor: pointer;
+        transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    }
+
+    .ex-mic-btn:active {
+        transform: scale(0.95);
+    }
+
+    .ex-mic-btn.recording {
+        background: #E8B65A;
+        box-shadow: 0 4px 16px rgba(232, 182, 90, 0.4);
+        animation: micPulse 1s ease-in-out infinite;
+    }
+
+    .ex-mic-btn.scored {
+        background: #2FBE6A;
+        box-shadow: 0 4px 16px rgba(47, 190, 106, 0.35);
+    }
+
+    @keyframes micPulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(232, 182, 90, 0.4); }
+        50% { box-shadow: 0 0 0 14px rgba(232, 182, 90, 0); }
     }
 
     .ex-mic-btn svg {
@@ -562,6 +712,69 @@ const typedPrefix = usedChars.join('');
         font-size: 0.75rem;
         color: #858693;
         font-style: italic;
+    }
+
+    /* Recording waveform */
+    .ex-wave {
+        display: none;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 3px;
+        height: 22px;
+        margin: 2px 0 6px;
+    }
+
+    .ex-wave.on {
+        display: flex;
+    }
+
+    .ex-wave span {
+        width: 3px;
+        height: 6px;
+        background: #E8B65A;
+        border-radius: 2px;
+        animation: exWave 0.8s ease-in-out infinite;
+    }
+
+    .ex-wave span:nth-child(2) { animation-delay: 0.1s; }
+    .ex-wave span:nth-child(3) { animation-delay: 0.2s; }
+    .ex-wave span:nth-child(4) { animation-delay: 0.3s; }
+    .ex-wave span:nth-child(5) { animation-delay: 0.15s; }
+    .ex-wave span:nth-child(6) { animation-delay: 0.25s; }
+    .ex-wave span:nth-child(7) { animation-delay: 0.05s; }
+
+    @keyframes exWave {
+        0%, 100% { height: 6px; }
+        50% { height: 20px; }
+    }
+
+    /* Pronunciation score */
+    .ex-score {
+        display: none;
+        font-size: 1.3rem;
+        font-weight: 800;
+        margin-top: 6px;
+    }
+
+    .ex-score.show {
+        display: block;
+        animation: fadeInPanel 0.3s ease;
+    }
+
+    .ex-score.good { color: #2FBE6A; }
+    .ex-score.ok { color: #E8B65A; }
+
+    /* Recall answer reveal */
+    .ex-recall-answer {
+        display: none;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1a1a2e;
+    }
+
+    .ex-recall-answer.show {
+        display: block;
+        animation: fadeInPanel 0.3s ease;
     }
 
     /* Recall prompt */
@@ -578,6 +791,22 @@ const typedPrefix = usedChars.join('');
         font-size: 0.9rem;
         font-weight: 700;
         color: #fff;
+        cursor: pointer;
+        user-select: none;
+        transition: opacity 0.2s ease, transform 0.1s ease;
+    }
+
+    .ex-action-btn:active {
+        transform: scale(0.98);
+    }
+
+    .ex-action-btn.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .ex-action-btn.shake {
+        animation: exShake 0.4s ease;
     }
 
     .ex-btn-teal {
@@ -588,6 +817,46 @@ const typedPrefix = usedChars.join('');
         background: transparent;
         border: 2px solid #CACBE1;
         color: #CACBE1;
+    }
+
+    /* Session complete flourish */
+    .ex-complete {
+        position: absolute;
+        inset: 0;
+        border-radius: 36px;
+        background: rgba(248, 248, 248, 0.94);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+    }
+
+    .ex-complete.show {
+        opacity: 1;
+    }
+
+    .ex-complete-check {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        background: #2FBE6A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 24px rgba(47, 190, 106, 0.4);
+        animation: popIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    .ex-complete-check svg {
+        width: 44px;
+        height: 44px;
+    }
+
+    @keyframes popIn {
+        from { transform: scale(0.3); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
     }
 
     /* === Description (right) === */
@@ -659,48 +928,402 @@ const typedPrefix = usedChars.join('');
             font-size: 0.82rem;
         }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ex-panel,
+        .ex-desc.active,
+        .ex-score.show,
+        .ex-recall-answer.show,
+        .ex-complete-check {
+            animation: none;
+        }
+
+        .letter-bubble.shake,
+        .ex-action-btn.shake {
+            animation: none;
+        }
+    }
 </style>
 
 <script>
-  const exTabs = document.querySelectorAll('.practice-section .ex-tab');
-  const exPanels = document.querySelectorAll('.practice-section .ex-panel');
-  const exDescs = document.querySelectorAll('.practice-section .ex-desc');
-
-  function setExercise(index: number) {
-    exTabs.forEach((t, i) => t.classList.toggle('active', i === index));
-    exPanels.forEach((p, i) => p.classList.toggle('active', i === index));
-    exDescs.forEach((d, i) => d.classList.toggle('active', i === index));
+  interface PracticeData {
+    word: string;
+    wordSpell: string;
+    ipa: string;
+    correct: string;
+    distractors: string[];
+    lang: string;
   }
 
-  exTabs.forEach((tab, i) => {
-    tab.addEventListener('click', () => setExercise(i));
-  });
+  const root = document.querySelector<HTMLElement>('.practice-section');
+  if (root) initPractice(root);
 
-  // Auto-cycle
-  let exCurrent = 0;
-  let exAuto = setInterval(() => {
-    exCurrent = (exCurrent + 1) % exTabs.length;
-    setExercise(exCurrent);
-  }, 4000);
+  function initPractice(root: HTMLElement) {
+    const dataEl = root.querySelector('[data-practice-data]');
+    let pd: PracticeData;
+    try {
+      pd = JSON.parse(dataEl?.textContent || '{}');
+    } catch {
+      return;
+    }
+    if (!pd.word) return;
 
-  const phoneEl = document.querySelector('.phone-bezel');
-  phoneEl?.addEventListener('mouseenter', () => clearInterval(exAuto));
-  phoneEl?.addEventListener('mouseleave', () => {
-    exAuto = setInterval(() => {
-      exCurrent = (exCurrent + 1) % exTabs.length;
-      setExercise(exCurrent);
-    }, 4000);
-  });
+    const tabs = Array.from(root.querySelectorAll<HTMLElement>('.ex-tab'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('.ex-panel'));
+    const descs = Array.from(root.querySelectorAll<HTMLElement>('.ex-desc'));
+    const fill = root.querySelector<HTMLElement>('.ex-progress-fill');
+    const phone = root.querySelector<HTMLElement>('.phone-bezel');
+    const complete = root.querySelector<HTMLElement>('.ex-complete');
 
-  // Sync tab click with auto-cycle
-  exTabs.forEach((tab, i) => {
-    tab.addEventListener('click', () => {
-      exCurrent = i;
-      clearInterval(exAuto);
-      exAuto = setInterval(() => {
-        exCurrent = (exCurrent + 1) % exTabs.length;
-        setExercise(exCurrent);
-      }, 4000);
+    const ORDER = [0, 1, 2, 3, 4, 5];
+    let pos = 0;
+    let interacted = false;
+    let showcase: number | undefined;
+    let pending: number | undefined;
+
+    function shuffle<T>(arr: T[]): T[] {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function speak(text: string, el?: HTMLElement | null) {
+      if (el) {
+        el.classList.remove('playing');
+        void el.offsetWidth;
+        el.classList.add('playing');
+      }
+      try {
+        const S = (window as any).speechSynthesis;
+        if (!S) return;
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = pd.lang;
+        u.rate = 0.9;
+        S.cancel();
+        S.speak(u);
+      } catch {
+        /* no voice available — visual pulse only */
+      }
+    }
+
+    function clearPending() {
+      if (pending) {
+        clearTimeout(pending);
+        pending = undefined;
+      }
+    }
+
+    function stopShowcase() {
+      if (showcase) {
+        clearInterval(showcase);
+        showcase = undefined;
+      }
+    }
+
+    function startShowcase() {
+      if (interacted || showcase) return;
+      showcase = window.setInterval(() => {
+        pos = (pos + 1) % ORDER.length;
+        showPanel(ORDER[pos]);
+      }, 3800);
+    }
+
+    function firstInteract() {
+      if (interacted) return;
+      interacted = true;
+      stopShowcase();
+    }
+
+    function setProgress() {
+      if (fill) fill.style.width = Math.round(((pos + 1) / ORDER.length) * 100) + '%';
+    }
+
+    function showPanel(i: number) {
+      tabs.forEach((t, k) => t.classList.toggle('active', k === i));
+      panels.forEach((p, k) => p.classList.toggle('active', k === i));
+      descs.forEach((d, k) => d.classList.toggle('active', k === i));
+      setProgress();
+      resetPanel(i);
+    }
+
+    function gotoExercise(i: number) {
+      clearPending();
+      pos = ORDER.indexOf(i);
+      if (pos < 0) pos = 0;
+      showPanel(i);
+    }
+
+    function advance() {
+      clearPending();
+      pos = (pos + 1) % ORDER.length;
+      if (pos === 0) {
+        celebrate();
+        return;
+      }
+      showPanel(ORDER[pos]);
+    }
+
+    function celebrate() {
+      complete?.classList.add('show');
+      pending = window.setTimeout(() => {
+        complete?.classList.remove('show');
+        pos = 0;
+        showPanel(ORDER[0]);
+      }, 1150);
+    }
+
+    function afterFeedback() {
+      clearPending();
+      pending = window.setTimeout(advance, 1050);
+    }
+
+    // ---- per-panel reset + wiring ----
+    function resetPanel(i: number) {
+      if (i === 0) resetChoice(0, false);
+      else if (i === 1) resetChoice(1, true);
+      else if (i === 2) resetSpell();
+      else if (i === 3) resetIsCorrect();
+      else if (i === 4) resetPronounce();
+      else if (i === 5) resetRecall();
+    }
+
+    // 0 = choose translation, 1 = listen & choose
+    // NOTE: reuse the server-rendered option elements (they carry Astro's scoped
+    // style attribute). Recreating them with createElement would drop the scope
+    // and leave them unstyled.
+    function resetChoice(panelIdx: number, listen: boolean) {
+      const panel = panels[panelIdx];
+      const grid = panel.querySelector<HTMLElement>('.js-options');
+      const check = panel.querySelector<HTMLElement>('.js-check');
+      if (!grid || !check) return;
+
+      const optionEls = Array.from(grid.querySelectorAll<HTMLElement>('.ex-option'));
+      const options = shuffle([pd.correct, ...pd.distractors]);
+      grid.classList.remove('done');
+      let selected: HTMLElement | null = null;
+
+      optionEls.forEach((el, idx) => {
+        const text = options[idx];
+        el.textContent = text;
+        el.className = 'ex-option';
+        if (text === pd.correct) el.dataset.correct = '1';
+        else delete el.dataset.correct;
+        el.onclick = () => {
+          if (grid.classList.contains('done')) return;
+          firstInteract();
+          optionEls.forEach((o) => o.classList.remove('selected'));
+          el.classList.add('selected');
+          selected = el;
+        };
+      });
+
+      check.onclick = () => {
+        if (grid.classList.contains('done')) return;
+        firstInteract();
+        if (!selected) {
+          check.classList.add('shake');
+          setTimeout(() => check.classList.remove('shake'), 400);
+          return;
+        }
+        grid.classList.add('done');
+        const correctEl = grid.querySelector<HTMLElement>('[data-correct="1"]');
+        correctEl?.classList.add('correct');
+        selected.classList.remove('selected');
+        if (selected !== correctEl) selected.classList.add('wrong');
+        afterFeedback();
+      };
+
+      if (listen) {
+        const sp = panel.querySelector<HTMLElement>('.js-speak');
+        if (sp) sp.onclick = () => { firstInteract(); speak(pd.word, sp); };
+      }
+    }
+
+    // 2 = form the word from scrambled letters.
+    // Reuse the server-rendered letter tiles (one per character of the word) so
+    // they keep Astro's scoped styling; just relabel/shuffle and rewire them.
+    function resetSpell() {
+      const panel = panels[2];
+      const input = panel.querySelector<HTMLElement>('.js-spell-input');
+      const bubbles = panel.querySelector<HTMLElement>('.js-bubbles');
+      const skip = panel.querySelector<HTMLElement>('.js-skip');
+      const typed = input?.querySelector<HTMLElement>('.ex-typed');
+      if (!input || !bubbles || !skip || !typed) return;
+
+      const letters = Array.from(pd.wordSpell);
+      let built = 0;
+
+      input.classList.remove('correct');
+      typed.textContent = '';
+
+      const bubbleEls = Array.from(bubbles.querySelectorAll<HTMLElement>('.letter-bubble'));
+      const shuffled = shuffle(letters);
+      bubbles.classList.remove('done');
+
+      bubbleEls.forEach((b, idx) => {
+        const ch = shuffled[idx];
+        b.textContent = ch;
+        b.className = 'letter-bubble';
+        b.onclick = () => {
+          firstInteract();
+          if (b.classList.contains('used') || bubbles.classList.contains('done')) return;
+          if (ch === letters[built]) {
+            b.classList.add('used');
+            typed.textContent = (typed.textContent || '') + ch;
+            built++;
+            if (built === letters.length) {
+              bubbles.classList.add('done');
+              input.classList.add('correct');
+              afterFeedback();
+            }
+          } else {
+            b.classList.add('shake');
+            setTimeout(() => b.classList.remove('shake'), 400);
+          }
+        };
+      });
+
+      skip.onclick = () => {
+        firstInteract();
+        if (bubbles.classList.contains('done')) return;
+        bubbles.classList.add('done');
+        typed.textContent = letters.join('');
+        bubbleEls.forEach((x) => x.classList.add('used'));
+        afterFeedback();
+      };
+    }
+
+    // 3 = is this translation correct?
+    function resetIsCorrect() {
+      const panel = panels[3];
+      const cand = panel.querySelector<HTMLElement>('.js-candidate');
+      const yes = panel.querySelector<HTMLElement>('.js-yes');
+      const no = panel.querySelector<HTMLElement>('.js-no');
+      if (!cand || !yes || !no) return;
+
+      const showCorrect = Math.random() < 0.5;
+      const candidate = showCorrect
+        ? pd.correct
+        : pd.distractors[Math.floor(Math.random() * pd.distractors.length)];
+      cand.textContent = candidate;
+      cand.className = 'ex-word-answer js-candidate';
+      yes.className = 'ex-yesno-btn ex-btn-yes js-yes';
+      no.className = 'ex-yesno-btn ex-btn-no js-no';
+
+      let done = false;
+      const answer = (saidYes: boolean, btn: HTMLElement) => {
+        firstInteract();
+        if (done) return;
+        done = true;
+        const right = saidYes === showCorrect;
+        btn.classList.add(right ? 'correct' : 'wrong');
+        cand.classList.add(showCorrect ? 'correct' : 'wrong');
+        afterFeedback();
+      };
+      yes.onclick = () => answer(true, yes);
+      no.onclick = () => answer(false, no);
+    }
+
+    // 4 = pronounce (simulated scoring — no backend on the site)
+    function resetPronounce() {
+      const panel = panels[4];
+      const mic = panel.querySelector<HTMLElement>('.js-mic');
+      const skip = panel.querySelector<HTMLElement>('.js-skip');
+      const score = panel.querySelector<HTMLElement>('.js-score');
+      const wave = panel.querySelector<HTMLElement>('.js-wave');
+      if (!mic || !skip || !score || !wave) return;
+
+      mic.className = 'ex-mic-btn js-mic';
+      score.className = 'ex-score js-score';
+      score.textContent = '';
+      wave.className = 'ex-wave js-wave';
+      let done = false;
+
+      mic.onclick = () => {
+        firstInteract();
+        if (done) return;
+        done = true;
+        speak(pd.word);
+        mic.classList.add('recording');
+        wave.classList.add('on');
+        pending = window.setTimeout(() => {
+          mic.classList.remove('recording');
+          wave.classList.remove('on');
+          mic.classList.add('scored');
+          const val = 88 + Math.floor(Math.random() * 10); // 88–97
+          score.textContent = val + '%';
+          score.classList.add('show', val >= 90 ? 'good' : 'ok');
+          afterFeedback();
+        }, 1600);
+      };
+
+      skip.onclick = () => {
+        firstInteract();
+        if (done) return;
+        done = true;
+        advance();
+      };
+    }
+
+    // 5 = recall (reveal the translation)
+    function resetRecall() {
+      const panel = panels[5];
+      const reveal = panel.querySelector<HTMLElement>('.js-reveal');
+      const answer = panel.querySelector<HTMLElement>('.js-recall-answer');
+      const label = panel.querySelector<HTMLElement>('.js-recall-label');
+      const speaker = panel.querySelector<HTMLElement>('.js-speak-small');
+      if (!reveal || !answer) return;
+
+      answer.textContent = '';
+      answer.classList.remove('show');
+      reveal.classList.remove('disabled');
+      if (label) label.style.display = '';
+
+      let done = false;
+      reveal.onclick = () => {
+        firstInteract();
+        if (done) return;
+        done = true;
+        answer.textContent = pd.correct;
+        answer.classList.add('show');
+        if (label) label.style.display = 'none';
+        reveal.classList.add('disabled');
+        afterFeedback();
+      };
+
+      if (speaker) speaker.onclick = () => { firstInteract(); speak(pd.word, speaker); };
+    }
+
+    // ---- tabs, hover, visibility ----
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        firstInteract();
+        gotoExercise(i);
+      });
     });
-  });
+
+    phone?.addEventListener('mouseenter', () => { if (!interacted) stopShowcase(); });
+    phone?.addEventListener('mouseleave', () => { if (!interacted) startShowcase(); });
+
+    let io: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver === 'function') {
+      io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) startShowcase();
+            else stopShowcase();
+          });
+        },
+        { threshold: 0.25 }
+      );
+      io.observe(root);
+    }
+
+    // init: reset the first panel, then let the showcase run (via observer/fallback)
+    gotoExercise(ORDER[0]);
+    if (!io) startShowcase();
+  }
 </script>
