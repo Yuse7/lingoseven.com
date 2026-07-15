@@ -16,8 +16,6 @@ faq:
     answer: "No. News is narrow: it covers politics, economics, crime, sport, weather, and disaster in a formal register, and almost nothing about emotions, relationships, humor, dialogue, or everyday life. A news-only diet leaves you able to discuss interest rates but unable to tell a story about your weekend. Make news one ingredient and read fiction and conversation-rich books for the rest."
 ---
 
-# Reading the News in a Foreign Language: A Practical Guide
-
 There is a moment in every language learner's life when they decide they are ready for the news. You have done a few hundred hours of an app, you can order coffee and ask for directions, and one morning you open a real newspaper in your target language, confident that this is the day it all clicks. Ten minutes later you have looked up nine words in the first paragraph, you still do not know what the article is actually about, and you are wondering whether you have wasted the last six months.
 
 This is one of the most common ways learners crash into a wall. Not because the news is a bad idea, it is one of the best reading materials available, but because a real front-page article is written for an educated native adult who already knows the country's politics, its parties, its scandals, and its shorthand. Walking into that cold is like trying to follow a conversation that started years before you arrived.

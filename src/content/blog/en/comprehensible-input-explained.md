@@ -16,8 +16,6 @@ faq:
     answer: "Aim for material where you understand roughly 90 to 98 percent of the words without a dictionary. For reading that usually means graded readers at A1 to B1 and accessible originals at B2 and up. If you stop every sentence to look things up, the text is too hard; if nothing is new, it is too easy."
 ---
 
-# Comprehensible Input Explained: What It Is, Krashen's i+1, and How to Find Yours
-
 You have probably met two kinds of language learners. The first has filled three notebooks with grammar tables, can recite the rules for the subjunctive, and freezes solid the moment a native speaker opens their mouth. The second never studied a single rule, picked up most of their second language from television and friends, and now speaks it without thinking. The gap between these two people is not talent or memory. It is the difference between studying a language and absorbing it, and the word at the center of that difference is **input**.
 
 For the last forty years, one phrase has done more to shape how people think about that difference than any other: **comprehensible input**. It shows up in YouTube method videos, in language-app marketing, in heated forum arguments, and in the lesson plans of teachers who have never read the original research. Some people treat it as the one true path. Others dismiss it as a slogan. Both camps tend to be working from a cartoon version of the idea.

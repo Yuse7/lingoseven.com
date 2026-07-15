@@ -17,8 +17,6 @@ faq:
     answer: "Slovenian is a hard Slavic language, roughly 1,100 hours to professional proficiency, with six cases, verbal aspect, and the rare dual. It has very little graded learner material, so the guide's path leans on familiar texts: Mali princ and the folk classics first, then Ivan Cankar, with parallel translation carrying you over the unfamiliar word endings."
 ---
 
-# Best Books to Learn Slovenian Through Reading: From Beginner to Advanced
-
 Slovenian, *slovenščina* to the roughly two million people who speak it, is one of the most rewarding small languages in Europe, and one of the harder ones for an English speaker to learn. It is a South Slavic language written in the familiar Latin alphabet, which removes one obstacle that Russian or Bulgarian throws at you. But underneath that approachable surface sits a grammar of real depth: six cases, three genders, pervasive verbal aspect, a moveable accent, and one feature so rare that linguists single Slovenian out for it. We will get to that feature shortly, because it shapes how you should read.
 
 The Foreign Service Institute classifies the Slavic languages, Slovenian among them, as hard languages requiring roughly 1,100 hours of study to reach professional working proficiency. Some FSI tables place Slovenian in Category III alongside its Slavic siblings; others list it in the harder Category IV tier. Either way the honest message is the same: this is a serious, multi-year commitment for a native English speaker, and there is no point pretending otherwise.

@@ -17,8 +17,6 @@ faq:
     answer: "At B1 to B2 the article leans on Nguyễn Nhật Ánh, Vietnam's most popular author for young people: Cho tôi xin một vé đi tuổi thơ (2008), Mắt biếc, and Tôi thấy hoa vàng trên cỏ xanh, several adapted into films that give a comprehension safety net. There is almost no intermediate-learner tier, so you read accessible native fiction with parallel text and audio as scaffolding."
 ---
 
-# Best Books to Learn Vietnamese Through Reading: A Level-by-Level Guide (A1 to C1+)
-
 There is a strange paradox at the heart of learning Vietnamese. On paper, the writing system is one of the friendliest a tonal Asian language could offer an English speaker, a Latin-based alphabet, no characters to memorize, words you can sound out from day one. And yet the U.S. Foreign Service Institute places Vietnamese in Category IV, its second-hardest tier, alongside languages that take English speakers roughly 1,100 class hours to reach professional proficiency. The difficulty is almost entirely in the sound, not the script.
 
 That gap, easy to read on the page, hard to hear and pronounce, is exactly why reading is such a powerful tool for Vietnamese, and exactly why you have to read it the right way. Read silently and skip the tones, and you build a fluent-looking inner voice no Vietnamese speaker would understand. Read with synchronized audio, and you train ear and eye at once while the script's transparency pays real dividends.

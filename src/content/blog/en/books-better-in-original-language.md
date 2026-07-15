@@ -16,8 +16,6 @@ faq:
     answer: "Translators must resolve what authors left open. Formal and informal address (tu and vous, ty and vy), puns, deliberate ambiguity like Kafka's Ungeziefer, sentence rhythm, and culturally loaded words carry meaning that English's single you, or its nearest equivalent, cannot hold. A translator picks one option where the original offered two, which flattens the effect."
 ---
 
-# 5 Books That Are Better in the Original Than in Translation
-
 Every translator knows the Italian proverb: *Traduttore, traditore*, translator, traitor. It is a half-joke and a half-confession. The best translators in the world will tell you, usually after a glass of wine, that something always gets lost. They can carry the meaning across. They can approximate the tone. But the thing that makes a great book feel alive, the rhythm of its sentences, the double meanings hiding in plain sight, the cultural weight of a single word choice, that thing does not always survive the crossing.
 
 Some books translate beautifully. You can read Dostoevsky in English and still feel the existential dread. You can read Borges in French and the labyrinths hold together. Good translators perform small miracles every day, and most readers never need to know what was sacrificed in the process.

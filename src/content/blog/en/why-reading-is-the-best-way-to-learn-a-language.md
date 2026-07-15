@@ -16,8 +16,6 @@ faq:
     answer: "Not on its own. Reading is the most efficient way to build vocabulary and grammatical intuition, but it does not train speaking, pronunciation, or conversational patterns, since books are input rather than output. <strong>The honest approach is to build your foundation through reading, then activate it with real speaking practice.</strong>"
 ---
 
-# Why Reading Books Is the Most Effective Way to Learn a Language
-
 Here is a discouraging statistic: most language learners quit within three months. They download an app, buy a textbook, sign up for a course, make enthusiastic progress for a few weeks, and then abandon the effort entirely. The reasons vary, boredom, frustration, lack of visible progress, but the pattern is remarkably consistent across languages, age groups, and learning methods.
 
 Yet there is one approach that consistently produces learners who stick with it and achieve real fluency: reading books in the target language. Not textbook chapters. Not grammar exercises. Actual books, stories, essays, novels, that people read because the content is interesting.

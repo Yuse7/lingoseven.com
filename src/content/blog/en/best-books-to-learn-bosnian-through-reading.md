@@ -17,8 +17,6 @@ faq:
     answer: "At B1 to B2 you graduate straight to real literature. Start with Miljenko Jergović's short-story collection Sarajevski Marlboro (1994), the gentlest landing and ideal for finishable units. Then take on Ivo Andrić's Nobel-winning Na Drini ćuprija (The Bridge on the Drina), reading it chapter by chapter as self-contained stories with translation alongside. Selimović's denser novels come next, at B2 to C1."
 ---
 
-# Best Books to Learn Bosnian Through Reading: From Beginner to Advanced
-
 Bosnian has a reputation for being hard, and that reputation is honest. It is a South Slavic language with seven grammatical cases, three genders, verbal aspect woven through nearly every verb, and a pitch accent that almost no foreign learner fully masters. The Foreign Service Institute places it in Category IV, the same demanding tier as Polish, Greek, and Hungarian, which means an English speaker should plan on roughly 1,100 class hours, or around 44 weeks of full-time study, to reach professional working proficiency. There is no way to dress that up as easy, and this guide will not try.
 
 But there is real good news that shapes everything below. First, Bosnian today is written predominantly in a clean, fully phonetic Latin alphabet, the same Gaj-based system used for Croatian, with 30 letters each mapped to a single sound. If you can read this sentence, you can read a Bosnian sentence aloud on day one and pronounce it almost correctly, even before you understand a word of it. That is an enormous head start for a Slavic language, and it makes reading a far more practical entry point into Bosnian than it is into Russian or Ukrainian.

@@ -17,8 +17,6 @@ faq:
     answer: "Spanish is one of the easiest languages for English speakers, an FSI Category I language at roughly 600 to 750 hours. Its spelling is almost perfectly phonetic, hundreds of words are near-identical cognates, and the volume of Spanish content is endless. The main rule is to choose by difficulty first: pick a book you can almost read, not the most famous one."
 ---
 
-# Best Books to Learn Spanish Through Reading: A Level-by-Level Guide from Beginner to Advanced
-
 Spanish is one of the most rewarding languages an English speaker can take up through reading. The US Foreign Service Institute places it in Category I, the easiest tier for native English speakers, estimating roughly 600 to 750 hours of study to reach professional working proficiency. That is partly because Spanish spelling is almost perfectly phonetic, partly because hundreds of words are near-identical cognates, and partly because the sheer volume of Spanish content in the world means you will never run out of things to read.
 
 But "Spanish is easy" is a relative statement, and it does not tell you what to actually open first. The single most common mistake learners make is choosing a book that is famous instead of a book that fits. Someone three months into Spanish picks up *Cien años de soledad* because it is a masterpiece, reads two pages, looks up forty words, and quietly concludes that they are bad at languages. The book was not the problem. The match was.

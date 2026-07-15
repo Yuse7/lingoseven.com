@@ -51,7 +51,12 @@ const applyVars = (s: string) => s
   .replace(/{targetLangPrep}/g, targetLangNamePrep)
   .replace(/{targetLangGen}/g, targetLangNameGen);
 
-const title = applyVars(translations['learn_meta_title'] ?? `Learn ${targetLangName}`);
+// Slavic and Turkic locales lowercase their language names, and their title
+// template opens with one, so capitalize the rendered sentence rather than the
+// name (which must stay lowercase mid-sentence). Locale-aware, so Azerbaijani
+// gets "İ" and not "I".
+const rawTitle = applyVars(translations['learn_meta_title'] ?? `Learn ${targetLangName}`);
+const title = rawTitle.charAt(0).toLocaleUpperCase(uiCode) + rawTitle.slice(1);
 const description = applyVars(translations['learn_meta_description'] ?? `Learn ${targetLangName} with Lingo7`);
 
 const enabled = getEnabledLanguages();

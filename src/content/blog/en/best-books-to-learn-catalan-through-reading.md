@@ -17,8 +17,6 @@ faq:
     answer: "At C1 and above, read Josep Pla El quadern gris (The Grey Notebook), prized for its precise prose, Jaume Cabré thousand-page epic Jo confesso (Confessions), and Víctor Català Solitud (1905), a landmark of Catalan Modernisme. All three are demanding even for educated native speakers, so reach them once reading Catalan is a pleasure."
 ---
 
-# Best Books to Learn Catalan Through Reading: A Level-by-Level Guide from Beginner to Advanced
-
 Catalan is one of the most quietly accessible languages an English speaker can take up, and one of the most misunderstood. It is not a dialect of Spanish. It is a full Romance language in its own right, spoken by some millions of people across Catalonia, the Valencian Community, the Balearic Islands, the eastern strip of Aragon, the French region of Roussillon, and the sovereign state of Andorra, where it is the only official language. It has its own grammar, its own literary tradition stretching back to the medieval troubadours and the philosopher Ramon Llull, and its own living body of contemporary fiction.
 
 What makes Catalan especially friendly to readers is its position on the map of Romance languages. It sits between Spanish and French, not as a blend of the two, but as a third sibling that shares a great deal with both. If you have studied Spanish, Catalan vocabulary will feel familiar nine words out of ten. If you have studied French, you will recognise much of the rest: words like *finestra* (window, compare French *fenêtre*), *menjar* (to eat, compare *manger*), and *taula* (table, compare *table*) that look nothing like their Spanish equivalents but slot neatly into a French-trained eye. Know either language and reading Catalan becomes a matter of bridging a gap, not crossing an ocean.

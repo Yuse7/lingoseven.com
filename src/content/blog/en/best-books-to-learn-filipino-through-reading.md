@@ -17,8 +17,6 @@ faq:
     answer: "At B1-B2, read the folk tales and the contemporary bestsellers. Severino Reyes's Mga Kuwento ni Lola Basyang and a prose retelling of Ibong Adarna give narrative momentum and cultural fluency. Then cross into the living language with Bob Ong, whose ABNKKBSNPLAko?! and Bakit Baligtad Magbasa ng Libro ang mga Pilipino? are written in the everyday Taglish-inflected Tagalog Filipinos actually speak."
 ---
 
-# The Best Books to Learn Filipino Through Reading: A Level-by-Level Guide to Tagalog Books (A1 to C1+)
-
 Filipino is one of the more approachable languages an English speaker can take up, and yet it is strangely underserved by the usual learner infrastructure. There is no equivalent of the dense German graded-reader market, no shelf of dual-language Filipino classics in your local bookshop, no tidy A1-through-C1 ladder published by a single house. What there is instead is a living, joyfully chaotic literature, folk epics passed down in verse, children's picture books from a publisher older than most learners, runaway bestsellers written in the language people actually speak, and national novels so important that reading them is required by law.
 
 This guide is about reading your way into that literature. The US Foreign Service Institute classifies Filipino as a Category III language for English speakers, moderately difficult, roughly 1,100 hours to professional proficiency, sitting above Spanish but well below Mandarin or Arabic. The grammar is the genuinely hard part. The reading, as you will see, is far friendlier than the FSI number suggests, and that gap is exactly what you can exploit.

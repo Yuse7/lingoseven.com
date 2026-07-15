@@ -16,8 +16,6 @@ faq:
     answer: "Do not try to make up the time. If you miss a day, just do your normal 30 minutes the next day, never 60. If you miss a week, return to where you left off rather than restarting. Accumulating debt turns each session into an obligation and crushes motivation. Miss a day, forgive yourself, show up tomorrow."
 ---
 
-# 30 Minutes a Day: A Realistic 3-Month Reading Plan for Language Learning
-
 You do not need two hours a day. You do not need to quit your job, move abroad, or rearrange your entire schedule around language study. You need 30 minutes and a plan.
 
 What follows is the exact plan. Week by week, for 90 days, with specific tasks, realistic expectations, and honest assessments of what each phase will feel like. By the end, you will have read your first book in a foreign language, not because you found some secret shortcut, but because you showed up for half an hour a day and followed a structure that works.

@@ -16,8 +16,6 @@ faq:
     answer: "No. Looking up every word destroys reading flow and teaches you less. If you understand roughly 95 percent of a page, infer the rest from context. The practical rule: skip an unknown word the first and second time you see it. If it appears a third time and the meaning is still unclear, then look it up."
 ---
 
-# Your First Book in a Foreign Language: How to Choose and Not Give Up
-
 The number one reason people fail at reading in a foreign language is not a lack of vocabulary. It is not weak grammar. It is not even a lack of time.
 
 It is choosing the wrong book.

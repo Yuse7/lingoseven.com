@@ -17,8 +17,6 @@ faq:
     answer: "At B1 to B2 the article recommends short forms first: the tiny Nasreddin Hoca tales and the satirical short stories of Aziz Nesin (1915 to 1995). For one full novel at B2, make it Sabahattin Ali's Kürk Mantolu Madonna (1943), a beloved, clear-prose love story set partly in 1920s Berlin, with a respected 2016 English translation by Maureen Freely and Alexander Dawe for parallel reading."
 ---
 
-# The Best Books to Learn Turkish Through Reading: A Level-by-Level Guide (A1 to C1+)
-
 Turkish has a reputation for being one of the harder languages an English speaker can take on, and that reputation is earned. The US Foreign Service Institute places it in Category IV, the same difficulty band as Russian, Hindi, and Vietnamese, and estimates roughly 1,100 class hours to reach professional working proficiency. The grammar works nothing like English. Words grow long tails of suffixes, the verb sits at the very end of the sentence, and at first a single Turkish word can look like a wall of letters with no obvious seams.
 
 And yet Turkish is, in a specific and important sense, one of the *easiest* hard languages to start reading. It is written in the Latin alphabet, so you are not learning a new script before you can sound out a word. The spelling is very nearly phonetic, one letter, one sound, so once you know the alphabet, you can pronounce essentially anything you see, even words you have never met. And the grammar, for all its strangeness, is remarkably regular: almost no irregular verbs, almost no exceptions, almost no genders or arbitrary noun classes to memorize. Turkish is hard because it is *different*, not because it is messy. The rules are demanding, but they are honest, and once you learn them they hold.

@@ -17,8 +17,6 @@ faq:
     answer: "At B1 to B2 the article steers you to Nordic noir. Henning Mankell's Mördare utan ansikte (1991), the first Wallander novel, is written in clear, unadorned prose and starts a long series at consistent difficulty. Then graduate to Stieg Larsson's Män som hatar kvinnor (2005), the first Millennium novel, which is denser and darker but compulsively plotted."
 ---
 
-# The Best Books to Learn Swedish Through Reading: A1 to C1+
-
 Swedish is one of the friendliest languages an English speaker can pick up, and reading is one of the fastest ways into it. The two languages are close cousins, both Germanic, both built on the same word-order skeleton, so a surprising amount of written Swedish is half-legible before you have studied a single grammar rule. _Hus_ is house, _bok_ is book, _vinter_ is winter, _sommar_ is summer, _fisk_ is fish. The U.S. Foreign Service Institute places Swedish in Category I, its easiest tier, alongside Spanish and French: roughly 600-750 class hours to professional working proficiency. For reading specifically, you reach "this is genuinely enjoyable" territory even faster.
 
 There is a second advantage that is almost unique to Swedish, and it deserves to be the centerpiece of any reading plan: Sweden has a strong, state-supported tradition of _lättläst_, "easy-to-read", publishing. These are real books, written in deliberately simplified Swedish, produced for new readers, language learners, and people with reading difficulties. No other small European language offers learners such a deep, well-curated catalogue of accessible material. If you learn how to use lättläst editions, you can read whole books in Swedish months earlier than you would expect.

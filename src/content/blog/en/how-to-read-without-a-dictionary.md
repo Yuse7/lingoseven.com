@@ -16,8 +16,6 @@ faq:
     answer: "Research associated with Paul Nation puts the comfortable, unassisted threshold around 98 percent of the running words, about one unknown word in fifty, with 95 percent as a rough minimum for basic comprehension. If you are looking up a word every other sentence, the text is below that level and you need an easier book."
 ---
 
-# How to Read in a Foreign Language Without a Dictionary: Building Tolerance for Ambiguity
-
 There is a particular way of reading in a foreign language that almost everyone tries first, and almost everyone finds exhausting. You open a book, read the first sentence, hit a word you do not know, and reach for a dictionary. You look it up, return to the sentence, lose the thread, read it again, hit another unknown word, and reach for the dictionary again. Twenty minutes later you have covered half a page, your notes are longer than the text, and you could not summarise what you just read if someone asked.
 
 This is not a failure of effort. If anything, it is a failure of too much effort applied in the wrong place. The instinct to resolve every unknown word feels responsible, like you are being thorough, like you are learning properly. But constant lookups quietly destroy the very thing that makes reading work as a way to learn a language: the experience of actually reading, in larger chunks, with momentum, holding meaning across sentences.

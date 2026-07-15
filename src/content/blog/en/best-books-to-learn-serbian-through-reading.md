@@ -17,8 +17,6 @@ faq:
     answer: "At B1 to B2 the guide recommends folk narrative and comic prose: the Srpske narodne pripovetke collected by Vuk Karadžić, whose repetition and formulaic structure suit intermediate readers, and Branislav Nušić's Autobiografija, a warm, ironic mock-memoir in conversational modern Serbian. Nušić's comedies, such as Gospođa ministarka, make a natural next step into spoken-style dialogue."
 ---
 
-# Best Books to Learn Serbian Through Reading: From Beginner to Advanced
-
 Serbian is one of those languages that rewards the reader and punishes the dabbler. There is no shortcut through its seven cases, its three genders, and its shifting word stress, but there is a slow, durable road through them, and that road is paved with books. If you are willing to sit with real Serbian text, sentence by sentence, the grammar that looks impossible in a textbook becomes something you simply start to feel.
 
 This guide curates real Serbian books, every title and author verified, none invented, organized by the level at which they actually become useful. We will be honest about where the road gets steep. The U.S. Foreign Service Institute classifies Serbian as a Category IV language, the second-hardest tier for English speakers, roughly on par with Russian, Polish, and Greek and far above the Romance languages. The FSI estimates around 1,100 class hours to reach professional working proficiency. That number should not scare you off; it should set your expectations. You are running a marathon, and books are how you pass the long miles.

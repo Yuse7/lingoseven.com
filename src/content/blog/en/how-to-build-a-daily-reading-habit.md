@@ -16,8 +16,6 @@ faq:
     answer: "Get back on the next day. The rule is never miss twice: missing once is a harmless blip, but missing twice starts a new pattern of not reading. Do not try to make up lost time by reading double, which makes reading feel like punishment. Just open the book again the next morning, even for one sentence, and the habit survives."
 ---
 
-# How to Build a Daily Reading Habit in a Foreign Language
-
 Almost everyone who tries to read in a foreign language starts the same way. A burst of energy, a freshly downloaded book, maybe a new notebook for vocabulary. The first three days go great. You read for forty minutes, look up every word, feel the satisfaction of progress. Then day four is busy. Day five you are tired. By the end of week two the book is still open to chapter one, and you tell yourself you will get back to it on the weekend. You usually do not.
 
 This is not a character flaw, and it is not about discipline. It is about how the whole thing was set up. Most people lean on motivation to carry them, and motivation is a terrible foundation because it comes and goes on its own schedule. They also pick material that is too hard, so every session feels like work with a dictionary, and the brain learns to dread it. A habit that depends on feeling inspired and that hurts every time you do it has no chance of surviving past the first rough week.

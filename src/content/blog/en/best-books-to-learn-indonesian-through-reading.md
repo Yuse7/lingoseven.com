@@ -17,8 +17,6 @@ faq:
     answer: "At C1 and beyond the article points to Pramoedya Ananta Toer's Buru Quartet, starting with Bumi Manusia (This Earth of Mankind), and to Eka Kurniawan's Cantik Itu Luka and the shorter Lelaki Harimau (Man Tiger). All have respected English translations by Max Lane and Annie Tucker, so careful parallel reading stays possible even at literary difficulty."
 ---
 
-# The Best Books to Learn Indonesian Through Reading: A Level-by-Level Guide (A1 to C1+)
-
 Indonesian, Bahasa Indonesia, is one of the most rewarding languages an English speaker can take on, and one of the most welcoming. It uses the Latin alphabet, so you have nothing new to decode on day one. It has no tones, so a mispitched syllable will not change a word's meaning. It has no grammatical gender, no noun cases, and no verb conjugation in the European sense. The US Foreign Service Institute places Indonesian in Category III, roughly 36 weeks or 900 hours of study to reach professional working proficiency, the same band as German, and well short of the Category IV punishment reserved for Arabic, Mandarin, or Korean.
 
 That said, "easy to start" is not the same as "easy to master," and anyone who tells you Indonesian is effortless has not sat with its affixation system. Words like _ajar_ (teach) spin off into _belajar_ (to learn), _mengajar_ (to teach), _pelajar_ (a student), _pelajaran_ (a lesson), and _pembelajaran_ (the process of learning) through a web of prefixes and suffixes that you eventually love but at first must simply absorb. And there is a second wall waiting: the gap between the formal Indonesian you find in textbooks and books, and the colloquial Indonesian people actually speak. Reading is the single best way to climb both walls at once.

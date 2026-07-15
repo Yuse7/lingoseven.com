@@ -17,8 +17,6 @@ faq:
     answer: "Finnish is a Category IV language with around fifteen cases and vowel harmony, so the grammar is demanding. But the difficulty is in comprehension, not decoding: spelling is almost perfectly phonetic and stress always falls on the first syllable, so you can read any word aloud from your first week. Reading is the fastest way to turn the case system into intuition."
 ---
 
-# Best Books to Learn Finnish Through Reading: A Level-by-Level Guide From Beginner to Advanced
-
 Finnish has a reputation, and it is mostly earned. The U.S. Foreign Service Institute places it in Category IV, the hardest tier short of Mandarin, Japanese, Arabic and Korean, and estimates that an English speaker needs roughly 1,100 hours of study to reach professional working proficiency. Finnish is not Indo-European; it belongs to the Uralic family, a cousin of Estonian and a distant relative of Hungarian. It is agglutinative, with around fifteen grammatical cases and a system of vowel harmony that makes word endings shift to match the vowels in the root. None of that maps onto English in any comfortable way.
 
 And yet Finnish is one of the most rewarding languages to read your way into, precisely because of where its difficulty lives. The grammar is demanding, but the writing system is almost perfectly phonetic: spelling tells you the pronunciation with very few exceptions, and stress always falls on the first syllable of every word. Once you know the alphabet, you can read any Finnish word aloud correctly, even one you have never seen and do not understand. That is an enormous head start for a reader. The struggle in Finnish is comprehension, not decoding, and reading is exactly the activity that builds comprehension fastest.

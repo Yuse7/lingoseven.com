@@ -17,8 +17,6 @@ faq:
     answer: "Not especially. The US Foreign Service Institute rates Portuguese a Category I language, its easiest tier for English speakers, at roughly 600 to 750 hours to professional proficiency. It shares a Latin backbone with English, so cognates like importante and natural appear constantly. The main early choice is Brazilian versus European Portuguese, which matters more for audio than for reading."
 ---
 
-# Best Books to Learn Portuguese Through Reading: A Level-by-Level Guide from Beginner to Advanced
-
 Portuguese is one of the most welcoming languages an English speaker can take up through reading. The US Foreign Service Institute places it in Category I, the easiest tier for native English speakers, estimating roughly 600 to 750 class hours to reach professional working proficiency. It shares a Latin backbone with English's borrowed vocabulary, so cognates appear constantly: *importante*, *natural*, *informação*, *possível*. Once you adjust to the spelling and the accents, a surprising amount of a page is already legible on day one.
 
 But "Portuguese is approachable" is a relative statement, and it tells you nothing about what to actually open first. The most common mistake learners make is choosing a book that is famous instead of a book that fits. A reader three months into Portuguese picks up Clarice Lispector because she is a giant of the language, reads half a page, looks up thirty words, and quietly concludes they are bad at languages. The book was not the problem. The match was.

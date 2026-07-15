@@ -16,8 +16,6 @@ faq:
     answer: "Yes, because two mechanisms do the work. The spacing effect means reviews spread across days beat the same time crammed into one sitting. The testing effect means pulling a word from memory strengthens it far more than seeing it again. Re-reading only lets you recognize the answer sitting in front of you; spaced review forces real recall."
 ---
 
-# How to Remember the Words You Read in a Foreign Language
-
 You look up a word. You understand the sentence. You feel a small flicker of satisfaction, another piece of the language clicked into place. Three pages later, the same word appears again, and you have no idea what it means. You look it up a second time, recognize your own underlining from earlier, and feel a flicker of something less pleasant.
 
 This is the central frustration of learning vocabulary through reading, and almost every reader runs into it. The looking-up is easy. The remembering is hard. You can read for an hour, meet forty unfamiliar words, understand all of them in the moment, and retain perhaps three of them by the next day. The reading felt productive, but the vocabulary leaked out almost as fast as it came in.

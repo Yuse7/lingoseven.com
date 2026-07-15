@@ -17,8 +17,6 @@ faq:
     answer: "At B1 to B2, move into Elin Pelin village stories and Yordan Yovkov Старопланински легенди (Legends of Stara Planina), both short and self-contained. As a top-of-B2 stretch, try Ivan Vazov Под игото (Under the Yoke), the national novel, though its 1880s Bulgarian is noticeably archaic with older vocabulary and Ottoman-era loanwords."
 ---
 
-# Best Books to Learn Bulgarian Through Reading: A Level-by-Level Guide from Beginner to Advanced
-
 Bulgarian is one of those languages that rewards readers in a particular way. It is the oldest written Slavic language, it carries a literary tradition that recently produced an International Booker Prize winner, and, unusually for a Slavic language, its grammar contains a feature that makes it far gentler on beginners than Russian or Polish. If you want to learn Bulgarian, reading is not a side activity. It is one of the most efficient ways in.
 
 That said, there is no point pretending Bulgarian is easy. It is written in Cyrillic, which means you have to learn a new alphabet before you can read a single word. The U.S. Foreign Service Institute groups it with the other Slavic languages in its "hard but not hardest" tier, alongside Czech, Polish, and Greek, roughly 1,100 hours of study to reach professional working proficiency. And while Bulgarian shed one major Slavic complication, it invented a couple of its own that you will not have met before.

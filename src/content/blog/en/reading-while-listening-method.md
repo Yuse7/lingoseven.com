@@ -16,8 +16,6 @@ faq:
     answer: "At A1 to A2, pick easy material and slow the audio to about 0.75x, doing several passes. At B1 to B2, use native-paced audio: read a chapter silently, then read it again while listening to turn known-on-paper words into known-in-sound ones. At C1 to C2, use it for hard or fast material and try listening while reading the translation."
 ---
 
-# Reading While Listening: The Listening-Reading (L-R) Method for Language Learning
-
 There is a particular frustration that almost every language learner hits. You can read. You sit down with a book, you follow the plot, you understand the sentences. Then someone speaks the same language out loud, a film, a podcast, a person at a counter, and the words dissolve into noise. You know the vocabulary on the page, but you cannot find it in the sound.
 
 Reading while listening is the simplest and most direct fix for that gap. The idea is almost embarrassingly plain: you read a text in your target language while hearing it spoken aloud by a native voice at the same time. Eyes and ears process the same words in the same moment. The written form and the spoken form, which your brain has been storing as two unrelated things, finally get welded together.

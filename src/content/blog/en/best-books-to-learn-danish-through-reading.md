@@ -17,8 +17,6 @@ faq:
     answer: "At B1 to B2, let story pull you: Ole Lund Kirkegaard Gummi-Tarzan, H.C. Andersen eventyr (read for culture, since the language is nineteenth-century), and Jussi Adler-Olsen Afdeling Q crime series starting with Kvinden i buret. Peter Høeg Frøken Smillas fornemmelse for sne is your bridge from B2 toward C1."
 ---
 
-# The Best Books to Learn Danish Through Reading: A1 to C1+
-
 Danish has a strange reputation among language learners. On paper, it is one of the easiest languages an English speaker can take up, and on the page, it really is. But the moment you hear it spoken aloud, that confidence tends to evaporate. The written word and the spoken word in Danish can feel like two different languages, and that gap is the single most important thing to understand before you choose your first book.
 
 Let us start with the good news, because there is a lot of it. The U.S. Foreign Service Institute places Danish in Category I, its easiest tier for English speakers, alongside Spanish, French, Norwegian, and Swedish, roughly 24 to 30 weeks, or around 600 to 750 class hours, to professional working proficiency. Danish is Germanic, a cousin of English, and the two share a deep common vocabulary. _Hus_ is house, _bog_ is book, _vinter_ is winter, _sommer_ is summer, _fisk_ is fish, _vand_ is water, _ven_ is friend, _hånd_ is hand. Word order largely mirrors English. A great deal of written Danish is half-decipherable before you have studied a single grammar rule.

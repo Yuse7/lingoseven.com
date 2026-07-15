@@ -16,8 +16,6 @@ faq:
     answer: "Each language progresses at roughly the rate of 30 minutes of daily single-language study, so you advance slower in each than if you focused on one. A realistic six-month result is B1 reading in the easier language and A2 in the other. The payoff comes later: maintaining two languages costs barely more than maintaining one."
 ---
 
-# Learning 2 Languages at Once Through Reading: Does It Work?
-
 "Never learn two languages at once."
 
 You will hear this from most language teachers. It comes up in beginner textbooks, Reddit advice threads, and YouTube videos with titles like "Top 10 Language Learning Mistakes." The reasoning sounds solid: splitting your attention means half the progress in each language, you will mix them up, and you will burn out before reaching useful fluency in either one.

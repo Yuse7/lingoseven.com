@@ -16,8 +16,6 @@ faq:
     answer: "French may be the worst, with silent letters, liaisons, and casual reductions (je ne sais pas becomes chepa). English has chaotic spelling (ough has seven pronunciations). Irish orthography barely resembles its sound, Mandarin hides tones from readers, and Arabic omits short vowels. Spanish, Italian, Finnish, and Korean have closer spelling-to-sound matches, so the gap is milder."
 ---
 
-# I Can Read But Can't Understand Speech, What to Do
-
 You can read a whole chapter of *Le Petit Prince* in French. You understand the sentences, you follow the plot, you barely need to check the translation. Then you open a French podcast, maybe something simple, a news summary for learners, and you understand maybe 30%. Words blur together into a stream of unfamiliar sounds. You catch a word here, a phrase there, but the meaning slips through your fingers like water.
 
 You are not broken. You are not stupid. You are experiencing one of the most common and most frustrating phenomena in language learning: the gap between reading comprehension and listening comprehension. Almost every language learner hits this wall, and there is a clear explanation for why it happens and a concrete path to fixing it.

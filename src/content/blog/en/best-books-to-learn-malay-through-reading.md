@@ -17,8 +17,6 @@ faq:
     answer: "At B1-B2 contemporary popular fiction is your best territory: the romance Ombak Rindu by Fauziah Ashari, and the crime, horror, and thriller titles from the publisher Buku FIXI, written in everyday spoken Malay. By upper B2 you can stretch into accessible classics like A. Samad Said's Salina and Abdullah Hussain's Interlok, ideally with translation support."
 ---
 
-# The Best Books to Learn Malay Through Reading: A Level-by-Level Guide for Beginners to Advanced
-
 Malay, Bahasa Melayu in Malaysia and Brunei, and the close sibling of Bahasa Indonesia across the Strait, is one of the most welcoming languages a reader can pick up. There are no tones to wrestle with, no grammatical gender, no verb conjugation tables to memorise, and the writing system today is the familiar Latin alphabet. For an English speaker who has ever bounced off the tones of Mandarin or the cases of Russian, opening a Malay book for the first time can feel almost suspiciously gentle.
 
 That gentleness is real, but it is not the whole story. Malay's difficulty is back-loaded. The script and the sounds give you a fast start, and then the affixation system, the way roots grow prefixes and suffixes like _me-_, _ber-_, _-kan_ and _-an_, quietly becomes the work of intermediate study. Reading is one of the most effective ways to absorb that system, because you meet the same root in a dozen affixed forms across a few pages and your brain starts to feel the pattern before any grammar book has explained it.

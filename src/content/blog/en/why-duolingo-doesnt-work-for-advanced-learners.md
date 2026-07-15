@@ -16,8 +16,6 @@ faq:
     answer: "Most Duolingo courses cover roughly 2,000 to 3,000 unique words, about the A2 to B1 range. That leaves out common words like reluctantly, postpone, scattered, ceiling, and thorough that fill real books and conversations. Paul Nation's research shows you need to know about 98 percent of a text's words to read it comfortably, which means around 8,000 to 9,000 word families."
 ---
 
-# Why Duolingo Doesn't Work for Advanced Learners (And What Does)
-
 You have a 500-day Duolingo streak. You can conjugate verbs in the present and past tense. You translate sentences about cats on tables and women who eat apples. You match words to pictures, unscramble sentences, and tap through multiple-choice exercises while waiting for the bus. Your phone congratulates you every evening. Your friends are impressed by the flame icon.
 
 But you still cannot read a newspaper article in your target language without getting lost by the third paragraph. You cannot follow a movie without subtitles. You cannot hold a real conversation beyond introducing yourself and ordering coffee. When a native speaker talks to you at normal speed, you catch maybe every fifth word.

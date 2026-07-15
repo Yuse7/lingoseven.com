@@ -16,8 +16,6 @@ faq:
     answer: "Choose native authors who write plainly. 1984 by Orwell and The Old Man and the Sea by Hemingway use short, concrete sentences. Sapiens by Harari explains every term it introduces, teaching vocabulary as you read. The first three Harry Potter books are accessible at B2. Genre fiction in a genre you already love adds predictability that compensates for vocabulary gaps."
 ---
 
-# Best Books for Every Language Level: From A1 Beginner to C1 Advanced
-
 Search for "best books to learn French" and you get one list. Search for "best books to learn Japanese" and you get a completely different one. Every recommendation seems to start with the language and then try to find books that fit.
 
 But here is the thing most book lists get wrong: what you can read depends far more on your level than on which language you are learning. A B1 learner of French and a B1 learner of Korean face the same fundamental challenge, they know roughly 2,000 words, they can handle simple plots but not dense prose, and they need books that hold their attention without overwhelming their vocabulary. The specific language changes the script and the grammar, but the reading ability is the same.

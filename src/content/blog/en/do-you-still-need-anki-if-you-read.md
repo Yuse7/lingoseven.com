@@ -16,8 +16,6 @@ faq:
     answer: "Anki burnout usually comes from adding cards faster than you review them. Cap new cards per day, well below what feels generous, and mine sparingly so the deck stays a curated set, not a dumping ground. Keep cards clear and answerable, and treat a backlog after a break as normal. A tiny deck you keep beats a huge one you abandon."
 ---
 
-# Do You Still Need Anki If You Read a Lot?
-
 Ask this question in any language-learning forum and you will start a fight. One camp tells you to delete Anki, pick up a stack of books, and let your vocabulary grow the way a child's does, by meeting words over and over in real sentences until they stick. The other camp tells you that reading without review is a sieve, that you will meet a word, feel that warm flicker of recognition, and forget it three pages later, and that the only honest fix is to put it on a card and review it on schedule.
 
 Both camps have a point, and both tend to argue against a cartoon version of the other side. The "just read" people imagine flashcard users as joyless robots drilling decontextualized word lists for hours. The "review or forget" people imagine readers drowning in books they barely understand, fooling themselves that exposure alone is teaching them anything. Neither caricature is fair, and neither answers the real question, which is narrower and more useful: if you already read a lot in your target language, does adding a spaced repetition habit pay for the time it costs?

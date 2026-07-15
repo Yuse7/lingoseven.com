@@ -16,8 +16,6 @@ faq:
     answer: "Gains are real and measurable. In one study, learners raised their reading speed about 31 percent over roughly 30 weeks of extensive reading. Early readers often sit below 100 words per minute, and even fluent bilinguals read their second language around 30 percent slower than their first. Your target is steady improvement, not native speed."
 ---
 
-# How to Read Faster in a Foreign Language
-
 You sit down with a novel in the language you are learning. You read the first sentence. Then you read it again, because the first pass did not stick. There is a word you almost know, so you tap it. Then another. By the time you reach the bottom of the page, twenty minutes have gone, you have looked up nine words, and you could not tell anyone what just happened in the story. In your own language, that same page would have taken ninety seconds and required no effort at all.
 
 This is the quiet frustration of intermediate reading. You are no longer a beginner. You can decode the words, you mostly follow the grammar, and yet the whole thing moves at a crawl. It feels like wading through water. Worse, the slowness makes everything else harder: when reading is this effortful, you do not want to do much of it, and the small amount you do does not give you the volume you actually need to improve.

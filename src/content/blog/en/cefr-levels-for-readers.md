@@ -16,8 +16,6 @@ faq:
     answer: "Take a page you want to read and mark every unknown word. Missing more than about one word in twenty (5 percent) means it is above your comfortable independent level; one in fifty (2 percent) or fewer means it is in range. Cross-check against the can-do descriptors and graded readers labelled by level."
 ---
 
-# CEFR Levels for Readers: What A1 to C2 Actually Mean for Reading
-
 Most people who learn a language want to read in it. Real books, news, a novel they loved in translation, the comments under a video. But there is a gap between wanting to read and knowing what you can read right now without it turning into a slog. That gap is where a lot of learners quietly give up. They buy a novel that everyone calls "easy," open it, hit a wall of unknown words in the first paragraph, and conclude that they are bad at the language. They are not. They just picked a text three levels above where they are.
 
 The CEFR, the Common European Framework of Reference for Languages, is the tool that closes that gap. It sorts language ability into six levels, from A1 (just starting) to C2 (near-native), and the Council of Europe defines each level with plain "can-do" statements: not a grammar checklist, but a description of what you can actually do. There is a separate set of these statements for reading, and they are honest about what is realistic. Knowing your reading level, and knowing what a level even means, lets you pick text you can finish.

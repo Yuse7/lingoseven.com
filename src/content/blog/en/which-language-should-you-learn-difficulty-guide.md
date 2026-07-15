@@ -16,8 +16,6 @@ faq:
     answer: "It adds an upfront cost, not a wall. Cyrillic, Greek, Hangul, and Devanagari map fairly regularly to sounds and take days to a few weeks to learn. Chinese characters and Japanese kanji are the real exception, a multi-year investment, since you cannot sound out an unfamiliar character."
 ---
 
-# Which Language Should You Learn? A Difficulty Guide for English Speakers
-
 "Which language should I learn?" is the single most common question on every language learning forum, subreddit, and Discord server. It gets asked dozens of times a day, and the answers usually fall into two unhelpful camps: people who insist you should learn whatever language you are personally drawn to (true, but not actionable), and people who rank languages by difficulty without explaining what "difficulty" actually means for different learners.
 
 This guide takes a different approach. We will cover the standard difficulty ratings, but we will also analyze something most guides ignore: **reading difficulty**. Because if you plan to learn a language through books, through parallel reading, graded readers, or authentic literature, the ease of reading that language matters at least as much as the ease of speaking it. Some languages that are hard to speak are surprisingly approachable on the page. Others look deceptively simple until you open a book.

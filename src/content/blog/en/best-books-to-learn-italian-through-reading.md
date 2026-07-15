@@ -17,8 +17,6 @@ faq:
     answer: "At B1 to B2 the article recommends plain-spoken native books: Carlo Collodi's Le avventure di Pinocchio, the Italian Il Piccolo Principe, Niccolo Ammaniti's Io non ho paura (told by a nine-year-old, so the language stays accessible), and Italo Calvino's Marcovaldo, twenty short linked stories that make a manageable on-ramp to a major author."
 ---
 
-# Best Books to Learn Italian Through Reading: From Beginner to Advanced
-
 Most "best books to learn Italian" lists make the same mistake: they hand a complete beginner a copy of Elena Ferrante and call it inspiration. It is not inspiration, it is a recipe for quitting on page four. The right book is not the most famous one, or the most beautiful one. It is the one that sits just slightly above your current level, so that you can read it without drowning.
 
 This guide is organized the way you actually progress: by ability, from your very first pages in Italian to genuine literature you read for pleasure. Every title here is a real book that exists, by a real author, and we have noted honestly what each one demands of you. Some of these are graded readers written specifically for learners. Some are children's classics that happen to be written in plain, musical Italian. And some are adult novels that will stretch you for years, worth knowing about, but not worth starting with.

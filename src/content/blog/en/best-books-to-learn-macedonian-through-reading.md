@@ -17,8 +17,6 @@ faq:
     answer: "At B1-B2 you can read the foundations of modern Macedonian literature: Blaže Koneski's poetry (he shaped the standard language), Kočo Racin's 1939 collection Бели мугри (White Dawns), and Slavko Janevski's Село зад седумте јасени, the first novel ever written in Macedonian. Pick one and finish it rather than sampling several."
 ---
 
-# Best Books to Learn Macedonian Through Reading: A Level-by-Level Guide from Beginner to Advanced
-
 Macedonian is one of the most approachable Slavic languages to read, and almost nobody tells you that. The reputation of Slavic languages, six or seven noun cases, dizzying verb aspect, walls of consonants, scares people off before they start. Macedonian quietly sidesteps the single feature that makes Russian and Polish so punishing for beginners: it lost its noun cases centuries ago. What you gain instead is a grammar that, sentence by sentence, behaves more like English or Bulgarian than like the Slavic stereotype.
 
 The catch is that Macedonian is a small language. North Macedonia has around two million people, and the supply of graded readers, bilingual editions, and learner-specific material is thin compared to what you would find for Spanish or German. The U.S. Foreign Service Institute still rates Macedonian a Category IV language for English speakers, roughly 1,100 class hours to professional proficiency, and that rating is honest. The vocabulary is unfamiliar, the alphabet is Cyrillic, and you will not find a shelf of "easy Macedonian readers" at your local bookshop.

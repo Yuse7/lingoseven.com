@@ -16,8 +16,6 @@ faq:
     answer: "Yes, the threshold shifts by language. English speakers get 2,000 to 3,000 Spanish word families free through cognates, so you actively learn fewer. Chinese reaches high coverage with fewer base units because characters combine compositionally, and agglutinative languages like Finnish are counted in lemmas instead of word families."
 ---
 
-# How Many Words Do You Need to Read Books in a Foreign Language?
-
 "How many words do I need to know?" This is the single most practical question in language learning, and it has a surprisingly clear answer. Unlike most questions about language, "How long does fluency take?" or "What is the best method?", vocabulary thresholds for reading have been studied rigorously for decades, and the numbers are consistent across researchers and languages.
 
 The short version: you need roughly 3,000 word families to read most fiction with some effort, 5,000 for comfortable reading, and 8,000-9,000 for the kind of smooth, uninterrupted reading experience you have in your native language. But those numbers alone do not tell the full story. What matters is what those numbers feel like in practice, how they vary by language, and how [reading itself is the fastest way to reach them](/en/blog/why-reading-is-the-best-way-to-learn-a-language/).

@@ -17,8 +17,6 @@ faq:
     answer: "At B1 to B2 the article recommends Zulu literature written for Zulu readers: C.L.S. Nyembezi's Inkinsela yaseMgungundlovu (1961), arguably the most loved isiZulu novel and a prescribed school text with study notes online, and John Langalibalele Dube's Insila kaShaka (1930), the first novel written in isiZulu, which has an English translation for parallel reading."
 ---
 
-# Best Books to Learn Zulu Through Reading: A Level-by-Level Guide From Beginner to Advanced
-
 Zulu, or isiZulu as its speakers call it, is the most widely spoken home language in South Africa. Roughly 12 million people speak it as a first language, and when you count second-language speakers the total climbs toward 28 million. It belongs to the Nguni branch of the vast Bantu family, which means it is a close cousin of Xhosa, Swati, and Ndebele. If you learn to read Zulu well, you have a head start on a whole cluster of southern African languages and a window into one of the continent's richest oral and literary traditions.
 
 Let us be honest about the difficulty. The United States Foreign Service Institute places Zulu in its higher difficulty tiers, roughly Category III to IV, meaning it takes an English speaker a serious investment of time to reach professional reading fluency. The reasons are real. Zulu organizes every noun into one of fifteen or more noun classes, and those classes ripple outward through the whole sentence in a system of agreement called concord, so that the verb, the adjective, and the pronoun all have to "match" the noun. On top of that, Zulu has three click consonants, written c, q, and x, and it is a tonal language, where pitch can change meaning. None of this is trivial.

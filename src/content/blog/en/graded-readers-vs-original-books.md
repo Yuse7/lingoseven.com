@@ -16,8 +16,6 @@ faq:
     answer: "Yes, especially early on. Graded readers keep vocabulary at your level, so you read whole books smoothly, build volume, and gain confidence. Their limits are flat prose, thin supply outside major languages, and a ceiling around B2 (about 2,500 headwords). They are a bridge, not a destination, so move to originals once your vocabulary can reach them."
 ---
 
-# Graded Readers vs Original Books: Which Should You Read?
-
 Every learner who decides to read in a foreign language runs into the same wall almost immediately. You open a real novel, the kind a native speaker would read, and within two sentences you are drowning. You look up one word, then the next, then the next, and by the time you reach the bottom of the page you have forgotten how the page started. The book that was supposed to teach you the language has become a chore you dread.
 
 So you do the sensible thing. You buy a graded reader instead, a book written specifically for learners, with controlled vocabulary and simplified sentences. And it works. You can actually read it. You finish a chapter without exhausting yourself. But then a different feeling creeps in. The story is thin. The prose is flat. You can feel that someone has sanded off all the interesting edges to keep you safe, and after a few of these you start to wonder whether you are really learning the language or just learning a watered-down version of it.

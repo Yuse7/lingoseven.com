@@ -17,8 +17,6 @@ faq:
     answer: "At B1-B2 you can read books written for native readers. Jo Nesbø's Harry Hole crime series (starting with Flaggermusmannen) pulls you forward with momentum and sits around B2. Jostein Gaarder's Sofies verden teaches philosophy in calm, well-signposted prose. Maria Parr's warm children's novels are wonderful too, with the caveat that she writes in Nynorsk."
 ---
 
-# The Best Books to Learn Norwegian Through Reading: A1 to C1+
-
 Norwegian is one of the most generous languages an English speaker can take up, and reading is the shortest path into it. The two are close relatives, both Germanic, both built on the same word-order skeleton, so a surprising amount of written Norwegian is half-decipherable before you have studied a single rule of grammar. _Hus_ is house, _bok_ is book, _vinter_ is winter, _sommer_ is summer, _fisk_ is fish, _vann_ is water. The U.S. Foreign Service Institute places Norwegian in Category I, its easiest tier, alongside Spanish, French, and Swedish: roughly 24 to 30 weeks, or around 600 to 750 class hours, to professional working proficiency. For reading specifically, you reach the point where the page is genuinely enjoyable even faster than that.
 
 What makes Norwegian especially comfortable on paper is its grammar. There is no verb conjugation by person, _jeg er_, _du er_, _han er_, _vi er_ all use the same _er_, and once you have absorbed a few hundred high-frequency words, the sentence structure stops feeling foreign and starts feeling like English wearing a slightly different coat. The catch, and there is one, is less about difficulty than about choice: before you buy a single book, you have to decide which Norwegian you are reading. We will deal with that first, because it shapes everything else.

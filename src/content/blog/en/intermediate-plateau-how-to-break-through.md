@@ -16,8 +16,6 @@ faq:
     answer: "If you understand 98 percent of every page without effort, you are reviewing, not learning. Growth happens where you understand 85 to 95 percent and have to work for the rest. Track unknown words per page each month: at the start of native-novel reading expect 15 to 25, dropping toward fewer than 3 to 5 as you reach advanced proficiency."
 ---
 
-# Stuck at Intermediate? How to Break Through the Language Plateau by Reading
-
 You passed B1. You can order food in a restaurant without pointing at the menu. You hold basic conversations, the weather, your job, weekend plans. You understand simple texts and follow the gist of a TV show if the actors speak slowly. Six months ago you were celebrating how fast everything was clicking.
 
 And then... nothing. Weeks pass. Months. You keep studying, but the needle does not move. You understand the same percentage of a conversation. You make the same mistakes. You reach for the same safe phrases. You have hit the intermediate plateau, and you are not alone, research suggests that the majority of language learners who reach this stage never move beyond it.

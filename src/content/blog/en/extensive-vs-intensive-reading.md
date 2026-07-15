@@ -16,8 +16,6 @@ faq:
     answer: "Both, on a deliberate schedule. Extensive reading should carry most of your volume at every level, with intensive study as the smaller, sharper supplement. A useful default is about 80 percent extensive and 20 percent intensive, leaning more intensive as a beginner and more extensive as you advance. The mistake is doing only one mode forever."
 ---
 
-# Extensive vs Intensive Reading: How to Use Both to Learn a Language Faster
-
 Most people who try to learn a language through reading make the same quiet mistake. They open a book, find it harder than expected, and respond by reading more carefully, looking up every unknown word, re-reading every confusing sentence, treating each paragraph like a puzzle to be solved before moving on. It feels diligent. It feels like the responsible thing to do. And after twenty minutes of this, they have covered half a page, learned almost nothing they will remember, and quietly decided that reading in a foreign language is exhausting.
 
 The problem is not effort. The problem is that there are two fundamentally different ways to read for language learning, and these learners are using the wrong one without knowing the other exists. One mode is built for speed, volume, and fluency. The other is built for depth, precision, and grammar. They are not better and worse versions of the same activity, they are different tools that build different skills. Using the depth tool when you need the volume tool is like trying to dig a foundation with a scalpel.

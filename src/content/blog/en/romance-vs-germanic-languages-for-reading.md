@@ -16,8 +16,6 @@ faq:
     answer: "Dutch combines two advantages most languages have only one of. It shares Germanic core vocabulary with English (water is water, boek is book) and also borrowed many French and Latin words, so cognate density rivals Romance languages. Its grammar is simpler than German, with no case system and two genders, making basic texts readable with minimal study."
 ---
 
-# Romance vs Germanic Languages: Which Are Easier to Read?
-
 English is a Germanic language with a Romance vocabulary. If that sounds like a contradiction, it is, and it is also your single greatest advantage as a language learner. Because of English's tangled ancestry, you already have a head start in both of Europe's dominant language families. But when it comes to reading, one of these groups gives you a noticeably faster path to your first book.
 
 This guide compares the Romance and Germanic languages side by side, specifically from a reader's perspective. Not speaking, not listening, not passing an exam, reading. Because the skills that matter on the page are different from the skills that matter in conversation, and the difficulty rankings shift accordingly.

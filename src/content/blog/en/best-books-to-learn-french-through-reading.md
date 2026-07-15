@@ -17,8 +17,6 @@ faq:
     answer: "At B1-B2 you can leave learner material and read real but accessible books. Le Petit Nicolas offers short, funny, self-contained stories at B1; Le Petit Prince suits a solid B1 and above; Bonjour tristesse by Françoise Sagan is a clean B2 read; and Maupassant's short stories, like La Parure, work at B2 with a glossary. Each is finishable in short sittings."
 ---
 
-# Best Books to Learn French Through Reading: From Beginner to Advanced
-
 French is one of the most rewarding languages to learn by reading. It shares thousands of cognates with English, its grammar, while fiddly, is learnable in stages, and it sits in the easiest tier of difficulty for English speakers. The Foreign Service Institute classifies French as a Category I language, estimating roughly 750 class hours to reach professional working proficiency. That is one of the lowest figures on the entire FSI scale, and a large share of those hours can be spent comfortably, with a book in your hands.
 
 But there is a catch that catches almost everyone off guard. French spelling is not phonetic. Words are crowded with letters you never pronounce, neighbouring words blur together through liaison and elision, and the rhythm of spoken French bears only a passing resemblance to the tidy text on the page. You can recognize a word perfectly in print and completely fail to catch it in speech. This is the single biggest reason French learners who read well still struggle to understand the news, films, or a native speaker ordering coffee.

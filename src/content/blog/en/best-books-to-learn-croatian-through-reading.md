@@ -17,8 +17,6 @@ faq:
     answer: "Purpose-built graded readers for Croatian are scarce, with no polished A1-to-B2 series like those for Spanish or German. The workaround is to read real books with support: start with something familiar like Mali princ, use sentence-level parallel translation and native audio, and re-read short texts so case endings become automatic."
 ---
 
-# Best Books to Learn Croatian Through Reading: From Beginner to Advanced
-
 Croatian has a reputation for being intimidating, and most of that reputation is earned. It is a South Slavic language with seven grammatical cases, three genders, verbal aspect that runs through nearly every verb you will meet, and a pitch accent system that almost no learner ever fully masters. The Foreign Service Institute places it in Category IV, the same hard tier as Polish, Greek, and Hungarian, meaning English speakers should expect to invest well over a thousand hours of study to reach professional working proficiency. There is no honest way to dress that up as easy.
 
 But there is one genuine piece of good news, and it shapes this entire guide: Croatian is written in a clean, fully phonetic Latin alphabet. Gaj's alphabet, gajica, uses 30 letters, each mapped to a single sound, with only a handful of diacritics (č, ć, đ, š, ž) and three digraphs (dž, lj, nj) to learn. There is no Cyrillic to decode, no spelling that diverges from pronunciation, no silent letters. If you can read this sentence, you can read a Croatian sentence aloud and pronounce it almost correctly on day one, even when you have no idea what it means. For a Slavic language, that is an enormous head start, and it makes reading a far more practical entry point into Croatian than it is into Russian, Ukrainian, or even Serbian.

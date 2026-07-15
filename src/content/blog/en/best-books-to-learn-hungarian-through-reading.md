@@ -17,8 +17,6 @@ faq:
     answer: "At C1 the article recommends the literary classics: Sándor Márai's A gyertyák csonkig égnek (Embers), Dezső Kosztolányi's Édes Anna, and Imre Kertész's Nobel-winning Sorstalanság (Fatelessness). All three have respected English translations, so you can read them in parallel, and each rewards a reader who has already finished a B2 novel with comfort."
 ---
 
-# Best Books to Learn Hungarian Through Reading: A Level-by-Level Guide from Beginner to Advanced
-
 Let us be honest from the first sentence: Hungarian is one of the harder languages an English speaker can choose to read. The US Foreign Service Institute places it in Category IV, the "hard" tier that takes roughly 1,100 classroom hours to reach professional working proficiency, the same neighbourhood as Russian, Thai, Vietnamese, and its distant cousin Finnish. Hungarian is not Indo-European at all. It belongs to the Uralic family, and almost nothing about its grammar lines up with the Romance or Germanic intuitions you may have built up from French, German, or Spanish.
 
 So why would anyone recommend learning Hungarian *through reading*, of all methods? Because reading turns out to be the place where Hungarian quietly rewards you. The same agglutinative machinery that makes spoken Hungarian feel like a wall of sound becomes legible on the page, where you can stop, look, and take a long word apart at your own pace. And Hungarian has two structural gifts for the reader that most "hard" languages do not: the spelling is almost perfectly phonetic, and the stress always falls on the first syllable of a word. You can decode and read a Hungarian sentence aloud, correctly, long before you can fully understand it.

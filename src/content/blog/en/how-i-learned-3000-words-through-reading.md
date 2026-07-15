@@ -16,8 +16,6 @@ faq:
     answer: "Start with the 200 most common words plus simple texts, then move to The Little Prince with parallel text, then short stories and B1 adapted classics, and only later real fiction. Jumping to adult novels at 800 words backfired here. You want roughly one unknown word every 15 to 20, which needs about 3,000 words for most Spanish fiction."
 ---
 
-# How I Learned 3,000 Words in 3 Months Through Reading (Method)
-
 Three months ago, I knew exactly 47 Spanish words. I know the number because I counted them one evening, sitting at my kitchen table with a notebook, trying to figure out whether learning Spanish through reading was a realistic idea or a fantasy. Forty-seven words. Hola, gracias, cerveza, gato, the numbers up to twenty, a handful of cognates I recognized from restaurant menus, and whatever stuck from a semester of high school French that was close enough to Spanish to count.
 
 Today I can read Gabriel Garcia Marquez short stories. Not fluently, I still look up words, I still reread sentences, and I still miss jokes that rely on cultural context. But I read them. I follow the plot. I feel something when the prose is beautiful. Three months ago, I could not read a Spanish children's menu. The distance between those two points is exactly 3,047 words in my spaced repetition system, roughly 45 hours of reading, and a method I am going to describe in detail because it worked far better than I expected and for reasons I did not anticipate.

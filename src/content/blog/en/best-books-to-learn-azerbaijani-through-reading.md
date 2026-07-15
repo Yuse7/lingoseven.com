@@ -17,8 +17,6 @@ faq:
     answer: "At B1 to B2, build reading stamina with the detective and spy thrillers of Çingiz Abdullayev, whose Drongo series sold in the millions and pulls you forward page after page. Add the canonical short story Poçt qutusu (1903) by Cəlil Məmmədquluzadə, famous for its clarity, and Anar's allegorical novella Ağ qoç, qara qoç (B2 to C1) for a step up toward literary prose."
 ---
 
-# Best Books to Learn Azerbaijani Through Reading: A Level-by-Level Guide From Beginner to Advanced
-
 Azerbaijani (Azərbaycan dili, often called Azeri) is a Turkic language spoken by somewhere around 25 million people or more, with the largest communities in the Republic of Azerbaijan and in the northwestern provinces of Iran. It is a state language, a language of poetry and satire and pop music, and one of the more approachable members of the Turkic family for an English speaker who is willing to learn how the grammar works. In Azerbaijan it is written in a Latin alphabet adopted in 1991, so you are not facing a brand new script before you can sound out a word, which is a real head start.
 
 Let us be honest about the difficulty, though. Azerbaijani sits roughly in the harder tier for English speakers, comparable to other Turkic and Central Asian languages: not the hardest thing you could attempt, but a genuine commitment of hundreds of hours. The grammar is agglutinative, meaning words grow long tails of suffixes; there is vowel harmony to internalize; the verb usually lands at the end of the sentence; and almost nothing about the sentence structure maps onto English word order. None of this is impossible, but it is different enough that listening and speaking can feel like wading through fog for a long time before things click.

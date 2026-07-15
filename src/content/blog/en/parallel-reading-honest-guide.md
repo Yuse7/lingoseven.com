@@ -16,8 +16,6 @@ faq:
     answer: "Three groups should be careful. Upper-intermediate learners at B2 or above who lean on it for every paragraph risk stalling their independent reading. People who end up reading only the native-language side learn nothing, a sign the text is too hard. And perfectionists who compare every sentence turn reading into slow translation analysis."
 ---
 
-# Parallel Reading: An Honest Guide, Who It Works For and Who It Doesn't
-
 Parallel reading has a cult following. Spend any time in language learning forums and you will find people who swear by it, learners who went from barely reading a menu to finishing entire novels in their target language, all because they had a translation sitting alongside the original text. They describe it as the breakthrough method, the thing that finally made a foreign language feel real.
 
 You will also find vocal critics. Some language teachers argue that parallel reading creates a translation dependency, that learners lean on the native language side and never truly develop the ability to think in L2. Others point out that reading a translation is not the same as understanding the original. A few dismiss it as a shortcut that feels productive but does not build real skill.
