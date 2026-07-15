@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Apprenez une langue en 30 minutes par jour",
-  "learn_meta_title": "Progresser en {targetLang} avec les meilleurs livres, Lingo7",
-  "learn_meta_description": "Lecture parallèle avec traduction, audio narré par des natifs et répétition espacée qui ancre le vocabulaire. Lisez n'importe quel livre en {targetLang}.",
+  "learn_meta_title": "Lire en {targetLang} : livres bilingues pour apprendre, Lingo7",
+  "learn_meta_description": "Lisez des livres en {targetLang} avec traduction parallèle : touchez un mot pour la traduction, écoutez l'audio des natifs. Gratuit sur iOS et Android.",
   "nav_features": "Fonctionnalités",
   "nav_practice": "Adaptation",
   "nav_how_it_works": "Comment ça marche",

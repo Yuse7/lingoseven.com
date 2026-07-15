@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Научете език за 30 минути на ден",
-  "learn_meta_title": "Учете {targetLang} с най-добрите книги в света, Lingo7",
-  "learn_meta_description": "Паралелно четене с превод, аудио от носители на езика и разпределено повторение, което задържа думите в паметта. Четете всяка книга на {targetLang}.",
+  "learn_meta_title": "{targetLang} език: двуезични книги за четене, Lingo7",
+  "learn_meta_description": "Четете всяка книга с паралелен превод ({targetLang} език): докоснете дума, за да видите превода. Аудио от носители. Безплатно за iOS и Android.",
   "nav_features": "Функции",
   "nav_practice": "Адаптация",
   "nav_how_it_works": "Как работи",

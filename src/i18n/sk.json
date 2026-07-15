@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Naučte sa jazyk za 30 minút denne",
-  "learn_meta_title": "{targetLang} s najlepšími knihami sveta, Lingo7",
-  "learn_meta_description": "Paralelné čítanie s prekladom, audio nahovorené rodenými hovorcami a rozložené opakovanie, vďaka ktorému slovná zásoba zostáva v pamäti. Čítajte akúkoľvek knihu v jazyku {targetLang}.",
+  "learn_meta_title": "{targetLang}: dvojjazyčné knihy na čítanie, Lingo7",
+  "learn_meta_description": "Čítajte knihy s paralelným prekladom ({targetLang}): ťuknite na slovo a uvidíte preklad. Audio od rodených hovorcov. Zadarmo pre iOS a Android.",
   "nav_features": "Funkcie",
   "nav_practice": "Adaptácia",
   "nav_how_it_works": "Ako to funguje",

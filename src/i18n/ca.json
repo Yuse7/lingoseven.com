@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Aprèn un idioma en 30 minuts al dia",
-  "learn_meta_title": "Aprendre {targetLang} amb els millors llibres del món, Lingo7",
-  "learn_meta_description": "Lectura paral·lela amb traducció, àudio narrat per nadius i repetició espaiada que fixa el vocabulari. Llegeix qualsevol llibre en {targetLang}.",
+  "learn_meta_title": "Aprendre {targetLang} amb llibres bilingües, Lingo7",
+  "learn_meta_description": "Llegeix llibres en {targetLang} amb traducció paral·lela: toca una paraula per veure el significat, escolta l'àudio de nadius. Gratis a iOS i Android.",
   "nav_features": "Funcionalitats",
   "nav_practice": "Adaptació",
   "nav_how_it_works": "Com funciona",

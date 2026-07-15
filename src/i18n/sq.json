@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Mëso një gjuhë në 30 minuta në ditë",
-  "learn_meta_title": "Mësoni {targetLang} me librat më të mirë në botë, Lingo7",
-  "learn_meta_description": "Lexim paralel me përkthim, audio nga folës amtarë dhe përsëritje e shpërndarë që ngulit fjalorin. Lexo çdo libër në {targetLang}.",
+  "learn_meta_title": "{targetLang} shqip: mësoni me libra dygjuhësh, Lingo7",
+  "learn_meta_description": "Lexoni çdo libër në {targetLang} me përkthim paralel: prekni një fjalë për të parë kuptimin, dëgjoni audio nga folës amtarë. Falas në iOS dhe Android.",
   "nav_features": "Veçoritë",
   "nav_practice": "Përshtatja",
   "nav_how_it_works": "Si funksionon",

@@ -53,11 +53,12 @@ const applyVars = (s: string) => s
 
 // Slavic and Turkic locales lowercase their language names, so the templates that
 // open with the name would start the title in lowercase. Capitalize only those:
-// Georgian has no sentence case, and uppercasing its opening letter would emit a
-// stray Mtavruli glyph. Locale-aware, so Azerbaijani gets "İ" and not "I".
+// Georgian is exempt even when its template opens with the name, because it has
+// no sentence case and uppercasing would emit a stray Mtavruli glyph.
+// Locale-aware, so Azerbaijani gets "İ" and not "I".
 const titleTemplate = translations['learn_meta_title'] ?? `Learn ${targetLangName}`;
 const rawTitle = applyVars(titleTemplate);
-const title = titleTemplate.startsWith('{targetLang}')
+const title = titleTemplate.startsWith('{targetLang}') && uiCode !== 'ka'
   ? rawTitle.charAt(0).toLocaleUpperCase(uiCode) + rawTitle.slice(1)
   : rawTitle;
 const description = applyVars(translations['learn_meta_description'] ?? `Learn ${targetLangName} with Lingo7`);

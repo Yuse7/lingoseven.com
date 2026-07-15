@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Өдөрт 30 минутаар хэл сур",
-  "learn_meta_title": "{targetLang} хэлийг дэлхийн шилдэг номоор сурах, Lingo7",
-  "learn_meta_description": "Орчуулгатай зэрэгцээ унших, төрөлх хэлтнээр уншуулсан аудио болон үг тогтооход тусалдаг давтамжтай давталт. {targetLang} хэл дээр аливаа номыг уншаарай.",
+  "learn_meta_title": "{targetLang} хэл: орчуулгатай ном унших, Lingo7",
+  "learn_meta_description": "Ном {targetLang} хэлээр зэрэгцээ орчуулгатай уншина уу: үг дээр дарж орчуулгыг харна. Аудио бий. iOS болон Android дээр үнэгүй.",
   "nav_features": "Боломжууд",
   "nav_practice": "Тохируулга",
   "nav_how_it_works": "Хэрхэн ажилладаг",

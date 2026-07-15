@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Ikasi hizkuntza bat eguneko 30 minututan",
-  "learn_meta_title": "Ikasi {targetLang} munduko libururik onenekin, Lingo7",
-  "learn_meta_description": "Irakurketa paraleloa itzulpenarekin, jatorrizko audio narratua eta hiztegia finkatzeko errepikapen tartekatua. Irakurri edozein liburu {targetLang} hizkuntzan.",
+  "learn_meta_title": "Ikasi {targetLang} liburu elebidunekin, Lingo7",
+  "learn_meta_description": "Irakurri liburu bat {targetLang} hizkuntzan itzulpen paraleloarekin: ukitu hitz bat esanahia ikusteko, entzun jatorrizko audioa. Doan iOS eta Android-en.",
   "nav_features": "Ezaugarriak",
   "nav_practice": "Egokitzapena",
   "nav_how_it_works": "Nola funtzionatzen du",

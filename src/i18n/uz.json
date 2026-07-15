@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Kuniga 30 daqiqada til o'rganing",
-  "learn_meta_title": "{targetLang} tilini eng yaxshi kitoblar bilan yaxshilang, Lingo7",
-  "learn_meta_description": "Tarjima bilan parallel o'qish, ona tilida so'zlovchilar ovozi va so'zlarni mustahkamlovchi oraliq takrorlash. {targetLang} tilida istalgan kitobni o'qing.",
+  "learn_meta_title": "{targetLang} tilini o'rganish uchun kitoblar, Lingo7",
+  "learn_meta_description": "Istalgan kitobni {targetLang} tilida parallel tarjima bilan o'qing: so'zga teging va tarjimani ko'ring. Audio bor. iOS va Android uchun bepul.",
   "nav_features": "Imkoniyatlar",
   "nav_practice": "Moslashtirish",
   "nav_how_it_works": "Qanday ishlaydi",

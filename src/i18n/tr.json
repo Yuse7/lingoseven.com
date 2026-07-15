@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Günde 30 dakikada bir dil öğrenin",
-  "learn_meta_title": "Dünyanın en iyi kitaplarıyla {targetLang} öğrenin, Lingo7",
-  "learn_meta_description": "Çevirili paralel okuma, ana dili konuşanların seslendirmesi ve kelimeleri kalıcı kılan aralıklı tekrar. {targetLang} dilinde her kitabı okuyun.",
+  "learn_meta_title": "{targetLang} öğrenin: çevirili ve sesli kitaplar, Lingo7",
+  "learn_meta_description": "{targetLang} dilinde her kitabı paralel çeviriyle okuyun: kelimeye dokunun, çevirisini görün, seslendirmeyi dinleyin. iOS ve Android'de ücretsiz.",
   "nav_features": "Özellikler",
   "nav_practice": "Uyarlama",
   "nav_how_it_works": "Nasıl çalışır",

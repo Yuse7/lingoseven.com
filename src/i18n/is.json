@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Lærðu tungumál á 30 mínútum á dag",
-  "learn_meta_title": "{targetLang} með bestu bókum heims, Lingo7",
-  "learn_meta_description": "Samhliða lestur með þýðingu, hljóð frá innfæddum lesendum og dreifð endurtekning sem festir orðaforðann. Lestu hvaða bók sem er á {targetLang}.",
+  "learn_meta_title": "{targetLang}: tvítyngdar bækur til að læra, Lingo7",
+  "learn_meta_description": "Lestu bækur með samhliða þýðingu ({targetLang}): snertu orð til að sjá þýðinguna, hlustaðu á upplestur innfæddra. Ókeypis á iOS og Android.",
   "nav_features": "Eiginleikar",
   "nav_practice": "Aðlögun",
   "nav_how_it_works": "Hvernig virkar það",

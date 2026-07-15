@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "ისწავლეთ ენა დღეში 30 წუთში",
-  "learn_meta_title": "ისწავლეთ {targetLang} მსოფლიოს საუკეთესო წიგნებით, Lingo7",
-  "learn_meta_description": "პარალელური კითხვა თარგმანით, მშობლიური მთხრობელის აუდიო და ლექსიკის დასამახსოვრებელი ინტერვალური გამეორება. წაიკითხეთ ნებისმიერი წიგნი {targetLang}-ზე.",
+  "learn_meta_title": "{targetLang} ენის შესწავლა წიგნებით, Lingo7",
+  "learn_meta_description": "წაიკითხეთ წიგნები პარალელური თარგმანით ({targetLang} ენა): შეეხეთ სიტყვას თარგმანის სანახავად, მოისმინეთ აუდიო. უფასოა iOS-სა და Android-ზე.",
   "nav_features": "ფუნქციები",
   "nav_practice": "ადაპტაცია",
   "nav_how_it_works": "როგორ მუშაობს",

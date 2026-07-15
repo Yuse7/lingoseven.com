@@ -1,8 +1,8 @@
 {
   "site_name": "Lingo7",
   "site_tagline": "Õpi keelt 30 minutiga päevas",
-  "learn_meta_title": "Õppige {targetLang} keelt maailma parimate raamatutega, Lingo7",
-  "learn_meta_description": "Paralleellugemine koos tõlkega, emakeelekõnelejate heli ja hajutatud kordamine, mis aitab sõnad meelde jätta. Loe ükskõik millist raamatut {targetLang} keeles.",
+  "learn_meta_title": "Õpi {targetLang} keelt kakskeelsete raamatutega, Lingo7",
+  "learn_meta_description": "Loe raamatuid {targetLang} keeles paralleeltõlkega: puuduta sõna, et näha tõlget, kuula emakeelset audiot. Tasuta iOS-is ja Androidis.",
   "nav_features": "Funktsioonid",
   "nav_practice": "Kohandus",
   "nav_how_it_works": "Kuidas see töötab",
