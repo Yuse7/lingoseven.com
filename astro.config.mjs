@@ -1,12 +1,16 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { getEnabledLanguages } from './src/data/languages';
+import { rehypeBookCta } from './src/plugins/rehype-book-cta.mjs';
 
 export default defineConfig({
   site: 'https://lingoseven.com',
   output: 'static',
   build: {
     format: 'directory'
+  },
+  markdown: {
+    rehypePlugins: [rehypeBookCta],
   },
   integrations: [
     sitemap({

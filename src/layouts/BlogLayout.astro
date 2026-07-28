@@ -3,8 +3,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import BaseLayout from './BaseLayout.astro';
 import CtaButtons from '../components/CtaButtons.astro';
+import ReaderDemo from '../components/ReaderDemo.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import { getPlayListing } from '../utils/storeListing';
+import { appRating } from '../data/appRating';
 import '../styles/blog.css';
 
 interface RelatedPost {
@@ -67,6 +69,10 @@ const {
 // Direct-answer + FAQ only render on the English (canonical) version of a post,
 // since post copy is English-only. Avoids mixing English into localized shells.
 const showEnrichment = uiLang === 'en';
+// Above-the-fold product CTA on book-list posts (the blog's conversion fix:
+// the cluster brings 44% of site clicks but almost no store clicks). English
+// only, same reasoning as showEnrichment.
+const showBookListCta = showEnrichment && category === 'book-lists';
 const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '');
 const faqLabel = translations['blog_faq_title'] ?? 'Frequently asked questions';
 const summaryLabel = translations['blog_quick_answer'] ?? 'Quick answer';
@@ -232,6 +238,30 @@ const ogArticle = {
       </aside>
     )}
 
+    {showBookListCta && (
+      <aside class="book-list-cta">
+        <div class="book-list-cta-copy">
+          <p class="book-list-cta-title">Read these books with parallel translation</p>
+          <p class="book-list-cta-text">
+            Lingo7 shows a book and its translation side by side. Import an EPUB or PDF,
+            or pick a book from the catalog, then tap any word for an instant translation
+            and audio.
+          </p>
+          <CtaButtons />
+          <p class="book-list-cta-rating">
+            ★ {appRating.ratingValue} of {appRating.bestRating} on the App Store and Google Play
+          </p>
+        </div>
+        {targetLang && (
+          <div class="book-list-cta-demo">
+            {/* The live app demo, same widget as the learn pages: a real book in
+                the post's language with English parallel text. */}
+            <ReaderDemo targetLang={targetLang} uiLang="en" />
+          </div>
+        )}
+      </aside>
+    )}
+
     <article class="prose">
       <slot />
     </article>
@@ -255,13 +285,8 @@ const ogArticle = {
       </section>
     )}
 
-    <RelatedPosts
-      posts={relatedPosts}
-      uiLang={uiLang}
-      title={relatedTitle}
-      readMoreText={readMoreText}
-    />
-
+    {/* Store CTA before RelatedPosts: the related grid sends readers to another
+        article, so the download ask has to come first. */}
     <div class="article-cta">
       <h3>{ctaTitle}</h3>
       <p>{ctaSubtitle}</p>
@@ -276,5 +301,12 @@ const ogArticle = {
         <CtaButtons />
       </div>
     </div>
+
+    <RelatedPosts
+      posts={relatedPosts}
+      uiLang={uiLang}
+      title={relatedTitle}
+      readMoreText={readMoreText}
+    />
   </main>
 </BaseLayout>

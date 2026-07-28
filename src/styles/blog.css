@@ -243,6 +243,119 @@
   line-height: 1.7;
 }
 
+/* Above-the-fold product CTA on book-list posts (BlogLayout) */
+.book-list-cta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px 32px;
+  align-items: center;
+  margin: 0 0 40px;
+  padding: 24px;
+  background: var(--background-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* The ReaderDemo phone is 320x640; scale it down without leaving layout gaps
+   (transform keeps the layout box, the negative margins reclaim it). */
+.book-list-cta-demo {
+  transform: scale(0.8);
+  transform-origin: center;
+  margin: -64px -32px;
+}
+
+@media (max-width: 768px) {
+  .book-list-cta {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: left;
+  }
+  .book-list-cta-copy {
+    justify-self: stretch;
+  }
+  /* At this width the widget itself renders at 260x520; keep it unscaled. */
+  .book-list-cta-demo {
+    transform: none;
+    margin: 8px 0 0;
+  }
+}
+
+.book-list-cta-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.book-list-cta-text {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.book-list-cta .cta-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.book-list-cta .btn-outline {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.book-list-cta .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.book-list-cta-rating {
+  color: var(--text-light);
+  font-size: 0.85rem;
+  margin: 12px 0 0;
+}
+
+/* Per-book store CTA inserted by the rehype-book-cta plugin */
+.prose .book-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  flex-wrap: wrap;
+  margin: 20px 0 28px;
+  padding: 12px 16px;
+  background: var(--background-alt);
+  border-left: 3px solid var(--primary);
+  border-radius: 8px;
+}
+
+.prose .book-cta p {
+  margin: 0;
+}
+
+.book-cta-text {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.book-cta-links {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+.prose .book-cta-links a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.prose .book-cta-links a:hover {
+  text-decoration: underline;
+}
+
 /* Blog FAQ (GEO): visible accordion + FAQPage JSON-LD. Reuses the global
    .faq-item / .faq-question / .faq-answer hooks but without full-section chrome. */
 .blog-faq {
