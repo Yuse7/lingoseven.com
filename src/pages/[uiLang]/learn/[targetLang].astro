@@ -1,4 +1,6 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import LearnHero from '../../../components/LearnHero.astro';
 import FeaturesSlider from '../../../components/FeaturesSlider.astro';
@@ -94,12 +96,19 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, '');
 }
 
-// Per-target-language facts (English-only content). Rendered only on English UI
-// pages to avoid mixing English copy into localized pages. See docs/marketing/seo-lingoseven.md.
+// Per-target-language facts. The full block (English prose + tool links) renders
+// only on English UI pages; the localized statsOnly variant (numbers + proper
+// nouns, localized labels) renders on the other 48 locales. See
+// docs/marketing/seo-lingoseven.md.
 const isEn = uiCode === 'en';
 const fact = languageFacts[targetCode];
 const showLanguageFacts = isEn && !!fact;
 const extraFaq = showLanguageFacts ? fact.faq : [];
+
+// Per-language OG card when one has been generated (scripts/og), else the
+// Head default applies.
+const learnOgFile = path.join(process.cwd(), 'public', 'images', 'og', 'learn', `${targetSlug}.png`);
+const ogImage = fs.existsSync(learnOgFile) ? `/images/og/learn/${targetSlug}.png` : undefined;
 
 // JSON-LD structured data
 const faqItems = [1, 2, 3, 4, 5].map((i) => {
@@ -199,6 +208,7 @@ const jsonLd = [
   description={description}
   lang={uiCode}
   canonicalUrl={`https://lingoseven.com/${uiCode}/learn/${targetSlug}/`}
+  ogImage={ogImage}
   hreflangAlternates={hreflangAlternates}
   jsonLd={jsonLd}
   translations={translations}
@@ -226,5 +236,14 @@ const jsonLd = [
     readMoreText={blogReadMore}
   />
   {showLanguageFacts && <LanguageIntro targetLangName={targetLangName} fact={fact} />}
+  {!isEn && fact && (
+    <LanguageIntro
+      statsOnly
+      targetLangName={targetLangName}
+      fact={fact}
+      translations={translations}
+      uiLang={uiCode}
+    />
+  )}
   <DownloadSection targetLangName={targetLangName} targetLangNamePrep={targetLangNamePrep} targetLangNameGen={targetLangNameGen} translations={translations} />
 </BaseLayout>

@@ -232,5 +232,18 @@
   "blog_cta_subtitle": "Pakua Lingo7 na uanze safari yako ya kujifunza lugha leo.",
   "blog_related_title": "Makala Husiana",
   "learn_blog_title": "Vidokezo vya Kujifunza {targetLang} Kupitia Kusoma",
-  "learn_blog_subtitle": "Miongozo ya wataalam na ushauri wa vitendo kukusaidia kusoma vitabu kwa {targetLang}."
+  "learn_blog_subtitle": "Miongozo ya wataalam na ushauri wa vitendo kukusaidia kusoma vitabu kwa {targetLang}.",
+  "language_facts_title": "{targetLang}: mambo muhimu",
+  "stats_speakers": "Wazungumzaji",
+  "stats_family": "Familia ya lugha",
+  "stats_writing": "Mfumo wa maandishi",
+  "stats_fsi_hours": "Saa za kujifunza (FSI)",
+  "fact_family_austronesian": "Kiaustronesia",
+  "fact_family_indo_european": "Kihindi-Ulaya",
+  "fact_family_niger_congo": "Niger-Kongo",
+  "fact_family_turkic": "Kituruki",
+  "fact_writing_armenian": "Kiarmenia",
+  "fact_writing_georgian_mkhedruli": "Kijojia (Mkhedruli)",
+  "fact_writing_greek": "Kigiriki",
+  "fact_writing_latin": "Kilatini"
 }

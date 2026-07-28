@@ -232,5 +232,10 @@
   "blog_quick_answer": "Quick answer",
   "blog_faq_title": "Frequently asked questions",
   "learn_blog_title": "Tips for Learning {targetLang} Through Reading",
-  "learn_blog_subtitle": "Expert guides and practical advice to help you read books in {targetLang}."
+  "learn_blog_subtitle": "Expert guides and practical advice to help you read books in {targetLang}.",
+  "language_facts_title": "Quick facts about {targetLang}",
+  "stats_speakers": "Speakers",
+  "stats_family": "Language family",
+  "stats_writing": "Writing system",
+  "stats_fsi_hours": "Study hours (FSI)"
 }

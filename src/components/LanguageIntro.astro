@@ -7,8 +7,45 @@ import { READING_LANG_CODES } from '../data/readingBooks';
 interface Props {
   targetLangName: string;
   fact: LanguageFact;
+  /** Localized stats-cards-only variant for non-English UI locales: no English
+   * prose, no links to English-only tool pages. */
+  statsOnly?: boolean;
+  translations?: Record<string, string>;
+  uiLang?: string;
 }
-const { targetLangName, fact } = Astro.props;
+const { targetLangName, fact, statsOnly = false, translations, uiLang = 'en' } = Astro.props;
+
+const t = (key: string, fallback: string) => translations?.[key] ?? fallback;
+
+// Enum values in languageFacts (family, writingSystem) are English strings.
+// Localized variants live in i18n under slugified keys; missing keys fall back
+// to the English value (proper nouns are acceptable untranslated).
+const slugifyFact = (v: string) => v.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+const factValue = (prefix: string, value: string) => t(`${prefix}_${slugifyFact(value)}`, value);
+
+const speakersEnglish = fact.speakers >= 1000
+  ? `${(fact.speakers / 1000).toFixed(1)}B`
+  : fact.speakers >= 1
+    ? `${Math.round(fact.speakers)}M`
+    : `${(fact.speakers * 1000).toFixed(0)}K`;
+let speakersLocalized = speakersEnglish;
+if (statsOnly) {
+  try {
+    speakersLocalized = new Intl.NumberFormat(uiLang, { notation: 'compact', maximumFractionDigits: 1 })
+      .format(fact.speakers * 1_000_000);
+  } catch {
+    speakersLocalized = speakersEnglish;
+  }
+}
+
+// Localized heading; capitalize when the template opens with the language name,
+// since Slavic/Turkic locales store language names lowercase. Georgian is
+// exempt: it has no sentence case and uppercasing emits a stray Mtavruli glyph.
+const titleTemplate = t('language_facts_title', 'Quick facts about {targetLang}');
+const rawFactsTitle = titleTemplate.replace(/{targetLang}/g, targetLangName);
+const factsTitle = titleTemplate.startsWith('{targetLang}') && uiLang !== 'ka'
+  ? rawFactsTitle.charAt(0).toLocaleUpperCase(uiLang) + rawFactsTitle.slice(1)
+  : rawFactsTitle;
 
 // Deep-link to this language's own vocabulary test if one exists, else the hub.
 const vocabSlug = codeToSlug[fact.code];
@@ -24,6 +61,35 @@ const readingUrl =
     : '/tools/reading-level-recommender/';
 ---
 
+{statsOnly ? (
+  <section class="language-intro">
+    <div class="container">
+      <div class="intro-content">
+        <h2 class="intro-title">{factsTitle}</h2>
+        <div class="intro-stats">
+          <div class="stat-card">
+            <span class="stat-value">{speakersLocalized}</span>
+            <span class="stat-label">{t('stats_speakers', 'Speakers')}</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">{factValue('fact_family', fact.family)}</span>
+            <span class="stat-label">{t('stats_family', 'Language family')}</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value">{factValue('fact_writing', fact.writingSystem)}</span>
+            <span class="stat-label">{t('stats_writing', 'Writing system')}</span>
+          </div>
+          {fact.fsiHours > 0 && (
+            <div class="stat-card">
+              <span class="stat-value">~{fact.fsiHours}</span>
+              <span class="stat-label">{t('stats_fsi_hours', 'Study hours (FSI)')}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+) : (
 <section class="language-intro">
   <div class="container">
     <div class="intro-content">
@@ -65,6 +131,7 @@ const readingUrl =
     </div>
   </div>
 </section>
+)}
 
 <style>
   .language-intro {

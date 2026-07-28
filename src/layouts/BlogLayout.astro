@@ -1,4 +1,6 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import BaseLayout from './BaseLayout.astro';
 import CtaButtons from '../components/CtaButtons.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
@@ -74,6 +76,13 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 });
+// Visible only when the post has really been revised (frontmatter updatedDate);
+// never fall back to pubDate here.
+const formattedUpdated = updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 
 const blogTitle = translations['blog_title'] ?? 'Blog';
 const backText = translations['blog_back_to_blog'] ?? 'Back to blog';
@@ -92,17 +101,23 @@ const canonicalUrl = noindex
   ? `https://lingoseven.com/en/blog/${slug}/`
   : `https://lingoseven.com/${uiLang}/blog/${slug}/`;
 
-const articleImage = ogImage
-  ? (ogImage.startsWith('http') ? ogImage : `https://lingoseven.com${ogImage}`)
-  : 'https://lingoseven.com/images/pic.png';
+// Prefer explicit frontmatter ogImage; else the generated per-post OG card
+// (scripts/og) when one exists for this slug; else the site default card.
+const generatedOgPath = path.join(process.cwd(), 'public', 'images', 'og', 'blog', `${slug}.png`);
+const resolvedOgImage = ogImage ?? (fs.existsSync(generatedOgPath) ? `/images/og/blog/${slug}.png` : undefined);
+
+const articleImage = resolvedOgImage
+  ? (resolvedOgImage.startsWith('http') ? resolvedOgImage : `https://lingoseven.com${resolvedOgImage}`)
+  : 'https://lingoseven.com/images/og/default.png';
 
 const jsonLd = [
   {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: title,
     image: articleImage,
     description,
+    inLanguage: 'en',
     datePublished: pubDate.toISOString(),
     ...(updatedDate && { dateModified: updatedDate.toISOString() }),
     author: {
@@ -174,7 +189,7 @@ const ogArticle = {
   description={description}
   lang={uiLang}
   canonicalUrl={canonicalUrl}
-  ogImage={ogImage}
+  ogImage={resolvedOgImage}
   ogType="article"
   ogArticle={ogArticle}
   hreflangAlternates={hreflangAlternates}
@@ -199,6 +214,11 @@ const ogArticle = {
       <div class="article-meta">
         <span class="article-category">{categoryLabel}</span>
         <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        {updatedDate && (
+          <time class="article-updated" datetime={updatedDate.toISOString()}>
+            Updated {formattedUpdated}
+          </time>
+        )}
       </div>
 
       <h1>{title}</h1>

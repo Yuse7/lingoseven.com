@@ -27,7 +27,7 @@ const {
   description,
   lang = 'en',
   canonicalUrl,
-  ogImage = '/images/pic.png',
+  ogImage = '/images/og/default.png',
   ogType = 'website',
   ogArticle,
   hreflangAlternates,
@@ -38,6 +38,60 @@ const {
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const resolvedCanonical = canonicalUrl ?? Astro.url.href;
 const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+// Facebook-style og:locale codes for the bare UI language codes we use in URLs.
+const OG_LOCALES: Record<string, string> = {
+  af: 'af_ZA', az: 'az_AZ', be: 'be_BY', bg: 'bg_BG', bs: 'bs_BA', ca: 'ca_ES',
+  cs: 'cs_CZ', da: 'da_DK', de: 'de_DE', el: 'el_GR', en: 'en_US', es: 'es_ES',
+  et: 'et_EE', eu: 'eu_ES', fi: 'fi_FI', fr: 'fr_FR', gl: 'gl_ES', hr: 'hr_HR',
+  hu: 'hu_HU', hy: 'hy_AM', id: 'id_ID', is: 'is_IS', it: 'it_IT', ka: 'ka_GE',
+  kk: 'kk_KZ', ky: 'ky_KG', lt: 'lt_LT', lv: 'lv_LV', mk: 'mk_MK', mn: 'mn_MN',
+  ms: 'ms_MY', nl: 'nl_NL', no: 'nb_NO', pl: 'pl_PL', pt: 'pt_BR', ro: 'ro_RO',
+  ru: 'ru_RU', sk: 'sk_SK', sl: 'sl_SI', sq: 'sq_AL', sr: 'sr_RS', sv: 'sv_SE',
+  sw: 'sw_KE', tl: 'tl_PH', tr: 'tr_TR', uk: 'uk_UA', uz: 'uz_UZ', vi: 'vi_VN',
+  zu: 'zu_ZA',
+};
+const ogLocale = OG_LOCALES[lang] ?? 'en_US';
+const ogLocaleAlternates = (hreflangAlternates ?? [])
+  .filter((alt) => alt.lang !== 'x-default' && alt.lang !== lang)
+  .map((alt) => OG_LOCALES[alt.lang])
+  .filter((code): code is string => !!code);
+
+// Sitewide entity graph: one WebSite + one Organization with stable @ids, so
+// search engines and AI answer engines can tie every page to the same brand
+// entity (per-page jsonLd stays additive and untouched).
+const entityGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://lingoseven.com/#website',
+      name: 'Lingo7',
+      url: 'https://lingoseven.com/',
+      publisher: { '@id': 'https://lingoseven.com/#organization' },
+    },
+    {
+      '@type': 'Organization',
+      '@id': 'https://lingoseven.com/#organization',
+      name: 'Lingo7',
+      legalName: 'SEYU LLC',
+      url: 'https://lingoseven.com/',
+      email: 'support@lingoseven.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://lingoseven.com/favicon/apple-touch-icon.png',
+        width: 180,
+        height: 180,
+      },
+      sameAs: [
+        'https://apps.apple.com/app/id6471030440',
+        'https://play.google.com/store/apps/details?id=com.doublereading',
+        'https://www.wikidata.org/wiki/Q140546582',
+        'https://www.facebook.com/lingoseven',
+      ],
+    },
+  ],
+};
 ---
 
 <meta charset="UTF-8" />
@@ -66,6 +120,10 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
 {ogArticle?.section && <meta property="article:section" content={ogArticle.section} />}
 {ogArticle?.tags?.map((tag) => <meta property="article:tag" content={tag} />)}
 <meta property="og:site_name" content="Lingo7" />
+<meta property="og:locale" content={ogLocale} />
+{ogLocaleAlternates.map((code) => (
+  <meta property="og:locale:alternate" content={code} />
+))}
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -92,6 +150,12 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
 <link rel="manifest" href="/favicon/site.webmanifest" />
 
+<!-- Early DNS for origins the client JS fetches from later (demo widgets pull
+  book pages/audio from the backend and S3; the home page loads flag images) -->
+<link rel="dns-prefetch" href="https://backend-cb6yl.ondigitalocean.app" />
+<link rel="dns-prefetch" href="https://lingo7.s3.eu-central-1.amazonaws.com" />
+<link rel="dns-prefetch" href="https://flagcdn.com" />
+
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -101,6 +165,7 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" />
 
 <!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(entityGraph)} />
 {jsonLd?.map((schema) => (
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 ))}

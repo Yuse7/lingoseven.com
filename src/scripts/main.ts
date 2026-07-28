@@ -477,7 +477,32 @@ function initFlagsScaleEffect(): void {
 
 initFlagsScaleEffect();
 
-// ========== Download animation (video to emoji transition) ==========
+// ========== One-shot section animations (video to overlay transition) ==========
+// The videos ship with preload="none" + a poster, so the mp4 is not part of the
+// initial page load; playback starts when the section scrolls into view.
+const playWhenVisible = (video: HTMLVideoElement) => {
+  const start = () => {
+    video.play().catch(() => {
+      // Autoplay rejected (e.g. data-saver): leave the poster in place.
+    });
+  };
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          start();
+          io.disconnect();
+          return;
+        }
+      }
+    }, { threshold: 0.4 });
+    io.observe(video);
+  } else {
+    start();
+  }
+};
+
+// Download animation (video to emoji transition)
 const downloadVideo = document.getElementById('downloadVideo') as HTMLVideoElement | null;
 const downloadEmoji = document.getElementById('downloadEmoji') as HTMLElement | null;
 
@@ -486,6 +511,7 @@ if (downloadVideo && downloadEmoji) {
     downloadVideo.classList.add('hidden');
     downloadEmoji.classList.add('visible');
   });
+  playWhenVisible(downloadVideo);
 }
 
 // Read animation with number
@@ -497,6 +523,7 @@ if (readVideo && readNumber) {
     readVideo.classList.add('hidden');
     readNumber.classList.add('visible');
   });
+  playWhenVisible(readVideo);
 }
 
 // ========== Analytics tracking for store links ==========
