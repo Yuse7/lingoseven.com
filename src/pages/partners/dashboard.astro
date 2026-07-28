@@ -1,0 +1,497 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Partner cabinet (noindex, excluded from the sitemap in astro.config.mjs).
+// Token comes from ?t= or localStorage('l7_partner_token'). All rendering is
+// client-side against GET /api/affiliate/portal?token=... See
+// docs/marketing/referral-program.md.
+
+const PORTAL_URL =
+  'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api/affiliate/portal';
+
+const title = 'Partner Dashboard | Lingo7';
+const description = 'Your Lingo7 affiliate dashboard.';
+---
+
+<BaseLayout title={title} description={description} lang="en" noindex={true}>
+  <section class="dash">
+    <div class="container">
+      <div class="dash-loading" id="dash-loading">Loading your dashboard...</div>
+
+      <div class="dash-error" id="dash-error" hidden>
+        <h1>This link is not valid</h1>
+        <p>
+          The dashboard link looks incorrect or has expired. Please use the link
+          we sent you, or write to <a href="mailto:support@lingoseven.com"
+            >support@lingoseven.com</a
+          >.
+        </p>
+      </div>
+
+      <div class="dash-body" id="dash-body" hidden>
+        <header class="dash-head">
+          <div>
+            <p class="dash-eyebrow">Partner dashboard</p>
+            <h1 id="partner-name"></h1>
+            <p class="dash-status" id="partner-status"></p>
+          </div>
+        </header>
+
+        <div class="dash-link">
+          <span class="dash-link-label">Your link</span>
+          <div class="dash-link-row">
+            <input type="text" id="partner-link" readonly />
+            <button type="button" class="btn-primary" id="copy-btn"
+              >Copy</button
+            >
+          </div>
+        </div>
+
+        <div class="cards-grid" id="cards-grid"></div>
+
+        <div class="dash-section">
+          <h2>Monthly</h2>
+          <div class="table-scroll">
+            <table class="dash-table" id="monthly-table">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Purchases</th>
+                  <th>Amount</th>
+                  <th>Your commission</th>
+                  <th>Paid</th>
+                </tr>
+              </thead>
+              <tbody id="monthly-body"></tbody>
+            </table>
+          </div>
+          <p class="dash-empty" id="monthly-empty" hidden>No payments yet.</p>
+        </div>
+
+        <div class="dash-section">
+          <h2>Recent activity</h2>
+          <ul class="events-list" id="events-list"></ul>
+          <p class="dash-empty" id="events-empty" hidden>No activity yet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ PORTAL_URL }}>
+  (function () {
+    var TOKEN_KEY = 'l7_partner_token';
+
+    var loading = document.getElementById('dash-loading');
+    var errorBox = document.getElementById('dash-error');
+    var body = document.getElementById('dash-body');
+
+    function showError() {
+      loading.hidden = true;
+      body.hidden = true;
+      errorBox.hidden = false;
+    }
+
+    // Resolve the token: URL ?t= wins and is persisted; otherwise localStorage.
+    var url = new URL(window.location.href);
+    var urlToken = url.searchParams.get('t');
+    var token = urlToken || '';
+    try {
+      if (urlToken) {
+        localStorage.setItem(TOKEN_KEY, urlToken);
+      } else {
+        token = localStorage.getItem(TOKEN_KEY) || '';
+      }
+    } catch (e) {
+      // localStorage may be blocked; fall back to the URL token only.
+    }
+
+    if (!token) {
+      showError();
+      return;
+    }
+
+    function money(cents) {
+      var n = typeof cents === 'number' ? cents : 0;
+      return '$' + (n / 100).toFixed(2);
+    }
+
+    function esc(s) {
+      var d = document.createElement('div');
+      d.textContent = s == null ? '' : String(s);
+      return d.innerHTML;
+    }
+
+    fetch(PORTAL_URL + '?token=' + encodeURIComponent(token))
+      .then(function (r) {
+        if (!r.ok) throw new Error('bad status');
+        return r.json();
+      })
+      .then(function (d) {
+        render(d);
+      })
+      .catch(function () {
+        showError();
+      });
+
+    function render(d) {
+      var partner = d.partner || {};
+      var totals = d.totals || {};
+      var monthly = d.monthly || [];
+      var recent = d.recent || [];
+
+      document.getElementById('partner-name').textContent =
+        partner.name || 'Partner';
+
+      var statusEl = document.getElementById('partner-status');
+      if (partner.status && partner.status !== 'active') {
+        statusEl.textContent = 'Status: ' + partner.status;
+      } else {
+        statusEl.hidden = true;
+      }
+
+      var linkInput = document.getElementById('partner-link');
+      linkInput.value = partner.link || '';
+
+      var copyBtn = document.getElementById('copy-btn');
+      copyBtn.addEventListener('click', function () {
+        linkInput.select();
+        var done = function () {
+          copyBtn.textContent = 'Copied';
+          setTimeout(function () {
+            copyBtn.textContent = 'Copy';
+          }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(linkInput.value).then(done, done);
+        } else {
+          try {
+            document.execCommand('copy');
+          } catch (e) {}
+          done();
+        }
+      });
+
+      var cards = [
+        { label: 'Clicks (30d)', value: totals.clicks_30d || 0 },
+        { label: 'Referred installs', value: totals.attributions || 0 },
+        {
+          label: 'Pending payout',
+          value: money(totals.pending_payout_cents),
+        },
+        { label: 'Paid to date', value: money(totals.paid_cents) },
+      ];
+      document.getElementById('cards-grid').innerHTML = cards
+        .map(function (c) {
+          return (
+            '<div class="stat-card"><span class="stat-value">' +
+            esc(c.value) +
+            '</span><span class="stat-label">' +
+            esc(c.label) +
+            '</span></div>'
+          );
+        })
+        .join('');
+
+      var monthlyBody = document.getElementById('monthly-body');
+      if (monthly.length) {
+        monthlyBody.innerHTML = monthly
+          .map(function (m) {
+            return (
+              '<tr><td>' +
+              esc(m.month) +
+              '</td><td>' +
+              esc(m.purchases || 0) +
+              '</td><td>' +
+              money(m.amount_cents) +
+              '</td><td>' +
+              money(m.commission_cents) +
+              '</td><td>' +
+              (m.paid ? 'Yes' : 'No') +
+              '</td></tr>'
+            );
+          })
+          .join('');
+      } else {
+        document.getElementById('monthly-table').hidden = true;
+        document.getElementById('monthly-empty').hidden = false;
+      }
+
+      var eventsList = document.getElementById('events-list');
+      if (recent.length) {
+        eventsList.innerHTML = recent
+          .map(function (ev) {
+            var amount = ev.commission_cents
+              ? '<span class="event-amount">' +
+                money(ev.commission_cents) +
+                '</span>'
+              : '';
+            return (
+              '<li class="event-row"><span class="event-date">' +
+              esc(ev.date) +
+              '</span><span class="event-type">' +
+              esc(ev.event_type) +
+              '</span>' +
+              amount +
+              '<span class="event-status">' +
+              esc(ev.status) +
+              '</span></li>'
+            );
+          })
+          .join('');
+      } else {
+        eventsList.hidden = true;
+        document.getElementById('events-empty').hidden = false;
+      }
+
+      loading.hidden = true;
+      body.hidden = false;
+    }
+  })();
+</script>
+
+<style>
+  .dash {
+    padding: 120px 0 80px;
+    min-height: 60vh;
+  }
+
+  .dash-loading,
+  .dash-empty {
+    color: var(--text-light);
+  }
+
+  .dash-loading {
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  .dash-error {
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .dash-error h1 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+
+  .dash-error p {
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .dash-body {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .dash-eyebrow {
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+
+  .dash-head h1 {
+    font-size: 2rem;
+  }
+
+  .dash-status {
+    color: var(--text-light);
+    margin-top: 6px;
+  }
+
+  .dash-link {
+    margin: 28px 0;
+    padding: 20px;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .dash-link-label {
+    display: block;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .dash-link-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .dash-link-row input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--background);
+    color: var(--text);
+    font-size: 0.95rem;
+    font-family: inherit;
+  }
+
+  .btn-primary {
+    padding: 0.8rem 1.4rem;
+    border-radius: var(--radius);
+    background: var(--primary);
+    color: #0f172a;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-dark);
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  /* Cards, table rows and event rows are injected via innerHTML, so they miss
+     Astro's scoped attribute — style them through :global() (site pattern for
+     dynamic widget DOM). */
+  .cards-grid :global(.stat-card) {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .cards-grid :global(.stat-value) {
+    color: var(--text);
+    font-size: 1.6rem;
+    font-weight: 800;
+  }
+
+  .cards-grid :global(.stat-label) {
+    color: var(--text-light);
+    font-size: 0.85rem;
+  }
+
+  .dash-section {
+    margin-top: 40px;
+  }
+
+  .dash-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  .dash-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .dash-table th,
+  .dash-table :global(td) {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .dash-table thead th {
+    color: var(--text);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .dash-table tbody :global(td) {
+    color: var(--text-light);
+  }
+
+  .dash-table tbody :global(tr:last-child td) {
+    border-bottom: none;
+  }
+
+  .events-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .events-list :global(.event-row) {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--background-card);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .events-list :global(.event-row:last-child) {
+    border-bottom: none;
+  }
+
+  .events-list :global(.event-date) {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    min-width: 92px;
+  }
+
+  .events-list :global(.event-type) {
+    color: var(--text);
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .events-list :global(.event-amount) {
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .events-list :global(.event-status) {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    text-transform: capitalize;
+  }
+
+  a {
+    color: var(--primary);
+  }
+
+  @media (max-width: 768px) {
+    .dash {
+      padding: 96px 0 56px;
+    }
+
+    .dash-head h1 {
+      font-size: 1.6rem;
+    }
+
+    .events-list :global(.event-row) {
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+  }
+</style>

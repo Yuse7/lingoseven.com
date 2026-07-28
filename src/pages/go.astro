@@ -1,0 +1,142 @@
+---
+// Affiliate redirect page: /go/?p={code} (docs/marketing/referral-program.md).
+// Logs the click on the backend, then forwards to the store. Android carries
+// the code through the Play install referrer; on iOS the button tap copies a
+// pasteboard token that the app reads on first launch. Deliberately not
+// localized (utility page, noindex, excluded from the sitemap in
+// astro.config.mjs).
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Lingo7</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        background: #f7f6f3;
+        color: #1f2328;
+      }
+      .card {
+        text-align: center;
+        padding: 2rem 1.5rem;
+        max-width: 22rem;
+      }
+      .logo {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+      }
+      p {
+        margin: 0 0 1.25rem;
+        color: #4b5563;
+      }
+      .store-btn {
+        display: inline-block;
+        padding: 0.85rem 1.6rem;
+        border-radius: 0.75rem;
+        background: #1f2328;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="card">
+        <div class="logo">Lingo7</div>
+        <p id="msg">Taking you to the store&hellip;</p>
+        <a id="ios-btn" class="store-btn" hidden href="https://apps.apple.com/app/id6471030440">
+          Get Lingo7 in the App Store
+        </a>
+        <noscript>
+          <p>
+            <a href="https://apps.apple.com/app/id6471030440">App Store</a>
+            &middot;
+            <a href="https://play.google.com/store/apps/details?id=com.doublereading">Google Play</a>
+          </p>
+        </noscript>
+      </div>
+    </main>
+    <script is:inline>
+      (function () {
+        var API = 'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api/affiliate/click';
+        var PLAY = 'https://play.google.com/store/apps/details?id=com.doublereading';
+        var APPSTORE = 'https://apps.apple.com/app/id6471030440';
+
+        var raw = new URLSearchParams(location.search).get('p') || '';
+        var code = /^[a-z0-9-]{1,32}$/i.test(raw) ? raw.toLowerCase() : null;
+        var ua = navigator.userAgent;
+        var platform = /android/i.test(ua)
+          ? 'android'
+          : /iphone|ipad|ipod/i.test(ua)
+            ? 'ios'
+            : 'web';
+
+        if (!code) {
+          location.replace('/');
+          return;
+        }
+
+        var timeout = new Promise(function (resolve) {
+          setTimeout(function () {
+            resolve(null);
+          }, 1200);
+        });
+        var click = fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: code, platform: platform }),
+          keepalive: true,
+        })
+          .then(function (r) {
+            return r.ok ? r.json() : null;
+          })
+          .catch(function () {
+            return null;
+          });
+
+        Promise.race([click, timeout]).then(function (resp) {
+          var token = resp && resp.token ? String(resp.token) : null;
+
+          if (platform === 'android') {
+            location.replace(PLAY + '&referrer=' + encodeURIComponent('lingo7ref=' + code));
+            return;
+          }
+
+          if (platform === 'ios') {
+            var btn = document.getElementById('ios-btn');
+            document.getElementById('msg').textContent = 'One tap to continue:';
+            btn.hidden = false;
+            btn.addEventListener('click', function (e) {
+              e.preventDefault();
+              var done = function () {
+                location.href = APPSTORE;
+              };
+              if (token && navigator.clipboard && navigator.clipboard.writeText) {
+                var id = token.indexOf('l7r:') === 0 ? token.slice(4) : token;
+                navigator.clipboard
+                  .writeText('https://lingoseven.com/go/#l7r=' + id)
+                  .then(done, done);
+              } else {
+                done();
+              }
+            });
+            return;
+          }
+
+          location.replace('/');
+        });
+      })();
+    </script>
+  </body>
+</html>

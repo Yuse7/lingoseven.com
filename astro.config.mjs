@@ -30,6 +30,10 @@ export default defineConfig({
         if (seg[0] === 'privacypolicy' || seg[0] === 'terms') return false;
         // Custom 404 page (noindex, served by Pages for unknown URLs)
         if (seg[0] === '404') return false;
+        // Affiliate redirect page /go/ (noindex utility, referral-program.md)
+        if (seg[0] === 'go') return false;
+        // Partner cabinet (noindex); keep /partners/ itself indexable.
+        if (seg[0] === 'partners' && seg[1] === 'dashboard') return false;
         // English-only blog policy: every non-English blog page (index + posts)
         // renders noindex,follow. Revisit this rule if blog translations ship
         // (see docs/marketing/seo-lingoseven.md, Next Step #2).
