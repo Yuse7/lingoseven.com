@@ -70,14 +70,15 @@ const {
 // since post copy is English-only. Avoids mixing English into localized shells.
 const showEnrichment = uiLang === 'en';
 // Above-the-fold product CTA on every English post, same reasoning as
-// showEnrichment. Book-list posts keep the exact variant EXP-002 measures
-// (own title, per-language demo, frozen until its check date); the other
-// categories get neutral copy and the default de->en demo book (EXP-004).
+// showEnrichment. Per-language book-list posts keep the exact variant EXP-002
+// measures (own title, demo in the post's language, frozen until its check
+// date); everything else gets the default de->en demo book (EXP-004), incl.
+// the language-agnostic book lists that have no targetLang.
 const isBookList = category === 'book-lists';
 const earlyCtaTitle = isBookList
   ? 'Read these books with parallel translation'
   : 'Try reading with parallel translation';
-const demoLang = targetLang ?? (isBookList ? undefined : 'de');
+const demoLang = targetLang ?? 'de';
 const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '');
 const faqLabel = translations['blog_faq_title'] ?? 'Frequently asked questions';
 const summaryLabel = translations['blog_quick_answer'] ?? 'Quick answer';
