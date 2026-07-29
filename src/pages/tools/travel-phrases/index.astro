@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
-import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolAppNote from '../../../components/ToolAppNote.astro';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { travelPhrases, TRAVEL_LANGS } from '../../../data/travelPhrases';
@@ -113,16 +113,6 @@ const jsonLd = [
         }
       </div>
 
-      <div class="tp-cta">
-        <h2>Then go past phrases. Learn the language by reading</h2>
-        <p>
-          Phrases get you to the country. Reading gets you the language. Lingo7 lets you read real books
-          with sentence-aligned translation and native-narrated audio, so a book a level above you becomes
-          readable, and the words start to stick. Free to start.
-        </p>
-        <CtaButtons size="large" />
-      </div>
-
       <div class="tp-explainer">
         <h2>How to choose what to learn</h2>
         <p>
@@ -139,6 +129,11 @@ const jsonLd = [
           reading in Lingo7 is built for.
         </p>
       </div>
+
+      <ToolAppNote
+        lead="Then go past phrases. Learn the language by reading."
+        body="Phrases get you to the country. Reading gets you the language. Lingo7 lets you read real books with sentence-aligned translation and native-narrated audio, so a book a level above you becomes readable, and the words start to stick. Free to start."
+      />
 
       <p class="tp-tool-link">
         <a href="/tools/reading-level-recommender/">What book should you read at your level? &rarr;</a>
@@ -192,15 +187,6 @@ const jsonLd = [
   .lang-flag { font-size: 2rem; }
   .lang-name { color: var(--text, #e8eef5); font-weight: 700; font-size: 1.05rem; }
   .lang-sub { color: var(--text-muted, #9fb0c3); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
-
-  .tp-cta {
-    max-width: 760px; margin: 3rem auto 0; text-align: center;
-    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
-    border-radius: 16px; padding: 2.2rem 1.5rem;
-  }
-  .tp-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
-  .tp-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
-  .tp-cta :global(.cta-buttons) { justify-content: center; }
 
   .tp-explainer { max-width: 760px; margin: 3rem auto 0; }
   .tp-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }

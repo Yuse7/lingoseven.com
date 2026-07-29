@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
-import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolAppNote from '../../../components/ToolAppNote.astro';
 import ToolsForLanguage from '../../../components/ToolsForLanguage.astro';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
@@ -190,16 +190,6 @@ const clientCfg = { code, endpoint };
         </table>
       </div>
 
-      <div class="ipa-cta">
-        <h2>Learn {name} faster by reading real books</h2>
-        <p>
-          Knowing how a word sounds is only the first step. Lingo7 lets you read real books in {name} with
-          tap-to-hear native audio and sentence-aligned translation, so pronunciation and meaning stick
-          together. Free to start.
-        </p>
-        <CtaButtons size="large" />
-      </div>
-
       <div class="ipa-explainer">
         <h2>How the IPA translator works</h2>
         <p>
@@ -219,6 +209,12 @@ const clientCfg = { code, endpoint };
           is exactly what reading in Lingo7 is built for.
         </p>
       </div>
+
+      <ToolAppNote
+        lead={`Learn ${name} faster by reading real books.`}
+        body={`Knowing how a word sounds is only the first step. Lingo7 lets you read real books in ${name} with tap-to-hear native audio and sentence-aligned translation, so pronunciation and meaning stick together. Free to start.`}
+        targetLang={code}
+      />
 
       <div class="ipa-links">
         <p class="ipa-tool-link">
@@ -468,15 +464,6 @@ const clientCfg = { code, endpoint };
   .ipa-table tbody tr:last-child td { border-bottom: none; }
   .ipa-cell-word { color: var(--text, #e8eef5); font-weight: 600; }
   .ipa-cell-ipa { color: var(--primary); font-size: 1.05rem; white-space: nowrap; }
-
-  .ipa-cta {
-    max-width: 760px; margin: 3rem auto 0; text-align: center;
-    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
-    border-radius: 16px; padding: 2.2rem 1.5rem;
-  }
-  .ipa-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
-  .ipa-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
-  .ipa-cta :global(.cta-buttons) { justify-content: center; }
 
   .ipa-explainer { max-width: 760px; margin: 3rem auto 0; }
   .ipa-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }

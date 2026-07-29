@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
-import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolAppNote from '../../../components/ToolAppNote.astro';
 import { cefrTest, CEFR_LANG_CODES } from '../../../data/cefrTest';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
@@ -104,16 +104,6 @@ const jsonLd = [
         }
       </div>
 
-      <div class="cefr-cta">
-        <h2>The fastest way up the CEFR scale is reading</h2>
-        <p>
-          Whatever your level, you climb quicker by meeting the language in real sentences, again and
-          again. Lingo7 lets you read real books at your level, with tap-to-translate and
-          native-narrated audio. Free to start.
-        </p>
-        <CtaButtons size="large" />
-      </div>
-
       <div class="cefr-explainer">
         <h2>How the test works</h2>
         <p>
@@ -128,6 +118,11 @@ const jsonLd = [
           exactly where to focus next.
         </p>
       </div>
+
+      <ToolAppNote
+        lead="The fastest way up the CEFR scale is reading."
+        body="Whatever your level, you climb quicker by meeting the language in real sentences, again and again. Lingo7 lets you read real books at your level, with tap-to-translate and native-narrated audio. Free to start."
+      />
 
       <p class="cefr-tool-link">
         <a href="/tools/reading-level-recommender/">Know your level? Find books to read at it &rarr;</a>
@@ -178,15 +173,6 @@ const jsonLd = [
   .lang-flag { font-size: 2rem; }
   .lang-name { color: var(--text, #e8eef5); font-weight: 700; font-size: 1.05rem; }
   .lang-sub { color: var(--text-muted, #9fb0c3); font-size: 0.82rem; }
-
-  .cefr-cta {
-    max-width: 760px; margin: 3rem auto 0; text-align: center;
-    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
-    border-radius: 16px; padding: 2.2rem 1.5rem;
-  }
-  .cefr-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
-  .cefr-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
-  .cefr-cta :global(.cta-buttons) { justify-content: center; }
 
   .cefr-explainer { max-width: 760px; margin: 3rem auto 0; }
   .cefr-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }

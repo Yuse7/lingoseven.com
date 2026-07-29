@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../components/ToolDirectAnswer.astro';
-import CtaButtons from '../../components/CtaButtons.astro';
+import ToolAppNote from '../../components/ToolAppNote.astro';
 
 // Hub page: every free tool in one place. Linked from the global footer, so the
 // tool cluster is reachable from any page on the site.
@@ -133,15 +133,10 @@ const jsonLd = [
         }
       </div>
 
-      <div class="tools-hub-cta">
-        <h2>Tools show the gap. Reading closes it.</h2>
-        <p>
-          Whatever a test tells you, the fastest way to improve is meeting the language in real
-          sentences. Lingo7 lets you read real books at your level, with parallel translation and
-          native-narrated audio. Free to start.
-        </p>
-        <CtaButtons size="large" />
-      </div>
+      <ToolAppNote
+        lead="Tools show the gap. Reading closes it."
+        body="Whatever a test tells you, the fastest way to improve is meeting the language in real sentences. Lingo7 lets you read real books at your level, with parallel translation and native-narrated audio. Free to start."
+      />
     </div>
   </section>
 </BaseLayout>
@@ -217,22 +212,6 @@ const jsonLd = [
     color: var(--primary);
     font-weight: 600;
     font-size: 0.85rem;
-  }
-
-  .tools-hub-cta {
-    max-width: 640px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .tools-hub-cta h2 {
-    margin-bottom: 12px;
-  }
-
-  .tools-hub-cta p {
-    color: var(--text-light);
-    line-height: 1.6;
-    margin-bottom: 24px;
   }
 
   @media (max-width: 768px) {

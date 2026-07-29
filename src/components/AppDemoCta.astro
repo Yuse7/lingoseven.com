@@ -1,0 +1,114 @@
+---
+// App CTA card with the live reader demo: copy + store buttons + rating on the
+// left, a scaled-down ReaderDemo phone on the right. Same pattern as the blog
+// book-list CTA (BlogLayout .book-list-cta), extracted for reuse on compare,
+// best-apps, home and the blog listing.
+// Max one per page: ReaderDemo's script binds to the first `.reader-demo`.
+import CtaButtons from './CtaButtons.astro';
+import ReaderDemo from './ReaderDemo.astro';
+import { appRating } from '../data/appRating';
+
+interface Props {
+  title: string;
+  text: string;
+  /** Language of the demo book (the language being learned). */
+  targetLang?: string;
+  /** Translation language shown under each sentence. */
+  uiLang?: string;
+}
+const { title, text, targetLang = 'de', uiLang = 'en' } = Astro.props;
+// A same-language pair would render a degenerate demo (book and translation
+// identical), e.g. the English page of a per-language cluster; shift the
+// translation side instead.
+const trnLang = uiLang === targetLang ? (targetLang === 'en' ? 'es' : 'en') : uiLang;
+---
+
+<aside class="app-demo-cta">
+  <div class="adc-copy">
+    <h2 class="adc-title">{title}</h2>
+    <p class="adc-text">{text}</p>
+    <CtaButtons />
+    <p class="adc-rating">
+      ★ {appRating.ratingValue} of {appRating.bestRating} on the App Store and Google Play
+    </p>
+  </div>
+  <div class="adc-demo">
+    <ReaderDemo targetLang={targetLang} uiLang={trnLang} />
+  </div>
+</aside>
+
+<style>
+  .app-demo-cta {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px 32px;
+    align-items: center;
+    max-width: 860px;
+    margin: 3rem auto 0;
+    padding: 24px;
+    background: var(--background-card, #2a3649);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+    border-radius: var(--radius, 12px);
+    text-align: left;
+  }
+
+  /* The ReaderDemo phone is 320x640; scale it down without leaving layout gaps
+     (transform keeps the layout box, the negative margins reclaim it). */
+  .adc-demo {
+    transform: scale(0.8);
+    transform-origin: center;
+    margin: -64px -32px;
+  }
+
+  @media (max-width: 768px) {
+    .app-demo-cta {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .adc-copy {
+      justify-self: stretch;
+    }
+    /* At this width the widget itself renders at 260x520; keep it unscaled. */
+    .adc-demo {
+      transform: none;
+      margin: 8px 0 0;
+    }
+  }
+
+  .adc-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--text, rgba(255, 255, 255, 0.9));
+  }
+
+  .adc-text {
+    color: var(--text-light, rgba(255, 255, 255, 0.6));
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 16px;
+  }
+
+  .adc-copy :global(.cta-buttons) {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .adc-copy :global(.btn-outline) {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .adc-copy :global(.btn-outline:hover) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .adc-rating {
+    color: var(--text-light, rgba(255, 255, 255, 0.6));
+    font-size: 0.85rem;
+    margin: 12px 0 0;
+  }
+</style>

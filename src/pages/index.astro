@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
+import AppDemoCta from '../components/AppDemoCta.astro';
 import { getEnabledLanguages } from '../data/languages';
 import { codeToSlug } from '../data/languageSlugs';
 import { appRating } from '../data/appRating';
@@ -65,6 +66,15 @@ const jsonLd = [
 >
   <HeroSection />
 
+  <section class="home-demo">
+    <div class="container">
+      <AppDemoCta
+        title="See it in action: a real book, translated in parallel"
+        text="Lingo7 shows a book and its translation side by side. Import an EPUB or PDF, or pick a book from the catalog, then tap any word for an instant translation and audio."
+      />
+    </div>
+  </section>
+
   <section class="choose-language">
     <div class="container">
       <div class="choose-language-grid">
@@ -86,6 +96,12 @@ const jsonLd = [
 </BaseLayout>
 
 <style>
+  /* The card brings its own top margin (3rem), so only the bottom gap
+     to the language grid is set here. */
+  .home-demo {
+    padding: 0 0 24px;
+  }
+
   .choose-language {
     padding: 24px 0 80px;
   }

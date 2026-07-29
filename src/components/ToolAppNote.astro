@@ -1,0 +1,119 @@
+---
+// Quiet in-flow app mention for tool pages. Replaces the old green promo card
+// with large store buttons. Mirrors the ToolDirectAnswer visual pattern
+// (small label + one paragraph) so the app pitch reads as part of the page,
+// not a banner. Store links are plain text links, not buttons; the pitch is
+// carried by the live ReaderDemo phone next to the text (same widget as the
+// learn pages and blog posts). Max one per page: ReaderDemo's script binds
+// to the first `.reader-demo`.
+import ReaderDemo from './ReaderDemo.astro';
+
+interface Props {
+  lead: string; // bolded first sentence, contextual to the tool
+  body: string; // rest of the paragraph
+  /** Language of the demo book; per-language tool pages pass their code. */
+  targetLang?: string;
+  /** Translation language shown under each sentence. */
+  uiLang?: string;
+}
+const { lead, body, targetLang = 'de', uiLang = 'en' } = Astro.props;
+// A same-language pair would render a degenerate demo (book and translation
+// identical), e.g. /tools/flashcards/english; shift the translation side.
+const trnLang = uiLang === targetLang ? (targetLang === 'en' ? 'es' : 'en') : uiLang;
+---
+
+<aside class="tool-app-note">
+  <div class="tan-copy">
+    <span class="tan-label">Put it into practice</span>
+    <p><strong>{lead}</strong> {body}</p>
+    <p class="tan-links">
+    <a href="https://apps.apple.com/app/id6471030440?pt=126721951&ct=lingoseven&mt=8">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+      </svg>
+      App Store
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.doublereading&utm_source=lingoseven&utm_campaign=website">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.56.69.56 1.19s-.22.92-.56 1.19l-2.11 1.24-2.5-2.5 2.5-2.5 2.11 1.38M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z" />
+      </svg>
+      Google Play
+    </a>
+  </p>
+  </div>
+  <div class="tan-demo">
+    <ReaderDemo targetLang={targetLang} uiLang={trnLang} />
+  </div>
+</aside>
+
+<style>
+  .tool-app-note {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px 28px;
+    align-items: center;
+    max-width: 760px;
+    margin: 3rem auto 0;
+    padding: 20px 24px;
+    background: var(--background-alt, #232d3f);
+    border-left: 3px solid var(--primary, #4ade80);
+    border-radius: 8px;
+    text-align: left;
+  }
+
+  /* The ReaderDemo phone is 320x640; scale it down without leaving layout gaps
+     (transform keeps the layout box, the negative margins reclaim it). */
+  .tan-demo {
+    transform: scale(0.72);
+    transform-origin: center;
+    margin: -90px -45px;
+  }
+
+  @media (max-width: 768px) {
+    .tool-app-note {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .tan-copy {
+      justify-self: stretch;
+    }
+    /* At this width the widget itself renders at 260x520; keep it unscaled. */
+    .tan-demo {
+      transform: none;
+      margin: 8px 0 0;
+    }
+  }
+  .tan-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary, #4ade80);
+    margin-bottom: 8px;
+  }
+  .tool-app-note p {
+    margin: 0;
+    color: var(--text, rgba(255, 255, 255, 0.9));
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .tan-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    margin-top: 12px;
+  }
+  .tan-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary, #4ade80);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .tan-links a:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../components/ToolDirectAnswer.astro';
-import CtaButtons from '../../components/CtaButtons.astro';
+import ToolAppNote from '../../components/ToolAppNote.astro';
 import { getLanguageByCode } from '../../data/languages';
 import { codeToSlug } from '../../data/languageSlugs';
 import { languageFacts } from '../../data/languageFacts';
@@ -345,16 +345,6 @@ const questions = [
         </ol>
       </div>
 
-      <div class="quiz-cta">
-        <h2>Whatever you pick, learn it faster by reading</h2>
-        <p>
-          Lingo7 lets you read real books in your new language with sentence-aligned translation and
-          native-narrated audio, so a book a level above you becomes readable. Save words as you go and
-          review them later. Free to start.
-        </p>
-        <CtaButtons size="large" />
-      </div>
-
       <div class="quiz-explainer">
         <h2>How the quiz works</h2>
         <p>
@@ -377,6 +367,11 @@ const questions = [
           above where you would manage alone. That is exactly what reading in Lingo7 is built for.
         </p>
       </div>
+
+      <ToolAppNote
+        lead="Whatever you pick, learn it faster by reading."
+        body="Lingo7 lets you read real books in your new language with sentence-aligned translation and native-narrated audio, so a book a level above you becomes readable. Save words as you go and review them later. Free to start."
+      />
 
       <div class="quiz-links">
         <p class="quiz-tool-link">
@@ -667,15 +662,6 @@ const questions = [
     color: var(--primary); font-weight: 600; font-size: 0.88rem; text-decoration: none;
   }
   .quiz-picks :global(.quiz-pick-links a:hover) { text-decoration: underline; }
-
-  .quiz-cta {
-    max-width: 760px; margin: 3rem auto 0; text-align: center;
-    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
-    border-radius: 16px; padding: 2.2rem 1.5rem;
-  }
-  .quiz-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
-  .quiz-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
-  .quiz-cta :global(.cta-buttons) { justify-content: center; }
 
   .quiz-explainer { max-width: 760px; margin: 3rem auto 0; }
   .quiz-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }

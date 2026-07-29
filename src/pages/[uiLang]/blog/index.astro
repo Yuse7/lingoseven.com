@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BlogCard from '../../../components/BlogCard.astro';
+import AppDemoCta from '../../../components/AppDemoCta.astro';
 import { getCollection } from 'astro:content';
 import { getEnabledLanguages } from '../../../data/languages';
 import { getTranslations, t } from '../../../utils/i18n';
@@ -69,6 +70,11 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
 const allLabel = translations['blog_all_categories'] ?? 'All';
 const readMoreText = translations['blog_read_more'] ?? 'Read more';
 const blogTitle = translations['blog_title'] ?? 'Blog';
+const ctaTitle = translations['blog_cta_title'] ?? 'Ready to start reading?';
+const ctaSubtitle = translations['blog_cta_subtitle'] ?? 'Download Lingo7 and begin your language learning journey today.';
+// English speakers get the German book, everyone else an English book
+// translated into their own language.
+const demoTargetLang = uiCode === 'en' ? 'de' : 'en';
 
 // Noindex blog index for non-English UI langs (all posts are English-only for now)
 const hasLocalizedPosts = localePosts.length > 0;
@@ -147,6 +153,13 @@ const jsonLd = [
         <p>No articles yet.</p>
       </div>
     )}
+
+    <AppDemoCta
+      title={ctaTitle}
+      text={ctaSubtitle}
+      targetLang={demoTargetLang}
+      uiLang={uiCode}
+    />
   </div>
 </BaseLayout>
 

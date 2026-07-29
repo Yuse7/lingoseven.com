@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
-import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolAppNote from '../../../components/ToolAppNote.astro';
 import { VOCAB_LANG_CODES } from '../../../data/vocabWords';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
@@ -102,16 +102,6 @@ const jsonLd = [
         ))}
       </div>
 
-      <div class="vocab-cta">
-        <h2>Grow your vocabulary the natural way, by reading</h2>
-        <p>
-          Whatever your score, the fastest way past it is meeting words again and again in real
-          sentences. Lingo7 lets you read real books with tap-to-translate and native-narrated audio.
-          Free to start.
-        </p>
-        <CtaButtons size="large" />
-      </div>
-
       <div class="vocab-explainer">
         <h2>How the test works</h2>
         <p>
@@ -126,6 +116,11 @@ const jsonLd = [
           an honest estimate, plus a level and a breakdown of where your vocabulary thins out.
         </p>
       </div>
+
+      <ToolAppNote
+        lead="Grow your vocabulary the natural way, by reading."
+        body="Whatever your score, the fastest way past it is meeting words again and again in real sentences. Lingo7 lets you read real books with tap-to-translate and native-narrated audio. Free to start."
+      />
 
       <p class="vocab-tool-link">
         <a href="/tools/cefr-level-test/">Want a full level check? Find your CEFR level (A1-C2) &rarr;</a>
@@ -174,15 +169,6 @@ const jsonLd = [
   .lang-flag { font-size: 2rem; }
   .lang-name { color: var(--text, #e8eef5); font-weight: 700; font-size: 1.05rem; }
   .lang-sub { color: var(--text-muted, #9fb0c3); font-size: 0.82rem; }
-
-  .vocab-cta {
-    max-width: 760px; margin: 3rem auto 0; text-align: center;
-    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
-    border-radius: 16px; padding: 2.2rem 1.5rem;
-  }
-  .vocab-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
-  .vocab-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
-  .vocab-cta :global(.cta-buttons) { justify-content: center; }
 
   .vocab-explainer { max-width: 760px; margin: 3rem auto 0; }
   .vocab-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }

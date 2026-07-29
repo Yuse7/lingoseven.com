@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
-import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolAppNote from '../../../components/ToolAppNote.astro';
 import ToolsForLanguage from '../../../components/ToolsForLanguage.astro';
 import { vocabWords, VOCAB_LANG_CODES } from '../../../data/vocabWords';
 import { vocabFacts } from '../../../data/vocabFacts';
@@ -168,16 +168,6 @@ const jsonLd = [
         </div>
       </div>
 
-      <div class="vocab-cta">
-        <h2>Grow your {name} vocabulary the natural way, by reading</h2>
-        <p>
-          The fastest way past these numbers is meeting words again and again in real sentences.
-          Lingo7 lets you read real books in {name} with tap-to-translate and native-narrated audio.
-          Free to start.
-        </p>
-        <CtaButtons size="large" />
-      </div>
-
       <div class="vocab-explainer">
         <h2>How the estimate works</h2>
         <p>
@@ -199,6 +189,12 @@ const jsonLd = [
           thicken it is to keep reading.
         </p>
       </div>
+
+      <ToolAppNote
+        lead={`Grow your ${name} vocabulary the natural way, by reading.`}
+        body={`The fastest way past these numbers is meeting words again and again in real sentences. Lingo7 lets you read real books in ${name} with tap-to-translate and native-narrated audio. Free to start.`}
+        targetLang={targetCode}
+      />
 
       {fact && (
         <div class="vocab-facts">
@@ -481,15 +477,6 @@ const jsonLd = [
   .ctx-item { display: flex; flex-direction: column; gap: 0.2rem; }
   .ctx-item strong { color: var(--text, #e8eef5); font-size: 1rem; font-variant-numeric: tabular-nums; }
   .ctx-item span { color: var(--text-muted, #9fb0c3); font-size: 0.78rem; line-height: 1.3; }
-
-  .vocab-cta {
-    max-width: 760px; margin: 3rem auto 0; text-align: center;
-    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
-    border-radius: 16px; padding: 2.2rem 1.5rem;
-  }
-  .vocab-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
-  .vocab-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
-  .vocab-cta :global(.cta-buttons) { justify-content: center; }
 
   .vocab-explainer { max-width: 760px; margin: 3rem auto 0; }
   .vocab-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }

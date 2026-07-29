@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ToolDirectAnswer from '../../../components/ToolDirectAnswer.astro';
-import CtaButtons from '../../../components/CtaButtons.astro';
+import ToolAppNote from '../../../components/ToolAppNote.astro';
 import ToolsForLanguage from '../../../components/ToolsForLanguage.astro';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
@@ -173,16 +173,6 @@ const clientData = {
         </table>
       </div>
 
-      <div class="fc-cta">
-        <h2>Learn {name} faster by reading, not just drilling</h2>
-        <p>
-          Flashcards fix words in memory; reading teaches you to use them. Lingo7 lets you read real books in
-          {name} with sentence-aligned translation and native-narrated audio, and save any word to review
-          later. Free to start.
-        </p>
-        <CtaButtons size="large" />
-      </div>
-
       <div class="fc-explainer">
         <h2>How to use these flashcards</h2>
         <p>
@@ -203,6 +193,12 @@ const clientData = {
           reading in Lingo7 is built for.
         </p>
       </div>
+
+      <ToolAppNote
+        lead={`Learn ${name} faster by reading, not just drilling.`}
+        body={`Flashcards fix words in memory; reading teaches you to use them. Lingo7 lets you read real books in ${name} with sentence-aligned translation and native-narrated audio, and save any word to review later. Free to start.`}
+        targetLang={code}
+      />
 
       <div class="fc-links">
         {
@@ -392,15 +388,6 @@ const clientData = {
   .fc-word { font-weight: 700; color: var(--primary); white-space: nowrap; }
   .fc-tr { color: var(--text, #e8eef5); }
   .fc-ex { color: var(--text-muted, #9fb0c3); font-style: italic; }
-
-  .fc-cta {
-    max-width: 760px; margin: 3rem auto 0; text-align: center;
-    background: rgba(74, 222, 128, 0.06); border: 1px solid rgba(74, 222, 128, 0.18);
-    border-radius: 16px; padding: 2.2rem 1.5rem;
-  }
-  .fc-cta h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
-  .fc-cta p { color: var(--text-muted, #9fb0c3); margin: 0 0 1.4rem; line-height: 1.6; }
-  .fc-cta :global(.cta-buttons) { justify-content: center; }
 
   .fc-explainer { max-width: 760px; margin: 3rem auto 0; }
   .fc-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }
