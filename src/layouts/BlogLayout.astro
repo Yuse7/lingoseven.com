@@ -69,10 +69,15 @@ const {
 // Direct-answer + FAQ only render on the English (canonical) version of a post,
 // since post copy is English-only. Avoids mixing English into localized shells.
 const showEnrichment = uiLang === 'en';
-// Above-the-fold product CTA on book-list posts (the blog's conversion fix:
-// the cluster brings 44% of site clicks but almost no store clicks). English
-// only, same reasoning as showEnrichment.
-const showBookListCta = showEnrichment && category === 'book-lists';
+// Above-the-fold product CTA on every English post, same reasoning as
+// showEnrichment. Book-list posts keep the exact variant EXP-002 measures
+// (own title, per-language demo, frozen until its check date); the other
+// categories get neutral copy and the default de->en demo book (EXP-004).
+const isBookList = category === 'book-lists';
+const earlyCtaTitle = isBookList
+  ? 'Read these books with parallel translation'
+  : 'Try reading with parallel translation';
+const demoLang = targetLang ?? (isBookList ? undefined : 'de');
 const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '');
 const faqLabel = translations['blog_faq_title'] ?? 'Frequently asked questions';
 const summaryLabel = translations['blog_quick_answer'] ?? 'Quick answer';
@@ -238,10 +243,10 @@ const ogArticle = {
       </aside>
     )}
 
-    {showBookListCta && (
+    {showEnrichment && (
       <aside class="book-list-cta">
         <div class="book-list-cta-copy">
-          <p class="book-list-cta-title">Read these books with parallel translation</p>
+          <p class="book-list-cta-title">{earlyCtaTitle}</p>
           <p class="book-list-cta-text">
             Lingo7 shows a book and its translation side by side. Import an EPUB or PDF,
             or pick a book from the catalog, then tap any word for an instant translation
@@ -252,11 +257,12 @@ const ogArticle = {
             ★ {appRating.ratingValue} of {appRating.bestRating} on the App Store and Google Play
           </p>
         </div>
-        {targetLang && (
+        {demoLang && (
           <div class="book-list-cta-demo">
             {/* The live app demo, same widget as the learn pages: a real book in
-                the post's language with English parallel text. */}
-            <ReaderDemo targetLang={targetLang} uiLang="en" />
+                the post's language (the default German book on non-book-list
+                posts) with English parallel text. */}
+            <ReaderDemo targetLang={demoLang} uiLang="en" />
           </div>
         )}
       </aside>
