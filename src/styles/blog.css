@@ -256,12 +256,13 @@
   border-radius: var(--radius);
 }
 
-/* The ReaderDemo phone is 320x640; scale it down without leaving layout gaps
-   (transform keeps the layout box, the negative margins reclaim it). */
+/* The ReaderDemo phone is 320x640, plus a 40px language picker on top; scale it
+   down without leaving layout gaps (transform keeps the layout box, the
+   negative margins reclaim it). */
 .book-list-cta-demo {
   transform: scale(0.8);
   transform-origin: center;
-  margin: -64px -32px;
+  margin: -68px -32px;
 }
 
 @media (max-width: 768px) {

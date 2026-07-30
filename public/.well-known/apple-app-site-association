@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["DT94Y347Z6.com.doublereading"],
+        "components": [
+          { "/": "/go/*", "comment": "affiliate redirect page; opens the app when installed so it can claim the ?p= code" }
+        ]
+      }
+    ]
+  }
+}

@@ -71,7 +71,9 @@ const langNameMapJson = JSON.stringify(langNameMap);
     <div class="container">
         <div class="parallel-reading-content">
             <div class="parallel-reading-screenshot">
-                <ReaderDemo targetLang={targetLang} uiLang={uiLang} />
+                <!-- No built-in picker: the H2 dropdown below drives this reader
+                     and rewrites the copy along with it. -->
+                <ReaderDemo targetLang={targetLang} uiLang={uiLang} langPicker={false} />
             </div>
             <div class="parallel-reading-text">
                 <span class="section-tag">{t('features_slider_tag')}</span>

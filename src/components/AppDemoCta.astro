@@ -33,7 +33,7 @@ const trnLang = uiLang === targetLang ? (targetLang === 'en' ? 'es' : 'en') : ui
     </p>
   </div>
   <div class="adc-demo">
-    <ReaderDemo targetLang={targetLang} uiLang={trnLang} />
+    <ReaderDemo targetLang={targetLang} uiLang={trnLang} menuLang={uiLang} />
   </div>
 </aside>
 
@@ -52,12 +52,13 @@ const trnLang = uiLang === targetLang ? (targetLang === 'en' ? 'es' : 'en') : ui
     text-align: left;
   }
 
-  /* The ReaderDemo phone is 320x640; scale it down without leaving layout gaps
-     (transform keeps the layout box, the negative margins reclaim it). */
+  /* The ReaderDemo phone is 320x640, plus a 40px language picker on top; scale
+     it down without leaving layout gaps (transform keeps the layout box, the
+     negative margins reclaim it). */
   .adc-demo {
     transform: scale(0.8);
     transform-origin: center;
-    margin: -64px -32px;
+    margin: -68px -32px;
   }
 
   @media (max-width: 768px) {

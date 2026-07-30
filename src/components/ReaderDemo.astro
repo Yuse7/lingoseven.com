@@ -1,15 +1,66 @@
 ---
 // Interactive parallel reader demo, loads real book content via backend API
+import { getEnabledLanguages } from '../data/languages';
+import { languageNames } from '../data/languageNames';
+
 interface Props {
   targetLang?: string;
   uiLang?: string;
   /** Screenshot mode: freeze on a representative still frame instead of animating. */
   still?: boolean;
+  /**
+   * Show the translation-language picker above the phone. Off where the page
+   * already owns a picker for the same reader (learn pages: FeaturesSlider's
+   * inline H2 dropdown, which also rewrites the surrounding copy).
+   */
+  langPicker?: boolean;
+  /** Locale for the picker's language names, i.e. the page's UI language. */
+  menuLang?: string;
+  /** Label in front of the picker; pass a localized string on localized pages. */
+  pickerLabel?: string;
+  /** Accessible name / tooltip for the picker. */
+  pickerHint?: string;
 }
-const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
+const {
+  targetLang = 'de',
+  uiLang = 'en',
+  still = false,
+  langPicker = true,
+  menuLang = 'en',
+  pickerLabel = 'Translation:',
+  pickerHint = 'Change the translation language',
+} = Astro.props;
+
+// No picker in screenshot mode: the still frame must stay pixel-stable.
+const showPicker = langPicker && !still;
+// The book language itself would make a degenerate pair, so it is not offered.
+const pickerLangs = showPicker
+  ? getEnabledLanguages()
+      .filter((lang) => lang.code !== targetLang)
+      .map((lang) => ({
+        code: lang.code,
+        name: languageNames[menuLang]?.[lang.code] ?? languageNames['en']?.[lang.code] ?? lang.name,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name, menuLang))
+  : [];
 ---
 
 <div class="reader-demo" data-target-lang={targetLang} data-ui-lang={uiLang} data-still={still ? '1' : undefined}>
+  {showPicker && (
+    <div class="reader-demo__langbar">
+      <label class="reader-demo__langlabel" for="readerTrnLang">{pickerLabel}</label>
+      <span class="reader-demo__langpill">
+        <select id="readerTrnLang" class="reader-demo__langselect" title={pickerHint} aria-label={pickerHint}>
+          {pickerLangs.map((lang) => (
+            <option value={lang.code} selected={lang.code === uiLang}>{lang.name}</option>
+          ))}
+        </select>
+        <svg class="reader-demo__langarrow" width="12" height="12" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+    </div>
+  )}
   <div class="reader-demo__phone-wrap">
     <img src="/images/phone-clean.svg" alt="" class="reader-demo__shell" />
     <div class="reader-demo__frame">
@@ -54,8 +105,78 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   /* Phone wrapper */
   .reader-demo {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 8px;
+  }
+
+  /* Translation-language picker. Its box is a fixed 32px + the 8px gap, the
+     wrappers that scale the widget down (AppDemoCta, ToolAppNote, blog CTA)
+     offset a 680px-tall widget. */
+  .reader-demo__langbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+  }
+
+  .reader-demo__langlabel {
+    color: rgba(255, 255, 255, 0.55);
+    white-space: nowrap;
+  }
+
+  .reader-demo__langpill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary, #4ade80);
+  }
+
+  .reader-demo__langselect {
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+    font-weight: 600;
+    color: inherit;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    border-radius: 999px;
+    padding: 5px 30px 5px 14px;
+    cursor: pointer;
+    max-width: 220px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .reader-demo__langselect:hover {
+    background: rgba(74, 222, 128, 0.18);
+    border-color: rgba(74, 222, 128, 0.6);
+  }
+
+  .reader-demo__langselect:focus-visible {
+    outline: 2px solid var(--primary, #4ade80);
+    outline-offset: 2px;
+  }
+
+  /* While the new pair is generated on the backend the reader shows Loading… */
+  .reader-demo__langselect:disabled {
+    opacity: 0.55;
+    cursor: progress;
+  }
+
+  /* Some browsers inherit the select's colors into the native option list. */
+  .reader-demo__langselect option {
+    color: #1a2332;
+    background: #fff;
+  }
+
+  .reader-demo__langarrow {
+    position: absolute;
+    right: 11px;
+    pointer-events: none;
   }
 
   .reader-demo__phone-wrap {
@@ -324,6 +445,7 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   const readerRoot = document.querySelector<HTMLElement>('.reader-demo');
   const INITIAL_TGT = readerRoot?.dataset.targetLang || 'de';
   const INITIAL_TRN = readerRoot?.dataset.uiLang || 'en';
+  const trnSelect = document.getElementById('readerTrnLang') as HTMLSelectElement | null;
   // Screenshot mode: render one clean frame (tapped word + highlighted
   // translation) and signal readiness via window.__shotReady, no animation.
   const STILL = readerRoot?.dataset.still === '1';
@@ -430,6 +552,12 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
     if (listenBtn) listenBtn.style.display = 'none';
     const fingerEl = document.getElementById('readerFinger');
     if (fingerEl) fingerEl.classList.remove('is-visible');
+    // A miss on the pages2 cache is generated synchronously, so the switch can
+    // take a few seconds; block further switching until this one lands.
+    if (trnSelect) {
+      trnSelect.value = trnLang;
+      trnSelect.disabled = true;
+    }
 
     try {
       // v2: one call returns orig (target lang) + trans (ui lang) paired, with
@@ -495,6 +623,9 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
     } catch (e) {
       if (requestId !== currentRequestId) return;
       console.error('ReaderDemo: failed to load book data', e);
+    } finally {
+      // Only the load that still owns the reader may hand the picker back.
+      if (trnSelect && requestId === currentRequestId) trnSelect.disabled = false;
     }
   }
 
@@ -735,6 +866,13 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   window.__lingoseven_reloadReader = function (newTrnLang) {
     loadAndRender(INITIAL_TGT, newTrnLang);
   };
+
+  // Built-in picker (every page that does not bring its own dropdown).
+  if (trnSelect) {
+    trnSelect.addEventListener('change', function () {
+      loadAndRender(INITIAL_TGT, trnSelect.value);
+    });
+  }
 
   loadAndRender(INITIAL_TGT, INITIAL_TRN);
 </script>
