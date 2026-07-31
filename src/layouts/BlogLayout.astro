@@ -3,10 +3,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import BaseLayout from './BaseLayout.astro';
 import CtaButtons from '../components/CtaButtons.astro';
+import InlineLangMenu from '../components/InlineLangMenu.astro';
+import InlineLangTrigger from '../components/InlineLangTrigger.astro';
 import ReaderDemo from '../components/ReaderDemo.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
+import StoreLinksRow from '../components/StoreLinksRow.astro';
 import { getPlayListing } from '../utils/storeListing';
-import { appRating } from '../data/appRating';
+import { getEnabledLanguages } from '../data/languages';
+import { languageNames } from '../data/languageNames';
 import '../styles/blog.css';
 
 interface RelatedPost {
@@ -76,9 +80,18 @@ const showEnrichment = uiLang === 'en';
 // the language-agnostic book lists that have no targetLang.
 const isBookList = category === 'book-lists';
 const earlyCtaTitle = isBookList
-  ? 'Read these books with parallel translation'
-  : 'Try reading with parallel translation';
+  ? 'Read these books with {uiLang} translation'
+  : 'Try reading with {uiLang} translation';
 const demoLang = targetLang ?? 'de';
+// An English book would make a degenerate en-en pair; demo en->es instead.
+const earlyCtaTrnLang = demoLang === 'en' ? 'es' : 'en';
+const earlyCtaTrnName = languageNames['en']?.[earlyCtaTrnLang] ?? earlyCtaTrnLang;
+// The book language itself would make a degenerate pair, so it is not offered.
+const earlyCtaLanguages = getEnabledLanguages()
+  .filter((lang) => lang.code !== demoLang)
+  .map((lang) => ({ code: lang.code, name: languageNames['en']?.[lang.code] ?? lang.name }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'en'));
+const [earlyCtaTitleBefore, earlyCtaTitleAfter] = earlyCtaTitle.split('{uiLang}');
 const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '');
 const faqLabel = translations['blog_faq_title'] ?? 'Frequently asked questions';
 const summaryLabel = translations['blog_quick_answer'] ?? 'Quick answer';
@@ -247,23 +260,22 @@ const ogArticle = {
     {showEnrichment && (
       <aside class="book-list-cta">
         <div class="book-list-cta-copy">
-          <p class="book-list-cta-title">{earlyCtaTitle}</p>
+          <p class="book-list-cta-title">{earlyCtaTitleBefore}<InlineLangTrigger name={earlyCtaTrnName} />{earlyCtaTitleAfter}</p>
           <p class="book-list-cta-text">
             Lingo7 shows a book and its translation side by side. Import an EPUB or PDF,
             or pick a book from the catalog, then tap any word for an instant translation
             and audio.
           </p>
-          <CtaButtons />
-          <p class="book-list-cta-rating">
-            ★ {appRating.ratingValue} of {appRating.bestRating} on the App Store and Google Play
-          </p>
+          <InlineLangMenu languages={earlyCtaLanguages} current={earlyCtaTrnLang} />
+          <StoreLinksRow />
         </div>
         {demoLang && (
           <div class="book-list-cta-demo">
             {/* The live app demo, same widget as the learn pages: a real book in
                 the post's language (the default German book on non-book-list
-                posts) with English parallel text. */}
-            <ReaderDemo targetLang={demoLang} uiLang="en" />
+                posts) with parallel text in the language picked in the title
+                dropdown. */}
+            <ReaderDemo targetLang={demoLang} uiLang={earlyCtaTrnLang} langPicker={false} />
           </div>
         )}
       </aside>
@@ -316,4 +328,9 @@ const ogArticle = {
       readMoreText={readMoreText}
     />
   </main>
+
+  <script>
+    import { initInlineLangPicker } from '../scripts/inlineLangPicker';
+    document.querySelectorAll('.book-list-cta').forEach((el) => initInlineLangPicker(el as HTMLElement));
+  </script>
 </BaseLayout>

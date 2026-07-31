@@ -1,0 +1,64 @@
+---
+// The in-text half of the inline translation-language dropdown: the current
+// language name rendered green with a dotted underline and a chevron, sitting
+// inside a heading or paragraph. Pairs with InlineLangMenu (a sibling of that
+// heading) and is wired up by scripts/inlineLangPicker.ts.
+// The learn pages' FeaturesSlider keeps its own copy of this pattern because
+// its dropdown also rewrites the surrounding marketing copy.
+interface Props {
+  /** Localized name of the currently selected translation language. */
+  name: string;
+}
+const { name } = Astro.props;
+---
+
+<button type="button" class="ilp-trigger" aria-haspopup="listbox" aria-expanded="false">
+  <span class="ilp-name">{name}</span>
+  <svg class="ilp-arrow" width="14" height="14" viewBox="0 0 20 20" aria-hidden="true">
+    <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</button>
+
+<style>
+  .ilp-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: var(--primary, #4ade80);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.18em;
+    vertical-align: baseline;
+    line-height: inherit;
+  }
+
+  .ilp-trigger:hover { color: #6ee497; }
+  .ilp-trigger:focus { outline: none; }
+  .ilp-trigger:focus-visible {
+    outline: 2px solid var(--primary, #4ade80);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .ilp-name {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.18em;
+  }
+
+  .ilp-arrow {
+    flex-shrink: 0;
+    width: 0.7em;
+    height: 0.7em;
+    transition: transform 0.2s ease;
+    align-self: center;
+    transform: translateY(0.05em);
+  }
+  .ilp-trigger[aria-expanded="true"] .ilp-arrow {
+    transform: rotate(180deg) translateY(-0.05em);
+  }
+</style>

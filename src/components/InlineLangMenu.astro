@@ -1,0 +1,66 @@
+---
+// Dropdown list for the inline in-text language picker (InlineLangTrigger).
+// Must be a sibling of the heading that holds the trigger, not a child: a
+// <ul> inside a <p> would close the paragraph. Positioned against its parent
+// element (which must be positioned) by scripts/inlineLangPicker.ts.
+interface Props {
+  languages: { code: string; name: string }[];
+  /** Code of the currently selected translation language. */
+  current: string;
+}
+const { languages, current } = Astro.props;
+---
+
+<ul class="ilp-menu" role="listbox" hidden>
+  {languages.map((lang) => (
+    <li role="option" class={lang.code === current ? 'is-selected' : ''} data-code={lang.code} tabindex="-1">{lang.name}</li>
+  ))}
+</ul>
+
+<style>
+  .ilp-menu {
+    position: absolute;
+    z-index: 50;
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+    background: #243248;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    max-height: 320px;
+    overflow-y: auto;
+    min-width: 220px;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .ilp-menu[hidden] { display: none; }
+
+  .ilp-menu li {
+    padding: 8px 16px;
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+
+  .ilp-menu li:hover,
+  .ilp-menu li:focus {
+    background: rgba(74, 222, 128, 0.1);
+    outline: none;
+  }
+
+  .ilp-menu li.is-selected {
+    color: var(--primary, #4ade80);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .ilp-menu {
+      min-width: 200px;
+      max-height: 260px;
+    }
+  }
+</style>

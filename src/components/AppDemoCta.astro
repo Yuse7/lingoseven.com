@@ -1,15 +1,24 @@
 ---
-// App CTA card with the live reader demo: copy + store buttons + rating on the
-// left, a scaled-down ReaderDemo phone on the right. Same pattern as the blog
-// book-list CTA (BlogLayout .book-list-cta), extracted for reuse on compare,
-// best-apps, home and the blog listing.
+// App CTA card with the live reader demo: copy + small store links + rating
+// on the left, a scaled-down ReaderDemo phone on the right. Same pattern as
+// the blog early CTA (BlogLayout .book-list-cta), extracted for reuse on
+// compare, best-apps, home and the blog listing.
+// A `{uiLang}` placeholder in `title` or `text` becomes the inline
+// translation-language dropdown (same pattern as the learn pages' H2 one) and
+// the ReaderDemo's own picker is turned off; without a placeholder the widget
+// keeps its own picker above the phone (e.g. the localized blog listing).
 // Max one per page: ReaderDemo's script binds to the first `.reader-demo`.
-import CtaButtons from './CtaButtons.astro';
+import InlineLangMenu from './InlineLangMenu.astro';
+import InlineLangTrigger from './InlineLangTrigger.astro';
 import ReaderDemo from './ReaderDemo.astro';
-import { appRating } from '../data/appRating';
+import StoreLinksRow from './StoreLinksRow.astro';
+import { getEnabledLanguages } from '../data/languages';
+import { languageNames } from '../data/languageNames';
 
 interface Props {
+  /** May carry one `{uiLang}` placeholder for the inline language dropdown. */
   title: string;
+  /** Same `{uiLang}` treatment; the title's placeholder wins if both have one. */
   text: string;
   /** Language of the demo book (the language being learned). */
   targetLang?: string;
@@ -21,21 +30,50 @@ const { title, text, targetLang = 'de', uiLang = 'en' } = Astro.props;
 // identical), e.g. the English page of a per-language cluster; shift the
 // translation side instead.
 const trnLang = uiLang === targetLang ? (targetLang === 'en' ? 'es' : 'en') : uiLang;
+
+const PLACEHOLDER = '{uiLang}';
+const titleIdx = title.indexOf(PLACEHOLDER);
+const textIdx = titleIdx < 0 ? text.indexOf(PLACEHOLDER) : -1;
+const hasInlinePicker = titleIdx >= 0 || textIdx >= 0;
+
+const trnLangName =
+  languageNames[uiLang]?.[trnLang] ?? languageNames['en']?.[trnLang] ?? trnLang;
+// The book language itself would make a degenerate pair, so it is not offered.
+const dropdownLanguages = hasInlinePicker
+  ? getEnabledLanguages()
+      .filter((lang) => lang.code !== targetLang)
+      .map((lang) => ({
+        code: lang.code,
+        name: languageNames[uiLang]?.[lang.code] ?? languageNames['en']?.[lang.code] ?? lang.name,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name, uiLang))
+  : [];
 ---
 
 <aside class="app-demo-cta">
   <div class="adc-copy">
-    <h2 class="adc-title">{title}</h2>
-    <p class="adc-text">{text}</p>
-    <CtaButtons />
-    <p class="adc-rating">
-      ★ {appRating.ratingValue} of {appRating.bestRating} on the App Store and Google Play
+    <h2 class="adc-title">
+      {titleIdx >= 0
+        ? <>{title.slice(0, titleIdx)}<InlineLangTrigger name={trnLangName} />{title.slice(titleIdx + PLACEHOLDER.length)}</>
+        : title}
+    </h2>
+    <p class="adc-text">
+      {textIdx >= 0
+        ? <>{text.slice(0, textIdx)}<InlineLangTrigger name={trnLangName} />{text.slice(textIdx + PLACEHOLDER.length)}</>
+        : text}
     </p>
+    {hasInlinePicker && <InlineLangMenu languages={dropdownLanguages} current={trnLang} />}
+    <StoreLinksRow />
   </div>
-  <div class="adc-demo">
-    <ReaderDemo targetLang={targetLang} uiLang={trnLang} menuLang={uiLang} />
+  <div class:list={['adc-demo', !hasInlinePicker && 'adc-demo--picker']}>
+    <ReaderDemo targetLang={targetLang} uiLang={trnLang} langPicker={!hasInlinePicker} menuLang={uiLang} />
   </div>
 </aside>
+
+<script>
+  import { initInlineLangPicker } from '../scripts/inlineLangPicker';
+  document.querySelectorAll('.app-demo-cta').forEach((el) => initInlineLangPicker(el as HTMLElement));
+</script>
 
 <style>
   .app-demo-cta {
@@ -52,12 +90,21 @@ const trnLang = uiLang === targetLang ? (targetLang === 'en' ? 'es' : 'en') : ui
     text-align: left;
   }
 
-  /* The ReaderDemo phone is 320x640, plus a 40px language picker on top; scale
-     it down without leaving layout gaps (transform keeps the layout box, the
-     negative margins reclaim it). */
+  /* Anchors the InlineLangMenu dropdown. */
+  .adc-copy {
+    position: relative;
+  }
+
+  /* The ReaderDemo phone is 320x640; scale it down without leaving layout gaps
+     (transform keeps the layout box, the negative margins reclaim it). */
   .adc-demo {
     transform: scale(0.8);
     transform-origin: center;
+    margin: -64px -32px;
+  }
+
+  /* With the widget's own 40px language picker on top the box is 680px tall. */
+  .adc-demo--picker {
     margin: -68px -32px;
   }
 
@@ -88,28 +135,5 @@ const trnLang = uiLang === targetLang ? (targetLang === 'en' ? 'es' : 'en') : ui
     font-size: 0.95rem;
     line-height: 1.6;
     margin: 0 0 16px;
-  }
-
-  .adc-copy :global(.cta-buttons) {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .adc-copy :global(.btn-outline) {
-    background: transparent;
-    color: #ffffff;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .adc-copy :global(.btn-outline:hover) {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
-  }
-
-  .adc-rating {
-    color: var(--text-light, rgba(255, 255, 255, 0.6));
-    font-size: 0.85rem;
-    margin: 12px 0 0;
   }
 </style>
