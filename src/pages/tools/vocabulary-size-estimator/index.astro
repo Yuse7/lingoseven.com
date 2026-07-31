@@ -15,13 +15,13 @@ const langs = VOCAB_LANG_CODES.filter((code) => codeToSlug[code]).map((code) => 
 const canonicalUrl = 'https://lingoseven.com/tools/vocabulary-size-estimator/';
 const title = 'Vocabulary Size Test, How Many Words Do You Know? | Lingo7';
 const description =
-  `Free vocabulary size test. Pick your language and estimate how many words you know, from beginner to near-native, with a frequency-based check that corrects for guessing. ${langs.length} languages.`;
+  `Free vocabulary size test. Pick your language, answer yes or no to 60 words one at a time, and see how many words you know, from beginner to near-native. ${langs.length} languages.`;
 
 const faq = [
   {
     question: 'What is a vocabulary size test?',
     answer:
-      'It estimates how many words you know in a language. You check the words you recognise from a list sampled across the whole frequency range, from the most common words to rare ones. The share you know in each band is scaled up to the size of that band and summed. Hidden made-up words catch over-claiming, so the number stays honest.',
+      'It estimates how many words you know in a language. You see 60 words one at a time and answer yes or no to each. The words are sampled across the whole frequency range, from the most common to rare ones. The share you know in each band is scaled up to the size of that band and summed. Made-up words mixed into the sequence catch over-claiming, so the number stays honest.',
   },
   {
     question: 'Which languages can I test?',
@@ -81,15 +81,14 @@ const jsonLd = [
         <p class="vocab-eyebrow">Free tool</p>
         <h1>How many words do you know?</h1>
         <p class="vocab-intro">
-          Estimate your vocabulary size in any of {langs.length} languages. You'll check the words you know from a
-          list sampled across the whole frequency range, the test scales that up to a total and
-          corrects for guessing. Pick a language to begin.
+          Estimate your vocabulary size in any of {langs.length} languages: 60 words one at a time,
+          yes or no. Pick a language to begin.
         </p>
       </header>
 
       <ToolDirectAnswer
         lead={`Vocabulary size is the number of word families you recognize: a B1 speaker knows roughly 2,000 to 3,000, a B2 reader 8,000 to 9,000, and an educated native speaker 15,000 to 20,000.`}
-        body={`This free test estimates yours in ${langs.length} languages in about a minute, sampling words across six frequency bands and correcting for guessing with hidden pseudowords.`}
+        body={`This free test estimates yours in ${langs.length} languages in about a minute: 60 words shown one at a time, yes or no, sampled across six frequency bands, with hidden pseudowords to correct for guessing.`}
       />
 
       <div class="lang-grid">
@@ -107,12 +106,14 @@ const jsonLd = [
         <p>
           Each language's words are sorted by <strong>frequency</strong>, how often they appear in
           real usage, and split into six bands, from the 600 most common words down to words ranked
-          around 25,000th. You see eight words from each band and check the ones you know.
+          around 25,000th. You see eight words from each band, one word per screen, and answer yes
+          or no to each.
         </p>
         <p>
           The share you know in a band is scaled up to the whole band, and the bands are summed.
-          The list also hides <strong>invented words</strong> that look real but aren't; ticking
-          those tells the test you're guessing, and it scales your score down to match. The result is
+          Mixed into the same sequence are <strong>invented words</strong> that look real but
+          aren't; saying yes to those tells the test you're guessing, and it scales your score down
+          to match. The result is
           an honest estimate, plus a level and a breakdown of where your vocabulary thins out.
         </p>
       </div>
