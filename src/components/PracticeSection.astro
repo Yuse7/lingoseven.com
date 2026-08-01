@@ -929,6 +929,26 @@ const practiceData = {
         }
     }
 
+    /* Narrow phones: the nowrap tabs alone are wider than the screen, so let
+       them stack and wrap, and let the phone shrink with the viewport. */
+    @media (max-width: 480px) {
+        .practice-layout {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .exercise-tabs {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .ex-tab {
+            white-space: normal;
+        }
+
+        .phone-bezel {
+            width: min(260px, 100%);
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .ex-panel,
         .ex-desc.active,

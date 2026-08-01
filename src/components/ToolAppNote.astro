@@ -111,7 +111,7 @@ const dropdownLanguages = hasInlinePicker
 
   @media (max-width: 768px) {
     .tool-app-note {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       justify-items: center;
     }
     .tan-copy {
@@ -121,6 +121,14 @@ const dropdownLanguages = hasInlinePicker
     .tan-demo {
       transform: none;
       margin: 8px 0 0;
+      max-width: 100%;
+    }
+  }
+
+  /* Narrow phones: give the note's content the padding back. */
+  @media (max-width: 480px) {
+    .tool-app-note {
+      padding: 16px;
     }
   }
   .tan-label {

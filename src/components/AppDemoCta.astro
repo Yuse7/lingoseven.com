@@ -110,7 +110,7 @@ const dropdownLanguages = hasInlinePicker
 
   @media (max-width: 768px) {
     .app-demo-cta {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       justify-items: center;
     }
     .adc-copy {
@@ -120,6 +120,14 @@ const dropdownLanguages = hasInlinePicker
     .adc-demo {
       transform: none;
       margin: 8px 0 0;
+      max-width: 100%;
+    }
+  }
+
+  /* Narrow phones: give the card's content the padding back. */
+  @media (max-width: 480px) {
+    .app-demo-cta {
+      padding: 16px;
     }
   }
 

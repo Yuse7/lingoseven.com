@@ -196,6 +196,9 @@ body {
 h1, h2, h3, h4 {
     color: var(--secondary);
     line-height: 1.2;
+    /* Long words (Recommendations, compound German nouns) would otherwise run
+       off the screen on narrow phones. */
+    overflow-wrap: break-word;
 }
 
 h1 {
@@ -2122,6 +2125,11 @@ h3 {
 }
 
 @media (max-width: 480px) {
+    /* Narrow phones need the horizontal space more than the gutter. */
+    .container {
+        padding: 0 16px;
+    }
+
     .hero-stats {
         flex-direction: column;
         gap: 24px;

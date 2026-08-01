@@ -271,7 +271,7 @@
 
 @media (max-width: 768px) {
   .book-list-cta {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     justify-items: center;
     text-align: left;
   }
@@ -282,6 +282,14 @@
   .book-list-cta-demo {
     transform: none;
     margin: 8px 0 0;
+    max-width: 100%;
+  }
+}
+
+/* Narrow phones: give the card's content the padding back. */
+@media (max-width: 480px) {
+  .book-list-cta {
+    padding: 16px;
   }
 }
 

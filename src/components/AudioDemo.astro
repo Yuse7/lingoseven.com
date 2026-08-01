@@ -67,6 +67,8 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
     display: flex;
     justify-content: center;
     align-items: center;
+    /* Phone width; frame height is 2x it, the shell SVG adds 6px on each side. */
+    --phone-w: 320px;
   }
 
   .audio-demo__phone-wrap {
@@ -78,8 +80,8 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
 
   .audio-demo__shell {
     position: absolute;
-    width: 332px;
-    height: 645px;
+    width: calc(var(--phone-w) + 12px);
+    height: calc(var(--phone-w) * 2 + 6px);
     top: -2px;
     left: -6px;
     z-index: 20;
@@ -87,8 +89,8 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   }
 
   .audio-demo__frame {
-    width: 320px;
-    height: 640px;
+    width: var(--phone-w);
+    height: calc(var(--phone-w) * 2);
     background: #fff;
     border-radius: 36px;
     overflow: hidden;
@@ -320,21 +322,24 @@ const { targetLang = 'de', uiLang = 'en', still = false } = Astro.props;
   }
 
   @media (max-width: 768px) {
-    .audio-demo__frame {
-      width: 260px;
-      height: 520px;
-      border-radius: 30px;
+    .audio-demo {
+      --phone-w: 260px;
     }
-    .audio-demo__shell {
-      width: 272px;
-      height: 530px;
-      left: -5px;
-      top: -2px;
+    .audio-demo__frame {
+      border-radius: 30px;
     }
     .audio-reader__mute-banner {
       bottom: 34px;
       font-size: 10px;
       padding: 6px 12px;
+    }
+  }
+
+  /* Below ~340px the 260px phone no longer fits inside the section padding,
+     so let it shrink with the viewport. */
+  @media (max-width: 480px) {
+    .audio-demo {
+      --phone-w: min(260px, calc(100vw - 80px));
     }
   }
 </style>

@@ -1340,9 +1340,28 @@ const stackCovers = [
   }
 
   @media (max-width: 480px) {
+    .anybook-card-inner {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 32px 20px;
+    }
+
     .anybook-stack {
-      width: 260px;
+      width: min(260px, 100%);
       transform: scale(0.92);
+    }
+
+    /* A long localized "or" line would otherwise push past the screen. */
+    .library-or-divider-text {
+      white-space: normal;
+      text-align: center;
+    }
+  }
+
+  /* The fanned covers stick out well past the stack box, so on the narrowest
+     phones the whole fan is scaled down instead of being cut by the screen. */
+  @media (max-width: 380px) {
+    .anybook-stack {
+      transform: scale(0.78);
     }
   }
 </style>

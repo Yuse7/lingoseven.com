@@ -109,6 +109,8 @@ const pickerLangs = showPicker
     justify-content: center;
     align-items: center;
     gap: 8px;
+    /* Phone width; frame height is 2x it, the shell SVG adds 6px on each side. */
+    --phone-w: 320px;
   }
 
   /* Translation-language picker. Its box is a fixed 32px + the 8px gap, the
@@ -188,8 +190,8 @@ const pickerLangs = showPicker
 
   .reader-demo__shell {
     position: absolute;
-    width: 332px;
-    height: 645px;
+    width: calc(var(--phone-w) + 12px);
+    height: calc(var(--phone-w) * 2 + 6px);
     top: -2px;
     left: -6px;
     z-index: 20;
@@ -197,8 +199,8 @@ const pickerLangs = showPicker
   }
 
   .reader-demo__frame {
-    width: 320px;
-    height: 640px;
+    width: var(--phone-w);
+    height: calc(var(--phone-w) * 2);
     background: #fff;
     border-radius: 36px;
     overflow: hidden;
@@ -413,16 +415,20 @@ const pickerLangs = showPicker
   }
 
   @media (max-width: 768px) {
+    .reader-demo {
+      --phone-w: 260px;
+    }
     .reader-demo__frame {
-      width: 260px;
-      height: 520px;
       border-radius: 30px;
     }
-    .reader-demo__shell {
-      width: 272px;
-      height: 530px;
-      left: -5px;
-      top: -2px;
+  }
+
+  /* Below ~340px the 260px phone no longer fits inside the promo cards that
+     host it (page padding + card padding + the shell overhang), so let it
+     shrink with the viewport instead of sticking out of the card. */
+  @media (max-width: 480px) {
+    .reader-demo {
+      --phone-w: min(260px, calc(100vw - 80px));
     }
   }
 

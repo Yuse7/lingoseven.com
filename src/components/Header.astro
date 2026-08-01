@@ -31,13 +31,18 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
       <img src="/images/logo.svg" alt="Lingo7" class="logo-img" />
     </a>
 
-    {showNav && (
-      <ul class="nav-links">
-        <li><a href="#features">{navFeatures}</a></li>
-        <li><a href="#audio">{navAudio}</a></li>
-        <li><a href="#adaptation">{navPractice}</a></li>
-      </ul>
-    )}
+    <ul class:list={['nav-links', !showNav && 'nav-links--compact']}>
+      {showNav && (
+        <>
+          <li><a href="#features">{navFeatures}</a></li>
+          <li><a href="#audio">{navAudio}</a></li>
+          <li><a href="#adaptation">{navPractice}</a></li>
+        </>
+      )}
+      {/* Narrow screens have no room for these in the bar, so they move here. */}
+      {blogUrl && <li class="nav-link-compact"><a href={blogUrl}>{blogLabel}</a></li>}
+      <li class="nav-link-compact"><a href="/tools/">{toolsLabel}</a></li>
+    </ul>
 
     {blogUrl && (
       <a href={blogUrl} class="header-blog-link">{blogLabel}</a>
@@ -128,10 +133,42 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
     color: var(--primary);
   }
 
-  @media (max-width: 480px) {
+  /* The burger menu only carries the Blog/Tools links on narrow screens; on
+     wider ones the list would be empty unless the page has section links. */
+  .nav-links--compact {
+    display: none;
+  }
+
+  .nav-link-compact {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    /* The bullet separators only make sense in the horizontal desktop row. */
+    .nav-links li::after {
+      content: none;
+    }
+
+    /* Both links move into the burger menu, which otherwise has nothing to
+       open on pages without section links. */
+    .header-blog-link,
     .header-tools-link {
-      max-width: 72px;
-      font-size: 0.85rem;
+      display: none;
+    }
+
+    .nav-links--compact,
+    .nav-link-compact {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav {
+      gap: 10px;
+    }
+
+    .logo-img {
+      height: 32px;
     }
   }
 
