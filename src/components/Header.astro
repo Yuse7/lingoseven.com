@@ -16,13 +16,15 @@ interface Props {
 
 const { translations, uiLang = 'en', uiLanguages, showNav = false, blogUrl } = Astro.props;
 const blogLabel = translations?.['blog_nav'] ?? 'Blog';
-const toolsLabel = translations?.['footer_tools'] ?? 'Tools';
+// Tools are reachable from the footer; the bar keeps only what fits on a phone.
 
 const navFeatures = translations?.['nav_features'] ?? 'Parallel reading';
 const navAudio = translations?.['nav_audio'] ?? 'Audio';
 const navPractice = translations?.['nav_practice'] ?? 'Adaptation';
 
 const currentLang = uiLanguages?.find((l) => l.code === uiLang);
+// Without either of these the burger would open an empty sheet, so it is hidden.
+const hasMenu = showNav || !!blogUrl;
 ---
 
 <header class="header">
@@ -31,24 +33,23 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
       <img src="/images/logo.svg" alt="Lingo7" class="logo-img" />
     </a>
 
-    <ul class:list={['nav-links', !showNav && 'nav-links--compact']}>
-      {showNav && (
-        <>
-          <li><a href="#features">{navFeatures}</a></li>
-          <li><a href="#audio">{navAudio}</a></li>
-          <li><a href="#adaptation">{navPractice}</a></li>
-        </>
-      )}
-      {/* Narrow screens have no room for these in the bar, so they move here. */}
-      {blogUrl && <li class="nav-link-compact"><a href={blogUrl}>{blogLabel}</a></li>}
-      <li class="nav-link-compact"><a href="/tools/">{toolsLabel}</a></li>
-    </ul>
+    {hasMenu && (
+      <ul class:list={['nav-links', !showNav && 'nav-links--compact']}>
+        {showNav && (
+          <>
+            <li><a href="#features">{navFeatures}</a></li>
+            <li><a href="#audio">{navAudio}</a></li>
+            <li><a href="#adaptation">{navPractice}</a></li>
+          </>
+        )}
+        {/* Narrow screens have no room for this in the bar, so it moves here. */}
+        {blogUrl && <li class="nav-link-compact"><a href={blogUrl}>{blogLabel}</a></li>}
+      </ul>
+    )}
 
     {blogUrl && (
       <a href={blogUrl} class="header-blog-link">{blogLabel}</a>
     )}
-
-    <a href="/tools/" class="header-tools-link">{toolsLabel}</a>
 
     <div class="header-actions">
       {uiLanguages && uiLanguages.length > 1 && (
@@ -96,7 +97,7 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
       </div>
     </div>
 
-    <button class="mobile-menu-btn" aria-label="Menu">
+    <button class:list={['mobile-menu-btn', !hasMenu && 'mobile-menu-btn--hidden']} aria-label="Menu">
       <span></span>
       <span></span>
       <span></span>
@@ -117,29 +118,18 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
     color: var(--primary);
   }
 
-  .header-tools-link {
-    color: var(--text);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.2s;
-    max-width: 120px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  .header-tools-link:hover {
-    color: var(--primary);
-  }
-
-  /* The burger menu only carries the Blog/Tools links on narrow screens; on
-     wider ones the list would be empty unless the page has section links. */
+  /* The burger menu only carries the Blog link on narrow screens; on wider
+     ones the list would be empty unless the page has section links. */
   .nav-links--compact {
     display: none;
   }
 
   .nav-link-compact {
+    display: none;
+  }
+
+  /* Nothing to open: no section links and no blog link. */
+  .mobile-menu-btn--hidden {
     display: none;
   }
 
@@ -149,10 +139,9 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
       content: none;
     }
 
-    /* Both links move into the burger menu, which otherwise has nothing to
+    /* The link moves into the burger menu, which otherwise has nothing to
        open on pages without section links. */
-    .header-blog-link,
-    .header-tools-link {
+    .header-blog-link {
       display: none;
     }
 
