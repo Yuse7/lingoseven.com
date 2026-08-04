@@ -5,7 +5,7 @@ import ToolAppNote from '../../../components/ToolAppNote.astro';
 import ToolsForLanguage from '../../../components/ToolsForLanguage.astro';
 import { getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
-import { idioms, IDIOM_LANGS, type Idiom } from '../../../data/idioms';
+import { idioms, idiomMeta, IDIOM_LANGS, type Idiom } from '../../../data/idioms';
 
 // One static page per language that has a curated idiom list.
 export function getStaticPaths() {
@@ -21,41 +21,86 @@ const name = lang?.name ?? code;
 const slug = codeToSlug[code];
 
 const list: Idiom[] = idioms[code];
+const meta = idiomMeta[code];
 const n = list.length;
+const isEn = code === 'en';
+
+// Per-idiom anchors so "what does X mean" queries land on the exact card.
+const anchorCount: Record<string, number> = {};
+const anchors = list.map((it) => {
+  const base = it.idiom
+    .toLowerCase()
+    .normalize('NFC')
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
+    .replace(/^-+|-+$/g, '');
+  const seen = anchorCount[base] ?? 0;
+  anchorCount[base] = seen + 1;
+  return seen ? `${base}-${seen + 1}` : base;
+});
+
+// Theme filter chips, in a fixed vocabulary order.
+const TAG_ORDER = ['character', 'emotions', 'money', 'work', 'love', 'talk', 'trouble', 'time', 'luck', 'everyday'];
+const themes = TAG_ORDER.filter((t) => list.some((it) => it.tags?.includes(t)));
+const themeLabel = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 
 // A representative idiom for the direct answer, FAQ, and explainer.
 const A = list[0];
 const hasLit = A.literal !== A.idiom; // English pages have no separate literal gloss.
 const Acap = A.idiom.charAt(0).toUpperCase() + A.idiom.slice(1);
-const first4 = list.slice(0, 4).map((it) => it.idiom).join(', ');
+const first5 = list.slice(0, 5).map((it) => it.idiom).join(', ');
+
+// First idiom with a close English counterpart, for the "how do you say X" FAQ.
+const E = list.find((it) => it.equivalent);
 
 // GEO "as of" stamp (computed at build so it stays current on every deploy).
 const updated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
 
 const canonicalUrl = `https://lingoseven.com/tools/common-idioms/${slug}/`;
 const title = `Common ${name} Idioms with Meanings and Examples | Lingo7`;
-const description =
-  `Learn ${n} common ${name} idioms with literal translations, real meanings, and example sentences. Understand the expressions natives actually use, then read them in real books.`;
+const description = isEn
+  ? `The ${n} most common English idioms ranked by frequency, each with its meaning and a real example sentence. Learn the expressions natives actually use.`
+  : `The ${n} most common ${name} idioms ranked by frequency, with literal translations, meanings, English equivalents, and example sentences with translations.`;
 
 const answerLead = `Common ${name} idioms are everyday expressions whose meaning cannot be guessed from the individual words.`;
 const answerBody = hasLit
-  ? `For example, ${A.idiom} literally means "${A.literal}" but is used to mean ${A.meaning}. This free tool lists ${n} real ${name} idioms, each with its literal translation, meaning, and an example sentence.`
-  : `For example, "${A.idiom}" means ${A.meaning}. This free tool lists ${n} common ${name} idioms, each with its meaning and an example sentence, so you learn the expressions natives actually use.`;
+  ? `For example, ${A.idiom} literally means "${A.literal}" but is used to mean ${A.meaning}. This free page ranks the ${n} most common ${name} idioms by how often you meet them, each with its literal translation, meaning, the closest English idiom where one exists, and an example sentence with an English translation.`
+  : `For example, "${A.idiom}" means ${A.meaning}. This free page ranks the ${n} most common ${name} idioms by how often you meet them, each with its meaning and a real example sentence, so you learn the expressions natives actually use.`;
 
-const inLang = code === 'en' ? '' : ` in ${name}`;
+const inLang = isEn ? '' : ` in ${name}`;
 
 const faq = [
   {
     question: `What are the most common idioms in ${name}?`,
     answer:
-      `Some of the most common ${name} idioms are ${first4}. Each one means something you could not guess from the words alone, which is exactly why learners have to meet them in context. This tool lists ${n} of them with their meaning and an example sentence.`,
+      `The most common ${name} idioms, ranked by everyday frequency, start with ${first5}. Each one means something you could not guess from the words alone, which is exactly why learners have to meet them in context. This page lists ${n} of them with meanings and example sentences.`,
   },
   {
     question: `What does "${A.idiom}" mean${inLang}?`,
     answer: hasLit
-      ? `In ${name}, "${A.idiom}" translates literally as "${A.literal}", but it actually means ${A.meaning}. You would use it like this: ${A.example}`
+      ? `In ${name}, "${A.idiom}" translates literally as "${A.literal}", but it actually means ${A.meaning}.` +
+        (A.equivalent ? ` The closest English idiom is "${A.equivalent}".` : '') +
+        ` Example: ${A.example}` +
+        (A.exampleEn ? ` ("${A.exampleEn}")` : '')
       : `"${A.idiom}" means ${A.meaning}. For example: ${A.example}`,
   },
+  ...(E && E.equivalent
+    ? [
+        {
+          question: `How do you say "${E.equivalent}" in ${name}?`,
+          answer:
+            `The ${name} equivalent is "${E.idiom}", literally "${E.literal}". Example: ${E.example}` +
+            (E.exampleEn ? ` ("${E.exampleEn}")` : ''),
+        },
+      ]
+    : []),
+  ...(meta && !isEn
+    ? [
+        {
+          question: `What do ${name} speakers call idioms and proverbs?`,
+          answer: `In ${name}, an idiom is called ${meta.idiomTerm}, and a proverb is ${meta.proverbTerm}. ${meta.termNote}`,
+        },
+      ]
+    : []),
   {
     question: `Why can't you translate ${name} idioms word for word?`,
     answer: hasLit
@@ -89,7 +134,8 @@ const jsonLd = [
       '@type': 'ListItem',
       position: i + 1,
       name: it.idiom,
-      description: it.meaning,
+      description: it.equivalent ? `${it.meaning} (English: ${it.equivalent})` : it.meaning,
+      url: `${canonicalUrl}#${anchors[i]}`,
     })),
   },
   {
@@ -133,31 +179,50 @@ const others = IDIOM_LANGS.filter((c) => c !== code && codeToSlug[c] && idioms[c
         <p class="idioms-eyebrow"><a href="/tools/common-idioms/">Common idioms</a></p>
         <h1>Common <span>{name}</span> idioms and what they really mean</h1>
         <p class="idioms-intro">
-          An idiom is a phrase you cannot translate word for word. Here are {n} of the most common {name}
-          idioms, each with its literal translation, real meaning, and an example sentence, so you know what
-          natives actually mean.
+          An idiom is a phrase you cannot translate word for word. Here are the {n} most common {name}
+          idioms, ranked by how often you will actually meet them, {isEn
+            ? 'each with its meaning and a real example sentence, so you know what the phrase actually means.'
+            : 'each with its literal translation, real meaning, the closest English idiom where one exists, and an example sentence with an English translation, so you know what natives actually mean.'}
         </p>
       </header>
 
       <ToolDirectAnswer lead={answerLead} body={answerBody} />
 
-      <div class="idioms-controls" role="group" aria-label="Choose a mode">
-        <span class="idioms-controls-label">Mode</span>
-        <div class="idioms-pills" id="idioms-pills">
-          <button type="button" class="idioms-pill is-active" data-mode="browse">Browse</button>
-          <button type="button" class="idioms-pill" data-mode="quiz">Quiz me</button>
+      <div class="idioms-controls" aria-label="Mode and theme">
+        <div class="idioms-controls-row" role="group" aria-label="Choose a mode">
+          <span class="idioms-controls-label">Mode</span>
+          <div class="idioms-pills" id="idioms-pills">
+            <button type="button" class="idioms-pill is-active" data-mode="browse">Browse</button>
+            <button type="button" class="idioms-pill" data-mode="quiz">Quiz me</button>
+          </div>
         </div>
+        {
+          themes.length > 1 && (
+            <div class="idioms-controls-row" role="group" aria-label="Filter by theme">
+              <span class="idioms-controls-label">Theme</span>
+              <div class="idioms-pills" id="idioms-themes">
+                <button type="button" class="idioms-pill idioms-pill--sm is-active" data-theme="all">All</button>
+                {themes.map((t) => (
+                  <button type="button" class="idioms-pill idioms-pill--sm" data-theme={t}>{themeLabel(t)}</button>
+                ))}
+              </div>
+            </div>
+          )
+        }
       </div>
 
-      <p class="idioms-caption" id="idioms-caption">All {n} {name} idioms, with meanings and examples.</p>
+      <p class="idioms-caption" id="idioms-caption">All {n} idioms, most common first.</p>
       <p class="idioms-note" id="idioms-note" hidden>Guess the meaning, then tap a card to check.</p>
       <p class="idioms-updated">Idiom list verified as of {updated}.</p>
 
       <div class="idioms-cards" id="idioms-cards">
         {
-          list.map((it) => (
-            <article class="idiom-card">
-              <p class="idiom-phrase" lang={code}>{it.idiom}</p>
+          list.map((it, i) => (
+            <article class="idiom-card" id={anchors[i]} data-tags={(it.tags ?? []).join(' ')}>
+              <p class="idiom-phrase" lang={code}>
+                <span class="idiom-num" aria-hidden="true">{i + 1}</span>
+                {it.idiom}
+              </p>
               {it.literal !== it.idiom && (
                 <p class="idiom-literal">
                   <span class="idiom-tag">Literally</span> {it.literal}
@@ -166,9 +231,20 @@ const others = IDIOM_LANGS.filter((c) => c !== code && codeToSlug[c] && idioms[c
               <p class="idiom-meaning">
                 <span class="idiom-tag idiom-tag--means">Means</span> {it.meaning}
               </p>
+              {it.equivalent && (
+                <p class="idiom-equal">
+                  <span class="idiom-tag idiom-tag--equal">English idiom</span> {it.equivalent}
+                </p>
+              )}
               <p class="idiom-example" lang={code}>
                 <span class="idiom-tag">Example</span> {it.example}
               </p>
+              {it.exampleEn && <p class="idiom-example-en">{it.exampleEn}</p>}
+              {it.note && (
+                <p class="idiom-usage">
+                  <span class="idiom-tag idiom-tag--note">Note</span> {it.note}
+                </p>
+              )}
             </article>
           ))
         }
@@ -251,27 +327,53 @@ const others = IDIOM_LANGS.filter((c) => c !== code && codeToSlug[c] && idioms[c
 
   <script>
     const grid = document.getElementById('idioms-cards') as HTMLElement;
-    const pills = Array.from(document.querySelectorAll<HTMLButtonElement>('.idioms-pill'));
+    const modePills = Array.from(document.querySelectorAll<HTMLButtonElement>('#idioms-pills .idioms-pill'));
+    const themePills = Array.from(document.querySelectorAll<HTMLButtonElement>('#idioms-themes .idioms-pill'));
     const caption = document.getElementById('idioms-caption') as HTMLElement;
     const note = document.getElementById('idioms-note') as HTMLElement;
     const cards = Array.from(document.querySelectorAll<HTMLElement>('.idiom-card'));
     const N = cards.length;
 
-    function setMode(mode: string) {
-      const quiz = mode === 'quiz';
+    let quiz = false;
+    let theme = 'all';
+
+    function refresh() {
       grid.classList.toggle('is-quiz', quiz);
       if (!quiz) cards.forEach((c) => c.classList.remove('is-revealed'));
       note.hidden = !quiz;
-      caption.textContent = quiz
-        ? 'Guess each meaning, then tap the card to check.'
-        : `All ${N} idioms, with meanings and examples.`;
+
+      let visible = 0;
+      cards.forEach((card) => {
+        const show = theme === 'all' || (card.dataset.tags || '').split(' ').includes(theme);
+        card.classList.toggle('is-hidden', !show);
+        if (show) visible++;
+      });
+
+      if (quiz) {
+        caption.textContent = 'Guess each meaning, then tap the card to check.';
+      } else if (theme === 'all') {
+        caption.textContent = `All ${N} idioms, most common first.`;
+      } else {
+        const label = theme.charAt(0).toUpperCase() + theme.slice(1);
+        caption.textContent = `Showing ${visible} of ${N} idioms (${label}).`;
+      }
     }
 
-    pills.forEach((pill) => {
+    modePills.forEach((pill) => {
       pill.addEventListener('click', () => {
-        pills.forEach((p) => p.classList.remove('is-active'));
+        modePills.forEach((p) => p.classList.remove('is-active'));
         pill.classList.add('is-active');
-        setMode(pill.dataset.mode || 'browse');
+        quiz = pill.dataset.mode === 'quiz';
+        refresh();
+      });
+    });
+
+    themePills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        themePills.forEach((p) => p.classList.remove('is-active'));
+        pill.classList.add('is-active');
+        theme = pill.dataset.theme || 'all';
+        refresh();
       });
     });
 
@@ -297,8 +399,11 @@ const others = IDIOM_LANGS.filter((c) => c !== code && codeToSlug[c] && idioms[c
   .idioms-intro { color: var(--text-muted, #9fb0c3); font-size: 1.05rem; line-height: 1.6; margin: 0; }
 
   .idioms-controls {
-    display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+    display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
     max-width: 760px; margin: 2.2rem auto 0;
+  }
+  .idioms-controls-row {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.7rem;
   }
   .idioms-controls-label {
     font-size: 0.82rem; color: var(--text-muted, #9fb0c3); font-weight: 600;
@@ -310,6 +415,7 @@ const others = IDIOM_LANGS.filter((c) => c !== code && codeToSlug[c] && idioms[c
     background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 999px; padding: 0.5rem 1.1rem; transition: all 0.12s ease;
   }
+  .idioms-pill--sm { padding: 0.35rem 0.85rem; font-size: 0.88rem; font-weight: 600; }
   .idioms-pill:hover { border-color: var(--primary); color: var(--primary); }
   .idioms-pill.is-active {
     background: var(--primary); color: #0b1120; border-color: var(--primary);
@@ -342,25 +448,46 @@ const others = IDIOM_LANGS.filter((c) => c !== code && codeToSlug[c] && idioms[c
     display: flex; flex-direction: column; gap: 0.35rem;
     background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px; padding: 1.1rem 1.2rem;
+    scroll-margin-top: 100px;
   }
+  .idiom-card:target { border-color: var(--primary); }
+  .idiom-card.is-hidden { display: none; }
   .idioms-cards.is-quiz .idiom-card { cursor: pointer; }
   .idiom-phrase {
     margin: 0; font-size: 1.15rem; font-weight: 700; color: var(--text, #e8eef5); line-height: 1.3;
   }
+  .idiom-num {
+    display: inline-block; min-width: 1.7em; margin-right: 0.45rem; text-align: center;
+    font-size: 0.7rem; font-weight: 700; line-height: 1.7em; vertical-align: 0.2em;
+    color: var(--primary); background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.25); border-radius: 999px;
+  }
   .idiom-literal, .idiom-example {
     margin: 0; font-size: 0.88rem; line-height: 1.5; color: var(--text-muted, #9fb0c3); font-style: italic;
   }
+  .idiom-example-en {
+    margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--text-muted, #9fb0c3); opacity: 0.85;
+  }
   .idiom-meaning { margin: 0.1rem 0; font-size: 0.98rem; line-height: 1.5; color: var(--text, #e8eef5); }
+  .idiom-equal { margin: 0; font-size: 0.92rem; line-height: 1.5; color: var(--text, #e8eef5); }
+  .idiom-usage { margin: 0.1rem 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--text-muted, #9fb0c3); }
   .idiom-tag {
     display: inline-block; margin-right: 0.35rem; font-size: 0.66rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted, #9fb0c3);
     font-style: normal;
   }
   .idiom-tag--means { color: var(--primary); }
-  /* Quiz mode: blur the meaning until the card is tapped. The text stays in the DOM
-     (default state has no .is-quiz class), so the page is fully indexable with JS off. */
-  .idioms-cards.is-quiz .idiom-meaning { filter: blur(6px); transition: filter 0.15s ease; }
-  .idioms-cards.is-quiz .idiom-card.is-revealed .idiom-meaning { filter: none; }
+  .idiom-tag--equal { color: var(--primary); }
+  .idiom-tag--note { color: var(--accent, #f97316); }
+  /* Quiz mode: blur everything that gives the meaning away until the card is tapped.
+     The text stays in the DOM (default state has no .is-quiz class), so the page is
+     fully indexable with JS off. */
+  .idioms-cards.is-quiz :is(.idiom-meaning, .idiom-equal, .idiom-example-en, .idiom-usage) {
+    filter: blur(6px); transition: filter 0.15s ease;
+  }
+  .idioms-cards.is-quiz .idiom-card.is-revealed :is(.idiom-meaning, .idiom-equal, .idiom-example-en, .idiom-usage) {
+    filter: none;
+  }
 
   .idioms-explainer { max-width: 760px; margin: 3rem auto 0; }
   .idioms-explainer h2 { font-size: 1.5rem; margin: 0 0 1rem; }

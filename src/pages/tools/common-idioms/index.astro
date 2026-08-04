@@ -27,7 +27,7 @@ const sample = idioms['en']?.[0];
 const canonicalUrl = 'https://lingoseven.com/tools/common-idioms/';
 const title = 'Common Idioms with Meanings and Examples | Lingo7';
 const description =
-  `Browse ${totalIdioms} common idioms across ${langs.length} languages, each with its literal translation, real meaning, and an example sentence. Learn the expressions natives actually use.`;
+  `Browse ${totalIdioms} common idioms across ${langs.length} languages, ranked by frequency, each with its literal translation, real meaning, closest English idiom, and a translated example sentence.`;
 
 const faq = [
   {
@@ -94,16 +94,17 @@ const jsonLd = [
         <h1>Common idioms and what they really mean</h1>
         <p class="idioms-intro">
           Idioms are the phrases you cannot translate word for word, and they are everywhere in real speech.
-          Pick a language and get the most common idioms, each with its literal translation, real meaning, and
-          an example sentence. Every entry is a real expression natives use.
+          Pick a language and get the most common idioms, ranked by how often you will meet them, each with its
+          literal translation, real meaning, the closest English idiom, and a translated example sentence.
+          Every entry is a real expression natives use.
         </p>
       </header>
 
       <ToolDirectAnswer
         lead={`An idiom is a common phrase whose meaning cannot be worked out from its individual words.`}
         body={sample
-          ? `For example, to "${sample.idiom}" in English means ${sample.meaning}. This free tool collects ${totalIdioms} real idioms across ${langs.length} languages, each with its literal translation, meaning, and an example sentence.`
-          : `This free tool collects ${totalIdioms} real idioms across ${langs.length} languages, each with its literal translation, meaning, and an example sentence, so you learn the expressions natives actually use.`}
+          ? `For example, to "${sample.idiom}" in English means ${sample.meaning}. This free tool collects ${totalIdioms} real idioms across ${langs.length} languages, ranked by frequency, each with its literal translation, meaning, closest English idiom, and a translated example sentence.`
+          : `This free tool collects ${totalIdioms} real idioms across ${langs.length} languages, ranked by frequency, each with its literal translation, meaning, and a translated example sentence, so you learn the expressions natives actually use.`}
       />
 
       <div class="lang-grid">
@@ -121,10 +122,12 @@ const jsonLd = [
       <div class="idioms-explainer">
         <h2>How to read the entries</h2>
         <p>
-          Each idiom shows three things: the <strong>literal</strong> translation (what the words say), the
-          <strong> meaning</strong> (what speakers actually intend), and an <strong>example</strong> sentence in
-          context. The gap between literal and meaning is the whole point of an idiom, and it is usually where
-          the culture and the humor live.
+          Idioms are numbered by how common they are, most common first. Each one shows the
+          <strong> literal</strong> translation (what the words say), the <strong>meaning</strong> (what
+          speakers actually intend), the closest <strong>English idiom</strong> where one exists, and an
+          <strong> example</strong> sentence with its English translation. Where it matters, a short note warns
+          you about register: whether the phrase is rude, very informal, or dated. The gap between literal and
+          meaning is the whole point of an idiom, and it is usually where the culture and the humor live.
         </p>
         <p>
           The guiding rule is the same in every language: <strong>do not translate word for word</strong>. Learn
