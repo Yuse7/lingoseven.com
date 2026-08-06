@@ -8,6 +8,14 @@ const description =
 ---
 
 <BaseLayout title={title} description={description} lang="en" noindex={true}>
+  <script is:inline>
+    // Pretty referral links /go/{code} have no static page on GitHub Pages
+    // and land here; hand them to the real attribution page.
+    (function () {
+      var m = location.pathname.match(/^\/go\/([a-z0-9-]{1,32})\/?$/i);
+      if (m) location.replace('/go/?p=' + m[1].toLowerCase());
+    })();
+  </script>
   <section class="nf">
     <div class="container">
       <p class="nf-code">404</p>

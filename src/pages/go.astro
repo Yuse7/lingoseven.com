@@ -2,9 +2,10 @@
 // Affiliate redirect page: /go/?p={code} (docs/marketing/referral-program.md).
 // Logs the click on the backend, then forwards to the store. Android carries
 // the code through the Play install referrer; on iOS the button tap copies a
-// pasteboard token that the app reads on first launch. Deliberately not
-// localized (utility page, noindex, excluded from the sitemap in
-// astro.config.mjs).
+// pasteboard token that the app reads on first launch. Desktop shows a QR code
+// pointing back to this same URL, so the phone that scans it runs the full
+// attribution flow. Deliberately not localized (utility page, noindex,
+// excluded from the sitemap in astro.config.mjs).
 ---
 
 <!doctype html>
@@ -15,6 +16,9 @@
     <meta name="robots" content="noindex, nofollow" />
     <title>Lingo7</title>
     <style>
+      [hidden] {
+        display: none !important;
+      }
       body {
         margin: 0;
         min-height: 100vh;
@@ -48,6 +52,43 @@
         text-decoration: none;
         font-weight: 600;
       }
+      .qr-box {
+        width: 12rem;
+        height: 12rem;
+        margin: 0 auto 1rem;
+        padding: 0.5rem;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 1rem;
+      }
+      .qr-box svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .copy-row {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.9rem;
+      }
+      .copy-row code {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        padding: 0.35rem 0.6rem;
+      }
+      .copy-btn {
+        padding: 0.35rem 0.8rem;
+        border: 1px solid #1f2328;
+        border-radius: 0.5rem;
+        background: #1f2328;
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -58,6 +99,13 @@
         <a id="ios-btn" class="store-btn" hidden href="https://apps.apple.com/app/id6471030440">
           Get Lingo7 in the App Store
         </a>
+        <div id="qr-wrap" hidden>
+          <div id="qr-box" class="qr-box"></div>
+          <p class="copy-row">
+            <code id="link-text"></code>
+            <button id="copy-btn" class="copy-btn" type="button">Copy</button>
+          </p>
+        </div>
         <noscript>
           <p>
             <a href="https://apps.apple.com/app/id6471030440">App Store</a>
@@ -85,6 +133,48 @@
         if (!code) {
           location.replace('/');
           return;
+        }
+
+        if (platform === 'web') {
+          // Desktop: no store to redirect to. Show a QR code with this same
+          // /go/ URL, so the phone that scans it gets proper attribution.
+          // No direct store links here: installs that bypass /go/ on the
+          // phone would lose the partner code.
+          document.getElementById('msg').textContent =
+            'Lingo7 is a mobile app. Scan the code with your phone, or send yourself the link:';
+          var prettyLink = 'https://lingoseven.com/go/' + code;
+          document.getElementById('link-text').textContent = 'lingoseven.com/go/' + code;
+          var copyBtn = document.getElementById('copy-btn');
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            copyBtn.addEventListener('click', function () {
+              navigator.clipboard.writeText(prettyLink).then(function () {
+                copyBtn.textContent = 'Copied';
+              }, function () {});
+            });
+          } else {
+            copyBtn.hidden = true;
+          }
+          var wrap = document.getElementById('qr-wrap');
+          var lib = document.createElement('script');
+          lib.src = '/js/qrcode.min.js';
+          lib.onload = function () {
+            var qr = qrcode(0, 'M');
+            qr.addData('https://lingoseven.com/go/?p=' + code);
+            qr.make();
+            document.getElementById('qr-box').innerHTML = qr.createSvgTag({
+              cellSize: 4,
+              margin: 16,
+              scalable: true,
+              title: 'Get Lingo7',
+            });
+            wrap.hidden = false;
+          };
+          lib.onerror = function () {
+            // No QR, but the store links still work.
+            document.getElementById('qr-box').hidden = true;
+            wrap.hidden = false;
+          };
+          document.head.appendChild(lib);
         }
 
         var timeout = new Promise(function (resolve) {
@@ -131,10 +221,7 @@
                 done();
               }
             });
-            return;
           }
-
-          location.replace('/');
         });
       })();
     </script>
