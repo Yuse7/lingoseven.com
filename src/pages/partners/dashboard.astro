@@ -37,7 +37,7 @@ const description = 'Your Lingo7 affiliate dashboard.';
           </div>
         </header>
 
-        <div class="dash-link">
+        <div class="dash-link" id="link-card">
           <span class="dash-link-label">Your link</span>
           <div class="dash-link-row">
             <input type="text" id="partner-link" readonly />
@@ -47,29 +47,15 @@ const description = 'Your Lingo7 affiliate dashboard.';
           </div>
         </div>
 
+        <div class="dash-promos" id="promos-card" hidden>
+          <span class="dash-link-label">Your promo codes</span>
+          <ul class="promo-list" id="promo-list"></ul>
+        </div>
+
         <div class="cards-grid" id="cards-grid"></div>
 
         <div class="dash-section">
-          <h2>Monthly</h2>
-          <div class="table-scroll">
-            <table class="dash-table" id="monthly-table">
-              <thead>
-                <tr>
-                  <th>Month</th>
-                  <th>Purchases</th>
-                  <th>Amount</th>
-                  <th>Your commission</th>
-                  <th>Paid</th>
-                </tr>
-              </thead>
-              <tbody id="monthly-body"></tbody>
-            </table>
-          </div>
-          <p class="dash-empty" id="monthly-empty" hidden>No payments yet.</p>
-        </div>
-
-        <div class="dash-section">
-          <h2>Recent activity</h2>
+          <h2 id="activity-title">Activity</h2>
           <ul class="events-list" id="events-list"></ul>
           <p class="dash-empty" id="events-empty" hidden>No activity yet.</p>
         </div>
@@ -111,15 +97,117 @@ const description = 'Your Lingo7 affiliate dashboard.';
       return;
     }
 
+    // Refund rows are stored negative, so the sign goes in front of the $.
     function money(cents) {
       var n = typeof cents === 'number' ? cents : 0;
-      return '$' + (n / 100).toFixed(2);
+      return (n < 0 ? '-' : '') + '$' + (Math.abs(n) / 100).toFixed(2);
     }
 
     function esc(s) {
       var d = document.createElement('div');
       d.textContent = s == null ? '' : String(s);
       return d.innerHTML;
+    }
+
+    var KIND_LABELS = { monthly: 'Monthly', yearly: 'Yearly', trial: 'Trial' };
+    var STATUS_LABELS = {
+      accrued: 'Accrued',
+      paid: 'Paid',
+      reversed: 'Reversed',
+    };
+
+    var LANG_NAMES = null;
+    try {
+      LANG_NAMES = new Intl.DisplayNames(['en'], { type: 'language' });
+    } catch (e) {
+      // Old browser without Intl.DisplayNames: language codes stay as codes.
+    }
+
+    // 'es' -> 'Spanish'. Falls back to the uppercased code when the runtime has
+    // no name for it (it then echoes the code back).
+    function langName(code) {
+      var raw = String(code || '').trim();
+      if (!raw) return '';
+      if (LANG_NAMES) {
+        try {
+          var name = LANG_NAMES.of(raw);
+          if (name && name.toLowerCase() !== raw.toLowerCase()) return name;
+        } catch (e) {}
+      }
+      return raw.toUpperCase();
+    }
+
+    // The pair is '<learning>-<native>', so the reader's own language leads:
+    // 'es-ru' reads "Russian -> Spanish". Returns ready HTML (names escaped),
+    // or '' for a row that carries no pair.
+    function pairLabel(pair) {
+      var parts = String(pair || '').split('-');
+      if (parts.length !== 2 || !parts[0] || !parts[1]) return '';
+      return esc(langName(parts[1])) + ' &rarr; ' + esc(langName(parts[0]));
+    }
+
+    // A refund keeps its own row with negative amounts. It is dimmed and
+    // labeled, never hidden.
+    function isRefund(p) {
+      var type = String(p.event_type || '').toUpperCase();
+      return type.indexOf('_REFUND') >= 0 || type === 'CANCELLATION';
+    }
+
+    // Day + time in the visitor's own locale. Falls back to the plain day for a
+    // ledger row written before `ts` joined the contract.
+    function timeLabel(ts, fallbackDay) {
+      var ms = ts ? Date.parse(ts) : NaN;
+      if (isNaN(ms)) return fallbackDay || '';
+      try {
+        return new Date(ms).toLocaleString(undefined, {
+          dateStyle: 'medium',
+          timeStyle: 'short',
+        });
+      } catch (e) {
+        // Old browser without dateStyle/timeStyle: its default format will do.
+        return new Date(ms).toLocaleString();
+      }
+    }
+
+    // Position on the feed. A row with no `ts` only knows its day, so it sorts
+    // from the start of that day.
+    function sortKey(ts, fallbackDay) {
+      var ms = ts ? Date.parse(ts) : NaN;
+      if (isNaN(ms) && fallbackDay) ms = Date.parse(fallbackDay + 'T00:00:00Z');
+      return isNaN(ms) ? 0 : ms;
+    }
+
+    // Copy `text` and flash "Copied" on `btn` for 1.6s. `input`, when given, is a
+    // real field to select for the execCommand fallback; without one we use a
+    // throwaway field, since that fallback can only copy a selection.
+    function copyText(text, btn, input) {
+      var temp = null;
+      var field = input;
+      if (!field) {
+        temp = document.createElement('input');
+        temp.value = text;
+        temp.setAttribute('readonly', '');
+        temp.style.position = 'fixed';
+        temp.style.top = '-1000px';
+        document.body.appendChild(temp);
+        field = temp;
+      }
+      field.select();
+      var done = function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () {
+          btn.textContent = 'Copy';
+        }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, done);
+      } else {
+        try {
+          document.execCommand('copy');
+        } catch (e) {}
+        done();
+      }
+      if (temp) temp.parentNode.removeChild(temp);
     }
 
     fetch(PORTAL_URL + '?token=' + encodeURIComponent(token))
@@ -137,8 +225,10 @@ const description = 'Your Lingo7 affiliate dashboard.';
     function render(d) {
       var partner = d.partner || {};
       var totals = d.totals || {};
-      var monthly = d.monthly || [];
-      var recent = d.recent || [];
+      var purchases = d.purchases || [];
+      // Added 2026-08-07; a backend that predates it sends no activations.
+      var activations = d.activations || [];
+      var promos = d.promos || [];
 
       document.getElementById('partner-name').textContent =
         partner.name || 'Partner';
@@ -150,27 +240,51 @@ const description = 'Your Lingo7 affiliate dashboard.';
         statusEl.hidden = true;
       }
 
-      var linkInput = document.getElementById('partner-link');
-      linkInput.value = partner.link || '';
+      // A partner may have promo codes only, with no referral link: then the whole
+      // link card goes away instead of showing an empty field.
+      if (partner.link) {
+        var linkInput = document.getElementById('partner-link');
+        linkInput.value = partner.link;
 
-      var copyBtn = document.getElementById('copy-btn');
-      copyBtn.addEventListener('click', function () {
-        linkInput.select();
-        var done = function () {
-          copyBtn.textContent = 'Copied';
-          setTimeout(function () {
-            copyBtn.textContent = 'Copy';
-          }, 1600);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(linkInput.value).then(done, done);
-        } else {
-          try {
-            document.execCommand('copy');
-          } catch (e) {}
-          done();
-        }
-      });
+        var copyBtn = document.getElementById('copy-btn');
+        copyBtn.addEventListener('click', function () {
+          copyText(linkInput.value, copyBtn, linkInput);
+        });
+      } else {
+        document.getElementById('link-card').hidden = true;
+      }
+
+      if (promos.length) {
+        var promoList = document.getElementById('promo-list');
+        promoList.innerHTML = promos
+          .map(function (p) {
+            var days = Number(p.duration_days) || 0;
+            var uses = Number(p.redemptions) || 0;
+            var meta = [];
+            if (days) meta.push(days === 1 ? '1 day free' : days + ' days free');
+            meta.push(uses === 1 ? '1 use' : uses + ' uses');
+            if (!p.is_active) meta.push('Inactive');
+            return (
+              '<li class="promo-row' +
+              (p.is_active ? '' : ' is-inactive') +
+              '"><code class="promo-code">' +
+              esc(p.code) +
+              '</code><span class="promo-meta">' +
+              esc(meta.join(' · ')) +
+              '</span><button type="button" class="promo-copy">Copy</button></li>'
+            );
+          })
+          .join('');
+
+        promoList.addEventListener('click', function (e) {
+          var btn = e.target.closest && e.target.closest('.promo-copy');
+          if (!btn) return;
+          var codeEl = btn.parentNode.querySelector('.promo-code');
+          copyText(codeEl ? codeEl.textContent : '', btn);
+        });
+
+        document.getElementById('promos-card').hidden = false;
+      }
 
       var cards = [
         { label: 'Clicks (30d)', value: totals.clicks_30d || 0 },
@@ -193,50 +307,60 @@ const description = 'Your Lingo7 affiliate dashboard.';
         })
         .join('');
 
-      var monthlyBody = document.getElementById('monthly-body');
-      if (monthly.length) {
-        monthlyBody.innerHTML = monthly
-          .map(function (m) {
-            return (
-              '<tr><td>' +
-              esc(m.month) +
-              '</td><td>' +
-              esc(m.purchases || 0) +
-              '</td><td>' +
-              money(m.amount_cents) +
-              '</td><td>' +
-              money(m.commission_cents) +
-              '</td><td>' +
-              (m.paid ? 'Yes' : 'No') +
-              '</td></tr>'
-            );
-          })
-          .join('');
-      } else {
-        document.getElementById('monthly-table').hidden = true;
-        document.getElementById('monthly-empty').hidden = false;
-      }
+      // One feed, newest first: promo activations and payments interleaved.
+      var feed = activations
+        .map(function (a) {
+          var langs = pairLabel(a.pair);
+          return {
+            at: sortKey(a.ts, null),
+            html:
+              '<li class="event-row is-activation"><span class="event-date">' +
+              esc(timeLabel(a.ts, null)) +
+              '</span><span class="event-type">Promo code activated' +
+              (langs ? ' · ' + langs : '') +
+              '</span></li>',
+          };
+        })
+        .concat(
+          purchases.map(function (p) {
+            var refund = isRefund(p);
+            var details = [
+              esc(KIND_LABELS[p.kind] || 'Subscription'),
+              esc(money(p.amount_cents)),
+            ];
+            var langs = pairLabel(p.pair);
+            if (langs) details.push(langs);
+
+            return {
+              at: sortKey(p.ts, p.date),
+              html:
+                '<li class="event-row' +
+                (refund ? ' is-refund' : '') +
+                '"><span class="event-date">' +
+                esc(timeLabel(p.ts, p.date)) +
+                '</span><span class="event-type">' +
+                details.join(' · ') +
+                '</span><span class="event-amount">your cut ' +
+                esc(money(p.commission_cents)) +
+                '</span><span class="event-status">' +
+                esc(
+                  refund ? 'Refund' : STATUS_LABELS[p.status] || p.status || '',
+                ) +
+                '</span></li>',
+            };
+          }),
+        );
 
       var eventsList = document.getElementById('events-list');
-      if (recent.length) {
-        eventsList.innerHTML = recent
-          .map(function (ev) {
-            var amount = ev.commission_cents
-              ? '<span class="event-amount">' +
-                money(ev.commission_cents) +
-                '</span>'
-              : '';
-            return (
-              '<li class="event-row"><span class="event-date">' +
-              esc(ev.date) +
-              '</span><span class="event-type">' +
-              esc(ev.event_type) +
-              '</span>' +
-              amount +
-              '<span class="event-status">' +
-              esc(ev.status) +
-              '</span></li>'
-            );
+      if (feed.length) {
+        feed.sort(function (a, b) {
+          return b.at - a.at;
+        });
+        document.getElementById('activity-title').textContent =
+          'Activity (' + feed.length + ')';
+        eventsList.innerHTML = feed
+          .map(function (item) {
+            return item.html;
           })
           .join('');
       } else {
@@ -354,6 +478,69 @@ const description = 'Your Lingo7 affiliate dashboard.';
     background: var(--primary-dark);
   }
 
+  .dash-promos {
+    margin: 28px 0;
+    padding: 20px;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .promo-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .promo-list :global(.promo-row) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .promo-list :global(.promo-row.is-inactive) {
+    opacity: 0.55;
+  }
+
+  .promo-list :global(.promo-code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+
+  .promo-list :global(.promo-meta) {
+    flex: 1;
+    color: var(--text-light);
+    font-size: 0.85rem;
+  }
+
+  .promo-list :global(.promo-copy) {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.85rem;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .promo-list :global(.promo-copy:hover) {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
   .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -394,43 +581,6 @@ const description = 'Your Lingo7 affiliate dashboard.';
     margin-bottom: 16px;
   }
 
-  .table-scroll {
-    overflow-x: auto;
-  }
-
-  .dash-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--background-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-
-  .dash-table th,
-  .dash-table :global(td) {
-    text-align: left;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
-  }
-
-  .dash-table thead th {
-    color: var(--text);
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .dash-table tbody :global(td) {
-    color: var(--text-light);
-  }
-
-  .dash-table tbody :global(tr:last-child td) {
-    border-bottom: none;
-  }
-
   .events-list {
     list-style: none;
     margin: 0;
@@ -453,10 +603,28 @@ const description = 'Your Lingo7 affiliate dashboard.';
     border-bottom: none;
   }
 
+  /* A refund stays on the list, quieter than the purchase it claws back. */
+  .events-list :global(.event-row.is-refund) {
+    opacity: 0.55;
+  }
+
+  /* An activation moves no money, so it carries no amount column. The green dot
+     tells it apart from a payment at a glance. */
+  .events-list :global(.event-row.is-activation .event-type::before) {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    vertical-align: middle;
+  }
+
   .events-list :global(.event-date) {
     color: var(--text-light);
     font-size: 0.85rem;
-    min-width: 92px;
+    min-width: 148px;
   }
 
   .events-list :global(.event-type) {
@@ -492,6 +660,11 @@ const description = 'Your Lingo7 affiliate dashboard.';
     .events-list :global(.event-row) {
       flex-wrap: wrap;
       gap: 8px 14px;
+    }
+
+    .promo-list :global(.promo-row) {
+      flex-wrap: wrap;
+      gap: 8px 12px;
     }
   }
 </style>
