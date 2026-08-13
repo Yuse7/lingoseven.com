@@ -5,6 +5,11 @@
 // plus 12 verified non-existent pseudowords per language (guessing-correction items).
 // Band widths are the count of distinct cleaned words in each frequency-rank span; the sum (28000)
 // is the upper bound of the vocabulary-size estimate. See docs/marketing/seo-lingoseven.md.
+// Pseudowords audited 2026-08-12 against native dictionaries incl. archaic/dialect sources
+// (51 leaked real words replaced, two independent audits merged). Before adding a pseudoword: check the exact string AND its
+// root in the language's reference dictionary, dialect dictionaries, and <lang>.wikipedia
+// full text; inflected forms of real lemmas count as real. Details:
+// .claude/memory/vocab-estimator-pseudoword-leaks.md
 
 export interface VocabBand {
   /** Number of word families this sample band represents (for extrapolation). */
@@ -29,7 +34,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["capilla", "consecuencia", "aparición", "orientación", "rapidez", "biológico", "proveedor", "terrenos"] },
       { width: 13000, words: ["quicio", "hocico", "debidamente", "larvas", "raqueta", "cojines", "tejón", "tecla"] },
     ],
-    pseudowords: ["trasco", "fontil", "garnoso", "plendar", "trendura", "rendizo", "brenoso", "talduro", "lomarro", "fresquil", "pandeco", "sorniza"],
+    pseudowords: ["trasco", "fontil", "garnoso", "plendar", "sundrejo", "rendizo", "brenoso", "talduro", "lomarro", "fresquil", "pandeco", "sorniza"],
   },
   fr: {
     bands: [
@@ -40,7 +45,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["cliché", "décennies", "grammes", "pingouin", "hypnose", "ruche", "abondance", "démocratique"] },
       { width: 13000, words: ["apogée", "fromages", "conquêtes", "arsenic", "dépistage", "lacet", "documentation", "sablier"] },
     ],
-    pseudowords: ["fralure", "gruvette", "plouquet", "ravisson", "crisule", "bouchade", "vernisard", "galetin", "murvette", "droquel", "tarveau", "sponille"],
+    pseudowords: ["fralure", "nervolet", "plouquet", "ravisson", "crisule", "bouchade", "vernisard", "galetin", "murvette", "droquel", "tarveau", "sponille"],
   },
   de: {
     bands: [
@@ -51,7 +56,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["gelangweilt", "vernünftige", "erweitern", "liebevoll", "Migräne", "zornig", "Blüten", "Melone"] },
       { width: 13000, words: ["widerspricht", "Insekt", "Lebenswerk", "duzen", "andauern", "Horoskop", "Gemeinden", "Pathologie"] },
     ],
-    pseudowords: ["Glomber", "Schrunke", "Brastel", "Knüffel", "Stramsel", "Grambel", "Plimsel", "Schnörben", "Flarbe", "Stördung", "trauselig", "wuckern"],
+    pseudowords: ["Glomber", "Schrunke", "Brastel", "Frimpel", "Drapsel", "Grambel", "Plimsel", "Schnörben", "Flarbe", "Stördung", "trauselig", "wuckern"],
   },
   it: {
     bands: [
@@ -62,7 +67,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["riflettuto", "ereditato", "granchio", "condannati", "cespugli", "rilassato", "maligno", "navigatore"] },
       { width: 13000, words: ["intensamente", "puramente", "ipocrisia", "cruciverba", "ghiacciolo", "surrogato", "fenice", "nicotina"] },
     ],
-    pseudowords: ["fralo", "tolpire", "sporite", "calvento", "trastina", "gimboso", "plendere", "voraco", "frenisco", "latuvo", "sberanto", "sbrenire"],
+    pseudowords: ["fralo", "lorvire", "sporite", "calvento", "trastina", "gimboso", "plendere", "voraco", "frenisco", "latuvo", "sberanto", "trolzare"],
   },
   pt: {
     bands: [
@@ -84,7 +89,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["conductor", "cradle", "morale", "imprisonment", "premature", "sensitivity", "scarce", "listener"] },
       { width: 13000, words: ["firearm", "scripture", "devastation", "grudges", "magnetism", "longevity", "compliance", "installations"] },
     ],
-    pseudowords: ["crembic", "flantor", "dwistle", "plovish", "snurgle", "trabbin", "glimmet", "quomber", "vendrop", "skellop", "marnith", "frellop"],
+    pseudowords: ["crembic", "flantor", "dwistle", "plovish", "snurgle", "trabbin", "glimmet", "quomber", "vendrop", "plummock", "marnith", "frellop"],
   },
   ru: {
     bands: [
@@ -95,7 +100,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["техника", "запасы", "луч", "нервный", "уютно", "приглашать", "упрямый", "авторы"] },
       { width: 13000, words: ["вскрыть", "задеть", "круиз", "груза", "уколы", "пачка", "тараканы", "знамя"] },
     ],
-    pseudowords: ["гломать", "шивенка", "плунда", "тарелон", "мостюга", "велюшка", "краздон", "фишталь", "нурбель", "скавица", "дрепон", "лощарка"],
+    pseudowords: ["гломать", "шивенка", "плунда", "тарелон", "мостюга", "велюшка", "краздон", "мыхталь", "нурбель", "скавица", "дрепон", "лощарка"],
   },
   nl: {
     bands: [
@@ -106,7 +111,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["laf", "wachters", "huisgenoot", "schuilen", "onderbreking", "opslagruimte", "verdwalen", "spoedgeval"] },
       { width: 13000, words: ["beeldmateriaal", "blindedarm", "tasten", "uitgegleden", "stilleggen", "misser", "dineetje", "toestond"] },
     ],
-    pseudowords: ["blonter", "kwesel", "draboel", "vinkter", "smodel", "plemig", "vorpel", "snolder", "breuvel", "wemberd", "splonk", "gruintel"],
+    pseudowords: ["blonter", "kwesel", "draboel", "vinkter", "smodel", "plemig", "klenzel", "snolder", "breuvel", "wemberd", "splonk", "gruintel"],
   },
   sv: {
     bands: [
@@ -117,7 +122,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["underverk", "medvetandet", "iskall", "förvarar", "skarp", "läder", "överföring", "styrelse"] },
       { width: 13000, words: ["mjukvara", "näsor", "elefanterna", "flygresan", "polsk", "bygge", "förlossning", "fakturan"] },
     ],
-    pseudowords: ["frumsa", "glytta", "snöved", "krammel", "plurig", "tjånka", "vräska", "böndal", "skrumla", "flänster", "gnurra", "hövsel"],
+    pseudowords: ["frumsa", "flönsa", "snöved", "knärvel", "plurig", "tjånka", "vräska", "böndal", "skrumla", "flänster", "gnurra", "hövsel"],
   },
   tr: {
     bands: [
@@ -128,7 +133,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["balina", "hevesli", "sınırsız", "rehber", "araçlar", "laflar", "bozma", "verilir"] },
       { width: 13000, words: ["kaygan", "şehit", "kimileri", "küller", "özetle", "koyabilir", "düşünsem", "davranmış"] },
     ],
-    pseudowords: ["talgın", "sömek", "buratuk", "kelinti", "naşor", "tirgen", "öbelek", "çamduk", "yelmik", "gözünek", "somarık", "düventi"],
+    pseudowords: ["talgın", "püvek", "buratuk", "kelinti", "naşor", "tirgen", "püşenek", "çamduk", "şelvik", "gözünek", "somarık", "düventi"],
   },
   no: {
     bands: [
@@ -139,7 +144,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["stunder", "jordbær", "lokalt", "vitnemål", "truende", "artilleri", "matematikk", "solstråle"] },
       { width: 13000, words: ["mistenksomme", "munnfull", "mykere", "stivnet", "finale", "hagl", "erobring", "underverden"] },
     ],
-    pseudowords: ["fjølstre", "gnørvel", "klonse", "sklunte", "spranke", "vemsel", "brøstig", "tralund", "skvalter", "høvring", "glemnar", "kvistel"],
+    pseudowords: ["fjølstre", "gnørvel", "klonse", "brønsel", "spranke", "vemsel", "brøstig", "tralund", "skvalter", "høvring", "glemnar", "kvistel"],
   },
   da: {
     bands: [
@@ -150,7 +155,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["erobre", "arvet", "hummer", "dybde", "sagfører", "udsættelse", "indføre", "løsesum"] },
       { width: 13000, words: ["fastlåst", "indgriben", "betændt", "kristent", "juletid", "mærkværdigt", "udlede", "husholdning"] },
     ],
-    pseudowords: ["brunsel", "fløske", "kandret", "smurpe", "gridsel", "tavlmer", "skølret", "hentrald", "plivse", "vorske", "gnædel", "traskel"],
+    pseudowords: ["brunsel", "brinse", "kandret", "smurpe", "gridsel", "tavlmer", "skølret", "hentrald", "plivse", "vorske", "gnædel", "traskel"],
   },
   ro: {
     bands: [
@@ -161,7 +166,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["academie", "șoarece", "diploma", "locuință", "pirați", "obstacole", "pneumonie", "magnet"] },
       { width: 13000, words: ["uraniu", "sondă", "vițel", "motociclist", "superficiale", "vandalism", "reclamație", "promoție"] },
     ],
-    pseudowords: ["plurnac", "mărgut", "stronel", "vâlteș", "dropină", "frăncot", "zburic", "lăsturic", "grămiț", "trăncuș", "ploștean", "bârlic"],
+    pseudowords: ["plurnac", "mărgut", "stronel", "vâlteș", "sclobină", "frăncot", "zburic", "lăsturic", "grămiț", "trăncuș", "ploștean", "bârlic"],
   },
   uk: {
     bands: [
@@ -172,7 +177,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["вислухай", "жінці", "налякав", "наміри", "злякався", "деталь", "змиритися", "шкірі"] },
       { width: 13000, words: ["розміром", "загального", "повітрям", "заарештують", "купатися", "збігається", "передбачив", "самотніх"] },
     ],
-    pseudowords: ["зморта", "вепляк", "крутівень", "блонива", "трепіль", "міркач", "грабушка", "плавіток", "хвильник", "дзвоняк", "ковзень", "стрівок"],
+    pseudowords: ["зморта", "вепляк", "крутівень", "блонива", "трепіль", "міркач", "грабушка", "плавіток", "хвильник", "кевдяк", "ковзень", "стрівок"],
   },
   pl: {
     bands: [
@@ -183,7 +188,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["przewodniczący", "postępować", "naturę", "muzyką", "pięści", "biblioteka", "benzyny", "farba"] },
       { width: 13000, words: ["niebem", "wzorem", "ładunku", "najbliższego", "przyzwyczajony", "wypłata", "przemocą", "szynka"] },
     ],
-    pseudowords: ["gradło", "mżawiec", "kreszta", "plątoń", "strówel", "brzękad", "świodka", "dręśnik", "wałszyn", "czaplun", "gwołek", "skrytań"],
+    pseudowords: ["gniodło", "mżawiec", "kreszta", "plątoń", "strówel", "brzękad", "świodka", "dręśnik", "wałszyn", "czaplun", "gwołek", "skrytań"],
   },
   cs: {
     bands: [
@@ -194,7 +199,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["praštit", "shoda", "bloky", "církve", "kostýmy", "mimino", "okresu", "okně"] },
       { width: 13000, words: ["objasnit", "okolní", "dynastie", "hostům", "pogratulovat", "rádce", "nesnesitelný", "špionáž"] },
     ],
-    pseudowords: ["mratel", "křapot", "hlemín", "třesík", "plašina", "chrudík", "brukně", "žvachot", "klopina", "mrštěna", "skřapel", "mlžinec"],
+    pseudowords: ["mratel", "křapot", "hlemín", "třesík", "plašina", "chrudík", "brukně", "žvachot", "klopina", "škubina", "skřapel", "mlžinec"],
   },
   sk: {
     bands: [
@@ -216,7 +221,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["ljubazna", "nafte", "izgovoriti", "trenucima", "proslava", "tužni", "ponosno", "knjižnica"] },
       { width: 13000, words: ["naići", "besplatnu", "vježbaš", "privuklo", "prisluškivanje", "hrast", "biljkama", "šarmantni"] },
     ],
-    pseudowords: ["krpalin", "zmuglica", "bravotak", "šelivka", "mrazgon", "plivotka", "svedran", "trkanj", "čmoluk", "blagušt", "vretolj", "snjažur"],
+    pseudowords: ["krpalin", "zmuglica", "bravotak", "šelivka", "mrazgon", "plivotka", "svedran", "cvrkanj", "čmoluk", "blagušt", "vretolj", "snjažur"],
   },
   bs: {
     bands: [
@@ -227,7 +232,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["baterija", "sviraš", "zapali", "ministarstva", "žedan", "provjere", "čelika", "kolekcija"] },
       { width: 13000, words: ["održavati", "preživimo", "utrke", "zatvaranja", "prozorima", "kritika", "jedinstvene", "vrijediti"] },
     ],
-    pseudowords: ["brastiv", "glomar", "pletoš", "vodanj", "krešina", "dromelj", "štrabac", "crmolj", "žunjak", "smrkalo", "prtinac", "vladur"],
+    pseudowords: ["brastiv", "glomar", "pletoš", "vodanj", "krešina", "vrljanik", "štrabac", "crmolj", "žunjak", "smrkalo", "prtinac", "vladur"],
   },
   bg: {
     bands: [
@@ -260,7 +265,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["strašen", "sočutje", "tiha", "pristojnosti", "pogreba", "kopanje", "toploto", "mornarice"] },
       { width: 13000, words: ["psihično", "počitnic", "vozovnica", "ponovni", "čakalnici", "priseljenci", "pripomba", "razločno"] },
     ],
-    pseudowords: ["graduš", "brunek", "plaviša", "stevora", "mižek", "klovar", "žaretje", "smoduh", "trevica", "prošten", "vlatek", "čmurka"],
+    pseudowords: ["graduš", "brunek", "plaviša", "stevora", "plevček", "klovar", "žaretje", "smoduh", "trevica", "prošten", "vlatek", "čmurka"],
   },
   lv: {
     bands: [
@@ -271,7 +276,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["piloti", "brīži", "milzīgi", "bandīti", "kaulus", "skandāls", "tradīcijas", "pavasaris"] },
       { width: 13000, words: ["izvēlamies", "tumšajiem", "taisnīgums", "pārkāpšana", "klostera", "klaiņo", "izsoles", "lietošanas"] },
     ],
-    pseudowords: ["gruvenis", "salbots", "tērkalis", "plūdaris", "vinteklis", "glumte", "sprandulis", "tirpsma", "brunkālis", "raudzeklis", "mēkulis", "skaldenis"],
+    pseudowords: ["gruvenis", "salbots", "tērkalis", "plūdaris", "vinteklis", "glumte", "sprandulis", "tirpsma", "brunkālis", "šņurbeklis", "mēkulis", "grimbenis"],
   },
   lt: {
     bands: [
@@ -293,7 +298,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["köysi", "muistella", "hirveästi", "vuosisatoja", "tulkita", "vammat", "yleisesti", "leirillä"] },
       { width: 13000, words: ["toverit", "järjestyksen", "tyydytystä", "vauriot", "purjeet", "neljännes", "neste", "hyytelöä"] },
     ],
-    pseudowords: ["vulkero", "salveri", "töppälä", "nuikko", "vällys", "ruosanto", "hivelä", "mökäri", "taulivo", "kenpätä", "murvasto", "pelähys"],
+    pseudowords: ["nurvakko", "salveri", "töppälä", "nuikko", "vällys", "ruosanto", "hivelä", "mökäri", "taulivo", "kenpätä", "murvasto", "pelähys"],
   },
   hu: {
     bands: [
@@ -315,7 +320,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["kangelast", "hüüdnimi", "salapärane", "treenida", "punktid", "surelik", "sõrmede", "ähvardada"] },
       { width: 13000, words: ["tuttavat", "garantii", "kontserti", "arreteerima", "võimul", "teaduslikult", "õnnestuma", "silmamuna"] },
     ],
-    pseudowords: ["kõlmas", "näveldus", "tuhmik", "nolvama", "lõmmel", "sõpendus", "virtul", "käbrastik", "mölvama", "ladrik", "püheldus", "nõrgis"],
+    pseudowords: ["kõlmas", "näveldus", "nõbrik", "nolvama", "vamberdus", "sõpendus", "virtul", "käbrastik", "mölvama", "ladrik", "püheldus", "nõrgis"],
   },
   el: {
     bands: [
@@ -337,7 +342,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["lengah", "cenayang", "bertujuan", "tembakau", "bakso", "membebani", "memukau", "disertai"] },
       { width: 13000, words: ["infanteri", "akte", "nominasi", "mendikte", "silet", "inflasi", "terpandang", "merambat"] },
     ],
-    pseudowords: ["gentari", "palunda", "rempila", "dukasan", "melonta", "tarisuk", "kembulan", "pansiru", "kelombir", "ribanca", "sumelat", "kerundal"],
+    pseudowords: ["gentari", "palunda", "rempila", "dukasan", "melonta", "tarisuk", "pindukan", "pansiru", "gembasan", "ribanca", "sumelat", "kerundal"],
   },
   ms: {
     bands: [
@@ -348,7 +353,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["seberat", "terjual", "megah", "menyusuri", "nikah", "toksin", "padi", "jurujual"] },
       { width: 13000, words: ["kiranya", "zamrud", "berkomitmen", "meluaskan", "angguk", "teduh", "bambu", "murai"] },
     ],
-    pseudowords: ["kemalut", "kelumbat", "pelitang", "tengkawa", "rumanggis", "selambuk", "memantir", "kurandap", "bilasun", "tenggaruk", "paduras", "menjelap"],
+    pseudowords: ["kemalut", "selunggak", "pelitang", "tengkawa", "rumanggis", "selambuk", "memantir", "kurandap", "bilasun", "tenggaruk", "paduras", "menjelap"],
   },
   is: {
     bands: [
@@ -359,7 +364,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["fundurinn", "vísvitandi", "geðveik", "grátandi", "markmiðið", "lauf", "illmenni", "einkennilega"] },
       { width: 13000, words: ["armbandið", "sjálfstæður", "háskóla", "gullfallegur", "hádegið", "fráleitt", "tónlistarmenn", "dýralæknirinn"] },
     ],
-    pseudowords: ["snæfla", "þrundla", "glompur", "kvistla", "melsuður", "vönglur", "dröflur", "skjálma", "flæskur", "gnúfla", "bjarmla", "hrundla"],
+    pseudowords: ["snæfla", "þrundla", "skrömlur", "kvistla", "melsuður", "vönglur", "dröflur", "skjálma", "flæskur", "gnúfla", "bjarmla", "hrundla"],
   },
   ca: {
     bands: [
@@ -370,7 +375,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["cavalcant", "governa", "redacció", "matrimonis", "reproduir", "favorable", "rajoles", "tallafocs"] },
       { width: 13000, words: ["diàries", "burlar", "tacar", "inclinació", "alarmant", "exercitar", "ressuscitar", "edificar"] },
     ],
-    pseudowords: ["trellot", "fanyoll", "grandís", "muntoll", "esverpit", "calbrer", "rondís", "plavetja", "tisorent", "embalcir", "ferrull", "vespoll"],
+    pseudowords: ["trellot", "fanyoll", "terquell", "muntoll", "esverpit", "calbrer", "rondís", "plavetja", "tisorent", "embalcir", "ferrull", "vespoll"],
   },
   gl: {
     bands: [
@@ -403,7 +408,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["liluratu", "armatuta", "arbola", "kontakizuna", "borrokaldia", "sindikatua", "gertakizun", "ezartzeko"] },
       { width: 13000, words: ["jokatuz", "zantzuak", "igogailu", "gatazkan", "inbertsioak", "lehiotik", "urpekontzia", "lehiaketa"] },
     ],
-    pseudowords: ["zarketa", "melurtu", "gantzo", "irruska", "betorre", "kaldura", "oztemena", "txulande", "naitoki", "gerronka", "abeltzu", "mardoski"],
+    pseudowords: ["zarketa", "melurtu", "keltzo", "irruska", "betorre", "kaldura", "oztemena", "txulande", "naitoki", "gerronka", "abeltzu", "mardoski"],
   },
   sr: {
     bands: [
@@ -414,7 +419,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["hirurg", "jeziku", "problemu", "koljena", "rebra", "stabla", "doručka", "narkoman"] },
       { width: 13000, words: ["doživotno", "jedra", "oznaku", "klasični", "zaštićeni", "mesar", "kvadrat", "arogantni"] },
     ],
-    pseudowords: ["vrnalo", "šturak", "gmizan", "klivoš", "drašnik", "krevoš", "smolnik", "blagura", "trnožak", "švrkan", "klemoš", "zdrupan"],
+    pseudowords: ["vrnalo", "cvilotak", "dremkav", "pleskun", "drašnik", "krevoš", "smolnik", "blagura", "trnožak", "švrkan", "klemoš", "zdrupan"],
   },
   af: {
     bands: [
@@ -436,7 +441,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["atışma", "istəmək", "balta", "böyrək", "şüurlu", "yaşlılar", "ağlayır", "sahili"] },
       { width: 13000, words: ["icad", "xatirələr", "xain", "təşviş", "çarəsi", "gəzdi", "dilənçilik", "həyasız"] },
     ],
-    pseudowords: ["qumraş", "salqıc", "qontaş", "qurnaş", "tişkəl", "möşgür", "dülvəş", "bəlişgə", "mölkün", "göyəltiş", "davquş", "somraq"],
+    pseudowords: ["qumraş", "salqıc", "qontaş", "qurnaş", "tişkəl", "möşgür", "körnəş", "bəlişgə", "mölkün", "göyəltiş", "davquş", "somraq"],
   },
   be: {
     bands: [
@@ -458,7 +463,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["երկինք", "արևոտ", "հաշվարկել", "թել", "վարք", "կարտոֆիլ", "տեխնոլոգիա", "ծխախոտ"] },
       { width: 13000, words: ["հագնվում", "զայրույթ", "տպել", "զգուշավոր", "խոստում", "երկրաշարժեր", "հավասարակշիռ", "վատառողջ"] },
     ],
-    pseudowords: ["մարգուն", "սելվանք", "թորմիկ", "խոնդար", "վաշտոր", "հնջարան", "պրծանիկ", "ձագուռ", "խլվատ", "սարմունք", "թափլուն", "կրնդուշ"],
+    pseudowords: ["մարգուն", "սելվանք", "թորմիկ", "խոնդար", "վաշտոր", "հնջարան", "պրծանիկ", "շավուռ", "խլվատ", "սարմունք", "թափլուն", "կրնդուշ"],
   },
   ka: {
     bands: [
@@ -469,7 +474,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["მაგალითს", "გაემგზავრება", "მსვლელობა", "მოსამართლეები", "დაბრკოლება", "სოფლებს", "ვერანაირად", "ნელნელა"] },
       { width: 13000, words: ["კვამლი", "მოწყენილი", "ბედავს", "კლდეში", "სიმსუქნე", "დაზუსტება", "მიწიერ", "გავიგებ"] },
     ],
-    pseudowords: ["ლარტანი", "ბოშკელი", "ტრიმანა", "ფარგუნი", "ნაშკური", "გვირთანი", "სხალიბო", "წიბონდა", "დრონკელა", "ღვინტელა", "კრანდული", "ტყემანი"],
+    pseudowords: ["ლუმხარი", "ბოშკელი", "ტრიმანა", "ფარგუნი", "ნაშკური", "გვირთანი", "სხალიბო", "წიბონდა", "დრონკელა", "ღვინტელა", "კრანდული", "ტყემანი"],
   },
   kk: {
     bands: [
@@ -491,7 +496,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["кийлигишүү", "чыккынчылык", "бүлүк", "тышкаркы", "жез", "боштондук", "апаат", "түлкү"] },
       { width: 13000, words: ["өпкө", "кууш", "жаат", "шыйрак", "ченем", "жандануу", "эгиз", "жүзүм"] },
     ],
-    pseudowords: ["чорпон", "таскыр", "кыртан", "таргын", "дарпын", "зорпош", "сүлкүн", "секмер", "төшүлдүк", "бүлкөм", "нүскөр", "миртек"],
+    pseudowords: ["чорпон", "таскыр", "кыртан", "таргын", "дарпын", "зорпош", "сүлкүн", "күрпөм", "төшүлдүк", "бүлкөм", "нүскөр", "миртек"],
   },
   mn: {
     bands: [
@@ -502,7 +507,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["ёсон", "зээр", "шанага", "тоосго", "өргөл", "шөл", "төмөрлөг", "шоргоолж"] },
       { width: 13000, words: ["зөнч", "хөг", "дэгээ", "хүрд", "өглөг", "цээрлэл", "мойл", "атга"] },
     ],
-    pseudowords: ["халбор", "тонсаг", "губрал", "насхуу", "дормог", "шалзан", "сэрбэл", "нэвшил", "төлбэн", "үлзэр", "толбир", "хүнрэг"],
+    pseudowords: ["халбор", "тонсаг", "губрал", "насхуу", "дормог", "шувдаг", "сэрбэл", "нэвшил", "төлбэн", "үлзэр", "мэрвүүн", "хүнрэг"],
   },
   sw: {
     bands: [
@@ -524,7 +529,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["hapunan", "marupok", "panukat", "kuwarto", "lathala", "katamaran", "pagkit", "ninang"] },
       { width: 13000, words: ["gayak", "makatuwiran", "kaban", "kasya", "masayahin", "sugal", "kalaro", "kinang"] },
     ],
-    pseudowords: ["lumasay", "damlisan", "tagawis", "pinurot", "malikbo", "sumalbot", "hangibol", "kalamsing", "paritok", "dalusaw", "tibangan", "gasindap"],
+    pseudowords: ["lumasay", "tanlukan", "tagawis", "pinurot", "malikbo", "sumalbot", "hangibol", "kalamsing", "paritok", "dalusaw", "tibangan", "gasindap"],
   },
   uz: {
     bands: [
@@ -535,7 +540,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["aqlli", "did", "qutqarish", "kifoya", "ifodali", "shijoat", "kamar", "lapar"] },
       { width: 13000, words: ["mahal", "semiz", "arboblar", "qarovsiz", "lazzatlanish", "parrakli", "sadoqati", "taʼminlanish"] },
     ],
-    pseudowords: ["sarqom", "tuzgʻal", "qishvon", "beltoq", "hovrim", "koʻstan", "namildoq", "sergʻun", "toʻlmar", "qadribon", "eshvara", "dovsar"],
+    pseudowords: ["sarqom", "tuzgʻal", "qishvon", "beltoq", "lavdim", "koʻstan", "namildoq", "sergʻun", "toʻlmar", "qadribon", "eshvara", "sumboq"],
   },
   vi: {
     bands: [
@@ -557,7 +562,7 @@ export const vocabWords: Record<string, VocabLangData> = {
       { width: 7000, words: ["isisho", "ukuhlomula", "ugula", "izitho", "ishumi", "ukukhululeka", "ukufana", "emqoka"] },
       { width: 13000, words: ["elenga", "ziboshwa", "uphela", "angempela", "okhulelwe", "uqophe", "impango", "yalahleka"] },
     ],
-    pseudowords: ["umhlabezi", "isibhungelo", "ukuhlombeza", "isigqwabelo", "izinkwelezi", "ubuhlwazana", "amantsholo", "ukuzimbuluza", "umphequzo", "isihlwabelo", "umdlabuzo", "ubunkwazana"],
+    pseudowords: ["umhlabezi", "isibhungelo", "ukuhlombeza", "umdlakhezo", "izinkwelezi", "ubuhlwazana", "amantsholo", "ukuzimbuluza", "umphequzo", "isihlwabelo", "umdlabuzo", "ubunkwazana"],
   },
 };
 
