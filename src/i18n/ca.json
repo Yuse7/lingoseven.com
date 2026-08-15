@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Ciríl·lic",
   "fact_writing_georgian_mkhedruli": "Georgià (mkhedruli)",
   "fact_writing_greek": "Grec",
-  "fact_writing_latin": "Llatí"
+  "fact_writing_latin": "Llatí",
+  "qr_scan_hint": "Escanegeu per obtenir l'aplicació"
 }

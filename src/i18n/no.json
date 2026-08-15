@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Kyrillisk",
   "fact_writing_georgian_mkhedruli": "Georgisk (mkhedruli)",
   "fact_writing_greek": "Gresk",
-  "fact_writing_latin": "Latinsk"
+  "fact_writing_latin": "Latinsk",
+  "qr_scan_hint": "Skann for å få appen"
 }

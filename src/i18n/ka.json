@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "კირილიცა",
   "fact_writing_georgian_mkhedruli": "ქართული (მხედრული)",
   "fact_writing_greek": "ბერძნული",
-  "fact_writing_latin": "ლათინური"
+  "fact_writing_latin": "ლათინური",
+  "qr_scan_hint": "დაასკანერეთ აპის მისაღებად"
 }

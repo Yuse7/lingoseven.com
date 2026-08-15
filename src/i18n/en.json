@@ -237,5 +237,6 @@
   "stats_speakers": "Speakers",
   "stats_family": "Language family",
   "stats_writing": "Writing system",
-  "stats_fsi_hours": "Study hours (FSI)"
+  "stats_fsi_hours": "Study hours (FSI)",
+  "qr_scan_hint": "Scan to get the app"
 }

@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Kirilica",
   "fact_writing_georgian_mkhedruli": "Gruzīnu (mhedruli)",
   "fact_writing_greek": "Grieķu",
-  "fact_writing_latin": "Latīņu"
+  "fact_writing_latin": "Latīņu",
+  "qr_scan_hint": "Skenējiet, lai iegūtu lietotni"
 }

@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Cirill",
   "fact_writing_georgian_mkhedruli": "Grúz (mhedruli)",
   "fact_writing_greek": "Görög",
-  "fact_writing_latin": "Latin"
+  "fact_writing_latin": "Latin",
+  "qr_scan_hint": "Olvassa be az alkalmazás letöltéséhez"
 }

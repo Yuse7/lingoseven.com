@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Κυριλλικό",
   "fact_writing_georgian_mkhedruli": "Γεωργιανό (μχεντρούλι)",
   "fact_writing_greek": "Ελληνικό",
-  "fact_writing_latin": "Λατινικό"
+  "fact_writing_latin": "Λατινικό",
+  "qr_scan_hint": "Σαρώστε για να αποκτήσετε την εφαρμογή"
 }

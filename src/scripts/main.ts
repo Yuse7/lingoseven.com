@@ -567,3 +567,47 @@ const bindStoreTracking = (
 
 bindStoreTracking('a[href*="apps.apple.com"]', 'click_app_store');
 bindStoreTracking('a[href*="play.google.com"]', 'click_google_play');
+
+// ========== Install attribution: page path -> store install ==========
+// Which page a visitor was on when they went to the store, carried all the way
+// to the installed app (docs/marketing/site-attribution.md).
+//
+// Android: the page path is packed into the Play `referrer=` parameter, the only
+// channel the Play Install Referrer API delivers to the app. The Firebase SDK
+// auto-reads it, so `first_open` lands in GA4/BigQuery with
+// traffic_source.name = page path. Existing referrer keys (e.g. lingo7ref on
+// partner flows) are preserved; the app's referrer parser splits by key.
+// The l7p key duplicates the path for the app's own captureOnce parser.
+//
+// iOS + Android: tapping any store link also copies a token URL to the
+// clipboard; the app reads it once on first launch (pasteboard channel, same
+// format family as /go/'s #l7r partner token). Mobile only: a desktop clipboard
+// never reaches a phone. The /go/ page has its own standalone flow (#l7r) and
+// does not load this script.
+(() => {
+  const path = location.pathname;
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  document
+    .querySelectorAll<HTMLAnchorElement>('a[href*="play.google.com/store/apps/details"]')
+    .forEach((el) => {
+      const url = new URL(el.href);
+      const payload = new URLSearchParams(url.searchParams.get('referrer') ?? '');
+      if (payload.has('l7p')) return;
+      payload.set('utm_source', 'lingoseven.com');
+      payload.set('utm_medium', 'website');
+      payload.set('utm_campaign', path);
+      payload.set('l7p', path);
+      url.searchParams.set('referrer', payload.toString());
+      el.href = url.toString();
+    });
+
+  if (!isMobile) return;
+  const token = `https://lingoseven.com/go/#l7p=${encodeURIComponent(path)}`;
+  document.addEventListener('click', (e) => {
+    const target = e.target instanceof Element ? e.target : null;
+    if (!target?.closest('a[href*="apps.apple.com"], a[href*="play.google.com"]')) return;
+    // Fire-and-forget inside the tap gesture; never blocks the navigation.
+    navigator.clipboard?.writeText(token).catch(() => {});
+  });
+})();

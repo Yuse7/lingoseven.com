@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Kirill",
   "fact_writing_georgian_mkhedruli": "Gruzin (mxedruli)",
   "fact_writing_greek": "Yunon",
-  "fact_writing_latin": "Lotin"
+  "fact_writing_latin": "Lotin",
+  "qr_scan_hint": "Ilovani olish uchun skanerlang"
 }

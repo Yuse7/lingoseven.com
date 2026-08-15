@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Kyrillinen",
   "fact_writing_georgian_mkhedruli": "Georgialainen (mkhedruli)",
   "fact_writing_greek": "Kreikkalainen",
-  "fact_writing_latin": "Latinalainen"
+  "fact_writing_latin": "Latinalainen",
+  "qr_scan_hint": "Skannaa, niin saat sovelluksen"
 }

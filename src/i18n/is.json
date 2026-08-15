@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Kýrillískt",
   "fact_writing_georgian_mkhedruli": "Georgískt (mkhedruli)",
   "fact_writing_greek": "Grískt",
-  "fact_writing_latin": "Latneskt"
+  "fact_writing_latin": "Latneskt",
+  "qr_scan_hint": "Skannaðu til að fá forritið"
 }

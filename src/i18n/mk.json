@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Кирилица",
   "fact_writing_georgian_mkhedruli": "Грузиско (мхедрули)",
   "fact_writing_greek": "Грчко",
-  "fact_writing_latin": "Латиница"
+  "fact_writing_latin": "Латиница",
+  "qr_scan_hint": "Скенирајте за да ја преземете апликацијата"
 }

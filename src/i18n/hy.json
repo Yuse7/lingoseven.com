@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Կյուրեղագիր",
   "fact_writing_georgian_mkhedruli": "Վրացական (մխեդրուլի)",
   "fact_writing_greek": "Հունական",
-  "fact_writing_latin": "Լատինական"
+  "fact_writing_latin": "Լատինական",
+  "qr_scan_hint": "Սկանավորեք՝ հավելվածը ստանալու համար"
 }

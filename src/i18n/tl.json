@@ -250,5 +250,6 @@
   "fact_writing_cyrillic_latin": "Ciriliko at Latin",
   "fact_writing_cyrillic": "Ciriliko",
   "fact_writing_greek": "Griyego",
-  "fact_writing_latin": "Latin"
+  "fact_writing_latin": "Latin",
+  "qr_scan_hint": "I-scan para makuha ang app"
 }

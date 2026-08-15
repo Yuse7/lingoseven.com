@@ -237,5 +237,6 @@
   "stats_speakers": "Abakhulumi",
   "stats_family": "Umndeni wezilimi",
   "stats_writing": "Uhlelo lokubhala",
-  "stats_fsi_hours": "Amahora okufunda (FSI)"
+  "stats_fsi_hours": "Amahora okufunda (FSI)",
+  "qr_scan_hint": "Skena ukuze uthole i-app"
 }

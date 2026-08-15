@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Kiril",
   "fact_writing_georgian_mkhedruli": "Gürcü (Mhedruli)",
   "fact_writing_greek": "Yunan",
-  "fact_writing_latin": "Latin"
+  "fact_writing_latin": "Latin",
+  "qr_scan_hint": "Uygulamayı edinmek için tarayın"
 }

@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Chữ Kirin",
   "fact_writing_georgian_mkhedruli": "Chữ Gruzia (Mkhedruli)",
   "fact_writing_greek": "Chữ Hy Lạp",
-  "fact_writing_latin": "Chữ Latinh"
+  "fact_writing_latin": "Chữ Latinh",
+  "qr_scan_hint": "Quét để tải ứng dụng"
 }

@@ -134,6 +134,10 @@ const entityGraph = {
 <!-- Canonical -->
 <link rel="canonical" href={resolvedCanonical} />
 
+<!-- iOS Smart App Banner: Safari-native install strip. app-argument hands the
+     page URL to the app when it is already installed (open-in-app). -->
+<meta name="apple-itunes-app" content={`app-id=6471030440, app-argument=${resolvedCanonical}`} />
+
 <!-- Blog RSS autodiscovery -->
 <link rel="alternate" type="application/rss+xml" title="Lingo7 Blog" href="/rss.xml" />
 

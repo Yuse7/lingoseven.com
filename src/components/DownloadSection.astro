@@ -1,4 +1,6 @@
 ---
+import QrBridge from './QrBridge.astro';
+
 interface Props {
   targetLangName?: string;
   targetLangNamePrep?: string;
@@ -46,6 +48,7 @@ function t(key: string): string {
                     <span class="download-emoji" id="downloadEmoji">&#x1F44D;</span>
                 </div>
             </div>
+            <QrBridge hint={t('qr_scan_hint')} />
         </div>
     </div>
 </section>

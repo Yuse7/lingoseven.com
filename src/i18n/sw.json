@@ -245,5 +245,6 @@
   "fact_writing_armenian": "Kiarmenia",
   "fact_writing_georgian_mkhedruli": "Kijojia (Mkhedruli)",
   "fact_writing_greek": "Kigiriki",
-  "fact_writing_latin": "Kilatini"
+  "fact_writing_latin": "Kilatini",
+  "qr_scan_hint": "Changanua ili kupata programu"
 }

@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Kirillitsa",
   "fact_writing_georgian_mkhedruli": "Gruusia (mhedruli)",
   "fact_writing_greek": "Kreeka",
-  "fact_writing_latin": "Ladina"
+  "fact_writing_latin": "Ladina",
+  "qr_scan_hint": "Rakenduse saamiseks skannige"
 }

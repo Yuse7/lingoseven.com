@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Cirilike",
   "fact_writing_georgian_mkhedruli": "Gjeorgjiane (mkhedruli)",
   "fact_writing_greek": "Greke",
-  "fact_writing_latin": "Latine"
+  "fact_writing_latin": "Latine",
+  "qr_scan_hint": "Skanoni për të marrë aplikacionin"
 }

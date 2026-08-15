@@ -1,0 +1,72 @@
+---
+// Desktop-only QR bridge: 62% of sessions are desktop, where a store click
+// dead-ends on a web store page. The QR encodes THIS page's URL, so the phone
+// that scans it lands on the same page and runs the normal mobile store flow,
+// keeping page-level install attribution intact (main.ts packs the path into
+// the Play referrer / pasteboard token). Hidden until client JS confirms a
+// desktop UA and the QR library (already shipped for /go/) has rendered.
+interface Props {
+  hint: string;
+}
+const { hint } = Astro.props;
+const pageUrl = Astro.url.href;
+---
+
+<div class="qr-bridge" hidden data-qr-url={pageUrl}>
+  <div class="qr-bridge-box" aria-hidden="true"></div>
+  <p class="qr-bridge-hint">{hint}</p>
+</div>
+
+<script>
+  const bridges = document.querySelectorAll<HTMLElement>('.qr-bridge');
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (bridges.length && !isMobile) {
+    const lib = document.createElement('script');
+    lib.src = '/js/qrcode.min.js';
+    lib.onload = () => {
+      bridges.forEach((el) => {
+        const url = el.dataset.qrUrl;
+        const box = el.querySelector('.qr-bridge-box');
+        if (!url || !box) return;
+        // qrcode.min.js exposes a global factory (same usage as go.astro).
+        const qr = (window as any).qrcode(0, 'M');
+        qr.addData(url);
+        qr.make();
+        box.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 8, scalable: true });
+        el.hidden = false;
+      });
+    };
+    document.head.appendChild(lib);
+  }
+</script>
+
+<style>
+  .qr-bridge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 1.5rem;
+  }
+
+  .qr-bridge-box {
+    width: 108px;
+    height: 108px;
+    padding: 6px;
+    background: #fff;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+
+  .qr-bridge-box :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .qr-bridge-hint {
+    margin: 0;
+    max-width: 200px;
+    color: var(--text-light, rgba(255, 255, 255, 0.6));
+    font-size: 0.9rem;
+  }
+</style>

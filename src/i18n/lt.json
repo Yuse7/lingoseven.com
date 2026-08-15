@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Kirilica",
   "fact_writing_georgian_mkhedruli": "Gruzinų (mchedruli)",
   "fact_writing_greek": "Graikų",
-  "fact_writing_latin": "Lotynų"
+  "fact_writing_latin": "Lotynų",
+  "qr_scan_hint": "Nuskaitykite, kad gautumėte programėlę"
 }

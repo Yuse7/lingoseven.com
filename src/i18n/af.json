@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Cyrillies",
   "fact_writing_georgian_mkhedruli": "Georgies (Mkhedruli)",
   "fact_writing_greek": "Grieks",
-  "fact_writing_latin": "Latyn"
+  "fact_writing_latin": "Latyn",
+  "qr_scan_hint": "Skandeer om die app te kry"
 }

@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Кірыліца",
   "fact_writing_georgian_mkhedruli": "Грузінскае (мхедрулі)",
   "fact_writing_greek": "Грэчаскае",
-  "fact_writing_latin": "Лацінка"
+  "fact_writing_latin": "Лацінка",
+  "qr_scan_hint": "Адскануйце, каб атрымаць праграму"
 }

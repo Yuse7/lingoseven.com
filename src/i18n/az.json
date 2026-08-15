@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Kiril",
   "fact_writing_georgian_mkhedruli": "Gürcü (Mxedruli)",
   "fact_writing_greek": "Yunan",
-  "fact_writing_latin": "Latın"
+  "fact_writing_latin": "Latın",
+  "qr_scan_hint": "Tətbiqi əldə etmək üçün skan edin"
 }

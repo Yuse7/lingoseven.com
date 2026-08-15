@@ -252,5 +252,6 @@
   "fact_writing_cyrillic": "Zirilikoa",
   "fact_writing_georgian_mkhedruli": "Georgiarra (mkhedruli)",
   "fact_writing_greek": "Grekoa",
-  "fact_writing_latin": "Latindarra"
+  "fact_writing_latin": "Latindarra",
+  "qr_scan_hint": "Eskaneatu aplikazioa lortzeko"
 }
