@@ -146,6 +146,15 @@ const description = 'Your Lingo7 affiliate dashboard.';
       return esc(langName(parts[1])) + ' &rarr; ' + esc(langName(parts[0]));
     }
 
+    // How the reader behind an activation arrived. A backend that predates the
+    // split (before 2026-08-15) sends no `source`, and the row keeps the one
+    // label it always had rather than guessing.
+    function activationLabel(source) {
+      if (source === 'link') return 'Activated via link';
+      if (source === 'code') return 'Promo code entered';
+      return 'Promo code activated';
+    }
+
     // A refund keeps its own row with negative amounts. It is dimmed and
     // labeled, never hidden.
     function isRefund(p) {
@@ -286,15 +295,30 @@ const description = 'Your Lingo7 affiliate dashboard.';
         document.getElementById('promos-card').hidden = false;
       }
 
-      var cards = [
-        { label: 'Clicks (30d)', value: totals.clicks_30d || 0 },
-        { label: 'Referred installs', value: totals.attributions || 0 },
-        {
-          label: 'Pending payout',
-          value: money(totals.pending_payout_cents),
-        },
-        { label: 'Paid to date', value: money(totals.paid_cents) },
-      ];
+      var cards = [{ label: 'Clicks (30d)', value: totals.clicks_30d || 0 }];
+      // Installs are split by how the reader arrived (added 2026-08-15). A
+      // backend that predates the split sends only the combined number, and
+      // then the card reads as it always did.
+      if (totals.attributions_link === undefined) {
+        cards.push({
+          label: 'Referred installs',
+          value: totals.attributions || 0,
+        });
+      } else {
+        cards.push({
+          label: 'Link installs',
+          value: totals.attributions_link || 0,
+        });
+        cards.push({
+          label: 'Code redemptions',
+          value: totals.attributions_promo || 0,
+        });
+      }
+      cards.push({
+        label: 'Pending payout',
+        value: money(totals.pending_payout_cents),
+      });
+      cards.push({ label: 'Paid to date', value: money(totals.paid_cents) });
       document.getElementById('cards-grid').innerHTML = cards
         .map(function (c) {
           return (
@@ -316,7 +340,9 @@ const description = 'Your Lingo7 affiliate dashboard.';
             html:
               '<li class="event-row is-activation"><span class="event-date">' +
               esc(timeLabel(a.ts, null)) +
-              '</span><span class="event-type">Promo code activated' +
+              '</span><span class="event-type">' +
+              esc(activationLabel(a.source)) +
+              (a.email ? ' · ' + esc(a.email) : '') +
               (langs ? ' · ' + langs : '') +
               '</span></li>',
           };
@@ -328,6 +354,7 @@ const description = 'Your Lingo7 affiliate dashboard.';
               esc(KIND_LABELS[p.kind] || 'Subscription'),
               esc(money(p.amount_cents)),
             ];
+            if (p.email) details.push(esc(p.email));
             var langs = pairLabel(p.pair);
             if (langs) details.push(langs);
 
