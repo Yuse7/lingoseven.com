@@ -237,6 +237,8 @@ const description = 'Your Lingo7 affiliate dashboard.';
       var purchases = d.purchases || [];
       // Added 2026-08-07; a backend that predates it sends no activations.
       var activations = d.activations || [];
+      // Added 2026-08-26; a backend that predates it sends no payouts.
+      var payouts = d.payouts || [];
       var promos = d.promos || [];
 
       document.getElementById('partner-name').textContent =
@@ -331,7 +333,8 @@ const description = 'Your Lingo7 affiliate dashboard.';
         })
         .join('');
 
-      // One feed, newest first: promo activations and payments interleaved.
+      // One feed, newest first: promo activations, payments and the transfers
+      // that settled them, interleaved.
       var feed = activations
         .map(function (a) {
           var langs = pairLabel(a.pair);
@@ -376,6 +379,22 @@ const description = 'Your Lingo7 affiliate dashboard.';
                 '</span></li>',
             };
           }),
+        )
+        .concat(
+          // A transfer carries no time of day: the admin states the day the
+          // money left, so the row sorts from the start of that day.
+          payouts.map(function (p) {
+            return {
+              at: sortKey(null, p.paid_at),
+              html:
+                '<li class="event-row is-payout"><span class="event-date">' +
+                esc(timeLabel(null, p.paid_at)) +
+                '</span><span class="event-type">Payout</span>' +
+                '<span class="event-amount">' +
+                esc(money(p.amount_cents)) +
+                '</span></li>',
+            };
+          }),
         );
 
       var eventsList = document.getElementById('events-list');
@@ -383,8 +402,30 @@ const description = 'Your Lingo7 affiliate dashboard.';
         feed.sort(function (a, b) {
           return b.at - a.at;
         });
+        // The feed mixes three different things, so the title splits the count:
+        // gift activations of the promo code, actual payments, and the money
+        // sent to the partner. One number here once read as "7 activations"
+        // while the code showed "6 uses".
+        var titleParts = [];
+        if (activations.length) {
+          titleParts.push(
+            activations.length +
+              (activations.length === 1 ? ' activation' : ' activations'),
+          );
+        }
+        if (purchases.length) {
+          titleParts.push(
+            purchases.length +
+              (purchases.length === 1 ? ' purchase' : ' purchases'),
+          );
+        }
+        if (payouts.length) {
+          titleParts.push(
+            payouts.length + (payouts.length === 1 ? ' payout' : ' payouts'),
+          );
+        }
         document.getElementById('activity-title').textContent =
-          'Activity (' + feed.length + ')';
+          'Activity · ' + titleParts.join(' · ');
         eventsList.innerHTML = feed
           .map(function (item) {
             return item.html;
@@ -645,6 +686,19 @@ const description = 'Your Lingo7 affiliate dashboard.';
     margin-right: 8px;
     border-radius: 50%;
     background: var(--primary);
+    vertical-align: middle;
+  }
+
+  /* A payout is money leaving us, not coming in, so it gets its own amber dot
+     instead of the activation's green one. */
+  .events-list :global(.event-row.is-payout .event-type::before) {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background: #f97316;
     vertical-align: middle;
   }
 

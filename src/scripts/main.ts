@@ -502,18 +502,6 @@ const playWhenVisible = (video: HTMLVideoElement) => {
   }
 };
 
-// Download animation (video to emoji transition)
-const downloadVideo = document.getElementById('downloadVideo') as HTMLVideoElement | null;
-const downloadEmoji = document.getElementById('downloadEmoji') as HTMLElement | null;
-
-if (downloadVideo && downloadEmoji) {
-  downloadVideo.addEventListener('ended', () => {
-    downloadVideo.classList.add('hidden');
-    downloadEmoji.classList.add('visible');
-  });
-  playWhenVisible(downloadVideo);
-}
-
 // Read animation with number
 const readVideo = document.getElementById('readVideo') as HTMLVideoElement | null;
 const readNumber = document.getElementById('readNumber') as HTMLElement | null;
