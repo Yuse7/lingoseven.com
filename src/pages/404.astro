@@ -9,11 +9,19 @@ const description =
 
 <BaseLayout title={title} description={description} lang="en" noindex={true}>
   <script is:inline>
-    // Pretty referral links /go/{code} have no static page on GitHub Pages
-    // and land here; hand them to the real attribution page.
+    // Pretty referral links /go/{code} and book links /b/{id} have no static
+    // page on GitHub Pages and land here; hand them to the real page. The
+    // Cloudflare redirect rule does the same before the request reaches
+    // GitHub Pages; this is the fallback while the rule is absent.
     (function () {
       var m = location.pathname.match(/^\/go\/([a-z0-9-]{1,32})\/?$/i);
-      if (m) location.replace('/go/?p=' + m[1].toLowerCase());
+      if (m) return location.replace('/go/?p=' + m[1].toLowerCase());
+      var b = location.pathname.match(/^\/b\/(pg\d{1,7})\/?$/i);
+      if (b) {
+        // Same shape as the Cloudflare rules: the whole query string rides along.
+        var q = location.search.replace(/^\?/, '');
+        location.replace('/b/?id=' + b[1].toLowerCase() + (q ? '&' + q : ''));
+      }
     })();
   </script>
   <section class="nf">
