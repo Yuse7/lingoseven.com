@@ -341,6 +341,13 @@ const jsonLd = [
     transition: border-color 0.2s, transform 0.2s;
   }
 
+  /* .pd-card sets display:flex, which overrides the [hidden] UA rule.
+     Restore the hide explicitly so the level filter (card.hidden = true)
+     actually hides cards. */
+  .pd-card[hidden] {
+    display: none;
+  }
+
   .pd-card:hover {
     border-color: var(--primary);
     transform: translateY(-2px);

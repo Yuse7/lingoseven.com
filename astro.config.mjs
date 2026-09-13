@@ -38,6 +38,9 @@ export default defineConfig({
         if (seg[0] === 'go') return false;
         // Tier B book link /b/ (noindex utility, docs/pd-books-pipeline.md)
         if (seg[0] === 'b') return false;
+        // Payment return pages /pay/success/ and /pay/fail/ (noindex utility,
+        // T-Kassa SuccessURL/FailURL)
+        if (seg[0] === 'pay') return false;
         // Partner cabinet (noindex); keep /partners/ itself indexable.
         if (seg[0] === 'partners' && seg[1] === 'dashboard') return false;
         // English-only blog policy: every non-English blog page (index + posts)
