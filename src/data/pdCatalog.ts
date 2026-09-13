@@ -7,7 +7,7 @@
  * data (`sample: true`, descriptions say so in their own text) so the pages can
  * be built and reviewed before the first export runs.
  *
- * Contract: docs/features/public-domain-books-plan.md, sections 5 and 6.
+ * Contract: docs/pd-books-pipeline.md (export format, shelves, growth rules).
  */
 import catalogJson from './pd-catalog.json';
 import { codeToSlug } from './languageSlugs';

@@ -36,7 +36,7 @@ export default defineConfig({
         if (seg[0] === '404') return false;
         // Affiliate redirect page /go/ (noindex utility, referral-program.md)
         if (seg[0] === 'go') return false;
-        // Tier B book link /b/ (noindex utility, public-domain-books-plan.md)
+        // Tier B book link /b/ (noindex utility, docs/pd-books-pipeline.md)
         if (seg[0] === 'b') return false;
         // Partner cabinet (noindex); keep /partners/ itself indexable.
         if (seg[0] === 'partners' && seg[1] === 'dashboard') return false;

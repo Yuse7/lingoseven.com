@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-09-13T12:15:13.148069+00:00",
+  "generated_at": "2026-09-13T12:30:37.168699+00:00",
   "shelves": [
     {
       "lang": "de",
@@ -8620,18 +8620,18 @@
       },
       "descriptions": {
         "en": {
-          "text": "This novel follows the decline of a wealthy merchant family in nineteenth century Germany. The language is sophisticated and descriptive, reflecting the formal tone of the era. You will encounter detailed sentences that focus on social status, family dynamics, and daily life. The vocabulary is rich and precise, which makes it a rewarding but challenging read for those learning German. It provides a deep look into the cultural norms and domestic environment of a bygone time through complex, layered prose.",
+          "text": "This novel follows the decline of a wealthy merchant family in nineteenth century Germany. The language reflects the formal and sophisticated tone of the era, featuring long, descriptive sentences and a rich, varied vocabulary. You will encounter complex sentence structures that require careful attention to detail. The story focuses on domestic life, social expectations, and the tensions within a family. It is a demanding read that offers a deep look into the cultural and social atmosphere of the period.",
           "pairs": [
             {
-              "dst": "\"Tony!\" she said, \"I believe that God –\"",
+              "dst": "Tony, she said, I believe that God",
               "src": "»Tony!« sagte sie, »ich glaube, daß mich Gott –«"
             },
             {
-              "dst": "\"Along with clothes and shoes,\" she said, \"food and drink, house and home, wife and child, fields and livestock ...\"",
+              "dst": "In addition to clothes and shoes, she said, food and drink, house and home, wife and child, fields and cattle",
               "src": "»Dazu Kleider und Schuhe«, sprach sie, »Essen und Trinken, Haus und Hof, Weib und Kind, Acker und Vieh …«"
             },
             {
-              "dst": "He inquired about Tony's fields and livestock, asked how much she would charge for a sack of wheat, and offered to do business with her.",
+              "dst": "He inquired about Tony's fields and cattle, asked how much she would charge for a sack of wheat, and offered to do business with her.",
               "src": "Er erkundigte sich nach Tonys Acker und Vieh, fragte, wieviel sie für den Sack Weizen nähme und erbot sich, Geschäfte mit ihr zu machen."
             }
           ]
@@ -33290,7 +33290,7 @@
       },
       "descriptions": {
         "en": {
-          "text": "This classic adventure novel follows the journey of Edmond Dantes, a man who suffers a great betrayal and seeks justice. Originally published in the mid nineteenth century, the Finnish translation reflects the formal language of the early twentieth century. The text features descriptive vocabulary related to maritime life, legal proceedings, and social hierarchy. The sentences are often long and complex, which may challenge learners. It is a dense narrative that explores themes of revenge, patience, and moral redemption.",
+          "text": "This classic adventure novel follows the journey of Edmond Dantes, a man who suffers a great injustice and seeks retribution. Written in the nineteenth century, the Finnish translation reflects the formal and descriptive style of that era. The vocabulary is rich and varied, often focusing on historical settings, maritime life, and social hierarchies. While the narrative is engaging, the sentence structures can be long and complex, making this a rewarding but challenging read for those developing their Finnish language skills.",
           "pairs": [
             {
               "dst": "1. Marseille — Arrival",
@@ -72861,19 +72861,19 @@
       },
       "descriptions": {
         "en": {
-          "text": "This novel from the early twentieth century follows a young woman named Gunvor who is pressured by her grandmother to visit an old, decaying estate. The language reflects the formal social norms and aristocratic values of the era. You will encounter older sentence structures and a vocabulary centered on family duty, social status, and traditional expectations. It is a demanding read because of the dialogue heavy style and the specific, somewhat dated phrasing used to describe personal relationships and societal roles.",
+          "text": "This novel from the early twentieth century follows a young woman named Gunvor who is pressured by her grandmother to visit an old estate. The language reflects the formal tone and social expectations of the era, featuring polite address and structured dialogue. While the vocabulary is relatively accessible, the sentences can be long and contain complex emotional reflections. It is a good choice for learners who want to explore historical social dynamics and traditional Swedish prose style in a narrative context.",
           "pairs": [
             {
-              "dst": "— For what, my child?",
-              "src": "— För hvad, mitt barn?"
+              "dst": "Quiet.",
+              "src": "Tyst."
             },
             {
-              "dst": "— His grandson is also with him, isn't he?",
-              "src": "— Hans sonson är ju också hos honom?"
+              "dst": "Count Haqvin Brage is a friend from my youth, you know that.",
+              "src": "Grefve Haqvin Brage är min ungdomsvän, det vet du."
             },
             {
-              "dst": "— An eighteen year old child should not understand, only obey.",
-              "src": "— Ett aderton års barn skall inte förstå, endast lyda."
+              "dst": "You shall get to know each other.",
+              "src": "Ni ska’ lära känna hvarandra."
             }
           ]
         }

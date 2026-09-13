@@ -36,7 +36,7 @@ const link = (href, label) => ({
 
 // Public domain page for the same title, when the core carries it. The blog is
 // English-only, so the `en` locale page is the one to link
-// (docs/features/public-domain-books-plan.md, section 5).
+// (docs/pd-books-pipeline.md).
 const pdPath = (lang, title) => {
   const book = findBookByTitle(lang, title);
   return book ? bookPath('en', book) : null;

@@ -14,7 +14,7 @@ interface Props {
 const { targetLangName = '', targetLangNamePrep = '', targetLangNameGen = '', targetLang = 'en', uiLang = 'en', translations = {} } = Astro.props;
 
 // Free public domain shelf for this language, when it is built in this locale
-// (docs/features/public-domain-books-plan.md).
+// (docs/pd-books-pipeline.md).
 const shelfUrl = shelfPath(uiLang, targetLang);
 // Own fallback string: this component gets the raw locale dictionary, and a
 // locale that has not been translated yet must not print a bare key.

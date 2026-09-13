@@ -2,7 +2,7 @@
 // Build limiter: fails the build before the site outgrows GitHub Pages.
 //
 // Pages refuses to publish a site over 1 GB, and the public domain book pages
-// (docs/features/public-domain-books-plan.md, section 5) are the first thing
+// (docs/pd-books-pipeline.md, growth rules) are the first thing
 // here that can grow without a human adding files one by one. A hard stop with
 // the numbers printed is better than a deploy that silently breaks, and the
 // warn threshold is the signal to change hosting rather than trim pages.
