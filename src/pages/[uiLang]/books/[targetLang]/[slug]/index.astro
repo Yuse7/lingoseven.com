@@ -1,0 +1,713 @@
+---
+// One public domain book: what it is, how hard it is, how it reads in Lingo7,
+// and the button that puts it in the app.
+// Plan: docs/features/public-domain-books-plan.md, sections 5 and 7.
+import BaseLayout from '../../../../../layouts/BaseLayout.astro';
+import ReaderDemo from '../../../../../components/ReaderDemo.astro';
+import QrBridge from '../../../../../components/QrBridge.astro';
+import { getEnabledLanguages } from '../../../../../data/languages';
+import { codeToSlug } from '../../../../../data/languageSlugs';
+import { getTargetLanguageName } from '../../../../../data/languageNames';
+import { getTranslations, t } from '../../../../../utils/i18n';
+import { getPlayListing } from '../../../../../utils/storeListing';
+import {
+  authorYears,
+  authorsLine,
+  bookPath,
+  books,
+  booksByLang,
+  getShelf,
+  issuedYear,
+  levelLabel,
+  localesWithShelves,
+  readingTime,
+  similarBooks,
+  type PdBook,
+} from '../../../../../data/pdCatalog';
+
+const APP_STORE_URL = 'https://apps.apple.com/app/id6471030440?pt=126721951&ct=lingoseven&mt=8';
+const GOOGLE_PLAY_URL =
+  'https://play.google.com/store/apps/details?id=com.doublereading&utm_source=lingoseven&utm_campaign=website';
+
+export function getStaticPaths() {
+  const paths: Array<{
+    params: { uiLang: string; targetLang: string; slug: string };
+    props: { uiCode: string; bookId: string };
+  }> = [];
+  for (const book of books) {
+    const langSlug = codeToSlug[book.lang];
+    const shelf = getShelf(book.lang);
+    if (!langSlug || !shelf) continue;
+    // Only the locales the shelf declares (wave 1: `en` for every shelf).
+    for (const locale of shelf.locales) {
+      paths.push({
+        params: { uiLang: locale, targetLang: langSlug, slug: book.slug },
+        props: { uiCode: locale, bookId: book.id },
+      });
+    }
+  }
+  return paths;
+}
+
+const { uiCode, bookId } = Astro.props;
+const book = books.find((b) => b.id === bookId) as PdBook;
+// English underlay: a locale missing the `books_*` keys still renders real copy.
+const translations = { ...getTranslations('en'), ...getTranslations(uiCode) };
+
+const targetSlug = codeToSlug[book.lang];
+const targetLangName = getTargetLanguageName(book.lang, uiCode);
+const shelf = getShelf(book.lang)!;
+const metrics = book.metrics;
+const level = levelLabel(book);
+const authors = authorsLine(book);
+const years = authorYears(book);
+const time = readingTime(book);
+const description = book.descriptions?.[uiCode]?.text ?? '';
+// Pairs are empty when the reader's language is the book's own language:
+// there is no translation to demo, so the widget stays off.
+const pairs = uiCode === book.lang ? [] : (book.descriptions?.[uiCode]?.pairs ?? []);
+const excerptParagraphs = (book.excerpt ?? '').split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+const subjects = (book.subjects ?? []).slice(0, 8);
+const similar = similarBooks(book, 6).map((other) => ({
+  book: other,
+  url: bookPath(uiCode, other)!,
+  level: levelLabel(other),
+  authors: authorsLine(other),
+}));
+
+const vars = {
+  targetLang: targetLangName,
+  title: book.title,
+  author: authors,
+  level: level ?? '',
+  words: metrics.words.toLocaleString('en-US'),
+  time,
+  chapters: String(metrics.chapters),
+  count: (book.download_count ?? 0).toLocaleString('en-US'),
+  pages: String(book.pages ?? metrics.pages ?? 0),
+};
+
+const canonicalUrl = `https://lingoseven.com${bookPath(uiCode, book)}`;
+const title = t(translations, 'books_book_meta_title', vars);
+// The generated description is the page's own summary; the key is the fallback
+// for a book whose description has not been generated yet.
+const metaDescription = description
+  ? description.length > 165
+    ? `${description.slice(0, 162).replace(/\s+\S*$/, '')}...`
+    : description
+  : t(translations, 'books_book_meta_description', vars);
+
+// hreflang stays inside the shelf's own locales: those are the only pages built.
+const hreflangAlternates = shelf.locales.map((locale) => ({
+  lang: locale,
+  url: `https://lingoseven.com/${locale}/books/${targetSlug}/${book.slug}/`,
+}));
+const defaultLocale = shelf.locales.includes('en') ? 'en' : shelf.locales[0];
+hreflangAlternates.push({
+  lang: 'x-default',
+  url: `https://lingoseven.com/${defaultLocale}/books/${targetSlug}/${book.slug}/`,
+});
+
+const enabled = getEnabledLanguages();
+const uiLanguages = enabled
+  .filter((l) => shelf.locales.includes(l.code))
+  .map((l) => ({
+    code: l.code,
+    nativeName: l.nativeName,
+    flag: l.flag,
+    url: bookPath(l.code, book)!,
+  }));
+
+const learnLanguageLinks = enabled.map((l) => ({
+  name: getTargetLanguageName(l.code, uiCode),
+  url: `/${uiCode}/learn/${codeToSlug[l.code]}/`,
+}));
+
+const hubLocale = localesWithShelves().includes(uiCode) ? uiCode : 'en';
+const shelfUrl = `/${uiCode}/books/${targetSlug}/`;
+
+const faq = [
+  {
+    q: t(translations, 'books_faq_level_q', vars),
+    a: t(translations, 'books_faq_level_a', vars),
+    skip: !level,
+  },
+  { q: t(translations, 'books_faq_free_q', vars), a: t(translations, 'books_faq_free_a', vars), skip: false },
+  { q: t(translations, 'books_faq_how_q', vars), a: t(translations, 'books_faq_how_a', vars), skip: false },
+  {
+    q: t(translations, 'books_faq_time_q', vars),
+    a: t(translations, 'books_faq_time_a', vars),
+    skip: !time,
+  },
+].filter((item) => !item.skip);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Book',
+    name: book.subtitle ? `${book.title}: ${book.subtitle}` : book.title,
+    url: canonicalUrl,
+    inLanguage: book.lang,
+    bookFormat: 'https://schema.org/EBook',
+    isAccessibleForFree: true,
+    ...(description ? { description } : {}),
+    ...(book.cover ? { image: book.cover } : {}),
+    ...(book.pages ? { numberOfPages: book.pages } : {}),
+    ...(book.issued ? { datePublished: book.issued } : {}),
+    author: (book.authors ?? []).map((a) => ({
+      '@type': 'Person',
+      name: a.display_name || a.name,
+      ...(a.birth_year ? { birthDate: String(a.birth_year) } : {}),
+      ...(a.death_year ? { deathDate: String(a.death_year) } : {}),
+    })),
+    publisher: { '@type': 'Organization', name: 'Project Gutenberg' },
+    potentialAction: {
+      '@type': 'ReadAction',
+      target: [APP_STORE_URL, GOOGLE_PLAY_URL],
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://lingoseven.com/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: t(translations, 'books_nav_label'),
+        item: `https://lingoseven.com/${hubLocale}/books/`,
+      },
+      { '@type': 'ListItem', position: 3, name: targetLangName, item: `https://lingoseven.com${shelfUrl}` },
+      { '@type': 'ListItem', position: 4, name: book.title, item: canonicalUrl },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={metaDescription}
+  lang={uiCode}
+  canonicalUrl={canonicalUrl}
+  ogImage={book.cover ?? undefined}
+  hreflangAlternates={hreflangAlternates}
+  jsonLd={jsonLd}
+  translations={translations}
+  uiLang={uiCode}
+  uiLanguages={uiLanguages}
+  learnLanguageLinks={learnLanguageLinks}
+  showNav={false}
+  blogUrl={`/${uiCode}/blog/`}
+  playListing={getPlayListing(book.lang)}
+  installActions={{ l7b: book.id }}
+  smartBannerArgument={`https://lingoseven.com/b/${book.id}`}
+>
+  <article class="pd-book">
+    <div class="container">
+      <nav class="pd-crumbs" aria-label="Breadcrumb">
+        <a href={`/${hubLocale}/books/`}>{t(translations, 'books_nav_label')}</a>
+        <span>/</span>
+        <a href={shelfUrl}>{targetLangName}</a>
+      </nav>
+
+      <header class="pd-hero">
+        {book.cover
+          ? <img class="pd-hero-cover" src={book.cover} alt={book.title} width="220" height="330" />
+          : <span class="pd-hero-cover pd-hero-cover--blank" aria-hidden="true">{book.title.slice(0, 1)}</span>}
+
+        <div class="pd-hero-body">
+          <h1>{book.title}</h1>
+          {book.subtitle && <p class="pd-subtitle">{book.subtitle}</p>}
+          {authors && (
+            <p class="pd-author">
+              {authors}{years && <span class="pd-years"> ({years})</span>}
+            </p>
+          )}
+
+          <dl class="pd-facts">
+            {level && (
+              <div>
+                <dt>{t(translations, 'books_level_approx')}</dt>
+                <dd><span class="pd-badge">{level}</span></dd>
+              </div>
+            )}
+            <div>
+              <dt>{t(translations, 'books_length')}</dt>
+              <dd>{t(translations, 'books_words_value', vars)}</dd>
+            </div>
+            {time && (
+              <div>
+                <dt>{t(translations, 'books_reading_time')}</dt>
+                <dd>{time}</dd>
+              </div>
+            )}
+            {metrics.chapters > 0 && (
+              <div>
+                <dt>{t(translations, 'books_chapters')}</dt>
+                <dd>{metrics.chapters}</dd>
+              </div>
+            )}
+            <div>
+              <dt>{t(translations, 'books_language')}</dt>
+              <dd>{targetLangName}</dd>
+            </div>
+            {issuedYear(book) && (
+              <div>
+                <dt>{t(translations, 'books_issued')}</dt>
+                <dd>{issuedYear(book)}</dd>
+              </div>
+            )}
+          </dl>
+
+          <div class="pd-cta" id="pd-read">
+            <a
+              class="btn btn-primary btn-large"
+              href={GOOGLE_PLAY_URL}
+              data-pd-cta
+              data-ios-href={APP_STORE_URL}
+              data-book-id={book.id}
+            >
+              {t(translations, 'books_read_cta')}
+            </a>
+            <div class="pd-store-row">
+              <a href={APP_STORE_URL}>{t(translations, 'app_store')}</a>
+              <span>&middot;</span>
+              <a href={GOOGLE_PLAY_URL}>{t(translations, 'google_play')}</a>
+            </div>
+          </div>
+
+          <QrBridge hint={t(translations, 'qr_scan_hint')} />
+        </div>
+      </header>
+
+      {description && (
+        <section class="pd-section pd-about">
+          <p>{description}</p>
+          {book.download_count ? (
+            <p class="pd-downloads">{t(translations, 'books_downloads', vars)}</p>
+          ) : null}
+        </section>
+      )}
+
+      {pairs.length > 0 && (
+        <section class="pd-section pd-demo">
+          <h2>{t(translations, 'books_demo_title')}</h2>
+          <p class="pd-section-sub">{t(translations, 'books_demo_subtitle')}</p>
+          <ReaderDemo targetLang={book.lang} uiLang={uiCode} pairs={pairs} bookTitle={book.title} />
+        </section>
+      )}
+
+      {excerptParagraphs.length > 0 && (
+        <section class="pd-section pd-excerpt">
+          <h2>{t(translations, 'books_excerpt_title')}</h2>
+          <div class="pd-excerpt-body" lang={book.lang}>
+            {excerptParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+          </div>
+          <p class="pd-excerpt-cut">
+            <a href="#pd-read">{t(translations, 'books_excerpt_cut')} &rarr;</a>
+          </p>
+        </section>
+      )}
+
+      {subjects.length > 0 && (
+        <section class="pd-section pd-subjects">
+          <h2>{t(translations, 'books_subjects')}</h2>
+          <ul class="pd-chips">
+            {subjects.map((subject) => <li>{subject}</li>)}
+          </ul>
+        </section>
+      )}
+
+      <section class="pd-section pd-faq">
+        <h2>{t(translations, 'books_faq_title')}</h2>
+        {faq.map((item) => (
+          <div class="pd-faq-item">
+            <h3>{item.q}</h3>
+            <p>{item.a}</p>
+          </div>
+        ))}
+      </section>
+
+      {similar.length > 0 && (
+        <section class="pd-section pd-similar">
+          <h2>{t(translations, 'books_similar_title')}</h2>
+          <p class="pd-section-sub">{t(translations, 'books_similar_subtitle')}</p>
+          <div class="pd-grid">
+            {similar.map((card) => (
+              <a class="pd-card" href={card.url}>
+                {card.book.cover
+                  ? <img class="pd-card-cover" src={card.book.cover} alt="" loading="lazy" width="120" height="180" />
+                  : <span class="pd-card-cover pd-card-cover--blank" aria-hidden="true">{card.book.title.slice(0, 1)}</span>}
+                <span class="pd-card-body">
+                  <span class="pd-card-title">{card.book.title}</span>
+                  {card.authors && <span class="pd-card-author">{card.authors}</span>}
+                  {card.level && <span class="pd-badge pd-badge--small">{card.level}</span>}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <p class="pd-source">{t(translations, 'books_source_note')}</p>
+    </div>
+  </article>
+</BaseLayout>
+
+<script is:inline>
+  // Primary button, per platform. Runs before main.ts (classic inline script vs
+  // deferred module), so main.ts sees the final href and binds the right store
+  // tracking, rewrites the Play referrer and keeps its pre-warm / pasteboard
+  // handlers on this link (docs/marketing/site-attribution.md).
+  (function () {
+    var cta = document.querySelector('[data-pd-cta]');
+    if (!cta) return;
+    var ua = navigator.userAgent;
+    if (/iPhone|iPad|iPod/i.test(ua)) {
+      var ios = cta.getAttribute('data-ios-href');
+      if (ios) cta.setAttribute('href', ios);
+      return;
+    }
+    if (!/Android/i.test(ua)) return;
+    // Android: hand the link to the installed app first. The fallback is the
+    // Play URL as it stands at click time, i.e. with the referrer main.ts wrote.
+    cta.addEventListener('click', function (event) {
+      var play = cta.getAttribute('href') || '';
+      var id = cta.getAttribute('data-book-id') || '';
+      if (play.indexOf('play.google.com') === -1 || !/^pg\d{1,7}$/.test(id)) return;
+      event.preventDefault();
+      location.href =
+        'intent://lingoseven.com/b/' + id + '#Intent;scheme=https;package=com.doublereading;' +
+        'S.browser_fallback_url=' + encodeURIComponent(play) + ';end';
+    });
+  })();
+</script>
+
+<style>
+  .pd-book {
+    padding: 120px 0 80px;
+  }
+
+  .pd-crumbs {
+    display: flex;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+  }
+
+  .pd-crumbs a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .pd-hero {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .pd-hero-cover {
+    width: 220px;
+    height: 330px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    background: var(--background-alt);
+  }
+
+  .pd-hero-cover--blank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--text-light);
+  }
+
+  .pd-hero-body {
+    flex: 1 1 320px;
+    min-width: 0;
+  }
+
+  .pd-hero-body h1 {
+    font-size: 2.1rem;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .pd-subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .pd-author {
+    color: var(--text);
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+
+  .pd-years {
+    color: var(--text-light);
+  }
+
+  .pd-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    margin: 0 0 28px;
+  }
+
+  .pd-facts dt {
+    color: var(--text-light);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .pd-facts dd {
+    margin: 0;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .pd-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: rgba(74, 222, 128, 0.12);
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .pd-badge--small {
+    font-size: 0.75rem;
+    align-self: flex-start;
+  }
+
+  .pd-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .pd-store-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+
+  .pd-store-row a {
+    color: var(--text-light);
+    text-decoration: none;
+  }
+
+  .pd-store-row a:hover {
+    color: var(--primary);
+  }
+
+  .pd-section {
+    margin-top: 56px;
+    max-width: 760px;
+  }
+
+  .pd-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .pd-section-sub {
+    color: var(--text-light);
+    margin-bottom: 20px;
+  }
+
+  .pd-about p {
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .pd-downloads {
+    margin-top: 12px;
+    color: var(--text-light);
+    font-size: 0.85rem;
+  }
+
+  .pd-demo {
+    max-width: none;
+  }
+
+  .pd-excerpt-body {
+    position: relative;
+    padding: 20px 24px;
+    background: var(--background-alt);
+    border-left: 3px solid var(--primary);
+    border-radius: 8px;
+    max-height: 420px;
+    overflow: hidden;
+  }
+
+  .pd-excerpt-body::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 90px;
+    background: linear-gradient(to bottom, rgba(35, 45, 63, 0), var(--background-alt));
+  }
+
+  .pd-excerpt-body p {
+    color: var(--text);
+    line-height: 1.8;
+    margin: 0 0 16px;
+  }
+
+  .pd-excerpt-cut {
+    margin-top: 12px;
+  }
+
+  .pd-excerpt-cut a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .pd-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pd-chips li {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-light);
+    font-size: 0.8rem;
+  }
+
+  .pd-faq-item {
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    background: var(--background-alt);
+    border-left: 3px solid var(--primary);
+    border-radius: 8px;
+  }
+
+  .pd-faq-item h3 {
+    font-size: 1.02rem;
+    margin: 0 0 8px;
+  }
+
+  .pd-faq-item p {
+    margin: 0;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .pd-similar {
+    max-width: none;
+  }
+
+  .pd-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .pd-card {
+    display: flex;
+    gap: 14px;
+    padding: 14px;
+    background: var(--background-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .pd-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .pd-card-cover {
+    width: 64px;
+    height: 96px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 6px;
+    background: var(--background-alt);
+  }
+
+  .pd-card-cover--blank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+  }
+
+  .pd-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .pd-card-title {
+    color: var(--text);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .pd-card-author {
+    color: var(--text-light);
+    font-size: 0.85rem;
+  }
+
+  .pd-source {
+    margin-top: 56px;
+    color: var(--text-light);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    .pd-book {
+      padding: 96px 0 56px;
+    }
+
+    .pd-hero {
+      gap: 20px;
+    }
+
+    .pd-hero-cover {
+      width: 140px;
+      height: 210px;
+    }
+
+    .pd-hero-body h1 {
+      font-size: 1.6rem;
+    }
+  }
+</style>

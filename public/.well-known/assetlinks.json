@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.doublereading",
+      "sha256_cert_fingerprints": [
+        "00:06:AE:AF:AC:20:F4:AD:F5:CD:46:1B:E4:0A:52:49:CE:CE:63:90:62:71:9B:D4:37:95:93:3B:9C:04:E3:59"
+      ]
+    }
+  }
+]

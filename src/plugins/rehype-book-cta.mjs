@@ -8,6 +8,7 @@
 // Prince") stay clean. Store hrefs are the standard ones, so main.ts click
 // tracking (GA4 + Ads conversion + Metrika) applies with no extra wiring.
 import { readingBooks } from '../data/readingBooks';
+import { bookPath, findBookByTitle } from '../data/pdCatalog';
 
 const APP_STORE_URL = 'https://apps.apple.com/app/id6471030440?pt=126721951&ct=lingoseven&mt=8';
 const GOOGLE_PLAY_URL =
@@ -33,7 +34,15 @@ const link = (href, label) => ({
   children: [{ type: 'text', value: label }],
 });
 
-const ctaNode = (title) => ({
+// Public domain page for the same title, when the core carries it. The blog is
+// English-only, so the `en` locale page is the one to link
+// (docs/features/public-domain-books-plan.md, section 5).
+const pdPath = (lang, title) => {
+  const book = findBookByTitle(lang, title);
+  return book ? bookPath('en', book) : null;
+};
+
+const ctaNode = (title, bookHref) => ({
   type: 'element',
   tagName: 'aside',
   properties: { className: ['book-cta'] },
@@ -56,11 +65,19 @@ const ctaNode = (title) => ({
       type: 'element',
       tagName: 'p',
       properties: { className: ['book-cta-links'] },
-      children: [
-        link(APP_STORE_URL, 'App Store'),
-        { type: 'text', value: ' · ' },
-        link(GOOGLE_PLAY_URL, 'Google Play'),
-      ],
+      children: bookHref
+        ? [
+            link(APP_STORE_URL, 'App Store'),
+            { type: 'text', value: ' · ' },
+            link(GOOGLE_PLAY_URL, 'Google Play'),
+            { type: 'text', value: ' · ' },
+            link(bookHref, 'About this book'),
+          ]
+        : [
+            link(APP_STORE_URL, 'App Store'),
+            { type: 'text', value: ' · ' },
+            link(GOOGLE_PLAY_URL, 'Google Play'),
+          ],
     },
   ],
 });
@@ -78,7 +95,7 @@ export function rehypeBookCta() {
     const out = [];
 
     const flush = () => {
-      if (pendingTitle) out.push(ctaNode(pendingTitle));
+      if (pendingTitle) out.push(ctaNode(pendingTitle, pdPath(fm.targetLang, pendingTitle)));
       pendingTitle = null;
     };
 

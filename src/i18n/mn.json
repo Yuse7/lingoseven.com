@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Гүрж (мхедрули)",
   "fact_writing_greek": "Грек",
   "fact_writing_latin": "Латин",
-  "qr_scan_hint": "Аппыг авахын тулд уншуулна уу"
+  "qr_scan_hint": "Аппыг авахын тулд уншуулна уу",
+  "footer_books": "Үнэгүй номууд"
 }

@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Грузин (мхедрули)",
   "fact_writing_greek": "Грек",
   "fact_writing_latin": "Латын",
-  "qr_scan_hint": "Колдонмону алуу үчүн сканерлеңиз"
+  "qr_scan_hint": "Колдонмону алуу үчүн сканерлеңиз",
+  "footer_books": "Бекер китептер"
 }

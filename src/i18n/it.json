@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Georgiano (mkhedruli)",
   "fact_writing_greek": "Greco",
   "fact_writing_latin": "Latino",
-  "qr_scan_hint": "Scansionare per ottenere l'app"
+  "qr_scan_hint": "Scansionare per ottenere l'app",
+  "footer_books": "Libri gratuiti"
 }

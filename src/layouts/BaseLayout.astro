@@ -3,6 +3,7 @@ import Head from '../components/Head.astro';
 import Analytics from '../components/Analytics.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import type { InstallActions } from '../data/installActions';
 
 interface UiLanguage {
   code: string;
@@ -42,6 +43,9 @@ interface Props {
   blogUrl?: string;
   noindex?: boolean;
   playListing?: string;
+  installActions?: InstallActions;
+  /** Smart App Banner app-argument; defaults to the canonical URL. */
+  smartBannerArgument?: string;
 }
 
 const {
@@ -62,6 +66,8 @@ const {
   blogUrl,
   noindex = false,
   playListing,
+  installActions,
+  smartBannerArgument,
 } = Astro.props;
 ---
 
@@ -79,6 +85,8 @@ const {
     hreflangAlternates={hreflangAlternates}
     jsonLd={jsonLd}
     noindex={noindex}
+    installActions={installActions}
+    smartBannerArgument={smartBannerArgument}
   />
   <Analytics />
 </head>

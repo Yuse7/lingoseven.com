@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Georgià (mkhedruli)",
   "fact_writing_greek": "Grec",
   "fact_writing_latin": "Llatí",
-  "qr_scan_hint": "Escanegeu per obtenir l'aplicació"
+  "qr_scan_hint": "Escanegeu per obtenir l'aplicació",
+  "footer_books": "Llibres gratuïts"
 }

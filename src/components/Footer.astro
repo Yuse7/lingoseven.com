@@ -11,6 +11,8 @@ interface LearnLanguageLink {
   url: string;
 }
 
+import { hubPath } from '../data/pdCatalog';
+
 interface Props {
   translations?: Record<string, string>;
   uiLang?: string;
@@ -27,6 +29,11 @@ const blogText = translations?.['blog_nav'] ?? 'Blog';
 const toolsText = translations?.['footer_tools'] ?? 'Free tools';
 const compareText = translations?.['footer_compare'] ?? 'App comparisons';
 const bestAppsText = translations?.['footer_best_apps'] ?? 'Best reading apps';
+const booksText = translations?.['footer_books'] ?? 'Free books';
+// Public domain books hub: this locale's own when it has a shelf, the English
+// one otherwise (wave 1 builds every shelf in `en` only). Null while the
+// catalog is empty, so the link never points at a page that was not built.
+const booksUrl = hubPath(uiLang);
 const copyrightText = translations?.['footer_copyright'] ?? '© 2024-2026 Lingo7. All rights reserved.';
 const learnLangTemplate = translations?.['learn_language'] ?? 'Learn {lang}';
 
@@ -77,6 +84,7 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
         <a href="/tools/">{toolsText}</a>
         <a href="/compare/">{compareText}</a>
         <a href="/best-apps-to-read-books-in/">{bestAppsText}</a>
+        {booksUrl && <a href={booksUrl}>{booksText}</a>}
         <a href="/privacypolicy">{privacyText}</a>
         <a href="/terms">{termsText}</a>
         <!--email_off--><a href="mailto:support@lingoseven.com">support@lingoseven.com</a><!--/email_off-->

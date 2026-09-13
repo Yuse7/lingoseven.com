@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Gruzin (mxedruli)",
   "fact_writing_greek": "Yunon",
   "fact_writing_latin": "Lotin",
-  "qr_scan_hint": "Ilovani olish uchun skanerlang"
+  "qr_scan_hint": "Ilovani olish uchun skanerlang",
+  "footer_books": "Bepul kitoblar"
 }

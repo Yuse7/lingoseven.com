@@ -1,0 +1,1614 @@
+{
+  "version": 1,
+  "generated_at": "2026-09-12T21:35:02.011255+00:00",
+  "shelves": [
+    {
+      "lang": "en",
+      "locales": [
+        "en"
+      ],
+      "count": 5
+    },
+    {
+      "lang": "es",
+      "locales": [
+        "en"
+      ],
+      "count": 4
+    },
+    {
+      "lang": "it",
+      "locales": [
+        "en"
+      ],
+      "count": 4
+    },
+    {
+      "lang": "de",
+      "locales": [
+        "en"
+      ],
+      "count": 3
+    },
+    {
+      "lang": "fi",
+      "locales": [
+        "en"
+      ],
+      "count": 3
+    },
+    {
+      "lang": "fr",
+      "locales": [
+        "en"
+      ],
+      "count": 3
+    },
+    {
+      "lang": "pt",
+      "locales": [
+        "en"
+      ],
+      "count": 2
+    }
+  ],
+  "books": [
+    {
+      "id": "pg35312",
+      "slug": "aus-dem-leben-eines-taugenichts-novelle-35312",
+      "title": "Aus dem Leben eines Taugenichts: Novelle",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Eichendorff, Joseph, Freiherr von",
+          "display_name": "Eichendorff, Joseph, Freiherr von",
+          "birth_year": 1788,
+          "death_year": 1857
+        }
+      ],
+      "lang": "de",
+      "issued": "2011-02-18",
+      "download_count": 74891,
+      "subjects": [
+        "Fathers and sons -- Fiction",
+        "Bildungsromans",
+        "Young men -- Fiction",
+        "German fiction"
+      ],
+      "bookshelves": [
+        "DE Prosa",
+        "Category: Romance",
+        "Category: Adventure",
+        "Category: Novels",
+        "Category: German Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg35312/cover.jpg",
+      "pages": 212,
+      "metrics": {
+        "pages": 212,
+        "words": 31358,
+        "chapters": 10,
+        "has_cover": true,
+        "sentences": 1382,
+        "computed_at": "2026-09-12T21:27:58.130431+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.9069,
+          "z4": 0.8169
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 157,
+        "avg_sentence_len": 22.69
+      },
+      "descriptions": {
+        "en": {
+          "text": "This novella follows a young man who leaves his father's mill to wander the world. Written in the early nineteenth century, the text reflects the Romantic era's focus on nature and individual freedom. You will encounter descriptive, lyrical vocabulary alongside older sentence structures that can be quite long and flowing. The narrative is centered on themes of travel, self-discovery, and the simplicity of life. It is a suitable choice if you wish to engage with classic German prose and its rhythmic, poetic style.",
+          "pairs": [
+            {
+              "dst": "Spring is at the door, go out into the world for once and earn your own bread.",
+              "src": "Der Frühling ist vor der Tür, geh auch einmal hinaus in die Welt und erwirb dir selber dein Brot."
+            },
+            {
+              "dst": "So I went into the house and took my violin, which I played quite well, off the wall; my father gave me a few groschen for the road, and so I strolled out through the long village.",
+              "src": "Ich ging also in das Haus hinein und holte meine Geige, die ich recht artig spielte, von der Wand, mein Vater gab mir noch einige Groschen Geld mit auf den Weg, und so schlenderte ich durch das lange Dorf hinaus."
+            },
+            {
+              "dst": "It felt to me like an eternal Sunday in my soul.",
+              "src": "Mir war es wie ein ewiger Sonntag im Gemüte."
+            }
+          ]
+        }
+      },
+      "excerpt": "Das Rad an meines Vaters Mühle brauste und rauschte schon wieder recht lustig, der Schnee tröpfelte emsig vom Dache, die Sperlinge zwitscherten und tummelten sich dazwischen; ich saß auf der Türschwelle und wischte mir den Schlaf aus den Augen; mir war so recht wohl in dem warmen Sonnenscheine. Da trat der Vater aus dem Hause; er hatte schon seit Tagesanbruch in der Mühle rumort und die Schlafmütze schief auf dem Kopfe, der sagte zu mir: »Du Taugenichts! da sonnst du dich schon wieder und dehnst und reckst dir die Knochen müde und läßt mich alle Arbeit allein tun. Ich kann dich hier nicht länger füttern. Der Frühling ist vor der Tür, geh auch einmal hinaus in die Welt und erwirb dir selber dein Brot.« – »Nun,« sagte ich, »wenn ich ein Taugenichts bin, so ists gut, so will ich in die Welt gehn und mein Glück machen.« Und eigentlich war mir das recht lieb, denn es war mir kurz vorher selber eingefallen, auf Reisen zu gehn, da ich die Goldammer, welche im Herbst und Winter immer betrübt an unserm Fenster sang: Bauer, miet mich, Bauer, miet mich! nun in der schönen Frühlingszeit wieder ganz stolz und lustig vom Baume rufen hörte: Bauer, behalt deinen Dienst! – Ich ging also in das Haus hinein und holte meine Geige, die ich recht artig spielte, von der Wand, mein Vater gab mir noch einige Groschen Geld mit auf den Weg, und so schlenderte ich durch das lange Dorf hinaus. Ich hatte recht meine heimliche Freude, als ich da alle meine alten Bekannten und Kameraden rechts und links, wie gestern und vorgestern und immerdar, zur Arbeit hinausziehen, graben und pflügen sah, während ich so in die freie Welt hinausstrich. Ich rief den armen Leuten nach allen Seiten recht stolz und zufrieden Adjes zu, aber es kümmerte sich eben keiner sehr darum. Mir war es wie ein ewiger Sonntag im Gemüte. Und als ich endlich ins freie Feld hinauskam, da nahm ich meine liebe Geige vor und spielte und sang, auf der Landstraße fortgehend:\n\n»Wem Gott will rechte Gunst erweisen,\n\nDen schickt er in die weite Welt,\n\nDem will er seine Wunder weisen\n\nIn Berg und Wald und Strom und Feld.\n\nDie Trägen, die zu Hause liegen,\n\nErquicket nicht das Morgenrot,\n\nSie wissen nur vom Kinderwiegen,\n\nVon Sorgen, Last und Not um Brot.\n\nDie Bächlein von den Bergen springen,\n\nDie Lerchen schwirren hoch vor Lust,\n\nWas sollt ich nicht mit ihnen singen\n\nAus voller Kehl und frischer Brust?\n\nDen lieben Gott laß ich nur walten;\n\nDer Bächlein, Lerchen, Wald und Feld\n\nUnd Erd und Himmel will erhalten,\n\nHat auch mein Sach aufs best bestellt!«\n\nIndem, wie ich mich so umsehe, kommt ein köstlicher Reisewagen ganz nahe an mich heran, der mochte wohl schon einige Zeit hinter mit drein gefahren sein, ohne daß ich es merkte, weil mein Herz so voller Klang war, denn es ging ganz langsam, und zwei vornehme Damen steckten die Köpfe aus dem Wagen und hörten mir zu. Die eine war besonders schön und jünger als die andere, aber eigentlich gefielen sie mir alle beide. Als ich nun aufhörte zu singen, ließ die ältere stillhalten und redete mich holdselig an: »Ei, lustiger Gesell, Er weiß ja recht hübsche Lieder zu singen.« Ich nicht zu faul dagegen: »Ew. Gnaden aufzuwarten, wüßt ich noch viel schönere.« Darauf fragte sie mich wieder: »Wohin wandert Er denn schon so am frühen Morgen?« Da schämte ich mich, daß ich das selber nicht wußte, und sagte dreist: »Nach Wien«; nun sprachen beide miteinander in einer fremden Sprache, die ich nicht verstand. Die jüngere schüttelte einigemal mit dem Kopfe, die andere lachte aber in einem fort und rief mir endlich zu: »Spring Er nur hinten mit auf, wir fahren auch nach Wien.« Wer war froher als ich! Ich machte eine Reverenz und war mit einem Sprunge hinter dem Wagen, der Kutscher knallte, und wir flogen über die glänzende Straße fort, daß mir der Wind am Hute pfiff."
+    },
+    {
+      "id": "pg50285",
+      "slug": "dr-mabuse-der-spieler-50285",
+      "title": "Dr. Mabuse, der Spieler",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Jacques, Norbert",
+          "display_name": "Norbert Jacques",
+          "birth_year": 1880,
+          "death_year": 1954
+        }
+      ],
+      "lang": "de",
+      "issued": "2015-10-22",
+      "download_count": 72442,
+      "subjects": [
+        "Germany -- Fiction",
+        "Gamblers -- Fiction",
+        "Murderers -- Fiction",
+        "Criminals -- Fiction",
+        "Hypnotism and crime -- Fiction"
+      ],
+      "bookshelves": [
+        "Category: Crime, Thrillers and Mystery",
+        "Category: Novels",
+        "Category: German Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg50285/cover.jpg",
+      "pages": 516,
+      "metrics": {
+        "pages": 516,
+        "words": 73978,
+        "chapters": 19,
+        "has_cover": true,
+        "sentences": 7334,
+        "computed_at": "2026-09-12T21:28:00.084489+00:00",
+        "cefr_estimate": "B2",
+        "zipf_coverage": {
+          "z3": 0.91,
+          "z4": 0.8252
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 370,
+        "avg_sentence_len": 10.09
+      },
+      "descriptions": {
+        "en": {
+          "text": "This novel introduces the mysterious Dr. Mabuse, a figure operating within the high-stakes gambling dens of early twentieth-century Germany. The prose reflects the era's literary style, utilizing descriptive, somewhat formal vocabulary to build tension. You will encounter complex sentence structures that require careful attention to detail, particularly regarding the psychological state of the characters. The themes of obsession, manipulation, and hidden influence make this a demanding yet engaging read for those looking to improve their grasp of sophisticated German narrative techniques.",
+          "pairs": [
+            {
+              "dst": "The distinguished old gentleman introduced himself.",
+              "src": "Der alte vornehme Herr stellte sich selber vor."
+            },
+            {
+              "dst": "As usual, nobody understood the name.",
+              "src": "Wie üblich, verstand niemand den Namen."
+            },
+            {
+              "dst": "But he was elegant and dressed in discreet, high-quality fabric.",
+              "src": "Aber er war elegant und in diskretes bestes Tuch gekleidet."
+            }
+          ]
+        }
+      },
+      "excerpt": "Der alte vornehme Herr stellte sich selber vor. Wie üblich, verstand niemand den Namen. Aber er war elegant und in diskretes bestes Tuch gekleidet. Er hatte als Vorstecknadel eine einfache weiße Perle, etwas barock, aber von der Weiße eines blonden Frauenrückens, wie Karstens sagte, und legte gleich so gegen 20000 Mark vor sich auf den Spieltisch.\n\nDer junge Hull, Stämmling eines Industrie-Millionen-Vermögens, an dem sein Vater ihn reichlich teilnehmen ließ, hatte ihn mitgebracht.\n\nMan begann gleich zu spielen. Der Gast nahm mit einer stummen Verbeugung das Spiel an, das man vorschlug: Einundzwanzig. Die Sätze waren unbegrenzt. Ritter hielt die Bank als erster.\n\nZunächst zeigte das Spiel durchaus nichts Ungewöhnliches. Verlust, Gewinn gingen reihum.\n\nAber bald begann es, daß Hull verlor. Das begann fast mit demselben Augenblick, da die Reihe, die Bank zu halten, an den alten Herrn kam. Hull verlor zuerst Hundertmarkscheine. Er spielte gelassen und in sein Pech ergeben. Vor dem alten Herrn mischten sich kleinere Noten in den Haufen der Tausender, die er vor sich hingelegt hatte.\n\nNur nach außen spielte Hull gelassen. Innerlich befand er sich in einer heißen Erregung. Es gingen Schleier vor seinem Hirn hin und her. Seine Noten chassierten zu dem Gast hinüber, ohne daß er es eigentlich merkte. Seine Sinne waren wie von einem feinen und unsichtbaren Spinnweb belegt, das ihn immer mehr einengte.\n\nEr trank einige Kognaks und ließ sich dann eine Flasche Sekt bringen. Das half aber zu nichts weiterem, als daß er das Fach seiner Brieftasche wechselte und zu den Tausendern griff. Er hatte sie nachmittags von der Bank geholt.\n\nSein Spielpech wurde unwahrscheinlich. Hatte er gute Karten, so war ihm, als ob aus irgendeinem in Dunkel verhüllten Winkel seines Innern heraus eine mahnende Hand sich auf seinen Mund legte. Er verließ die Höhe seiner Einsätze und nannte eine geringfügige Summe.\n\nDer alte Herr sollte nun die Bank weitergeben. Aber er erbot sich, Hull zuliebe sie noch zu behalten. Er sagte:\n\n„Wenn die Herren einverstanden sind, so behalte ich die Bank noch einige Runden. Sie sehen, wie sich vor mir das Geld häuft. Ich bin der Gast Ihres liebenswürdigen Klubs. Tragen Sie meinen peinlichen Gefühlen gegen Herrn Hull Rechnung, und gestatten Sie mir, um was ich Sie bitte.“\n\nAber obgleich das in bescheidener Redeform gesagt wurde, klang es doch herrisch, jede Abweisung fortschiebend.\n\nDer Klubdiener beäugte den Gast argwöhnisch. Aber er spielte mit den Karten, die der Klub selber stellte und die stets eben erst aus der Hülle gebrochen wurden.\n\nDas Spiel feuerte in den Kreis. Man trank auch viel. Ein leichter Rausch umsponn den Tisch. Der Gast schloß sich beim Trinken nicht aus. Er benahm sich in keiner Weise auffällig. Er hatte einen ruhigen, lang in jedem Auge, das ihn anschaute, verweilenden Blick, große graue Augen, die etwas Herrenhaftes hatten und die das Spiel kaum zu begleiten schienen. Seine Hände waren groß, massiv und ruhig, als seien sie aus Holz. Den andern, viel jüngern, zitterten schon die Finger vom Widerschein innerer Erregtheit.\n\nHull spielte weiter, obgleich er seine Tasche immer dünner werden spürte.\n\nWas ist los? fragte er sich immer. Er wollte aufstehen und ein Spiel vorübergehen lassen, um an einem Fenster Luft zu schöpfen und einmal in die Stille der Nacht hinauszuschauen, aus der er einen Strom Ruhe für sich selber atmen zu können hoffte. Aber er saß wie gefesselt auf dem Leder, preßte die Ellbogen auf den roten Filz, und alle Gedanken fielen unbeherrscht aus ihm in eine Leere, wie in die Dimensionslosigkeit eines Schlafs.\n\nSonst war er nicht gerade ein leichtsinniger Spieler. Er überlegte, verfolgte den Gang des Glücks und war immer dran, ihn auszunutzen, wenn er ihm günstig war, oder sich zu dämpfen, wenn ein anderer an der Reihe war."
+    },
+    {
+      "id": "pg66452",
+      "slug": "die-liebe-novelle-66452",
+      "title": "Die Liebe: Novelle",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Kaltneker, Hans",
+          "display_name": "Hans Kaltneker",
+          "birth_year": 1895,
+          "death_year": 1919
+        }
+      ],
+      "lang": "de",
+      "issued": "2021-10-03",
+      "download_count": 39092,
+      "subjects": [
+        "Austrian fiction -- 20th century"
+      ],
+      "bookshelves": [
+        "Category: Romance",
+        "Category: Novels",
+        "Category: German Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg66452/cover.jpg",
+      "pages": 110,
+      "metrics": {
+        "pages": 110,
+        "words": 14996,
+        "chapters": 2,
+        "has_cover": true,
+        "sentences": 1235,
+        "computed_at": "2026-09-12T21:28:06.214408+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.892,
+          "z4": 0.79
+        },
+        "cefr_confidence": "low",
+        "metrics_version": 1,
+        "reading_minutes": 75,
+        "avg_sentence_len": 12.14
+      },
+      "descriptions": {
+        "en": {
+          "text": "This novella by Hans Kaltneker explores the intensity of romantic devotion through a series of intimate dialogues. Written in the early twentieth century, the text features highly poetic and abstract language that often prioritizes emotional resonance over straightforward narrative structure. You will encounter complex sentence constructions and metaphorical descriptions that demand careful attention. The themes focus on the spiritual and existential dimensions of love, making this a challenging but rewarding read for those looking to engage with expressive, literary German prose.",
+          "pairs": [
+            {
+              "dst": "\"I love you.\"",
+              "src": "»Ich liebe dich.«"
+            },
+            {
+              "dst": "\"I love you.\"",
+              "src": "»Ich liebe dich.«"
+            },
+            {
+              "dst": "\"You did that for me!\"",
+              "src": "»Das hast du für mich getan!«"
+            }
+          ]
+        }
+      },
+      "excerpt": "Aber sie stärker und stärker zu prüfen,\n\nWählet der Kenner der Höhen und Tiefen\n\nLust und Entsetzen und grimmige Pein.\n\nGoethe »Der Gott und die Bajadere«\n\nAber ihr letztes Ziel wirkt die Liebe, die da stark ist wie der Tod. Und das ist, daß der Mensch auch auf sein ewiges Leben Verzicht leistet und auf alles, was er von Gott und seinen Gaben dereinst empfangen könnte.\n\nMagister Ekkehart »Fortis est ut mors dilectio«\n\n»Ich liebe dich.«\n\n»Ich liebe dich.«\n\nDurch einen Regen verklärter Tränen brechen ihre Blicke und finden sich – ein schimmernder Bogen – Gesicht bindend an Gesicht.\n\n»Dies – daß es sein kann –«\n\n»Daß es nicht sein konnte!«\n\nWorte gehen nicht gerade, aufrechte Boten schwebenden Herzschlags von einem zur andern, Worte schwanken, taumeln, sind Mantel um den nackten Gedanken, in den der Sturm fährt, ihn bauscht und knittert, und der Gedanke ist ein strahlender Gott. Worte sind Hall zwischen Himmel und Hölle, Ruf und Gegenruf zwischen dem Wächter unten und oben und die erdämmernde Nacht dröhnt leise von den Rufen der Engel.\n\nDer Mann: »Irre – Suchen – immer nur dich –«\n\nDie Frau: »Nie gesucht. Seligkeit, gefunden zu werden, sich finden lassen. Ich wußte, wußte, daß du mich finden würdest. O Warten – Jahre des Wartens –! Du warst noch weit, aber manchmal in Nächten fühlte dich näher nahen. Gläser klirrten von deinem entfernten Schritt, Kerze flackerte in deines entfernten Atems Wind und im Schlagen der Uhr metallen donnernd dein Herzschlag. Unendliche Nächte. Ich, geborgen in der Wärme meines Bettes, fliederfarbenes Dunkel leichter Decke über mir, warmer, süßer Schlaf meine Stirne umwehend –. Da wollte ich mir dich verdienen, opfern – Gott und dir – ein paar Schritte dir entgegenkommen auf deinem noch so weiten Weg. Und stand auf, tief in der Nacht, ging mit bloßen Füßen sechs Schritte neben dem Teppich über die kalten Parketten bis zur Türe. Und konnte nun erst schlafen. Lachst du? Geliebter.«\n\n»Das hast du für mich getan!«\n\n»Für dich – für Gott – für dich.«\n\n»Und hast nie gezweifelt?«\n\n»Lebte ich noch?«\n\n»Du lebtest mit einem andern! Mein waren drei Minuten – des andern die Nacht –«\n\n»Still, still du –«\n\nÜber seinen Augen liegt weiße Nacht, ihr Arm. Seine sinkenden Wimpern streifen ihre kühle, lebendige Haut.\n\n»Vor vier Jahren auf meiner Hochzeitsreise – in Kairo – sah ich einen leprakranken Bettler im Finstern eines Torbogens kauern. Er wagte sich nicht mehr ins Straßenlicht, sein Zerfall war so furchtbar, daß ihn die Menschen gesteinigt hätten. Aber aus dem Dunkel züngelte sein Blick rot und hündisch über meine Schuhe. So schrecklich war dieser Mensch, daß ich hingehen mußte und ihn streicheln – mit dieser Hand. Damals hatte ich deiner vergessen. Wie hätte ich sonst meinen Leib – deinen Leib, dies Mein, das dein war vom Anbeginn meines Atmens – solcher Gefahr preisgegeben? Willst du eifersüchtig sein auf diesen eiternden Brocken Fleisch? Ihm müßtest du mehr zürnen als dem Manne, der mein Sterbliches bis heute besessen hat. Damals brach ich dir die Treue.«\n\n»Du –!« Als riss' er einen jungen Baumstamm mit allen Wurzeln aus feuchter Erde, reißt er seinen Mund von ihrem auf. Ihr Kuß ist bitter wie das klebrige Innere einer märzlichen Blattknospe. Den Oberkörper emporgehoben über sie wirft er ihr die Worte ins Gesicht. Ihre Lider schlagen in seinem Atem wie an Fenstern schwere Vorhänge im Sturm. »Oft, oft hast du mich betrogen. Du liebtest andere Dinge neben mir, tausend andere Dinge. Tand, Eitelkeit, Ungöttliches!«\n\nIhre wehenden Lider sinken schwer herab. Und siehe, im Zimmer, dem hell vermeinten, ist solche Nacht, daß sein Leib angstvoll an ihren fliegt.\n\nDie Frau, leise, gebunden: »Vergib. Ich weiß. Es war viel Äußeres um mich und an mir. Und manches davon gefiel mir. Ich war gerne schön gekleidet, edel frisiert und fühlte mich froh, wenn Menschen mich schön fanden."
+    },
+    {
+      "id": "pg1342",
+      "slug": "pride-and-prejudice-1342",
+      "title": "Pride and Prejudice",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Austen, Jane",
+          "display_name": "Jane Austen",
+          "birth_year": 1775,
+          "death_year": 1817
+        }
+      ],
+      "lang": "en",
+      "issued": "1998-06-01",
+      "download_count": 198164,
+      "subjects": [
+        "England -- Fiction",
+        "Young women -- Fiction",
+        "Love stories",
+        "Sisters -- Fiction",
+        "Domestic fiction",
+        "Courtship -- Fiction",
+        "Social classes -- Fiction"
+      ],
+      "bookshelves": [
+        "Best Books Ever Listings",
+        "Harvard Classics",
+        "Category: Romance",
+        "Category: Novels",
+        "Category: Classics of Literature",
+        "Category: British Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg1342/cover.jpg",
+      "pages": 791,
+      "metrics": {
+        "pages": 791,
+        "words": 127263,
+        "chapters": 62,
+        "has_cover": true,
+        "sentences": 7201,
+        "computed_at": "2026-09-12T20:58:51.689352+00:00",
+        "cefr_estimate": "B1",
+        "zipf_coverage": {
+          "z3": 0.9693,
+          "z4": 0.9033
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 636,
+        "avg_sentence_len": 17.67
+      },
+      "descriptions": {
+        "en": {
+          "text": "This novel follows the lives of the Bennet sisters in rural England during the early nineteenth century. It focuses on themes of marriage, social status, and personal character. As a reader, you will encounter formal, nineteenth-century vocabulary and complex sentence structures that reflect the social etiquette of the time. The dialogue is witty and sharp, requiring careful attention to irony and nuance. This book is a demanding read because of its historical language, but it offers a clear look at classic English literature.",
+          "pairs": []
+        }
+      },
+      "excerpt": "IT is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.\n\nHowever little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered as the rightful property of some one or other of their daughters.\n\n“My dear Mr. Bennet,” said his lady to him one day, “have you heard that Netherfield Park is let at last?”\n\nMr. Bennet replied that he had not.\n\n“But it is,” returned she; “for Mrs. Long has just been here, and she told me all about it.”\n\nMr. Bennet made no answer.\n\n“Do not you want to know who has taken it?” cried his wife, impatiently.\n\n“You want to tell me, and I have no objection to hearing it.”\n\nThis was invitation enough.\n\n“Why, my dear, you must know, Mrs. Long says that Netherfield is taken by a young man of large fortune from the north of England; that he came down on Monday in a chaise and four to see the place, and was so much delighted with it that he agreed with Mr. Morris immediately; that he is to take possession before Michaelmas, and some of his servants are to be in the house by the end of next week.”\n\n“What is his name?”\n\n“Bingley.”\n\n“Is he married or single?”\n\n“Oh, single, my dear, to be sure! A single man of large fortune; four or five thousand a year. What a fine thing for our girls!”\n\n“How so? how can it affect them?”\n\n“My dear Mr. Bennet,” replied his wife, “how can you be so tiresome? You must know that I am thinking of his marrying one of them.”\n\n“Is that his design in settling here?”\n\n“Design? Nonsense, how can you talk so! But it is very likely that he may fall in love with one of them, and therefore you must visit him as soon as he comes.”\n\n“I see no occasion for that. You and the girls may go—or you may send them by themselves, which perhaps will be still better; for as you are as handsome as any of them, Mr. Bingley might like you the best of the party.”\n\n“My dear, you flatter me. I certainly have had my share of beauty, but I do not pretend to be anything extraordinary now. When a woman has five grown-up daughters, she ought to give over thinking of her own beauty.”\n\n“In such cases, a woman has not often much beauty to think of.”\n\n“But, my dear, you must indeed go and see Mr. Bingley when he comes into the neighbourhood.”\n\n“It is more than I engage for, I assure you.”\n\n“But consider your daughters. Only think what an establishment it would be for one of them. Sir William and Lady Lucas are determined to go, merely on that account; for in general, you know, they visit no new comers. Indeed you must go, for it will be impossible for us to visit him, if you do not.”\n\n“You are over scrupulous, surely. I dare say Mr. Bingley will be very glad to see you; and I will send a few lines by you to assure him of my hearty consent to his marrying whichever he chooses of the girls—though I must throw in a good word for my little Lizzy.”\n\n“I desire you will do no such thing. Lizzy is not a bit better than the others: and I am sure she is not half so handsome as Jane, nor half so good-humoured as Lydia."
+    },
+    {
+      "id": "pg2701",
+      "slug": "moby-dick-or-the-whale-2701",
+      "title": "Moby Dick; Or, The Whale",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Melville, Herman",
+          "display_name": "Herman Melville",
+          "birth_year": 1819,
+          "death_year": 1891
+        }
+      ],
+      "lang": "en",
+      "issued": "2001-07-01",
+      "download_count": 164301,
+      "subjects": [
+        "Whaling -- Fiction",
+        "Sea stories",
+        "Psychological fiction",
+        "Ship captains -- Fiction",
+        "Adventure stories",
+        "Mentally ill -- Fiction",
+        "Ahab, Captain (Fictitious character) -- Fiction",
+        "Whales -- Fiction",
+        "Whaling ships -- Fiction"
+      ],
+      "bookshelves": [
+        "Best Books Ever Listings",
+        "Category: Adventure",
+        "Category: Novels",
+        "Category: Classics of Literature",
+        "Category: American Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg2701/cover.jpg",
+      "pages": 1349,
+      "metrics": {
+        "pages": 1349,
+        "words": 217886,
+        "chapters": 134,
+        "has_cover": true,
+        "sentences": 9422,
+        "computed_at": "2026-09-12T21:27:39.446675+00:00",
+        "cefr_estimate": "B2",
+        "zipf_coverage": {
+          "z3": 0.9311,
+          "z4": 0.8252
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 1089,
+        "avg_sentence_len": 23.13
+      },
+      "descriptions": {
+        "en": {
+          "text": "This novel follows the obsessive quest of Captain Ahab to hunt a legendary white whale. Published in 1851, the text presents a significant challenge due to its archaic vocabulary, nautical terminology, and complex, philosophical sentence structures. Melville frequently employs dense, metaphorical language that requires careful attention. The narrative explores themes of fate, madness, and the human struggle against nature. It is a demanding read that offers a deep look into nineteenth-century American literature and the technical realities of historical whaling.",
+          "pairs": []
+        }
+      },
+      "excerpt": "The pale Usher—threadbare in coat, heart, body, and brain; I see him now. He was ever dusting his old lexicons and grammars, with a queer handkerchief, mockingly embellished with all the gay flags of all the known nations of the world. He loved to dust his old grammars; it somehow mildly reminded him of his mortality.\n\n“While you take in hand to school others, and to teach them by what name a whale-fish is to be called in our tongue, leaving out, through ignorance, the letter H, which almost alone maketh up the signification of the word, you deliver that which is not true.” —Hackluyt.\n\n“WHALE.    Sw. and Dan. hval. This animal is named from roundness or rolling; for in Dan. hvalt is arched or vaulted.” —Webster’s Dictionary.\n\n“WHALE.    It is more immediately from the Dut. and Ger. Wallen; A.S. Walw-ian, to roll, to wallow.” —Richardson’s Dictionary.\n\nחו, Hebrew.\n\nϰητος, Greek.\n\nCETUS, Latin.\n\nWHŒL, Anglo-Saxon.\n\nHVALT, Danish.\n\nWAL, Dutch.\n\nHWAL, Swedish.\n\nHVALUR, Icelandic.\n\nWHALE, English.\n\nBALEINE, French.\n\nBALLENA, Spanish.\n\nPEKEE-NUEE-NUEE, Fegee.\n\nPEHEE-NUEE-NUEE, Erromangoan.\n\nIt will be seen that this mere painstaking burrower and grub-worm of a poor devil of a Sub-Sub appears to have gone through the long Vaticans and street-stalls of the earth, picking up whatever random allusions to whales he could anyways find in any book whatsoever, sacred or profane. Therefore you must not, in every case at least, take the higgledy-piggledy whale statements, however authentic, in these extracts, for veritable gospel cetology. Far from it. As touching the ancient authors generally, as well as the poets here appearing, these extracts are solely valuable or entertaining, as affording a glancing bird’s eye view of what has been promiscuously said, thought, fancied, and sung of Leviathan, by many nations and generations, including our own.\n\nSo fare thee well, poor devil of a Sub-Sub, whose commentator I am. Thou belongest to that hopeless, sallow tribe which no wine of this world will ever warm; and for whom even Pale Sherry would be too rosy-strong; but with whom one sometimes loves to sit, and feel poor-devilish, too; and grow convivial upon tears; and say to them bluntly, with full eyes and empty glasses, and in not altogether unpleasant sadness—Give it up, Sub-Subs! For by how much the more pains ye take to please the world, by so much the more shall ye for ever go thankless! Would that I could clear out Hampton Court and the Tuileries for ye! But gulp down your tears and hie aloft to the royal-mast with your hearts; for your friends who have gone before are clearing out the seven-storied heavens, and making refugees of long-pampered Gabriel, Michael, and Raphael, against your coming. Here ye strike but splintered hearts together—there, ye shall strike unsplinterable glasses!\n\n“And God created great whales.” —Genesis.\n\n“Leviathan maketh a path to shine after him; One would think the deep to be hoary.” —Job.\n\n“Now the Lord had prepared a great fish to swallow up Jonah.” —Jonah.\n\n“There go the ships; there is that Leviathan whom thou hast made to play therein.” —Psalms.\n\n“In that day, the Lord with his sore, and great, and strong sword, shall punish Leviathan the piercing serpent, even Leviathan that crooked serpent; and he shall slay the dragon that is in the sea.” —Isaiah.\n\n“And what thing soever besides cometh within the chaos of this monster’s mouth, be it beast, boat, or stone, down it goes all incontinently that foul great swallow of his, and perisheth in the bottomless gulf of his paunch.” —Holland’s Plutarch’s Morals."
+    },
+    {
+      "id": "pg2554",
+      "slug": "crime-and-punishment-2554",
+      "title": "Crime and Punishment",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Dostoyevsky, Fyodor",
+          "display_name": "Fyodor Dostoyevsky",
+          "birth_year": 1821,
+          "death_year": 1881
+        },
+        {
+          "name": "Garnett, Constance",
+          "display_name": "Constance Garnett",
+          "birth_year": 1861,
+          "death_year": 1946
+        }
+      ],
+      "lang": "en",
+      "issued": "2006-03-28",
+      "download_count": 139348,
+      "subjects": [
+        "Detective and mystery stories",
+        "Psychological fiction",
+        "Saint Petersburg (Russia) -- Fiction",
+        "Murder -- Fiction",
+        "Crime -- Psychological aspects -- Fiction"
+      ],
+      "bookshelves": [
+        "Best Books Ever Listings",
+        "Crime Fiction",
+        "Harvard Classics",
+        "Category: Crime, Thrillers and Mystery",
+        "Category: Novels",
+        "Category: Classics of Literature",
+        "Category: Russian Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg2554/cover.jpg",
+      "pages": 1262,
+      "metrics": {
+        "pages": 1262,
+        "words": 208782,
+        "chapters": 40,
+        "has_cover": true,
+        "sentences": 15116,
+        "computed_at": "2026-09-12T21:27:47.328526+00:00",
+        "cefr_estimate": "B1",
+        "zipf_coverage": {
+          "z3": 0.9496,
+          "z4": 0.8925
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 1044,
+        "avg_sentence_len": 13.81
+      },
+      "descriptions": {
+        "en": {
+          "text": "This novel explores the psychological turmoil of a young man living in nineteenth-century Saint Petersburg. The narrative delves into themes of morality, poverty, and isolation. Readers will encounter complex, lengthy sentences and a formal vocabulary characteristic of nineteenth-century literature. The text requires careful attention to detail, as it focuses heavily on the internal thoughts and philosophical dilemmas of the protagonist. It is a demanding read that offers a deep look into the human condition through a dense and introspective prose style.",
+          "pairs": []
+        }
+      },
+      "excerpt": "CONTENTS\n\nTRANSLATOR’S PREFACE\n\nCRIME AND PUNISHMENT\n\nPART I\n\nCHAPTER I\n\nCHAPTER II\n\nCHAPTER III\n\nCHAPTER IV\n\nCHAPTER V\n\nCHAPTER VI\n\nCHAPTER VII\n\nPART II\n\nCHAPTER I\n\nCHAPTER II\n\nCHAPTER III\n\nCHAPTER IV\n\nCHAPTER V\n\nCHAPTER VI\n\nCHAPTER VII\n\nPART III\n\nCHAPTER I\n\nCHAPTER II\n\nCHAPTER III\n\nCHAPTER IV\n\nCHAPTER V\n\nCHAPTER VI\n\nPART IV\n\nCHAPTER I\n\nCHAPTER II\n\nCHAPTER III\n\nCHAPTER IV\n\nCHAPTER V\n\nCHAPTER VI\n\nPART V\n\nCHAPTER I\n\nCHAPTER II\n\nCHAPTER III\n\nCHAPTER IV\n\nCHAPTER V\n\nPART VI\n\nCHAPTER I\n\nCHAPTER II\n\nCHAPTER III\n\nCHAPTER IV\n\nCHAPTER V\n\nCHAPTER VI\n\nCHAPTER VII\n\nCHAPTER VIII\n\nEPILOGUE\n\nA few words about Dostoevsky himself may help the English reader to understand his work.\n\nDostoevsky was the son of a doctor. His parents were very hard-working and deeply religious people, but so poor that they lived with their five children in only two rooms. The father and mother spent their evenings in reading aloud to their children, generally from books of a serious character.\n\nThough always sickly and delicate Dostoevsky came out third in the final examination of the Petersburg school of Engineering. There he had already begun his first work, “Poor Folk.”\n\nThis story was published by the poet Nekrassov in his review and was received with acclamations. The shy, unknown youth found himself instantly something of a celebrity. A brilliant and successful career seemed to open before him, but those hopes were soon dashed. In 1849 he was arrested.\n\nThough neither by temperament nor conviction a revolutionist, Dostoevsky was one of a little group of young men who met together to read Fourier and Proudhon. He was accused of “taking part in conversations against the censorship, of reading a letter from Byelinsky to Gogol, and of knowing of the intention to set up a printing press.” Under Nicholas I. (that “stern and just man,” as Maurice Baring calls him) this was enough, and he was condemned to death. After eight months’ imprisonment he was with twenty-one others taken out to the Semyonovsky Square to be shot. Writing to his brother Mihail, Dostoevsky says: “They snapped words over our heads, and they made us put on the white shirts worn by persons condemned to death. Thereupon we were bound in threes to stakes, to suffer execution. Being the third in the row, I concluded I had only a few minutes of life before me. I thought of you and your dear ones and I contrived to kiss Plestcheiev and Dourov, who were next to me, and to bid them farewell. Suddenly the troops beat a tattoo, we were unbound, brought back upon the scaffold, and informed that his Majesty had spared us our lives.” The sentence was commuted to hard labour.\n\nOne of the prisoners, Grigoryev, went mad as soon as he was untied, and never regained his sanity.\n\nThe intense suffering of this experience left a lasting stamp on Dostoevsky’s mind. Though his religious temper led him in the end to accept every suffering with resignation and to regard it as a blessing in his own case, he constantly recurs to the subject in his writings. He describes the awful agony of the condemned man and insists on the cruelty of inflicting such torture. Then followed four years of penal servitude, spent in the company of common criminals in Siberia, where he began the “Dead House,” and some years of service in a disciplinary battalion.\n\nHe had shown signs of some obscure nervous disease before his arrest and this now developed into violent attacks of epilepsy, from which he suffered for the rest of his life. The fits occurred three or four times a year and were more frequent in periods of great strain. In 1859 he was allowed to return to Russia. He started a journal—“Vremya,” which was forbidden by the Censorship through a misunderstanding. In 1864 he lost his first wife and his brother Mihail. He was in terrible poverty, yet he took upon himself the payment of his brother’s debts. He started another journal—“The Epoch,” which within a few months was also prohibited. He was weighed down by debt, his brother’s family was dependent on him, he was forced to write at heart-breaking speed, and is said never to have corrected his work. The later years of his life were much softened by the tenderness and devotion of his second wife."
+    },
+    {
+      "id": "pg34413",
+      "slug": "the-love-letters-of-mary-wollstonecraft-to-gilbert-imlay-34413",
+      "title": "The Love Letters of Mary Wollstonecraft to Gilbert Imlay",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Wollstonecraft, Mary",
+          "display_name": "Mary Wollstonecraft",
+          "birth_year": 1759,
+          "death_year": 1797
+        },
+        {
+          "name": "Ingpen, Roger",
+          "display_name": "Roger Ingpen",
+          "birth_year": 1869,
+          "death_year": 1936
+        }
+      ],
+      "lang": "en",
+      "issued": "2010-11-23",
+      "download_count": 126102,
+      "subjects": [
+        "Love-letters",
+        "Wollstonecraft, Mary, 1759-1797 -- Correspondence",
+        "Imlay, Gilbert, 1754?-1828? -- Correspondence",
+        "Authors, English -- 18th century -- Correspondence",
+        "Feminists -- Great Britain -- Correspondence"
+      ],
+      "bookshelves": [
+        "Category: Romance",
+        "Category: Biographies",
+        "Category: Essays, Letters & Speeches",
+        "Category: British Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg34413/cover.jpg",
+      "pages": 208,
+      "metrics": {
+        "pages": 208,
+        "words": 33929,
+        "chapters": 80,
+        "has_cover": true,
+        "sentences": 1479,
+        "computed_at": "2026-09-12T21:27:49.213143+00:00",
+        "cefr_estimate": "B2",
+        "zipf_coverage": {
+          "z3": 0.9656,
+          "z4": 0.8975
+        },
+        "cefr_confidence": "high",
+        "metrics_version": 1,
+        "reading_minutes": 170,
+        "avg_sentence_len": 22.94
+      },
+      "descriptions": {
+        "en": {
+          "text": "This collection presents the personal correspondence of Mary Wollstonecraft, a prominent eighteenth-century thinker. The text offers a glimpse into her private life and emotional struggles during a period of significant social change. As a reader, you will encounter formal, period-specific vocabulary and complex sentence structures that reflect the writing style of the late 1700s. These letters provide a challenging look at historical prose, requiring careful attention to the nuances of language and the evolving themes of personal autonomy and romantic devotion.",
+          "pairs": []
+        }
+      },
+      "excerpt": "ILLUSTRATED WITH PORTRAITS\n\nPhiladelphia\n\nJ. B. LIPPINCOTT COMPANY\n\nLondon: HUTCHINSON & CO.\n\n1908\n\nPRINTED IN GREAT BRITAIN\n\nEDITED BY ROGER INGPEN\n\nLEIGH HUNT’S AUTOBIOGRAPHY. Illustrated Edition. 2 Vols. A. Constable & Co.\n\nONE THOUSAND POEMS FOR CHILDREN: A Collection of Verse Old and New. Hutchinson & Co.\n\nFORSTER’S LIFE OF OLIVER GOLDSMITH. Abridged. (Standard Biographies.) Hutchinson & Co.\n\nBOSWELL’S LIFE OF SAMUEL JOHNSON. Abridged. (Standard Biographies.) Hutchinson & Co.\n\nBOSWELL’S LIFE OF SAMUEL JOHNSON. Complete. Illustrated Edition. 2 Vols. Pitman.\n\nFrom an engraving, after the painting by John Opie, R.A.\n\nOf Mary Wollstonecraft’s ancestors little is known, except that they were of Irish descent. Her father, Edward John Wollstonecraft, was the son of a prosperous Spitalfields manufacturer of Irish birth, from whom he inherited the sum of ten thousand pounds. He married towards the middle of the eighteenth century Elizabeth Dixon, the daughter of a gentleman in good position, of Ballyshannon, by whom he had six children: Edward, Mary, Everina, Eliza, James, and Charles. Mary, the eldest daughter and second child, was born on April 27, 1759, the birth year of Burns and Schiller, and the last year of George II.’s reign. She passed her childhood, until she was five years old, in the neighbourhood of Epping Forest, but it is doubtful whether she was born there or at Hoxton. Mr. Wollstonecraft followed no profession in particular, although from time to time he dabbled in a variety of pursuits when seized with a desire to make money. He is described as of idle, dissipated habits, and possessed of an ungovernable temper and a restless spirit that urged him to perpetual changes of residence. From Hoxton, where he squandered most of his fortune, he wandered to Essex, and then, among other places, in 1768 to Beverley, in Yorkshire. Later he took up farming at Laugharne in Pembrokeshire, but he at length grew tired of this experiment and returned once more to London. As his fortunes declined, his brutality and selfishness increased, and Mary was frequently compelled to defend her mother from his acts of personal violence, sometimes by thrusting herself bodily between him and his victim. Mrs. Wollstonecraft herself was far from being an amiable woman; a petty tyrant and a stern but incompetent ruler of her household, she treated Mary as the scapegoat of the family. Mary’s early years therefore were far from being happy; what little schooling she had was spasmodic, owing to her father’s migratory habits.\n\nIn her sixteenth year, when the Wollstonecrafts were once more in London, Mary formed a friendship with Fanny Blood, a young girl about her own age, which was destined to be one of the happiest events of her life. There was a strong bond of sympathy between the two friends, for Fanny contrived by her work as an artist to be the chief support of her family, as her father, like Mr. Wollstonecraft, was a lazy, drunken fellow.\n\nMary’s new friend was an intellectual and cultured girl. She loved music, sang agreeably, was well-read too, for her age, and wrote interesting letters. It was by comparing Fanny Blood’s letters with her own, that Mary first recognised how defective her education had been. She applied herself therefore to the task of increasing her slender stock of knowledge—hoping ultimately to become a governess. At length, at the age of nineteen, Mary went to Bath as companion to a tiresome and exacting old lady, a Mrs. Dawson, the widow of a wealthy London tradesman. In spite of many difficulties, she managed to retain her situation for some two years, leaving it only to attend the deathbed of her mother."
+    },
+    {
+      "id": "pg1727",
+      "slug": "the-odyssey-1727",
+      "title": "The Odyssey",
+      "subtitle": "Rendered into English prose for the use of those who cannot read the original",
+      "authors": [
+        {
+          "name": "Homer",
+          "display_name": "Homer",
+          "birth_year": -751,
+          "death_year": -651
+        },
+        {
+          "name": "Butler, Samuel",
+          "display_name": "Samuel Butler",
+          "birth_year": 1835,
+          "death_year": 1902
+        }
+      ],
+      "lang": "en",
+      "issued": "1999-04-01",
+      "download_count": 120932,
+      "subjects": [
+        "Homer -- Translations into English",
+        "Epic poetry, Greek -- Translations into English",
+        "Odysseus, King of Ithaca (Mythological character)"
+      ],
+      "bookshelves": [
+        "Classical Antiquity",
+        "Harvard Classics",
+        "Category: Poetry",
+        "Category: Mythology, Legends & Folklore",
+        "Category: Classics of Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg1727/cover.jpg",
+      "pages": 755,
+      "metrics": {
+        "pages": 755,
+        "words": 130509,
+        "chapters": 27,
+        "has_cover": true,
+        "sentences": 4696,
+        "computed_at": "2026-09-12T21:27:54.097923+00:00",
+        "cefr_estimate": "B2",
+        "zipf_coverage": {
+          "z3": 0.9529,
+          "z4": 0.8911
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 653,
+        "avg_sentence_len": 27.79
+      },
+      "descriptions": {
+        "en": {
+          "text": "This prose translation of the Odyssey explores the legendary journey of Odysseus as he attempts to return home after the Trojan War. Written in the late nineteenth century, the text uses formal, academic English that reflects the scholarly debates of its time. You will encounter complex sentence structures and a vocabulary rooted in classical studies. The narrative focuses on themes of endurance, identity, and divine intervention, providing a challenging yet rewarding experience for those interested in the evolution of epic storytelling.",
+          "pairs": []
+        }
+      },
+      "excerpt": "This translation is intended to supplement a work entitled “The Authoress of the Odyssey”, which I published in 1897. I could not give the whole “Odyssey” in that book without making it unwieldy, I therefore epitomised my translation, which was already completed and which I now publish in full.\n\nI shall not here argue the two main points dealt with in the work just mentioned; I have nothing either to add to, or to withdraw from, what I have there written. The points in question are:\n\n(1) that the “Odyssey” was written entirely at, and drawn entirely from, the place now called Trapani on the West Coast of Sicily, alike as regards the Phaeacian and the Ithaca scenes; while the voyages of Ulysses, when once he is within easy reach of Sicily, solve themselves into a periplus of the island, practically from Trapani back to Trapani, via the Lipari islands, the Straits of Messina, and the island of Pantellaria.\n\n(2) That the poem was entirely written by a very young woman, who lived at the place now called Trapani, and introduced herself into her work under the name of Nausicaa.\n\nThe main arguments on which I base the first of these somewhat startling contentions, have been prominently and repeatedly before the English and Italian public ever since they appeared (without rejoinder) in the “Athenaeum” for January 30 and February 20, 1892. Both contentions were urged (also without rejoinder) in the Johnian “Eagle” for the Lent and October terms of the same year. Nothing to which I should reply has reached me from any quarter, and knowing how anxiously I have endeavoured to learn the existence of any flaws in my argument, I begin to feel some confidence that, did such flaws exist, I should have heard, at any rate about some of them, before now. Without, therefore, for a moment pretending to think that scholars generally acquiesce in my conclusions, I shall act as thinking them little likely so to gainsay me as that it will be incumbent upon me to reply, and shall confine myself to translating the “Odyssey” for English readers, with such notes as I think will be found useful. Among these I would especially call attention to one on xxii. 465-473 which Lord Grimthorpe has kindly allowed me to make public.\n\nI have repeated several of the illustrations used in “The Authoress of the Odyssey”, and have added two which I hope may bring the outer court of Ulysses’ house more vividly before the reader. I should like to explain that the presence of a man and a dog in one illustration is accidental, and was not observed by me till I developed the negative. In an appendix I have also reprinted the paragraphs explanatory of the plan of Ulysses’ house, together with the plan itself. The reader is recommended to study this plan with some attention.\n\nIn the preface to my translation of the “Iliad” I have given my views as to the main principles by which a translator should be guided, and need not repeat them here, beyond pointing out that the initial liberty of translating poetry into prose involves the continual taking of more or less liberty throughout the translation; for much that is right in poetry is wrong in prose, and the exigencies of readable prose are the first things to be considered in a prose translation. That the reader, however, may see how far I have departed from strict construe, I will print here Messrs."
+    },
+    {
+      "id": "pg52597",
+      "slug": "insolacion-y-morrina-dos-historias-amorosas-52597",
+      "title": "Insolación y Morriña (Dos historias amorosas)",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Pardo Bazán, Emilia, condesa de",
+          "display_name": "Pardo Bazán, Emilia, condesa de",
+          "birth_year": 1852,
+          "death_year": 1921
+        }
+      ],
+      "lang": "es",
+      "issued": "2016-07-17",
+      "download_count": 30046,
+      "subjects": [
+        "Spanish fiction -- 19th century",
+        "Romance fiction, Spanish"
+      ],
+      "bookshelves": [
+        "Category: Romance",
+        "Category: Novels"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg52597/cover.jpg",
+      "pages": 537,
+      "metrics": {
+        "pages": 537,
+        "words": 84042,
+        "chapters": 46,
+        "has_cover": true,
+        "sentences": 5847,
+        "computed_at": "2026-09-12T21:28:17.375829+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.9002,
+          "z4": 0.7856
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 420,
+        "avg_sentence_len": 14.37
+      },
+      "descriptions": {
+        "en": {
+          "text": "This novel by Emilia Pardo Bazán, published in the late nineteenth century, depicts the morning after a social event. The narrative focuses on the physical discomfort and internal state of the protagonist, Asís Taboada. For a Spanish learner, this text presents a challenge due to its descriptive, sensory-rich vocabulary and complex sentence structures typical of the period. You will encounter idiomatic expressions and detailed anatomical descriptions that require careful attention to understand the nuances of the character's experience.",
+          "pairs": [
+            {
+              "dst": "The lady sighed; she turned over, convinced that her bones were aching terribly; she reached for the bell pull and gave it a spirited tug.",
+              "src": "Suspiró la señora; dió una vuelta, convenciéndose de que tenía molidísimos los huesos; alcanzó el cordón de la campanilla, y tiró con garbo."
+            },
+            {
+              "dst": "The maid entered, treading softly, and opened the shutters of the dressing room slightly.",
+              "src": "Entró la doncella, pisando quedo, y entreabrió las maderas del cuarto-tocador."
+            },
+            {
+              "dst": "A shaft of light slipped into the bedroom, and Asís exclaimed in a hoarse, weak voice: 'Less open... Just a little... Like that.'",
+              "src": "Una flecha de luz se coló en la alcoba, y Asís exclamó con voz ronca y debilitada: —Menos abierto... Muy poco... Así."
+            }
+          ]
+        }
+      },
+      "excerpt": "LA primer señal por donde Asís Taboada se hizo cargo de que había salido de los limbos del sueño, fué un dolor como si la barrenasen las sienes de parte á parte con un barreno finísimo; luego le pareció que las raíces del pelo se convertían en millares de puntas de aguja y se le clavaban en el cráneo. También notó que la boca estaba pegajosita, amarga y seca; la lengua, hecha un pedazo de esparto; las mejillas ardían; latían desaforadamente las arterias, y el cuerpo declaraba á gritos que, si era ya hora muy razonable de saltar de la cama, no estaba él para valentías tales.\n\nSuspiró la señora; dió una vuelta, convenciéndose de que tenía molidísimos los huesos; alcanzó el cordón de la campanilla, y tiró con garbo. Entró la doncella, pisando quedo, y entreabrió las maderas del cuarto-tocador. Una flecha de luz se coló en la alcoba, y Asís exclamó con voz ronca y debilitada:\n\n—Menos abierto... Muy poco... Así.\n\n—¿Cómo le va, señorita?—preguntó muy solícita la Angela (por mal nombre Diabla).—¿Se encuentra algo más aliviada ahora?\n\n—Sí, hija..., pero se me abre la cabeza en dos.\n\n—¡Ay! ¿Tenemos la maldita de la jaquecona?\n\n—Clavada... A ver si me traes una taza de tila...\n\n—¿Muy cargada, señorita?\n\n—Regular...\n\n—Voy volando.\n\nUn cuarto de hora duró el vuelo de la Diabla. Su ama, vuelta de cara á la pared, subía las sábanas hasta cubrirse la cara con ellas, sin más objeto que sentir el fresco de la batista en aquellas mejillas y frente que estaban echando lumbre.\n\nDe tiempo en tiempo exhalaba un gemido sordo.\n\nEn la mollera suya funcionaba, de seguro, toda la maquinaria de la Casa de la Moneda, pues no recordaba aturdimiento como el presente, sino el que había experimentado al visitar la fábrica de dinero y salir medio loca de las salas de acuñación.\n\nEntonces, lo mismo que ahora, se le figuraba que una legión de enemigos se divertía en pegarla tenazazos en los sesos y devanarla con argadillos candentes la masa encefálica.\n\nAdemás, notaba cierta trepidación allá dentro, igual que si la cama fuese una hamaca, y á cada balance se le amontonase el estómago y le metiesen en prensa el corazón.\n\nLa tila. Calentita, muy bien hecha. Asís se incorporó, sujetando la cabeza y apretándose las sienes con los dedos. Al acercar la cucharilla á los labios, náuseas reales y efectivas.\n\n—Hija... está hirviendo... Abrasa. ¡Ay! Sosténme un poco, por los hombros. ¡Así!\n\nEra la Diabla una chica despabilada, lista como una pimienta: una luguesa que no le cedía el paso á la andaluza más ladina. Miró á su ama guiñando un poco los ojos, y dijo compungidísima al parecer:\n\n—Señorita... Vaya por Dios. ¿Se encuentra peor? Lo que tiene no es sino eso que le dicen allá en nuestra tierra un soleado... Ayer se caían los pájaros de calor, y V. fuera todo el santo día...\n\n—Eso será...,—afirmó la dama.\n\n—¿Quiere que vaya enseguidita á avisar al señor de Sánchez del Abrojo?\n\n—No seas tonta... No es cosa para andar fastidiando al médico. Un meneo á la taza. Múdala á ese vaso...\n\nCon un par de trasegaduras de vaso á taza y viceversa, quedó potable la tila. Asís se la embocó, y al punto se volvió hacia la pared.\n\n—Quiero dormir... No almuerzo... Almorzad vosotros... Si vienen visitas, que he salido... Atenderás por si llamo.\n\nHablaba la dama sorda y opacamente, de mal talante, como aquel que no está para bromas y tiene igualmente desazonados el cuerpo y el espíritu.\n\nSe retiró por fin la doncella, y al verse sola, Asís suspiró más profundo y alzó otra vez las sábanas, quedándose acurrucada en una concha de tela. Se arregló los pliegues del camisón, procurando que la cubriese hasta los piés; echó atrás la madeja del pelo revuelto, empapado en sudor y áspero de polvo, y luego permaneció quietecita, con síntomas de alivio y aun de bienestar físico producido por la infusión calmante."
+    },
+    {
+      "id": "pg55514",
+      "slug": "cuentos-de-amor-55514",
+      "title": "Cuentos de amor",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Pardo Bazán, Emilia, condesa de",
+          "display_name": "Pardo Bazán, Emilia, condesa de",
+          "birth_year": 1852,
+          "death_year": 1921
+        }
+      ],
+      "lang": "es",
+      "issued": "2017-09-09",
+      "download_count": 29755,
+      "subjects": [
+        "Short stories, Spanish",
+        "Romance fiction, Spanish"
+      ],
+      "bookshelves": [
+        "Category: Short Stories",
+        "Category: Romance"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg55514/cover.jpg",
+      "pages": 413,
+      "metrics": {
+        "pages": 413,
+        "words": 63840,
+        "chapters": 44,
+        "has_cover": true,
+        "sentences": 2770,
+        "computed_at": "2026-09-12T21:28:19.560537+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.9022,
+          "z4": 0.7792
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 319,
+        "avg_sentence_len": 23.05
+      },
+      "descriptions": {
+        "en": {
+          "text": "This collection of short stories by Emilia Pardo Bazán explores the persistent and inescapable nature of love. Written in the late nineteenth century, the prose features a sophisticated, literary vocabulary that reflects the period's style. You will encounter complex sentence structures and descriptive, metaphorical language that requires careful attention. The themes focus on human emotion and the struggle against internal passions. This text is a demanding read, suitable for those looking to engage with nuanced Spanish narrative techniques and historical literary expression.",
+          "pairs": [
+            {
+              "dst": "She began by putting distance between them, traveling to break the spell that binds the soul to the places where Love first appears to us.",
+              "src": "Empezó poniendo tierra en medio, viajando para romper el hechizo que sujeta al alma á los lugares donde por primera vez se nos aparece el Amor."
+            },
+            {
+              "dst": "At every place where Eva stopped, Love would poke out its mischievous little head and say to her with a playful, confidential smile: \"I am not leaving you.",
+              "src": "En cada punto donde Eva se detenía, sacaba el Amor su cabecita maliciosa y la decía con sonrisa picaresca y confidencial: «No me separo de ti."
+            },
+            {
+              "dst": "We are going together.\"",
+              "src": "Vamos juntos»."
+            }
+          ]
+        }
+      },
+      "excerpt": "NUNCA podrá decirse que la infeliz Eva omitió ningún medio lícito de zafarse de aquel tunantuelo de Amor, que la perseguía sin dejarla punto de reposo.\n\nEmpezó poniendo tierra en medio, viajando para romper el hechizo que sujeta al alma á los lugares donde por primera vez se nos aparece el Amor. Precaución inútil, tiempo perdido; pues el pícaro rapaz se subió á la zaga del coche, se agazapó bajo los asientos del tren, más adelante se deslizó en el saquillo de mano, y por último, en los bolsillos de la viajera. En cada punto donde Eva se detenía, sacaba el Amor su cabecita maliciosa y la decía con sonrisa picaresca y confidencial: «No me separo de ti. Vamos juntos».\n\nEntonces Eva, que no se dormía, mandó construir altísima torre bien resguardada con cubos, bastiones, fosos y contrafosos, defendida por guardias veteranos, y con rastrillos y macizas puertas chapeadas y claveteadas de hierro, cerradas día y noche. Pero al abrir la ventana, un anochecer que se asomó agobiada de tedio á mirar el campo y á gozar la apacible y melancólica luz de la luna saliente, el rapaz se coló en la estancia; y si bien le expulsó de ella y colocó rejas dobles, con agudos pinchos, y se encarceló voluntariamente,—sólo consiguió Eva que el Amor entrase por las hendiduras de la pared, por los canalones del tejado ó por el agujero de la llave.\n\nFuriosa, hizo tomar las grietas y calafatear los intersticios, creyéndose á salvo de atrevimientos y demasías: mas no contaba con lo ducho que es en tretas y picardigüelas el Amor. El muy maldito se disolvió en los átomos del aire, y envuelto en ellos se le metió en boca y pulmones, de modo que Eva se pasó el día respirándole, exaltada, loca, con una fiebre muy semejante á la que causa la atmósfera sobresaturada de oxígeno.\n\nYa fuera de tino, desesperando de poder tener á raya al malvado Amor, Eva comenzó á pensar en la manera de librarse de él definitivamente, á toda costa, sin reparar en medios ni detenerse en escrúpulos. Entre el Amor y Eva, la lucha era á muerte, y no importaba el cómo se vencía, sino sólo obtener la victoria.\n\nEva se conocía bien, no porque fuese muy reflexiva, sino porque poseía instinto sagaz y certero; y conociéndose, sabía que era capaz de engatusar con maulas y zalamerías al mismo diablo, que no al Amor, de suyo inflamable y fácil de seducir. Propúsose, pues, chasquear al Amor, y desembarazarse de él sobre seguro y traicioneramente, asesinándole.\n\nPreparó sus redes y anzuelos, y poniendo en ellos cebo de flores y de miel dulcísima, atrajo al Amor haciéndole graciosos guiños y dirigiéndole sonrisas de embriagadora ternura y palabras entre graves y mimosas, en voz velada por la emoción, de notas más melodiosas que las del agua cuando se destrenza sobre guijas ó cae suspirando en morisca fuente.\n\nY el Amor acudió volando, alegre, gentil, feliz, aturdido y confiado como niño, impetuoso y engreído como mancebo, plácido y sereno como varón vigoroso.\n\nEva le acogió en su regazo; acaricióle con felina blandura; sirvióle golosinas; le arrulló para que se adormeciese tranquilo, y así que le vió calmarse recostando en su pecho la cabeza, se preparó á extrangularle, apretándole la garganta con rabia y brío.\n\nUn sentimiento de pena y lástima la contuvo, sin embargo, breves instantes. ¡Estaba tan lindo, tan divinamente hermoso el condenado Amor aquél! Sobre sus mejillas de nácar, palidecidas por la felicidad, caía una lluvia de rizos de oro, finos como las mismas hebras de la luz; y de su boca purpúrea, risueña aún, de entre la doble sarta de piñones mondados de sus dientes, salía un soplo aromático, igual y puro. Sus azules pupilas, entreabiertas, húmedas, conservaban la languidez dichosa de los últimos instantes; y plegadas sobre su cuerpo de helénicas proporciones, sus alas color de rosa parecían pétalos arrancados. Eva notó ganas de llorar..."
+    },
+    {
+      "id": "pg78052",
+      "slug": "andanzas-y-visiones-espanolas-78052",
+      "title": "Andanzas y visiones españolas",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Unamuno, Miguel de",
+          "display_name": "Miguel de Unamuno",
+          "birth_year": 1864,
+          "death_year": 1936
+        }
+      ],
+      "lang": "es",
+      "issued": "2026-02-27",
+      "download_count": 24924,
+      "subjects": [
+        "Spain -- Description and travel"
+      ],
+      "bookshelves": [],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg78052/cover.jpg",
+      "pages": 486,
+      "metrics": {
+        "pages": 486,
+        "words": 77398,
+        "chapters": 38,
+        "has_cover": true,
+        "sentences": 3786,
+        "computed_at": "2026-09-12T21:28:28.318968+00:00",
+        "cefr_estimate": "B2",
+        "zipf_coverage": {
+          "z3": 0.918,
+          "z4": 0.8212
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 387,
+        "avg_sentence_len": 20.44
+      },
+      "descriptions": {
+        "en": {
+          "text": "This collection of essays by Miguel de Unamuno chronicles his travels across Spain and the Canary Islands during the early twentieth century. The language is sophisticated, reflecting the intellectual style of the era, and features complex, rhythmic sentence structures that require careful attention. You will encounter descriptive vocabulary related to geography, culture, and personal reflection. The text is demanding due to its philosophical tone and dense syntax, making it a challenging but rewarding read for those looking to refine their advanced Spanish comprehension.",
+          "pairs": [
+            {
+              "dst": "In 1911, I published in this same Renacimiento library a volume titled: \"Through the Lands of Portugal and Spain.\"",
+              "src": "En 1911 publiqué en esta misma biblioteca Renacimiento un tomo titulado: «Por tierras de Portugal y de España»."
+            },
+            {
+              "dst": "It consisted of twenty-six accounts of excursions through cities and countrysides of the Iberian Peninsula and the Canary Islands.",
+              "src": "Constituíanlo veintiséis relatos de excursiones por ciudades y campos de la Península Ibérica y las Islas Canarias."
+            },
+            {
+              "dst": "I have arranged them in chronological order, since these accounts appeared in newspapers in America—mostly in La Nación, of Buenos Aires—or in Spain—in El Imparcial, of Madrid—as I made the excursions and received the visions spoken of in them.",
+              "src": "Los he ordenado por orden cronológico, ya que estos relatos fueron apareciendo en diarios de América—en La Nación, de Buenos Aires, casi todos—o de España—en El Imparcial, de Madrid—a medida que hacia las excursiones y recibía las visiones de que en ellos se habla."
+            }
+          ]
+        }
+      },
+      "excerpt": "En 1911 publiqué en esta misma biblioteca Renacimiento un tomo titulado: «Por tierras de Portugal y de España». Constituíanlo veintiséis relatos de excursiones por ciudades y campos de la Península Ibérica y las Islas Canarias. Y ahora recojo, lector amigo—¿pues qué más fina amistad que leerle a uno?—en este volumen que tienes entre manos—o sobre la mesa—y a la vista, relatos de otras nuevas excursiones por ciudades y campos también de España.\n\nLos he ordenado por orden cronológico, ya que estos relatos fueron apareciendo en diarios de América—en La Nación, de Buenos Aires, casi todos—o de España—en El Imparcial, de Madrid—a medida que hacia las excursiones y recibía las visiones de que en ellos se habla.\n\nEl que siguiendo mi producción literaria se haya fijado en mis novelas, excepción hecha de la primera de ellas en tiempo, de Paz en la guerra, habrá podido observar que rehuyo en ellas las descripciones de paisajes y hasta el situarlas en época y lugar determinados, en darles color temporal y local. Ni en Amor y Pedagogía, ni en Niebla, ni en Abel Sánchez, ni en mis Tres novelas ejemplares, ni en La tía Tula hay apenas paisajes ni indicaciones geográficas y cronológicas. Y ello obedece al propósito de dar a mis novelas la mayor intensidad y el mayor carácter dramáticos posibles, reduciéndolas, en cuanto quepa, a diálogos y relato de acción y de sentimientos—en forma de monólogos esto—y ahorrando lo que en la dramaturgia se llama acotaciones.\n\nFácil me hubiera sido distribuir entre mis novelas las descripciones de tierras y de villas, de montañas, valles y poblados, que aquí recojo, pero no lo he hecho por darles ligereza. El que lee una novela, como el que presencia la representación de un drama, está pendiente del progreso del argumento, del juego de las acciones y pasiones de los personajes y se halla muy propenso a saltar las descripciones de paisajes por muy hermosos que en sí sean, y como no sea que el campo llegue a ser un verdadero personaje de la acción o de la pasión, lo que ocurre pocas veces. Y en cambio el que gusta del paisaje literario, va a buscarlo en sí y por sí. Y a esta demanda de la afición estética es a lo que quiere responder la oferta de este libro, lector amigo.\n\nMiguel de Unamuno.\n\nSalamanca, noviembre de 1920.\n\nNo lejos de Benavente, en la Granja de Moreruela, provincia de Zamora, resisten acabar de caer las espléndidas ruinas del primer monasterio de Cistercienses en España. Allá me fuí el último Domingo de Resurrección, y allí recordé una vez más el virgiliano etiam ruinae periere: ¡hasta las ruinas perecieron! ¡Qué majestad la de aquella columnata de la girola que se abre hoy al sol, al viento y a las lluvias! ¡Qué encanto el de aquel ábside! ¡Y qué intensa melancolía la de aquella nave tupida hoy de escombros sobre que brota la verde maleza! Y todo ello se alza, añorando siglos que fueron, y quién sabe si siglos por venir, en un valle de sosiego y de olvido del mundo.\n\nAl ir allá, en auto, desde Benavente, bordeábamos tranquilas charcas cubiertas de la blanca floración de las hierbas acuáticas, y al llamar yo la atención sobre ello a mis amigos, exclamó uno de éstos: «¡Hasta el agua estancada cría flores!» A lo que pensé calladamente: no; sólo el agua estancada florece, y no la que en el caz de un molino hace andar la rueda que nos da la harina. La industria pide agua corriente, pero a la poesía le basta la que está quieta."
+    },
+    {
+      "id": "pg2000",
+      "slug": "don-quijote-2000",
+      "title": "Don Quijote",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Cervantes Saavedra, Miguel de",
+          "display_name": "Miguel de Cervantes Saavedra",
+          "birth_year": 1547,
+          "death_year": 1616
+        }
+      ],
+      "lang": "es",
+      "issued": "1999-12-01",
+      "download_count": 16984,
+      "subjects": [
+        "Spain -- Social life and customs -- 16th century -- Fiction",
+        "Knights and knighthood -- Spain -- Fiction",
+        "Picaresque literature",
+        "Romances"
+      ],
+      "bookshelves": [
+        "Best Books Ever Listings",
+        "Harvard Classics",
+        "6 Best Loved Spanish Literary Classics",
+        "Category: Novels",
+        "Category: Classics of Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg2000/cover.jpg",
+      "pages": 2333,
+      "metrics": {
+        "pages": 2333,
+        "words": 378798,
+        "chapters": 137,
+        "has_cover": true,
+        "sentences": 11374,
+        "computed_at": "2026-09-12T21:28:43.088965+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.9165,
+          "z4": 0.8215
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 1894,
+        "avg_sentence_len": 33.3
+      },
+      "descriptions": {
+        "en": {
+          "text": "This text serves as the formal introduction and legal authorization for the publication of Don Quijote in 1604. Reading this excerpt provides a glimpse into the administrative language of the seventeenth century. You will encounter archaic legal terminology and complex sentence structures that reflect the bureaucratic style of the era. While the vocabulary is specific to historical record-keeping, it offers a challenging exercise for those interested in the evolution of Spanish prose and the formal tone used during the Golden Age.",
+          "pairs": [
+            {
+              "dst": "Juan Gallo de Andrada.",
+              "src": "Juan Gallo de Andrada."
+            },
+            {
+              "dst": "At the College of the Mother of God of the Theologians of the University of Alcalá, on the first of December, 1604.",
+              "src": "En el Colegio de la Madre de Dios de los Teólogos de la Universidad de Alcalá, en primero de diciembre de 1604 años."
+            },
+            {
+              "dst": "The licentiate Francisco Murcia de la Llana.",
+              "src": "El licenciado Francisco Murcia de la Llana."
+            }
+          ]
+        }
+      },
+      "excerpt": "Yo, Juan Gallo de Andrada, escribano de Cámara del Rey nuestro señor, de los que residen en su Consejo, certifico y doy fe que, habiendo visto por los señores dél un libro intitulado El ingenioso hidalgo de la Mancha, compuesto por Miguel de Cervantes Saavedra, tasaron cada pliego del dicho libro a tres maravedís y medio; el cual tiene ochenta y tres pliegos, que al dicho precio monta el dicho libro docientos y noventa maravedís y medio, en que se ha de vender en papel; y dieron licencia para que a este precio se pueda vender, y mandaron que esta tasa se ponga al principio del dicho libro, y no se pueda vender sin ella. Y, para que dello conste, di la presente en Valladolid, a veinte días del mes de deciembre de mil y seiscientos y cuatro años.\n\nJuan Gallo de Andrada.\n\nEste libro no tiene cosa digna que no corresponda a su original; en testimonio de lo haber correcto, di esta fee. En el Colegio de la Madre de Dios de los Teólogos de la Universidad de Alcalá, en primero de diciembre de 1604 años.\n\nEl licenciado Francisco Murcia de la Llana.\n\nPor cuanto por parte de vos, Miguel de Cervantes, nos fue fecha relación que habíades compuesto un libro intitulado El ingenioso hidalgo de la Mancha, el cual os había costado mucho trabajo y era muy útil y provechoso, nos pedistes y suplicastes os mandásemos dar licencia y facultad para le poder imprimir, y previlegio por el tiempo que fuésemos servidos, o como la nuestra merced fuese; lo cual visto por los del nuestro Consejo, por cuanto en el dicho libro se hicieron las diligencias que la premática últimamente por nos fecha sobre la impresión de los libros dispone, fue acordado que debíamos mandar dar esta nuestra cédula para vos, en la dicha razón; y nos tuvímoslo por bien. Por la cual, por os hacer bien y merced, os damos licencia y facultad para que vos, o la persona que vuestro poder hubiere, y no otra alguna, podáis imprimir el dicho libro, intitulado El ingenioso hidalgo de la Mancha, que desuso se hace mención, en todos estos nuestros reinos de Castilla, por tiempo y espacio de diez años, que corran y se cuenten desde el dicho día de la data desta nuestra cédula; so pena que la persona o personas que, sin tener vuestro poder, lo imprimiere o vendiere, o hiciere imprimir o vender, por el mesmo caso pierda la impresión que hiciere, con los moldes y aparejos della; y más, incurra en pena de cincuenta mil maravedís cada vez que lo contrario hiciere. La cual dicha pena sea la tercia parte para la persona que lo acusare, y la otra tercia parte para nuestra Cámara, y la otra tercia parte para el juez que lo sentenciare. Con tanto que todas las veces que hubiéredes de hacer imprimir el dicho libro, durante el tiempo de los dichos diez años, le traigáis al nuestro Consejo, juntamente con el original que en él fue visto, que va rubricado cada plana y firmado al fin dél de Juan Gallo de Andrada, nuestro Escribano de Cámara, de los que en él residen, para saber si la dicha impresión está conforme el original; o traigáis fe en pública forma de cómo por corretor nombrado por nuestro mandado, se vio y corrigió la dicha impresión por el original, y se imprimió conforme a él, y quedan impresas las erratas por él apuntadas, para cada un libro de los que así fueren impresos, para que se tase el precio que por cada volume hubiéredes de haber. Y mandamos al impresor que así imprimiere el dicho libro, no imprima el principio ni el primer pliego dél, ni entregue más de un solo libro con el original al autor, o persona a cuya costa lo imprimiere, ni otro alguno, para efeto de la dicha correción y tasa, hasta que antes y primero el dicho libro esté corregido y tasado por los del nuestro Consejo; y, estando hecho, y no de otra manera, pueda imprimir el dicho principio y primer pliego, y sucesivamente ponga esta nuestra cédula y la aprobación, tasa y erratas, so pena de caer e incurrir en las penas contenidas en las leyes y premáticas destos nuestros reinos. Y mandamos a los del nuestro Consejo, y a otras cualesquier justicias dellos, guarden y cumplan esta nuestra cédula y lo en ella contenido. Fecha en Valladolid, a veinte y seis días del mes de setiembre de mil y seiscientos y cuatro años."
+    },
+    {
+      "id": "pg78058",
+      "slug": "lintukoto-78058",
+      "title": "Lintukoto",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Lehtonen, Joel",
+          "display_name": "Joel Lehtonen",
+          "birth_year": 1881,
+          "death_year": 1934
+        }
+      ],
+      "lang": "fi",
+      "issued": "2026-02-27",
+      "download_count": 24382,
+      "subjects": [
+        "Short stories, Finnish",
+        "Finnish fiction -- 20th century"
+      ],
+      "bookshelves": [],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg78058/cover.jpg",
+      "pages": 288,
+      "metrics": {
+        "pages": 288,
+        "words": 31817,
+        "chapters": 4,
+        "has_cover": true,
+        "sentences": 2872,
+        "computed_at": "2026-09-12T21:28:32.044170+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.7131,
+          "z4": 0.5627
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 159,
+        "avg_sentence_len": 11.08
+      },
+      "descriptions": {
+        "en": {
+          "text": "This collection of short stories by Joel Lehtonen, published in 1929, explores themes of nature, solitude, and human relationships. The language is lyrical and introspective, reflecting the literary style of the early 20th century. For a learner of Finnish, the text presents a moderate challenge. You will encounter descriptive vocabulary and complex sentence structures that require careful attention. The prose is emotive and contemplative, focusing on the nuances of longing and the passage of time in the Finnish landscape.",
+          "pairs": [
+            {
+              "dst": "You are, my summer island, at the start of summer like a beloved woman whom one sees again after a long time.",
+              "src": "Niin olet, kesäsaareni, suven alussa kuin rakas nainen, jonka näkee uudestaan pitkien aikojen jälkeen."
+            },
+            {
+              "dst": "We walk the familiar country road for the last time, on the final evening.",
+              "src": "Kävellään tuttua maantietä viimeistä kertaa, viimeisenä iltana."
+            },
+            {
+              "dst": "Both silent, we dare not speak: that would release the spirits of pain from the depths of the heart, where they have been hidden, imprisoned, or must be imprisoned.",
+              "src": "Vaiti molemmat, ei uskalleta puhua: sehän vapauttaisi tuskan henget sydämen syvyydestä, jonne ne on kätketty, vangittu tai vangittava."
+            }
+          ]
+        }
+      },
+      "excerpt": "Helsingissä, Kustannusosakeyhtiö Otava, 1929.\n\nEro ja kohtaaminen\n\nRotanlumooja\n\nKesäisen erakkomajani historiaa y.m.\n\nMiten Krik toi kesän\n\nAuringon vertauskuva ilmestyy taloon\n\nKukosta lisää\n\nYhä kukosta. Matti alkaa toimensa\n\nVieraita ja juhlia\n\nNyt jutellaan taas Matista!\n\n\"Ritari Matvei\"\n\nKauneuden tuokio, mitä enempää voisin vaatia?\n\nMuurahaiset\n\nHeinäkuun kuutamo\n\n\"Hammam\"\n\nTiiranpoika\n\nLauantaikellot\n\nViikatemies\n\nElokuun kuutamo\n\nJäähyväiset Lintukodolle\n\n\"Vekkulit ja kekkuli!\"\n\nEro ja kohtaaminen.\n\nNiin olet, kesäsaareni, suven alussa kuin rakas nainen, jonka näkee uudestaan pitkien aikojen jälkeen.\n\nAh, nopeasti unohdan, olen aina ollut häpeäkseni petturi, sinä saaren',\n\nVanajan helmi, ulappain risteykseen luomisessa kohonnut pikku riutta,\n\njonka jokainen poukama ja niemeke on kaunis kuin täydellisin maalaus.\n\nMutta sytyn kyllä pian entiseen ihastukseen.\n\nKuin rakastettu nainen? Vaikea on ero saattanut olla, syvästi tuskallinen. Kävellään tuttua maantietä viimeistä kertaa, viimeisenä iltana. Vaiti molemmat, ei uskalleta puhua: sehän vapauttaisi tuskan henget sydämen syvyydestä, jonne ne on kätketty, vangittu tai vangittava. Katsellaan tien sivuille, ilmanrantojen kaukaisuuksiin, jotka alakuloisina himmenevät. Ei tohdita katsoa toisiamme, ja jos vilkaisemme, jos silmät rohkenevat toisen kuolemansairaisiin kasvoihin, näkevät ne, että toisen huulet alkavat vavahdella nyyhkytyksistä, jotka sitten lopettaa pakollinen, teennäisen reipas ero. Mikä leikki ja ilve surussa! Kyynelien kimmallus hymyn ja ilakoivien hyvästelysanojen läpi.\n\nSitten vietetään kuukausia erossa, etäällä toisistamme. Ainoana sykähtävänä ilona, ainakin minulle melkein ainoana aluksi, kirjeet, joita lentää välillämme kuin kirjekyyhkysiä. Iltaruskojen sammuessa on ne piirretty, tähystellen kummallakin puolen kahdesta toisistaan kaukana olevasta ikkunasta yhteiseen hehkuvaan ja haikeasti sammuvaan ruskotukseen. Öillä valvoen on ne mietitty, syvin niistä valmistettu, katsellen kumpikin talvikuutamon aavemaiseen loistoon tai riemuiten samasta kultaisesta tähdestä, joka taivaan äärellä alhaalla suurena säkenöi, kutsuu kuin itse rakkaus, tuo Kointähti, Venus.\n\nJa sitten kohtaamme taas toisemme, kiivaasti sitä päivää odottaen.\n\nMinkälainen kohtaus se saattoi olla minulle! En tiedä, nauraako makeasti, ellei tapaus olisi niin katkerasti surettava. Sellaista on hetken rakkaus, sellaista teki pelkkä muutamien kuukausien ero. Enhän usko, että olisin koskaan kyllin vakavasti rakastanut.\n\nTuskin vilkaisemme toisiimme, niin näemme, ettemme tohdi toisiimme katsoa. Emme ole kauniita kumpikaan, — anteeksi, ystäväni, näin tohdin sanoa, — Jumala paratkoon, eikä sitä minussa voi edes Jumala parantaa! Häpeämme, kummastumme itseämme. Kävelemme pelästyneinä…\n\nEmme saata nytkään puhua. Astelemme rinnatusten eteenpäin kuin taivaan rankaisemat, me, jotka annoimme muka rakkauden sokaista silmämme.\n\nEmmekä ymmärrä, miten lohduttaa toisiamme tässä pettymyksessä.\n\nMutta antaahan olla! Odotellaan! Sähkö alkaa virtailla jälleen. Taikalyhty syttyy, kaleidoskooppi pyörähtelee, näyttää aavistamattomat kuvionsa. Ilotulitus järjestyy, raketit lentävät, — säkenet jo sinkoavat silmästä toiseen. Alkaa uudestaan kauneimman jumalattaren taika… Huomaan kauniin poven, muistan jotain. Olen onnellinen…\n\nTuskin ehdimme hengittää helpotuksesta. Nyt vapaudumme, juttelemme, pyrimme toisiamme kohti. Alamme jälleen palaa yhteisesti kuin ennenkin. Sellainen petos on rakkaus.\n\nNiin myöskin kesäsaareni, Vanajan helmi, unohdettu, jätetty koko talveksi, sellaisena näen sinutkin uudestaan kevään tullen.\n\nJoskus olen sinua muistellut poissa ollessani, etenkin syksyllä, hiljan erottuamme. Ajatellut kadonneesta suviauringosta haikeana poukamiasi, joiden yli suuret raidat kumartuvat kuin kyynelpajut hautapaasien, niemiäsi, joille näkyy salmen yli vanha hämäläiskylä, sitä vanhempi kivikirkko ja vieläkin paljon, paljon vanhempi uhrivaara isojen rantakivieni takaa, joihin kahden ulapan aallot kohisten murskautuvat. Muistellut haltioihini syttyen valtaisia tervaleppiäsi, jotka kesän auringossa kiiluvat tummina kuin kalmiston poppelit, piilipuitasi, joiden ritvat uneksien nuokkuvat, jättiläiskoivujasi ja kahta kaunista jalavaasi, vaahteroita, hopeapajua, omenapuita ja kirsikanvesoja. Muistellut myöskin kukkiasi, kielokenttiä, malvoja, ruusuja, niin, mitä luettelenkaan! Ja, ah, ajatellut ennen kaikkea tummaista rauhantupaa, sen ebenpuun-värisiä orsia, yksinkertaista maalaistakkaa… Sinistä kamaria, jonne mehevät pihlajat luovat ikkunoista kalpeanvihreän hämäränsä, työkammiotani, johon sepitin vaimoni kanssa sinisen ruutukaton ja jossa olen niin paljon mietiskellyt pakottaakseni jumalaisen rauhan luonani asumaan… Muistellut kylyäni, jonka lavolta uimaan heittäytyminen maistuu ihanammalta kuin mikään sampanja…\n\nMutta sitten, talvemmalla nuo muistelut melkein jätin. Jumalan kiitos, unohdan toki niin helposti, se on sittenkin suuri onneni.\n\nJa nyt tulin jälleen tänne, sinä saarelma, vanha rakastettu. Jo sain taas kyllin seuraistunnoista, teattereista, juhlista, sen tuollaisista. Väsyin hieman sanomalehtiin, rupatuksiin, tärkeihin uutisiin, tietoihin, radioihin, jotka ikäänkuin tyrkyttelevät ihmiselle sitä tai sitä esitelmää, juuri sitä ja sitä juhlarunoa, — miksi juuri tuota sävellystä, tuota puhetta? Kiivaileehan moni muukin tähän tapaan. Kyllästyin, väsyin kuin muutkin. Pakenin ensin melkoisen kauas pois. Mutta nyt, täällä, tuntuu yksinpä Parisikin, kivierämaa, joka on mieleiseni ainoastaan siksi, ettei siellä mikään riitele ihmistä pois hänen mielikuviltaan, vaan hän riemuitsee sielunsa yksinäisyydestä, vapaudesta, siitä, että tietää itsensä vain jonkinlaisten geniustensa omistamaksi, — niin, nyt tuntuu sekin ainoastaan hupaiselta, mutta vieraalta unelta, kun olen paennut vieläkin suurempaan yksinäisyyteen, saareni luo!"
+    },
+    {
+      "id": "pg78007",
+      "slug": "vanhaa-viinaa-uudessa-leilissa-78007",
+      "title": "Vanhaa viinaa uudessa leilissä",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Valkonen, Tatu",
+          "display_name": "Tatu Valkonen",
+          "birth_year": 1885,
+          "death_year": 1945
+        }
+      ],
+      "lang": "fi",
+      "issued": "2026-02-22",
+      "download_count": 24363,
+      "subjects": [
+        "Finnish wit and humor"
+      ],
+      "bookshelves": [],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg78007/cover.jpg",
+      "pages": 161,
+      "metrics": {
+        "pages": 161,
+        "words": 18129,
+        "chapters": 31,
+        "has_cover": true,
+        "sentences": 1181,
+        "computed_at": "2026-09-12T21:28:38.687443+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.8027,
+          "z4": 0.6682
+        },
+        "cefr_confidence": "low",
+        "metrics_version": 1,
+        "reading_minutes": 91,
+        "avg_sentence_len": 15.35
+      },
+      "descriptions": {
+        "en": {
+          "text": "This collection of humorous essays from 1929 offers a glimpse into Finnish social life, rural customs, and the changing times of the early twentieth century. The language reflects the era, featuring descriptive, slightly formal sentence structures and vocabulary that may challenge modern learners. You will encounter themes ranging from agricultural management to early encounters with technology. It is a demanding read due to its idiomatic wit and the specific cultural context of the period, requiring a solid grasp of Finnish grammar.",
+          "pairs": [
+            {
+              "dst": "Because of this, I am able to talk about agriculture just as well as many officials in the agricultural board, and perhaps even better.",
+              "src": "Tästä riippuu, että me osaamme puhua maanviljelyksestä yhtä hyvin kuin moni maanviljelyshallituksen virkamies ja ehkä paremminkin."
+            },
+            {
+              "dst": "But our intention was not to start talking about ourselves, but rather to tell how Lippo arrived at this agricultural school and gave cause for this essay.",
+              "src": "Mutta meidän aikomuksemmehan ei ollut ruveta puhumaan itsestämme, vaan kerromme siitä, kuinka Lippo saapui tähän maanviljelyskouluun ja antoi aihetta tähän pakinaan."
+            },
+            {
+              "dst": "And then we went to look at this miracle of a creature.",
+              "src": "Ja mentiin sitten tätä ihmekappaletta katsomaan."
+            }
+          ]
+        }
+      },
+      "excerpt": "Pakinoita\n\nKirj.\n\nTATU VALKONEN [Ilmo Lassila]\n\nJyväskylässä, K. J. Gummerus Osakeyhtiö, 1929.\n\nTaiteilija, maanviljelysneuvos, hevonen, patruuna, patrunessa y.m.\n\nKotiapulaiskoulu.\n\nKouluretkeilyt.\n\nNykyajan nuoriso.\n\nPäärynä.\n\nOpettavainen kertomus.\n\nTiedemiehen kohtalo.\n\nAmerikkalaista.\n\nPalvelijatarkysymyksestä.\n\nTarina suuresta lännestä.\n\nOnnen avain.\n\nNaurishuhdan isännän konekauppa.\n\nIhmiskone.\n\nTuloilmoitusaikoina.\n\nVähäisen lukkarin seikkailu.\n\nAikamme nuori nainen.\n\nRautatiematka kieltolakimaassa.\n\nPuhuva filmi.\n\nSalatieteiden tutkijat huom.!\n\nMaisteri Köyhänen ja hänen torakkansa.\n\nNe autot, ne autot!\n\nKeksijät hoi!\n\nNykyaikaista rakennustoimintaa.\n\nRouvien parissa.\n\nAinoastaan miehille.\n\nTerveiset maalta.\n\nUlkomaanpasseista.\n\nJuttu kesäleskestä.\n\nMitä Venäjän nainen voi opettaa maailmalle.\n\nMekin olemme nähneet parempia päiviä. Aikoinamme olimme nim. nuorempana opettajana maankuulussa maanviljelyskoulussa, jonka johtajana oli oikein maankuulu maanviljelysneuvos. Tästä riippuu, että me osaamme puhua maanviljelyksestä yhtä hyvin kuin moni maanviljelyshallituksen virkamies ja ehkä paremminkin.\n\nMutta meidän aikomuksemmehan ei ollut ruveta puhumaan itsestämme, vaan kerromme siitä, kuinka Lippo saapui tähän maanviljelyskouluun ja antoi aihetta tähän pakinaan.\n\nMaanviljelysneuvos oli lähtenyt erääseen komiteaan, jollaisia maanviljelysneuvoksilla aina on, ja kun hän saapui tältä matkalta kotiinsa, niin oli reen edessä uusi ja komea hevonen. Se oli hieman vaahdossa, mutta ilmoitettiin apulaiselle, nim. allekirjoittaneelle, että kyllä Lippo osaa juosta ja kunnolla rekensä kuljettaa, mutta tällä kertaa on Lippo sattunut juoksemaan liiaksi, niin että siitä tämä Lipon vaahtoaminen johtuu.\n\nJa mentiin sitten tätä ihmekappaletta katsomaan. Taiteilija, joka oli maanviljelysneuvoksen sukulainen ja joka asui talossa, vaikka oli saapunut läheisen tehtaan patruunan kuvaa maalaamaan, otti heti paikalla esille kangaskappaleen ja pensselinsä ja värinsä ja ikuistutti Lipon. Ja maanviljelysneuvos esitti sekä taiteilijalle että allekirjoittaneelle Lipon sukutaulun. Siitä selvisi, että Lippo oli mitä korkeinta ja hienointa sukua ja että ainoastaan yksi rengas oli hieman epäselvä, mutta siitäkin piti tulla selvyys ensi tilassa. Ja sitten sanottiin apulaiselle, että tällä hevosella ei aja kukaan muu kuin maanviljelysneuvos itse ja taiteilija ja Renki-Aapo.\n\nSen jälkeen syötiin Lipon harjakaiset ja maistettiinpa siinä vähän miestä väkevämpääkin joukkoon.\n\nJa nyt vasta alkaa oikeastaan meidän pakinamme. Illalla tuossa kello 10 aikaan, jolloin talossa, jossa painuttiin aikaisin yöpuulle, jo kaikki nukkuivat, naputti taiteilija meidän akkunallemme ja ilmoitti, että nyt on sinullakin kunnia päästä Lipon kanssa kyytiin. Hyvin pian huomasimme, mistä tämä kohteliaisuus johtui, sillä se johtui siitä, että meillä sattui olemaan rekiliiterin avain ja myöskin avain siihen pieneen kulmikkoon, jossa talon parhaat valjaat olivat. Mutta siitä emme sillä kertaa mitään puhuneet, sillä olimme hyvin mielissämme, kun pääsimme tällä paraatihevosella ajelulle. Hevosen valjastaminen reen eteen ja yleensä muidenkaan ajopelien eteen ei ole meidän vahvimpia puoliamme. Ojentelimme taiteilijalle valjasvehkeitä ja näytti meistä siltä, että hän teki työnsä hyvin kunnollisesti. Hän oli nim. innostunut hevosmies.\n\nLopuksi annettiin Lipolle puolikas leipää, jonka jälkeen meidät istutettiin karhuntaljalle reen takaistuimelle, jotavastoin taiteilija istahti kuskille, ja niin lähdettiin matkaan. Meistä tuntui koko ajan, että reki vähä väliä tahtoi asettua tielle poikittain ja huomautimmekin tästä parikin kertaa taiteilijalle, mutta saimme kuulla sen vastauksen, että minä olen ensimäinen mies hevosen hännästä ja tiedän, mitä täällä tapahtuu.\n\nMutta sitten tuli eteemme eräs rautatien ylikäytävä ja tuskin olimme radalle päässeet, kun kuului junan vihlaiseva vihellys. Emme tiedä, miten reestä linkosimme, mutta yht'äkkiä näimme Lipon riistäytyvän valjaistaan sekä taiteilijan ja itsemme vyöryvän alas ratavallia, ja olisimme ehkä vyöryneet hyvinkin pitkälle, ellemme olisi tärähtäneet erääseen kantoon. Mutta reki rusahti hienoksi junan alla.\n\nKinoksessa syntyi sitten seuraava keskustelu: Taiteilija sanoi meille, että miks'et sinä sittenkin katsonut, että toinen aisa oli irti. Nyt on mennyt rikki tämä kartanon kaikkein paras paraatireki, ja sitäpaitsi, missä on Lippo? Kyllä olisi minun pitänyt tietää, ettei ajomatkalle pidä koskaan lähteä sellaisen kanssa, joka ei hevosten päälle ymmärrä.\n\nMurheellinen näköala oli tosiaankin edessämme, sillä reki oli murskaantunut niin pieniksi säpäleiksi, ettei siitä kirvesvarren kokoista kappaletta olisi mistään saanut. Reen jalaksetkin olivat aivan pieninä sirpaleina. Ei siinä voinut allekirjoittanutkaan muuta kuin purskahtaa itkuun ja sanoa, että millä minä tämän kaiken maksan?"
+    },
+    {
+      "id": "pg78049",
+      "slug": "sointula-78049",
+      "title": "Sointula",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Järnefelt, Arvid",
+          "display_name": "Arvid Järnefelt",
+          "birth_year": 1861,
+          "death_year": 1932
+        }
+      ],
+      "lang": "fi",
+      "issued": "2026-02-26",
+      "download_count": 24342,
+      "subjects": [
+        "Finnish drama -- 20th century"
+      ],
+      "bookshelves": [],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg78049/cover.jpg",
+      "pages": 112,
+      "metrics": {
+        "pages": 112,
+        "words": 12626,
+        "chapters": 5,
+        "has_cover": true,
+        "sentences": 1818,
+        "computed_at": "2026-09-12T21:28:40.217838+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.772,
+          "z4": 0.6391
+        },
+        "cefr_confidence": "low",
+        "metrics_version": 1,
+        "reading_minutes": 63,
+        "avg_sentence_len": 6.94
+      },
+      "descriptions": {
+        "en": {
+          "text": "This play, written in 1924 by Arvid Järnefelt, explores social idealism and personal conflict through the lens of a fictionalized historical colony. For a learner of Finnish, this text offers a window into early 20th-century formal language and theatrical dialogue. The vocabulary is descriptive, focusing on interior settings and social interactions. While the sentences are generally structured and clear, the formal tone and specific terminology regarding legal and social matters may present a moderate challenge for those accustomed to modern, colloquial Finnish.",
+          "pairs": [
+            {
+              "dst": "JOHANNES (to the lawyer): Please, go ahead.",
+              "src": "JOHANNES (asianajajalle): Olkaa hyvä."
+            },
+            {
+              "dst": "NIINA: Ask your questions, Mr. Lawyer.",
+              "src": "NIINA: Kysykää, herra asianajaja."
+            },
+            {
+              "dst": "KOMPA: Dear Madam, why can you not agree to travel with your husband?",
+              "src": "KOMPA: Arvoisa rouva, miksi ette voi suostua matkustamaan miehenne mukana?"
+            }
+          ]
+        }
+      },
+      "excerpt": "Kolminäytöksinen näytelmä\n\nKirj.\n\nPorvoossa, Werner Söderström Osakeyhtiö, 1924.\n\nJOHANNES, yhteiskunnallinen uudistaja, puhuja.\n\nNIINA, hänen vaimonsa.\n\nJEAN BORGSTRÖM (Nanne), arkkitehti.\n\nKOMPA, asianajaja.\n\nJYRKI, entinen ylioppilas, Johanneksen aatetoveri.\n\nAILI, hänen vaimonsa.\n\nALPERTI, tilallinen Pohjanmaalta.\n\nHUHTIALA, tilallinen Hämeestä.\n\nHYVÄRINEN, tilallinen Savosta.\n\nVÄINÖ, torpanpoika.\n\nEEVA, hänen morsiamensa.\n\nRISTO, työläinen.\n\nVanhempia vaimoja:\n\n1:nen, 2:nen, 3:s, 4:s, 5:s, 6:s.\n\nPoikia:\n\n1:nen, 2:nen, 3:s.\n\nTyttöjä: 1:nen, 2:nen, 3:s.\n\nPALYELUSPOIKA (1:sessä näytöksessä).\n\nJENNI, palvelustyttö (3:nnessa näytöksessä).\n\nTyömiehiä, vanhempia ja nuorempia vaimoja, tyttöjä, poikia, lapsia.\n\nI näytös Suomessa.\n\n11 \" Amerikassa.\n\nIII \" Suomessa.\n\nTekijä pyytää seuraavan huomautuksen painattamista teatterien henkilöohjelmiin:\n\nSointula niminen siirtola on todellisuudessa ollut olemassa Pohjois-Amerikassa, Vancouverissa, Malcolm saarella tämän vuosisadan alussa. Näytelmässä esiintyvillä henkilöillä ei ole kuitenkaan tarkoitettu kuvata tuohon siirtolaan osaaottaneita henkilöitä, vaan ovat näytelmän kaikki henkilöluonteet vapaasti muovaeltuja taiteen tarkoituksissa.\n\nArvid Järnefelt.\n\nSali. Perällä, katsojasta käsin vähän vasemmalla puolella ovi avaraan eteiseen. Eteisen vasemmalla ovi, perällä ulko-ovi. Vasemmalla puolella salia, taaempana ovi, lännempänä uuni, jonka tulensija on avonainen, näiden välissä vanhanaikainen kaappi-kello, jonka heilurinkäynti on harva ja lyönti kumean matala. Oikealla taampana ovi, keskempänä flyygeli-piano. Ikkuna perällä. Tämän ja peräoven välillä korkea peililaite peililautoineen. Sisustus osottaa huomattavaa varallisuutta. Salin ovissa ja ikkunoissa kalliita verhoja, seinissä taidemaalauksia ja gobelinejä, nurkissa veistokuvia, permannolla paksuja mattoja, uhkeita valaistuslaitteita.\n\nVäliverhon auetessa kaikki ovet ovat suljettuina.\n\nASIANAJAJA KOMPA perempänä, vähän oikealla, istuu kynä kädessä paperia ja mustepullo edessään satunnaisesti asetetun katteettoman pöydän ääressä. Hänen katseensa ja kynää pitelevä kätensä on kysyvästi suunnattuna Johannesta kohden.\n\nJOHANNES (seisoo asianajajaan päin kääntyneenä etualalla vasemmalla):\n\nEi, ei, luovun naimaosastani, jota en ole pesään tuonutkaan.\n\nKOMPA (epäröi kirjoittaa): Mutta — (vähän kohottautuen): hyvä herrasväki, minun on vähän vaikea vieraananne tässä yksin istua. Ettekö suvaitsisi…\n\nNIINA (seisoo etualalla oikealla): Valitettavasti en voi vaikeuksianne lieventää. (Osottaen Johanneksen puoleen): Mutta…\n\nJOHANNES (asianajajalle): Olkaa hyvä.\n\nKOMPA: Niinkuin suvaitsette. (Kirjoittaa vähän aikaa, sitten katselee papereitaan, tärkeästi): Olen sitte viime kerran paljon miettinyt käsillä olevaa avioerokysymystä, ja ovat muutamat kohdat siinä minulle yhä jääneet hämäriksi. Minun on senvuoksi pakko vaivata herrasväkeä vieläkin muutamilla kysymyksillä.\n\nNIINA: Kysykää, herra asianajaja.\n\nKOMPA: Arvoisa rouva, miksi ette voi suostua matkustamaan miehenne mukana?\n\nNIINA: Minä en voi — minä rakastan taidetta, soitantoa, ystäviä, joiden kanssa voi puhua. Mutta hän tahtoo, että muuttaisimme jonnekin sinne — sinne — Hän tahtoo, että jäisin ikipäiviksi elämään noiden tuollaisten — noiden hänen moukkiensa seuraan. Semmoista en voi. En ikinä!\n\nJOHANNES (asianajajalle): Näette itse, tiemme auttamattomasti haaraantuvat.\n\nKOMPA (Niinan puoleen): Lainopin kannalta voi tähän sanoa vain: vaimo seuratkoon miestänsä.\n\nNIINA: Vai niin se on lainopin kannalta. Entä järjen kannalta? Koko hänen suunnitelmansa on pelkkää tyhmyyttä! (Johanneksen liikahduksen johdosta): Niin, niin — minulla on puheenvuoro. Hän aikoo muuttaa maailman. Ah kuinka kaunista! Siirtola — paratiisi ihmisten keskellä. Mutta kun koko sinun ajatuksesi on alusta alkaen pelkkää tyh-myyt-tä, tyhmyyttä! Viedä satoja ihmisiä vieraaseen maahan, ruveta heidän johtajakseen, kun — kun —\n\nKOMPA: Saanko kysyä, mitä \"kun\"?\n\nNIINA: Kun ihminen ei osaa itseänsäkään johtaa. — Tyhmyyttä! — Sittenkin ehkä seuraisin miestäni, jos se todella olisi hänen keksintönsä, mutta kun koko juttu on hänen yllyttäjänsä keksimä. Älä keskeytä. Niin juuri, minä en ole velvollinen seuraamaan maailman ilettävimmän viettelijän tahtoa. Tuo mies on hänen jumalansa, mutta minä vihaan häntä. Tosin viisas kuin käärme, mutta käärme. Kyykäärme!\n\nKOMPA: Minkä perusteella pidätte miehenne suunnitelmaa niin — niin järjettömänä?\n\nNIINA: Herra jumala, ettekö sitä ymmärrä! He tahtovat perustaa jonnekin maapallon taakse siirtolan, jossa — voi kuinka hullua — lapset kasvatetaan yhteisesti ja ei mikään ole kenenkään ja lapset riistetään äideiltänsä! Ja vielä: — eivät aio käyttää rahaa — aivan noin ilman mitään… Te olette oppinut lakimies. Sanokaa minulle suoraan, ettekö pidä sitä tyhmänä? No? — (Turhaan odotettuaan): Onko vaimo lain mukaan velvollinen suostumaan ilmi tyhmyyksiin? (Taas odotettuaan): Onko hän velvollinen uhraamaan elämänsä, kotinsa, onnensa, maansa, ystävänsä…? (Suuttuen omaan heltymiseensä): Vastatkaa!"
+    },
+    {
+      "id": "pg62215",
+      "slug": "le-fantome-de-l-opera-62215",
+      "title": "Le Fantôme de l'Opéra",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Leroux, Gaston",
+          "display_name": "Gaston Leroux",
+          "birth_year": 1868,
+          "death_year": 1927
+        }
+      ],
+      "lang": "fr",
+      "issued": "2020-05-24",
+      "download_count": 101041,
+      "subjects": [
+        "Horror tales",
+        "Musical fiction",
+        "Opera -- Fiction",
+        "Paris (France) -- Fiction",
+        "Composers -- Fiction",
+        "Phantom of the Opera (Fictitious character) -- Fiction",
+        "French fiction -- 20th century"
+      ],
+      "bookshelves": [
+        "FR Nouveautés",
+        "FR Littérature",
+        "Category: Romance",
+        "Category: Crime, Thrillers and Mystery",
+        "Category: Novels",
+        "Category: French Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg62215/cover.jpg",
+      "pages": 672,
+      "metrics": {
+        "pages": 672,
+        "words": 108866,
+        "chapters": 29,
+        "has_cover": true,
+        "sentences": 8392,
+        "computed_at": "2026-09-12T21:27:56.352241+00:00",
+        "cefr_estimate": "B2",
+        "zipf_coverage": {
+          "z3": 0.9485,
+          "z4": 0.8555
+        },
+        "cefr_confidence": "high",
+        "metrics_version": 1,
+        "reading_minutes": 544,
+        "avg_sentence_len": 12.97
+      },
+      "descriptions": {
+        "en": {
+          "text": "This novel, written in the early twentieth century, explores the mysterious occurrences surrounding the Paris Opera House. The narrative style is formal and descriptive, reflecting the literary conventions of its time. You will encounter sophisticated vocabulary related to theater and investigative journalism, alongside complex sentence structures that require careful attention. The themes of obsession, tragedy, and the supernatural make this a challenging yet rewarding read for those looking to improve their grasp of nuanced, descriptive French prose.",
+          "pairs": [
+            {
+              "dst": "The Phantom of the Opera existed.",
+              "src": "Le fantôme de l'Opéra a existé."
+            },
+            {
+              "dst": "Yes, he existed, in flesh and blood, even though he took on all the appearances of a real ghost, that is to say, a shadow.",
+              "src": "Oui, il a existé, en chair et en os, bien qu'il se donnât toutes les apparences d'un vrai fantôme, c'est-à-dire d'une ombre."
+            },
+            {
+              "dst": "But none of these witnesses had believed until today that they should link the rather legendary character of the Phantom of the Opera to this terrible adventure.",
+              "src": "Mais aucun de ces témoins n'avait cru jusqu'à ce jour devoir mêler à cette affreuse aventure le personnage plutôt légendaire du fantôme de l'Opéra."
+            }
+          ]
+        }
+      },
+      "excerpt": "Le fantôme de l'Opéra a existé. Ce ne fut point, comme on l'a cru longtemps, une inspiration d'artistes, une superstition de directeurs, la création falote des cervelles excitées de ces demoiselles du corps de ballet, de leurs mères, des ouvreuses, des employés du vestiaire et de la concierge.\n\nOui, il a existé, en chair et en os, bien qu'il se donnât toutes les apparences d'un vrai fantôme, c'est-à-dire d'une ombre.\n\nJ'avais été frappé dès l'abord que je commençai de compulser les archives de l'Académie nationale de musique par la coïncidence surprenante des phénomènes attribués au fantôme, et du plus mystérieux, du plus fantastique des drames et je devais bientôt être conduit à cette idée que l'on pourrait peut-être rationnellement expliquer celui-ci par celui-là. Les événements ne datent guère que d'une trentaine d'années et il ne serait point difficile de trouver encore aujourd'hui, au foyer même de la danse, des vieillards fort respectables, dont on ne saurait mettre la parole en doute, qui se souviennent comme si la chose datait d'hier, des conditions mystérieuses et tragiques qui accompagnèrent l'enlèvement de Christine Daaé, la disparition du vicomte de Chagny et la mort de son frère aîné le comte Philippe, dont le corps fut trouvé sur la berge du lac qui s'étend dans les dessous de l'Opéra, du côté de la rue Scribe. Mais aucun de ces témoins n'avait cru jusqu'à ce jour devoir mêler à cette affreuse aventure le personnage plutôt légendaire du fantôme de l'Opéra.\n\nLa vérité fut lente à pénétrer mon esprit troublé par une enquête qui se heurtait à chaque instant à des événements qu'à première vue on pouvait juger extra-terrestres, et, plus d'une fois, je fus tout près d'abandonner une besogne où je m'exténuais à poursuivre,—sans la saisir jamais,—une vaine image. Enfin, j'eus la preuve que mes pressentiments ne m'avaient point trompé et je fus récompensé de tous mes efforts le jour où j'acquis la certitude que le fantôme de l'Opéra avait été plus qu'une ombre.\n\nCe jour-là, j'avais passé de longues heures en compagnie des «Mémoires d'un directeur», œuvre légère de ce trop sceptique Moncharmin qui ne comprit rien, pendant son passage à l'Opéra, à la conduite ténébreuse du fantôme, et qui s'en gaussa tant qu'il put, dans le moment même qu'il était la première victime de la curieuse opération financière qui se passait à l'intérieur de «l'enveloppe magique».\n\nDésespéré, je venais de quitter la bibliothèque quand je rencontrai le charmant administrateur de notre Académie nationale, qui bavardait sur un palier avec un petit vieillard vif et coquet, auquel il me présenta allègrement. M. l'administrateur était au courant de mes recherches et savait avec quelle impatience j'avais en vain tenté de découvrir la retraite du juge d'instruction de la fameuse affaire Chagny, M. Faure. On ne savait ce qu'il était devenu, mort ou vivant; et voilà que, de retour du Canada, où il venait de passer quinze ans, sa première démarche à Paris avait été pour venir chercher un fauteuil de faveur au secrétariat de l'Opéra. Ce petit vieillard était M. Faure lui-même.\n\nNous passâmes une bonne partie de la soirée ensemble et il me raconta toute l'affaire Chagny telle qu'il l'avait comprise jadis. Il avait dû conclure, faute de preuves, à la folie du vicomte et à la mort accidentelle du frère aîné, mais il restait persuadé qu'un drame terrible s'était passé entre les deux frères à propos de Christine Daaé. Il ne sut me dire ce qu'était devenue Christine, ni le vicomte. Bien entendu, quand je lui parlai du fantôme, il ne fit qu'en rire. Lui aussi avait été mis au courant des singulières manifestations qui semblaient alors attester l'existence d'un être exceptionnel ayant élu domicile dans un des coins les plus mystérieux de l'Opéra et il avait connu l'histoire de «l'enveloppe», mais il n'avait vu dans tout cela rien qui pût retenir l'attention d'un magistrat chargé d'instruire l'affaire Chagny, et c'est tout juste s'il avait écouté quelques instants la déposition d'un témoin qui s'était spontanément présenté pour affirmer qu'il avait eu l'occasion de rencontrer le fantôme. Ce personnage—le témoin—n'était autre que celui que le Tout-Paris appelait «le Persan» et qui était bien connu de tous les abonnés de l'Opéra. Le juge l'avait pris pour un illuminé."
+    },
+    {
+      "id": "pg32854",
+      "slug": "arsene-lupin-gentleman-cambrioleur-32854",
+      "title": "Arsène Lupin, gentleman-cambrioleur",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Leblanc, Maurice",
+          "display_name": "Maurice Leblanc",
+          "birth_year": 1864,
+          "death_year": 1941
+        },
+        {
+          "name": "Claretie, Jules",
+          "display_name": "Jules Claretie",
+          "birth_year": 1840,
+          "death_year": 1913
+        }
+      ],
+      "lang": "fr",
+      "issued": "2010-06-17",
+      "download_count": 70857,
+      "subjects": [
+        "Short stories",
+        "Burglars -- Fiction",
+        "Lupin, Arsène (Fictitious character) -- Fiction",
+        "Mystery and detective stories",
+        "Adventure stories, French"
+      ],
+      "bookshelves": [
+        "FR Littérature",
+        "Category: Crime, Thrillers and Mystery",
+        "Category: Novels",
+        "Category: French Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg32854/cover.jpg",
+      "pages": 371,
+      "metrics": {
+        "pages": 371,
+        "words": 59399,
+        "chapters": 11,
+        "has_cover": true,
+        "sentences": 5150,
+        "computed_at": "2026-09-12T21:28:01.860118+00:00",
+        "cefr_estimate": "B2",
+        "zipf_coverage": {
+          "z3": 0.9335,
+          "z4": 0.8379
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 297,
+        "avg_sentence_len": 11.53
+      },
+      "descriptions": {
+        "en": {
+          "text": "This collection of short stories introduces Arsène Lupin, a sophisticated gentleman thief operating in early twentieth-century France. The language reflects the era's literary style, featuring elegant vocabulary and complex, rhythmic sentence structures that provide a rewarding challenge for intermediate learners. While the themes focus on crime and mystery, the narrative tone remains witty and engaging. You will encounter descriptive passages that test your grasp of formal French, making this an excellent choice for those looking to improve their reading comprehension.",
+          "pairs": [
+            {
+              "dst": "Tell us then, you who tell stories so well, a story about thieves...",
+              "src": "—Racontez-nous donc, vous qui contez si bien, une histoire de voleurs..."
+            },
+            {
+              "dst": "So be it, said Voltaire (or another eighteenth-century philosopher, for the anecdote is attributed to several of these incomparable conversationalists).",
+              "src": "—Soit, dit Voltaire (ou un autre philosophe du XVIIIe siècle, car l'anecdote est attribuée à plusieurs de ces causeurs incomparables)."
+            },
+            {
+              "dst": "And he began: Once upon a time there was a tax farmer...",
+              "src": "Et il commença: —Il était une fois un fermier général..."
+            }
+          ]
+        }
+      },
+      "excerpt": "Préface de\n\nJules Claretie\n\nde l'Académie Française\n\nÀ Pierre LAFITTE.\n\nMon cher ami,\n\nTu m'as engagé sur une route où je ne croyais point que je dusse jamais m'aventurer, et j'y ai trouvé tant de plaisir et d'agrément littéraire qu'il me paraît juste d'inscrire ton nom en tête de ce premier volume, et de t'affirmer ici mes sentiments d'affectueuse et fidèle reconnaissance.\n\nM. L.\n\nTABLE DES MATIÈRES\n\n—Racontez-nous donc, vous qui contez si bien, une histoire de voleurs...\n\n—Soit, dit Voltaire (ou un autre philosophe du XVIIIe siècle, car l'anecdote est attribuée à plusieurs de ces causeurs incomparables).\n\nEt il commença:\n\n—Il était une fois un fermier général...\n\nL'auteur des Aventures d'Arsène Lupin, qui sait si joliment conter, lui aussi, eût commencé tout autrement:\n\n—Il était une fois, un gentilhomme cambrioleur...\n\nEt ce début paradoxal eût fait dresser les têtes effarées des auditrices. Les aventures d'Arsène Lupin, aussi incroyables et entraînantes que celles d'Arthur Gordon Pym, ont fait mieux. Elles n'ont pas seulement intéressé un salon, elles ont passionné la foule. Depuis le jour où cet étonnant personnage a fait son apparition dans Je sais tout, il a effrayé, il a charmé, il a amusé des lecteurs par centaines de mille et, sous la forme nouvelle du volume, il va entrer triomphalement dans la bibliothèque, après avoir conquis le magazine.\n\nCes histoires de détectives et d'apaches du high life ou de la rue ont toujours eu une singulière et puissante attraction. Balzac, en quittant Mme de Morsauf, vivait l'existence dramatique d'un limier de police. Il laissait là le lys de la vallée pour le réfractaire du ruisseau. Victor Hugo inventait Javert, donnant la chasse à Jean Valjean comme l'autre «inspecteur» poursuivait Vautrin. Et tous deux songeaient à Vidocq, cet étrange loup-cervier devenu chien de garde, dont le poète des Misérables et le romancier de Rubempré avaient pu recueillir les confidences. Plus tard, et dans un ordre inférieur, Monsieur Lecoq avait éveillé la curiosité des fervents du roman judiciaire, et M. de Bismarck et M. de Beust, ces deux adversaires, l'un farouche, l'autre spirituel, avaient trouvé, avant et après Sadowa, ce qui les divisait le moins: les récits de Gaboriau.\n\nIl arrive ainsi à l'écrivain de rencontrer sur son chemin un personnage dont il fait un type et qui, à son tour, fait la fortune littéraire de son inventeur. Heureux qui crée de toutes pièces un être qui semblera bientôt aussi vivant que les vivants: Delobelle ou Priola! Le romancier anglais Conan Doyle a popularisé Sherlock Holmes. M. Maurice Leblanc a trouvé, lui, son Sherlock Holmes, et je crois bien que depuis les exploits de l'illustre détective anglais, pas une aventure au monde n'a aussi vivement excité la curiosité que les exploits de cet Arsène Lupin, cette succession de faits devenus aujourd'hui un livre.\n\nLe succès des récits de M. Leblanc a été, on peut le dire, foudroyant dans la revue mensuelle où le lecteur, qui se contentait jadis des vulgaires intrigues du roman feuilleton, va chercher (évolution significative) une littérature qui le divertisse, mais qui reste pourtant de la littérature.\n\nL'auteur avait débuté, il y a une douzaine d'années, si je ne me trompe, dans l'ancien Gil Blas, où ses nouvelles originales, sobres, puissantes, le placèrent du premier coup au meilleur rang des conteurs. Normand, Rouennais, l'auteur était visiblement de la bonne lignée des Flaubert, des Maupassant, des Albert Sorel (qui fut, lui aussi, un novellière à ses heures). Son premier roman, Une Femme, fut très remarqué, et, depuis, plusieurs études psychologiques, l'Œuvre de Mort, Armelle et Claude, l'Enthousiasme, une pièce en trois actes, applaudie chez Antoine, la Pitié, étaient venues s'ajouter à ces petits romans en deux cents lignes où excelle M. Maurice Leblanc."
+    },
+    {
+      "id": "pg18143",
+      "slug": "romeo-et-juliette-18143",
+      "title": "Roméo et Juliette",
+      "subtitle": "Tragédie",
+      "authors": [
+        {
+          "name": "Shakespeare, William",
+          "display_name": "William Shakespeare",
+          "birth_year": 1564,
+          "death_year": 1616
+        },
+        {
+          "name": "Guizot, François",
+          "display_name": "François Guizot",
+          "birth_year": 1787,
+          "death_year": 1874
+        }
+      ],
+      "lang": "fr",
+      "issued": "2006-04-10",
+      "download_count": 49717,
+      "subjects": [
+        "Vendetta -- Drama",
+        "Youth -- Drama",
+        "Verona (Italy) -- Drama",
+        "Juliet (Fictitious character) -- Drama",
+        "Romeo (Fictitious character) -- Drama",
+        "Conflict of generations -- Drama",
+        "Tragedies (Drama)"
+      ],
+      "bookshelves": [
+        "FR Théâtre",
+        "Category: Romance",
+        "Category: Plays/Films/Dramas",
+        "Category: Classics of Literature",
+        "Category: British Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg18143/cover.jpg",
+      "pages": 240,
+      "metrics": {
+        "pages": 240,
+        "words": 39011,
+        "chapters": 27,
+        "has_cover": true,
+        "sentences": 2699,
+        "computed_at": "2026-09-12T21:28:03.583630+00:00",
+        "cefr_estimate": "B2",
+        "zipf_coverage": {
+          "z3": 0.9396,
+          "z4": 0.8326
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 195,
+        "avg_sentence_len": 14.45
+      },
+      "descriptions": {
+        "en": {
+          "text": "This historical account introduces the famous tragedy of Romeo and Juliet set in Verona. Written in nineteenth-century French, the prose is formal and descriptive, reflecting the style of historian François Guizot. You will encounter sophisticated vocabulary related to social customs and civic conflict. The sentences are relatively long and structured, requiring careful attention to verb tenses and complex clauses. This text serves as a challenging yet rewarding study for intermediate learners interested in classical literature and the evolution of dramatic storytelling.",
+          "pairs": [
+            {
+              "dst": "Alberto della Scala, the second perpetual captain of Verona, had worked in vain to reconcile them.",
+              "src": "Alberto della Scala, second capitaine perpétuel de Vérone, avait inutilement travaillé à les réconcilier;"
+            },
+            {
+              "dst": "People were very surprised by the boldness with which he came into the midst of his enemies.",
+              "src": "On s'étonna beaucoup de la hardiesse avec laquelle il venait ainsi au milieu de ses ennemis."
+            },
+            {
+              "dst": "His eyes and those of Juliet Cappelletto soon met, and, equally struck with admiration, they could not stop looking at each other.",
+              "src": "Ses yeux et ceux de Juliette Cappelletto se rencontrèrent bientôt, et, frappés également d'admiration, ils ne cessèrent plus de se regarder."
+            }
+          ]
+        }
+      },
+      "excerpt": "Deux grandes familles de Vérone, les Montecchi et les Capelletti (les Montaigu et les Capulet), vivaient depuis longtemps dans une inimitié qui avait souvent donné lieu, dans les rues, à des combats sanglants. Alberto della Scala, second capitaine perpétuel de Vérone, avait inutilement travaillé à les réconcilier; mais du moins était-il parvenu à les contenir de telle sorte que lorsqu'ils se rencontraient, dit l'historien de Vérone, Girolamo della Corte, «les plus jeunes cédaient le pas aux plus âgés, ils se saluaient et se rendaient le salut.»\n\nEn 1303, sous Bartolommeo della Scala, élu capitaine perpétuel après la mort de son père Alberto, Antonio Cappelletto, chef de sa faction, donna, dans le carnaval, une grande fête, à laquelle il invita une partie de la noblesse de Vérone. Roméo Montecchio, âgé de vingt à vingt et un ans, et l'un des plus beaux et des plus aimables jeunes gens de la ville; s'y rendit masqué avec quelques-uns de ses amis. Au bout de quelque temps, ayant ôté son masque, il s'assit dans un coin d'où il pouvait voir et être vu. On s'étonna beaucoup de la hardiesse avec laquelle il venait ainsi au milieu de ses ennemis. Cependant, comme il était jeune et de manières agréables, ceux-ci, dit l'historien, «n'y firent pas autant d'attention qu'ils en auraient fait peut-être s'il eût été plus âgé.» Ses yeux et ceux de Juliette Cappelletto se rencontrèrent bientôt, et, frappés également d'admiration, ils ne cessèrent plus de se regarder. La fête s'étant terminée par une danse appelée chez nous, dit Girolamo, «la danse du chapeau» (dal cappello), une dame vint prendre Roméo, qui, se trouvant ainsi introduit dans la danse, après avoir fait quelques tours avec sa danseuse, la quitta pour aller prendre Juliette, qui dansait avec un autre. Aussitôt qu'elle l'eût senti lui toucher la main, elle lui dit: «Bénie soit votre venue!» Et lui, lui serrant la main, répondit: «Quelles bénédictions en recevez-vous, madame?» Et elle reprit en souriant: «Ne vous étonnez pas, seigneur, si je bénis votre venue; M. Mercutio était là depuis longtemps à me glacer, et par votre politesse vous êtes venu me réchauffer.» (Ce jeune homme, qui s'appelait Mercutio, dit le louche, et que l'agrément de son esprit faisait aimer de tout le monde, avait toujours eu les mains plus froides que la glace.) A ces mots, Roméo répondit: «Je suis grandement heureux de vous rendre service en quoi que ce soit.» Comme la danse finissait, Juliette ne put dire que ces mots: «Hélas! je suis plus à vous qu'à moi-même.»\n\nRoméo s'étant rendu plusieurs fois dans une petite rue, sur laquelle donnaient les fenêtres de Juliette, un soir elle le reconnut à «son éternuement ou à quelque autre signe,» et elle ouvrit la fenêtre. Ils se saluèrent «très-poliment (cortesissimamente),» et, après s'être longtemps entretenus de leurs amours, ils convinrent qu'il fallait qu'ils se mariassent, quoi qu'il en pût arriver; et que cela devait se faire par l'entremise du frère Lonardo, franciscain, «théologien, grand philosophe, distillateur admirable, savant dans l'art de la magie,» et confesseur de presque toute la ville. Roméo l'alla trouver, et le frère, songeant au crédit qu'il acquerrait, non-seulement auprès du capitaine perpétuel, mais dans toute la ville, s'il parvenait à réconcilier les deux familles, se prêta aux désirs des deux jeunes gens. A l'époque de la Quadragésime, où la confession était d'obligation, Juliette se rendit avec sa mère dans l'église de Saint-François, dans la citadelle, et étant entrée la première dans le confessionnal, de l'autre côté duquel se trouvait Roméo, également venu à l'église avec son père, ils reçurent la bénédiction nuptiale par la fenêtre du confessionnal, que le frère avait eu soin d'ouvrir; puis, par les soins d'une très adroite vieille de la maison de Juliette, ils passèrent la nuit ensemble dans son jardin."
+    },
+    {
+      "id": "pg38720",
+      "slug": "l-amore-che-torna-romanzo-38720",
+      "title": "L'amore che torna: romanzo",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Verona, Guido da",
+          "display_name": "Guido da Verona",
+          "birth_year": 1881,
+          "death_year": 1939
+        }
+      ],
+      "lang": "it",
+      "issued": "2012-01-30",
+      "download_count": 30107,
+      "subjects": [
+        "Italian fiction"
+      ],
+      "bookshelves": [
+        "IT Romanzi",
+        "Category: Romance",
+        "Category: Novels"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg38720/cover.jpg",
+      "pages": 774,
+      "metrics": {
+        "pages": 774,
+        "words": 116156,
+        "chapters": 38,
+        "has_cover": true,
+        "sentences": 9039,
+        "computed_at": "2026-09-12T21:28:15.503114+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.9103,
+          "z4": 0.8044
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 581,
+        "avg_sentence_len": 12.85
+      },
+      "descriptions": {
+        "en": {
+          "text": "This novel, written in the early twentieth century, explores the complex dynamics of a romantic relationship through a series of intimate dialogues. The language reflects the literary style of the era, featuring descriptive prose and nuanced emotional expressions. While the vocabulary is accessible, the sentence structures are often elaborate and formal, requiring careful attention to detail. The narrative focuses on themes of patience, misunderstanding, and the subtle interplay between two characters, making it a rewarding experience for those practicing their reading comprehension.",
+          "pairs": [
+            {
+              "dst": "\"Are you sleeping?\" she asked softly, entering under the arch of the curtain that wrapped around her like a cloak of old, dark velvet.",
+              "src": "— Dormite? — ella domandò, piano, entrando sotto l'arco della tenda che l'avviluppava in sè come un mantello d'antico e fosco velluto."
+            },
+            {
+              "dst": "\"Are you sleeping?\" she repeated, approaching and leaning her head forward, as if to see me better in the dim light of the room.",
+              "src": "— Dormite? — ella ripetè, avvicinandosi e protendendo il capo, quasi per meglio discernermi nella semioscurità della stanza."
+            },
+            {
+              "dst": "\"No, I was thinking,\" I replied in a quick voice, which despite myself betrayed the impatience of having waited for her for so long.",
+              "src": "— No, stavo pensando, — le risposi con una voce rapida, che a mio malgrado tradiva l'impazienza di averla così a lungo attesa."
+            }
+          ]
+        }
+      },
+      "excerpt": "«Placet, si vis Domine»\n\n— Dormite? — ella domandò, piano, entrando sotto l'arco della tenda che l'avviluppava in sè come un mantello d'antico e fosco velluto. Avevo inteso il rumore de' suoi passi nell'altra stanza, il fruscìo della sua gonna sul tappeto, ma fingevo di sonnecchiare davanti al caminetto, con un libro aperto su le ginocchia.\n\n— Dormite? — ella ripetè, avvicinandosi e protendendo il capo, quasi per meglio discernermi nella semioscurità della stanza.\n\n— No, stavo pensando, — le risposi con una voce rapida, che a mio malgrado tradiva l'impazienza di averla così a lungo attesa.\n\nBella e ridente nella luce irrequieta della fiamma:\n\n— Ebbene — domandò — non mi dite nulla? non mi salutate neppure?\n\n— Vi aspettavo per le quattro e mezzo; ora sono le sei... Veramente mi pare un po' tardi!\n\n— Allora me ne torno via... — E fece ridendo l'atto di volgersi; poi soggiunse:\n\n— Dunque, siete sempre in collera?\n\n— Con voi non mi riesce! Solo, durante le attese, medito, e quando medito mi assale a poco a poco l'esasperazione.\n\n— Già, voi avete un carattere bizzarro! Ascoltatemi: ora vi spiegherò.\n\n— A che serve? Mi sarebbe così difficile credervi!\n\n[pg!6] — Ed avreste torto, — ella rispose tranquillamente. — Se volessi mentirvi, saprei anche mentirvi bene.\n\n— Oh... davvero?\n\n— Forse ne dubitate? Noi donne ci confondiamo più facilmente nel dire la verità.\n\n— Quand'è così, — feci — spiegatevi pure.\n\n— Permettete che mi sieda? — ella domandò in tono di celia.\n\n— Ve ne prego.\n\n— E che mi tolga la pelliccia? i guanti? il cappello?\n\n— Ve ne prego, — ripetei con la stessa urbanità.\n\n— E che vi chieda un bacio? un bacio su la punta delle dita?\n\nMi tese una piccola mano, senz'anelli, con l'unghie rosee, finemente curate, ove le mie labbra indugiarono con voluttà, poich'era tepida e morbida come una soave piuma.\n\n— Ecco, — ella fece, sedendo presso il caminetto e ravviando i suoi capelli, d'un bel colore d'oro e di bronzo antico, fusi per comporre insieme una maravigliosa luce, — ecco: vi aspetterete chissà quale confessione, chissà quale complicatissima storia... Invece una causa molto semplice: avevo dimenticato. Leggevo anch'io, vicino al fuoco, un libro molto bello, e mi ricordai dell'ora solo quando fu, come voi dite, un poco tardi.\n\nMi guardò col suo riso impertinente, in cui erano tutte le grazie e tutte le insensibilità.\n\nUna pausa lunga; ella si leva, guarda i fiori che stanno in un grande vaso d'argento e trascolorano al riverbero del fuoco, sceglie una pallida rosa e la pone alla sua cintura. Io accendo una sigaretta, la decima forse dalle quattro e mezzo in poi; Ludovico reca il vassoio del tè: ci sediamo entrambi, aspirando il vaporoso aroma della bevanda profumata.\n\n— Dunque, — riprendo con indifferenza, — avete letto molto a lungo? E certo un libro attraentissimo, un libro strano, perchè voi amate soltanto le cose strane...\n\n— Non sempre, qualche volta, anche le tristi.\n\n[pg!7] — Allora, oggi, un libro triste?\n\n— Sì: «Le roman d'un spahi», del Loti. Era l'unico libro suo che non avessi ancor letto.\n\n— Vi piace Loti?\n\n— Molto; perchè ne' suoi libri mi rassomiglia un poco; sente cioè tutte le cose con un'anima che non è sua, ma che gli appartiene e che sa far comprendere come se fosse la sua.\n\n— E questa seconda anima cosa sarebbe, in voi ed in lui?\n\n— Oh Dio, è ben difficile a definirsi! Un misto d'ingegno e di fantasia, d'indifferenza e di sensibilità, di superficiale e di profondo, di curioso e d'inutile.\n\n— È vero; per Loti è vero. Per voi, non so... perchè non vi conosco.\n\n— Ah?... ricominciate le indagini solite?\n\n— No, me ne guardo bene. Mi avete già data una risposta la quale vieta ogni ulteriore commento. Mi avete detto: «La mia vita passata non vi appartiene, come non appartiene a me sola... dunque non insistete, perchè inevitabilmente vi mentirei.» Questa frase risolve tutto; non insisto più."
+    },
+    {
+      "id": "pg38628",
+      "slug": "vecchie-storie-d-amore-38628",
+      "title": "Vecchie storie d'amore",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Albertazzi, Adolfo",
+          "display_name": "Adolfo Albertazzi",
+          "birth_year": 1865,
+          "death_year": 1924
+        }
+      ],
+      "lang": "it",
+      "issued": "2012-01-20",
+      "download_count": 29317,
+      "subjects": [
+        "Fiction",
+        "Short stories, Italian"
+      ],
+      "bookshelves": [
+        "IT Racconti",
+        "Category: Short Stories",
+        "Category: Romance"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg38628/cover.jpg",
+      "pages": 172,
+      "metrics": {
+        "pages": 172,
+        "words": 26553,
+        "chapters": 20,
+        "has_cover": true,
+        "sentences": 1162,
+        "computed_at": "2026-09-12T21:28:21.084963+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.8841,
+          "z4": 0.7634
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 133,
+        "avg_sentence_len": 22.85
+      },
+      "descriptions": {
+        "en": {
+          "text": "This collection of short stories by Adolfo Albertazzi offers a glimpse into turn-of-the-century Italian prose. The language is evocative and descriptive, often employing a lyrical, slightly archaic style that captures the romantic atmosphere of the era. You will encounter sophisticated vocabulary related to nature and emotions, alongside complex sentence structures that require careful reading. It is a demanding but rewarding text for learners who wish to explore the nuances of literary Italian through themes of longing, nature, and forbidden love.",
+          "pairs": [
+            {
+              "dst": "She stood at a castle window; he was on this side of the moat, at the very edge.",
+              "src": "Essa stava a una finestra del castello; egli di qua dalla fossa, al margine ultimo."
+            },
+            {
+              "dst": "The knight did not hurry his horse.",
+              "src": "Il cavaliere non affrettava il cavallo."
+            }
+          ]
+        }
+      },
+      "excerpt": "Nella notte, tra 'l gracidare delle rane e lo stridere dei grilli, gli amanti, che la fossa divideva, mescevano brame molte e piú promesse in lieve suono di parole, come di sospiri.\n\nEssa stava a una finestra del castello; egli di qua dalla fossa, al margine ultimo. Cosí ogni notte, perché ser Lapo, l'avaro signore del Farneto, non consentiva l'amore della figlia con quel povero cavaliere che era Raimondo di Santelmo; e all'albeggiare Raimondo inforcava il suo fido e bel leardo, e Giovanna lo accompagnava con gli occhi intenti finché egli spariva per il bosco.\n\nLa boscaglia in quell'ora si svegliava e l'indefinita letizia della vita universale al far del giorno invadeva l'animo del cavaliere co 'l canto degli uccelli, l'odore delle erbe e degli alberi, la frescura [pg!24] dell'aria: sussurravano le foglie, stormivano le rame, cinguettavano le passere, chioccolavano i merli, strillavano le gazze: murmuri, palpiti, fremiti; voci e canti ed inni: un inno concorde e solenne di gioia e di grazie della natura universa al sole ed all'amore.\n\nIl cavaliere non affrettava il cavallo. E le sembianze dell'amata, mal certe al suo sguardo durante il colloquio, allora gli s'avvivavano nell'imaginativa sí che rivedeva piú bella la donna; le parole di lei risonavano al suo orecchio piú dolci e piú distinte e, come voleva la letizia dell'ora, egli, che di lei non aveva per anche tócca una mano, ne sognava l'intero possesso con ingannevole gaudio. — Oh le morbide guance di rosa e le carni gigliate e fresche!\n\nMa la notte, traversando la boscaglia alla volta di Farneto, un'ambascia grave gli pesava su l'animo, e quanto piú disperava di un lieto fine al suo amore tanto piú ardeva dal desiderio di rivedere almeno e di riudire Giovanna cosí, di furto, la notte. E mentre cercava tra le fronde spesse la vista delle stelle, scorgeva delle ombre [pg!25] nere che passavano tra i rami dei cerri e delle querce: delle streghe, che l'accompagnavano con mala intenzione, male augurando, sommessamente, al suo povero amore; sommessamente.\n\nEgli rideva forte, e gli avessero pure additato, le streghe, la chiocciola d'oro dai pulcini tutti d'oro, la quale, al dire della gente, si trovava dentro il bosco, ch'egli avrebbe ben saputo rapirgliela, al demonio!\n\nPoi con desiderio intenso e disperato di Giovanna affrettava il leardo per un sentiero che era segnato dalle sole orme del leardo e che lo guidava al suo amore piú presto e di nascosto.\n\n[pg!26]\n\nGiovanna del Farneto tanto desiderava per marito Raimondo di Santelmo quanto questi desiderava lei per moglie; e se Raimondo si doleva della sua sorte e minacciava di penetrare nel castello, essa, per gran paura che le fosse ucciso (giorno e notte vigilavano le guardie a custodia del ponte: fonda e larga era la fossa, alta la cinta e ferrate le finestre) gli si prometteva ancora e gli si raccomandava di fidare in lei. Poi una notte lo consigliò cosí:\n\n— Mio padre non vuol maritarmi a voi perché non siete ricco; vorrebbe se quel vostro zio di Monveglio vi donasse delle sue terre: andate dunque dallo zio a pregarlo che finga donarvi delle sue terre, e noi, sposati che saremo, gliele renderemo secondo patto giurato e stipulato. — Piacque il consiglio al cavaliere, il quale, il dí appresso, cavalcò alla volta di Monveglio.\n\nVi giunse che era tardi, e trovò lo zio molto lieto, come uno che ha cenato bene e cenando [pg!27] ha bevuto vino buono, di quello che rischiara la mente, ravviva lo spirito e intenerisce il core."
+    },
+    {
+      "id": "pg1012",
+      "slug": "la-divina-commedia-di-dante-1012",
+      "title": "La Divina Commedia di Dante",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Dante Alighieri",
+          "display_name": "Dante Alighieri",
+          "birth_year": 1265,
+          "death_year": 1321
+        }
+      ],
+      "lang": "it",
+      "issued": "1997-08-01",
+      "download_count": 26917,
+      "subjects": [
+        "Italian poetry -- To 1400",
+        "Epic poetry, Italian"
+      ],
+      "bookshelves": [
+        "Poetry",
+        "Harvard Classics",
+        "Banned Books from Anne Haight's list",
+        "IT Poesia",
+        "Category: Poetry",
+        "Category: Classics of Literature"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg1012/cover.jpg",
+      "pages": 603,
+      "metrics": {
+        "pages": 603,
+        "words": 101686,
+        "chapters": 100,
+        "has_cover": true,
+        "sentences": 14319,
+        "computed_at": "2026-09-12T21:28:23.201145+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.8434,
+          "z4": 0.7445
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 508,
+        "avg_sentence_len": 7.1
+      },
+      "descriptions": {
+        "en": {
+          "text": "Dante Alighieri’s fourteenth-century epic poem, The Divine Comedy, follows a narrator through the afterlife. Reading this work is a significant challenge for learners of Italian. The text uses archaic vocabulary, complex syntax, and a rigid poetic structure that differs greatly from modern speech. Its themes of morality, theology, and human nature are profound, but the dense, metaphorical language requires patience and a dictionary. This is a foundational piece of literature that demands careful study to fully grasp its historical and linguistic depth.",
+          "pairs": [
+            {
+              "dst": "I cannot well recount how I entered it, so full of sleep was I at that point when I abandoned the true way.",
+              "src": "Io non so ben ridir com’ i’ v’intrai, tant’ era pien di sonno a quel punto che la verace via abbandonai."
+            },
+            {
+              "dst": "But after I had reached the foot of a hill, there where that valley ended which had pierced my heart with fear,",
+              "src": "Ma poi ch’i’ fui al piè d’un colle giunto, là dove terminava quella valle che m’avea di paura il cor compunto,"
+            },
+            {
+              "dst": "Then the fear was a little quieted, which had lasted in the lake of my heart the night that I passed with so much pity.",
+              "src": "Allor fu la paura un poco queta, che nel lago del cor m’era durata la notte ch’i’ passai con tanta pieta."
+            }
+          ]
+        }
+      },
+      "excerpt": "Nel mezzo del cammin di nostra vita\n\nmi ritrovai per una selva oscura,\n\nché la diritta via era smarrita.\n\nAhi quanto a dir qual era è cosa dura\n\nesta selva selvaggia e aspra e forte\n\nche nel pensier rinova la paura!\n\nTant’ è amara che poco è più morte;\n\nma per trattar del ben ch’i’ vi trovai,\n\ndirò de l’altre cose ch’i’ v’ho scorte.\n\nIo non so ben ridir com’ i’ v’intrai,\n\ntant’ era pien di sonno a quel punto\n\nche la verace via abbandonai.\n\nMa poi ch’i’ fui al piè d’un colle giunto,\n\nlà dove terminava quella valle\n\nche m’avea di paura il cor compunto,\n\nguardai in alto e vidi le sue spalle\n\nvestite già de’ raggi del pianeta\n\nche mena dritto altrui per ogne calle.\n\nAllor fu la paura un poco queta,\n\nche nel lago del cor m’era durata\n\nla notte ch’i’ passai con tanta pieta.\n\nE come quei che con lena affannata,\n\nuscito fuor del pelago a la riva,\n\nsi volge a l’acqua perigliosa e guata,\n\ncosì l’animo mio, ch’ancor fuggiva,\n\nsi volse a retro a rimirar lo passo\n\nche non lasciò già mai persona viva.\n\nPoi ch’èi posato un poco il corpo lasso,\n\nripresi via per la piaggia diserta,\n\nsì che ’l piè fermo sempre era ’l più basso.\n\nEd ecco, quasi al cominciar de l’erta,\n\nuna lonza leggera e presta molto,\n\nche di pel macolato era coverta;\n\ne non mi si partia dinanzi al volto,\n\nanzi ’mpediva tanto il mio cammino,\n\nch’i’ fui per ritornar più volte vòlto.\n\nTemp’ era dal principio del mattino,\n\ne ’l sol montava ’n sù con quelle stelle\n\nch’eran con lui quando l’amor divino\n\nmosse di prima quelle cose belle;\n\nsì ch’a bene sperar m’era cagione\n\ndi quella fiera a la gaetta pelle\n\nl’ora del tempo e la dolce stagione;\n\nma non sì che paura non mi desse\n\nla vista che m’apparve d’un leone.\n\nQuesti parea che contra me venisse\n\ncon la test’ alta e con rabbiosa fame,\n\nsì che parea che l’aere ne tremesse.\n\nEd una lupa, che di tutte brame\n\nsembiava carca ne la sua magrezza,\n\ne molte genti fé già viver grame,\n\nquesta mi porse tanto di gravezza\n\ncon la paura ch’uscia di sua vista,\n\nch’io perdei la speranza de l’altezza.\n\nE qual è quei che volontieri acquista,\n\ne giugne ’l tempo che perder lo face,\n\nche ’n tutti suoi pensier piange e s’attrista;\n\ntal mi fece la bestia sanza pace,\n\nche, venendomi ’ncontro, a poco a poco\n\nmi ripigneva là dove ’l sol tace.\n\nMentre ch’i’ rovinava in basso loco,\n\ndinanzi a li occhi mi si fu offerto\n\nchi per lungo silenzio parea fioco.\n\nQuando vidi costui nel gran diserto,\n\n«Miserere di me», gridai a lui,\n\n«qual che tu sii, od ombra od omo certo!».\n\nRispuosemi: «Non omo, omo già fui,\n\ne li parenti miei furon lombardi,\n\nmantoani per patrïa ambedui.\n\nNacqui sub Iulio, ancor che fosse tardi,\n\ne vissi a Roma sotto ’l buono Augusto\n\nnel tempo de li dèi falsi e bugiardi.\n\nPoeta fui, e cantai di quel giusto\n\nfigliuol d’Anchise che venne di Troia,\n\npoi che ’l superbo Ilïón fu combusto.\n\nMa tu perché ritorni a tanta noia?\n\nperché non sali il dilettoso monte\n\nch’è principio e cagion di tutta gioia?».\n\n«Or se’ tu quel Virgilio e quella fonte\n\nche spandi di parlar sì largo fiume?»,\n\nrispuos’ io lui con vergognosa fronte.\n\n«O de li altri poeti onore e lume,"
+    },
+    {
+      "id": "pg61885",
+      "slug": "ricordi-d-infanzia-e-di-scuola-61885",
+      "title": "Ricordi d'infanzia e di scuola",
+      "subtitle": "seguìti da Bambole e marionette, Gente minima, Piccoli studenti, Adolescenti, Due di spade e due di cuori",
+      "authors": [
+        {
+          "name": "De Amicis, Edmondo",
+          "display_name": "Edmondo De Amicis",
+          "birth_year": 1846,
+          "death_year": 1908
+        }
+      ],
+      "lang": "it",
+      "issued": "2020-04-21",
+      "download_count": 26482,
+      "subjects": [
+        "De Amicis, Edmondo, 1846-1908"
+      ],
+      "bookshelves": [
+        "IT Biografie",
+        "Category: Biographies"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg61885/cover.jpg",
+      "pages": 654,
+      "metrics": {
+        "pages": 654,
+        "words": 99660,
+        "chapters": 58,
+        "has_cover": true,
+        "sentences": 3810,
+        "computed_at": "2026-09-12T21:28:26.223142+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.9131,
+          "z4": 0.8124
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 498,
+        "avg_sentence_len": 26.16
+      },
+      "descriptions": {
+        "en": {
+          "text": "This memoir by Edmondo De Amicis explores the author's earliest childhood memories. Written in the late nineteenth century, the prose is elegant and reflective, characterized by long, complex sentences that require careful attention to syntax. The vocabulary is rich and descriptive, focusing on themes of memory, family, and the passage of time. For a learner, this text offers a beautiful look at formal Italian, though its sophisticated structure and introspective tone make it a demanding read for those still building their fluency.",
+          "pairs": [
+            {
+              "dst": "It seems to me that my existence began at that moment.",
+              "src": "A me pare che la mia esistenza sia incominciata in quel momento."
+            },
+            {
+              "dst": "But after this, the darkness returns, and I do not find the light of a memory again until much later:",
+              "src": "Ma dopo di questo ricomincian le tenebre, e non ritrovo più il lume d'una ricordanza che molto tempo di poi:"
+            },
+            {
+              "dst": "All my childhood memories are etched in my mind against the vivid green of that countryside, the clear blue of those waters, and the bright snow of those high mountains.",
+              "src": "Tutti i ricordi dell'infanzia mi si disegnano alla mente sul verde vivo di quella campagna, sull'azzurro chiaro di quelle acque, sulla neve luminosa di quelle alte montagne."
+            }
+          ]
+        }
+      },
+      "excerpt": "La traccia più remota ch'io trovi in me della mia coscienza è quella d'un giorno che stavo giocando sopra un mucchio di sabbia con un mio fratellino, maggiore di me di due anni, il quale morì quand'io n'avevo quattro, non lasciandomi neppure una vaga reminiscenza del suo viso. In che maniera mi sia rimasta l'immagine di lui in quel punto, e non l'ombra d'un ricordo di quanto avvenne in casa mia alla sua morte, che avrebbe dovuto lasciarmi un'impressione profonda, è uno di quei tanti misteri della memoria, che tenta invano il nostro pensiero. E non è meno misteriosa per me la certezza assoluta che ebbi sempre, che quella larva con cui giocavo quel giorno era mio fratello, quantunque non abbia nessuna ragione d'esserne certo. A me pare che la mia esistenza sia incominciata in quel momento. Ma dopo di questo ricomincian le tenebre, e non ritrovo più il lume d'una ricordanza che molto tempo di poi: quello d'avere una volta, scendendo la scala di casa, contato i miei anni, che eran cinque, sulla punta delle dita, e d'aver pensato che mi sarei potuto chiamar grande quando per contar la mia età mi fossi dovuto servire anche dell'altra mano. D'allora in poi gli avvenimenti di cui mi rammento, benchè separati ancora da molti spazi oscuri, come i fuochi notturni dei pastori sui monti, sono chiari nella mia memoria come quelli dei periodi più recenti della mia vita.\n\nMio padre, genovese, era banchiere regio dei sali e tabacchi in una piccola città del Piemonte, che è per il sito e per i dintorni una delle più belle d'Italia: posta sull'ultimo lembo d'un altipiano, che si protende a punta e sovrasta al confluente d'un fiume e d'un torrente, i quali la cingono come d'un abbraccio; e di là dalle rive si stende, ascendendo ad anfiteatro, una campagna floridissima, tutta macchie e vigneti, coronata dalle Alpi imminenti. Tutti i ricordi dell'infanzia mi si disegnano alla mente sul verde vivo di quella campagna, sull'azzurro chiaro di quelle acque, sulla neve luminosa di quelle alte montagne. Abitavamo in una casa spaziosa, che guardava da una parte sul fiume, e aveva a terreno l'ufficio e i magazzini, e davanti un giardino, un orto, due grandi pergolati, e un vasto cortile; il quale si riempiva due volte la settimana dei carri dei rivenditori, discesi a far le provviste fin dai villaggi più lontani del circondario; e quei giorni era un moto, un traffico, un rumorìo di mercato, nel quale io mi tuffavo con gran piacere, correndo qua e là fra le bestie e la gente e su per i sacchi e le casse, curioso e eccitato, e un poco anche inorgoglito dal pensiero che tutto quell'affaccendamento mettesse capo a mio padre, che mi pareva un personaggio più potente d'un ministro. Ma le impressioni più belle e più forti di quei primi anni furono quelle che ebbi dalla natura: tanto belle che, ripensando a quel tempo, mi pare che non ci siano più stati al mondo splendori di sole così sfolgoranti, lumi di luna così limpidi, primavere così fresche e così odorose; tanto forti che anche ora il piacere che mi dànno l'aurora, il tramonto, la pioggia, la neve, l'odor della terra e il profumo delle rose e delle viole, deriva in gran parte dal ricordo delle sensazioni che tutte quelle cose mi destavano allora. Per il luogo e per le circostanze in cui trascorsi la mia infanzia, non avrei potuto esser più fortunato. Mi è sempre stato un conforto dolcissimo il pensiero d'esser cresciuto in cospetto di quella vasta bellezza alpina, in quella casa grande e sonora, inondata di luce e scossa dai venti, tra il verde di quel giardino che mi pareva immenso, in mezzo a quel trambusto di arrivi e di partenze, di lavoro e di grida, che metteva in moto ogni momento la mia immaginazione e le mie gambe, e mi faceva vivere una vita intensa e varia, tra cittadina e campestre, un po' da figliuol di signore e un po' da ragazzo d'officina, libera e vigorosa come l'aria purissima che respiravo."
+    },
+    {
+      "id": "pg55752",
+      "slug": "dom-casmurro-55752",
+      "title": "Dom Casmurro",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Machado de Assis",
+          "display_name": "Machado de Assis",
+          "birth_year": 1839,
+          "death_year": 1908
+        }
+      ],
+      "lang": "pt",
+      "issued": "2017-10-15",
+      "download_count": 3438,
+      "subjects": [
+        "Adultery -- Fiction",
+        "Authorship -- Fiction",
+        "Catholic Church -- Fiction",
+        "Reminiscing in old age -- Fiction"
+      ],
+      "bookshelves": [
+        "Category: Novels"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg55752/cover.jpg",
+      "pages": 418,
+      "metrics": {
+        "pages": 418,
+        "words": 66208,
+        "chapters": 149,
+        "has_cover": true,
+        "sentences": 4466,
+        "computed_at": "2026-09-12T21:28:44.986748+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.8719,
+          "z4": 0.7838
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 331,
+        "avg_sentence_len": 14.82
+      },
+      "descriptions": {
+        "en": {
+          "text": "This novel, written in late nineteenth-century Brazil, follows an elderly man reflecting on his youth and his complicated marriage. The narrative style is conversational yet sophisticated, featuring the nuanced vocabulary of the period. You will encounter long, rhythmic sentences that require careful attention to detail. The themes revolve around memory, jealousy, and social perception. It is a demanding read for learners due to the author's ironic tone and the specific historical context of the language used throughout the text.",
+          "pairs": [
+            {
+              "dst": "He greeted me, sat down next to me, talked about the moon and the ministers, and ended up reciting verses to me.",
+              "src": "Comprimentou-me, sentou-se ao pé de mim, falou da lua e dos ministros, e acabou recitando-me versos."
+            },
+            {
+              "dst": "The trip was short, and the verses might not have been entirely bad.",
+              "src": "A viagem era curta, e os versos póde ser que não fossem inteiramente maus."
+            },
+            {
+              "dst": "It happened, however, that as I was tired, I closed my eyes three or four times; that was enough for him to stop reading and put the verses in his pocket.",
+              "src": "Succedeu, porém, que como eu estava cançado, fechei os olhos tres ou quatro vezes; tanto bastou para que elle interrompesse a leitura e mettesse os versos no bolso."
+            }
+          ]
+        }
+      },
+      "excerpt": "Indice\n\nUma noite destas, vindo da cidade para o Engenho Novo, encontrei no trem da Central um rapaz aqui do bairro, que eu conheço de vista e de chapéo. Comprimentou-me, sentou-se ao pé de mim, falou da lua e dos ministros, e acabou recitando-me versos. A viagem era curta, e os versos póde ser que não fossem inteiramente maus. Succedeu, porém, que como eu estava cançado, fechei os olhos tres ou quatro vezes; tanto bastou para que elle interrompesse a leitura e mettesse os versos no bolso.\n\n—Continue, disse eu accordando.\n\n—Já acabei, murmurou elle.\n\n—São muito bonitos.\n\nVi-lhe fazer um gesto para tiral-os outra vez do bolso, mas não passou do gesto; estava amuado. No dia seguinte entrou a dizer de mim nomes feios, e acabou alcunhando-me Dom Casmurro. Os visinhos, que não gostam dos meus habitos reclusos e calados, deram curso á alcunha, que afinal pegou. Nem por isso me zanguei. Contei a anecdota aos amigos da cidade, e elles, por graça, chamam-me assim, alguns em bilhetes: «Dom Casmurro, domingo vou jantar com você.»—«Vou para Petropolis, Dom Casmurro; a casa é a mesma da Rhenania; vê se deixas essa caverna do Engenho Novo, e vae lá passar uns quinze dias commigo.»—«Meu caro Dom Casmurro, não cuide que o dispenso do theatro amanhã; venha e dormirá aqui na cidade; dou-lhe camarote, dou-lhe chá, dou-lhe cama; só não lhe dou moça.»\n\nNão consultes diccionarios. Casmurro não está aqui no sentido que elles lhe dão, mas no que lhe poz o vulgo de homem calado e mettido comsigo. Dom veiu por ironia, para attribuir-me fumos de fidalgo. Tudo por estar cochilando! Tambem não achei melhor titulo para a minha narração; se não tiver outro d'aqui até ao fim do livro, vae este mesmo. O meu poeta do trem ficará sabendo que não lhe guardo rancor. E com pequeno esforço, sendo o titulo seu, poderá cuidar que a obra é sua. Ha livros que apenas terão isso dos seus autores; alguns nem tanto.\n\nAgora que expliquei o titulo, passo a escrever o livro. Antes disso, porém, digamos os motivos que me põem a penna na mão.\n\nVivo só, com um creado. A casa em que moro é propria; fil-a construir de proposito, levado de um desejo tão particular que me vexa imprimil-o, mas vá lá. Um dia, ha bastantes annos, lembrou-me reproduzir no Engenho Novo a casa em que me criei na antiga rua de Matacavallos, dando-lhe o mesmo aspecto e economia daquella outra, que desappareceu. Constructor e pintor entenderam bem as indicações que lhes fiz: é o mesmo predio assobradado, tres janellas de frente, varanda ao fundo, as mesmas alcovas e salas. Na principal destas, a pintura do tecto e das paredes é mais ou menos egual, umas grinaldas de flores miudas e grandes passaros que as tomam nos bicos, de espaço a espaço. Nos quatro cantos do tecto as figuras das estações, e ao centro das paredes os medalhões de Cesar, Augusto, Nero e Massinissa, com os nomes por baixo... Não alcanço a razão de taes personagens. Quando fomos para a casa de Matacavallos, já ella estava assim decorada; vinha do decennio anterior. Naturalmente era gosto do tempo metter sabor classico e figuras antigas em pinturas americanas. O mais é tambem analogo e parecido. Tenho chacarinha, flôres, legume, uma casuarina, um poço e lavadouro. Uso louça velha e mobilia velha. Emfim, agora, como outr'ora, ha aqui o mesmo contraste da vida interior, que é pacata, com a exterior, que é ruidosa."
+    },
+    {
+      "id": "pg62383",
+      "slug": "a-biblia-sagrada-contendo-o-velho-e-o-novo-testamento-62383",
+      "title": "A Biblia Sagrada, Contendo o Velho e o Novo Testamento",
+      "subtitle": null,
+      "authors": [
+        {
+          "name": "Almeida, João Ferreira d'",
+          "display_name": "João Ferreira d' Almeida",
+          "birth_year": 1628,
+          "death_year": 1691
+        }
+      ],
+      "lang": "pt",
+      "issued": "2020-06-12",
+      "download_count": 2896,
+      "subjects": [
+        "Bible"
+      ],
+      "bookshelves": [
+        "Category: Religion/Spirituality"
+      ],
+      "cover": "https://lingo7.s3.eu-central-1.amazonaws.com/pd/pg62383/cover.jpg",
+      "pages": 5429,
+      "metrics": {
+        "pages": 5429,
+        "words": 951177,
+        "chapters": 1921,
+        "has_cover": true,
+        "sentences": 112429,
+        "computed_at": "2026-09-12T21:28:49.852916+00:00",
+        "cefr_estimate": "C1",
+        "zipf_coverage": {
+          "z3": 0.8518,
+          "z4": 0.7637
+        },
+        "cefr_confidence": "medium",
+        "metrics_version": 1,
+        "reading_minutes": 4756,
+        "avg_sentence_len": 8.46
+      },
+      "descriptions": {
+        "en": {
+          "text": "This text presents the opening chapters of the Almeida translation of the Bible. As a seventeenth-century work, it features archaic spelling and grammatical structures that differ from modern Portuguese. The vocabulary is focused on foundational concepts of creation, nature, and divinity. The sentences are generally short and repetitive, following a rhythmic, declarative structure. This makes the text a useful study for observing historical linguistic patterns, though the formal and theological tone requires careful attention to the specific usage of older verb forms.",
+          "pairs": [
+            {
+              "dst": "In the beginning, God created the heavens and the earth.",
+              "src": "1 No [1] principio creou [2] Deus os céus e a terra."
+            },
+            {
+              "dst": "And God said, Let there be light: and there was light.",
+              "src": "3 E disse Deus: [5] Haja luz: e [6] houve luz."
+            },
+            {
+              "dst": "And God called the expanse Heaven, and there was evening and there was morning, the second day.",
+              "src": "8 E chamou Deus á expansão Céus, e foi a tarde e a manhã o dia segundo."
+            }
+          ]
+        }
+      },
+      "excerpt": "Antes de Christo 4004\n\n1 No [1] principio creou [2] Deus os céus e a terra.\n\n2 E a terra [3] era sem fórma e vasia; e havia trevas sobre a face do abysmo: e o [4] Espirito de Deus se movia sobre a face das aguas.\n\n3 E disse Deus: [5] Haja luz: e [6] houve luz.\n\n4 E viu Deus que era boa a luz: e fez Deus separação entre a luz e as trevas.\n\n5 E Deus chamou á luz Dia; e ás [7] trevas chamou Noite. E foi a tarde e a manhã, o dia primeiro.\n\n6 E disse Deus: Haja uma expansão no meio das aguas, e haja separação entre aguas e aguas.\n\n7 E fez Deus a expansão, [8] e fez separação entre as aguas que estavam debaixo da expansão e as aguas que [9] estavam sobre a expansão: e assim foi.\n\n8 E chamou Deus á expansão Céus, e foi a tarde e a manhã o dia segundo.\n\n9 E disse Deus: Ajuntem-se [10] as aguas debaixo dos céus n’um logar; e appareça a porção secca: e assim foi.\n\n10 E chamou Deus á porção secca Terra; e ao ajuntamento das aguas chamou Mares: e viu Deus que era bom.\n\n11 Disse Deus: Produza a terra herva verde, herva que dê semente, arvore fructifera que dê fructo segundo a sua especie, cuja semente está n’ella sobre a terra: e assim foi.\n\n12 E a terra produziu herva, herva dando semente conforme a sua especie, e a arvore fructifera, cuja semente está n’ella conforme a sua especie: e viu Deus que era bom.\n\n13 E foi a tarde, e a manhã, o dia terceiro.\n\n14 E disse Deus: [11] Haja luminares na expansão dos céus, para haver separação entre o dia e a noite; [12] e sejam elles para signaes e para [A] tempos determinados e para dias e annos.\n\n15 E sejam para luminares na expansão dos céus, para allumiar a terra: e assim foi.\n\n16 E fez Deus os dois grandes luminares: o luminar maior para governar o dia, e o luminar menor para governar a noite; e [13] as estrellas.\n\n17 E Deus os poz na expansão dos céus para allumiar a terra,\n\n18 E para governar o dia e a noite, e para fazer separação entre a luz e as trevas: e viu Deus que era bom.\n\n19 E foi a tarde, e a manhã, o dia quarto.\n\n20 E disse Deus: Produzam as aguas abundantemente [B] reptis de alma vivente; e vôem as aves sobre a face da expansão dos céus.\n\n21 E Deus creou as [C] grandes balêas, e todo o reptil de alma vivente que as aguas abundantemente produziram conforme as suas especies; e toda a ave de azas conforme a sua especie: e viu Deus que era bom.\n\n22 E Deus as abençoou, dizendo: Fructificae e multiplicae-vos, e enchei as aguas nos mares; e as aves se multipliquem na terra.\n\n23 E foi a tarde, e a manhã, o dia quinto.\n\n24 E disse Deus: Produza a terra alma vivente conforme a sua especie; gado e reptis, e bestas feras da terra conforme a sua especie: e assim foi.\n\n25 E fez Deus as bestas feras da terra conforme a sua especie, e o gado conforme a sua especie, e todo o reptil da terra conforme a sua especie: e viu Deus que era bom.\n\n26 E disse Deus: [14] Façamos o homem á nossa imagem, conforme á nossa similhança: e domine sobre os peixes do mar, e sobre as aves dos céus, e sobre o gado, e sobre toda a terra, e sobre todo o reptil que se [D] move sobre a terra."
+    }
+  ]
+}

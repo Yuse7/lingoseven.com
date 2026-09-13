@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Gürcü (Mhedruli)",
   "fact_writing_greek": "Yunan",
   "fact_writing_latin": "Latin",
-  "qr_scan_hint": "Uygulamayı edinmek için tarayın"
+  "qr_scan_hint": "Uygulamayı edinmek için tarayın",
+  "footer_books": "Ücretsiz kitaplar"
 }

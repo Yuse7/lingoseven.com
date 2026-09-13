@@ -1,5 +1,12 @@
 ---
 import '../styles/global.css';
+import {
+  INSTALL_ACTIONS_META_NAME,
+  runInstallActionsVectors,
+  serializeInstallActions,
+  validateInstallActions,
+  type InstallActions,
+} from '../data/installActions';
 
 interface OgArticle {
   publishedTime: string;
@@ -20,6 +27,9 @@ interface Props {
   hreflangAlternates?: Array<{ lang: string; url: string }>;
   jsonLd?: Record<string, any>[];
   noindex?: boolean;
+  installActions?: InstallActions;
+  /** Smart App Banner app-argument; defaults to the canonical URL. */
+  smartBannerArgument?: string;
 }
 
 const {
@@ -33,7 +43,15 @@ const {
   hreflangAlternates,
   jsonLd,
   noindex = false,
+  installActions,
+  smartBannerArgument,
 } = Astro.props;
+
+// Install actions are validated on the build: the dictionary self-check plus
+// the page prop, so a bad declaration never reaches production.
+runInstallActionsVectors();
+if (installActions) validateInstallActions(installActions);
+const installActionsContent = installActions ? serializeInstallActions(installActions) : '';
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const resolvedCanonical = canonicalUrl ?? Astro.url.href;
@@ -135,8 +153,15 @@ const entityGraph = {
 <link rel="canonical" href={resolvedCanonical} />
 
 <!-- iOS Smart App Banner: Safari-native install strip. app-argument hands the
-     page URL to the app when it is already installed (open-in-app). -->
-<meta name="apple-itunes-app" content={`app-id=6471030440, app-argument=${resolvedCanonical}`} />
+     page URL to the app when it is already installed (open-in-app). Book pages
+     override it with their /b/{id} link, the URL the app knows how to act on
+     (docs/marketing/site-attribution.md). -->
+<meta name="apple-itunes-app" content={`app-id=6471030440, app-argument=${smartBannerArgument ?? resolvedCanonical}`} />
+
+<!-- Deferred actions this page asks the app to perform on first launch after
+     install (docs/marketing/site-attribution.md, "Install actions"); main.ts carries them into the
+     Play referrer and the pasteboard token. -->
+{installActionsContent && <meta name={INSTALL_ACTIONS_META_NAME} content={installActionsContent} />}
 
 <!-- Blog RSS autodiscovery -->
 <link rel="alternate" type="application/rss+xml" title="Lingo7 Blog" href="/rss.xml" />

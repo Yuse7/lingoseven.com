@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Georgiskt (mchedruli)",
   "fact_writing_greek": "Grekiskt",
   "fact_writing_latin": "Latinskt",
-  "qr_scan_hint": "Skanna för att hämta appen"
+  "qr_scan_hint": "Skanna för att hämta appen",
+  "footer_books": "Gratis böcker"
 }

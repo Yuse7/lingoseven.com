@@ -1,3 +1,8 @@
+import {
+  INSTALL_ACTIONS_META_NAME,
+  parseInstallActionsContent,
+} from '../data/installActions';
+
 console.log('[lingo7] site build: 2026-05-20, adaptation copy v2');
 
 // ========== Platform-aware CTA buttons ==========
@@ -572,9 +577,18 @@ bindStoreTracking('a[href*="play.google.com"]', 'click_google_play');
 // format family as /go/'s #l7r partner token). Mobile only: a desktop clipboard
 // never reaches a phone. The /go/ page has its own standalone flow (#l7r) and
 // does not load this script.
+//
+// Both channels also carry the page's install actions, if it declares any in
+// the lingo7-install-actions meta tag (docs/marketing/site-attribution.md). The
+// meta content is re-filtered against the canonical dictionary here, defence in
+// depth on top of the build-time validation.
 (() => {
   const path = location.pathname;
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  const meta = document.querySelector<HTMLMetaElement>(`meta[name="${INSTALL_ACTIONS_META_NAME}"]`);
+  const parsedActions = parseInstallActionsContent(meta?.content ?? '');
+  const actions = Object.entries(parsedActions);
 
   document
     .querySelectorAll<HTMLAnchorElement>('a[href*="play.google.com/store/apps/details"]')
@@ -586,12 +600,34 @@ bindStoreTracking('a[href*="play.google.com"]', 'click_google_play');
       payload.set('utm_medium', 'website');
       payload.set('utm_campaign', path);
       payload.set('l7p', path);
+      actions.forEach(([key, value]) => payload.set(key, value));
       url.searchParams.set('referrer', payload.toString());
       el.href = url.toString();
     });
 
+  // Book pre-warm: a store click starts the mirror ingest of the declared book,
+  // so the deferred claim on first launch lands on a warm mirror
+  // (docs/backend.md, "Public domain mirror"). Desktop counts too: the visitor goes on
+  // to the QR bridge and installs from a phone. v1 covers Gutenberg ids only.
+  const BACKEND_API = 'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api';
+  const bookId = parsedActions.l7b;
+  if (bookId && /^pg\d{1,7}$/.test(bookId)) {
+    let prewarmed = false;
+    document.addEventListener('click', (e) => {
+      const target = e.target instanceof Element ? e.target : null;
+      if (!target?.closest('a[href*="apps.apple.com"], a[href*="play.google.com"]')) return;
+      if (prewarmed) return;
+      prewarmed = true;
+      fetch(`${BACKEND_API}/pd/${bookId}/ensure`, {
+        method: 'POST',
+        keepalive: true,
+      }).catch(() => {});
+    });
+  }
+
   if (!isMobile) return;
-  const token = `https://lingoseven.com/go/#l7p=${encodeURIComponent(path)}`;
+  const token = `https://lingoseven.com/go/#l7p=${encodeURIComponent(path)}`
+    + actions.map(([key, value]) => `&${key}=${encodeURIComponent(value)}`).join('');
   document.addEventListener('click', (e) => {
     const target = e.target instanceof Element ? e.target : null;
     if (!target?.closest('a[href*="apps.apple.com"], a[href*="play.google.com"]')) return;

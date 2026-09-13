@@ -1,0 +1,413 @@
+---
+// Tier B book link: /b/{id} (Cloudflare rewrites it to /b/?id={id}), one page
+// for every safe book in the Gutenberg mirror, with no page in the build.
+// Standalone like go.astro: no BaseLayout, no main.ts, all logic inline.
+// Plan: docs/features/public-domain-books-plan.md, section 6.
+// Channels and formats: docs/marketing/site-attribution.md.
+import { getEnabledLanguages } from '../data/languages';
+import { bookPathsById } from '../data/pdCatalog';
+
+// Build-time map of the tier-A core, so a book that has its own page can point
+// the canonical there. Everything else stays uncanonicalized and noindex.
+const bookPaths = bookPathsById('en');
+const langNames = Object.fromEntries(getEnabledLanguages().map((l) => [l.code, l.name]));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="apple-itunes-app" content="app-id=6471030440" />
+    <title>Lingo7</title>
+    <style>
+      [hidden] {
+        display: none !important;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        background: #1a2332;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      main {
+        width: 100%;
+        max-width: 26rem;
+        padding: 1.5rem;
+        box-sizing: border-box;
+      }
+      .logo {
+        font-size: 1.3rem;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 1.25rem;
+      }
+      .card {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem;
+        background: #2a3649;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+      }
+      .cover {
+        width: 84px;
+        height: 126px;
+        flex-shrink: 0;
+        object-fit: cover;
+        border-radius: 6px;
+        background: #232d3f;
+      }
+      .book-title {
+        margin: 0 0 0.25rem;
+        font-size: 1.05rem;
+        line-height: 1.3;
+      }
+      .book-author,
+      .book-meta {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
+      }
+      .book-meta {
+        margin-top: 0.4rem;
+      }
+      .msg {
+        margin: 0 0 1rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .actions {
+        margin-top: 1.25rem;
+        text-align: center;
+      }
+      .store-btn {
+        display: block;
+        padding: 0.9rem 1.6rem;
+        border-radius: 12px;
+        background: #4ade80;
+        color: #12241a;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .store-row {
+        margin: 0.9rem 0 0;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+      }
+      .store-row a {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .page-link {
+        display: block;
+        margin-top: 0.9rem;
+        text-align: center;
+        color: #4ade80;
+        font-size: 0.9rem;
+      }
+      .qr-box {
+        width: 11rem;
+        height: 11rem;
+        margin: 1.25rem auto 0.75rem;
+        padding: 0.5rem;
+        background: #fff;
+        border-radius: 12px;
+        box-sizing: border-box;
+      }
+      .qr-box svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .copy-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.85rem;
+      }
+      .copy-row code {
+        background: #232d3f;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 0.35rem 0.6rem;
+        overflow-wrap: anywhere;
+      }
+      .copy-btn {
+        padding: 0.35rem 0.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 600;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="logo">Lingo7</div>
+
+      <p class="msg" id="msg">Loading the book&hellip;</p>
+
+      <div class="card" id="card" hidden>
+        <img class="cover" id="cover" alt="" hidden />
+        <div>
+          <h1 class="book-title" id="book-title"></h1>
+          <p class="book-author" id="book-author"></p>
+          <p class="book-meta" id="book-meta"></p>
+        </div>
+      </div>
+
+      <div class="actions" id="actions" hidden>
+        <a class="store-btn" id="primary-btn" href="https://apps.apple.com/app/id6471030440">Read in Lingo7</a>
+        <p class="store-row" id="store-row">
+          <a id="ios-link" href="https://apps.apple.com/app/id6471030440">App Store</a>
+          &middot;
+          <a id="play-link" href="https://play.google.com/store/apps/details?id=com.doublereading">Google Play</a>
+        </p>
+      </div>
+
+      <a class="page-link" id="page-link" hidden>About this book</a>
+
+      <div id="qr-wrap" hidden>
+        <div id="qr-box" class="qr-box"></div>
+        <p class="copy-row">
+          <code id="link-text"></code>
+          <button id="copy-btn" class="copy-btn" type="button">Copy</button>
+        </p>
+      </div>
+    </main>
+
+    <script is:inline define:vars={{ bookPaths, langNames }}>
+      (function () {
+        var API = 'https://backend-cb6yl.ondigitalocean.app/dev-backend4/api';
+        var CLICK_API = API + '/affiliate/click';
+        var PLAY = 'https://play.google.com/store/apps/details?id=com.doublereading';
+        var APPSTORE = 'https://apps.apple.com/app/id6471030440?pt=126721951&ct=lingoseven&mt=8';
+        var PAGE_PATH = '/b/';
+
+        var params = new URLSearchParams(location.search);
+        var rawId = params.get('id') || '';
+        var id = /^pg\d{1,7}$/.test(rawId) ? rawId : null;
+        var rawCode = params.get('p') || '';
+        var partner = /^[a-z0-9-]{1,32}$/i.test(rawCode) ? rawCode.toLowerCase() : null;
+
+        var ua = navigator.userAgent;
+        var isAndroid = /android/i.test(ua);
+        var isIos = /iphone|ipad|ipod/i.test(ua);
+        var platform = isAndroid ? 'android' : isIos ? 'ios' : 'web';
+        var isMobile = isAndroid || isIos;
+
+        var msg = document.getElementById('msg');
+        var card = document.getElementById('card');
+        var actions = document.getElementById('actions');
+        var primaryBtn = document.getElementById('primary-btn');
+        var playLink = document.getElementById('play-link');
+        var iosLink = document.getElementById('ios-link');
+
+        // Partner click token, fetched once on load so it is ready by the time
+        // someone taps (same endpoint and token shape as /go/).
+        var partnerToken = null;
+        if (partner) {
+          fetch(CLICK_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: partner, platform: platform }),
+            keepalive: true,
+          })
+            .then(function (r) {
+              return r.ok ? r.json() : null;
+            })
+            .then(function (resp) {
+              var token = resp && resp.token ? String(resp.token) : null;
+              if (token) partnerToken = token.indexOf('l7r:') === 0 ? token.slice(4) : token;
+            })
+            .catch(function () {});
+        }
+
+        // Nothing to install for, so the QR (a link back to this same page)
+        // is suppressed along with the buttons.
+        var gone = false;
+        function unavailable(text) {
+          gone = true;
+          msg.textContent = text;
+          card.hidden = true;
+          actions.hidden = true;
+          var qr = document.getElementById('qr-wrap');
+          if (qr) qr.hidden = true;
+        }
+
+        if (!id) {
+          unavailable('This book is not available.');
+          return;
+        }
+
+        // Play install referrer: the app reads l7p (the page) and l7b (the book)
+        // out of this payload on first launch (docs/marketing/site-attribution.md).
+        var payload = new URLSearchParams();
+        if (partner) payload.set('lingo7ref', partner);
+        payload.set('utm_source', 'lingoseven.com');
+        payload.set('utm_medium', 'website');
+        payload.set('utm_campaign', PAGE_PATH);
+        payload.set('l7p', PAGE_PATH);
+        payload.set('l7b', id);
+        var playUrl = PLAY + '&referrer=' + encodeURIComponent(payload.toString());
+        playLink.href = playUrl;
+        iosLink.href = APPSTORE;
+
+        // Pasteboard token: the iOS (and Android) channel for the same two keys.
+        function pasteboardToken() {
+          var frag = partnerToken ? '#l7r=' + partnerToken + '&l7p=' : '#l7p=';
+          return (
+            'https://lingoseven.com/go/' +
+            frag +
+            encodeURIComponent(PAGE_PATH) +
+            '&l7b=' +
+            encodeURIComponent(id)
+          );
+        }
+
+        // Pre-warm: the first store click starts the mirror ingest, so the book
+        // is ready by the time the app asks for it.
+        var prewarmed = false;
+        function prewarm() {
+          if (prewarmed) return;
+          prewarmed = true;
+          fetch(API + '/pd/' + id + '/ensure', { method: 'POST', keepalive: true }).catch(function () {});
+        }
+
+        document.addEventListener('click', function (e) {
+          var link = e.target && e.target.closest ? e.target.closest('a') : null;
+          if (!link) return;
+          var href = link.getAttribute('href') || '';
+          if (href.indexOf('apps.apple.com') === -1 && href.indexOf('play.google.com') === -1 && href.indexOf('intent://') !== 0) return;
+          prewarm();
+          if (isMobile && navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(pasteboardToken()).catch(function () {});
+          }
+        });
+
+        // Primary button per platform. Android tries the installed app first and
+        // falls back to Play with the same referrer.
+        if (isAndroid) {
+          primaryBtn.href = playUrl;
+          primaryBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            location.href =
+              'intent://lingoseven.com/b/' + id + '#Intent;scheme=https;package=com.doublereading;' +
+              'S.browser_fallback_url=' + encodeURIComponent(playUrl) + ';end';
+          });
+        } else if (isIos) {
+          primaryBtn.href = APPSTORE;
+        } else {
+          primaryBtn.href = playUrl;
+        }
+
+        // Desktop: the phone has to do the install, so show the QR and the link.
+        // With a partner code the store buttons stay hidden (a desktop install
+        // would drop the code, same rule as /go/).
+        if (!isMobile) {
+          var prettyLink = 'https://lingoseven.com/b/' + id;
+          document.getElementById('link-text').textContent = 'lingoseven.com/b/' + id;
+          var copyBtn = document.getElementById('copy-btn');
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            copyBtn.addEventListener('click', function () {
+              navigator.clipboard.writeText(prettyLink).then(function () {
+                copyBtn.textContent = 'Copied';
+              }, function () {});
+            });
+          } else {
+            copyBtn.hidden = true;
+          }
+          var wrap = document.getElementById('qr-wrap');
+          var lib = document.createElement('script');
+          lib.src = '/js/qrcode.min.js';
+          lib.onload = function () {
+            var qr = qrcode(0, 'M');
+            // Encode the query form: it works before the Cloudflare rewrite exists.
+            qr.addData('https://lingoseven.com/b/?id=' + id + (partner ? '&p=' + partner : ''));
+            qr.make();
+            document.getElementById('qr-box').innerHTML = qr.createSvgTag({
+              cellSize: 4,
+              margin: 8,
+              scalable: true,
+              title: 'Open this book in Lingo7',
+            });
+            wrap.hidden = gone;
+          };
+          lib.onerror = function () {
+            document.getElementById('qr-box').hidden = true;
+            wrap.hidden = gone;
+          };
+          document.head.appendChild(lib);
+        }
+
+        // Tier A books have their own page: point the canonical at it and offer
+        // the link. Tier B stays noindex with no canonical.
+        var path = bookPaths[id];
+        if (path) {
+          var canonical = document.createElement('link');
+          canonical.rel = 'canonical';
+          canonical.href = 'https://lingoseven.com' + path;
+          document.head.appendChild(canonical);
+          var pageLink = document.getElementById('page-link');
+          pageLink.href = path;
+          pageLink.hidden = false;
+        }
+
+        function displayName(name) {
+          var parts = String(name || '').split(',');
+          return parts.length === 2 ? parts[1].trim() + ' ' + parts[0].trim() : String(name || '').trim();
+        }
+
+        fetch(API + '/pd/' + id + '/meta')
+          .then(function (r) {
+            if (r.status === 404 || r.status === 400) return { missing: true };
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+          })
+          .then(function (data) {
+            if (!data || data.missing) {
+              unavailable('This book is not available.');
+              return;
+            }
+            document.getElementById('book-title').textContent =
+              data.subtitle ? data.title + ': ' + data.subtitle : data.title;
+            var authors = (data.authors || []).map(function (a) {
+              return displayName(a.name);
+            });
+            document.getElementById('book-author').textContent = authors.join(', ');
+            var bits = [];
+            if (data.lang) bits.push(langNames[data.lang] || data.lang);
+            if (data.metrics && data.metrics.words) {
+              bits.push(data.metrics.words.toLocaleString('en-US') + ' words');
+            } else if (data.pages) {
+              bits.push(data.pages + ' pages');
+            }
+            if (data.metrics && data.metrics.cefr_estimate) bits.push(data.metrics.cefr_estimate);
+            document.getElementById('book-meta').textContent = bits.join(' · ');
+            if (data.cover) {
+              var cover = document.getElementById('cover');
+              cover.src = data.cover;
+              cover.hidden = false;
+            }
+            msg.textContent = 'Free book. One tap to read it in Lingo7:';
+            card.hidden = false;
+            // With a partner code, desktop keeps the QR route only (see above).
+            actions.hidden = !isMobile && !!partner;
+          })
+          .catch(function () {
+            unavailable('Could not load the book right now. Please try again in a minute.');
+          });
+      })();
+    </script>
+  </body>
+</html>

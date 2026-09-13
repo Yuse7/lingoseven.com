@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Gjeorgjiane (mkhedruli)",
   "fact_writing_greek": "Greke",
   "fact_writing_latin": "Latine",
-  "qr_scan_hint": "Skanoni për të marrë aplikacionin"
+  "qr_scan_hint": "Skanoni për të marrë aplikacionin",
+  "footer_books": "Libra falas"
 }

@@ -20,6 +20,15 @@ interface Props {
   pickerLabel?: string;
   /** Accessible name / tooltip for the picker. */
   pickerHint?: string;
+  /**
+   * Fixed sentence pairs to show instead of loading a demo book from the
+   * backend (book pages: the pairs come from the catalog description, already
+   * translated into the page locale). No picker and no word alignments in this
+   * mode: the pairs are what they are.
+   */
+  pairs?: Array<{ src: string; dst: string }>;
+  /** Title for the phone header in `pairs` mode. */
+  bookTitle?: string;
 }
 const {
   targetLang = 'de',
@@ -29,10 +38,14 @@ const {
   menuLang = 'en',
   pickerLabel = 'Translation:',
   pickerHint = 'Change the translation language',
+  pairs = [],
+  bookTitle = '',
 } = Astro.props;
 
-// No picker in screenshot mode: the still frame must stay pixel-stable.
-const showPicker = langPicker && !still;
+// No picker in screenshot mode: the still frame must stay pixel-stable. None in
+// pairs mode either: there is nothing to reload.
+const usePairs = pairs.length > 0;
+const showPicker = langPicker && !still && !usePairs;
 // The book language itself would make a degenerate pair, so it is not offered.
 const pickerLangs = showPicker
   ? getEnabledLanguages()
@@ -45,7 +58,14 @@ const pickerLangs = showPicker
   : [];
 ---
 
-<div class="reader-demo" data-target-lang={targetLang} data-ui-lang={uiLang} data-still={still ? '1' : undefined}>
+<div
+  class="reader-demo"
+  data-target-lang={targetLang}
+  data-ui-lang={uiLang}
+  data-still={still ? '1' : undefined}
+  data-pairs={usePairs ? JSON.stringify(pairs) : undefined}
+  data-book-title={usePairs ? bookTitle : undefined}
+>
   {showPicker && (
     <div class="reader-demo__langbar">
       <label class="reader-demo__langlabel" for="readerTrnLang">{pickerLabel}</label>
@@ -455,6 +475,16 @@ const pickerLangs = showPicker
   // Screenshot mode: render one clean frame (tapped word + highlighted
   // translation) and signal readiness via window.__shotReady, no animation.
   const STILL = readerRoot?.dataset.still === '1';
+  // Fixed pairs mode (book pages): the sentences are baked into the page, so
+  // the widget renders them instead of calling the backend.
+  let PAIRS: Array<{ src: string; dst: string }> = [];
+  if (readerRoot?.dataset.pairs) {
+    try {
+      PAIRS = JSON.parse(readerRoot.dataset.pairs);
+    } catch (e) {
+      console.warn('ReaderDemo: bad pairs payload', e);
+    }
+  }
   // Optional still-frame overrides (used by the Instagram-grid centerpiece, not the
   // store screenshots): tap a specific, more evocative word and float the finger
   // ABOVE it (pointing down) so it never covers the highlighted translation below.
@@ -543,6 +573,40 @@ const pickerLangs = showPicker
     return words.map((w, i) =>
       `<span class="${cssClass}" data-word-idx="${i}">${w}</span>`
     ).join(' ');
+  }
+
+  // Render the page-supplied pairs: same markup as a loaded page, minus the
+  // network, the picker and the word alignments (nothing aligns arbitrary
+  // sentences, so a tap highlights the word and leaves the translation alone).
+  function renderPairs(pairs) {
+    const requestId = ++currentRequestId;
+    const container = document.getElementById('readerContent');
+    const titleEl = document.getElementById('readerTitle');
+    if (!container) return;
+    const title = readerRoot?.dataset.bookTitle || '';
+    if (titleEl) titleEl.textContent = title.length > 22 ? title.slice(0, 20) + '…' : title;
+    const escape = (w) => w.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const splitWords = (s) => s.split(/\s+/).filter(Boolean).map(escape);
+    const targetSentences = [];
+    const transSentences = [];
+    let html = '';
+    for (let i = 0; i < pairs.length; i++) {
+      const src = splitWords(pairs[i].src ?? '');
+      const dst = splitWords(pairs[i].dst ?? '');
+      if (!src.length || !dst.length) continue;
+      targetSentences.push({ words: src, text: pairs[i].src, blockIdx: 0, sentIdx: i, tokenOffset: 0 });
+      transSentences.push({ words: dst, text: pairs[i].dst, blockIdx: 0, sentIdx: i, tokenOffset: 0 });
+      const line = targetSentences.length - 1;
+      html += `<div class="reader__pair">`;
+      html += `<p class="reader__en" data-line="${line}">${renderWords(src, 'reader__word')}</p>`;
+      html += `<p class="reader__trans" data-line="${line}">${renderWords(dst, 'reader__trans-word')}</p>`;
+      html += `</div>`;
+    }
+    if (!targetSentences.length) return;
+    container.innerHTML = html;
+    const listenBtn = document.querySelector<HTMLElement>('.reader__listen');
+    if (listenBtn) listenBtn.style.display = '';
+    startFingerAnimation(targetSentences, transSentences, null, targetSentences.length, requestId);
   }
 
   async function loadAndRender(tgtLang, trnLang) {
@@ -880,5 +944,6 @@ const pickerLangs = showPicker
     });
   }
 
-  loadAndRender(INITIAL_TGT, INITIAL_TRN);
+  if (PAIRS.length) renderPairs(PAIRS);
+  else loadAndRender(INITIAL_TGT, INITIAL_TRN);
 </script>

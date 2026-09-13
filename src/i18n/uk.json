@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Грузинська (мхедрулі)",
   "fact_writing_greek": "Грецька",
   "fact_writing_latin": "Латиниця",
-  "qr_scan_hint": "Відскануйте, щоб отримати застосунок"
+  "qr_scan_hint": "Відскануйте, щоб отримати застосунок",
+  "footer_books": "Безкоштовні книги"
 }

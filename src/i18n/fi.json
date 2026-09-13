@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Georgialainen (mkhedruli)",
   "fact_writing_greek": "Kreikkalainen",
   "fact_writing_latin": "Latinalainen",
-  "qr_scan_hint": "Skannaa, niin saat sovelluksen"
+  "qr_scan_hint": "Skannaa, niin saat sovelluksen",
+  "footer_books": "Ilmaiset kirjat"
 }

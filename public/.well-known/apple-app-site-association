@@ -4,7 +4,8 @@
       {
         "appIDs": ["DT94Y347Z6.com.doublereading"],
         "components": [
-          { "/": "/go/*", "comment": "affiliate redirect page; opens the app when installed so it can claim the ?p= code" }
+          { "/": "/go/*", "comment": "affiliate redirect page; opens the app when installed so it can claim the ?p= code" },
+          { "/": "/b/*", "comment": "public domain book link; opens the app when installed so it can add the book" }
         ]
       }
     ]

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "metaName": "lingo7-install-actions",
+  "actions": {
+    "l7b": { "name": "add_book", "value": "^[a-z0-9_-]{1,64}$" }
+  },
+  "vectors": [
+    { "content": "l7b=pg1342", "parsed": { "l7b": "pg1342" } },
+    { "content": "l7b=PG1342!", "parsed": {} },
+    { "content": "unknown=x&l7b=pg1342", "parsed": { "l7b": "pg1342" } },
+    { "content": "", "parsed": {} }
+  ]
+}

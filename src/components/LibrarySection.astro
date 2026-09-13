@@ -1,15 +1,25 @@
 ---
 import { adaptExamples, adaptBook } from '../data/adaptExamples';
+import { shelfPath } from '../data/pdCatalog';
 
 interface Props {
   targetLangName?: string;
   targetLangNamePrep?: string;
   targetLangNameGen?: string;
   targetLang?: string;
+  uiLang?: string;
   translations?: Record<string, any>;
 }
 
-const { targetLangName = '', targetLangNamePrep = '', targetLangNameGen = '', targetLang = 'en', translations = {} } = Astro.props;
+const { targetLangName = '', targetLangNamePrep = '', targetLangNameGen = '', targetLang = 'en', uiLang = 'en', translations = {} } = Astro.props;
+
+// Free public domain shelf for this language, when it is built in this locale
+// (docs/features/public-domain-books-plan.md).
+const shelfUrl = shelfPath(uiLang, targetLang);
+// Own fallback string: this component gets the raw locale dictionary, and a
+// locale that has not been translated yet must not print a bare key.
+const shelfLinkText = (translations?.['books_shelf_h1'] ?? 'Free books in {targetLang}')
+  .replace(/{targetLang}/g, targetLangName);
 
 // Real before/after passage for this target language (falls back to English).
 const adapt = adaptExamples[targetLang] ?? adaptExamples['en'];
@@ -351,6 +361,11 @@ const stackCovers = [
     <!-- CTA -->
     <div class="library-footer">
       <p class="library-total">{t('library_total')}</p>
+      {shelfUrl && (
+        <p class="library-shelf-link">
+          <a href={shelfUrl}>{shelfLinkText} &rarr;</a>
+        </p>
+      )}
       <div class="hero-cta">
         <a href="https://apps.apple.com/app/id6471030440?pt=126721951&ct=lingoseven&mt=8" class="btn btn-primary btn-large">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -1184,6 +1199,21 @@ const stackCovers = [
     flex-direction: column;
     align-items: center;
     gap: 24px;
+  }
+
+  .library-shelf-link {
+    margin: -8px 0 0;
+  }
+
+  .library-shelf-link a {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+  }
+
+  .library-shelf-link a:hover {
+    text-decoration: underline;
   }
 
   .library-total {

@@ -253,5 +253,6 @@
   "fact_writing_georgian_mkhedruli": "Грузијско (мхедрули)",
   "fact_writing_greek": "Грчко",
   "fact_writing_latin": "Латиница",
-  "qr_scan_hint": "Скенирајте да бисте преузели апликацију"
+  "qr_scan_hint": "Скенирајте да бисте преузели апликацију",
+  "footer_books": "Бесплатне књиге"
 }
