@@ -24,7 +24,6 @@ const { translations, uiLang = 'en', uiLanguages, learnLanguageLinks } = Astro.p
 
 const privacyText = translations?.['footer_privacy'] ?? 'Privacy Policy';
 const termsText = translations?.['footer_terms'] ?? 'Terms of Use';
-const contactText = translations?.['footer_contact'] ?? 'Contact';
 const blogText = translations?.['blog_nav'] ?? 'Blog';
 const toolsText = translations?.['footer_tools'] ?? 'Free tools';
 const compareText = translations?.['footer_compare'] ?? 'App comparisons';
@@ -87,9 +86,11 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
         {booksUrl && <a href={booksUrl}>{booksText}</a>}
         <a href="/privacypolicy">{privacyText}</a>
         <a href="/terms">{termsText}</a>
+      </div>
+      <div class="footer-simple-bottom">
+        <p class="footer-copy">{copyrightText}</p>
         <!--email_off--><a href="mailto:support@lingoseven.com">support@lingoseven.com</a><!--/email_off-->
       </div>
-      <p class="footer-copy">{copyrightText}</p>
     </div>
   </div>
 </footer>
