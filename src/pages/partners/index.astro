@@ -173,6 +173,24 @@ const jsonLd = [
           </label>
 
           <label class="field">
+            <span class="field-label">Preferred promo code (optional)</span>
+            <input
+              type="text"
+              name="desired_code"
+              maxlength="32"
+              autocomplete="off"
+              pattern="[a-z0-9-]+"
+              placeholder="alice-blog"
+            />
+            <span class="field-hint">
+              Tell us which code you would like. It becomes your link,
+              lingoseven.com/go/CODE, and the code readers type in the app.
+              Lowercase letters, numbers and hyphens; if it is taken, we will
+              pick a close one.
+            </span>
+          </label>
+
+          <label class="field">
             <span class="field-label">About your audience</span>
             <textarea
               name="audience_note"
@@ -253,6 +271,12 @@ const jsonLd = [
       status.hidden = false;
     }
 
+    var codeInput = form.elements['desired_code'];
+    codeInput.addEventListener('input', function () {
+      var clean = codeInput.value.toLowerCase().replace(/[^a-z0-9-]/g, '');
+      if (clean !== codeInput.value) codeInput.value = clean;
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       status.hidden = true;
@@ -264,6 +288,12 @@ const jsonLd = [
         audience_note: form.elements['audience_note'].value.trim(),
         website: form.elements['website'].value,
       };
+
+      // An empty wish says nothing, and a backend that does not know the field
+      // yet rejects the whole application over it, so send the key only when
+      // the applicant actually typed a code.
+      var desiredCode = form.elements['desired_code'].value.trim().toLowerCase();
+      if (desiredCode) data.desired_code = desiredCode;
 
       if (!data.name || !data.email || !data.channel_url) {
         showStatus('Please fill in your name, email, and channel URL.');
@@ -482,6 +512,12 @@ const jsonLd = [
     color: var(--text);
     font-weight: 600;
     font-size: 0.95rem;
+  }
+
+  .field-hint {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    line-height: 1.5;
   }
 
   .apply-form input,
