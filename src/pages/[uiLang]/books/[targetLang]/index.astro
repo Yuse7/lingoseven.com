@@ -150,7 +150,7 @@ const jsonLd = [
   uiLanguages={uiLanguages}
   learnLanguageLinks={learnLanguageLinks}
   showNav={false}
-  blogUrl={`/${uiCode}/blog/`}
+  blogUrl="/en/blog/"
 >
   <section class="pd-shelf-page">
     <div class="container">
@@ -166,7 +166,7 @@ const jsonLd = [
         <p class="pd-links">
           <a href={`/${uiCode}/learn/${targetSlug}/`}>{t(translations, 'books_shelf_learn_link', vars)}</a>
           {hasPost && (
-            <a href={`/${uiCode}/blog/${postSlug}/`}>{t(translations, 'books_shelf_post_link', vars)}</a>
+            <a href={`/en/blog/${postSlug}/`}>{t(translations, 'books_shelf_post_link', vars)}</a>
           )}
         </p>
       </header>

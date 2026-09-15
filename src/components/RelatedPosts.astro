@@ -10,12 +10,11 @@ interface RelatedPost {
 
 interface Props {
   posts: RelatedPost[];
-  uiLang: string;
   title: string;
   readMoreText: string;
 }
 
-const { posts, uiLang, title, readMoreText } = Astro.props;
+const { posts, title, readMoreText } = Astro.props;
 ---
 
 {posts.length > 0 && (
@@ -23,7 +22,7 @@ const { posts, uiLang, title, readMoreText } = Astro.props;
     <h2>{title}</h2>
     <div class="related-posts-grid">
       {posts.map((post) => (
-        <a href={`/${uiLang}/blog/${post.slug}/`} class="related-post-card">
+        <a href={`/en/blog/${post.slug}/`} class="related-post-card">
           <div class="related-post-meta">
             <span class="related-post-category">{post.categoryLabel}</span>
           </div>

@@ -22,6 +22,12 @@ const description =
         var q = location.search.replace(/^\?/, '');
         location.replace('/b/?id=' + b[1].toLowerCase() + (q ? '&' + q : ''));
       }
+      // The blog is English-only and only /en/blog/ is built. Old localized
+      // blog URLs land here; send them to their English counterpart.
+      var blog = location.pathname.match(/^\/([a-z]{2})\/blog(?:\/(.*))?$/i);
+      if (blog && blog[1].toLowerCase() !== 'en') {
+        location.replace('/en/blog/' + (blog[2] || '') + location.search + location.hash);
+      }
     })();
   </script>
   <section class="nf">

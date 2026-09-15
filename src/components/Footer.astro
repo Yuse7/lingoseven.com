@@ -29,6 +29,7 @@ const toolsText = translations?.['footer_tools'] ?? 'Free tools';
 const compareText = translations?.['footer_compare'] ?? 'App comparisons';
 const bestAppsText = translations?.['footer_best_apps'] ?? 'Best reading apps';
 const booksText = translations?.['footer_books'] ?? 'Free books';
+const affiliateText = translations?.['footer_affiliate'] ?? 'Affiliate program';
 // Public domain books hub: this locale's own when it has a shelf, the English
 // one otherwise (wave 1 builds every shelf in `en` only). Null while the
 // catalog is empty, so the link never points at a page that was not built.
@@ -74,21 +75,25 @@ const currentLang = uiLanguages?.find((l) => l.code === uiLang);
       </div>
     )}
 
-    <div class="footer-simple">
+    <div class="footer-main">
       <a href="/" class="logo">
         <img src="/images/logo.svg" alt="Lingo7" class="logo-img" />
       </a>
-      <div class="footer-links-inline">
-        <a href={`/${uiLang}/blog/`}>{blogText}</a>
+      <nav class="footer-nav">
+        <a href="/en/blog/">{blogText}</a>
         <a href="/tools/">{toolsText}</a>
         <a href="/compare/">{compareText}</a>
         <a href="/best-apps-to-read-books-in/">{bestAppsText}</a>
         {booksUrl && <a href={booksUrl}>{booksText}</a>}
+        <a href="/partners/">{affiliateText}</a>
+      </nav>
+    </div>
+
+    <div class="footer-legal-bar">
+      <p class="footer-copy">{copyrightText}</p>
+      <div class="footer-legal-links">
         <a href="/privacypolicy">{privacyText}</a>
         <a href="/terms">{termsText}</a>
-      </div>
-      <div class="footer-simple-bottom">
-        <p class="footer-copy">{copyrightText}</p>
         <!--email_off--><a href="mailto:support@lingoseven.com">support@lingoseven.com</a><!--/email_off-->
       </div>
     </div>

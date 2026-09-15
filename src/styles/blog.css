@@ -1,4 +1,11 @@
 /* Blog index grid */
+
+/* The listing ends with the app CTA, so it needs its own bottom gap:
+   without it the card sits flush against the footer band. */
+.blog-listing {
+  padding-bottom: 48px;
+}
+
 .blog-hero {
   text-align: center;
   padding: 80px 0 40px;

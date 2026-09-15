@@ -3,54 +3,26 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BlogCard from '../../../components/BlogCard.astro';
 import AppDemoCta from '../../../components/AppDemoCta.astro';
 import { getCollection } from 'astro:content';
-import { getEnabledLanguages } from '../../../data/languages';
-import { getTranslations, t } from '../../../utils/i18n';
+import { getTranslations } from '../../../utils/i18n';
 import { getLanguageByCode } from '../../../data/languages';
 import '../../../styles/blog.css';
 
+// The blog is English-only, so no other UI locale is built.
 export function getStaticPaths() {
-  const enabled = getEnabledLanguages();
-  return enabled.map((lang) => ({
-    params: { uiLang: lang.code },
-    props: { uiCode: lang.code },
-  }));
+  return [{ params: { uiLang: 'en' }, props: { uiCode: 'en' } }];
 }
 
 const { uiCode } = Astro.props;
 const translations = getTranslations(uiCode);
 
-// Get all non-draft posts, prefer locale match, fallback to English
+// All non-draft English posts, newest first
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-const localePosts = allPosts.filter((p) => p.data.locale === uiCode);
-const enPosts = allPosts.filter((p) => p.data.locale === 'en');
-
-// Use localized posts if available, otherwise English. Deduplicate by slug.
-const slugsWithLocale = new Set(localePosts.map((p) => p.id.split('/').pop()));
-const posts = [
-  ...localePosts,
-  ...enPosts.filter((p) => !slugsWithLocale.has(p.id.split('/').pop())),
-].sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
-
-const enabled = getEnabledLanguages();
+const posts = allPosts
+  .filter((p) => p.data.locale === 'en')
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
 const title = translations['blog_meta_title'] ?? 'Lingo7 Blog';
 const description = translations['blog_meta_description'] ?? 'Language learning tips and guides';
-
-const hreflangAlternates = enabled.map((ui) => ({
-  lang: ui.code,
-  url: `https://lingoseven.com/${ui.code}/blog/`,
-}));
-hreflangAlternates.push({
-  lang: 'x-default',
-  url: 'https://lingoseven.com/en/blog/',
-});
-
-const uiLanguages = enabled.map((l) => ({
-  code: l.code,
-  nativeName: l.nativeName,
-  flag: l.flag,
-  url: `/${l.code}/blog/`,
-}));
 
 const categoryKeys: Record<string, string> = {
   'book-lists': 'blog_category_book_lists',
@@ -72,13 +44,8 @@ const readMoreText = translations['blog_read_more'] ?? 'Read more';
 const blogTitle = translations['blog_title'] ?? 'Blog';
 const ctaTitle = translations['blog_cta_title'] ?? 'Ready to start reading?';
 const ctaSubtitle = translations['blog_cta_subtitle'] ?? 'Download Lingo7 and begin your language learning journey today.';
-// English speakers get the German book, everyone else an English book
-// translated into their own language.
-const demoTargetLang = uiCode === 'en' ? 'de' : 'en';
-
-// Noindex blog index for non-English UI langs (all posts are English-only for now)
-const hasLocalizedPosts = localePosts.length > 0;
-const noindexBlogIndex = uiCode !== 'en' && !hasLocalizedPosts;
+// The page is English, so the demo shows the German book translated into English.
+const demoTargetLang = 'de';
 
 function getSlugFromId(id: string): string {
   const parts = id.split('/');
@@ -91,7 +58,7 @@ const jsonLd = [
     '@type': 'CollectionPage',
     name: title,
     description,
-    url: `https://lingoseven.com/${uiCode}/blog/`,
+    url: 'https://lingoseven.com/en/blog/',
     isPartOf: {
       '@type': 'WebSite',
       name: 'Lingo7',
@@ -105,16 +72,13 @@ const jsonLd = [
   title={title}
   description={description}
   lang={uiCode}
-  canonicalUrl={noindexBlogIndex ? `https://lingoseven.com/en/blog/` : `https://lingoseven.com/${uiCode}/blog/`}
-  hreflangAlternates={hreflangAlternates}
+  canonicalUrl="https://lingoseven.com/en/blog/"
   jsonLd={jsonLd}
   translations={translations}
   uiLang={uiCode}
-  uiLanguages={uiLanguages}
-  blogUrl={`/${uiCode}/blog/`}
-  noindex={noindexBlogIndex}
+  blogUrl="/en/blog/"
 >
-  <div class="container">
+  <div class="container blog-listing">
     <section class="blog-hero">
       <span class="blog-hero-pill">{blogTitle}</span>
       <h1>{title}</h1>
@@ -141,7 +105,6 @@ const jsonLd = [
               category={post.data.category}
               categoryLabel={getCategoryLabel(post.data.category)}
               slug={slug}
-              uiLang={uiCode}
               targetLangFlag={flag}
               readMoreText={readMoreText}
             />

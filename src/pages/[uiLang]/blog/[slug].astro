@@ -1,61 +1,38 @@
 ---
 import BlogLayout from '../../../layouts/BlogLayout.astro';
 import { getCollection, render } from 'astro:content';
-import { getEnabledLanguages, getLanguageByCode } from '../../../data/languages';
 import { codeToSlug } from '../../../data/languageSlugs';
 import { getTranslations } from '../../../utils/i18n';
 import { getTargetLanguageName } from '../../../data/languageNames';
 
+// The blog is English-only, so each post is built once, under /en/.
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
-  const enabled = getEnabledLanguages();
+  const posts = await getCollection(
+    'blog',
+    ({ data }) => data.locale === 'en' && !data.draft,
+  );
 
-  // Group posts by slug (last part of id) to handle locale fallback
-  const postsBySlug = new Map<string, typeof posts>();
-  for (const post of posts) {
-    const slug = post.id.includes('/') ? post.id.split('/').pop()! : post.id;
-    if (!postsBySlug.has(slug)) postsBySlug.set(slug, []);
-    postsBySlug.get(slug)!.push(post);
-  }
-
-  const paths = [];
-
-  for (const [slug, slugPosts] of postsBySlug) {
-    // Find English version as fallback
-    const enPost = slugPosts.find((p) => p.data.locale === 'en');
-
-    for (const ui of enabled) {
-      // Prefer localized version, fall back to English
-      const localizedPost = slugPosts.find((p) => p.data.locale === ui.code);
-      const post = localizedPost ?? enPost;
-      if (!post) continue;
-
-      paths.push({
-        params: { uiLang: ui.code, slug },
-        props: { post, uiCode: ui.code },
-      });
-    }
-  }
-
-  return paths;
+  return posts.map((post) => ({
+    params: {
+      uiLang: 'en',
+      slug: post.id.includes('/') ? post.id.split('/').pop()! : post.id,
+    },
+    props: { post, uiCode: 'en' },
+  }));
 }
 
 const { post, uiCode } = Astro.props;
 const { Content } = await render(post);
 const translations = getTranslations(uiCode);
-const enabled = getEnabledLanguages();
 
 const slug = post.id.includes('/') ? post.id.split('/').pop()! : post.id;
 
-// Query related posts: same category, excluding current, prefer locale match
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-const localePosts = allPosts.filter((p) => p.data.locale === uiCode);
-const enPosts = allPosts.filter((p) => p.data.locale === 'en');
-const slugsWithLocale = new Set(localePosts.map((p) => (p.id.includes('/') ? p.id.split('/').pop()! : p.id)));
-const availablePosts = [
-  ...localePosts,
-  ...enPosts.filter((p) => !slugsWithLocale.has(p.id.includes('/') ? p.id.split('/').pop()! : p.id)),
-].filter((p) => {
+// Query related posts: same category, excluding current
+const allPosts = await getCollection(
+  'blog',
+  ({ data }) => data.locale === 'en' && !data.draft,
+);
+const availablePosts = allPosts.filter((p) => {
   const pSlug = p.id.includes('/') ? p.id.split('/').pop()! : p.id;
   return pSlug !== slug;
 });
@@ -84,24 +61,6 @@ const relatedPosts = relatedRaw.map((p) => ({
   pubDate: p.data.pubDate,
 }));
 
-// Hreflang alternates
-const hreflangAlternates = enabled.map((ui) => ({
-  lang: ui.code,
-  url: `https://lingoseven.com/${ui.code}/blog/${slug}/`,
-}));
-hreflangAlternates.push({
-  lang: 'x-default',
-  url: `https://lingoseven.com/en/blog/${slug}/`,
-});
-
-// Language switcher
-const uiLanguages = enabled.map((l) => ({
-  code: l.code,
-  nativeName: l.nativeName,
-  flag: l.flag,
-  url: `/${l.code}/blog/${slug}/`,
-}));
-
 const categoryLabel = translations[categoryKeys[post.data.category] ?? ''] ?? post.data.category;
 
 // Target language info for CTA
@@ -126,14 +85,11 @@ const targetLangSlug = post.data.targetLang
   targetLangName={targetLangName}
   targetLangSlug={targetLangSlug}
   ogImage={post.data.ogImage}
-  locale={post.data.locale}
   uiLang={uiCode}
   slug={slug}
   summary={post.data.summary}
   faq={post.data.faq}
   translations={translations}
-  uiLanguages={uiLanguages}
-  hreflangAlternates={hreflangAlternates}
   relatedPosts={relatedPosts}
 >
   <Content />

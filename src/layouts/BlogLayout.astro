@@ -35,14 +35,11 @@ interface Props {
   targetLangName?: string;
   targetLangSlug?: string;
   ogImage?: string;
-  locale: string;
   uiLang: string;
   slug: string;
   summary?: string;
   faq?: Array<{ question: string; answer: string }>;
   translations: Record<string, string>;
-  uiLanguages: Array<{ code: string; nativeName: string; flag: string; url: string }>;
-  hreflangAlternates: Array<{ lang: string; url: string }>;
   relatedPosts: RelatedPost[];
 }
 
@@ -59,25 +56,18 @@ const {
   targetLangName,
   targetLangSlug,
   ogImage,
-  locale,
   uiLang,
   slug,
   summary,
   faq,
   translations,
-  uiLanguages,
-  hreflangAlternates,
   relatedPosts,
 } = Astro.props;
 
-// Direct-answer + FAQ only render on the English (canonical) version of a post,
-// since post copy is English-only. Avoids mixing English into localized shells.
-const showEnrichment = uiLang === 'en';
-// Above-the-fold product CTA on every English post, same reasoning as
-// showEnrichment. Per-language book-list posts keep the exact variant EXP-002
-// measures (own title, demo in the post's language, frozen until its check
-// date); everything else gets the default de->en demo book (EXP-004), incl.
-// the language-agnostic book lists that have no targetLang.
+// Above-the-fold product CTA on every post. Per-language book-list posts keep
+// the exact variant EXP-002 measures (own title, demo in the post's language,
+// frozen until its check date); everything else gets the default de->en demo
+// book (EXP-004), incl. the language-agnostic book lists that have no targetLang.
 const isBookList = category === 'book-lists';
 const earlyCtaTitle = isBookList
   ? 'Read these books with {uiLang} translation'
@@ -119,12 +109,7 @@ const learnCta = targetLangName
   ? (translations['blog_related_learn'] ?? 'Start learning {targetLang} now').replace('{targetLang}', targetLangName)
   : null;
 
-// If blog content is not translated for this UI language, noindex and point canonical to English
-const isTranslated = locale === uiLang;
-const noindex = !isTranslated && uiLang !== 'en';
-const canonicalUrl = noindex
-  ? `https://lingoseven.com/en/blog/${slug}/`
-  : `https://lingoseven.com/${uiLang}/blog/${slug}/`;
+const canonicalUrl = `https://lingoseven.com/en/blog/${slug}/`;
 
 // Prefer explicit frontmatter ogImage; else the generated per-post OG card
 // (scripts/og) when one exists for this slug; else the site default card.
@@ -177,7 +162,7 @@ const jsonLd = [
         '@type': 'ListItem',
         position: 2,
         name: blogTitle,
-        item: `https://lingoseven.com/${uiLang}/blog/`,
+        item: 'https://lingoseven.com/en/blog/',
       },
       {
         '@type': 'ListItem',
@@ -188,7 +173,7 @@ const jsonLd = [
   },
 ];
 
-if (showEnrichment && faq && faq.length > 0) {
+if (faq && faq.length > 0) {
   jsonLd.push({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -217,13 +202,10 @@ const ogArticle = {
   ogImage={resolvedOgImage}
   ogType="article"
   ogArticle={ogArticle}
-  hreflangAlternates={hreflangAlternates}
   jsonLd={jsonLd}
   translations={translations}
   uiLang={uiLang}
-  uiLanguages={uiLanguages}
-  blogUrl={`/${uiLang}/blog/`}
-  noindex={noindex}
+  blogUrl="/en/blog/"
   playListing={getPlayListing(targetLang)}
 >
   <main class="article-container">
@@ -231,7 +213,7 @@ const ogArticle = {
       <nav class="article-breadcrumb">
         <a href="/">Home</a>
         <span class="article-breadcrumb-sep">/</span>
-        <a href={`/${uiLang}/blog/`}>{blogTitle}</a>
+        <a href="/en/blog/">{blogTitle}</a>
         <span class="article-breadcrumb-sep">/</span>
         <span>{title}</span>
       </nav>
@@ -250,42 +232,40 @@ const ogArticle = {
       <p class="article-description">{description}</p>
     </header>
 
-    {showEnrichment && summary && (
+    {summary && (
       <aside class="direct-answer">
         <span class="direct-answer-label">{summaryLabel}</span>
         <p>{summary}</p>
       </aside>
     )}
 
-    {showEnrichment && (
-      <aside class="book-list-cta">
-        <div class="book-list-cta-copy">
-          <p class="book-list-cta-title">{earlyCtaTitleBefore}<InlineLangTrigger name={earlyCtaTrnName} />{earlyCtaTitleAfter}</p>
-          <p class="book-list-cta-text">
-            Lingo7 shows a book and its translation side by side. Import an EPUB or PDF,
-            or pick a book from the catalog, then tap any word for an instant translation
-            and audio.
-          </p>
-          <InlineLangMenu languages={earlyCtaLanguages} current={earlyCtaTrnLang} />
-          <StoreLinksRow />
+    <aside class="book-list-cta">
+      <div class="book-list-cta-copy">
+        <p class="book-list-cta-title">{earlyCtaTitleBefore}<InlineLangTrigger name={earlyCtaTrnName} />{earlyCtaTitleAfter}</p>
+        <p class="book-list-cta-text">
+          Lingo7 shows a book and its translation side by side. Import an EPUB or PDF,
+          or pick a book from the catalog, then tap any word for an instant translation
+          and audio.
+        </p>
+        <InlineLangMenu languages={earlyCtaLanguages} current={earlyCtaTrnLang} />
+        <StoreLinksRow />
+      </div>
+      {demoLang && (
+        <div class="book-list-cta-demo">
+          {/* The live app demo, same widget as the learn pages: a real book in
+              the post's language (the default German book on non-book-list
+              posts) with parallel text in the language picked in the title
+              dropdown. */}
+          <ReaderDemo targetLang={demoLang} uiLang={earlyCtaTrnLang} langPicker={false} />
         </div>
-        {demoLang && (
-          <div class="book-list-cta-demo">
-            {/* The live app demo, same widget as the learn pages: a real book in
-                the post's language (the default German book on non-book-list
-                posts) with parallel text in the language picked in the title
-                dropdown. */}
-            <ReaderDemo targetLang={demoLang} uiLang={earlyCtaTrnLang} langPicker={false} />
-          </div>
-        )}
-      </aside>
-    )}
+      )}
+    </aside>
 
     <article class="prose">
       <slot />
     </article>
 
-    {showEnrichment && faq && faq.length > 0 && (
+    {faq && faq.length > 0 && (
       <section class="blog-faq">
         <h2 class="blog-faq-title">{faqLabel}</h2>
         <div class="faq-list">
@@ -323,7 +303,6 @@ const ogArticle = {
 
     <RelatedPosts
       posts={relatedPosts}
-      uiLang={uiLang}
       title={relatedTitle}
       readMoreText={readMoreText}
     />
